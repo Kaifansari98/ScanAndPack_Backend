@@ -73,6 +73,13 @@ export type VendorMasterMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   state_id: number | null
+  gst_no: string | null
+  toll_free_no: string | null
+  website_link: string | null
+  tag_line: string | null
+  address: string | null
+  pincode: string | null
+  city: string | null
 }
 
 export type VendorMasterMaxAggregateOutputType = {
@@ -108,6 +115,13 @@ export type VendorMasterMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   state_id: number | null
+  gst_no: string | null
+  toll_free_no: string | null
+  website_link: string | null
+  tag_line: string | null
+  address: string | null
+  pincode: string | null
+  city: string | null
 }
 
 export type VendorMasterCountAggregateOutputType = {
@@ -143,6 +157,13 @@ export type VendorMasterCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   state_id: number
+  gst_no: number
+  toll_free_no: number
+  website_link: number
+  tag_line: number
+  address: number
+  pincode: number
+  city: number
   _all: number
 }
 
@@ -194,6 +215,13 @@ export type VendorMasterMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   state_id?: true
+  gst_no?: true
+  toll_free_no?: true
+  website_link?: true
+  tag_line?: true
+  address?: true
+  pincode?: true
+  city?: true
 }
 
 export type VendorMasterMaxAggregateInputType = {
@@ -229,6 +257,13 @@ export type VendorMasterMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   state_id?: true
+  gst_no?: true
+  toll_free_no?: true
+  website_link?: true
+  tag_line?: true
+  address?: true
+  pincode?: true
+  city?: true
 }
 
 export type VendorMasterCountAggregateInputType = {
@@ -264,6 +299,13 @@ export type VendorMasterCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   state_id?: true
+  gst_no?: true
+  toll_free_no?: true
+  website_link?: true
+  tag_line?: true
+  address?: true
+  pincode?: true
+  city?: true
   _all?: true
 }
 
@@ -386,6 +428,13 @@ export type VendorMasterGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   state_id: number | null
+  gst_no: string | null
+  toll_free_no: string | null
+  website_link: string | null
+  tag_line: string | null
+  address: string | null
+  pincode: string | null
+  city: string | null
   _count: VendorMasterCountAggregateOutputType | null
   _avg: VendorMasterAvgAggregateOutputType | null
   _sum: VendorMasterSumAggregateOutputType | null
@@ -444,6 +493,13 @@ export type VendorMasterWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
+  gst_no?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  toll_free_no?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  website_link?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  tag_line?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  address?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  pincode?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  city?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   accounts?: Prisma.AccountMasterListRelationFilter
   boxes?: Prisma.BoxMasterListRelationFilter
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterListRelationFilter
@@ -605,6 +661,13 @@ export type VendorMasterOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  gst_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  toll_free_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  website_link?: Prisma.SortOrderInput | Prisma.SortOrder
+  tag_line?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  pincode?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
   accounts?: Prisma.AccountMasterOrderByRelationAggregateInput
   boxes?: Prisma.BoxMasterOrderByRelationAggregateInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterOrderByRelationAggregateInput
@@ -769,6 +832,13 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
+  gst_no?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  toll_free_no?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  website_link?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  tag_line?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  address?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  pincode?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  city?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   accounts?: Prisma.AccountMasterListRelationFilter
   boxes?: Prisma.BoxMasterListRelationFilter
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterListRelationFilter
@@ -930,6 +1000,13 @@ export type VendorMasterOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  gst_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  toll_free_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  website_link?: Prisma.SortOrderInput | Prisma.SortOrder
+  tag_line?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  pincode?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.VendorMasterCountOrderByAggregateInput
   _avg?: Prisma.VendorMasterAvgOrderByAggregateInput
   _max?: Prisma.VendorMasterMaxOrderByAggregateInput
@@ -973,6 +1050,13 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableWithAggregatesFilter<"VendorMaster"> | number | null
+  gst_no?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
+  toll_free_no?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
+  website_link?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
+  tag_line?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
+  address?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
+  pincode?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
+  city?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
 }
 
 export type VendorMasterCreateInput = {
@@ -1006,6 +1090,13 @@ export type VendorMasterCreateInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -1167,6 +1258,13 @@ export type VendorMasterUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -1325,6 +1423,13 @@ export type VendorMasterUpdateInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -1486,6 +1591,13 @@ export type VendorMasterUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -1646,6 +1758,13 @@ export type VendorMasterCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
 }
 
 export type VendorMasterUpdateManyMutationInput = {
@@ -1679,6 +1798,13 @@ export type VendorMasterUpdateManyMutationInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type VendorMasterUncheckedUpdateManyInput = {
@@ -1714,6 +1840,13 @@ export type VendorMasterUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type VendorMasterCountOrderByAggregateInput = {
@@ -1749,6 +1882,13 @@ export type VendorMasterCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrder
+  gst_no?: Prisma.SortOrder
+  toll_free_no?: Prisma.SortOrder
+  website_link?: Prisma.SortOrder
+  tag_line?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  pincode?: Prisma.SortOrder
+  city?: Prisma.SortOrder
 }
 
 export type VendorMasterAvgOrderByAggregateInput = {
@@ -1791,6 +1931,13 @@ export type VendorMasterMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrder
+  gst_no?: Prisma.SortOrder
+  toll_free_no?: Prisma.SortOrder
+  website_link?: Prisma.SortOrder
+  tag_line?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  pincode?: Prisma.SortOrder
+  city?: Prisma.SortOrder
 }
 
 export type VendorMasterMinOrderByAggregateInput = {
@@ -1826,6 +1973,13 @@ export type VendorMasterMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrder
+  gst_no?: Prisma.SortOrder
+  toll_free_no?: Prisma.SortOrder
+  website_link?: Prisma.SortOrder
+  tag_line?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  pincode?: Prisma.SortOrder
+  city?: Prisma.SortOrder
 }
 
 export type VendorMasterSumOrderByAggregateInput = {
@@ -3716,6 +3870,13 @@ export type VendorMasterCreateWithoutAddressesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -3876,6 +4037,13 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -4049,6 +4217,13 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -4209,6 +4384,13 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -4366,6 +4548,13 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -4526,6 +4715,13 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -4699,6 +4895,13 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -4859,6 +5062,13 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -5016,6 +5226,13 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -5176,6 +5393,13 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -5349,6 +5573,13 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -5509,6 +5740,13 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -5666,6 +5904,13 @@ export type VendorMasterCreateWithoutUsersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -5826,6 +6071,13 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -5999,6 +6251,13 @@ export type VendorMasterUpdateWithoutUsersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -6159,6 +6418,13 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -6316,6 +6582,13 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -6476,6 +6749,13 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -6649,6 +6929,13 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -6809,6 +7096,13 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -6966,6 +7260,13 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -7126,6 +7427,13 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -7299,6 +7607,13 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -7459,6 +7774,13 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -7616,6 +7938,13 @@ export type VendorMasterCreateWithoutProjectsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -7776,6 +8105,13 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -7949,6 +8285,13 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -8109,6 +8452,13 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -8266,6 +8616,13 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -8426,6 +8783,13 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -8599,6 +8963,13 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -8759,6 +9130,13 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -8916,6 +9294,13 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -9076,6 +9461,13 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -9249,6 +9641,13 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -9409,6 +9808,13 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -9566,6 +9972,13 @@ export type VendorMasterCreateWithoutBoxesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
@@ -9726,6 +10139,13 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
@@ -9899,6 +10319,13 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
@@ -10059,6 +10486,13 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
@@ -10216,6 +10650,13 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -10376,6 +10817,13 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -10549,6 +10997,13 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -10709,6 +11164,13 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -10866,6 +11328,13 @@ export type VendorMasterCreateWithoutTokensInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -11026,6 +11495,13 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -11199,6 +11675,13 @@ export type VendorMasterUpdateWithoutTokensInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -11359,6 +11842,13 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -11516,6 +12006,13 @@ export type VendorMasterCreateWithoutLeadsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -11676,6 +12173,13 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -11849,6 +12353,13 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -12009,6 +12520,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -12166,6 +12684,13 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -12326,6 +12851,13 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -12499,6 +13031,13 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -12659,6 +13198,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -12816,6 +13362,13 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -12976,6 +13529,13 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -13149,6 +13709,13 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -13309,6 +13876,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -13466,6 +14040,13 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -13626,6 +14207,13 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -13799,6 +14387,13 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -13959,6 +14554,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -14116,6 +14718,13 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -14276,6 +14885,13 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -14449,6 +15065,13 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -14609,6 +15232,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -14766,6 +15396,13 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -14926,6 +15563,13 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -15099,6 +15743,13 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -15259,6 +15910,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -15416,6 +16074,13 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -15576,6 +16241,13 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -15749,6 +16421,13 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -15909,6 +16588,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -16066,6 +16752,13 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -16226,6 +16919,13 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -16399,6 +17099,13 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -16559,6 +17266,13 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -16716,6 +17430,13 @@ export type VendorMasterCreateWithoutSourcesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -16876,6 +17597,13 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -17049,6 +17777,13 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -17209,6 +17944,13 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -17366,6 +18108,13 @@ export type VendorMasterCreateWithoutAccountsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
@@ -17526,6 +18275,13 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
@@ -17699,6 +18455,13 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
@@ -17859,6 +18622,13 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
@@ -18016,6 +18786,13 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -18176,6 +18953,13 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -18349,6 +19133,13 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -18509,6 +19300,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -18666,6 +19464,13 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -18826,6 +19631,13 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -18999,6 +19811,13 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -19159,6 +19978,13 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -19316,6 +20142,13 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -19476,6 +20309,13 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -19649,6 +20489,13 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -19809,6 +20656,13 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -19966,6 +20820,13 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -20126,6 +20987,13 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -20299,6 +21167,13 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -20459,6 +21334,13 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -20616,6 +21498,13 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -20776,6 +21665,13 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -20949,6 +21845,13 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -21109,6 +22012,13 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -21266,6 +22176,13 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -21426,6 +22343,13 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -21599,6 +22523,13 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -21759,6 +22690,13 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -21916,6 +22854,13 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -22076,6 +23021,13 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -22249,6 +23201,13 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -22409,6 +23368,13 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -22566,6 +23532,13 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -22726,6 +23699,13 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -22899,6 +23879,13 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -23059,6 +24046,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -23216,6 +24210,13 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -23376,6 +24377,13 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -23549,6 +24557,13 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -23709,6 +24724,13 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -23866,6 +24888,13 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -24026,6 +25055,13 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -24199,6 +25235,13 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -24359,6 +25402,13 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -24516,6 +25566,13 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -24676,6 +25733,13 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -24849,6 +25913,13 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -25009,6 +26080,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -25166,6 +26244,13 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -25326,6 +26411,13 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -25499,6 +26591,13 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -25659,6 +26758,13 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -25816,6 +26922,13 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -25976,6 +27089,13 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -26149,6 +27269,13 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -26309,6 +27436,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -26466,6 +27600,13 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -26626,6 +27767,13 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -26799,6 +27947,13 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -26959,6 +28114,13 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -27116,6 +28278,13 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -27276,6 +28445,13 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -27449,6 +28625,13 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -27609,6 +28792,13 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -27766,6 +28956,13 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -27926,6 +29123,13 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -28099,6 +29303,13 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -28259,6 +29470,13 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -28416,6 +29634,13 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -28576,6 +29801,13 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -28749,6 +29981,13 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -28909,6 +30148,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -29066,6 +30312,13 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -29226,6 +30479,13 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -29399,6 +30659,13 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -29559,6 +30826,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -29716,6 +30990,13 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -29876,6 +31157,13 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -30049,6 +31337,13 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -30209,6 +31504,13 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -30366,6 +31668,13 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -30526,6 +31835,13 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -30699,6 +32015,13 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -30859,6 +32182,13 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -31016,6 +32346,13 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -31176,6 +32513,13 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -31349,6 +32693,13 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -31509,6 +32860,13 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -31666,6 +33024,13 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -31826,6 +33191,13 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -31999,6 +33371,13 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -32159,6 +33538,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -32316,6 +33702,13 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -32476,6 +33869,13 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -32649,6 +34049,13 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -32809,6 +34216,13 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -32966,6 +34380,13 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -33126,6 +34547,13 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -33299,6 +34727,13 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -33459,6 +34894,13 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -33616,6 +35058,13 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -33776,6 +35225,13 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -33949,6 +35405,13 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -34109,6 +35572,13 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -34266,6 +35736,13 @@ export type VendorMasterCreateWithoutLedgersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -34426,6 +35903,13 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -34599,6 +36083,13 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -34759,6 +36250,13 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -34916,6 +36414,13 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -35076,6 +36581,13 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -35249,6 +36761,13 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -35409,6 +36928,13 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -35566,6 +37092,13 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -35726,6 +37259,13 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -35899,6 +37439,13 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -36059,6 +37606,13 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -36216,6 +37770,13 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -36376,6 +37937,13 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -36549,6 +38117,13 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -36709,6 +38284,13 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -36866,6 +38448,13 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -37026,6 +38615,13 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -37199,6 +38795,13 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -37359,6 +38962,13 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -37516,6 +39126,13 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -37676,6 +39293,13 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -37849,6 +39473,13 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -38009,6 +39640,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -38166,6 +39804,13 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -38326,6 +39971,13 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -38499,6 +40151,13 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -38659,6 +40318,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -38816,6 +40482,13 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -38976,6 +40649,13 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -39149,6 +40829,13 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -39309,6 +40996,13 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -39466,6 +41160,13 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -39626,6 +41327,13 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -39799,6 +41507,13 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -39959,6 +41674,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -40116,6 +41838,13 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -40276,6 +42005,13 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -40449,6 +42185,13 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -40609,6 +42352,13 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -40766,6 +42516,13 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -40926,6 +42683,13 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -41099,6 +42863,13 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -41259,6 +43030,13 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -41416,6 +43194,13 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -41576,6 +43361,13 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -41749,6 +43541,13 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -41909,6 +43708,13 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -42066,6 +43872,13 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -42226,6 +44039,13 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -42399,6 +44219,13 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -42559,6 +44386,13 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -42716,6 +44550,13 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -42876,6 +44717,13 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -43049,6 +44897,13 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -43209,6 +45064,13 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -43366,6 +45228,13 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -43526,6 +45395,13 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -43699,6 +45575,13 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -43859,6 +45742,13 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -44016,6 +45906,13 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -44176,6 +46073,13 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -44349,6 +46253,13 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -44509,6 +46420,13 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -44666,6 +46584,13 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -44826,6 +46751,13 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -44999,6 +46931,13 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -45159,6 +47098,13 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -45316,6 +47262,13 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -45476,6 +47429,13 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -45649,6 +47609,13 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -45809,6 +47776,13 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -45966,6 +47940,13 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -46126,6 +48107,13 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -46299,6 +48287,13 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -46459,6 +48454,13 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -46616,6 +48618,13 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -46776,6 +48785,13 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -46949,6 +48965,13 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -47109,6 +49132,13 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -47266,6 +49296,13 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -47426,6 +49463,13 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -47599,6 +49643,13 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -47759,6 +49810,13 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -47916,6 +49974,13 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -48076,6 +50141,13 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -48249,6 +50321,13 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -48409,6 +50488,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -48566,6 +50652,13 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -48726,6 +50819,13 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -48899,6 +50999,13 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -49059,6 +51166,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -49216,6 +51330,13 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -49376,6 +51497,13 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -49549,6 +51677,13 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -49709,6 +51844,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -49866,6 +52008,13 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
@@ -50026,6 +52175,13 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
@@ -50199,6 +52355,13 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
@@ -50359,6 +52522,13 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
@@ -50516,6 +52686,13 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -50676,6 +52853,13 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -50849,6 +53033,13 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -51009,6 +53200,13 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -51166,6 +53364,13 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -51326,6 +53531,13 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -51499,6 +53711,13 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -51659,6 +53878,13 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -51816,6 +54042,13 @@ export type VendorMasterCreateWithoutInstallersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -51976,6 +54209,13 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -52149,6 +54389,13 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -52309,6 +54556,13 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -52466,6 +54720,13 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -52626,6 +54887,13 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -52799,6 +55067,13 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -52959,6 +55234,13 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -53116,6 +55398,13 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -53276,6 +55565,13 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -53449,6 +55745,13 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -53609,6 +55912,13 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -53766,6 +56076,13 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -53926,6 +56243,13 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -54099,6 +56423,13 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -54259,6 +56590,13 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -54416,6 +56754,13 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -54576,6 +56921,13 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -54749,6 +57101,13 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -54909,6 +57268,13 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -55066,6 +57432,13 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -55226,6 +57599,13 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -55399,6 +57779,13 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -55559,6 +57946,13 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -55716,6 +58110,13 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -55876,6 +58277,13 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -56049,6 +58457,13 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -56209,6 +58624,13 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -56366,6 +58788,13 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -56526,6 +58955,13 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -56699,6 +59135,13 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -56859,6 +59302,13 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -57016,6 +59466,13 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -57176,6 +59633,13 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -57349,6 +59813,13 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -57509,6 +59980,13 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -57666,6 +60144,13 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -57826,6 +60311,13 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -57999,6 +60491,13 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -58159,6 +60658,13 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -58316,6 +60822,13 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -58476,6 +60989,13 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -58649,6 +61169,13 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -58809,6 +61336,13 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -58966,6 +61500,13 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -59126,6 +61667,13 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -59299,6 +61847,13 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -59459,6 +62014,13 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -59616,6 +62178,13 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -59776,6 +62345,13 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -59949,6 +62525,13 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -60109,6 +62692,13 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -60266,6 +62856,13 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -60426,6 +63023,13 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -60599,6 +63203,13 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -60759,6 +63370,13 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -60916,6 +63534,13 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -61076,6 +63701,13 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -61249,6 +63881,13 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -61409,6 +64048,13 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -61566,6 +64212,13 @@ export type VendorMasterCreateWithoutCutListInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -61726,6 +64379,13 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -61899,6 +64559,13 @@ export type VendorMasterUpdateWithoutCutListInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -62059,6 +64726,13 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -62216,6 +64890,13 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -62376,6 +65057,13 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -62549,6 +65237,13 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -62709,6 +65404,13 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -62866,6 +65568,13 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -63026,6 +65735,13 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -63199,6 +65915,13 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -63359,6 +66082,13 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -63516,6 +66246,13 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -63676,6 +66413,13 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -63849,6 +66593,13 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -64009,6 +66760,13 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -64166,6 +66924,13 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -64326,6 +67091,13 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -64499,6 +67271,13 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -64659,6 +67438,13 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -64816,6 +67602,13 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -64976,6 +67769,13 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -65149,6 +67949,13 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -65309,6 +68116,13 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -65466,6 +68280,13 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -65626,6 +68447,13 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -65799,6 +68627,13 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -65959,6 +68794,13 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -66116,6 +68958,13 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -66276,6 +69125,13 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -66449,6 +69305,13 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -66609,6 +69472,13 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -66766,6 +69636,13 @@ export type VendorMasterCreateWithoutStateInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -66925,6 +69802,13 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -67114,6 +69998,13 @@ export type VendorMasterScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
+  gst_no?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  toll_free_no?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  website_link?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  tag_line?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  address?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  pincode?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  city?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
 }
 
 export type VendorMasterCreateWithoutThemesInput = {
@@ -67147,6 +70038,13 @@ export type VendorMasterCreateWithoutThemesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -67307,6 +70205,13 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -67480,6 +70385,13 @@ export type VendorMasterUpdateWithoutThemesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -67640,6 +70552,13 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -67797,6 +70716,13 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -67957,6 +70883,13 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -68130,6 +71063,13 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -68290,6 +71230,13 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -68447,6 +71394,13 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -68607,6 +71561,13 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -68780,6 +71741,13 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -68940,6 +71908,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -69097,6 +72072,13 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -69257,6 +72239,13 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -69430,6 +72419,13 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -69590,6 +72586,13 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -69747,6 +72750,13 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -69907,6 +72917,13 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -70080,6 +73097,13 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -70240,6 +73264,13 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -70397,6 +73428,13 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -70557,6 +73595,13 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -70730,6 +73775,13 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -70890,6 +73942,13 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -71047,6 +74106,13 @@ export type VendorMasterCreateWithoutBrandsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -71207,6 +74273,13 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -71380,6 +74453,13 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -71540,6 +74620,13 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -71697,6 +74784,13 @@ export type VendorMasterCreateWithoutProductsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -71857,6 +74951,13 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -72030,6 +75131,13 @@ export type VendorMasterUpdateWithoutProductsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -72190,6 +75298,13 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -72347,6 +75462,13 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -72507,6 +75629,13 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -72680,6 +75809,13 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -72840,6 +75976,13 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -72997,6 +76140,13 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -73157,6 +76307,13 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -73330,6 +76487,13 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -73490,6 +76654,13 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -73647,6 +76818,13 @@ export type VendorMasterCreateWithoutGrnsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -73807,6 +76985,13 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -73980,6 +77165,13 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -74140,6 +77332,13 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -74297,6 +77496,13 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -74457,6 +77663,13 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -74630,6 +77843,13 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -74790,6 +78010,13 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -74947,6 +78174,13 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -75107,6 +78341,13 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -75280,6 +78521,13 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -75440,6 +78688,13 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -75597,6 +78852,13 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -75757,6 +79019,13 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -75930,6 +79199,13 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -76090,6 +79366,13 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -76247,6 +79530,13 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -76407,6 +79697,13 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -76580,6 +79877,13 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -76740,6 +80044,13 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -76897,6 +80208,13 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -77057,6 +80375,13 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -77230,6 +80555,13 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -77390,6 +80722,13 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -77547,6 +80886,13 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -77707,6 +81053,13 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -77880,6 +81233,13 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -78040,6 +81400,13 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -78197,6 +81564,13 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -78357,6 +81731,13 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -78530,6 +81911,13 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -78690,6 +82078,13 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -78847,6 +82242,13 @@ export type VendorMasterCreateWithoutUnitsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -79007,6 +82409,13 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -79180,6 +82589,13 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -79340,6 +82756,13 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -79497,6 +82920,13 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -79657,6 +83087,13 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -79830,6 +83267,13 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -79990,6 +83434,13 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -80147,6 +83598,13 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -80307,6 +83765,13 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -80480,6 +83945,13 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -80640,6 +84112,13 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -80797,6 +84276,13 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -80957,6 +84443,13 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -81130,6 +84623,13 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -81290,6 +84790,13 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -81447,6 +84954,13 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -81607,6 +85121,13 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -81780,6 +85301,13 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -81940,6 +85468,13 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -82097,6 +85632,13 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -82257,6 +85799,13 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -82430,6 +85979,13 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -82590,6 +86146,13 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -82747,6 +86310,13 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -82907,6 +86477,13 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -83080,6 +86657,13 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -83240,6 +86824,13 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -83397,6 +86988,13 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -83557,6 +87155,13 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -83730,6 +87335,13 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -83890,6 +87502,13 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -84047,6 +87666,13 @@ export type VendorMasterCreateWithoutBox_info_fieldsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -84207,6 +87833,13 @@ export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -84380,6 +88013,13 @@ export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -84540,6 +88180,13 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -84697,6 +88344,13 @@ export type VendorMasterCreateWithoutBox_info_valuesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -84857,6 +88511,13 @@ export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -85030,6 +88691,13 @@ export type VendorMasterUpdateWithoutBox_info_valuesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -85190,6 +88858,13 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -85348,6 +89023,13 @@ export type VendorMasterCreateManyStateInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
 }
 
 export type VendorMasterUpdateWithoutStateInput = {
@@ -85381,6 +89063,13 @@ export type VendorMasterUpdateWithoutStateInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -85540,6 +89229,13 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -85699,6 +89395,13 @@ export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -86881,6 +90584,13 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
+  gst_no?: boolean
+  toll_free_no?: boolean
+  website_link?: boolean
+  tag_line?: boolean
+  address?: boolean
+  pincode?: boolean
+  city?: boolean
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
   boxes?: boolean | Prisma.VendorMaster$boxesArgs<ExtArgs>
   CompanyVendorsMaster?: boolean | Prisma.VendorMaster$CompanyVendorsMasterArgs<ExtArgs>
@@ -87043,6 +90753,13 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
+  gst_no?: boolean
+  toll_free_no?: boolean
+  website_link?: boolean
+  tag_line?: boolean
+  address?: boolean
+  pincode?: boolean
+  city?: boolean
   state?: boolean | Prisma.VendorMaster$stateArgs<ExtArgs>
 }, ExtArgs["result"]["vendorMaster"]>
 
@@ -87079,6 +90796,13 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
+  gst_no?: boolean
+  toll_free_no?: boolean
+  website_link?: boolean
+  tag_line?: boolean
+  address?: boolean
+  pincode?: boolean
+  city?: boolean
   state?: boolean | Prisma.VendorMaster$stateArgs<ExtArgs>
 }, ExtArgs["result"]["vendorMaster"]>
 
@@ -87115,9 +90839,16 @@ export type VendorMasterSelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
+  gst_no?: boolean
+  toll_free_no?: boolean
+  website_link?: boolean
+  tag_line?: boolean
+  address?: boolean
+  pincode?: boolean
+  city?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "icon" | "login_image" | "time_zone" | "subdomain_url" | "IsAccountLocInEnabled" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "is_client_visit_enabled" | "is_this_vendor_is_custom_usertype_only" | "is_year_wise_lead_code_enabled" | "handlesLargeScaleProjects" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "createdAt" | "updatedAt" | "state_id", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "icon" | "login_image" | "time_zone" | "subdomain_url" | "IsAccountLocInEnabled" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "is_client_visit_enabled" | "is_this_vendor_is_custom_usertype_only" | "is_year_wise_lead_code_enabled" | "handlesLargeScaleProjects" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "createdAt" | "updatedAt" | "state_id" | "gst_no" | "toll_free_no" | "website_link" | "tag_line" | "address" | "pincode" | "city", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
   boxes?: boolean | Prisma.VendorMaster$boxesArgs<ExtArgs>
@@ -87417,6 +91148,13 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     createdAt: Date
     updatedAt: Date
     state_id: number | null
+    gst_no: string | null
+    toll_free_no: string | null
+    website_link: string | null
+    tag_line: string | null
+    address: string | null
+    pincode: string | null
+    city: string | null
   }, ExtArgs["result"]["vendorMaster"]>
   composites: {}
 }
@@ -87998,6 +91736,13 @@ export interface VendorMasterFieldRefs {
   readonly createdAt: Prisma.FieldRef<"VendorMaster", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"VendorMaster", 'DateTime'>
   readonly state_id: Prisma.FieldRef<"VendorMaster", 'Int'>
+  readonly gst_no: Prisma.FieldRef<"VendorMaster", 'String'>
+  readonly toll_free_no: Prisma.FieldRef<"VendorMaster", 'String'>
+  readonly website_link: Prisma.FieldRef<"VendorMaster", 'String'>
+  readonly tag_line: Prisma.FieldRef<"VendorMaster", 'String'>
+  readonly address: Prisma.FieldRef<"VendorMaster", 'String'>
+  readonly pincode: Prisma.FieldRef<"VendorMaster", 'String'>
+  readonly city: Prisma.FieldRef<"VendorMaster", 'String'>
 }
     
 

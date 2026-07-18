@@ -280,7 +280,14 @@ export const VendorMasterScalarFieldEnum = {
   is_in_app_noti_enabled: 'is_in_app_noti_enabled',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  state_id: 'state_id'
+  state_id: 'state_id',
+  gst_no: 'gst_no',
+  toll_free_no: 'toll_free_no',
+  website_link: 'website_link',
+  tag_line: 'tag_line',
+  address: 'address',
+  pincode: 'pincode',
+  city: 'city'
 } as const
 
 export type VendorMasterScalarFieldEnum = (typeof VendorMasterScalarFieldEnum)[keyof typeof VendorMasterScalarFieldEnum]

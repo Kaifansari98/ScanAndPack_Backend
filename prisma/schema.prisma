@@ -40,6 +40,13 @@ model VendorMaster {
   createdAt                              DateTime @default(now())
   updatedAt                              DateTime @updatedAt
   state_id                               Int?
+  gst_no                                 String?
+  toll_free_no                           String?
+  website_link                           String?
+  tag_line                               String?
+  address                                String?
+  pincode                                String?
+  city                                   String?
 
   accounts                            AccountMaster[]
   boxes                               BoxMaster[]
@@ -3973,9 +3980,7 @@ model ProjectBoxInfoField {
 
   values BoxInfoFieldValue[]
 
-
   @@index([project_id, vendor_id])
-  
 }
 
 model BoxInfoFieldValue {
@@ -4002,7 +4007,6 @@ model BoxInfoFieldValue {
   @@unique([box_id, field_id])
   @@index([box_id])
   @@index([project_id, vendor_id])
-  
 }
 
 enum BoxInfoFieldType {

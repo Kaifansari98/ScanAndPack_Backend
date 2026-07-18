@@ -58,7 +58,7 @@ export const createBox = async (
             project_id: Number(project_id),
             lead_id: lead_id ? Number(lead_id) : null,
             box_name: box_name.trim(),
-            created_by: created_by ,
+            created_by: created_by,
           },
 
           select: {
@@ -148,7 +148,7 @@ export const updateBoxName = async (
           },
 
           data: {
-            box_name: newBoxName.trim(),            
+            box_name: newBoxName.trim(),
           },
 
           select: {
@@ -540,17 +540,17 @@ export const generateBoxPdfService = async (
   let tempFilePath: string | null =
     null;
 
-  const hardcodedCompany = {
-    tollFreeNo: "18002674949",
-    email: "info@adarshindia.in",
-    website: "www.adarshindia.in",
-    addressLine1: "280 & 283, Bilavali,",
-    addressLine2: "Kudus, Wada, Palghar",
-    addressLine3: "421312 Maharashtra",
-    gst: "27AAZFA7533R1ZC",
-    tagline: "Design. Build. Deliver",
-    fallbackName: "ADARSH INFRAINTERIO",
-  };
+  // const hardcodedCompany = {
+  //   tollFreeNo: "18002674949",
+  //   email: "info@adarshindia.in",
+  //   website: "www.adarshindia.in",
+  //   addressLine1: "280 & 283, Bilavali,",
+  //   addressLine2: "Kudus, Wada, Palghar",
+  //   addressLine3: "421312 Maharashtra",
+  //   gst: "27AAZFA7533R1ZC",
+  //   tagline: "Design. Build. Deliver",
+  //   fallbackName: "ADARSH INFRAINTERIO",
+  // };
 
   const toNumber = (
     value: any
@@ -774,6 +774,20 @@ export const generateBoxPdfService = async (
           primary_contact_number: true,
           primary_contact_email: true,
           logo: true,
+          gst_no: true,
+          toll_free_no: true,
+          website_link: true,
+          tag_line: true,
+          address: true,
+          pincode: true,
+          city: true,
+          state: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+
         },
       }),
 
@@ -897,6 +911,19 @@ export const generateBoxPdfService = async (
 
     let logoUrl = "";
 
+
+    const hardcodedCompany = {
+      tollFreeNo: vendor.toll_free_no,
+      email: vendor.primary_contact_email,
+      website: vendor.website_link,
+      addressLine1: vendor.address,
+      addressLine2: vendor.city,
+      addressLine3: vendor.pincode + ' ' + vendor.state?.name,
+      gst: vendor.gst_no,
+      tagline: vendor.tag_line,
+      fallbackName: vendor.vendor_name
+    };
+
     if (vendor.logo) {
       try {
         logoUrl =
@@ -920,18 +947,18 @@ export const generateBoxPdfService = async (
     const lead =
       project.lead_id
         ? await prisma.leadMaster.findUnique({
-            where: {
-              id: project.lead_id,
-            },
+          where: {
+            id: project.lead_id,
+          },
 
-            select: {
-              firstname: true,
-              lastname: true,
-              contact_no: true,
-              email: true,
-              site_address: true,
-            },
-          })
+          select: {
+            firstname: true,
+            lastname: true,
+            contact_no: true,
+            email: true,
+            site_address: true,
+          },
+        })
         : null;
 
     /*
@@ -944,8 +971,7 @@ export const generateBoxPdfService = async (
       project.client_name ||
       (
         lead
-          ? `${lead.firstname || ""} ${
-              lead.lastname || ""
+          ? `${lead.firstname || ""} ${lead.lastname || ""
             }`.trim()
           : ""
       ) ||
@@ -1214,7 +1240,7 @@ export const generateBoxPdfService = async (
           .cut_list
           ?.group_name
           ?.trim() ||
-          null
+        null
       );
     }
 
@@ -1409,44 +1435,44 @@ export const generateBoxPdfService = async (
             <tr>
               <td class="code-cell">
                 ${escapeHtml(
-                  item.unique_code ||
-                  "-"
-                )}
+            item.unique_code ||
+            "-"
+          )}
               </td>
 
               <td class="component-cell">
                 <strong>
                   ${escapeHtml(
-                    item.item_name ||
-                    "-"
-                  )}
+            item.item_name ||
+            "-"
+          )}
                 </strong>
 
                 <span>
                   ${escapeHtml(
-                    getItemSizeText(
-                      item
-                    )
-                  )}
+            getItemSizeText(
+              item
+            )
+          )}
                 </span>
               </td>
 
               <td class="qty-cell">
                 ${formatQuantity(
-                  item.quantity
-                )}
+            item.quantity
+          )}
               </td>
 
               <td class="unit-cell">
                 ${item.unit_weight.toFixed(
-                  2
-                )}
+            2
+          )}
               </td>
 
               <td class="total-cell">
                 ${item.total_weight.toFixed(
-                  2
-                )}
+            2
+          )}
               </td>
             </tr>
           `
@@ -1625,7 +1651,6 @@ body {
   width: 55%;
 }
 
-.address-text,
 .contact-text {
   display: block;
   font-size: 5.5px;
@@ -1633,6 +1658,17 @@ body {
   font-weight: 700;
   color: #5b667d;
   white-space: nowrap;
+}
+
+.address-text{
+  display: block;
+  font-size: 5.5px;
+  line-height: 8.4px;
+  font-weight: 700;
+  color: #5b667d;  
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .gst-text {
@@ -2093,9 +2129,9 @@ body {
               <td colspan="2" class="company-cell">
                 <span class="company-name">
                   ${escapeHtml(
-                    vendor.vendor_name ||
-                    hardcodedCompany.fallbackName
-                  )}
+      vendor.vendor_name ||
+      hardcodedCompany.fallbackName
+    )}
                 </span>
               </td>
             </tr>
@@ -2104,26 +2140,26 @@ body {
               <td class="address-cell">
                 <span class="address-text">
                   ${escapeHtml(
-                    hardcodedCompany.addressLine1
-                  )}
+      hardcodedCompany.addressLine1
+    )}
                 </span>
 
                 <span class="address-text">
                   ${escapeHtml(
-                    hardcodedCompany.addressLine2
-                  )}
+      hardcodedCompany.addressLine2
+    )}
                 </span>
 
                 <span class="address-text">
                   ${escapeHtml(
-                    hardcodedCompany.addressLine3
-                  )}
+      hardcodedCompany.addressLine3
+    )}
                 </span>
 
                 <span class="gst-text">
                   GST: ${escapeHtml(
-                    hardcodedCompany.gst
-                  )}
+      hardcodedCompany.gst
+    )}
                 </span>
               </td>
 
@@ -2131,24 +2167,24 @@ body {
                 <span class="contact-text">
                   Toll Free No. :
                   ${escapeHtml(
-                    hardcodedCompany.tollFreeNo
-                  )}
+      hardcodedCompany.tollFreeNo
+    )}
                 </span>
 
                 <span class="contact-text">
-                  Email ID :
+                  Email :
                   <span class="email-link">
                     ${escapeHtml(
-                      hardcodedCompany.email
-                    )}
+      hardcodedCompany.email
+    )}
                   </span>
                 </span>
 
                 <span class="contact-text">
                   Website :
                   ${escapeHtml(
-                    hardcodedCompany.website
-                  )}
+      hardcodedCompany.website
+    )}
                 </span>
 
                 <span style="float: right;" class="package-label">
@@ -2172,8 +2208,8 @@ body {
           <div class="package-number-box">
             <span class="package-number">
               ${escapeHtml(
-                box.box_name
-              )}
+      box.box_name
+    )}
             </span>
           </div>
         </td>
@@ -2193,8 +2229,8 @@ body {
 
         <div class="field-value">
           ${escapeHtml(
-            clientName
-          )}
+      clientName
+    )}
         </div>
       </div>
 
@@ -2205,8 +2241,8 @@ body {
 
         <div class="field-value">
           ${escapeHtml(
-            clientContact
-          )}
+      clientContact
+    )}
         </div>
       </div>
     </div>
@@ -2222,8 +2258,8 @@ body {
 
         <div class="field-value">
           ${escapeHtml(
-            deliveryAddress
-          )}
+      deliveryAddress
+    )}
         </div>
       </div>
 
@@ -2234,8 +2270,8 @@ body {
 
         <div class="field-value">
           ${escapeHtml(
-            project.project_name
-          )}
+      project.project_name
+    )}
         </div>
       </div>
     </div>
@@ -2253,8 +2289,8 @@ body {
 
         <div class="field-value">
           ${escapeHtml(
-            orderNumber
-          )}
+      orderNumber
+    )}
         </div>
       </div>
 
@@ -2265,8 +2301,8 @@ body {
 
         <div class="field-value">
           ${escapeHtml(
-            packageSize
-          )}
+      packageSize
+    )}
         </div>
       </div>
 
@@ -2292,8 +2328,8 @@ body {
 
         <div class="field-value">
           ${escapeHtml(
-            floorName
-          )}
+      floorName
+    )}
         </div>
       </div>
 
@@ -2304,8 +2340,8 @@ body {
 
         <div class="field-value">
           ${escapeHtml(
-            productBoxCount
-          )}
+      productBoxCount
+    )}
         </div>
       </div>
 
@@ -2316,8 +2352,8 @@ body {
 
         <div class="field-value">
           ${escapeHtml(
-            itemNo
-          )}
+      itemNo
+    )}
         </div>
       </div>
     </div>
@@ -2330,8 +2366,8 @@ body {
     <div class="product-title">
       PRODUCT :
       ${escapeHtml(
-        productName
-      )}
+      productName
+    )}
     </div>
 
     <!-- ============================== -->
@@ -2388,9 +2424,8 @@ body {
       </thead>
 
       <tbody>
-        ${
-          componentRows ||
-          `
+        ${componentRows ||
+      `
             <tr>
               <td
                 colspan="5"
@@ -2400,7 +2435,7 @@ body {
               </td>
             </tr>
           `
-        }
+      }
       </tbody>
 
       <tfoot>
@@ -2414,8 +2449,8 @@ body {
 
           <td class="qty-cell">
             ${formatQuantity(
-              totalQuantity
-            )}
+        totalQuantity
+      )}
           </td>
 
           <td class="unit-cell">
@@ -2424,8 +2459,8 @@ body {
 
           <td class="total-cell">
             ${totalWeight.toFixed(
-              2
-            )}KG
+        2
+      )}KG
           </td>
         </tr>
       </tfoot>
@@ -2966,18 +3001,18 @@ export const generateBoxHtmlService = async (
     const lead =
       project.lead_id
         ? await prisma.leadMaster.findUnique({
-            where: {
-              id: project.lead_id,
-            },
+          where: {
+            id: project.lead_id,
+          },
 
-            select: {
-              firstname: true,
-              lastname: true,
-              contact_no: true,
-              email: true,
-              site_address: true,
-            },
-          })
+          select: {
+            firstname: true,
+            lastname: true,
+            contact_no: true,
+            email: true,
+            site_address: true,
+          },
+        })
         : null;
 
     /*
@@ -2990,8 +3025,7 @@ export const generateBoxHtmlService = async (
       project.client_name ||
       (
         lead
-          ? `${lead.firstname || ""} ${
-              lead.lastname || ""
+          ? `${lead.firstname || ""} ${lead.lastname || ""
             }`.trim()
           : ""
       ) ||
@@ -3260,7 +3294,7 @@ export const generateBoxHtmlService = async (
           .cut_list
           ?.group_name
           ?.trim() ||
-          null
+        null
       );
     }
 
@@ -3455,44 +3489,44 @@ export const generateBoxHtmlService = async (
             <tr>
               <td class="code-cell">
                 ${escapeHtml(
-                  item.unique_code ||
-                  "-"
-                )}
+            item.unique_code ||
+            "-"
+          )}
               </td>
 
               <td class="component-cell">
                 <strong>
                   ${escapeHtml(
-                    item.item_name ||
-                    "-"
-                  )}
+            item.item_name ||
+            "-"
+          )}
                 </strong>
 
                 <span>
                   ${escapeHtml(
-                    getItemSizeText(
-                      item
-                    )
-                  )}
+            getItemSizeText(
+              item
+            )
+          )}
                 </span>
               </td>
 
               <td class="qty-cell">
                 ${formatQuantity(
-                  item.quantity
-                )}
+            item.quantity
+          )}
               </td>
 
               <td class="unit-cell">
                 ${item.unit_weight.toFixed(
-                  2
-                )}
+            2
+          )}
               </td>
 
               <td class="total-cell">
                 ${item.total_weight.toFixed(
-                  2
-                )}
+            2
+          )}
               </td>
             </tr>
           `
@@ -3671,7 +3705,6 @@ body {
   width: 55%;
 }
 
-.address-text,
 .contact-text {
   display: block;
   font-size: 5.5px;
@@ -3679,6 +3712,17 @@ body {
   font-weight: 700;
   color: #5b667d;
   white-space: nowrap;
+}
+
+.address-text{
+  display: block;
+  font-size: 5.5px;
+  line-height: 8.4px;
+  font-weight: 700;
+  color: #5b667d;  
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .gst-text {
@@ -4139,9 +4183,9 @@ body {
               <td colspan="2" class="company-cell">
                 <span class="company-name">
                   ${escapeHtml(
-                    vendor.vendor_name ||
-                    hardcodedCompany.fallbackName
-                  )}
+      vendor.vendor_name ||
+      hardcodedCompany.fallbackName
+    )}
                 </span>
               </td>
             </tr>
@@ -4150,26 +4194,26 @@ body {
               <td class="address-cell">
                 <span class="address-text">
                   ${escapeHtml(
-                    hardcodedCompany.addressLine1
-                  )}
+      hardcodedCompany.addressLine1
+    )}
                 </span>
 
                 <span class="address-text">
                   ${escapeHtml(
-                    hardcodedCompany.addressLine2
-                  )}
+      hardcodedCompany.addressLine2
+    )}
                 </span>
 
                 <span class="address-text">
                   ${escapeHtml(
-                    hardcodedCompany.addressLine3
-                  )}
+      hardcodedCompany.addressLine3
+    )}
                 </span>
 
                 <span class="gst-text">
                   GST: ${escapeHtml(
-                    hardcodedCompany.gst
-                  )}
+      hardcodedCompany.gst
+    )}
                 </span>
               </td>
 
@@ -4177,24 +4221,24 @@ body {
                 <span class="contact-text">
                   Toll Free No. :
                   ${escapeHtml(
-                    hardcodedCompany.tollFreeNo
-                  )}
+      hardcodedCompany.tollFreeNo
+    )}
                 </span>
 
                 <span class="contact-text">
-                  Email ID :
+                  Email :
                   <span class="email-link">
                     ${escapeHtml(
-                      hardcodedCompany.email
-                    )}
+      hardcodedCompany.email
+    )}
                   </span>
                 </span>
 
                 <span class="contact-text">
                   Website :
                   ${escapeHtml(
-                    hardcodedCompany.website
-                  )}
+      hardcodedCompany.website
+    )}
                 </span>
 
                 <span style="float: right;" class="package-label">
@@ -4218,8 +4262,8 @@ body {
           <div class="package-number-box">
             <span class="package-number">
               ${escapeHtml(
-                box.box_name
-              )}
+      box.box_name
+    )}
             </span>
           </div>
         </td>
@@ -4237,8 +4281,8 @@ body {
 
         <div class="field-value">
           ${escapeHtml(
-            clientName
-          )}
+      clientName
+    )}
         </div>
       </div>
 
@@ -4249,8 +4293,8 @@ body {
 
         <div class="field-value">
           ${escapeHtml(
-            clientContact
-          )}
+      clientContact
+    )}
         </div>
       </div>
     </div>
@@ -4266,8 +4310,8 @@ body {
 
         <div class="field-value">
           ${escapeHtml(
-            deliveryAddress
-          )}
+      deliveryAddress
+    )}
         </div>
       </div>
 
@@ -4278,8 +4322,8 @@ body {
 
         <div class="field-value">
           ${escapeHtml(
-            project.project_name
-          )}
+      project.project_name
+    )}
         </div>
       </div>
     </div>
@@ -4297,8 +4341,8 @@ body {
 
         <div class="field-value">
           ${escapeHtml(
-            orderNumber
-          )}
+      orderNumber
+    )}
         </div>
       </div>
 
@@ -4309,8 +4353,8 @@ body {
 
         <div class="field-value">
           ${escapeHtml(
-            packageSize
-          )}
+      packageSize
+    )}
         </div>
       </div>
 
@@ -4336,8 +4380,8 @@ body {
 
         <div class="field-value">
           ${escapeHtml(
-            floorName
-          )}
+      floorName
+    )}
         </div>
       </div>
 
@@ -4348,8 +4392,8 @@ body {
 
         <div class="field-value">
           ${escapeHtml(
-            productBoxCount
-          )}
+      productBoxCount
+    )}
         </div>
       </div>
 
@@ -4360,8 +4404,8 @@ body {
 
         <div class="field-value">
           ${escapeHtml(
-            itemNo
-          )}
+      itemNo
+    )}
         </div>
       </div>
     </div>
@@ -4374,8 +4418,8 @@ body {
     <div class="product-title">
       PRODUCT :
       ${escapeHtml(
-        productName
-      )}
+      productName
+    )}
     </div>
 
     <!-- ============================== -->
@@ -4432,9 +4476,8 @@ body {
       </thead>
 
       <tbody>
-        ${
-          componentRows ||
-          `
+        ${componentRows ||
+      `
             <tr>
               <td
                 colspan="5"
@@ -4444,7 +4487,7 @@ body {
               </td>
             </tr>
           `
-        }
+      }
       </tbody>
 
       <tfoot>
@@ -4458,8 +4501,8 @@ body {
 
           <td class="qty-cell">
             ${formatQuantity(
-              totalQuantity
-            )}
+        totalQuantity
+      )}
           </td>
 
           <td class="unit-cell">
@@ -4468,8 +4511,8 @@ body {
 
           <td class="total-cell">
             ${totalWeight.toFixed(
-              2
-            )}KG
+        2
+      )}KG
           </td>
         </tr>
       </tfoot>
@@ -7268,17 +7311,7 @@ export const generateProjectFullReportService = async (
 
   let tempFilePath: string | null = null;
 
-  const hardcodedCompany = {
-    tollFreeNo: "18002674949",
-    email: "info@adarshindia.in",
-    website: "www.adarshindia.in",
-    addressLine1: "280 & 283, Bilavali,",
-    addressLine2: "Kudus, Wada, Palghar",
-    addressLine3: "421312 Maharashtra",
-    gst: "27AAZFA7533R1ZC",
-    tagline: "Design. Build. Deliver",
-    fallbackName: "ADARSH INFRAINTERIO",
-  };
+
 
   const toNumber = (
     value: any
@@ -7456,6 +7489,20 @@ export const generateProjectFullReportService = async (
           primary_contact_number: true,
           primary_contact_email: true,
           logo: true,
+          gst_no: true,
+          toll_free_no: true,
+          website_link: true,
+          tag_line: true,
+          address: true,
+          pincode: true,
+          city: true,
+          state: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+
         },
       }),
 
@@ -7502,6 +7549,18 @@ export const generateProjectFullReportService = async (
     |--------------------------------------------------------------------------
     */
 
+    const hardcodedCompany = {
+      tollFreeNo: vendor.toll_free_no,
+      email: vendor.primary_contact_email,
+      website: vendor.website_link,
+      addressLine1: vendor.address,
+      addressLine2: vendor.city,
+      addressLine3: vendor.pincode + ' ' + vendor.state?.name,
+      gst: vendor.gst_no,
+      tagline: vendor.tag_line,
+      fallbackName: vendor.vendor_name
+    };
+
     let logoUrl = "";
 
     if (vendor.logo) {
@@ -7527,18 +7586,18 @@ export const generateProjectFullReportService = async (
     const lead =
       project.lead_id
         ? await prisma.leadMaster.findUnique({
-            where: {
-              id: project.lead_id,
-            },
+          where: {
+            id: project.lead_id,
+          },
 
-            select: {
-              firstname: true,
-              lastname: true,
-              contact_no: true,
-              email: true,
-              site_address: true,
-            },
-          })
+          select: {
+            firstname: true,
+            lastname: true,
+            contact_no: true,
+            email: true,
+            site_address: true,
+          },
+        })
         : null;
 
     /*
@@ -7551,8 +7610,7 @@ export const generateProjectFullReportService = async (
       project.client_name ||
       (
         lead
-          ? `${lead.firstname || ""} ${
-              lead.lastname || ""
+          ? `${lead.firstname || ""} ${lead.lastname || ""
             }`.trim()
           : ""
       ) ||
@@ -8091,26 +8149,26 @@ export const generateProjectFullReportService = async (
 
               <td>
                 ${escapeHtml(
-                  box.packet_no
-                )}
+            box.packet_no
+          )}
               </td>
 
               <td>
                 ${escapeHtml(
-                  box.packed_by_name
-                )}
+            box.packed_by_name
+          )}
               </td>
 
               <td>
                 ${formatReportDate(
-                  box.package_date
-                )}
+            box.package_date
+          )}
               </td>
 
               <td>
                 ${escapeHtml(
-                  box.product_box_count
-                )}
+            box.product_box_count
+          )}
               </td>
 
               <td>${box.items.length}</td>
@@ -8119,16 +8177,16 @@ export const generateProjectFullReportService = async (
 
               <td>
                 ${box.total_weight.toFixed(
-                  2
-                )} kg
+            2
+          )} kg
               </td>
 
               <td>
                 ${escapeHtml(
-                  String(
-                    box.box_status
-                  )
-                )}
+            String(
+              box.box_status
+            )
+          )}
               </td>
             </tr>
           `
@@ -8145,31 +8203,31 @@ export const generateProjectFullReportService = async (
           <div class="summary-company-info">
             <div class="summary-company-name">
               ${escapeHtml(
-                vendor.vendor_name ||
-                hardcodedCompany.fallbackName
-              )}
+      vendor.vendor_name ||
+      hardcodedCompany.fallbackName
+    )}
             </div>
 
             <div>
               ${escapeHtml(
-                hardcodedCompany.addressLine1
-              )}
+      hardcodedCompany.addressLine1
+    )}
               ${escapeHtml(
-                hardcodedCompany.addressLine2
-              )}
+      hardcodedCompany.addressLine2
+    )}
             </div>
 
             <div>
               ${escapeHtml(
-                hardcodedCompany.addressLine3
-              )}
+      hardcodedCompany.addressLine3
+    )}
             </div>
 
             <div>
               GST:
               ${escapeHtml(
-                hardcodedCompany.gst
-              )}
+      hardcodedCompany.gst
+    )}
             </div>
           </div>
         </div>
@@ -8178,29 +8236,29 @@ export const generateProjectFullReportService = async (
           <div>
             <div class="summary-title">
               ${escapeHtml(
-                project.project_name
-              )}
+      project.project_name
+    )}
             </div>
 
             <div class="summary-subtitle">
               Order Number:
               ${escapeHtml(
-                orderNumber
-              )}
+      orderNumber
+    )}
             </div>
           </div>
 
           <div class="summary-client">
             <strong>
               ${escapeHtml(
-                clientName
-              )}
+      clientName
+    )}
             </strong>
 
             <div>
               ${escapeHtml(
-                clientContact
-              )}
+      clientContact
+    )}
             </div>
           </div>
         </div>
@@ -8226,8 +8284,8 @@ export const generateProjectFullReportService = async (
 
             <strong>
               ${totalWeight.toFixed(
-                2
-              )} kg
+      2
+    )} kg
             </strong>
           </div>
         </div>
@@ -8236,8 +8294,8 @@ export const generateProjectFullReportService = async (
           <strong>DELIVERY ADDRESS:</strong>
 
           ${escapeHtml(
-            clientAddress
-          )}
+      clientAddress
+    )}
         </div>
 
         <h3 class="section-title">
@@ -8271,8 +8329,8 @@ export const generateProjectFullReportService = async (
 
               <td>
                 ${totalWeight.toFixed(
-                  2
-                )} kg
+      2
+    )} kg
               </td>
 
               <td>${packedBoxes}</td>
@@ -8326,44 +8384,44 @@ export const generateProjectFullReportService = async (
                     <tr>
                       <td class="code-cell">
                         ${escapeHtml(
-                          item.unique_code ||
-                          "-"
-                        )}
+                    item.unique_code ||
+                    "-"
+                  )}
                       </td>
 
                       <td class="component-cell">
                         <strong>
                           ${escapeHtml(
-                            item.item_name ||
-                            "-"
-                          )}
+                    item.item_name ||
+                    "-"
+                  )}
                         </strong>
 
                         <span>
                           ${escapeHtml(
-                            getItemSizeText(
-                              item
-                            )
-                          )}
+                    getItemSizeText(
+                      item
+                    )
+                  )}
                         </span>
                       </td>
 
                       <td class="qty-cell">
                         ${formatQuantity(
-                          item.quantity
-                        )}
+                    item.quantity
+                  )}
                       </td>
 
                       <td class="unit-cell">
                         ${item.unit_weight.toFixed(
-                          2
-                        )}
+                    2
+                  )}
                       </td>
 
                       <td class="total-cell">
                         ${item.total_weight.toFixed(
-                          2
-                        )}
+                    2
+                  )}
                       </td>
                     </tr>
                   `
@@ -8397,9 +8455,9 @@ export const generateProjectFullReportService = async (
               <td colspan="2" class="company-cell">
                 <span class="company-name">
                   ${escapeHtml(
-                    vendor.vendor_name ||
-                    hardcodedCompany.fallbackName
-                  )}
+              vendor.vendor_name ||
+              hardcodedCompany.fallbackName
+            )}
                 </span>
               </td>
             </tr>
@@ -8408,26 +8466,26 @@ export const generateProjectFullReportService = async (
               <td class="address-cell">
                 <span class="address-text">
                   ${escapeHtml(
-                    hardcodedCompany.addressLine1
-                  )}
+              hardcodedCompany.addressLine1
+            )}
                 </span>
 
                 <span class="address-text">
                   ${escapeHtml(
-                    hardcodedCompany.addressLine2
-                  )}
+              hardcodedCompany.addressLine2
+            )}
                 </span>
 
                 <span class="address-text">
                   ${escapeHtml(
-                    hardcodedCompany.addressLine3
-                  )}
+              hardcodedCompany.addressLine3
+            )}
                 </span>
 
                 <span class="gst-text">
                   GST: ${escapeHtml(
-                    hardcodedCompany.gst
-                  )}
+              hardcodedCompany.gst
+            )}
                 </span>
               </td>
 
@@ -8435,24 +8493,24 @@ export const generateProjectFullReportService = async (
                 <span class="contact-text">
                   Toll Free No. :
                   ${escapeHtml(
-                    hardcodedCompany.tollFreeNo
-                  )}
+              hardcodedCompany.tollFreeNo
+            )}
                 </span>
 
                 <span class="contact-text">
-                  Email ID :
+                  Email :
                   <span class="email-link">
                     ${escapeHtml(
-                      hardcodedCompany.email
-                    )}
+              hardcodedCompany.email
+            )}
                   </span>
                 </span>
 
                 <span class="contact-text">
                   Website :
                   ${escapeHtml(
-                    hardcodedCompany.website
-                  )}
+              hardcodedCompany.website
+            )}
                 </span>
 
                 <span style="float: right;" class="package-label">
@@ -8476,8 +8534,8 @@ export const generateProjectFullReportService = async (
           <div class="package-number-box">
             <span class="package-number">
               ${escapeHtml(
-                box.packet_no
-              )}
+              box.packet_no
+            )}
             </span>
           </div>
         </td>
@@ -8497,8 +8555,8 @@ export const generateProjectFullReportService = async (
 
                       <div class="field-value">
                         ${escapeHtml(
-                          clientName
-                        )}
+              clientName
+            )}
                       </div>
                     </div>
 
@@ -8509,8 +8567,8 @@ export const generateProjectFullReportService = async (
 
                       <div class="field-value">
                         ${escapeHtml(
-                          clientContact
-                        )}
+              clientContact
+            )}
                       </div>
                     </div>
                   </div>
@@ -8526,8 +8584,8 @@ export const generateProjectFullReportService = async (
 
                       <div class="field-value">
                         ${escapeHtml(
-                          box.address
-                        )}
+              box.address
+            )}
                       </div>
                     </div>
 
@@ -8538,8 +8596,8 @@ export const generateProjectFullReportService = async (
 
                       <div class="field-value">
                         ${escapeHtml(
-                          project.project_name
-                        )}
+              project.project_name
+            )}
                       </div>
                     </div>
                   </div>
@@ -8557,8 +8615,8 @@ export const generateProjectFullReportService = async (
 
                       <div class="field-value">
                         ${escapeHtml(
-                          box.order_no
-                        )}
+              box.order_no
+            )}
                       </div>
                     </div>
 
@@ -8569,8 +8627,8 @@ export const generateProjectFullReportService = async (
 
                       <div class="field-value">
                         ${escapeHtml(
-                          box.package_size
-                        )}
+              box.package_size
+            )}
                       </div>
                     </div>
 
@@ -8596,8 +8654,8 @@ export const generateProjectFullReportService = async (
 
                       <div class="field-value">
                         ${escapeHtml(
-                          box.floor_name
-                        )}
+              box.floor_name
+            )}
                       </div>
                     </div>
 
@@ -8608,8 +8666,8 @@ export const generateProjectFullReportService = async (
 
                       <div class="field-value">
                         ${escapeHtml(
-                          box.product_box_count
-                        )}
+              box.product_box_count
+            )}
                       </div>
                     </div>
 
@@ -8620,8 +8678,8 @@ export const generateProjectFullReportService = async (
 
                       <div class="field-value">
                         ${escapeHtml(
-                          box.item_no
-                        )}
+              box.item_no
+            )}
                       </div>
                     </div>
                   </div>
@@ -8634,8 +8692,8 @@ export const generateProjectFullReportService = async (
                   <div class="product-title">
                     PRODUCT :
                     ${escapeHtml(
-                      box.product_name
-                    )}
+              box.product_name
+            )}
                   </div>
 
                   <!-- ============================== -->
@@ -8692,9 +8750,8 @@ export const generateProjectFullReportService = async (
                     </thead>
 
                     <tbody>
-                      ${
-                        componentRows ||
-                        `
+                      ${componentRows ||
+              `
                           <tr>
                             <td
                               colspan="5"
@@ -8704,7 +8761,7 @@ export const generateProjectFullReportService = async (
                             </td>
                           </tr>
                         `
-                      }
+              }
                     </tbody>
 
                     <tfoot>
@@ -8718,8 +8775,8 @@ export const generateProjectFullReportService = async (
 
                         <td class="qty-cell">
                           ${formatQuantity(
-                            box.total_quantity
-                          )}
+                box.total_quantity
+              )}
                         </td>
 
                         <td class="unit-cell">
@@ -8728,8 +8785,8 @@ export const generateProjectFullReportService = async (
 
                         <td class="total-cell">
                           ${box.total_weight.toFixed(
-                            2
-                          )}KG
+                2
+              )}KG
                         </td>
                       </tr>
                     </tfoot>
@@ -8917,7 +8974,6 @@ body {
   width: 55%;
 }
 
-.address-text,
 .contact-text {
   display: block;
   font-size: 5.5px;
@@ -8925,6 +8981,17 @@ body {
   font-weight: 700;
   color: #5b667d;
   white-space: nowrap;
+}
+
+.address-text{
+  display: block;
+  font-size: 5.5px;
+  line-height: 8.4px;
+  font-weight: 700;
+  color: #5b667d;  
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .gst-text {
@@ -9456,7 +9523,7 @@ ${stickerPages}
       }
     );
   } catch (
-    error
+  error
   ) {
     console.error(
       "generateProjectFullReportService:",
