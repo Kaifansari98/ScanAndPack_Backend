@@ -4427,7 +4427,7 @@ model BroadcastMaster {
   id         Int             @id @default(autoincrement())
   title      String
   content    String          @db.Text
-  status     BroadcastStatus @default(DRAFT)
+  status     BroadcastStatus @default(ACTIVE)
   type       BroadcastType
   publish_at DateTime?
   vendor_id  Int?

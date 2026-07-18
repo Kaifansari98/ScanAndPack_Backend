@@ -578,8 +578,6 @@ export type BroadcastType = (typeof BroadcastType)[keyof typeof BroadcastType]
 
 
 export const BroadcastStatus = {
-  DRAFT: 'DRAFT',
-  SCHEDULED: 'SCHEDULED',
   ACTIVE: 'ACTIVE',
   INACTIVE: 'INACTIVE'
 } as const
