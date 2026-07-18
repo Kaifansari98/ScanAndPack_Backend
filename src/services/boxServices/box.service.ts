@@ -2140,25 +2140,25 @@ body {
               <td class="address-cell">
                 <span class="address-text">
                   ${escapeHtml(
-      hardcodedCompany.addressLine1
+      hardcodedCompany.addressLine1 ?? ""
     )}
                 </span>
 
                 <span class="address-text">
                   ${escapeHtml(
-      hardcodedCompany.addressLine2
+      hardcodedCompany.addressLine2?? ""
     )}
                 </span>
 
                 <span class="address-text">
                   ${escapeHtml(
-      hardcodedCompany.addressLine3
+      hardcodedCompany.addressLine3?? ""
     )}
                 </span>
 
                 <span class="gst-text">
                   GST: ${escapeHtml(
-      hardcodedCompany.gst
+      hardcodedCompany.gst?? ""
     )}
                 </span>
               </td>
@@ -2167,7 +2167,7 @@ body {
                 <span class="contact-text">
                   Toll Free No. :
                   ${escapeHtml(
-      hardcodedCompany.tollFreeNo
+      hardcodedCompany.tollFreeNo?? ""
     )}
                 </span>
 
@@ -2183,7 +2183,7 @@ body {
                 <span class="contact-text">
                   Website :
                   ${escapeHtml(
-      hardcodedCompany.website
+      hardcodedCompany.website?? ""
     )}
                 </span>
 
@@ -4194,25 +4194,25 @@ body {
               <td class="address-cell">
                 <span class="address-text">
                   ${escapeHtml(
-      hardcodedCompany.addressLine1
+      hardcodedCompany.addressLine1?? ""
     )}
                 </span>
 
                 <span class="address-text">
                   ${escapeHtml(
-      hardcodedCompany.addressLine2
+      hardcodedCompany.addressLine2?? ""
     )}
                 </span>
 
                 <span class="address-text">
                   ${escapeHtml(
-      hardcodedCompany.addressLine3
+      hardcodedCompany.addressLine3?? ""
     )}
                 </span>
 
                 <span class="gst-text">
                   GST: ${escapeHtml(
-      hardcodedCompany.gst
+      hardcodedCompany.gst?? ""
     )}
                 </span>
               </td>
@@ -4221,7 +4221,7 @@ body {
                 <span class="contact-text">
                   Toll Free No. :
                   ${escapeHtml(
-      hardcodedCompany.tollFreeNo
+      hardcodedCompany.tollFreeNo?? ""
     )}
                 </span>
 
@@ -4229,7 +4229,7 @@ body {
                   Email :
                   <span class="email-link">
                     ${escapeHtml(
-      hardcodedCompany.email
+      hardcodedCompany.email?? ""
     )}
                   </span>
                 </span>
@@ -8210,23 +8210,23 @@ export const generateProjectFullReportService = async (
 
             <div>
               ${escapeHtml(
-      hardcodedCompany.addressLine1
+      hardcodedCompany.addressLine1?? ""
     )}
               ${escapeHtml(
-      hardcodedCompany.addressLine2
+      hardcodedCompany.addressLine2?? ""
     )}
             </div>
 
             <div>
               ${escapeHtml(
-      hardcodedCompany.addressLine3
+      hardcodedCompany.addressLine3?? ""
     )}
             </div>
 
             <div>
               GST:
               ${escapeHtml(
-      hardcodedCompany.gst
+      hardcodedCompany.gst?? ""
     )}
             </div>
           </div>
@@ -8466,25 +8466,25 @@ export const generateProjectFullReportService = async (
               <td class="address-cell">
                 <span class="address-text">
                   ${escapeHtml(
-              hardcodedCompany.addressLine1
+              hardcodedCompany.addressLine1?? ""
             )}
                 </span>
 
                 <span class="address-text">
                   ${escapeHtml(
-              hardcodedCompany.addressLine2
+              hardcodedCompany.addressLine2?? ""
             )}
                 </span>
 
                 <span class="address-text">
                   ${escapeHtml(
-              hardcodedCompany.addressLine3
+              hardcodedCompany.addressLine3?? ""
             )}
                 </span>
 
                 <span class="gst-text">
                   GST: ${escapeHtml(
-              hardcodedCompany.gst
+              hardcodedCompany.gst?? ""
             )}
                 </span>
               </td>
@@ -8493,7 +8493,7 @@ export const generateProjectFullReportService = async (
                 <span class="contact-text">
                   Toll Free No. :
                   ${escapeHtml(
-              hardcodedCompany.tollFreeNo
+              hardcodedCompany.tollFreeNo?? ""
             )}
                 </span>
 
@@ -8509,7 +8509,7 @@ export const generateProjectFullReportService = async (
                 <span class="contact-text">
                   Website :
                   ${escapeHtml(
-              hardcodedCompany.website
+              hardcodedCompany.website?? ""
             )}
                 </span>
 
@@ -9588,6 +9588,7 @@ type CustomPdfOptions = {
   height: string;
 
   printBackground?: boolean;
+  preferCSSPageSize?: boolean;
 
   margin?: {
     top?: string;
