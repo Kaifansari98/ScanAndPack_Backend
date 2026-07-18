@@ -222,6 +222,34 @@ export class CompanyVendorsDetailedService {
       }
     }
 
+    // Check duplicate phone number in contacts
+    if (contacts && Array.isArray(contacts)) {
+      for (const contact of contacts) {
+        if (contact.phone) {
+          const existingPhone = await prisma.companyVendorContactPerson.findFirst({
+            where: { phone: contact.phone, is_deleted: false, companyVendor: { is_deleted: false } },
+          });
+          if (existingPhone) {
+            throw this.conflict(`Phone number "${contact.phone}" is already in use`);
+          }
+        }
+      }
+    }
+
+    // Check duplicate bank account numbers
+    if (bank_accounts && Array.isArray(bank_accounts)) {
+      for (const bank of bank_accounts) {
+        if (bank.account_no) {
+          const existingAccount = await prisma.companyVendorBankAccount.findFirst({
+            where: { account_no: bank.account_no, is_deleted: false, companyVendor: { is_deleted: false } },
+          });
+          if (existingAccount) {
+            throw this.conflict(`Bank account number "${bank.account_no}" is already in use`);
+          }
+        }
+      }
+    }
+
     // Validate address rule if provided
     if (addresses && Array.isArray(addresses) && addresses.length > 0) {
       const primaryAddresses = addresses.filter((a: any) => a.is_primary === true);
@@ -515,6 +543,44 @@ export class CompanyVendorsDetailedService {
         where: { pan_no, is_deleted: false, NOT: { id: companyVendorId } },
       });
       if (duplicatePAN) throw this.conflict(`pan_no "${pan_no}" is already in use`);
+    }
+
+    // Validate duplicate phone number in contacts if changed/provided
+    if (contacts && Array.isArray(contacts)) {
+      for (const contact of contacts) {
+        if (contact.phone) {
+          const duplicatePhone = await prisma.companyVendorContactPerson.findFirst({
+            where: {
+              phone: contact.phone,
+              is_deleted: false,
+              companyVendor: { is_deleted: false },
+              NOT: { company_vendor_id: companyVendorId },
+            },
+          });
+          if (duplicatePhone) {
+            throw this.conflict(`Phone number "${contact.phone}" is already in use`);
+          }
+        }
+      }
+    }
+
+    // Validate duplicate bank account numbers if changed/provided
+    if (bank_accounts && Array.isArray(bank_accounts)) {
+      for (const bank of bank_accounts) {
+        if (bank.account_no) {
+          const duplicateAccount = await prisma.companyVendorBankAccount.findFirst({
+            where: {
+              account_no: bank.account_no,
+              is_deleted: false,
+              companyVendor: { is_deleted: false },
+              NOT: { company_vendor_id: companyVendorId },
+            },
+          });
+          if (duplicateAccount) {
+            throw this.conflict(`Bank account number "${bank.account_no}" is already in use`);
+          }
+        }
+      }
     }
 
     // Validations on relationships if provided
