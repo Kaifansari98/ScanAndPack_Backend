@@ -1733,6 +1733,44 @@ export const onboardVendor = async (data: any) => {
     is_year_wise_lead_code_enabled,
   } = data;
 
+  // Check duplicate vendor_code
+  const existingCode = await prisma.vendorMaster.findFirst({
+    where: { vendor_code },
+  });
+  if (existingCode) {
+    throw new Error(`Vendor code "${vendor_code}" is already in use`);
+  }
+
+  // Check duplicate subdomain_url
+  if (subdomain_url) {
+    const existingSubdomain = await prisma.vendorMaster.findFirst({
+      where: { subdomain_url },
+    });
+    if (existingSubdomain) {
+      throw new Error(`Domain "${subdomain_url}" is already in use`);
+    }
+  }
+
+  // Check duplicate phone number
+  if (primary_contact_number) {
+    const existingPhone = await prisma.vendorMaster.findFirst({
+      where: { primary_contact_number },
+    });
+    if (existingPhone) {
+      throw new Error(`Primary contact number "${primary_contact_number}" is already in use`);
+    }
+  }
+
+  // Check duplicate email
+  if (primary_contact_email) {
+    const existingEmail = await prisma.vendorMaster.findFirst({
+      where: { primary_contact_email },
+    });
+    if (existingEmail) {
+      throw new Error(`Primary contact email "${primary_contact_email}" is already in use`);
+    }
+  }
+
   const vendor = await prisma.vendorMaster.create({
     data: {
       vendor_name,
@@ -1805,6 +1843,38 @@ export const updateVendor = async (vendorId: number, data: any) => {
     handlesLargeScaleProjects,
     is_year_wise_lead_code_enabled,
   } = data;
+
+  // Check duplicate vendor_code if changed
+  if (vendor_code && vendor_code !== existingVendor.vendor_code) {
+    const duplicateCode = await prisma.vendorMaster.findFirst({
+      where: { vendor_code, NOT: { id: vendorId } },
+    });
+    if (duplicateCode) throw new Error(`Vendor code "${vendor_code}" is already in use`);
+  }
+
+  // Check duplicate subdomain_url if changed
+  if (subdomain_url && subdomain_url !== existingVendor.subdomain_url) {
+    const duplicateSubdomain = await prisma.vendorMaster.findFirst({
+      where: { subdomain_url, NOT: { id: vendorId } },
+    });
+    if (duplicateSubdomain) throw new Error(`Domain "${subdomain_url}" is already in use`);
+  }
+
+  // Check duplicate phone number if changed
+  if (primary_contact_number && primary_contact_number !== existingVendor.primary_contact_number) {
+    const duplicatePhone = await prisma.vendorMaster.findFirst({
+      where: { primary_contact_number, NOT: { id: vendorId } },
+    });
+    if (duplicatePhone) throw new Error(`Primary contact number "${primary_contact_number}" is already in use`);
+  }
+
+  // Check duplicate email if changed
+  if (primary_contact_email && primary_contact_email !== existingVendor.primary_contact_email) {
+    const duplicateEmail = await prisma.vendorMaster.findFirst({
+      where: { primary_contact_email, NOT: { id: vendorId } },
+    });
+    if (duplicateEmail) throw new Error(`Primary contact email "${primary_contact_email}" is already in use`);
+  }
 
   const vendor = await prisma.vendorMaster.update({
     where: { id: vendorId },
