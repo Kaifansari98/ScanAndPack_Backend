@@ -182,12 +182,14 @@ export class AuthService {
     }
 
     let is_ho_user = false;
+    let moduled_for_b2b = false;
     if (user.franchise_id) {
       const franchise = await prisma.franchiseMaster.findUnique({
         where: { id: user.franchise_id },
-        select: { is_head_office: true },
+        select: { is_head_office: true, moduled_for_b2b: true },
       });
       is_ho_user = franchise?.is_head_office ?? false;
+      moduled_for_b2b = franchise?.moduled_for_b2b ?? false;
     }
 
     const customPrivileges = await this.getCustomPrivilegeCodes(
@@ -249,6 +251,7 @@ export class AuthService {
     const updatedUser = {
       ...user,
       is_ho_user,
+      moduled_for_b2b,
       logoUrl,
       iconUrl,
       vendor: user.vendor ? {

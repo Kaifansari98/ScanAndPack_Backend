@@ -588,7 +588,7 @@ export class OrderLoginService {
       },
       include: {
         companyVendor: {
-          select: { id: true, company_name: true },
+          select: { id: true, company_name: true, in_house: true },
         },
         lead: {
           select: { lead_code: true, firstname: true, lastname: true },
@@ -741,6 +741,7 @@ export class OrderLoginService {
             id: true,
             company_name: true,
             contact_no: true,
+            in_house: true,
           },
         },
       },

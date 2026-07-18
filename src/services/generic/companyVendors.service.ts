@@ -9,7 +9,7 @@ export class CompanyVendorsService {
     }
 
     const vendors = await prisma.companyVendorsMaster.findMany({
-      where: { vendor_id: vendorId, is_deleted: false },
+      where: { vendor_id: vendorId, is_deleted: false, status_id: 1 },
       orderBy: { created_at: "desc" },
       include: {
         vendor: {
@@ -35,12 +35,13 @@ export class CompanyVendorsService {
     }
 
     return prisma.companyVendorsMaster.findMany({
-      where: { vendor_id: vendorId },
+      where: { vendor_id: vendorId, is_deleted: false },
       orderBy: { created_at: "desc" },
       include: {
         vendor: {
           select: { vendor_name: true, vendor_code: true },
         },
+        status: true,
       },
     });
   }
@@ -80,9 +81,8 @@ export class CompanyVendorsService {
     return prisma.companyVendorsMaster.update({
       where: { id: companyVendorId },
       data: {
-        is_deleted: isDeleted,
-        deleted_by: isDeleted ? updatedBy : null,
-        deleted_at: isDeleted ? new Date() : null,
+        status_id: isDeleted ? 2 : 1, // 2 = Inactive, 1 = Active
+        is_deleted: false, // Ensure not soft-deleted
         updated_by: updatedBy,
         updated_at: new Date(),
       },
