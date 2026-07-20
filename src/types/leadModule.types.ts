@@ -259,10 +259,11 @@ export interface CreateLeadDTO {
     contact_no: string;
     alt_contact_no?: string;
     email?: string;
-    site_address: string;
+    site_address?: string;
     site_map_link?: string;
     site_type_id?: number;
     source_id: number;
+    refered_by?: string;
     archetech_name?: string;
     architect_id?: number;
     archetech_number?: string;
@@ -283,6 +284,8 @@ export interface CreateLeadDTO {
     }[];
     initial_site_measurement_date?: Date;
     is_draft?: boolean;
+    client_id?: number;
+    order_number?: string;
 }
   
 export interface DocumentUpload {

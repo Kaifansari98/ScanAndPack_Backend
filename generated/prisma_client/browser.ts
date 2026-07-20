@@ -98,6 +98,11 @@ export type VendorTokens = Prisma.VendorTokensModel
  */
 export type ClientMaster = Prisma.ClientMasterModel
 /**
+ * Model ClientTypeMaster
+ * 
+ */
+export type ClientTypeMaster = Prisma.ClientTypeMasterModel
+/**
  * Model LeadMaster
  * 
  */

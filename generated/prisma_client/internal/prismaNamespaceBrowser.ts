@@ -67,6 +67,7 @@ export const ModelName = {
   ScanAndPackItem: 'ScanAndPackItem',
   VendorTokens: 'VendorTokens',
   ClientMaster: 'ClientMaster',
+  ClientTypeMaster: 'ClientTypeMaster',
   LeadMaster: 'LeadMaster',
   LeadSpecificationsMaster: 'LeadSpecificationsMaster',
   LeadCarcassMaterialMapping: 'LeadCarcassMaterialMapping',
@@ -523,6 +524,7 @@ export type VendorTokensScalarFieldEnum = (typeof VendorTokensScalarFieldEnum)[k
 
 export const ClientMasterScalarFieldEnum = {
   id: 'id',
+  vendor_id: 'vendor_id',
   name: 'name',
   contact: 'contact',
   alt_contact: 'alt_contact',
@@ -532,10 +534,27 @@ export const ClientMasterScalarFieldEnum = {
   state: 'state',
   country: 'country',
   pincode: 'pincode',
-  clientCode: 'clientCode'
+  clientCode: 'clientCode',
+  gst_number: 'gst_number',
+  company_name: 'company_name',
+  client_type_id: 'client_type_id',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
 export type ClientMasterScalarFieldEnum = (typeof ClientMasterScalarFieldEnum)[keyof typeof ClientMasterScalarFieldEnum]
+
+
+export const ClientTypeMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  type: 'type',
+  is_active: 'is_active',
+  created_at: 'created_at'
+} as const
+
+export type ClientTypeMasterScalarFieldEnum = (typeof ClientTypeMasterScalarFieldEnum)[keyof typeof ClientTypeMasterScalarFieldEnum]
 
 
 export const LeadMasterScalarFieldEnum = {
@@ -549,6 +568,7 @@ export const LeadMasterScalarFieldEnum = {
   site_address: 'site_address',
   site_type_id: 'site_type_id',
   source_id: 'source_id',
+  refered_by: 'refered_by',
   archetech_name: 'archetech_name',
   archetech_number: 'archetech_number',
   architect_id: 'architect_id',
@@ -561,6 +581,7 @@ export const LeadMasterScalarFieldEnum = {
   assign_to: 'assign_to',
   assigned_by: 'assigned_by',
   account_id: 'account_id',
+  client_id: 'client_id',
   deleted_at: 'deleted_at',
   deleted_by: 'deleted_by',
   is_deleted: 'is_deleted',
@@ -625,6 +646,7 @@ export const LeadMasterScalarFieldEnum = {
   franchise_id: 'franchise_id',
   order_login_prod_files_remark: 'order_login_prod_files_remark',
   total_required_chs_manufacturing_days: 'total_required_chs_manufacturing_days',
+  order_number: 'order_number',
   is_blocked: 'is_blocked',
   lead_blocked_at: 'lead_blocked_at'
 } as const

@@ -42,13 +42,17 @@ export const createLeadSchema = Joi.object({
 
   email: Joi.string().email().optional().allow("", null),
 
-  site_address: Joi.string().trim().min(1).max(2000).required(),
+  site_address: Joi.string().trim().max(2000).optional().allow("", null),
   site_map_link: Joi.string().uri().optional().allow("", null, ""),
 
   site_type_id: numberLike.optional().allow(null),
   source_id: numberLike.required().messages({
     "alternatives.match": '"source_id" must be a valid number',
   }),
+  refered_by: Joi.string().trim().max(300).optional().allow("", null),
+
+  client_id: numberLike.optional().allow(null),
+  order_number: Joi.string().trim().max(100).optional().allow("", null),
 
   archetech_name: Joi.string().trim().max(100).optional().allow("", null),
   archetech_number: Joi.string()
@@ -111,6 +115,9 @@ export const createLeadDraftSchema = Joi.object({
 
   site_type_id: numberLike.optional().allow(null),
   source_id: numberLike.optional().allow(null), // ✅ Drafts don't require this
+  refered_by: Joi.string().trim().max(300).optional().allow("", null),
+  client_id: numberLike.optional().allow(null),
+  order_number: Joi.string().trim().max(100).optional().allow("", null),
   archetech_name: Joi.string().trim().max(100).optional().allow("", null),
   archetech_number: Joi.string()
     .trim()
