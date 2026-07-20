@@ -40,6 +40,13 @@ model VendorMaster {
   createdAt                              DateTime @default(now())
   updatedAt                              DateTime @updatedAt
   state_id                               Int?
+  gst_no                                 String?
+  toll_free_no                           String?
+  website_link                           String?
+  tag_line                               String?
+  address                                String?
+  pincode                                String?
+  city                                   String?
 
   accounts                            AccountMaster[]
   boxes                               BoxMaster[]
@@ -173,6 +180,8 @@ model VendorMaster {
   popaymentScheduleHistories POPaymentScheduleHistory[]
   clientTypes                ClientTypeMaster[]
   clients                    ClientMaster[]
+  box_info_fields            ProjectBoxInfoField[]
+  box_info_values            BoxInfoFieldValue[]
 
   @@index([state_id])
 }
@@ -468,6 +477,8 @@ model ProjectMaster {
   lead                  LeadMaster?             @relation(fields: [lead_id], references: [id])
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   scanItems             ScanAndPackItem[]
+  box_info_fields       ProjectBoxInfoField[]
+  box_info_values       BoxInfoFieldValue[]
 }
 
 model ProjectDetails {
@@ -538,6 +549,67 @@ model BoxMaster {
   factoryOutByUser      UserMaster?             @relation("BoxFactoryOutBy", fields: [factory_out_by], references: [id])
   siteInByUser          UserMaster?             @relation("BoxSiteInBy", fields: [site_in_by], references: [id])
   packedByUser          UserMaster?             @relation("BoxPackedByUser", fields: [packed_by], references: [id])
+  box_info_values       BoxInfoFieldValue[]
+}
+
+model ProjectBoxInfoField {
+  id         Int @id @default(autoincrement())
+  project_id Int
+  vendor_id  Int
+
+  field_label String
+  field_key   String
+  field_type  BoxInfoFieldType @default(TEXT)
+
+  is_required Boolean @default(false)
+  sort_order  Int     @default(0)
+  active      Boolean @default(true)
+
+  created_by Int?
+  updated_by Int?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  project ProjectMaster @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor  VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  values BoxInfoFieldValue[]
+
+  @@index([project_id, vendor_id])
+}
+
+model BoxInfoFieldValue {
+  id Int @id @default(autoincrement())
+
+  box_id     Int
+  project_id Int
+  vendor_id  Int
+  field_id   Int
+
+  field_value String?
+
+  created_by Int?
+  updated_by Int?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  box     BoxMaster           @relation(fields: [box_id], references: [id], onDelete: Cascade)
+  project ProjectMaster       @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor  VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  field   ProjectBoxInfoField @relation(fields: [field_id], references: [id], onDelete: Cascade)
+
+  @@unique([box_id, field_id])
+  @@index([box_id])
+  @@index([project_id, vendor_id])
+}
+
+enum BoxInfoFieldType {
+  TEXT
+  NUMBER
+  DATE
+  TEXTAREA
 }
 
 model ScanAndPackItem {

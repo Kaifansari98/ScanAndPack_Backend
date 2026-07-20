@@ -73,6 +73,13 @@ export type VendorMasterMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   state_id: number | null
+  gst_no: string | null
+  toll_free_no: string | null
+  website_link: string | null
+  tag_line: string | null
+  address: string | null
+  pincode: string | null
+  city: string | null
 }
 
 export type VendorMasterMaxAggregateOutputType = {
@@ -108,6 +115,13 @@ export type VendorMasterMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   state_id: number | null
+  gst_no: string | null
+  toll_free_no: string | null
+  website_link: string | null
+  tag_line: string | null
+  address: string | null
+  pincode: string | null
+  city: string | null
 }
 
 export type VendorMasterCountAggregateOutputType = {
@@ -143,6 +157,13 @@ export type VendorMasterCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   state_id: number
+  gst_no: number
+  toll_free_no: number
+  website_link: number
+  tag_line: number
+  address: number
+  pincode: number
+  city: number
   _all: number
 }
 
@@ -194,6 +215,13 @@ export type VendorMasterMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   state_id?: true
+  gst_no?: true
+  toll_free_no?: true
+  website_link?: true
+  tag_line?: true
+  address?: true
+  pincode?: true
+  city?: true
 }
 
 export type VendorMasterMaxAggregateInputType = {
@@ -229,6 +257,13 @@ export type VendorMasterMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   state_id?: true
+  gst_no?: true
+  toll_free_no?: true
+  website_link?: true
+  tag_line?: true
+  address?: true
+  pincode?: true
+  city?: true
 }
 
 export type VendorMasterCountAggregateInputType = {
@@ -264,6 +299,13 @@ export type VendorMasterCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   state_id?: true
+  gst_no?: true
+  toll_free_no?: true
+  website_link?: true
+  tag_line?: true
+  address?: true
+  pincode?: true
+  city?: true
   _all?: true
 }
 
@@ -386,6 +428,13 @@ export type VendorMasterGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   state_id: number | null
+  gst_no: string | null
+  toll_free_no: string | null
+  website_link: string | null
+  tag_line: string | null
+  address: string | null
+  pincode: string | null
+  city: string | null
   _count: VendorMasterCountAggregateOutputType | null
   _avg: VendorMasterAvgAggregateOutputType | null
   _sum: VendorMasterSumAggregateOutputType | null
@@ -444,6 +493,13 @@ export type VendorMasterWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
+  gst_no?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  toll_free_no?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  website_link?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  tag_line?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  address?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  pincode?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  city?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   accounts?: Prisma.AccountMasterListRelationFilter
   boxes?: Prisma.BoxMasterListRelationFilter
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterListRelationFilter
@@ -570,6 +626,8 @@ export type VendorMasterWhereInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryListRelationFilter
   clientTypes?: Prisma.ClientTypeMasterListRelationFilter
   clients?: Prisma.ClientMasterListRelationFilter
+  box_info_fields?: Prisma.ProjectBoxInfoFieldListRelationFilter
+  box_info_values?: Prisma.BoxInfoFieldValueListRelationFilter
 }
 
 export type VendorMasterOrderByWithRelationInput = {
@@ -605,6 +663,13 @@ export type VendorMasterOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  gst_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  toll_free_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  website_link?: Prisma.SortOrderInput | Prisma.SortOrder
+  tag_line?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  pincode?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
   accounts?: Prisma.AccountMasterOrderByRelationAggregateInput
   boxes?: Prisma.BoxMasterOrderByRelationAggregateInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterOrderByRelationAggregateInput
@@ -731,6 +796,8 @@ export type VendorMasterOrderByWithRelationInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryOrderByRelationAggregateInput
   clientTypes?: Prisma.ClientTypeMasterOrderByRelationAggregateInput
   clients?: Prisma.ClientMasterOrderByRelationAggregateInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldOrderByRelationAggregateInput
+  box_info_values?: Prisma.BoxInfoFieldValueOrderByRelationAggregateInput
 }
 
 export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -769,6 +836,13 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
+  gst_no?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  toll_free_no?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  website_link?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  tag_line?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  address?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  pincode?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  city?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   accounts?: Prisma.AccountMasterListRelationFilter
   boxes?: Prisma.BoxMasterListRelationFilter
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterListRelationFilter
@@ -895,6 +969,8 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryListRelationFilter
   clientTypes?: Prisma.ClientTypeMasterListRelationFilter
   clients?: Prisma.ClientMasterListRelationFilter
+  box_info_fields?: Prisma.ProjectBoxInfoFieldListRelationFilter
+  box_info_values?: Prisma.BoxInfoFieldValueListRelationFilter
 }, "id">
 
 export type VendorMasterOrderByWithAggregationInput = {
@@ -930,6 +1006,13 @@ export type VendorMasterOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  gst_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  toll_free_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  website_link?: Prisma.SortOrderInput | Prisma.SortOrder
+  tag_line?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  pincode?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.VendorMasterCountOrderByAggregateInput
   _avg?: Prisma.VendorMasterAvgOrderByAggregateInput
   _max?: Prisma.VendorMasterMaxOrderByAggregateInput
@@ -973,6 +1056,13 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableWithAggregatesFilter<"VendorMaster"> | number | null
+  gst_no?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
+  toll_free_no?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
+  website_link?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
+  tag_line?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
+  address?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
+  pincode?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
+  city?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
 }
 
 export type VendorMasterCreateInput = {
@@ -1006,6 +1096,13 @@ export type VendorMasterCreateInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -1132,6 +1229,8 @@ export type VendorMasterCreateInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateInput = {
@@ -1167,6 +1266,13 @@ export type VendorMasterUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -1292,6 +1398,8 @@ export type VendorMasterUncheckedCreateInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUpdateInput = {
@@ -1325,6 +1433,13 @@ export type VendorMasterUpdateInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -1451,6 +1566,8 @@ export type VendorMasterUpdateInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateInput = {
@@ -1486,6 +1603,13 @@ export type VendorMasterUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -1611,6 +1735,8 @@ export type VendorMasterUncheckedUpdateInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateManyInput = {
@@ -1646,6 +1772,13 @@ export type VendorMasterCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
 }
 
 export type VendorMasterUpdateManyMutationInput = {
@@ -1679,6 +1812,13 @@ export type VendorMasterUpdateManyMutationInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type VendorMasterUncheckedUpdateManyInput = {
@@ -1714,6 +1854,13 @@ export type VendorMasterUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type VendorMasterCountOrderByAggregateInput = {
@@ -1749,6 +1896,13 @@ export type VendorMasterCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrder
+  gst_no?: Prisma.SortOrder
+  toll_free_no?: Prisma.SortOrder
+  website_link?: Prisma.SortOrder
+  tag_line?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  pincode?: Prisma.SortOrder
+  city?: Prisma.SortOrder
 }
 
 export type VendorMasterAvgOrderByAggregateInput = {
@@ -1791,6 +1945,13 @@ export type VendorMasterMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrder
+  gst_no?: Prisma.SortOrder
+  toll_free_no?: Prisma.SortOrder
+  website_link?: Prisma.SortOrder
+  tag_line?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  pincode?: Prisma.SortOrder
+  city?: Prisma.SortOrder
 }
 
 export type VendorMasterMinOrderByAggregateInput = {
@@ -1826,6 +1987,13 @@ export type VendorMasterMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrder
+  gst_no?: Prisma.SortOrder
+  toll_free_no?: Prisma.SortOrder
+  website_link?: Prisma.SortOrder
+  tag_line?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  pincode?: Prisma.SortOrder
+  city?: Prisma.SortOrder
 }
 
 export type VendorMasterSumOrderByAggregateInput = {
@@ -2029,6 +2197,34 @@ export type VendorMasterUpdateOneRequiredWithoutBoxesNestedInput = {
   upsert?: Prisma.VendorMasterUpsertWithoutBoxesInput
   connect?: Prisma.VendorMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutBoxesInput, Prisma.VendorMasterUpdateWithoutBoxesInput>, Prisma.VendorMasterUncheckedUpdateWithoutBoxesInput>
+}
+
+export type VendorMasterCreateNestedOneWithoutBox_info_fieldsInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_fieldsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_fieldsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutBox_info_fieldsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutBox_info_fieldsNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_fieldsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_fieldsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutBox_info_fieldsInput
+  upsert?: Prisma.VendorMasterUpsertWithoutBox_info_fieldsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutBox_info_fieldsInput, Prisma.VendorMasterUpdateWithoutBox_info_fieldsInput>, Prisma.VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput>
+}
+
+export type VendorMasterCreateNestedOneWithoutBox_info_valuesInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_valuesInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_valuesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutBox_info_valuesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutBox_info_valuesNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_valuesInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_valuesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutBox_info_valuesInput
+  upsert?: Prisma.VendorMasterUpsertWithoutBox_info_valuesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutBox_info_valuesInput, Prisma.VendorMasterUpdateWithoutBox_info_valuesInput>, Prisma.VendorMasterUncheckedUpdateWithoutBox_info_valuesInput>
 }
 
 export type VendorMasterCreateNestedOneWithoutScanItemsInput = {
@@ -3716,6 +3912,13 @@ export type VendorMasterCreateWithoutAddressesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -3841,6 +4044,8 @@ export type VendorMasterCreateWithoutAddressesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutAddressesInput = {
@@ -3876,6 +4081,13 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -4000,6 +4212,8 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutAddressesInput = {
@@ -4049,6 +4263,13 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -4174,6 +4395,8 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
@@ -4209,6 +4432,13 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -4333,6 +4563,8 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutTaxInfoInput = {
@@ -4366,6 +4598,13 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -4491,6 +4730,8 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
@@ -4526,6 +4767,13 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -4650,6 +4898,8 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutTaxInfoInput = {
@@ -4699,6 +4949,13 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -4824,6 +5081,8 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
@@ -4859,6 +5118,13 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -4983,6 +5249,8 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPrivilegeMastersInput = {
@@ -5016,6 +5284,13 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -5141,6 +5416,8 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
@@ -5176,6 +5453,13 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -5300,6 +5584,8 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPrivilegeMastersInput = {
@@ -5349,6 +5635,13 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -5474,6 +5767,8 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
@@ -5509,6 +5804,13 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -5633,6 +5935,8 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUsersInput = {
@@ -5666,6 +5970,13 @@ export type VendorMasterCreateWithoutUsersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -5791,6 +6102,8 @@ export type VendorMasterCreateWithoutUsersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUsersInput = {
@@ -5826,6 +6139,13 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -5950,6 +6270,8 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUsersInput = {
@@ -5999,6 +6321,13 @@ export type VendorMasterUpdateWithoutUsersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -6124,6 +6453,8 @@ export type VendorMasterUpdateWithoutUsersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUsersInput = {
@@ -6159,6 +6490,13 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -6283,6 +6621,8 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserSessionsInput = {
@@ -6316,6 +6656,13 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -6441,6 +6788,8 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
@@ -6476,6 +6825,13 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -6600,6 +6956,8 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserSessionsInput = {
@@ -6649,6 +7007,13 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -6774,6 +7139,8 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
@@ -6809,6 +7176,13 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -6933,6 +7307,8 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
@@ -6966,6 +7342,13 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -7091,6 +7474,8 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
@@ -7126,6 +7511,13 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -7250,6 +7642,8 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserPrivilegeMappingsInput = {
@@ -7299,6 +7693,13 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -7424,6 +7825,8 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
@@ -7459,6 +7862,13 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -7583,6 +7993,8 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectsInput = {
@@ -7616,6 +8028,13 @@ export type VendorMasterCreateWithoutProjectsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -7741,6 +8160,8 @@ export type VendorMasterCreateWithoutProjectsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectsInput = {
@@ -7776,6 +8197,13 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -7900,6 +8328,8 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectsInput = {
@@ -7949,6 +8379,13 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -8074,6 +8511,8 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
@@ -8109,6 +8548,13 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -8233,6 +8679,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectDetailsInput = {
@@ -8266,6 +8714,13 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -8391,6 +8846,8 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
@@ -8426,6 +8883,13 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -8550,6 +9014,8 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectDetailsInput = {
@@ -8599,6 +9065,13 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -8724,6 +9197,8 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
@@ -8759,6 +9234,13 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -8883,6 +9365,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectItemsInput = {
@@ -8916,6 +9400,13 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -9041,6 +9532,8 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
@@ -9076,6 +9569,13 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -9200,6 +9700,8 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectItemsInput = {
@@ -9249,6 +9751,13 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -9374,6 +9883,8 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
@@ -9409,6 +9920,13 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -9533,6 +10051,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutBoxesInput = {
@@ -9566,6 +10086,13 @@ export type VendorMasterCreateWithoutBoxesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
@@ -9691,6 +10218,8 @@ export type VendorMasterCreateWithoutBoxesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutBoxesInput = {
@@ -9726,6 +10255,13 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
@@ -9850,6 +10386,8 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutBoxesInput = {
@@ -9899,6 +10437,13 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
@@ -10024,6 +10569,8 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
@@ -10059,6 +10606,13 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
@@ -10183,6 +10737,1380 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutBox_info_fieldsInput = {
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  icon?: string | null
+  login_image?: string | null
+  time_zone: string
+  subdomain_url?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  icon?: string | null
+  login_image?: string | null
+  time_zone: string
+  subdomain_url?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutBox_info_fieldsInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_fieldsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_fieldsInput>
+}
+
+export type VendorMasterUpsertWithoutBox_info_fieldsInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutBox_info_fieldsInput, Prisma.VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_fieldsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_fieldsInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutBox_info_fieldsInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutBox_info_fieldsInput, Prisma.VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput>
+}
+
+export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutBox_info_valuesInput = {
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  icon?: string | null
+  login_image?: string | null
+  time_zone: string
+  subdomain_url?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  icon?: string | null
+  login_image?: string | null
+  time_zone: string
+  subdomain_url?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutBox_info_valuesInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_valuesInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_valuesInput>
+}
+
+export type VendorMasterUpsertWithoutBox_info_valuesInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutBox_info_valuesInput, Prisma.VendorMasterUncheckedUpdateWithoutBox_info_valuesInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_valuesInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_valuesInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutBox_info_valuesInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutBox_info_valuesInput, Prisma.VendorMasterUncheckedUpdateWithoutBox_info_valuesInput>
+}
+
+export type VendorMasterUpdateWithoutBox_info_valuesInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutScanItemsInput = {
@@ -10216,6 +12144,13 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -10341,6 +12276,8 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
@@ -10376,6 +12313,13 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -10500,6 +12444,8 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutScanItemsInput = {
@@ -10549,6 +12495,13 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -10674,6 +12627,8 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
@@ -10709,6 +12664,13 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -10833,6 +12795,8 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutTokensInput = {
@@ -10866,6 +12830,13 @@ export type VendorMasterCreateWithoutTokensInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -10991,6 +12962,8 @@ export type VendorMasterCreateWithoutTokensInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutTokensInput = {
@@ -11026,6 +12999,13 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -11150,6 +13130,8 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutTokensInput = {
@@ -11199,6 +13181,13 @@ export type VendorMasterUpdateWithoutTokensInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -11324,6 +13313,8 @@ export type VendorMasterUpdateWithoutTokensInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutTokensInput = {
@@ -11359,6 +13350,13 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -11483,6 +13481,8 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutClientsInput = {
@@ -11516,6 +13516,13 @@ export type VendorMasterCreateWithoutClientsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -11641,6 +13648,8 @@ export type VendorMasterCreateWithoutClientsInput = {
   productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutClientsInput = {
@@ -11676,6 +13685,13 @@ export type VendorMasterUncheckedCreateWithoutClientsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -11800,6 +13816,8 @@ export type VendorMasterUncheckedCreateWithoutClientsInput = {
   productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutClientsInput = {
@@ -11849,6 +13867,13 @@ export type VendorMasterUpdateWithoutClientsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -11974,6 +13999,8 @@ export type VendorMasterUpdateWithoutClientsInput = {
   productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientsInput = {
@@ -12009,6 +14036,13 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -12133,6 +14167,8 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
   productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutClientTypesInput = {
@@ -12166,6 +14202,13 @@ export type VendorMasterCreateWithoutClientTypesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -12291,6 +14334,8 @@ export type VendorMasterCreateWithoutClientTypesInput = {
   productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
@@ -12326,6 +14371,13 @@ export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -12450,6 +14502,8 @@ export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
   productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutClientTypesInput = {
@@ -12499,6 +14553,13 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -12624,6 +14685,8 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
   productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
@@ -12659,6 +14722,13 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -12783,6 +14853,8 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
   productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadsInput = {
@@ -12816,6 +14888,13 @@ export type VendorMasterCreateWithoutLeadsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -12941,6 +15020,8 @@ export type VendorMasterCreateWithoutLeadsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadsInput = {
@@ -12976,6 +15057,13 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -13100,6 +15188,8 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadsInput = {
@@ -13149,6 +15239,13 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -13274,6 +15371,8 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
@@ -13309,6 +15408,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -13433,6 +15539,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadSpecificationsInput = {
@@ -13466,6 +15574,13 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -13591,6 +15706,8 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
@@ -13626,6 +15743,13 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -13750,6 +15874,8 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadSpecificationsInput = {
@@ -13799,6 +15925,13 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -13924,6 +16057,8 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
@@ -13959,6 +16094,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -14083,6 +16225,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
@@ -14116,6 +16260,13 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -14241,6 +16392,8 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput = {
@@ -14276,6 +16429,13 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -14400,6 +16560,8 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadCarcassMaterialMappingsInput = {
@@ -14449,6 +16611,13 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -14574,6 +16743,8 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput = {
@@ -14609,6 +16780,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -14733,6 +16911,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
@@ -14766,6 +16946,13 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -14891,6 +17078,8 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput = {
@@ -14926,6 +17115,13 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -15050,6 +17246,8 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadShutterMaterialMappingsInput = {
@@ -15099,6 +17297,13 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -15224,6 +17429,8 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput = {
@@ -15259,6 +17466,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -15383,6 +17597,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
@@ -15416,6 +17632,13 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -15541,6 +17764,8 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput = {
@@ -15576,6 +17801,13 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -15700,6 +17932,8 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadSuperAdminApprovalLocInsInput = {
@@ -15749,6 +17983,13 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -15874,6 +18115,8 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
@@ -15909,6 +18152,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -16033,6 +18283,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadUserMappingsInput = {
@@ -16066,6 +18318,13 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -16191,6 +18450,8 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
@@ -16226,6 +18487,13 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -16350,6 +18618,8 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadUserMappingsInput = {
@@ -16399,6 +18669,13 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -16524,6 +18801,8 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
@@ -16559,6 +18838,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -16683,6 +18969,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
@@ -16716,6 +19004,13 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -16841,6 +19136,8 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
@@ -16876,6 +19173,13 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -17000,6 +19304,8 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadActivityStatusLogInput = {
@@ -17049,6 +19355,13 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -17174,6 +19487,8 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
@@ -17209,6 +19524,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -17333,6 +19655,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSiteTypesInput = {
@@ -17366,6 +19690,13 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -17491,6 +19822,8 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
@@ -17526,6 +19859,13 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -17650,6 +19990,8 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSiteTypesInput = {
@@ -17699,6 +20041,13 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -17824,6 +20173,8 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
@@ -17859,6 +20210,13 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -17983,6 +20341,8 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSourcesInput = {
@@ -18016,6 +20376,13 @@ export type VendorMasterCreateWithoutSourcesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -18141,6 +20508,8 @@ export type VendorMasterCreateWithoutSourcesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSourcesInput = {
@@ -18176,6 +20545,13 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -18300,6 +20676,8 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSourcesInput = {
@@ -18349,6 +20727,13 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -18474,6 +20859,8 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
@@ -18509,6 +20896,13 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -18633,6 +21027,8 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutAccountsInput = {
@@ -18666,6 +21062,13 @@ export type VendorMasterCreateWithoutAccountsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
@@ -18791,6 +21194,8 @@ export type VendorMasterCreateWithoutAccountsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutAccountsInput = {
@@ -18826,6 +21231,13 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
@@ -18950,6 +21362,8 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutAccountsInput = {
@@ -18999,6 +21413,13 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
@@ -19124,6 +21545,8 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
@@ -19159,6 +21582,13 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
@@ -19283,6 +21713,8 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadProductMapsInput = {
@@ -19316,6 +21748,13 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -19441,6 +21880,8 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
@@ -19476,6 +21917,13 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -19600,6 +22048,8 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadProductMapsInput = {
@@ -19649,6 +22099,13 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -19774,6 +22231,8 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
@@ -19809,6 +22268,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -19933,6 +22399,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductTypesInput = {
@@ -19966,6 +22434,13 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -20091,6 +22566,8 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
@@ -20126,6 +22603,13 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -20250,6 +22734,8 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductTypesInput = {
@@ -20299,6 +22785,13 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -20424,6 +22917,8 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
@@ -20459,6 +22954,13 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -20583,6 +23085,8 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCarcassTypesInput = {
@@ -20616,6 +23120,13 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -20741,6 +23252,8 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
@@ -20776,6 +23289,13 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -20900,6 +23420,8 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCarcassTypesInput = {
@@ -20949,6 +23471,13 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -21074,6 +23603,8 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
@@ -21109,6 +23640,13 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -21233,6 +23771,8 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCarcasMaterialsInput = {
@@ -21266,6 +23806,13 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -21391,6 +23938,8 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
@@ -21426,6 +23975,13 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -21550,6 +24106,8 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCarcasMaterialsInput = {
@@ -21599,6 +24157,13 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -21724,6 +24289,8 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
@@ -21759,6 +24326,13 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -21883,6 +24457,8 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutShutterTypesInput = {
@@ -21916,6 +24492,13 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -22041,6 +24624,8 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
@@ -22076,6 +24661,13 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -22200,6 +24792,8 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutShutterTypesInput = {
@@ -22249,6 +24843,13 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -22374,6 +24975,8 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
@@ -22409,6 +25012,13 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -22533,6 +25143,8 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutShutterMaterialsInput = {
@@ -22566,6 +25178,13 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -22691,6 +25310,8 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
@@ -22726,6 +25347,13 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -22850,6 +25478,8 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutShutterMaterialsInput = {
@@ -22899,6 +25529,13 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -23024,6 +25661,8 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
@@ -23059,6 +25698,13 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -23183,6 +25829,8 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCarcassLegsInput = {
@@ -23216,6 +25864,13 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -23341,6 +25996,8 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
@@ -23376,6 +26033,13 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -23500,6 +26164,8 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCarcassLegsInput = {
@@ -23549,6 +26215,13 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -23674,6 +26347,8 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
@@ -23709,6 +26384,13 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -23833,6 +26515,8 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
@@ -23866,6 +26550,13 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -23991,6 +26682,8 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
@@ -24026,6 +26719,13 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -24150,6 +26850,8 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadHardwareMappingsInput = {
@@ -24199,6 +26901,13 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -24324,6 +27033,8 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
@@ -24359,6 +27070,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -24483,6 +27201,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLightCarcasTypesInput = {
@@ -24516,6 +27236,13 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -24641,6 +27368,8 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
@@ -24676,6 +27405,13 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -24800,6 +27536,8 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLightCarcasTypesInput = {
@@ -24849,6 +27587,13 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -24974,6 +27719,8 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
@@ -25009,6 +27756,13 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -25133,6 +27887,8 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
@@ -25166,6 +27922,13 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -25291,6 +28054,8 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
@@ -25326,6 +28091,13 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -25450,6 +28222,8 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLightCarcasUnitsInput = {
@@ -25499,6 +28273,13 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -25624,6 +28405,8 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
@@ -25659,6 +28442,13 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -25783,6 +28573,8 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
@@ -25816,6 +28608,13 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -25941,6 +28740,8 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput = {
@@ -25976,6 +28777,13 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -26100,6 +28908,8 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadLightCarcasUnitMappingsInput = {
@@ -26149,6 +28959,13 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -26274,6 +29091,8 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput = {
@@ -26309,6 +29128,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -26433,6 +29259,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutOtherAppliancesInput = {
@@ -26466,6 +29294,13 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -26591,6 +29426,8 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
@@ -26626,6 +29463,13 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -26750,6 +29594,8 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutOtherAppliancesInput = {
@@ -26799,6 +29645,13 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -26924,6 +29777,8 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
@@ -26959,6 +29814,13 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -27083,6 +29945,8 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
@@ -27116,6 +29980,13 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -27241,6 +30112,8 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput = {
@@ -27276,6 +30149,13 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -27400,6 +30280,8 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadOtherAppliancesMappingsInput = {
@@ -27449,6 +30331,13 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -27574,6 +30463,8 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput = {
@@ -27609,6 +30500,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -27733,6 +30631,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutHandleTypesInput = {
@@ -27766,6 +30666,13 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -27891,6 +30798,8 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
@@ -27926,6 +30835,13 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -28050,6 +30966,8 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutHandleTypesInput = {
@@ -28099,6 +31017,13 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -28224,6 +31149,8 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
@@ -28259,6 +31186,13 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -28383,6 +31317,8 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutTimelineRulesInput = {
@@ -28416,6 +31352,13 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -28541,6 +31484,8 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
@@ -28576,6 +31521,13 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -28700,6 +31652,8 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutTimelineRulesInput = {
@@ -28749,6 +31703,13 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -28874,6 +31835,8 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
@@ -28909,6 +31872,13 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -29033,6 +32003,8 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDocumentsInput = {
@@ -29066,6 +32038,13 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -29191,6 +32170,8 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
@@ -29226,6 +32207,13 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -29350,6 +32338,8 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDocumentsInput = {
@@ -29399,6 +32389,13 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -29524,6 +32521,8 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
@@ -29559,6 +32558,13 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -29683,6 +32689,8 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadChatRoomsInput = {
@@ -29716,6 +32724,13 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -29841,6 +32856,8 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
@@ -29876,6 +32893,13 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -30000,6 +33024,8 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadChatRoomsInput = {
@@ -30049,6 +33075,13 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -30174,6 +33207,8 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
@@ -30209,6 +33244,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -30333,6 +33375,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
@@ -30366,6 +33410,13 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -30491,6 +33542,8 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
@@ -30526,6 +33579,13 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -30650,6 +33710,8 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadChatDocumentsInput = {
@@ -30699,6 +33761,13 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -30824,6 +33893,8 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
@@ -30859,6 +33930,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -30983,6 +34061,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductStructureInput = {
@@ -31016,6 +34096,13 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -31141,6 +34228,8 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
@@ -31176,6 +34265,13 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -31300,6 +34396,8 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductStructureInput = {
@@ -31349,6 +34447,13 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -31474,6 +34579,8 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
@@ -31509,6 +34616,13 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -31633,6 +34747,8 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductSubStructuresInput = {
@@ -31666,6 +34782,13 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -31791,6 +34914,8 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
@@ -31826,6 +34951,13 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -31950,6 +35082,8 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductSubStructuresInput = {
@@ -31999,6 +35133,13 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -32124,6 +35265,8 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
@@ -32159,6 +35302,13 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -32283,6 +35433,8 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductItemCodesInput = {
@@ -32316,6 +35468,13 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -32441,6 +35600,8 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
@@ -32476,6 +35637,13 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -32600,6 +35768,8 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductItemCodesInput = {
@@ -32649,6 +35819,13 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -32774,6 +35951,8 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
@@ -32809,6 +35988,13 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -32933,6 +36119,8 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
@@ -32966,6 +36154,13 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -33091,6 +36286,8 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
@@ -33126,6 +36323,13 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -33250,6 +36454,8 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadProductStructureMappingInput = {
@@ -33299,6 +36505,13 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -33424,6 +36637,8 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
@@ -33459,6 +36674,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -33583,6 +36805,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductStructureInstancesInput = {
@@ -33616,6 +36840,13 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -33741,6 +36972,8 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
@@ -33776,6 +37009,13 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -33900,6 +37140,8 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductStructureInstancesInput = {
@@ -33949,6 +37191,13 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -34074,6 +37323,8 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
@@ -34109,6 +37360,13 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -34233,6 +37491,8 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
@@ -34266,6 +37526,13 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -34391,6 +37658,8 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
@@ -34426,6 +37695,13 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -34550,6 +37826,8 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSelfAssignTaskTypeMastersInput = {
@@ -34599,6 +37877,13 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -34724,6 +38009,8 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
@@ -34759,6 +38046,13 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -34883,6 +38177,8 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPaymentsInput = {
@@ -34916,6 +38212,13 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -35041,6 +38344,8 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
@@ -35076,6 +38381,13 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -35200,6 +38512,8 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPaymentsInput = {
@@ -35249,6 +38563,13 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -35374,6 +38695,8 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
@@ -35409,6 +38732,13 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -35533,6 +38863,8 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLedgersInput = {
@@ -35566,6 +38898,13 @@ export type VendorMasterCreateWithoutLedgersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -35691,6 +39030,8 @@ export type VendorMasterCreateWithoutLedgersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLedgersInput = {
@@ -35726,6 +39067,13 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -35850,6 +39198,8 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLedgersInput = {
@@ -35899,6 +39249,13 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -36024,6 +39381,8 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
@@ -36059,6 +39418,13 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -36183,6 +39549,8 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDocumentTypesInput = {
@@ -36216,6 +39584,13 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -36341,6 +39716,8 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
@@ -36376,6 +39753,13 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -36500,6 +39884,8 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDocumentTypesInput = {
@@ -36549,6 +39935,13 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -36674,6 +40067,8 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
@@ -36709,6 +40104,13 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -36833,6 +40235,8 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
@@ -36866,6 +40270,13 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -36991,6 +40402,8 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput = {
@@ -37026,6 +40439,13 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -37150,6 +40570,8 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSmallOrderRequestTypeMastersInput = {
@@ -37199,6 +40621,13 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -37324,6 +40753,8 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput = {
@@ -37359,6 +40790,13 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -37483,6 +40921,8 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
@@ -37516,6 +40956,13 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -37641,6 +41088,8 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
@@ -37676,6 +41125,13 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -37800,6 +41256,8 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSmallOrderRequestsInput = {
@@ -37849,6 +41307,13 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -37974,6 +41439,8 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
@@ -38009,6 +41476,13 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -38133,6 +41607,8 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
@@ -38166,6 +41642,13 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -38291,6 +41774,8 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = {
@@ -38326,6 +41811,13 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -38450,6 +41942,8 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSmallOrderRequestDocumentsInput = {
@@ -38499,6 +41993,13 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -38624,6 +42125,8 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = {
@@ -38659,6 +42162,13 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -38783,6 +42293,8 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadAmcContractsInput = {
@@ -38816,6 +42328,13 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -38941,6 +42460,8 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
@@ -38976,6 +42497,13 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -39100,6 +42628,8 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadAmcContractsInput = {
@@ -39149,6 +42679,13 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -39274,6 +42811,8 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
@@ -39309,6 +42848,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -39433,6 +42979,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
@@ -39466,6 +43014,13 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -39591,6 +43146,8 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
@@ -39626,6 +43183,13 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -39750,6 +43314,8 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadServiceSchedulesInput = {
@@ -39799,6 +43365,13 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -39924,6 +43497,8 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
@@ -39959,6 +43534,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -40083,6 +43665,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutStatusTypesInput = {
@@ -40116,6 +43700,13 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -40241,6 +43832,8 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
@@ -40276,6 +43869,13 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -40400,6 +44000,8 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutStatusTypesInput = {
@@ -40449,6 +44051,13 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -40574,6 +44183,8 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
@@ -40609,6 +44220,13 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -40733,6 +44351,8 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadStatusLogsInput = {
@@ -40766,6 +44386,13 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -40891,6 +44518,8 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
@@ -40926,6 +44555,13 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -41050,6 +44686,8 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadStatusLogsInput = {
@@ -41099,6 +44737,13 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -41224,6 +44869,8 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
@@ -41259,6 +44906,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -41383,6 +45037,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDesignMeetingInput = {
@@ -41416,6 +45072,13 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -41541,6 +45204,8 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
@@ -41576,6 +45241,13 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -41700,6 +45372,8 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDesignMeetingInput = {
@@ -41749,6 +45423,13 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -41874,6 +45555,8 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
@@ -41909,6 +45592,13 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -42033,6 +45723,8 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutClientVisitsInput = {
@@ -42066,6 +45758,13 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -42191,6 +45890,8 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
@@ -42226,6 +45927,13 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -42350,6 +46058,8 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutClientVisitsInput = {
@@ -42399,6 +46109,13 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -42524,6 +46241,8 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
@@ -42559,6 +46278,13 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -42683,6 +46409,8 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMeetingTypesInput = {
@@ -42716,6 +46444,13 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -42841,6 +46576,8 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
@@ -42876,6 +46613,13 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -43000,6 +46744,8 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMeetingTypesInput = {
@@ -43049,6 +46795,13 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -43174,6 +46927,8 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
@@ -43209,6 +46964,13 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -43333,6 +47095,8 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
@@ -43366,6 +47130,13 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -43491,6 +47262,8 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
@@ -43526,6 +47299,13 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -43650,6 +47430,8 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDesignMeetingDocsMappingInput = {
@@ -43699,6 +47481,13 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -43824,6 +47613,8 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
@@ -43859,6 +47650,13 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -43983,6 +47781,8 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
@@ -44016,6 +47816,13 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -44141,6 +47948,8 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
@@ -44176,6 +47985,13 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -44300,6 +48116,8 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutClientVisitDocumentMappingsInput = {
@@ -44349,6 +48167,13 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -44474,6 +48299,8 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
@@ -44509,6 +48336,13 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -44633,6 +48467,8 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDesignSelectionInput = {
@@ -44666,6 +48502,13 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -44791,6 +48634,8 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
@@ -44826,6 +48671,13 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -44950,6 +48802,8 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDesignSelectionInput = {
@@ -44999,6 +48853,13 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -45124,6 +48985,8 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
@@ -45159,6 +49022,13 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -45283,6 +49153,8 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
@@ -45316,6 +49188,13 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -45441,6 +49320,8 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
@@ -45476,6 +49357,13 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -45600,6 +49488,8 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutChsSelectionMappingsInput = {
@@ -45649,6 +49539,13 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -45774,6 +49671,8 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
@@ -45809,6 +49708,13 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -45933,6 +49839,8 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
@@ -45966,6 +49874,13 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -46091,6 +50006,8 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
@@ -46126,6 +50043,13 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -46250,6 +50174,8 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPaymentTypeMasterInput = {
@@ -46299,6 +50225,13 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -46424,6 +50357,8 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
@@ -46459,6 +50394,13 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -46583,6 +50525,8 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSiteSupervisorsInput = {
@@ -46616,6 +50560,13 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -46741,6 +50692,8 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
@@ -46776,6 +50729,13 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -46900,6 +50860,8 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSiteSupervisorsInput = {
@@ -46949,6 +50911,13 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -47074,6 +51043,8 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
@@ -47109,6 +51080,13 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -47233,6 +51211,8 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserLeadTasksInput = {
@@ -47266,6 +51246,13 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -47391,6 +51378,8 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
@@ -47426,6 +51415,13 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -47550,6 +51546,8 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserLeadTasksInput = {
@@ -47599,6 +51597,13 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -47724,6 +51729,8 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
@@ -47759,6 +51766,13 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -47883,6 +51897,8 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
@@ -47916,6 +51932,13 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -48041,6 +52064,8 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput = {
@@ -48076,6 +52101,13 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -48200,6 +52232,8 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutFastProductionRequestBatchesInput = {
@@ -48249,6 +52283,13 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -48374,6 +52415,8 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput = {
@@ -48409,6 +52452,13 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -48533,6 +52583,8 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutFastProductionRequestsInput = {
@@ -48566,6 +52618,13 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -48691,6 +52750,8 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
@@ -48726,6 +52787,13 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -48850,6 +52918,8 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutFastProductionRequestsInput = {
@@ -48899,6 +52969,13 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -49024,6 +53101,8 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
@@ -49059,6 +53138,13 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -49183,6 +53269,8 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
@@ -49216,6 +53304,13 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -49341,6 +53436,8 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
@@ -49376,6 +53473,13 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -49500,6 +53604,8 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadDetailedLogsInput = {
@@ -49549,6 +53655,13 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -49674,6 +53787,8 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
@@ -49709,6 +53824,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -49833,6 +53955,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
@@ -49866,6 +53990,13 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -49991,6 +54122,8 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
@@ -50026,6 +54159,13 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -50150,6 +54290,8 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadDocumentLogsInput = {
@@ -50199,6 +54341,13 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -50324,6 +54473,8 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
@@ -50359,6 +54510,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -50483,6 +54641,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -50516,6 +54676,13 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -50641,6 +54808,8 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -50676,6 +54845,13 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -50800,6 +54976,8 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -50849,6 +55027,13 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -50974,6 +55159,8 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -51009,6 +55196,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -51133,6 +55327,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
@@ -51166,6 +55362,13 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
@@ -51291,6 +55494,8 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
@@ -51326,6 +55531,13 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
@@ -51450,6 +55662,8 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCompanyVendorsMasterInput = {
@@ -51499,6 +55713,13 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
@@ -51624,6 +55845,8 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
@@ -51659,6 +55882,13 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
@@ -51783,6 +56013,8 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
@@ -51816,6 +56048,13 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -51941,6 +56180,8 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
@@ -51976,6 +56217,13 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -52100,6 +56348,8 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutOrderLoginDetailsInput = {
@@ -52149,6 +56399,13 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -52274,6 +56531,8 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
@@ -52309,6 +56568,13 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -52433,6 +56699,8 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSiteReadinessInput = {
@@ -52466,6 +56734,13 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -52591,6 +56866,8 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
@@ -52626,6 +56903,13 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -52750,6 +57034,8 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSiteReadinessInput = {
@@ -52799,6 +57085,13 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -52924,6 +57217,8 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
@@ -52959,6 +57254,13 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -53083,6 +57385,8 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallersInput = {
@@ -53116,6 +57420,13 @@ export type VendorMasterCreateWithoutInstallersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -53241,6 +57552,8 @@ export type VendorMasterCreateWithoutInstallersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallersInput = {
@@ -53276,6 +57589,13 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -53400,6 +57720,8 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallersInput = {
@@ -53449,6 +57771,13 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -53574,6 +57903,8 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
@@ -53609,6 +57940,13 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -53733,6 +58071,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallerMappingsInput = {
@@ -53766,6 +58106,13 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -53891,6 +58238,8 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
@@ -53926,6 +58275,13 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -54050,6 +58406,8 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallerMappingsInput = {
@@ -54099,6 +58457,13 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -54224,6 +58589,8 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
@@ -54259,6 +58626,13 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -54383,6 +58757,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallationUpdatesInput = {
@@ -54416,6 +58792,13 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -54541,6 +58924,8 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
@@ -54576,6 +58961,13 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -54700,6 +59092,8 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallationUpdatesInput = {
@@ -54749,6 +59143,13 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -54874,6 +59275,8 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
@@ -54909,6 +59312,13 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -55033,6 +59443,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
@@ -55066,6 +59478,13 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -55191,6 +59610,8 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
@@ -55226,6 +59647,13 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -55350,6 +59778,8 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallationUpdateDocsInput = {
@@ -55399,6 +59829,13 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -55524,6 +59961,8 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
@@ -55559,6 +59998,13 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -55683,6 +60129,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
@@ -55716,6 +60164,13 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -55841,6 +60296,8 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
@@ -55876,6 +60333,13 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -56000,6 +60464,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousMasterInput = {
@@ -56049,6 +60515,13 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -56174,6 +60647,8 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
@@ -56209,6 +60684,13 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -56333,6 +60815,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
@@ -56366,6 +60850,13 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -56491,6 +60982,8 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
@@ -56526,6 +61019,13 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -56650,6 +61150,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousTypeMasterInput = {
@@ -56699,6 +61201,13 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -56824,6 +61333,8 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
@@ -56859,6 +61370,13 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -56983,6 +61501,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
@@ -57016,6 +61536,13 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -57141,6 +61668,8 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
@@ -57176,6 +61705,13 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -57300,6 +61836,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousTeamMasterInput = {
@@ -57349,6 +61887,13 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -57474,6 +62019,8 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
@@ -57509,6 +62056,13 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -57633,6 +62187,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
@@ -57666,6 +62222,13 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -57791,6 +62354,8 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
@@ -57826,6 +62391,13 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -57950,6 +62522,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousDocumentInput = {
@@ -57999,6 +62573,13 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -58124,6 +62705,8 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
@@ -58159,6 +62742,13 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -58283,6 +62873,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
@@ -58316,6 +62908,13 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -58441,6 +63040,8 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
@@ -58476,6 +63077,13 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -58600,6 +63208,8 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallationIssueLogMasterInput = {
@@ -58649,6 +63259,13 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -58774,6 +63391,8 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
@@ -58809,6 +63428,13 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -58933,6 +63559,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
@@ -58966,6 +63594,13 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -59091,6 +63726,8 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
@@ -59126,6 +63763,13 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -59250,6 +63894,8 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutIssueLogTypeMasterInput = {
@@ -59299,6 +63945,13 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -59424,6 +64077,8 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
@@ -59459,6 +64114,13 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -59583,6 +64245,8 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutNotificationMastersInput = {
@@ -59616,6 +64280,13 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -59741,6 +64412,8 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
@@ -59776,6 +64449,13 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -59900,6 +64580,8 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutNotificationMastersInput = {
@@ -59949,6 +64631,13 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -60074,6 +64763,8 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
@@ -60109,6 +64800,13 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -60233,6 +64931,8 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutNotificationsInput = {
@@ -60266,6 +64966,13 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -60391,6 +65098,8 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
@@ -60426,6 +65135,13 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -60550,6 +65266,8 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutNotificationsInput = {
@@ -60599,6 +65317,13 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -60724,6 +65449,8 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
@@ -60759,6 +65486,13 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -60883,6 +65617,8 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserPushTokensInput = {
@@ -60916,6 +65652,13 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -61041,6 +65784,8 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
@@ -61076,6 +65821,13 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -61200,6 +65952,8 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserPushTokensInput = {
@@ -61249,6 +66003,13 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -61374,6 +66135,8 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
@@ -61409,6 +66172,13 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -61533,6 +66303,8 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
@@ -61566,6 +66338,13 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -61691,6 +66470,8 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
@@ -61726,6 +66507,13 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -61850,6 +66638,8 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutVendorModulesMappingsInput = {
@@ -61899,6 +66689,13 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -62024,6 +66821,8 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
@@ -62059,6 +66858,13 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -62183,6 +66989,8 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMachineMasterInput = {
@@ -62216,6 +67024,13 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -62341,6 +67156,8 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
@@ -62376,6 +67193,13 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -62500,6 +67324,8 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMachineMasterInput = {
@@ -62549,6 +67375,13 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -62674,6 +67507,8 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
@@ -62709,6 +67544,13 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -62833,6 +67675,8 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCutListInput = {
@@ -62866,6 +67710,13 @@ export type VendorMasterCreateWithoutCutListInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -62991,6 +67842,8 @@ export type VendorMasterCreateWithoutCutListInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCutListInput = {
@@ -63026,6 +67879,13 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -63150,6 +68010,8 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCutListInput = {
@@ -63199,6 +68061,13 @@ export type VendorMasterUpdateWithoutCutListInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -63324,6 +68193,8 @@ export type VendorMasterUpdateWithoutCutListInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCutListInput = {
@@ -63359,6 +68230,13 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -63483,6 +68361,8 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCutListMachineMappingInput = {
@@ -63516,6 +68396,13 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -63641,6 +68528,8 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
@@ -63676,6 +68565,13 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -63800,6 +68696,8 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCutListMachineMappingInput = {
@@ -63849,6 +68747,13 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -63974,6 +68879,8 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
@@ -64009,6 +68916,13 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -64133,6 +69047,8 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserMachineMappingInput = {
@@ -64166,6 +69082,13 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -64291,6 +69214,8 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
@@ -64326,6 +69251,13 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -64450,6 +69382,8 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserMachineMappingInput = {
@@ -64499,6 +69433,13 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -64624,6 +69565,8 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
@@ -64659,6 +69602,13 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -64783,6 +69733,8 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutVendorSettingInput = {
@@ -64816,6 +69768,13 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -64941,6 +69900,8 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
@@ -64976,6 +69937,13 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -65100,6 +70068,8 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutVendorSettingInput = {
@@ -65149,6 +70119,13 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -65274,6 +70251,8 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
@@ -65309,6 +70288,13 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -65433,6 +70419,8 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDefectMasterInput = {
@@ -65466,6 +70454,13 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -65591,6 +70586,8 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
@@ -65626,6 +70623,13 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -65750,6 +70754,8 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDefectMasterInput = {
@@ -65799,6 +70805,13 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -65924,6 +70937,8 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
@@ -65959,6 +70974,13 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -66083,6 +71105,8 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDefectedItemsInput = {
@@ -66116,6 +71140,13 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -66241,6 +71272,8 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
@@ -66276,6 +71309,13 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -66400,6 +71440,8 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDefectedItemsInput = {
@@ -66449,6 +71491,13 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -66574,6 +71623,8 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
@@ -66609,6 +71660,13 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -66733,6 +71791,8 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutFranchisesInput = {
@@ -66766,6 +71826,13 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -66891,6 +71958,8 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
@@ -66926,6 +71995,13 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -67050,6 +72126,8 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutFranchisesInput = {
@@ -67099,6 +72177,13 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -67224,6 +72309,8 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
@@ -67259,6 +72346,13 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -67383,6 +72477,8 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -67416,6 +72512,13 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -67541,6 +72644,8 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -67576,6 +72681,13 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -67700,6 +72812,8 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -67749,6 +72863,13 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -67874,6 +72995,8 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -67909,6 +73032,13 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -68033,6 +73163,8 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutStateInput = {
@@ -68066,6 +73198,13 @@ export type VendorMasterCreateWithoutStateInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -68191,6 +73330,8 @@ export type VendorMasterCreateWithoutStateInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutStateInput = {
@@ -68225,6 +73366,13 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -68350,6 +73498,8 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutStateInput = {
@@ -68414,6 +73564,13 @@ export type VendorMasterScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
+  gst_no?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  toll_free_no?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  website_link?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  tag_line?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  address?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  pincode?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
+  city?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
 }
 
 export type VendorMasterCreateWithoutThemesInput = {
@@ -68447,6 +73604,13 @@ export type VendorMasterCreateWithoutThemesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -68572,6 +73736,8 @@ export type VendorMasterCreateWithoutThemesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutThemesInput = {
@@ -68607,6 +73773,13 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -68731,6 +73904,8 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutThemesInput = {
@@ -68780,6 +73955,13 @@ export type VendorMasterUpdateWithoutThemesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -68905,6 +74087,8 @@ export type VendorMasterUpdateWithoutThemesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutThemesInput = {
@@ -68940,6 +74124,13 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -69064,6 +74255,8 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
@@ -69097,6 +74290,13 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -69222,6 +74422,8 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
@@ -69257,6 +74459,13 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -69381,6 +74590,8 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutExternalPlatformTokensInput = {
@@ -69430,6 +74641,13 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -69555,6 +74773,8 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
@@ -69590,6 +74810,13 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -69714,6 +74941,8 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput = {
@@ -69747,6 +74976,13 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -69872,6 +75108,8 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappingsInput = {
@@ -69907,6 +75145,13 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -70031,6 +75276,8 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadExternalPlatformCustomerMappingsInput = {
@@ -70080,6 +75327,13 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -70205,6 +75459,8 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappingsInput = {
@@ -70240,6 +75496,13 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -70364,6 +75627,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCompletionPhotosInput = {
@@ -70397,6 +75662,13 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -70522,6 +75794,8 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
@@ -70557,6 +75831,13 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -70681,6 +75962,8 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCompletionPhotosInput = {
@@ -70730,6 +76013,13 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -70855,6 +76145,8 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
@@ -70890,6 +76182,13 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -71014,6 +76313,8 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
@@ -71047,6 +76348,13 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -71172,6 +76480,8 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
@@ -71207,6 +76517,13 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -71331,6 +76648,8 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectCategoriesMasterInput = {
@@ -71380,6 +76699,13 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -71505,6 +76831,8 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
@@ -71540,6 +76868,13 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -71664,6 +76999,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
@@ -71697,6 +77034,13 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -71822,6 +77166,8 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInput = {
@@ -71857,6 +77203,13 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -71981,6 +77334,8 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectCategoriesVendorMappingsInput = {
@@ -72030,6 +77385,13 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -72155,6 +77517,8 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInput = {
@@ -72190,6 +77554,13 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -72314,6 +77685,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutBrandsInput = {
@@ -72347,6 +77720,13 @@ export type VendorMasterCreateWithoutBrandsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -72472,6 +77852,8 @@ export type VendorMasterCreateWithoutBrandsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutBrandsInput = {
@@ -72507,6 +77889,13 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -72631,6 +78020,8 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutBrandsInput = {
@@ -72680,6 +78071,13 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -72805,6 +78203,8 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
@@ -72840,6 +78240,13 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -72964,6 +78371,8 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductsInput = {
@@ -72997,6 +78406,13 @@ export type VendorMasterCreateWithoutProductsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -73122,6 +78538,8 @@ export type VendorMasterCreateWithoutProductsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductsInput = {
@@ -73157,6 +78575,13 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -73281,6 +78706,8 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductsInput = {
@@ -73330,6 +78757,13 @@ export type VendorMasterUpdateWithoutProductsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -73455,6 +78889,8 @@ export type VendorMasterUpdateWithoutProductsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductsInput = {
@@ -73490,6 +78926,13 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -73614,6 +79057,8 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPurchaseIntentsInput = {
@@ -73647,6 +79092,13 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -73772,6 +79224,8 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
@@ -73807,6 +79261,13 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -73931,6 +79392,8 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPurchaseIntentsInput = {
@@ -73980,6 +79443,13 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -74105,6 +79575,8 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
@@ -74140,6 +79612,13 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -74264,6 +79743,8 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPurchaseOrdersInput = {
@@ -74297,6 +79778,13 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -74422,6 +79910,8 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
@@ -74457,6 +79947,13 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -74581,6 +80078,8 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPurchaseOrdersInput = {
@@ -74630,6 +80129,13 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -74755,6 +80261,8 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
@@ -74790,6 +80298,13 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -74914,6 +80429,8 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutGrnsInput = {
@@ -74947,6 +80464,13 @@ export type VendorMasterCreateWithoutGrnsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -75072,6 +80596,8 @@ export type VendorMasterCreateWithoutGrnsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutGrnsInput = {
@@ -75107,6 +80633,13 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -75231,6 +80764,8 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutGrnsInput = {
@@ -75280,6 +80815,13 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -75405,6 +80947,8 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
@@ -75440,6 +80984,13 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -75564,6 +81115,8 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDebitCreditNotesInput = {
@@ -75597,6 +81150,13 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -75722,6 +81282,8 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
@@ -75757,6 +81319,13 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -75881,6 +81450,8 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDebitCreditNotesInput = {
@@ -75930,6 +81501,13 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -76055,6 +81633,8 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
@@ -76090,6 +81670,13 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -76214,6 +81801,8 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
@@ -76247,6 +81836,13 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -76372,6 +81968,8 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
@@ -76407,6 +82005,13 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -76531,6 +82136,8 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutRedeliveryRequestsInput = {
@@ -76580,6 +82187,13 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -76705,6 +82319,8 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
@@ -76740,6 +82356,13 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -76864,6 +82487,8 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutHsnMappingsInput = {
@@ -76897,6 +82522,13 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -77022,6 +82654,8 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
@@ -77057,6 +82691,13 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -77181,6 +82822,8 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutHsnMappingsInput = {
@@ -77230,6 +82873,13 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -77355,6 +83005,8 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
@@ -77390,6 +83042,13 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -77514,6 +83173,8 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutStockHistoriesInput = {
@@ -77547,6 +83208,13 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -77672,6 +83340,8 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
@@ -77707,6 +83377,13 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -77831,6 +83508,8 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutStockHistoriesInput = {
@@ -77880,6 +83559,13 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -78005,6 +83691,8 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
@@ -78040,6 +83728,13 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -78164,6 +83859,8 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPaymentTermsInput = {
@@ -78197,6 +83894,13 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -78322,6 +84026,8 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
@@ -78357,6 +84063,13 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -78481,6 +84194,8 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPaymentTermsInput = {
@@ -78530,6 +84245,13 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -78655,6 +84377,8 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
@@ -78690,6 +84414,13 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -78814,6 +84545,8 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
@@ -78847,6 +84580,13 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -78972,6 +84712,8 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
@@ -79007,6 +84749,13 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -79131,6 +84880,8 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPoPaymentSchedulesInput = {
@@ -79180,6 +84931,13 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -79305,6 +85063,8 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
@@ -79340,6 +85100,13 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -79464,6 +85231,8 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPoPaymentsInput = {
@@ -79497,6 +85266,13 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -79622,6 +85398,8 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
@@ -79657,6 +85435,13 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -79781,6 +85566,8 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPoPaymentsInput = {
@@ -79830,6 +85617,13 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -79955,6 +85749,8 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
@@ -79990,6 +85786,13 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -80114,6 +85917,8 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUnitsInput = {
@@ -80147,6 +85952,13 @@ export type VendorMasterCreateWithoutUnitsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -80272,6 +86084,8 @@ export type VendorMasterCreateWithoutUnitsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUnitsInput = {
@@ -80307,6 +86121,13 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -80431,6 +86252,8 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUnitsInput = {
@@ -80480,6 +86303,13 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -80605,6 +86435,8 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
@@ -80640,6 +86472,13 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -80764,6 +86603,8 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutItemGroupsInput = {
@@ -80797,6 +86638,13 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -80922,6 +86770,8 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
@@ -80957,6 +86807,13 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -81081,6 +86938,8 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutItemGroupsInput = {
@@ -81130,6 +86989,13 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -81255,6 +87121,8 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
@@ -81290,6 +87158,13 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -81414,6 +87289,8 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
@@ -81447,6 +87324,13 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -81572,6 +87456,8 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
@@ -81607,6 +87493,13 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -81731,6 +87624,8 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductSupplierMappingsInput = {
@@ -81780,6 +87675,13 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -81905,6 +87807,8 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
@@ -81940,6 +87844,13 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -82064,6 +87975,8 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
@@ -82097,6 +88010,13 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -82222,6 +88142,8 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = {
@@ -82257,6 +88179,13 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -82381,6 +88310,8 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPopaymentScheduleHistoriesInput = {
@@ -82430,6 +88361,13 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -82555,6 +88493,8 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = {
@@ -82590,6 +88530,13 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -82714,6 +88661,8 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutArchitechuremastersInput = {
@@ -82747,6 +88696,13 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -82872,6 +88828,8 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
@@ -82907,6 +88865,13 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -83031,6 +88996,8 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutArchitechuremastersInput = {
@@ -83080,6 +89047,13 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -83205,6 +89179,8 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
@@ -83240,6 +89216,13 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -83364,6 +89347,8 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
@@ -83397,6 +89382,13 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -83522,6 +89514,8 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
@@ -83557,6 +89551,13 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -83681,6 +89682,8 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutAdditionalCostMastersInput = {
@@ -83730,6 +89733,13 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -83855,6 +89865,8 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
@@ -83890,6 +89902,13 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -84014,6 +90033,8 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
@@ -84047,6 +90068,13 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -84172,6 +90200,8 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
@@ -84207,6 +90237,13 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -84331,6 +90368,8 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPiSupplierAdditionalCostsInput = {
@@ -84380,6 +90419,13 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -84505,6 +90551,8 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
@@ -84540,6 +90588,13 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -84664,6 +90719,8 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
@@ -84697,6 +90754,13 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
@@ -84822,6 +90886,8 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
@@ -84857,6 +90923,13 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -84981,6 +91054,8 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPoSupplierAdditionalCostsInput = {
@@ -85030,6 +91105,13 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -85155,6 +91237,8 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
@@ -85190,6 +91274,13 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -85314,6 +91405,8 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateManyStateInput = {
@@ -85348,6 +91441,13 @@ export type VendorMasterCreateManyStateInput = {
   is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
 }
 
 export type VendorMasterUpdateWithoutStateInput = {
@@ -85381,6 +91481,13 @@ export type VendorMasterUpdateWithoutStateInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
@@ -85506,6 +91613,8 @@ export type VendorMasterUpdateWithoutStateInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutStateInput = {
@@ -85540,6 +91649,13 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -85665,6 +91781,8 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
   clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
@@ -85699,6 +91817,13 @@ export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -85832,6 +91957,8 @@ export type VendorMasterCountOutputType = {
   popaymentScheduleHistories: number
   clientTypes: number
   clients: number
+  box_info_fields: number
+  box_info_values: number
 }
 
 export type VendorMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -85960,6 +92087,8 @@ export type VendorMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   popaymentScheduleHistories?: boolean | VendorMasterCountOutputTypeCountPopaymentScheduleHistoriesArgs
   clientTypes?: boolean | VendorMasterCountOutputTypeCountClientTypesArgs
   clients?: boolean | VendorMasterCountOutputTypeCountClientsArgs
+  box_info_fields?: boolean | VendorMasterCountOutputTypeCountBox_info_fieldsArgs
+  box_info_values?: boolean | VendorMasterCountOutputTypeCountBox_info_valuesArgs
 }
 
 /**
@@ -86847,6 +92976,20 @@ export type VendorMasterCountOutputTypeCountClientsArgs<ExtArgs extends runtime.
   where?: Prisma.ClientMasterWhereInput
 }
 
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountBox_info_fieldsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProjectBoxInfoFieldWhereInput
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountBox_info_valuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoxInfoFieldValueWhereInput
+}
+
 
 export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -86881,6 +93024,13 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
+  gst_no?: boolean
+  toll_free_no?: boolean
+  website_link?: boolean
+  tag_line?: boolean
+  address?: boolean
+  pincode?: boolean
+  city?: boolean
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
   boxes?: boolean | Prisma.VendorMaster$boxesArgs<ExtArgs>
   CompanyVendorsMaster?: boolean | Prisma.VendorMaster$CompanyVendorsMasterArgs<ExtArgs>
@@ -87007,6 +93157,8 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   popaymentScheduleHistories?: boolean | Prisma.VendorMaster$popaymentScheduleHistoriesArgs<ExtArgs>
   clientTypes?: boolean | Prisma.VendorMaster$clientTypesArgs<ExtArgs>
   clients?: boolean | Prisma.VendorMaster$clientsArgs<ExtArgs>
+  box_info_fields?: boolean | Prisma.VendorMaster$box_info_fieldsArgs<ExtArgs>
+  box_info_values?: boolean | Prisma.VendorMaster$box_info_valuesArgs<ExtArgs>
   _count?: boolean | Prisma.VendorMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["vendorMaster"]>
 
@@ -87043,6 +93195,13 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
+  gst_no?: boolean
+  toll_free_no?: boolean
+  website_link?: boolean
+  tag_line?: boolean
+  address?: boolean
+  pincode?: boolean
+  city?: boolean
   state?: boolean | Prisma.VendorMaster$stateArgs<ExtArgs>
 }, ExtArgs["result"]["vendorMaster"]>
 
@@ -87079,6 +93238,13 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
+  gst_no?: boolean
+  toll_free_no?: boolean
+  website_link?: boolean
+  tag_line?: boolean
+  address?: boolean
+  pincode?: boolean
+  city?: boolean
   state?: boolean | Prisma.VendorMaster$stateArgs<ExtArgs>
 }, ExtArgs["result"]["vendorMaster"]>
 
@@ -87115,9 +93281,16 @@ export type VendorMasterSelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
+  gst_no?: boolean
+  toll_free_no?: boolean
+  website_link?: boolean
+  tag_line?: boolean
+  address?: boolean
+  pincode?: boolean
+  city?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "icon" | "login_image" | "time_zone" | "subdomain_url" | "IsAccountLocInEnabled" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "is_client_visit_enabled" | "is_this_vendor_is_custom_usertype_only" | "is_year_wise_lead_code_enabled" | "handlesLargeScaleProjects" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "createdAt" | "updatedAt" | "state_id", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "icon" | "login_image" | "time_zone" | "subdomain_url" | "IsAccountLocInEnabled" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "is_client_visit_enabled" | "is_this_vendor_is_custom_usertype_only" | "is_year_wise_lead_code_enabled" | "handlesLargeScaleProjects" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "createdAt" | "updatedAt" | "state_id" | "gst_no" | "toll_free_no" | "website_link" | "tag_line" | "address" | "pincode" | "city", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
   boxes?: boolean | Prisma.VendorMaster$boxesArgs<ExtArgs>
@@ -87245,6 +93418,8 @@ export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.Interna
   popaymentScheduleHistories?: boolean | Prisma.VendorMaster$popaymentScheduleHistoriesArgs<ExtArgs>
   clientTypes?: boolean | Prisma.VendorMaster$clientTypesArgs<ExtArgs>
   clients?: boolean | Prisma.VendorMaster$clientsArgs<ExtArgs>
+  box_info_fields?: boolean | Prisma.VendorMaster$box_info_fieldsArgs<ExtArgs>
+  box_info_values?: boolean | Prisma.VendorMaster$box_info_valuesArgs<ExtArgs>
   _count?: boolean | Prisma.VendorMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type VendorMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -87383,6 +93558,8 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     popaymentScheduleHistories: Prisma.$POPaymentScheduleHistoryPayload<ExtArgs>[]
     clientTypes: Prisma.$ClientTypeMasterPayload<ExtArgs>[]
     clients: Prisma.$ClientMasterPayload<ExtArgs>[]
+    box_info_fields: Prisma.$ProjectBoxInfoFieldPayload<ExtArgs>[]
+    box_info_values: Prisma.$BoxInfoFieldValuePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -87417,6 +93594,13 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     createdAt: Date
     updatedAt: Date
     state_id: number | null
+    gst_no: string | null
+    toll_free_no: string | null
+    website_link: string | null
+    tag_line: string | null
+    address: string | null
+    pincode: string | null
+    city: string | null
   }, ExtArgs["result"]["vendorMaster"]>
   composites: {}
 }
@@ -87937,6 +94121,8 @@ export interface Prisma__VendorMasterClient<T, Null = never, ExtArgs extends run
   popaymentScheduleHistories<T extends Prisma.VendorMaster$popaymentScheduleHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$popaymentScheduleHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$POPaymentScheduleHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   clientTypes<T extends Prisma.VendorMaster$clientTypesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$clientTypesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClientTypeMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   clients<T extends Prisma.VendorMaster$clientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$clientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClientMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  box_info_fields<T extends Prisma.VendorMaster$box_info_fieldsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$box_info_fieldsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectBoxInfoFieldPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  box_info_values<T extends Prisma.VendorMaster$box_info_valuesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$box_info_valuesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxInfoFieldValuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -87998,6 +94184,13 @@ export interface VendorMasterFieldRefs {
   readonly createdAt: Prisma.FieldRef<"VendorMaster", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"VendorMaster", 'DateTime'>
   readonly state_id: Prisma.FieldRef<"VendorMaster", 'Int'>
+  readonly gst_no: Prisma.FieldRef<"VendorMaster", 'String'>
+  readonly toll_free_no: Prisma.FieldRef<"VendorMaster", 'String'>
+  readonly website_link: Prisma.FieldRef<"VendorMaster", 'String'>
+  readonly tag_line: Prisma.FieldRef<"VendorMaster", 'String'>
+  readonly address: Prisma.FieldRef<"VendorMaster", 'String'>
+  readonly pincode: Prisma.FieldRef<"VendorMaster", 'String'>
+  readonly city: Prisma.FieldRef<"VendorMaster", 'String'>
 }
     
 
@@ -91415,6 +97608,54 @@ export type VendorMaster$clientsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.ClientMasterScalarFieldEnum | Prisma.ClientMasterScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.box_info_fields
+ */
+export type VendorMaster$box_info_fieldsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectBoxInfoField
+   */
+  select?: Prisma.ProjectBoxInfoFieldSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectBoxInfoField
+   */
+  omit?: Prisma.ProjectBoxInfoFieldOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectBoxInfoFieldInclude<ExtArgs> | null
+  where?: Prisma.ProjectBoxInfoFieldWhereInput
+  orderBy?: Prisma.ProjectBoxInfoFieldOrderByWithRelationInput | Prisma.ProjectBoxInfoFieldOrderByWithRelationInput[]
+  cursor?: Prisma.ProjectBoxInfoFieldWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProjectBoxInfoFieldScalarFieldEnum | Prisma.ProjectBoxInfoFieldScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.box_info_values
+ */
+export type VendorMaster$box_info_valuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoxInfoFieldValue
+   */
+  select?: Prisma.BoxInfoFieldValueSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoxInfoFieldValue
+   */
+  omit?: Prisma.BoxInfoFieldValueOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoxInfoFieldValueInclude<ExtArgs> | null
+  where?: Prisma.BoxInfoFieldValueWhereInput
+  orderBy?: Prisma.BoxInfoFieldValueOrderByWithRelationInput | Prisma.BoxInfoFieldValueOrderByWithRelationInput[]
+  cursor?: Prisma.BoxInfoFieldValueWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoxInfoFieldValueScalarFieldEnum | Prisma.BoxInfoFieldValueScalarFieldEnum[]
 }
 
 /**

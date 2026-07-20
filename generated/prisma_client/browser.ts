@@ -83,6 +83,16 @@ export type ProjectItemsMaster = Prisma.ProjectItemsMasterModel
  */
 export type BoxMaster = Prisma.BoxMasterModel
 /**
+ * Model ProjectBoxInfoField
+ * 
+ */
+export type ProjectBoxInfoField = Prisma.ProjectBoxInfoFieldModel
+/**
+ * Model BoxInfoFieldValue
+ * 
+ */
+export type BoxInfoFieldValue = Prisma.BoxInfoFieldValueModel
+/**
  * Model ScanAndPackItem
  * 
  */

@@ -64,6 +64,8 @@ export const ModelName = {
   ProjectDetails: 'ProjectDetails',
   ProjectItemsMaster: 'ProjectItemsMaster',
   BoxMaster: 'BoxMaster',
+  ProjectBoxInfoField: 'ProjectBoxInfoField',
+  BoxInfoFieldValue: 'BoxInfoFieldValue',
   ScanAndPackItem: 'ScanAndPackItem',
   VendorTokens: 'VendorTokens',
   ClientMaster: 'ClientMaster',
@@ -279,7 +281,14 @@ export const VendorMasterScalarFieldEnum = {
   is_in_app_noti_enabled: 'is_in_app_noti_enabled',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  state_id: 'state_id'
+  state_id: 'state_id',
+  gst_no: 'gst_no',
+  toll_free_no: 'toll_free_no',
+  website_link: 'website_link',
+  tag_line: 'tag_line',
+  address: 'address',
+  pincode: 'pincode',
+  city: 'city'
 } as const
 
 export type VendorMasterScalarFieldEnum = (typeof VendorMasterScalarFieldEnum)[keyof typeof VendorMasterScalarFieldEnum]
@@ -491,6 +500,41 @@ export const BoxMasterScalarFieldEnum = {
 } as const
 
 export type BoxMasterScalarFieldEnum = (typeof BoxMasterScalarFieldEnum)[keyof typeof BoxMasterScalarFieldEnum]
+
+
+export const ProjectBoxInfoFieldScalarFieldEnum = {
+  id: 'id',
+  project_id: 'project_id',
+  vendor_id: 'vendor_id',
+  field_label: 'field_label',
+  field_key: 'field_key',
+  field_type: 'field_type',
+  is_required: 'is_required',
+  sort_order: 'sort_order',
+  active: 'active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ProjectBoxInfoFieldScalarFieldEnum = (typeof ProjectBoxInfoFieldScalarFieldEnum)[keyof typeof ProjectBoxInfoFieldScalarFieldEnum]
+
+
+export const BoxInfoFieldValueScalarFieldEnum = {
+  id: 'id',
+  box_id: 'box_id',
+  project_id: 'project_id',
+  vendor_id: 'vendor_id',
+  field_id: 'field_id',
+  field_value: 'field_value',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type BoxInfoFieldValueScalarFieldEnum = (typeof BoxInfoFieldValueScalarFieldEnum)[keyof typeof BoxInfoFieldValueScalarFieldEnum]
 
 
 export const ScanAndPackItemScalarFieldEnum = {
