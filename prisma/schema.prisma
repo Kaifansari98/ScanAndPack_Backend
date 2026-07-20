@@ -40,13 +40,6 @@ model VendorMaster {
   createdAt                              DateTime @default(now())
   updatedAt                              DateTime @updatedAt
   state_id                               Int?
-  gst_no                                 String?
-  toll_free_no                           String?
-  website_link                           String?
-  tag_line                               String?
-  address                                String?
-  pincode                                String?
-  city                                   String?
 
   accounts                            AccountMaster[]
   boxes                               BoxMaster[]
@@ -178,8 +171,8 @@ model VendorMaster {
   itemGroups                 ItemGroupMaster[]
   productSupplierMappings    ProductSupplierMapping[]
   popaymentScheduleHistories POPaymentScheduleHistory[]
-  box_info_fields            ProjectBoxInfoField[]
-  box_info_values            BoxInfoFieldValue[]
+  clientTypes                ClientTypeMaster[]
+  clients                    ClientMaster[]
 
   @@index([state_id])
 }
@@ -475,8 +468,6 @@ model ProjectMaster {
   lead                  LeadMaster?             @relation(fields: [lead_id], references: [id])
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   scanItems             ScanAndPackItem[]
-  box_info_fields       ProjectBoxInfoField[]
-  box_info_values       BoxInfoFieldValue[]
 }
 
 model ProjectDetails {
@@ -547,7 +538,6 @@ model BoxMaster {
   factoryOutByUser      UserMaster?             @relation("BoxFactoryOutBy", fields: [factory_out_by], references: [id])
   siteInByUser          UserMaster?             @relation("BoxSiteInBy", fields: [site_in_by], references: [id])
   packedByUser          UserMaster?             @relation("BoxPackedByUser", fields: [packed_by], references: [id])
-  box_info_values       BoxInfoFieldValue[]
 }
 
 model ScanAndPackItem {
@@ -581,21 +571,47 @@ model VendorTokens {
 }
 
 model ClientMaster {
-  id          Int     @id @default(autoincrement())
-  name        String
-  contact     String
-  alt_contact String?
-  email       String
-  address     String
-  city        String
-  state       String
-  country     String
-  pincode     String
-  clientCode  String
+  id             Int      @id @default(autoincrement())
+  vendor_id      Int
+  name           String
+  contact        String
+  alt_contact    String?
+  email          String
+  address        String
+  city           String
+  state          String
+  country        String
+  pincode        String
+  clientCode     String
+  gst_number     String?
+  company_name   String?
+  client_type_id Int?
+  is_active      Boolean  @default(true)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
 
-  ledgers   Ledger[]
-  projects  ProjectMaster[]
-  scanItems ScanAndPackItem[]
+  vendor     VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  clientType ClientTypeMaster? @relation(fields: [client_type_id], references: [id], onDelete: SetNull)
+  ledgers    Ledger[]
+  projects   ProjectMaster[]
+  scanItems  ScanAndPackItem[]
+  leads      LeadMaster[]
+
+  @@index([vendor_id])
+  @@index([client_type_id])
+}
+
+model ClientTypeMaster {
+  id         Int      @id @default(autoincrement())
+  vendor_id  Int
+  type       String
+  is_active  Boolean  @default(true)
+  created_at DateTime @default(now())
+
+  vendor  VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  clients ClientMaster[]
+
+  @@index([vendor_id])
 }
 
 model LeadMaster {
@@ -609,6 +625,7 @@ model LeadMaster {
   site_address                                String?
   site_type_id                                Int?
   source_id                                   Int?
+  refered_by                                  String?
   archetech_name                              String?
   archetech_number                            String?
   architect_id                                Int?
@@ -621,6 +638,7 @@ model LeadMaster {
   assign_to                                   Int?
   assigned_by                                 Int?
   account_id                                  Int?
+  client_id                                   Int?
   deleted_at                                  DateTime?
   deleted_by                                  Int?
   is_deleted                                  Boolean                               @default(false)
@@ -685,6 +703,7 @@ model LeadMaster {
   franchise_id                                Int?
   order_login_prod_files_remark               String?
   total_required_chs_manufacturing_days       Int?
+  order_number                                String?
   is_blocked                                  Boolean                               @default(false)
   lead_blocked_at                             DateTime?
   cutList                                     CutList[]
@@ -715,6 +734,7 @@ model LeadMaster {
   lightCarcasUnitMappings                     LeadLightCarcasUnitMapping[]
   otherAppliancesMappings                     LeadOtherAppliancesMapping[]
   account                                     AccountMaster?                        @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  client                                      ClientMaster?                         @relation(fields: [client_id], references: [id], onDelete: SetNull)
   assignedTo                                  UserMaster?                           @relation("LeadAssignedTo", fields: [assign_to], references: [id])
   assignedBy                                  UserMaster?                           @relation("LeadAssignedBy", fields: [assigned_by], references: [id])
   createdBy                                   UserMaster                            @relation("LeadCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
@@ -3955,66 +3975,6 @@ model PurchaseOrderSupplierAdditionalCost {
   @@index([company_vendor_id], map: "po_sup_cost_company_vendor_idx")
   @@index([additional_cost_id], map: "po_sup_cost_master_idx")
   @@index([source_pi_additional_cost_id], map: "po_sup_cost_source_pi_idx")
-}
-
-model ProjectBoxInfoField {
-  id         Int @id @default(autoincrement())
-  project_id Int
-  vendor_id  Int
-
-  field_label String
-  field_key   String
-  field_type  BoxInfoFieldType @default(TEXT)
-
-  is_required Boolean @default(false)
-  sort_order  Int     @default(0)
-  active      Boolean @default(true)
-
-  created_by Int?
-  updated_by Int?
-
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-
-  project ProjectMaster @relation(fields: [project_id], references: [id], onDelete: Cascade)
-  vendor  VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-
-  values BoxInfoFieldValue[]
-
-  @@index([project_id, vendor_id])
-}
-
-model BoxInfoFieldValue {
-  id Int @id @default(autoincrement())
-
-  box_id     Int
-  project_id Int
-  vendor_id  Int
-  field_id   Int
-
-  field_value String?
-
-  created_by Int?
-  updated_by Int?
-
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-
-  box     BoxMaster           @relation(fields: [box_id], references: [id], onDelete: Cascade)
-  project ProjectMaster       @relation(fields: [project_id], references: [id], onDelete: Cascade)
-  vendor  VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  field   ProjectBoxInfoField @relation(fields: [field_id], references: [id], onDelete: Cascade)
-
-  @@unique([box_id, field_id])
-  @@index([box_id])
-  @@index([project_id, vendor_id])
-}
-
-enum BoxInfoFieldType {
-  TEXT
-  NUMBER
-  DATE
-  TEXTAREA
 }
 
 enum PackingType {
