@@ -199,6 +199,9 @@ interface UpdateLeadInput {
   archetech_number?: string;
   designer_remark?: string;
   updated_by?: number;
+  client_id?: number;
+  order_number?: string;
+  refered_by?: string;
 }
 
 export const validateUpdateLeadInput = (
@@ -337,6 +340,24 @@ export const validateUpdateLeadInput = (
   if (input.contact_no && typeof input.contact_no === "string") {
     if (input.contact_no.length < 7 || input.contact_no.length > 15) {
       errors.push("contact_no must be between 7 and 15 characters");
+    }
+  }
+
+  if (input.client_id !== undefined && input.client_id !== null) {
+    if (typeof input.client_id !== "number") {
+      errors.push("client_id must be a number if provided");
+    }
+  }
+
+  if (input.order_number !== undefined && input.order_number !== null) {
+    if (typeof input.order_number !== "string") {
+      errors.push("order_number must be a string if provided");
+    }
+  }
+
+  if (input.refered_by !== undefined && input.refered_by !== null) {
+    if (typeof input.refered_by !== "string") {
+      errors.push("refered_by must be a string if provided");
     }
   }
 
