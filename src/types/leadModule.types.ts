@@ -311,6 +311,9 @@ export interface UpdateLeadDTO {
     designer_remark?: string;
     updated_by: number;
     initial_site_measurement_date?: Date | string;
+    client_id?: number;
+    order_number?: string;
+    refered_by?: string;
 }
 
 export interface SalesExecutiveData {

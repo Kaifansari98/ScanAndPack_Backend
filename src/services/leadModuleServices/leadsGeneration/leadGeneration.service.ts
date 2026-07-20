@@ -2177,6 +2177,9 @@ export const updateLeadService = async (
     designer_remark,
     updated_by,
     initial_site_measurement_date,
+    client_id,
+    order_number,
+    refered_by,
   } = payload;
 
   const result = await prisma.$transaction(async (tx) => {
@@ -2267,6 +2270,10 @@ export const updateLeadService = async (
       leadUpdateData.archetech_number = archetech_number;
     if (designer_remark !== undefined)
       leadUpdateData.designer_remark = designer_remark;
+    if (client_id !== undefined)
+      leadUpdateData.client_id = client_id ? Number(client_id) : null;
+    if (order_number !== undefined) leadUpdateData.order_number = order_number;
+    if (refered_by !== undefined) leadUpdateData.refered_by = refered_by;
 
     const updatedLead = await tx.leadMaster.update({
       where: { id: leadId },
