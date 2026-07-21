@@ -917,3 +917,28 @@ export type CompanyVendorDocumentMapping = Prisma.CompanyVendorDocumentMappingMo
  * 
  */
 export type CompanyVendorAddress = Prisma.CompanyVendorAddressModel
+/**
+ * Model BroadcastMaster
+ * 
+ */
+export type BroadcastMaster = Prisma.BroadcastMasterModel
+/**
+ * Model BroadcastAudienceMapping
+ * 
+ */
+export type BroadcastAudienceMapping = Prisma.BroadcastAudienceMappingModel
+/**
+ * Model BroadcastAttachment
+ * 
+ */
+export type BroadcastAttachment = Prisma.BroadcastAttachmentModel
+/**
+ * Model BroadcastRead
+ * 
+ */
+export type BroadcastRead = Prisma.BroadcastReadModel
+/**
+ * Model NotificationQueue
+ * 
+ */
+export type NotificationQueue = Prisma.NotificationQueueModel

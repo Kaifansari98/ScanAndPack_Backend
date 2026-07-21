@@ -182,6 +182,7 @@ model VendorMaster {
   clients                    ClientMaster[]
   box_info_fields            ProjectBoxInfoField[]
   box_info_values            BoxInfoFieldValue[]
+  broadcasts                 BroadcastMaster[]          @relation("VendorBroadcasts")
 
   @@index([state_id])
 }
@@ -375,14 +376,25 @@ model UserMaster {
   poItemsDeleted                             PurchaseOrderItem[]                    @relation("POItemDeletedBy")
   stockHistories                             ProductStockHistory[]                  @relation("StockHistoryUser")
   architechuremasters                        Architechuremaster[]
-  leadSpecificationsCreated                  LeadSpecificationsMaster[]             @relation("LeadSpecificationsCreatedBy")
-  leadCarcassMaterialMappingsCreated         LeadCarcassMaterialMapping[]           @relation("LeadCarcassMaterialMappingCreatedBy")
-  leadShutterMaterialMappingsCreated         LeadShutterMaterialMapping[]           @relation("LeadShutterMaterialMappingCreatedBy")
-  leadHardwareMappingsCreated                LeadHardwareMapping[]                  @relation("LeadHardwareMappingCreatedBy")
+  leadSpecificationsCreated                  LeadSpecificationsMaster[]                     @relation("LeadSpecificationsCreatedBy")
+  leadCarcassMaterialMappingsCreated         LeadCarcassMaterialMapping[]                   @relation("LeadCarcassMaterialMappingCreatedBy")
+  leadShutterMaterialMappingsCreated         LeadShutterMaterialMapping[]                   @relation("LeadShutterMaterialMappingCreatedBy")
+  leadHardwareMappingsCreated                LeadHardwareMapping[]                          @relation("LeadHardwareMappingCreatedBy")
   leadLightCarcasUnitMappingsCreated         LeadLightCarcasUnitMapping[]           @relation("LeadLightCarcasUnitMappingCreatedBy")
   leadOtherAppliancesMappingsCreated         LeadOtherAppliancesMapping[]           @relation("LeadOtherAppliancesMappingCreatedBy")
   poPaymentScheduleHistories                 POPaymentScheduleHistory[]
   boxesPackedBy                              BoxMaster[]                            @relation("BoxPackedByUser")
+  broadcastsCreated                          BroadcastMaster[]                      @relation("BroadcastCreatedBy")
+  broadcastsUpdated                          BroadcastMaster[]                      @relation("BroadcastUpdatedBy")
+  broadcastAudienceCreated                   BroadcastAudienceMapping[]             @relation("BroadcastAudienceCreatedBy")
+  broadcastAudienceUpdated                   BroadcastAudienceMapping[]             @relation("BroadcastAudienceUpdatedBy")
+  broadcastAttachmentsCreated                BroadcastAttachment[]                  @relation("BroadcastAttachmentCreatedBy")
+  broadcastAttachmentsUpdated                BroadcastAttachment[]                  @relation("BroadcastAttachmentUpdatedBy")
+  broadcastReads                             BroadcastRead[]                        @relation("BroadcastReadUser")
+  broadcastReadsCreated                      BroadcastRead[]                        @relation("BroadcastReadCreatedBy")
+  broadcastReadsUpdated                      BroadcastRead[]                        @relation("BroadcastReadUpdatedBy")
+  notificationQueuesCreated                  NotificationQueue[]                    @relation("NotificationQueueCreatedBy")
+  notificationQueuesUpdated                  NotificationQueue[]                    @relation("NotificationQueueUpdatedBy")
 }
 
 model UserDocument {
@@ -847,18 +859,21 @@ model LeadSpecificationsMaster {
   lead_id       Int
   name          String
   lights_remark String?
+  item_code_id  Int?
   created_at    DateTime @default(now())
   created_by    Int
 
-  vendor                  VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  lead                    LeadMaster                   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  createdBy               UserMaster                   @relation("LeadSpecificationsCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  vendor                     VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead                       LeadMaster                   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  createdBy               UserMaster                     @relation("LeadSpecificationsCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  productItemCode         ProductItemCode?             @relation(fields: [item_code_id], references: [id], onDelete: SetNull)
   lightCarcasUnitMappings LeadLightCarcasUnitMapping[]
   otherAppliancesMappings LeadOtherAppliancesMapping[]
 
   @@index([vendor_id])
   @@index([lead_id])
   @@index([created_by])
+  @@index([item_code_id])
 }
 
 model LeadCarcassMaterialMapping {
@@ -1473,6 +1488,7 @@ model ProductItemCode {
   productStructure              ProductStructure               @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
   subProductStructure           ProductSubStructure?           @relation(fields: [sub_product_structure_id], references: [id], onDelete: SetNull)
   vendor                        VendorMaster                   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  leadSpecifications            LeadSpecificationsMaster[]
 
   @@unique([vendor_id, item_code, description, specification])
   @@index([vendor_id])
@@ -4586,4 +4602,147 @@ model CompanyVendorAddress {
   is_deleted Boolean   @default(false) @map("is_deleted")
 
   @@map("CompanyVendorAddress")
+}
+enum BroadcastType {
+  CIRCULAR
+  DOCUMENT
+}
+
+enum BroadcastStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum AudienceType {
+  ALL
+  ROLE
+  USER
+  FRANCHISE
+}
+
+enum AttachmentType {
+  FILE
+  YOUTUBE
+}
+
+enum NotificationSource {
+  IN_APP
+  EMAIL
+}
+
+enum NotificationStatus {
+  PENDING
+  SENT
+  FAILED
+}
+
+model BroadcastMaster {
+  id         Int             @id @default(autoincrement())
+  title      String
+  content    String          @db.Text
+  status     BroadcastStatus @default(ACTIVE)
+  type       BroadcastType
+  publish_at DateTime?
+  vendor_id  Int?
+  created_by Int
+  updated_by Int?
+  created_at DateTime        @default(now())
+  updated_at DateTime        @updatedAt
+
+  vendor      VendorMaster?              @relation("VendorBroadcasts", fields: [vendor_id], references: [id], onDelete: SetNull)
+  createdBy   UserMaster                 @relation("BroadcastCreatedBy", fields: [created_by], references: [id])
+  updatedBy   UserMaster?                @relation("BroadcastUpdatedBy", fields: [updated_by], references: [id])
+  audiences   BroadcastAudienceMapping[]
+  attachments BroadcastAttachment[]
+  readLogs    BroadcastRead[]
+
+  @@index([vendor_id])
+  @@index([created_by])
+  @@index([updated_by])
+}
+
+model BroadcastAudienceMapping {
+  id            Int          @id @default(autoincrement())
+  broadcast_id  Int
+  audience_type AudienceType
+  target_id     Int?
+  created_by    Int
+  updated_by    Int?
+  created_at    DateTime     @default(now())
+  updated_at    DateTime     @updatedAt
+
+  broadcast BroadcastMaster @relation(fields: [broadcast_id], references: [id], onDelete: Cascade)
+  createdBy UserMaster      @relation("BroadcastAudienceCreatedBy", fields: [created_by], references: [id])
+  updatedBy UserMaster?     @relation("BroadcastAudienceUpdatedBy", fields: [updated_by], references: [id])
+
+  @@index([broadcast_id])
+  @@index([audience_type, target_id])
+}
+
+model BroadcastAttachment {
+  id                 Int            @id @default(autoincrement())
+  broadcast_id       Int
+  attachment_type    AttachmentType
+  title              String
+  file_name          String?
+  original_file_name String?
+  file_url           String
+  file_type          String?
+  created_by         Int
+  updated_by         Int?
+  created_at         DateTime       @default(now())
+  updated_at         DateTime       @updatedAt
+
+  broadcast BroadcastMaster @relation(fields: [broadcast_id], references: [id], onDelete: Cascade)
+  createdBy UserMaster      @relation("BroadcastAttachmentCreatedBy", fields: [created_by], references: [id])
+  updatedBy UserMaster?     @relation("BroadcastAttachmentUpdatedBy", fields: [updated_by], references: [id])
+
+  @@index([broadcast_id])
+  @@index([created_by])
+  @@index([updated_by])
+}
+
+model BroadcastRead {
+  id           Int      @id @default(autoincrement())
+  broadcast_id Int
+  user_id      Int
+  read_at      DateTime @default(now())
+  created_by   Int
+  updated_by   Int?
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  broadcast BroadcastMaster @relation(fields: [broadcast_id], references: [id], onDelete: Cascade)
+  user      UserMaster      @relation("BroadcastReadUser", fields: [user_id], references: [id], onDelete: Cascade)
+  createdBy UserMaster      @relation("BroadcastReadCreatedBy", fields: [created_by], references: [id])
+  updatedBy UserMaster?     @relation("BroadcastReadUpdatedBy", fields: [updated_by], references: [id])
+
+  @@unique([broadcast_id, user_id])
+  @@index([broadcast_id])
+  @@index([user_id])
+  @@index([created_by])
+  @@index([updated_by])
+}
+
+model NotificationQueue {
+  id                  Int                @id @default(autoincrement())
+  title               String
+  body                String             @db.Text
+  redirect_url        String?
+  image               String?
+  notification_source NotificationSource
+  notification_status NotificationStatus @default(PENDING)
+  send_at             DateTime
+  request_body        Json?
+  created_by          Int
+  updated_by          Int?
+  created_at          DateTime           @default(now())
+  updated_at          DateTime           @updatedAt
+
+  createdBy UserMaster  @relation("NotificationQueueCreatedBy", fields: [created_by], references: [id])
+  updatedBy UserMaster? @relation("NotificationQueueUpdatedBy", fields: [updated_by], references: [id])
+
+  @@index([created_by])
+  @@index([updated_by])
+  @@index([notification_status, send_at])
 }

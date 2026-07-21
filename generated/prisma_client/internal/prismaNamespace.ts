@@ -563,7 +563,12 @@ export const ModelName = {
   CompanyVendorBankAccount: 'CompanyVendorBankAccount',
   CompanyVendorDocumentMaster: 'CompanyVendorDocumentMaster',
   CompanyVendorDocumentMapping: 'CompanyVendorDocumentMapping',
-  CompanyVendorAddress: 'CompanyVendorAddress'
+  CompanyVendorAddress: 'CompanyVendorAddress',
+  BroadcastMaster: 'BroadcastMaster',
+  BroadcastAudienceMapping: 'BroadcastAudienceMapping',
+  BroadcastAttachment: 'BroadcastAttachment',
+  BroadcastRead: 'BroadcastRead',
+  NotificationQueue: 'NotificationQueue'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -579,7 +584,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "projectBoxInfoField" | "boxInfoFieldValue" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "clientTypeMaster" | "leadMaster" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterMaterialFinishMaster" | "carcassLegsMaster" | "skirtingCarcassLegsMaster" | "skirtingCarcassLegsColorMaster" | "leadHardwareMapping" | "lightCarcasTypeMaster" | "lightCarcasUnitMaster" | "leadLightCarcasUnitMapping" | "otherAppliancesMaster" | "leadOtherAppliancesMapping" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost" | "vendorTypeMaster" | "companyVendorStatusMaster" | "companyVendorTypeMapping" | "companyVendorContactPerson" | "companyVendorBankAccount" | "companyVendorDocumentMaster" | "companyVendorDocumentMapping" | "companyVendorAddress"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "projectBoxInfoField" | "boxInfoFieldValue" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "clientTypeMaster" | "leadMaster" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterMaterialFinishMaster" | "carcassLegsMaster" | "skirtingCarcassLegsMaster" | "skirtingCarcassLegsColorMaster" | "leadHardwareMapping" | "lightCarcasTypeMaster" | "lightCarcasUnitMaster" | "leadLightCarcasUnitMapping" | "otherAppliancesMaster" | "leadOtherAppliancesMapping" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost" | "vendorTypeMaster" | "companyVendorStatusMaster" | "companyVendorTypeMapping" | "companyVendorContactPerson" | "companyVendorBankAccount" | "companyVendorDocumentMaster" | "companyVendorDocumentMapping" | "companyVendorAddress" | "broadcastMaster" | "broadcastAudienceMapping" | "broadcastAttachment" | "broadcastRead" | "notificationQueue"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -13903,6 +13908,376 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    BroadcastMaster: {
+      payload: Prisma.$BroadcastMasterPayload<ExtArgs>
+      fields: Prisma.BroadcastMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BroadcastMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BroadcastMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.BroadcastMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BroadcastMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastMasterPayload>
+        }
+        findMany: {
+          args: Prisma.BroadcastMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastMasterPayload>[]
+        }
+        create: {
+          args: Prisma.BroadcastMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastMasterPayload>
+        }
+        createMany: {
+          args: Prisma.BroadcastMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BroadcastMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.BroadcastMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastMasterPayload>
+        }
+        update: {
+          args: Prisma.BroadcastMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.BroadcastMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BroadcastMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BroadcastMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.BroadcastMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.BroadcastMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBroadcastMaster>
+        }
+        groupBy: {
+          args: Prisma.BroadcastMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BroadcastMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BroadcastMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BroadcastMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    BroadcastAudienceMapping: {
+      payload: Prisma.$BroadcastAudienceMappingPayload<ExtArgs>
+      fields: Prisma.BroadcastAudienceMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BroadcastAudienceMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAudienceMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BroadcastAudienceMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAudienceMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.BroadcastAudienceMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAudienceMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BroadcastAudienceMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAudienceMappingPayload>
+        }
+        findMany: {
+          args: Prisma.BroadcastAudienceMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAudienceMappingPayload>[]
+        }
+        create: {
+          args: Prisma.BroadcastAudienceMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAudienceMappingPayload>
+        }
+        createMany: {
+          args: Prisma.BroadcastAudienceMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BroadcastAudienceMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAudienceMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.BroadcastAudienceMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAudienceMappingPayload>
+        }
+        update: {
+          args: Prisma.BroadcastAudienceMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAudienceMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.BroadcastAudienceMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BroadcastAudienceMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BroadcastAudienceMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAudienceMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.BroadcastAudienceMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAudienceMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.BroadcastAudienceMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBroadcastAudienceMapping>
+        }
+        groupBy: {
+          args: Prisma.BroadcastAudienceMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BroadcastAudienceMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BroadcastAudienceMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BroadcastAudienceMappingCountAggregateOutputType> | number
+        }
+      }
+    }
+    BroadcastAttachment: {
+      payload: Prisma.$BroadcastAttachmentPayload<ExtArgs>
+      fields: Prisma.BroadcastAttachmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BroadcastAttachmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAttachmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BroadcastAttachmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAttachmentPayload>
+        }
+        findFirst: {
+          args: Prisma.BroadcastAttachmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAttachmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BroadcastAttachmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAttachmentPayload>
+        }
+        findMany: {
+          args: Prisma.BroadcastAttachmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAttachmentPayload>[]
+        }
+        create: {
+          args: Prisma.BroadcastAttachmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAttachmentPayload>
+        }
+        createMany: {
+          args: Prisma.BroadcastAttachmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BroadcastAttachmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAttachmentPayload>[]
+        }
+        delete: {
+          args: Prisma.BroadcastAttachmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAttachmentPayload>
+        }
+        update: {
+          args: Prisma.BroadcastAttachmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAttachmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.BroadcastAttachmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BroadcastAttachmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BroadcastAttachmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAttachmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.BroadcastAttachmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastAttachmentPayload>
+        }
+        aggregate: {
+          args: Prisma.BroadcastAttachmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBroadcastAttachment>
+        }
+        groupBy: {
+          args: Prisma.BroadcastAttachmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BroadcastAttachmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BroadcastAttachmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BroadcastAttachmentCountAggregateOutputType> | number
+        }
+      }
+    }
+    BroadcastRead: {
+      payload: Prisma.$BroadcastReadPayload<ExtArgs>
+      fields: Prisma.BroadcastReadFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BroadcastReadFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastReadPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BroadcastReadFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastReadPayload>
+        }
+        findFirst: {
+          args: Prisma.BroadcastReadFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastReadPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BroadcastReadFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastReadPayload>
+        }
+        findMany: {
+          args: Prisma.BroadcastReadFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastReadPayload>[]
+        }
+        create: {
+          args: Prisma.BroadcastReadCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastReadPayload>
+        }
+        createMany: {
+          args: Prisma.BroadcastReadCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BroadcastReadCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastReadPayload>[]
+        }
+        delete: {
+          args: Prisma.BroadcastReadDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastReadPayload>
+        }
+        update: {
+          args: Prisma.BroadcastReadUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastReadPayload>
+        }
+        deleteMany: {
+          args: Prisma.BroadcastReadDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BroadcastReadUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BroadcastReadUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastReadPayload>[]
+        }
+        upsert: {
+          args: Prisma.BroadcastReadUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastReadPayload>
+        }
+        aggregate: {
+          args: Prisma.BroadcastReadAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBroadcastRead>
+        }
+        groupBy: {
+          args: Prisma.BroadcastReadGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BroadcastReadGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BroadcastReadCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BroadcastReadCountAggregateOutputType> | number
+        }
+      }
+    }
+    NotificationQueue: {
+      payload: Prisma.$NotificationQueuePayload<ExtArgs>
+      fields: Prisma.NotificationQueueFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.NotificationQueueFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationQueuePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NotificationQueueFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationQueuePayload>
+        }
+        findFirst: {
+          args: Prisma.NotificationQueueFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationQueuePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.NotificationQueueFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationQueuePayload>
+        }
+        findMany: {
+          args: Prisma.NotificationQueueFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationQueuePayload>[]
+        }
+        create: {
+          args: Prisma.NotificationQueueCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationQueuePayload>
+        }
+        createMany: {
+          args: Prisma.NotificationQueueCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.NotificationQueueCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationQueuePayload>[]
+        }
+        delete: {
+          args: Prisma.NotificationQueueDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationQueuePayload>
+        }
+        update: {
+          args: Prisma.NotificationQueueUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationQueuePayload>
+        }
+        deleteMany: {
+          args: Prisma.NotificationQueueDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.NotificationQueueUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.NotificationQueueUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationQueuePayload>[]
+        }
+        upsert: {
+          args: Prisma.NotificationQueueUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationQueuePayload>
+        }
+        aggregate: {
+          args: Prisma.NotificationQueueAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateNotificationQueue>
+        }
+        groupBy: {
+          args: Prisma.NotificationQueueGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NotificationQueueGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.NotificationQueueCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NotificationQueueCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -14397,6 +14772,7 @@ export const LeadSpecificationsMasterScalarFieldEnum = {
   lead_id: 'lead_id',
   name: 'name',
   lights_remark: 'lights_remark',
+  item_code_id: 'item_code_id',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -16976,6 +17352,88 @@ export const CompanyVendorAddressScalarFieldEnum = {
 export type CompanyVendorAddressScalarFieldEnum = (typeof CompanyVendorAddressScalarFieldEnum)[keyof typeof CompanyVendorAddressScalarFieldEnum]
 
 
+export const BroadcastMasterScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  status: 'status',
+  type: 'type',
+  publish_at: 'publish_at',
+  vendor_id: 'vendor_id',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type BroadcastMasterScalarFieldEnum = (typeof BroadcastMasterScalarFieldEnum)[keyof typeof BroadcastMasterScalarFieldEnum]
+
+
+export const BroadcastAudienceMappingScalarFieldEnum = {
+  id: 'id',
+  broadcast_id: 'broadcast_id',
+  audience_type: 'audience_type',
+  target_id: 'target_id',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type BroadcastAudienceMappingScalarFieldEnum = (typeof BroadcastAudienceMappingScalarFieldEnum)[keyof typeof BroadcastAudienceMappingScalarFieldEnum]
+
+
+export const BroadcastAttachmentScalarFieldEnum = {
+  id: 'id',
+  broadcast_id: 'broadcast_id',
+  attachment_type: 'attachment_type',
+  title: 'title',
+  file_name: 'file_name',
+  original_file_name: 'original_file_name',
+  file_url: 'file_url',
+  file_type: 'file_type',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type BroadcastAttachmentScalarFieldEnum = (typeof BroadcastAttachmentScalarFieldEnum)[keyof typeof BroadcastAttachmentScalarFieldEnum]
+
+
+export const BroadcastReadScalarFieldEnum = {
+  id: 'id',
+  broadcast_id: 'broadcast_id',
+  user_id: 'user_id',
+  read_at: 'read_at',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type BroadcastReadScalarFieldEnum = (typeof BroadcastReadScalarFieldEnum)[keyof typeof BroadcastReadScalarFieldEnum]
+
+
+export const NotificationQueueScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  body: 'body',
+  redirect_url: 'redirect_url',
+  image: 'image',
+  notification_source: 'notification_source',
+  notification_status: 'notification_status',
+  send_at: 'send_at',
+  request_body: 'request_body',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type NotificationQueueScalarFieldEnum = (typeof NotificationQueueScalarFieldEnum)[keyof typeof NotificationQueueScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -17988,6 +18446,90 @@ export type EnumAdditionalCostCalculationTypeFieldRefInput<$PrismaModel> = Field
 export type ListEnumAdditionalCostCalculationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AdditionalCostCalculationType[]'>
     
 
+
+/**
+ * Reference to a field of type 'BroadcastStatus'
+ */
+export type EnumBroadcastStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BroadcastStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'BroadcastStatus[]'
+ */
+export type ListEnumBroadcastStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BroadcastStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BroadcastType'
+ */
+export type EnumBroadcastTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BroadcastType'>
+    
+
+
+/**
+ * Reference to a field of type 'BroadcastType[]'
+ */
+export type ListEnumBroadcastTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BroadcastType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AudienceType'
+ */
+export type EnumAudienceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AudienceType'>
+    
+
+
+/**
+ * Reference to a field of type 'AudienceType[]'
+ */
+export type ListEnumAudienceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AudienceType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AttachmentType'
+ */
+export type EnumAttachmentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AttachmentType'>
+    
+
+
+/**
+ * Reference to a field of type 'AttachmentType[]'
+ */
+export type ListEnumAttachmentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AttachmentType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'NotificationSource'
+ */
+export type EnumNotificationSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationSource'>
+    
+
+
+/**
+ * Reference to a field of type 'NotificationSource[]'
+ */
+export type ListEnumNotificationSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationSource[]'>
+    
+
+
+/**
+ * Reference to a field of type 'NotificationStatus'
+ */
+export type EnumNotificationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'NotificationStatus[]'
+ */
+export type ListEnumNotificationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationStatus[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -18263,6 +18805,11 @@ export type GlobalOmitConfig = {
   companyVendorDocumentMaster?: Prisma.CompanyVendorDocumentMasterOmit
   companyVendorDocumentMapping?: Prisma.CompanyVendorDocumentMappingOmit
   companyVendorAddress?: Prisma.CompanyVendorAddressOmit
+  broadcastMaster?: Prisma.BroadcastMasterOmit
+  broadcastAudienceMapping?: Prisma.BroadcastAudienceMappingOmit
+  broadcastAttachment?: Prisma.BroadcastAttachmentOmit
+  broadcastRead?: Prisma.BroadcastReadOmit
+  notificationQueue?: Prisma.NotificationQueueOmit
 }
 
 /* Types for Logging */

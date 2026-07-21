@@ -293,7 +293,12 @@ export const NotificationService = {
   },
 
   async markRead(notificationId: number, userId: number) {
-    return prisma.notification.updateMany({
+    const notif = await prisma.notification.findUnique({
+      where: { id: notificationId },
+      select: { entity_type: true, entity_id: true, user_id: true },
+    });
+
+    const result = await prisma.notification.updateMany({
       where: {
         id: notificationId,
         user_id: userId,
@@ -303,10 +308,47 @@ export const NotificationService = {
         read_at: new Date(),
       },
     });
+
+    if (notif && notif.entity_type === "broadcast" && notif.entity_id) {
+      try {
+        const userRec = await prisma.userMaster.findUnique({
+          where: { id: userId },
+          select: { user_type: { select: { user_type: true } } },
+        });
+        const roleName = userRec?.user_type?.user_type?.toLowerCase();
+        const isSuperAdmin = roleName === "super-admin" || roleName === "superadmin" || roleName === "super_admin";
+
+        if (!isSuperAdmin) {
+          await prisma.broadcastRead.upsert({
+            where: { broadcast_id_user_id: { broadcast_id: notif.entity_id, user_id: userId } },
+            update: { read_at: new Date(), updated_by: userId, updated_at: new Date() },
+            create: {
+              broadcast_id: notif.entity_id,
+              user_id: userId,
+              created_by: userId,
+              updated_by: userId,
+            },
+          });
+        }
+      } catch (err) {
+        // Non-fatal
+      }
+    }
+
+    return result;
   },
 
   async markReadBulk(notificationIds: number[], userId: number) {
-    return prisma.notification.updateMany({
+    const broadcastNotifs = await prisma.notification.findMany({
+      where: {
+        id: { in: notificationIds },
+        user_id: userId,
+        entity_type: "broadcast",
+      },
+      select: { entity_id: true },
+    });
+
+    const result = await prisma.notification.updateMany({
       where: {
         id: { in: notificationIds },
         user_id: userId,
@@ -316,6 +358,36 @@ export const NotificationService = {
         read_at: new Date(),
       },
     });
+
+    try {
+      const userRec = await prisma.userMaster.findUnique({
+        where: { id: userId },
+        select: { user_type: { select: { user_type: true } } },
+      });
+      const roleName = userRec?.user_type?.user_type?.toLowerCase();
+      const isSuperAdmin = roleName === "super-admin" || roleName === "superadmin" || roleName === "super_admin";
+
+      if (!isSuperAdmin) {
+        for (const notif of broadcastNotifs) {
+          if (notif.entity_id) {
+            await prisma.broadcastRead.upsert({
+              where: { broadcast_id_user_id: { broadcast_id: notif.entity_id, user_id: userId } },
+              update: { read_at: new Date(), updated_by: userId, updated_at: new Date() },
+              create: {
+                broadcast_id: notif.entity_id,
+                user_id: userId,
+                created_by: userId,
+                updated_by: userId,
+              },
+            });
+          }
+        }
+      }
+    } catch (err) {
+      // Non-fatal
+    }
+
+    return result;
   },
 
   async registerPushToken(input: RegisterPushTokenInput) {

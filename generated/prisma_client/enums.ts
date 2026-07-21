@@ -585,3 +585,54 @@ export const PaymentScheduleAction = {
 } as const
 
 export type PaymentScheduleAction = (typeof PaymentScheduleAction)[keyof typeof PaymentScheduleAction]
+
+
+export const BroadcastType = {
+  CIRCULAR: 'CIRCULAR',
+  DOCUMENT: 'DOCUMENT'
+} as const
+
+export type BroadcastType = (typeof BroadcastType)[keyof typeof BroadcastType]
+
+
+export const BroadcastStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+} as const
+
+export type BroadcastStatus = (typeof BroadcastStatus)[keyof typeof BroadcastStatus]
+
+
+export const AudienceType = {
+  ALL: 'ALL',
+  ROLE: 'ROLE',
+  USER: 'USER',
+  FRANCHISE: 'FRANCHISE'
+} as const
+
+export type AudienceType = (typeof AudienceType)[keyof typeof AudienceType]
+
+
+export const AttachmentType = {
+  FILE: 'FILE',
+  YOUTUBE: 'YOUTUBE'
+} as const
+
+export type AttachmentType = (typeof AttachmentType)[keyof typeof AttachmentType]
+
+
+export const NotificationSource = {
+  IN_APP: 'IN_APP',
+  EMAIL: 'EMAIL'
+} as const
+
+export type NotificationSource = (typeof NotificationSource)[keyof typeof NotificationSource]
+
+
+export const NotificationStatus = {
+  PENDING: 'PENDING',
+  SENT: 'SENT',
+  FAILED: 'FAILED'
+} as const
+
+export type NotificationStatus = (typeof NotificationStatus)[keyof typeof NotificationStatus]

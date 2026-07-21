@@ -230,7 +230,12 @@ export const ModelName = {
   CompanyVendorBankAccount: 'CompanyVendorBankAccount',
   CompanyVendorDocumentMaster: 'CompanyVendorDocumentMaster',
   CompanyVendorDocumentMapping: 'CompanyVendorDocumentMapping',
-  CompanyVendorAddress: 'CompanyVendorAddress'
+  CompanyVendorAddress: 'CompanyVendorAddress',
+  BroadcastMaster: 'BroadcastMaster',
+  BroadcastAudienceMapping: 'BroadcastAudienceMapping',
+  BroadcastAttachment: 'BroadcastAttachment',
+  BroadcastRead: 'BroadcastRead',
+  NotificationQueue: 'NotificationQueue'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -704,6 +709,7 @@ export const LeadSpecificationsMasterScalarFieldEnum = {
   lead_id: 'lead_id',
   name: 'name',
   lights_remark: 'lights_remark',
+  item_code_id: 'item_code_id',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -3281,6 +3287,88 @@ export const CompanyVendorAddressScalarFieldEnum = {
 } as const
 
 export type CompanyVendorAddressScalarFieldEnum = (typeof CompanyVendorAddressScalarFieldEnum)[keyof typeof CompanyVendorAddressScalarFieldEnum]
+
+
+export const BroadcastMasterScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  status: 'status',
+  type: 'type',
+  publish_at: 'publish_at',
+  vendor_id: 'vendor_id',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type BroadcastMasterScalarFieldEnum = (typeof BroadcastMasterScalarFieldEnum)[keyof typeof BroadcastMasterScalarFieldEnum]
+
+
+export const BroadcastAudienceMappingScalarFieldEnum = {
+  id: 'id',
+  broadcast_id: 'broadcast_id',
+  audience_type: 'audience_type',
+  target_id: 'target_id',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type BroadcastAudienceMappingScalarFieldEnum = (typeof BroadcastAudienceMappingScalarFieldEnum)[keyof typeof BroadcastAudienceMappingScalarFieldEnum]
+
+
+export const BroadcastAttachmentScalarFieldEnum = {
+  id: 'id',
+  broadcast_id: 'broadcast_id',
+  attachment_type: 'attachment_type',
+  title: 'title',
+  file_name: 'file_name',
+  original_file_name: 'original_file_name',
+  file_url: 'file_url',
+  file_type: 'file_type',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type BroadcastAttachmentScalarFieldEnum = (typeof BroadcastAttachmentScalarFieldEnum)[keyof typeof BroadcastAttachmentScalarFieldEnum]
+
+
+export const BroadcastReadScalarFieldEnum = {
+  id: 'id',
+  broadcast_id: 'broadcast_id',
+  user_id: 'user_id',
+  read_at: 'read_at',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type BroadcastReadScalarFieldEnum = (typeof BroadcastReadScalarFieldEnum)[keyof typeof BroadcastReadScalarFieldEnum]
+
+
+export const NotificationQueueScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  body: 'body',
+  redirect_url: 'redirect_url',
+  image: 'image',
+  notification_source: 'notification_source',
+  notification_status: 'notification_status',
+  send_at: 'send_at',
+  request_body: 'request_body',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type NotificationQueueScalarFieldEnum = (typeof NotificationQueueScalarFieldEnum)[keyof typeof NotificationQueueScalarFieldEnum]
 
 
 export const SortOrder = {
