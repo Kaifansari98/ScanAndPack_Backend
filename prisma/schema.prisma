@@ -847,18 +847,21 @@ model LeadSpecificationsMaster {
   lead_id       Int
   name          String
   lights_remark String?
+  item_code_id  Int?
   created_at    DateTime @default(now())
   created_by    Int
 
   vendor                  VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   lead                    LeadMaster                   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   createdBy               UserMaster                   @relation("LeadSpecificationsCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  productItemCode         ProductItemCode?             @relation(fields: [item_code_id], references: [id], onDelete: SetNull)
   lightCarcasUnitMappings LeadLightCarcasUnitMapping[]
   otherAppliancesMappings LeadOtherAppliancesMapping[]
 
   @@index([vendor_id])
   @@index([lead_id])
   @@index([created_by])
+  @@index([item_code_id])
 }
 
 model LeadCarcassMaterialMapping {
@@ -1473,6 +1476,7 @@ model ProductItemCode {
   productStructure              ProductStructure               @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
   subProductStructure           ProductSubStructure?           @relation(fields: [sub_product_structure_id], references: [id], onDelete: SetNull)
   vendor                        VendorMaster                   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  leadSpecifications            LeadSpecificationsMaster[]
 
   @@unique([vendor_id, item_code, description, specification])
   @@index([vendor_id])

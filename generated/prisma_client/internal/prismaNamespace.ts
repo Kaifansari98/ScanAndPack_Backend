@@ -14397,6 +14397,7 @@ export const LeadSpecificationsMasterScalarFieldEnum = {
   lead_id: 'lead_id',
   name: 'name',
   lights_remark: 'lights_remark',
+  item_code_id: 'item_code_id',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const

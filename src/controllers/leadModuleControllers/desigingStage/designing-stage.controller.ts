@@ -3228,6 +3228,11 @@ export class DesigingStageController {
           vendor_id: Number(vendorId),
           lead_id: Number(leadId),
         },
+        include: {
+          productItemCode: {
+            select: { id: true, item_code: true },
+          },
+        },
         orderBy: { created_at: "asc" },
       });
 
@@ -3249,7 +3254,7 @@ export class DesigingStageController {
   public static async createLeadSpecification(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
-      const { created_by } = req.body;
+      const { created_by, item_code_id } = req.body;
 
       if (!vendorId || !leadId || !created_by) {
         return res.status(400).json({
@@ -3267,6 +3272,18 @@ export class DesigingStageController {
           throw new Error("Lead not found or access denied");
         }
 
+        let existingItemCode: { id: number; item_code: string } | null = null;
+        if (item_code_id) {
+          existingItemCode = await tx.productItemCode.findFirst({
+            where: { id: Number(item_code_id), vendor_id: Number(vendorId) },
+            select: { id: true, item_code: true },
+          });
+
+          if (!existingItemCode) {
+            throw new Error("Item code not found or access denied");
+          }
+        }
+
         const existingCount = await tx.leadSpecificationsMaster.count({
           where: { vendor_id: Number(vendorId), lead_id: Number(leadId) },
         });
@@ -3282,7 +3299,9 @@ export class DesigingStageController {
             "Client",
         );
         const itemGroupSegment = sanitizeFilename(
-          leadProductMapping?.productType?.type || "General",
+          existingItemCode?.item_code ||
+            leadProductMapping?.productType?.type ||
+            "General",
         );
         const now = new Date();
         const dateSegment = [
@@ -3299,6 +3318,12 @@ export class DesigingStageController {
             lead_id: Number(leadId),
             name: specificationName,
             created_by: Number(created_by),
+            item_code_id: item_code_id ? Number(item_code_id) : undefined,
+          },
+          include: {
+            productItemCode: {
+              select: { id: true, item_code: true },
+            },
           },
         });
       });
