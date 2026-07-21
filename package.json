@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js",
+    "build": "swc src -d dist && swc generated -d dist/generated --strip-leading-paths",
+    "type-check": "tsc --noEmit",
+    "start": "node dist/src/server.js",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,6 +17,8 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@swc/cli": "^0.8.1",
+    "@swc/core": "^1.15.46",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/express-winston": "^4.0.2",
@@ -71,7 +74,13 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "@prisma/client"
+      "@firebase/util",
+      "@prisma/client",
+      "@prisma/engines",
+      "@swc/core",
+      "prisma",
+      "protobufjs",
+      "puppeteer"
     ],
     "overrides": {
       "lodash@>=4.0.0 <=4.17.22": ">=4.17.23",
