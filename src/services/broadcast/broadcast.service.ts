@@ -21,6 +21,20 @@ async function getSuperAdminUserTypeIds(): Promise<number[]> {
   }
 }
 
+function stripHtmlAndEntitiesBackend(html: string): string {
+  if (!html) return "";
+  return html
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 async function isSuperAdminUser(userId: number): Promise<boolean> {
   try {
     const superAdminTypeIds = await getSuperAdminUserTypeIds();
@@ -75,7 +89,7 @@ export class BroadcastService {
         await tx.notificationQueue.create({
           data: {
             title: `New Announcement: ${title}`,
-            body: content.replace(/<[^>]*>/g, "").substring(0, 100),
+            body: stripHtmlAndEntitiesBackend(content).substring(0, 100),
             notification_source: "IN_APP",
             notification_status: "PENDING",
             send_at: publishAt ? new Date(publishAt) : new Date(),
@@ -213,6 +227,7 @@ export class BroadcastService {
 
     const dataWithCounts = enrichedData.map((b: any) => ({
       ...b,
+      isRead: Array.isArray(b.readLogs) ? b.readLogs.length > 0 : false,
       readersCount: readCountMap.get(b.id) ?? 0,
       sentCount: sentCountMap.get(b.id) ?? 0,
     }));

@@ -139,7 +139,10 @@ export class BroadcastRepository {
     const [data, total] = await Promise.all([
       prisma.broadcastMaster.findMany({
         where,
-        include: this.defaultInclude,
+        include: {
+          ...this.defaultInclude,
+          ...(audience ? { readLogs: { where: { user_id: audience.userId }, select: { id: true } } } : {}),
+        },
         orderBy: { created_at: "desc" },
         skip,
         take: limit,
