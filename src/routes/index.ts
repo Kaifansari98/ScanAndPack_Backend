@@ -61,6 +61,7 @@ import purchaseOrderRoutes from "./purchaseOrderRoutes/purchaseOrder.routes";
 import grnRoutes from "./grnRoutes/grn.routes";
 import architectureMasterRoutes from "./architectureMasterRoutes/architectureMaster.route";
 import paymentRequisitionRoutes from "./inventoryRoutes/payment-requisitions.routes";
+import broadcastRouter from "./broadcast/broadcast.routes";
 const router = Router();
 
 router.use("/dashboard", DashboardRouter);
@@ -140,5 +141,7 @@ router.use(
 );
 
 router.use("/inventory/payment-requisitions", paymentRequisitionRoutes);
+
+router.use("/broadcasts", broadcastRouter);
 
 export { router };
