@@ -11,6 +11,7 @@ import scanItemRoutes from "./sapRoutes/scanAndPack.routes";
 import authRoutes from "./auth/auth.routes";
 import vendorTokenRoutes from "./vendorRoutes/vendorToken.routes";
 import clientRoutes from "./clientRoutes/client.routes";
+import clientTypeRoutes from "./clientTypeRoutes/clientType.routes";
 import Statsrouter from "./generic/leadStats.routes";
 
 // Leads Routes
@@ -80,6 +81,7 @@ router.use("/boxes", boxRoutes);
 router.use("/scan-items", scanItemRoutes);
 router.use("/auth", authRoutes);
 router.use("/clients", clientRoutes);
+router.use("/client-types", clientTypeRoutes);
 router.use("/leads", leadModuleRoutes);
 router.use("/leads/initial-site-measurement", paymentUploadRoutes);
 router.use("/leads/designing-stage", DesigningStageRouter);

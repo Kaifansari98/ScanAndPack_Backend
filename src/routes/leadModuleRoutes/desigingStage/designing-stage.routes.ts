@@ -198,6 +198,18 @@ DesigningStageRouter.get(
   (req, res) => DesigingStageController.getLeadSpecifications(req, res),
 );
 
+// POST /api/leads/designing-stage/vendor/:vendorId/lead/:leadId/specifications
+DesigningStageRouter.post(
+  "/vendor/:vendorId/lead/:leadId/specifications",
+  (req, res) => DesigingStageController.createLeadSpecification(req, res),
+);
+
+// PUT /api/leads/designing-stage/specifications/:specsId/lights-remark
+DesigningStageRouter.put(
+  "/specifications/:specsId/lights-remark",
+  (req, res) => DesigingStageController.updateLeadSpecificationLightsRemark(req, res),
+);
+
 DesigningStageRouter.get(
   "/vendor/:vendorId/lead/:leadId/carcass-material-mappings",
   (req, res) => DesigingStageController.getLeadCarcassMaterialMappings(req, res),
@@ -226,6 +238,26 @@ DesigningStageRouter.get(
 DesigningStageRouter.post(
   "/hardware-mappings",
   (req, res) => DesigingStageController.upsertLeadHardwareMapping(req, res),
+);
+
+DesigningStageRouter.get(
+  "/vendor/:vendorId/lead/:leadId/specs/:specsId/light-carcas-unit-mappings",
+  (req, res) => DesigingStageController.getLeadLightCarcasUnitMappings(req, res),
+);
+
+DesigningStageRouter.post(
+  "/light-carcas-unit-mappings",
+  (req, res) => DesigingStageController.upsertLeadLightCarcasUnitMapping(req, res),
+);
+
+DesigningStageRouter.get(
+  "/vendor/:vendorId/lead/:leadId/specs/:specsId/other-appliances-mappings",
+  (req, res) => DesigingStageController.getLeadOtherAppliancesMappings(req, res),
+);
+
+DesigningStageRouter.post(
+  "/other-appliances-mappings",
+  (req, res) => DesigingStageController.upsertLeadOtherAppliancesMapping(req, res),
 );
 
 // ─── CHS Selection Type Mapping ───────────────────────────────────────────────

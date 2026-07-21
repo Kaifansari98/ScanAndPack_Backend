@@ -40,6 +40,13 @@ model VendorMaster {
   createdAt                              DateTime @default(now())
   updatedAt                              DateTime @updatedAt
   state_id                               Int?
+  gst_no                                 String?
+  toll_free_no                           String?
+  website_link                           String?
+  tag_line                               String?
+  address                                String?
+  pincode                                String?
+  city                                   String?
 
   accounts                            AccountMaster[]
   boxes                               BoxMaster[]
@@ -67,6 +74,11 @@ model VendorMaster {
   leadCarcassMaterialMappings         LeadCarcassMaterialMapping[]
   leadShutterMaterialMappings         LeadShutterMaterialMapping[]
   leadHardwareMappings                LeadHardwareMapping[]
+  lightCarcasTypes                    LightCarcasTypeMaster[]
+  lightCarcasUnits                    LightCarcasUnitMaster[]
+  leadLightCarcasUnitMappings         LeadLightCarcasUnitMapping[]
+  otherAppliances                     OtherAppliancesMaster[]
+  leadOtherAppliancesMappings         LeadOtherAppliancesMapping[]
   handleTypes                         HandleTypeMaster[]
   timelineRules                       TimelineRule[]
   leadActivityStatusLog               LeadActivityStatusLog[]
@@ -166,6 +178,10 @@ model VendorMaster {
   itemGroups                 ItemGroupMaster[]
   productSupplierMappings    ProductSupplierMapping[]
   popaymentScheduleHistories POPaymentScheduleHistory[]
+  clientTypes                ClientTypeMaster[]
+  clients                    ClientMaster[]
+  box_info_fields            ProjectBoxInfoField[]
+  box_info_values            BoxInfoFieldValue[]
   broadcasts                 BroadcastMaster[]          @relation("VendorBroadcasts")
 
   @@index([state_id])
@@ -360,10 +376,12 @@ model UserMaster {
   poItemsDeleted                             PurchaseOrderItem[]                    @relation("POItemDeletedBy")
   stockHistories                             ProductStockHistory[]                  @relation("StockHistoryUser")
   architechuremasters                        Architechuremaster[]
-  leadSpecificationsCreated                  LeadSpecificationsMaster[]             @relation("LeadSpecificationsCreatedBy")
-  leadCarcassMaterialMappingsCreated         LeadCarcassMaterialMapping[]           @relation("LeadCarcassMaterialMappingCreatedBy")
-  leadShutterMaterialMappingsCreated         LeadShutterMaterialMapping[]           @relation("LeadShutterMaterialMappingCreatedBy")
-  leadHardwareMappingsCreated                LeadHardwareMapping[]                  @relation("LeadHardwareMappingCreatedBy")
+  leadSpecificationsCreated                  LeadSpecificationsMaster[]                     @relation("LeadSpecificationsCreatedBy")
+  leadCarcassMaterialMappingsCreated         LeadCarcassMaterialMapping[]                   @relation("LeadCarcassMaterialMappingCreatedBy")
+  leadShutterMaterialMappingsCreated         LeadShutterMaterialMapping[]                   @relation("LeadShutterMaterialMappingCreatedBy")
+  leadHardwareMappingsCreated                LeadHardwareMapping[]                          @relation("LeadHardwareMappingCreatedBy")
+  leadLightCarcasUnitMappingsCreated         LeadLightCarcasUnitMapping[]           @relation("LeadLightCarcasUnitMappingCreatedBy")
+  leadOtherAppliancesMappingsCreated         LeadOtherAppliancesMapping[]           @relation("LeadOtherAppliancesMappingCreatedBy")
   poPaymentScheduleHistories                 POPaymentScheduleHistory[]
   boxesPackedBy                              BoxMaster[]                            @relation("BoxPackedByUser")
   broadcastsCreated                          BroadcastMaster[]                      @relation("BroadcastCreatedBy")
@@ -439,22 +457,23 @@ model UserPrivilegeMapping {
 }
 
 model ProjectMaster {
-  id                Int       @id @default(autoincrement())
+  id                Int         @id @default(autoincrement())
   project_name      String
   vendor_id         Int
   client_id         Int?
   created_by        Int
-  project_status    String    @default("Initiated")
-  created_at        DateTime  @default(now())
+  project_status    String      @default("Initiated")
+  created_at        DateTime    @default(now())
   unique_project_id String
-  is_grouping       Boolean   @default(false)
+  is_grouping       Boolean     @default(false)
   lead_id           Int?
   order_no          String?
   client_name       String?
   client_address    String?
   client_contact_no String?
+  packing_type      PackingType @default(DEFAULT)
   updated_by        Int?
-  updated_at        DateTime? @updatedAt
+  updated_at        DateTime?   @updatedAt
 
   track_trace_status    String                  @default("Not Started")
   track_started_at      DateTime?
@@ -470,6 +489,8 @@ model ProjectMaster {
   lead                  LeadMaster?             @relation(fields: [lead_id], references: [id])
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   scanItems             ScanAndPackItem[]
+  box_info_fields       ProjectBoxInfoField[]
+  box_info_values       BoxInfoFieldValue[]
 }
 
 model ProjectDetails {
@@ -540,6 +561,67 @@ model BoxMaster {
   factoryOutByUser      UserMaster?             @relation("BoxFactoryOutBy", fields: [factory_out_by], references: [id])
   siteInByUser          UserMaster?             @relation("BoxSiteInBy", fields: [site_in_by], references: [id])
   packedByUser          UserMaster?             @relation("BoxPackedByUser", fields: [packed_by], references: [id])
+  box_info_values       BoxInfoFieldValue[]
+}
+
+model ProjectBoxInfoField {
+  id         Int @id @default(autoincrement())
+  project_id Int
+  vendor_id  Int
+
+  field_label String
+  field_key   String
+  field_type  BoxInfoFieldType @default(TEXT)
+
+  is_required Boolean @default(false)
+  sort_order  Int     @default(0)
+  active      Boolean @default(true)
+
+  created_by Int?
+  updated_by Int?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  project ProjectMaster @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor  VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  values BoxInfoFieldValue[]
+
+  @@index([project_id, vendor_id])
+}
+
+model BoxInfoFieldValue {
+  id Int @id @default(autoincrement())
+
+  box_id     Int
+  project_id Int
+  vendor_id  Int
+  field_id   Int
+
+  field_value String?
+
+  created_by Int?
+  updated_by Int?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  box     BoxMaster           @relation(fields: [box_id], references: [id], onDelete: Cascade)
+  project ProjectMaster       @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor  VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  field   ProjectBoxInfoField @relation(fields: [field_id], references: [id], onDelete: Cascade)
+
+  @@unique([box_id, field_id])
+  @@index([box_id])
+  @@index([project_id, vendor_id])
+}
+
+enum BoxInfoFieldType {
+  TEXT
+  NUMBER
+  DATE
+  TEXTAREA
 }
 
 model ScanAndPackItem {
@@ -573,21 +655,47 @@ model VendorTokens {
 }
 
 model ClientMaster {
-  id          Int     @id @default(autoincrement())
-  name        String
-  contact     String
-  alt_contact String?
-  email       String
-  address     String
-  city        String
-  state       String
-  country     String
-  pincode     String
-  clientCode  String
+  id             Int      @id @default(autoincrement())
+  vendor_id      Int
+  name           String
+  contact        String
+  alt_contact    String?
+  email          String
+  address        String
+  city           String
+  state          String
+  country        String
+  pincode        String
+  clientCode     String
+  gst_number     String?
+  company_name   String?
+  client_type_id Int?
+  is_active      Boolean  @default(true)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
 
-  ledgers   Ledger[]
-  projects  ProjectMaster[]
-  scanItems ScanAndPackItem[]
+  vendor     VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  clientType ClientTypeMaster? @relation(fields: [client_type_id], references: [id], onDelete: SetNull)
+  ledgers    Ledger[]
+  projects   ProjectMaster[]
+  scanItems  ScanAndPackItem[]
+  leads      LeadMaster[]
+
+  @@index([vendor_id])
+  @@index([client_type_id])
+}
+
+model ClientTypeMaster {
+  id         Int      @id @default(autoincrement())
+  vendor_id  Int
+  type       String
+  is_active  Boolean  @default(true)
+  created_at DateTime @default(now())
+
+  vendor  VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  clients ClientMaster[]
+
+  @@index([vendor_id])
 }
 
 model LeadMaster {
@@ -601,6 +709,7 @@ model LeadMaster {
   site_address                                String?
   site_type_id                                Int?
   source_id                                   Int?
+  refered_by                                  String?
   archetech_name                              String?
   archetech_number                            String?
   architect_id                                Int?
@@ -613,6 +722,7 @@ model LeadMaster {
   assign_to                                   Int?
   assigned_by                                 Int?
   account_id                                  Int?
+  client_id                                   Int?
   deleted_at                                  DateTime?
   deleted_by                                  Int?
   is_deleted                                  Boolean                               @default(false)
@@ -677,6 +787,7 @@ model LeadMaster {
   franchise_id                                Int?
   order_login_prod_files_remark               String?
   total_required_chs_manufacturing_days       Int?
+  order_number                                String?
   is_blocked                                  Boolean                               @default(false)
   lead_blocked_at                             DateTime?
   cutList                                     CutList[]
@@ -704,7 +815,10 @@ model LeadMaster {
   carcassMaterialMappings                     LeadCarcassMaterialMapping[]
   shutterMaterialMappings                     LeadShutterMaterialMapping[]
   hardwareMappings                            LeadHardwareMapping[]
+  lightCarcasUnitMappings                     LeadLightCarcasUnitMapping[]
+  otherAppliancesMappings                     LeadOtherAppliancesMapping[]
   account                                     AccountMaster?                        @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  client                                      ClientMaster?                         @relation(fields: [client_id], references: [id], onDelete: SetNull)
   assignedTo                                  UserMaster?                           @relation("LeadAssignedTo", fields: [assign_to], references: [id])
   assignedBy                                  UserMaster?                           @relation("LeadAssignedBy", fields: [assigned_by], references: [id])
   createdBy                                   UserMaster                            @relation("LeadCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
@@ -740,20 +854,26 @@ model LeadMaster {
 }
 
 model LeadSpecificationsMaster {
-  id         Int      @id @default(autoincrement())
-  vendor_id  Int
-  lead_id    Int
-  name       String
-  created_at DateTime @default(now())
-  created_by Int
+  id            Int      @id @default(autoincrement())
+  vendor_id     Int
+  lead_id       Int
+  name          String
+  lights_remark String?
+  item_code_id  Int?
+  created_at    DateTime @default(now())
+  created_by    Int
 
-  vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  lead      LeadMaster   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  createdBy UserMaster   @relation("LeadSpecificationsCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  vendor                     VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead                       LeadMaster                   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  createdBy               UserMaster                     @relation("LeadSpecificationsCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  productItemCode         ProductItemCode?             @relation(fields: [item_code_id], references: [id], onDelete: SetNull)
+  lightCarcasUnitMappings LeadLightCarcasUnitMapping[]
+  otherAppliancesMappings LeadOtherAppliancesMapping[]
 
   @@index([vendor_id])
   @@index([lead_id])
   @@index([created_by])
+  @@index([item_code_id])
 }
 
 model LeadCarcassMaterialMapping {
@@ -1085,6 +1205,93 @@ model LeadHardwareMapping {
   @@index([created_by])
 }
 
+model LightCarcasTypeMaster {
+  id         Int      @id @default(autoincrement())
+  vendor_id  Int
+  type       String
+  is_active  Boolean  @default(true)
+  created_at DateTime @default(now())
+
+  vendor VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  units  LightCarcasUnitMaster[]
+
+  @@index([vendor_id])
+}
+
+model LightCarcasUnitMaster {
+  id                   Int      @id @default(autoincrement())
+  vendor_id            Int
+  type                 String
+  light_carcas_type_id Int
+  is_active            Boolean  @default(true)
+  created_at           DateTime @default(now())
+
+  vendor          VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lightCarcasType LightCarcasTypeMaster        @relation(fields: [light_carcas_type_id], references: [id], onDelete: Cascade)
+  leadMappings    LeadLightCarcasUnitMapping[]
+
+  @@index([vendor_id])
+  @@index([light_carcas_type_id])
+}
+
+model LeadLightCarcasUnitMapping {
+  id                          Int      @id @default(autoincrement())
+  vendor_id                   Int
+  lead_id                     Int
+  specs_id                    Int
+  light_carcas_unit_master_id Int
+  created_at                  DateTime @default(now())
+  created_by                  Int
+
+  vendor          VendorMaster             @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead            LeadMaster               @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  specification   LeadSpecificationsMaster @relation(fields: [specs_id], references: [id], onDelete: Cascade)
+  lightCarcasUnit LightCarcasUnitMaster    @relation(fields: [light_carcas_unit_master_id], references: [id], onDelete: Cascade)
+  createdBy       UserMaster               @relation("LeadLightCarcasUnitMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
+  @@index([lead_id])
+  @@index([specs_id])
+  @@index([light_carcas_unit_master_id])
+  @@index([created_by])
+}
+
+model OtherAppliancesMaster {
+  id             Int      @id @default(autoincrement())
+  vendor_id      Int
+  type           String
+  article_number String
+  description    String
+  created_at     DateTime @default(now())
+
+  vendor       VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  leadMappings LeadOtherAppliancesMapping[]
+
+  @@index([vendor_id])
+}
+
+model LeadOtherAppliancesMapping {
+  id                         Int      @id @default(autoincrement())
+  lead_id                    Int
+  vendor_id                  Int
+  specs_id                   Int
+  other_appliances_master_id Int
+  created_at                 DateTime @default(now())
+  created_by                 Int
+
+  lead            LeadMaster               @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  vendor          VendorMaster             @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  specification   LeadSpecificationsMaster @relation(fields: [specs_id], references: [id], onDelete: Cascade)
+  otherAppliances OtherAppliancesMaster    @relation(fields: [other_appliances_master_id], references: [id], onDelete: Cascade)
+  createdBy       UserMaster               @relation("LeadOtherAppliancesMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+
+  @@index([lead_id])
+  @@index([vendor_id])
+  @@index([specs_id])
+  @@index([other_appliances_master_id])
+  @@index([created_by])
+}
+
 model HandleTypeMaster {
   id                   Int                       @id @default(autoincrement())
   name                 String
@@ -1281,6 +1488,7 @@ model ProductItemCode {
   productStructure              ProductStructure               @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
   subProductStructure           ProductSubStructure?           @relation(fields: [sub_product_structure_id], references: [id], onDelete: SetNull)
   vendor                        VendorMaster                   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  leadSpecifications            LeadSpecificationsMaster[]
 
   @@unique([vendor_id, item_code, description, specification])
   @@index([vendor_id])
@@ -2662,6 +2870,7 @@ model FranchiseMaster {
   contact_email                       String?
   contact_person                      String?
   is_head_office                      Boolean                              @default(false)
+  moduled_for_b2b                     Boolean                              @default(false)
   zone_id                             Int?
   country_id                          Int?
   region_id                           Int?
@@ -3856,6 +4065,11 @@ model PurchaseOrderSupplierAdditionalCost {
   @@index([source_pi_additional_cost_id], map: "po_sup_cost_source_pi_idx")
 }
 
+enum PackingType {
+  DEFAULT
+  GROUPWISE
+}
+
 enum AdditionalCostCalculationType {
   Fixed
   Percentage
@@ -4389,7 +4603,6 @@ model CompanyVendorAddress {
 
   @@map("CompanyVendorAddress")
 }
-
 enum BroadcastType {
   CIRCULAR
   DOCUMENT

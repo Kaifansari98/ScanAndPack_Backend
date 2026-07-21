@@ -55,16 +55,36 @@ import {
 } from "../../controllers/leadModuleControllers/paymentType.controller";
 import {
   fetchAllCarcassTypes,
+  addCarcassType,
   fetchAllCarcasMaterials,
+  addCarcasMaterial,
   fetchCarcassMaterialFinishes,
+  addCarcassMaterialFinish,
+  fetchAllCarcassMaterialFinishesForVendor,
   fetchFastProductionTimelineRules,
   fetchAllHandleTypes,
   fetchAllShutterTypes,
+  addShutterType,
   fetchAllShutterMaterials,
+  addShutterMaterial,
   fetchShutterMaterialFinishes,
+  addShutterMaterialFinish,
+  fetchAllShutterMaterialFinishesForVendor,
   fetchAllCarcassLegs,
+  addCarcassLegs,
   fetchSkirtingCarcassLegs,
+  addSkirtingCarcassLegs,
+  fetchAllSkirtingCarcassLegsForVendor,
   fetchSkirtingCarcassLegsColors,
+  addSkirtingCarcassLegsColor,
+  fetchAllSkirtingCarcassLegsColorsForVendor,
+  fetchAllLightCarcasTypes,
+  addLightCarcasType,
+  fetchLightCarcasUnits,
+  addLightCarcasUnit,
+  fetchAllLightCarcasUnitsForVendor,
+  fetchAllOtherAppliances,
+  addOtherAppliances,
 } from "../../controllers/leadModuleControllers/selectionMaster.controller";
 import { fetchAllSmallOrderRequestTypes } from "../../controllers/leadModuleControllers/smallOrderRequestType.controller";
 import {
@@ -145,32 +165,79 @@ leadsRouter.patch(
   markSmallOrderRequestResolvedController,
 );
 leadsRouter.get("/get-all-carcass-types/:vendor_id", fetchAllCarcassTypes);
+leadsRouter.post("/create-carcass-type", addCarcassType);
 leadsRouter.get(
   "/get-all-carcas-materials/:vendor_id",
   fetchAllCarcasMaterials,
 );
+leadsRouter.post("/create-carcas-material", addCarcasMaterial);
 leadsRouter.get(
   "/get-carcass-material-finishes/:carcas_material_id",
   fetchCarcassMaterialFinishes,
 );
+leadsRouter.post("/create-carcass-material-finish", addCarcassMaterialFinish);
+leadsRouter.get(
+  "/get-all-carcass-material-finishes/:vendor_id",
+  fetchAllCarcassMaterialFinishesForVendor,
+);
 leadsRouter.get("/get-all-shutter-types/:vendor_id", fetchAllShutterTypes);
+leadsRouter.post("/create-shutter-type", addShutterType);
 leadsRouter.get(
   "/get-all-shutter-materials/:vendor_id",
   fetchAllShutterMaterials,
 );
+leadsRouter.post("/create-shutter-material", addShutterMaterial);
 leadsRouter.get(
   "/get-shutter-material-finishes/:shutter_material_id",
   fetchShutterMaterialFinishes,
 );
+leadsRouter.get(
+  "/get-all-shutter-material-finishes/:vendor_id",
+  fetchAllShutterMaterialFinishesForVendor,
+);
+leadsRouter.post("/create-shutter-material-finish", addShutterMaterialFinish);
 leadsRouter.get("/get-all-carcass-legs/:vendor_id", fetchAllCarcassLegs);
+leadsRouter.post("/create-carcass-legs", addCarcassLegs);
 leadsRouter.get(
   "/get-skirting-carcass-legs/:carcass_legs_id",
   fetchSkirtingCarcassLegs,
 );
 leadsRouter.get(
+  "/get-all-skirting-carcass-legs/:vendor_id",
+  fetchAllSkirtingCarcassLegsForVendor,
+);
+leadsRouter.post("/create-skirting-carcass-legs", addSkirtingCarcassLegs);
+leadsRouter.get(
   "/get-skirting-carcass-legs-colors/:skirting_carcass_legs_id",
   fetchSkirtingCarcassLegsColors,
 );
+leadsRouter.get(
+  "/get-all-skirting-carcass-legs-colors/:vendor_id",
+  fetchAllSkirtingCarcassLegsColorsForVendor,
+);
+leadsRouter.post(
+  "/create-skirting-carcass-legs-color",
+  addSkirtingCarcassLegsColor,
+);
+leadsRouter.get(
+  "/get-all-light-carcas-types/:vendor_id",
+  fetchAllLightCarcasTypes,
+);
+leadsRouter.post("/create-light-carcas-type", addLightCarcasType);
+leadsRouter.get(
+  "/get-light-carcas-units/:light_carcas_type_id",
+  fetchLightCarcasUnits,
+);
+leadsRouter.get(
+  "/get-all-light-carcas-units/:vendor_id",
+  fetchAllLightCarcasUnitsForVendor,
+);
+leadsRouter.post("/create-light-carcas-unit", addLightCarcasUnit);
+leadsRouter.get(
+  "/get-all-other-appliances/:vendor_id",
+  fetchAllOtherAppliances,
+);
+leadsRouter.post("/create-other-appliances", addOtherAppliances);
 leadsRouter.get("/get-all-handle-types/:vendor_id", fetchAllHandleTypes);
 leadsRouter.get(
   "/get-fast-production-timeline-rules/:vendor_id",
@@ -274,6 +341,11 @@ leadsRouter.get(
 leadsRouter.post(
   "/vendorId/:vendorId/leadId/:leadId/assign-designer",
   leadController.assignDesigner
+);
+
+leadsRouter.post(
+  "/vendorId/:vendorId/leadId/:leadId/unassign-designer",
+  leadController.unassignDesigner
 );
 
 // GET /api/site-supervisor/vendor/:vendorId

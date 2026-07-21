@@ -3228,6 +3228,11 @@ export class DesigingStageController {
           vendor_id: Number(vendorId),
           lead_id: Number(leadId),
         },
+        include: {
+          productItemCode: {
+            select: { id: true, item_code: true },
+          },
+        },
         orderBy: { created_at: "asc" },
       });
 
@@ -3238,6 +3243,139 @@ export class DesigingStageController {
       });
     } catch (error: any) {
       console.error("Error fetching lead specifications:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
+
+  public static async createLeadSpecification(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+      const { created_by, item_code_id } = req.body;
+
+      if (!vendorId || !leadId || !created_by) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId, leadId and created_by are required",
+        });
+      }
+
+      const specification = await prisma.$transaction(async (tx) => {
+        const existingLead = await tx.leadMaster.findFirst({
+          where: { id: Number(leadId), vendor_id: Number(vendorId), is_deleted: false },
+        });
+
+        if (!existingLead) {
+          throw new Error("Lead not found or access denied");
+        }
+
+        let existingItemCode: { id: number; item_code: string } | null = null;
+        if (item_code_id) {
+          existingItemCode = await tx.productItemCode.findFirst({
+            where: { id: Number(item_code_id), vendor_id: Number(vendorId) },
+            select: { id: true, item_code: true },
+          });
+
+          if (!existingItemCode) {
+            throw new Error("Item code not found or access denied");
+          }
+        }
+
+        const existingCount = await tx.leadSpecificationsMaster.count({
+          where: { vendor_id: Number(vendorId), lead_id: Number(leadId) },
+        });
+
+        const leadProductMapping = await tx.leadProductMapping.findFirst({
+          where: { vendor_id: Number(vendorId), lead_id: Number(leadId) },
+          orderBy: { id: "asc" },
+          select: { productType: { select: { type: true } } },
+        });
+
+        const clientNameSegment = sanitizeFilename(
+          `${existingLead.firstname ?? ""}${existingLead.lastname ?? ""}` ||
+            "Client",
+        );
+        const itemGroupSegment = sanitizeFilename(
+          existingItemCode?.item_code ||
+            leadProductMapping?.productType?.type ||
+            "General",
+        );
+        const now = new Date();
+        const dateSegment = [
+          now.getFullYear(),
+          String(now.getMonth() + 1).padStart(2, "0"),
+          String(now.getDate()).padStart(2, "0"),
+        ].join("-");
+
+        const specificationName = `S${existingCount}-${clientNameSegment}-${itemGroupSegment}-${dateSegment}`;
+
+        return tx.leadSpecificationsMaster.create({
+          data: {
+            vendor_id: Number(vendorId),
+            lead_id: Number(leadId),
+            name: specificationName,
+            created_by: Number(created_by),
+            item_code_id: item_code_id ? Number(item_code_id) : undefined,
+          },
+          include: {
+            productItemCode: {
+              select: { id: true, item_code: true },
+            },
+          },
+        });
+      });
+
+      return res.status(201).json({
+        success: true,
+        message: "Lead specification created successfully",
+        data: specification,
+      });
+    } catch (error: any) {
+      console.error("Error creating lead specification:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
+
+  public static async updateLeadSpecificationLightsRemark(
+    req: Request,
+    res: Response,
+  ) {
+    try {
+      const specsId = Number(req.params.specsId);
+      const { lights_remark } = req.body;
+
+      const allowedValues = [
+        "In our scope",
+        "Not in our scope",
+        "Provide only grooves",
+      ];
+
+      if (!specsId || !allowedValues.includes(lights_remark)) {
+        return res.status(400).json({
+          success: false,
+          message: `specsId is required and lights_remark must be one of: ${allowedValues.join(", ")}`,
+        });
+      }
+
+      const specification = await prisma.leadSpecificationsMaster.update({
+        where: { id: specsId },
+        data: { lights_remark },
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Lights remark updated successfully",
+        data: specification,
+      });
+    } catch (error: any) {
+      console.error("Error updating lead specification lights remark:", error);
       return res.status(500).json({
         success: false,
         message: "Internal server error",
@@ -3648,6 +3786,276 @@ export class DesigingStageController {
       });
     } catch (error: any) {
       console.error("Error saving lead hardware mapping:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
+
+  public static async getLeadLightCarcasUnitMappings(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+      const specsId = Number(req.params.specsId);
+
+      if (!vendorId || !leadId || !specsId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId, leadId and specsId are required",
+        });
+      }
+
+      const mappings = await prisma.leadLightCarcasUnitMapping.findMany({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          specs_id: specsId,
+        },
+        include: {
+          lightCarcasUnit: {
+            select: {
+              id: true,
+              type: true,
+              light_carcas_type_id: true,
+              lightCarcasType: { select: { id: true, type: true } },
+            },
+          },
+        },
+        orderBy: { id: "asc" },
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Lead light carcas unit mappings fetched successfully",
+        data: mappings,
+      });
+    } catch (error: any) {
+      console.error("Error fetching lead light carcas unit mappings:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
+
+  public static async upsertLeadLightCarcasUnitMapping(req: Request, res: Response) {
+    try {
+      const id = req.body.id ? Number(req.body.id) : undefined;
+      const vendorId = Number(req.body.vendor_id);
+      const leadId = Number(req.body.lead_id);
+      const specsId = Number(req.body.specs_id);
+      const lightCarcasUnitMasterId = Number(req.body.light_carcas_unit_master_id);
+      const createdBy = Number(req.body.created_by);
+
+      if (
+        !vendorId ||
+        !leadId ||
+        !specsId ||
+        !lightCarcasUnitMasterId ||
+        !createdBy
+      ) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "vendor_id, lead_id, specs_id, light_carcas_unit_master_id and created_by are required",
+        });
+      }
+
+      const data = {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        specs_id: specsId,
+        light_carcas_unit_master_id: lightCarcasUnitMasterId,
+        created_by: createdBy,
+      };
+
+      const existingDuplicate = await prisma.leadLightCarcasUnitMapping.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          specs_id: specsId,
+          light_carcas_unit_master_id: lightCarcasUnitMasterId,
+          ...(id ? { NOT: { id } } : {}),
+        },
+        select: { id: true },
+      });
+
+      if (existingDuplicate) {
+        return res.status(400).json({
+          success: false,
+          message: "This carcas type and remark combination has already been added.",
+        });
+      }
+
+      const includeShape = {
+        lightCarcasUnit: {
+          select: {
+            id: true,
+            type: true,
+            light_carcas_type_id: true,
+            lightCarcasType: { select: { id: true, type: true } },
+          },
+        },
+      };
+
+      const mapping = id
+        ? await prisma.leadLightCarcasUnitMapping.update({
+            where: { id },
+            data,
+            include: includeShape,
+          })
+        : await prisma.leadLightCarcasUnitMapping.create({
+            data,
+            include: includeShape,
+          });
+
+      return res.status(200).json({
+        success: true,
+        message: id
+          ? "Lead light carcas unit mapping updated successfully"
+          : "Lead light carcas unit mapping created successfully",
+        data: mapping,
+      });
+    } catch (error: any) {
+      console.error("Error saving lead light carcas unit mapping:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
+
+  public static async getLeadOtherAppliancesMappings(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+      const specsId = Number(req.params.specsId);
+
+      if (!vendorId || !leadId || !specsId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId, leadId and specsId are required",
+        });
+      }
+
+      const mappings = await prisma.leadOtherAppliancesMapping.findMany({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          specs_id: specsId,
+        },
+        include: {
+          otherAppliances: {
+            select: {
+              id: true,
+              type: true,
+              article_number: true,
+              description: true,
+            },
+          },
+        },
+        orderBy: { id: "asc" },
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Lead other appliances mappings fetched successfully",
+        data: mappings,
+      });
+    } catch (error: any) {
+      console.error("Error fetching lead other appliances mappings:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
+
+  public static async upsertLeadOtherAppliancesMapping(req: Request, res: Response) {
+    try {
+      const id = req.body.id ? Number(req.body.id) : undefined;
+      const vendorId = Number(req.body.vendor_id);
+      const leadId = Number(req.body.lead_id);
+      const specsId = Number(req.body.specs_id);
+      const otherAppliancesMasterId = Number(req.body.other_appliances_master_id);
+      const createdBy = Number(req.body.created_by);
+
+      if (
+        !vendorId ||
+        !leadId ||
+        !specsId ||
+        !otherAppliancesMasterId ||
+        !createdBy
+      ) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "vendor_id, lead_id, specs_id, other_appliances_master_id and created_by are required",
+        });
+      }
+
+      const data = {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        specs_id: specsId,
+        other_appliances_master_id: otherAppliancesMasterId,
+        created_by: createdBy,
+      };
+
+      const existingDuplicate = await prisma.leadOtherAppliancesMapping.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          specs_id: specsId,
+          other_appliances_master_id: otherAppliancesMasterId,
+          ...(id ? { NOT: { id } } : {}),
+        },
+        select: { id: true },
+      });
+
+      if (existingDuplicate) {
+        return res.status(400).json({
+          success: false,
+          message: "This article has already been added.",
+        });
+      }
+
+      const includeShape = {
+        otherAppliances: {
+          select: {
+            id: true,
+            type: true,
+            article_number: true,
+            description: true,
+          },
+        },
+      };
+
+      const mapping = id
+        ? await prisma.leadOtherAppliancesMapping.update({
+            where: { id },
+            data,
+            include: includeShape,
+          })
+        : await prisma.leadOtherAppliancesMapping.create({
+            data,
+            include: includeShape,
+          });
+
+      return res.status(200).json({
+        success: true,
+        message: id
+          ? "Lead other appliances mapping updated successfully"
+          : "Lead other appliances mapping created successfully",
+        data: mapping,
+      });
+    } catch (error: any) {
+      console.error("Error saving lead other appliances mapping:", error);
       return res.status(500).json({
         success: false,
         message: "Internal server error",

@@ -8,6 +8,7 @@ import {
 }
   from "../../../src/services/trackTraceServices/track-trace-project.service";
 import logger from "../../utils/logger";
+import { PackingType } from "../../../generated/prisma_client/enums";
 
 
 export const createProjectController = async (req: Request, res: Response) => {
@@ -20,6 +21,7 @@ export const createProjectController = async (req: Request, res: Response) => {
       client_name,
       client_address,
       client_contact_no,
+      packing_type
     } = req.body;
 
     if (!projectName || !vendorId) {
@@ -41,6 +43,13 @@ export const createProjectController = async (req: Request, res: Response) => {
         ? Number(lead_id)
         : null;
 
+        const resolvedPackingType:
+  PackingType =
+  packing_type ===
+  PackingType.GROUPWISE
+    ? PackingType.GROUPWISE
+    : PackingType.DEFAULT;
+
     const result = await createProjectService({
       projectName,
       vendorId: Number(vendorId),
@@ -49,6 +58,7 @@ export const createProjectController = async (req: Request, res: Response) => {
       client_name,
       client_address,
       client_contact_no,
+      packing_type,
       file: req.file,
     });
 

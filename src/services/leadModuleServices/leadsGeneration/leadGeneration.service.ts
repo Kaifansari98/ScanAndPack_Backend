@@ -122,6 +122,13 @@ type AssignDesignerInput = {
   created_by: number;
 };
 
+type UnassignDesignerInput = {
+  lead_id: number;
+  vendor_id: number;
+  user_id: number;
+  updated_by: number;
+};
+
 type ToggleLeadBlockInput = {
   vendor_id: number;
   lead_id: number;
@@ -186,6 +193,7 @@ export const createLeadService = async (
     site_type_id,
     status_id,
     source_id,
+    refered_by,
     archetech_name,
     architect_id,
     archetech_number,
@@ -200,6 +208,8 @@ export const createLeadService = async (
     product_structures = [],
     product_structure_instances = [],
     initial_site_measurement_date,
+    client_id,
+    order_number,
   } = payload;
 
   const transactionResult = await prisma.$transaction(
@@ -227,6 +237,17 @@ export const createLeadService = async (
 
         if (!franchise) {
           throw new Error("Invalid franchise_id for the given vendor_id.");
+        }
+
+        if (client_id) {
+          const client = await tx.clientMaster.findFirst({
+            where: { id: client_id, vendor_id },
+            select: { id: true },
+          });
+
+          if (!client) {
+            throw new Error("Invalid client_id for the given vendor_id.");
+          }
         }
 
         if (!payload.is_draft) {
@@ -314,6 +335,7 @@ export const createLeadService = async (
           site_type_id,
           status_id,
           source_id,
+          refered_by: refered_by?.trim() || null,
           archetech_name,
           architect_id: architect_id ? Number(architect_id) : null,
           archetech_number,
@@ -327,6 +349,8 @@ export const createLeadService = async (
           assigned_by,
           initial_site_measurement_date,
           is_draft: !!payload.is_draft,
+          client_id: client_id ?? null,
+          order_number: order_number || null,
         };
 
         const lead = await tx.leadMaster.create({
@@ -1208,7 +1232,7 @@ export const getLeadById = async (
       },
     });
 
-    const oldestDesignerMapping = await prisma.leadUserMapping.findFirst({
+    const activeDesignerMappings = await prisma.leadUserMapping.findMany({
       where: {
         lead_id: lead.id,
         vendor_id: vendorId,
@@ -1259,13 +1283,13 @@ export const getLeadById = async (
             created_at: oldestIsmMapping.created_at,
           }
           : null,
-        assigned_designer_from_mapping: oldestDesignerMapping
-          ? {
-            user_id: oldestDesignerMapping.user_id,
-            user_name: oldestDesignerMapping.user?.user_name ?? null,
-            created_at: oldestDesignerMapping.created_at,
-          }
-          : null,
+        assigned_designers_from_mapping: activeDesignerMappings.map(
+          (mapping) => ({
+            user_id: mapping.user_id,
+            user_name: mapping.user?.user_name ?? null,
+            created_at: mapping.created_at,
+          }),
+        ),
       },
       userInfo: {
         role: userType,
@@ -1309,31 +1333,38 @@ export const assignDesignerToLead = async (
       select: { is_this_vendor_is_custom_usertype_only: true },
     });
 
-    if (vendor?.is_this_vendor_is_custom_usertype_only !== true) {
-      throw new Error("Designer assignment is available only for custom-user-type vendors");
-    }
-
     const designerUser = await tx.userMaster.findFirst({
       where: {
         id: data.assign_to_user_id,
         vendor_id: data.vendor_id,
         status: "active",
         ...(lead.franchise_id ? { franchise_id: lead.franchise_id } : {}),
-        user_type: {
-          user_type: {
-            equals: "custom",
-            mode: "insensitive",
-          },
-        },
-        userPrivilegeMappings: {
-          some: {
-            is_allowed: true,
-            privilege: {
-              code: requiredPrivilegeCode,
-              is_active: true,
-            },
-          },
-        },
+        ...(vendor?.is_this_vendor_is_custom_usertype_only === true
+          ? {
+              user_type: {
+                user_type: {
+                  equals: "custom",
+                  mode: "insensitive",
+                },
+              },
+              userPrivilegeMappings: {
+                some: {
+                  is_allowed: true,
+                  privilege: {
+                    code: requiredPrivilegeCode,
+                    is_active: true,
+                  },
+                },
+              },
+            }
+          : {
+              user_type: {
+                user_type: {
+                  equals: "designer",
+                  mode: "insensitive",
+                },
+              },
+            }),
       },
       select: {
         id: true,
@@ -1351,6 +1382,7 @@ export const assignDesignerToLead = async (
         vendor_id: data.vendor_id,
         status: "active",
         type: "designer",
+        user_id: designerUser.id,
       },
       select: {
         id: true,
@@ -1358,25 +1390,12 @@ export const assignDesignerToLead = async (
       },
     });
 
-    if (existingActiveDesignerMapping?.user_id === designerUser.id) {
+    if (existingActiveDesignerMapping) {
       return {
         mappingId: existingActiveDesignerMapping.id,
         user: designerUser,
       };
     }
-
-    await tx.leadUserMapping.updateMany({
-      where: {
-        lead_id: data.lead_id,
-        vendor_id: data.vendor_id,
-        type: "designer",
-        status: "active",
-      },
-      data: {
-        status: "inactive",
-        updated_by: data.created_by,
-      },
-    });
 
     const mapping = await tx.leadUserMapping.create({
       data: {
@@ -1440,6 +1459,60 @@ export const assignDesignerToLead = async (
       mappingId: mapping.id,
       user: designerUser,
     };
+  });
+};
+
+export const unassignDesignerFromLead = async (
+  data: UnassignDesignerInput,
+) => {
+  return prisma.$transaction(async (tx) => {
+    const lead = await tx.leadMaster.findFirst({
+      where: {
+        id: data.lead_id,
+        vendor_id: data.vendor_id,
+        is_deleted: false,
+      },
+      select: { id: true, account_id: true },
+    });
+
+    if (!lead) {
+      throw new Error("Lead not found");
+    }
+
+    const mapping = await tx.leadUserMapping.findFirst({
+      where: {
+        lead_id: data.lead_id,
+        vendor_id: data.vendor_id,
+        user_id: data.user_id,
+        type: "designer",
+        status: "active",
+      },
+      select: { id: true, user: { select: { user_name: true } } },
+    });
+
+    if (!mapping) {
+      throw new Error("Active designer assignment not found");
+    }
+
+    await tx.leadUserMapping.update({
+      where: { id: mapping.id },
+      data: {
+        status: "inactive",
+        updated_by: data.updated_by,
+      },
+    });
+
+    await createLeadLog(tx, {
+      vendor_id: data.vendor_id,
+      lead_id: data.lead_id,
+      account_id: lead.account_id!,
+      action: `Designer ${mapping.user?.user_name ?? ""} unassigned.`,
+      action_type: "UPDATE",
+      created_by: data.updated_by,
+      created_at: new Date(),
+    });
+
+    return { mappingId: mapping.id };
   });
 };
 
@@ -2104,6 +2177,9 @@ export const updateLeadService = async (
     designer_remark,
     updated_by,
     initial_site_measurement_date,
+    client_id,
+    order_number,
+    refered_by,
   } = payload;
 
   const result = await prisma.$transaction(async (tx) => {
@@ -2194,6 +2270,10 @@ export const updateLeadService = async (
       leadUpdateData.archetech_number = archetech_number;
     if (designer_remark !== undefined)
       leadUpdateData.designer_remark = designer_remark;
+    if (client_id !== undefined)
+      leadUpdateData.client_id = client_id ? Number(client_id) : null;
+    if (order_number !== undefined) leadUpdateData.order_number = order_number;
+    if (refered_by !== undefined) leadUpdateData.refered_by = refered_by;
 
     const updatedLead = await tx.leadMaster.update({
       where: { id: leadId },
@@ -2721,6 +2801,50 @@ export const getSalesExecutivesByVendor = async (
 
     const normalizedAssigneeUserType =
       options?.assigneeUserType?.trim().toLowerCase() ?? null;
+
+    if (normalizedAssigneeUserType === "designer") {
+      const designers = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+          status: "active",
+          ...(franchiseId !== undefined ? { franchise_id: franchiseId } : {}),
+          user_type: {
+            user_type: { equals: "designer", mode: "insensitive" },
+          },
+        },
+        include: {
+          user_type: true,
+          documents: true,
+        },
+        orderBy: {
+          created_at: "desc",
+        },
+      });
+
+      console.log(`[SERVICE] Found ${designers.length} eligible designers`);
+
+      return designers.map((user) => ({
+        id: user.id,
+        vendor_id: user.vendor_id,
+        user_name: user.user_name,
+        user_contact: user.user_contact,
+        user_email: user.user_email,
+        user_timezone: user.user_timezone,
+        status: user.status,
+        created_at: user.created_at,
+        updated_at: user.updated_at,
+        user_type: {
+          id: user.user_type.id,
+          user_type: user.user_type.user_type,
+        },
+        documents: user.documents.map((doc) => ({
+          id: doc.id,
+          document_name: doc.document_name,
+          document_number: doc.document_number,
+          filename: doc.filename,
+        })),
+      }));
+    }
 
     if (normalizedAssigneeUserType === "custom") {
       const customUsers = await prisma.userMaster.findMany({
@@ -3951,4 +4075,3 @@ export const updateLeadStageService = async (
     throw new Error(error.message || "Failed to update lead stage");
   }
 };
-

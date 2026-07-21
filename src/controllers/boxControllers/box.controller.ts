@@ -121,10 +121,17 @@ export const getAllBoxesWithItemCount = async (req: Request, res: Response) => {
 
 export const markBoxAsPacked = async (req: Request, res: Response) => {
   try {
+    const {
+      user_id,
+    } =
+      req.body;
+
+
+    // console.log("user_id",user_id);return;
     const boxId = Number(req.params.boxId);
     if (isNaN(boxId)) return res.status(400).json({ error: 'Invalid boxId' });
 
-    const updatedBox = await updateBoxStatus(boxId, BoxStatus.packed);
+    const updatedBox = await updateBoxStatus(boxId, BoxStatus.packed,user_id);
     res.status(200).json(updatedBox);
   } catch (err: any) {
     res.status(400).json({ error: err.message });
@@ -133,10 +140,14 @@ export const markBoxAsPacked = async (req: Request, res: Response) => {
 
 export const markBoxAsUnpacked = async (req: Request, res: Response) => {
   try {
+    const {
+      user_id,
+    } =
+      req.body;
     const boxId = Number(req.params.boxId);
     if (isNaN(boxId)) return res.status(400).json({ error: 'Invalid boxId' });
 
-    const updatedBox = await updateBoxStatus(boxId, BoxStatus.unpacked);
+    const updatedBox = await updateBoxStatus(boxId, BoxStatus.unpacked,user_id);
     res.status(200).json(updatedBox);
   } catch (err: any) {
     res.status(400).json({ error: err.message });

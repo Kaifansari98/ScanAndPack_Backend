@@ -140,6 +140,7 @@ export interface CarcasMaterialFinish {
     id: number;
     name: string;
     carcas_material_id: number;
+    material?: { id: number; name: string };
 }
 
 export interface CarcasMaterial {
@@ -153,6 +154,7 @@ export interface ShutterMaterialFinish {
     id: number;
     name: string;
     shutter_material_id: number;
+    material?: { id: number; name: string };
 }
 
 export interface ShutterMaterial {
@@ -167,6 +169,7 @@ export interface SkirtingCarcassLegsColor {
     carcass_legs_id: number;
     skirting_carcass_legs_id: number;
     color: string;
+    skirtingCarcassLegs?: { id: number; name: string };
 }
 
 export interface SkirtingCarcassLegs {
@@ -175,6 +178,7 @@ export interface SkirtingCarcassLegs {
     carcass_legs_id: number;
     inScope: boolean;
     colors?: SkirtingCarcassLegsColor[];
+    carcassLegs?: { id: number; name: string };
 }
 
 export interface CarcassLegs {
@@ -182,6 +186,31 @@ export interface CarcassLegs {
     name: string;
     vendor_id: number;
     skirtings?: SkirtingCarcassLegs[];
+}
+
+export interface LightCarcasUnit {
+    id: number;
+    vendor_id: number;
+    type: string;
+    light_carcas_type_id: number;
+    is_active: boolean;
+    lightCarcasType?: { id: number; type: string };
+}
+
+export interface LightCarcasType {
+    id: number;
+    vendor_id: number;
+    type: string;
+    is_active: boolean;
+    units?: LightCarcasUnit[];
+}
+
+export interface OtherAppliances {
+    id: number;
+    vendor_id: number;
+    type: string;
+    article_number: string;
+    description: string;
 }
 
 export interface DocumentTypeInput {
@@ -230,10 +259,11 @@ export interface CreateLeadDTO {
     contact_no: string;
     alt_contact_no?: string;
     email?: string;
-    site_address: string;
+    site_address?: string;
     site_map_link?: string;
     site_type_id?: number;
     source_id: number;
+    refered_by?: string;
     archetech_name?: string;
     architect_id?: number;
     archetech_number?: string;
@@ -254,6 +284,8 @@ export interface CreateLeadDTO {
     }[];
     initial_site_measurement_date?: Date;
     is_draft?: boolean;
+    client_id?: number;
+    order_number?: string;
 }
   
 export interface DocumentUpload {
@@ -279,6 +311,9 @@ export interface UpdateLeadDTO {
     designer_remark?: string;
     updated_by: number;
     initial_site_measurement_date?: Date | string;
+    client_id?: number;
+    order_number?: string;
+    refered_by?: string;
 }
 
 export interface SalesExecutiveData {

@@ -22,6 +22,7 @@ import {
   uploadMoreSitePhotosService,
   checkSiteSupervisorAssigned,
   assignDesignerToLead,
+  unassignDesignerFromLead,
   blockLeadService,
   unblockLeadService,
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
@@ -279,10 +280,16 @@ export class LeadController {
       }
 
       // 1. Resolve the vendor's Open status ID dynamically
-      const [vendor, openStatus] = await Promise.all([
+      const numericFranchiseId = Number(req.body.franchise_id);
+
+      const [vendor, franchise, openStatus] = await Promise.all([
         prisma.vendorMaster.findUnique({
           where: { id: numericVendorId },
           select: { handlesLargeScaleProjects: true },
+        }),
+        prisma.franchiseMaster.findUnique({
+          where: { id: numericFranchiseId },
+          select: { vendor_id: true, moduled_for_b2b: true },
         }),
         prisma.statusTypeMaster.findFirst({
           where: {
@@ -297,13 +304,18 @@ export class LeadController {
         throw new Error(`Vendor ${vendor_id} not found`);
       }
 
+      if (!franchise || franchise.vendor_id !== numericVendorId) {
+        throw new Error(`Franchise ${req.body.franchise_id} not found for vendor ${vendor_id}`);
+      }
+
       if (!openStatus) {
         throw new Error(
           `Open status (Type 1) not found for vendor ${vendor_id}`,
         );
       }
 
-      const requiresFurnitureSelection = !vendor.handlesLargeScaleProjects;
+      const requiresFurnitureSelection =
+        !vendor.handlesLargeScaleProjects && !franchise.moduled_for_b2b;
 
       const payload = {
         ...req.body,
@@ -313,7 +325,7 @@ export class LeadController {
         status_id: openStatus.id, // <-- use openStatus' id here
         source_id: Number(req.body.source_id) || undefined,
         vendor_id: numericVendorId,
-        franchise_id: Number(req.body.franchise_id),
+        franchise_id: numericFranchiseId,
         created_by: Number(req.body.created_by),
         priority: getSingleBodyValue(req.body.priority)?.trim() || undefined,
         assign_to: req.body.assign_to ? Number(req.body.assign_to) : undefined,
@@ -333,6 +345,9 @@ export class LeadController {
           ? new Date(req.body.initial_site_measurement_date)
           : undefined,
         site_map_link: req.body.site_map_link || null,
+        refered_by: req.body.refered_by?.trim() || undefined,
+        client_id: req.body.client_id ? Number(req.body.client_id) : undefined,
+        order_number: req.body.order_number || undefined,
       };
 
       if (!requiresFurnitureSelection) {
@@ -1914,6 +1929,55 @@ export class LeadController {
         .json(
           ApiResponse.error(
             error?.message || "Failed to assign designer",
+            statusCode,
+          ),
+        );
+    }
+  }
+
+  async unassignDesigner(req: Request, res: Response): Promise<Response> {
+    try {
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
+      const userId = Number(req.body.user_id);
+      const updatedBy = Number(req.body.updated_by);
+
+      if (
+        [vendorId, leadId, userId, updatedBy].some(
+          (value) => Number.isNaN(value) || value <= 0,
+        )
+      ) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid unassignment payload", 400));
+      }
+
+      const result = await unassignDesignerFromLead({
+        lead_id: leadId,
+        vendor_id: vendorId,
+        user_id: userId,
+        updated_by: updatedBy,
+      });
+
+      return res.status(200).json(
+        ApiResponse.success(
+          { mapping_id: result.mappingId },
+          "Designer unassigned successfully",
+          200,
+        ),
+      );
+    } catch (error: any) {
+      console.error("[CONTROLLER] unassignDesigner error:", error);
+      const statusCode =
+        error?.message === "Lead not found" ||
+        error?.message === "Active designer assignment not found"
+          ? 404
+          : 400;
+      return res
+        .status(statusCode)
+        .json(
+          ApiResponse.error(
+            error?.message || "Failed to unassign designer",
             statusCode,
           ),
         );
