@@ -9,7 +9,11 @@ export class CompanyVendorsService {
     }
 
     return prisma.companyVendorsMaster.findMany({
-      where: { vendor_id: vendorId, is_deleted: false, status_id: 1 },
+      where: {
+        vendor_id: vendorId,
+        is_deleted: false,
+        OR: [{ status_id: null }, { status_id: 1 }],
+      },
       orderBy: { created_at: "desc" },
       include: {
         vendor: {
