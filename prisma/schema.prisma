@@ -565,66 +565,6 @@ model BoxMaster {
   box_info_values       BoxInfoFieldValue[]
 }
 
-model ProjectBoxInfoField {
-  id         Int @id @default(autoincrement())
-  project_id Int
-  vendor_id  Int
-
-  field_label String
-  field_key   String
-  field_type  BoxInfoFieldType @default(TEXT)
-
-  is_required Boolean @default(false)
-  sort_order  Int     @default(0)
-  active      Boolean @default(true)
-
-  created_by Int?
-  updated_by Int?
-
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-
-  project ProjectMaster @relation(fields: [project_id], references: [id], onDelete: Cascade)
-  vendor  VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-
-  values BoxInfoFieldValue[]
-
-  @@index([project_id, vendor_id])
-}
-
-model BoxInfoFieldValue {
-  id Int @id @default(autoincrement())
-
-  box_id     Int
-  project_id Int
-  vendor_id  Int
-  field_id   Int
-
-  field_value String?
-
-  created_by Int?
-  updated_by Int?
-
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-
-  box     BoxMaster           @relation(fields: [box_id], references: [id], onDelete: Cascade)
-  project ProjectMaster       @relation(fields: [project_id], references: [id], onDelete: Cascade)
-  vendor  VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  field   ProjectBoxInfoField @relation(fields: [field_id], references: [id], onDelete: Cascade)
-
-  @@unique([box_id, field_id])
-  @@index([box_id])
-  @@index([project_id, vendor_id])
-}
-
-enum BoxInfoFieldType {
-  TEXT
-  NUMBER
-  DATE
-  TEXTAREA
-}
-
 model ScanAndPackItem {
   id                 Int            @id @default(autoincrement())
   project_id         Int
@@ -4066,6 +4006,66 @@ model PurchaseOrderSupplierAdditionalCost {
   @@index([source_pi_additional_cost_id], map: "po_sup_cost_source_pi_idx")
 }
 
+model ProjectBoxInfoField {
+  id         Int @id @default(autoincrement())
+  project_id Int
+  vendor_id  Int
+
+  field_label String
+  field_key   String
+  field_type  BoxInfoFieldType @default(TEXT)
+
+  is_required Boolean @default(false)
+  sort_order  Int     @default(0)
+  active      Boolean @default(true)
+
+  created_by Int?
+  updated_by Int?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  project ProjectMaster @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor  VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  values BoxInfoFieldValue[]
+
+  @@index([project_id, vendor_id])
+}
+
+model BoxInfoFieldValue {
+  id Int @id @default(autoincrement())
+
+  box_id     Int
+  project_id Int
+  vendor_id  Int
+  field_id   Int
+
+  field_value String?
+
+  created_by Int?
+  updated_by Int?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  box     BoxMaster           @relation(fields: [box_id], references: [id], onDelete: Cascade)
+  project ProjectMaster       @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor  VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  field   ProjectBoxInfoField @relation(fields: [field_id], references: [id], onDelete: Cascade)
+
+  @@unique([box_id, field_id])
+  @@index([box_id])
+  @@index([project_id, vendor_id])
+}
+
+enum BoxInfoFieldType {
+  TEXT
+  NUMBER
+  DATE
+  TEXTAREA
+}
+
 enum PackingType {
   DEFAULT
   GROUPWISE
@@ -4690,7 +4690,7 @@ model BroadcastAttachment {
   original_file_name String?
   file_url           String
   file_type          String?
-  file_size          BigInt?        // File size in bytes, null for YouTube links
+  file_size          BigInt? // File size in bytes, null for YouTube links
   created_by         Int
   updated_by         Int?
   created_at         DateTime       @default(now())

@@ -5,6 +5,12 @@ import os from "os";
 import { getAllProjectsTrackTrace } from "../../controllers/trackTraceController/project.controller";
 
 import {
+  getProjectBoxInfoFieldsController,
+  saveBoxInfoValuesController,
+  getBoxInfoValuesController,
+} from "../../controllers/trackTraceController/boxInfo.controller";
+
+import {
   getAllMachines,
   getKPIS,
   getRealTimeItemTracking,
@@ -151,6 +157,22 @@ router.get(
 router.get("/defect-dashboard/:vendor_id/summary", getDefectSummary);
 router.get("/defect-dashboard/:vendor_id/pending", getPendingDefects);
 router.get("/defect-dashboard/:vendor_id/resolved", getResolvedDefects);
+
+
+router.get(
+  "/projects/:project_id/box-info-fields",
+  getProjectBoxInfoFieldsController
+);
+
+router.get(
+  "/boxes/:box_id/info-values",
+  getBoxInfoValuesController
+);
+
+router.post(
+  "/boxes/:box_id/info-values",
+  saveBoxInfoValuesController
+);
 
 // router.post(
 //   "/upload-machine-excel/:vendor_id/:project_token",
