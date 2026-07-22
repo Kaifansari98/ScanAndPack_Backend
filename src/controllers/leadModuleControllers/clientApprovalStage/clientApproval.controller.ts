@@ -125,7 +125,7 @@ export class ClientApprovalController {
       const approvalScreenshots = (req.files as any)?.approvalScreenshots || [];
       const payment_files = (req.files as any)?.payment_files || [];
 
-      if (!leadId || !vendorId || !account_id || !client_id || !created_by) {
+      if (!leadId || !vendorId || !account_id || !created_by) {
         res
           .status(400)
           .json({ success: false, message: "Missing required fields" });
@@ -334,7 +334,7 @@ export class ClientApprovalController {
 
       const details = await clientApprovalService.getClientApprovalDetails(
         Number(vendorId),
-        Number(leadId)
+        Number(leadId),
       );
 
       res.status(200).json({
@@ -360,11 +360,7 @@ export class ClientApprovalController {
   ): Promise<void> {
     try {
       const { leadId, vendorId } = req.params;
-      const {
-        account_id,
-        assign_to_user_id,
-        created_by,
-      } = req.body;
+      const { account_id, assign_to_user_id, created_by } = req.body;
 
       if (
         !leadId ||
@@ -406,12 +402,20 @@ export class ClientApprovalController {
           const [lead, instances] = await Promise.all([
             prisma.leadMaster.findUnique({
               where: { id: dto.lead_id },
-              select: { firstname: true, lastname: true, lead_code: true, franchise_id: true },
+              select: {
+                firstname: true,
+                lastname: true,
+                lead_code: true,
+                franchise_id: true,
+              },
             }),
             prisma.leadProductStructureInstance.findMany({
               where: { lead_id: dto.lead_id, vendor_id: dto.vendor_id },
               select: { id: true, quantity_index: true },
-              orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+              orderBy: [
+                { product_structure_id: "asc" },
+                { quantity_index: "asc" },
+              ],
             }),
           ]);
 
@@ -490,7 +494,10 @@ export class ClientApprovalController {
             prisma.leadProductStructureInstance.findMany({
               where: { lead_id: dto.lead_id, vendor_id: dto.vendor_id },
               select: { id: true, quantity_index: true },
-              orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+              orderBy: [
+                { product_structure_id: "asc" },
+                { quantity_index: "asc" },
+              ],
             }),
           ]);
 
@@ -569,7 +576,10 @@ export class ClientApprovalController {
           prisma.leadProductStructureInstance.findFirst({
             where: { lead_id: dto.lead_id, vendor_id: dto.vendor_id },
             select: { id: true },
-            orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+            orderBy: [
+              { product_structure_id: "asc" },
+              { quantity_index: "asc" },
+            ],
           }),
         ]);
 
@@ -588,17 +598,19 @@ export class ClientApprovalController {
             : `/dashboard/production/details/${dto.lead_id}`;
 
         const queryParams = new URLSearchParams();
-        if (dto.account_id) queryParams.set("accountId", String(dto.account_id));
+        if (dto.account_id)
+          queryParams.set("accountId", String(dto.account_id));
         if (instanceId) queryParams.set("instance_id", String(instanceId));
         const qs = queryParams.toString();
         const redirectUrl = qs ? `${stagePath}?${qs}` : stagePath;
 
         // Only admins matching vendor_id + franchise_id
-        const { recipients: users, isSuperAdminFallback } = await getFranchiseAdminRecipients({
-          vendorId: dto.vendor_id,
-          franchiseId,
-          excludeUserId: dto.created_by,
-        });
+        const { recipients: users, isSuperAdminFallback } =
+          await getFranchiseAdminRecipients({
+            vendorId: dto.vendor_id,
+            franchiseId,
+            excludeUserId: dto.created_by,
+          });
 
         await Promise.all(
           users.map((user) =>
@@ -634,7 +646,7 @@ export class ClientApprovalController {
               sendMajorMilestoneEmail({
                 vendor_id: dto.vendor_id,
                 allowSuperAdmin: isSuperAdminFallback,
-              toEmail: user.user_email!,
+                toEmail: user.user_email!,
                 toName: user.user_name ?? undefined,
                 leadCode,
                 leadName: leadName || "Lead",
