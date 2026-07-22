@@ -313,22 +313,32 @@ export const NotificationService = {
       try {
         const userRec = await prisma.userMaster.findUnique({
           where: { id: userId },
-          select: { user_type: { select: { user_type: true } } },
+          select: { created_at: true, user_type: { select: { user_type: true } } },
         });
         const roleName = userRec?.user_type?.user_type?.toLowerCase();
         const isSuperAdmin = roleName === "super-admin" || roleName === "superadmin" || roleName === "super_admin";
 
         if (!isSuperAdmin) {
-          await prisma.broadcastRead.upsert({
-            where: { broadcast_id_user_id: { broadcast_id: notif.entity_id, user_id: userId } },
-            update: { read_at: new Date(), updated_by: userId, updated_at: new Date() },
-            create: {
-              broadcast_id: notif.entity_id,
-              user_id: userId,
-              created_by: userId,
-              updated_by: userId,
-            },
+          const broadcastRec = await prisma.broadcastMaster.findUnique({
+            where: { id: notif.entity_id },
+            select: { created_at: true, publish_at: true },
           });
+          const effectivePublishDate = broadcastRec?.publish_at || broadcastRec?.created_at;
+          const isUserCreatedAfterPublish =
+            userRec?.created_at && effectivePublishDate && userRec.created_at > effectivePublishDate;
+
+          if (!isUserCreatedAfterPublish) {
+            await prisma.broadcastRead.upsert({
+              where: { broadcast_id_user_id: { broadcast_id: notif.entity_id, user_id: userId } },
+              update: { read_at: new Date(), updated_by: userId, updated_at: new Date() },
+              create: {
+                broadcast_id: notif.entity_id,
+                user_id: userId,
+                created_by: userId,
+                updated_by: userId,
+              },
+            });
+          }
         }
       } catch (err) {
         // Non-fatal
@@ -362,7 +372,7 @@ export const NotificationService = {
     try {
       const userRec = await prisma.userMaster.findUnique({
         where: { id: userId },
-        select: { user_type: { select: { user_type: true } } },
+        select: { created_at: true, user_type: { select: { user_type: true } } },
       });
       const roleName = userRec?.user_type?.user_type?.toLowerCase();
       const isSuperAdmin = roleName === "super-admin" || roleName === "superadmin" || roleName === "super_admin";
@@ -370,16 +380,26 @@ export const NotificationService = {
       if (!isSuperAdmin) {
         for (const notif of broadcastNotifs) {
           if (notif.entity_id) {
-            await prisma.broadcastRead.upsert({
-              where: { broadcast_id_user_id: { broadcast_id: notif.entity_id, user_id: userId } },
-              update: { read_at: new Date(), updated_by: userId, updated_at: new Date() },
-              create: {
-                broadcast_id: notif.entity_id,
-                user_id: userId,
-                created_by: userId,
-                updated_by: userId,
-              },
+            const broadcastRec = await prisma.broadcastMaster.findUnique({
+              where: { id: notif.entity_id },
+              select: { created_at: true, publish_at: true },
             });
+            const effectivePublishDate = broadcastRec?.publish_at || broadcastRec?.created_at;
+            const isUserCreatedAfterPublish =
+              userRec?.created_at && effectivePublishDate && userRec.created_at > effectivePublishDate;
+
+            if (!isUserCreatedAfterPublish) {
+              await prisma.broadcastRead.upsert({
+                where: { broadcast_id_user_id: { broadcast_id: notif.entity_id, user_id: userId } },
+                update: { read_at: new Date(), updated_by: userId, updated_at: new Date() },
+                create: {
+                  broadcast_id: notif.entity_id,
+                  user_id: userId,
+                  created_by: userId,
+                  updated_by: userId,
+                },
+              });
+            }
           }
         }
       }

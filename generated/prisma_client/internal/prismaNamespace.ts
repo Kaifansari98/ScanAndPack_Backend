@@ -14347,6 +14347,7 @@ export const VendorMasterScalarFieldEnum = {
   is_self_assign_task_type_master_enabed: 'is_self_assign_task_type_master_enabed',
   is_email_noti_enabled: 'is_email_noti_enabled',
   is_in_app_noti_enabled: 'is_in_app_noti_enabled',
+  is_broadcast_enabled: 'is_broadcast_enabled',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   state_id: 'state_id',
@@ -17392,6 +17393,7 @@ export const BroadcastAttachmentScalarFieldEnum = {
   original_file_name: 'original_file_name',
   file_url: 'file_url',
   file_type: 'file_type',
+  file_size: 'file_size',
   created_by: 'created_by',
   updated_by: 'updated_by',
   created_at: 'created_at',
@@ -18500,6 +18502,20 @@ export type EnumAttachmentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$P
  * Reference to a field of type 'AttachmentType[]'
  */
 export type ListEnumAttachmentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AttachmentType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt'
+ */
+export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt[]'
+ */
+export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
     
 
 

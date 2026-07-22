@@ -65,11 +65,33 @@ export class BroadcastService {
     userId: number,
     uploadedFiles: { [fieldname: string]: Express.Multer.File[] } = {}
   ) {
-    const { title, content, type, status, publishAt, vendorId, audiences, attachments = [] } = payload;
+    const { title, content, type, status, publishAt, vendorId, audiences = [], attachments = [] } = payload;
 
     if (vendorId) await this.assertVendorExists(vendorId);
 
     const resolvedAttachments = await this.resolveAttachments(attachments, vendorId, uploadedFiles);
+
+    // Support userTypeId / userTypeIds as number or array of numbers
+    const rawUserTypeId = (payload as any).userTypeId ?? (payload as any).userTypeIds;
+    let finalAudiences: Array<{ audienceType: string; targetId?: number | null }> = [...audiences];
+
+    if (rawUserTypeId !== undefined && rawUserTypeId !== null) {
+      const userTypeIdsArray: number[] = Array.isArray(rawUserTypeId) ? rawUserTypeId : [rawUserTypeId];
+      for (const utId of userTypeIdsArray) {
+        if (utId && typeof utId === "number") {
+          const exists = finalAudiences.some(
+            (a) => a.audienceType === "ROLE" && Number(a.targetId) === Number(utId)
+          );
+          if (!exists) {
+            finalAudiences.push({ audienceType: "ROLE", targetId: utId });
+          }
+        }
+      }
+    }
+
+    if (finalAudiences.length === 0) {
+      finalAudiences = [{ audienceType: "ALL", targetId: null }];
+    }
 
     const broadcast = await prisma.$transaction(async (tx) => {
       const record = await this.repository.createBroadcast(tx, {
@@ -79,7 +101,7 @@ export class BroadcastService {
         created_by: userId,
         updated_by: userId,
       });
-      await this.repository.createAudiences(tx, record.id, audiences, userId);
+      await this.repository.createAudiences(tx, record.id, finalAudiences, userId);
       if (resolvedAttachments.length > 0) {
         await this.repository.createAttachments(tx, record.id, resolvedAttachments, userId);
       }
@@ -126,15 +148,28 @@ export class BroadcastService {
     let readersCount = 0;
     try {
       const superAdminTypeIds = await getSuperAdminUserTypeIds();
-      sentCount = await prisma.notification.count({
-        where: { entity_type: "broadcast", entity_id: id },
+      const broadcastRecord = await prisma.broadcastMaster.findUnique({
+        where: { id },
+        select: { created_at: true, publish_at: true },
       });
+      const effectivePublishDate = broadcastRecord?.publish_at || broadcastRecord?.created_at;
+
+      const sentUserList = await prisma.notification.findMany({
+        where: { entity_type: "broadcast", entity_id: id },
+        select: { user_id: true },
+        distinct: ["user_id"],
+      });
+      sentCount = sentUserList.length;
+
       readersCount = await prisma.broadcastRead.count({
         where: {
           broadcast_id: id,
-          ...(superAdminTypeIds.length > 0
-            ? { user: { user_type_id: { notIn: superAdminTypeIds } } }
-            : {}),
+          user: {
+            ...(superAdminTypeIds.length > 0
+              ? { user_type_id: { notIn: superAdminTypeIds } }
+              : {}),
+            ...(effectivePublishDate ? { created_at: { lte: effectivePublishDate } } : {}),
+          },
         },
       });
     } catch (err) {
@@ -154,18 +189,19 @@ export class BroadcastService {
     filters: ListBroadcastsInput,
     currentUser: { id: number; user_type_id?: number; franchise_id?: number }
   ) {
-    let audience: { userId: number; userTypeId?: number; franchiseId?: number } | undefined;
+    let audience: { userId: number; userTypeId?: number; franchiseId?: number; createdAt?: Date } | undefined;
 
     if (filters.forMe) {
       const userRecord = await prisma.userMaster.findUnique({
         where: { id: currentUser.id },
-        select: { id: true, user_type_id: true, franchise_id: true },
+        select: { id: true, user_type_id: true, franchise_id: true, created_at: true },
       });
 
       audience = {
         userId: currentUser.id,
         userTypeId: userRecord?.user_type_id ?? currentUser.user_type_id,
         franchiseId: userRecord?.franchise_id ?? currentUser.franchise_id ?? undefined,
+        createdAt: userRecord?.created_at ?? undefined,
       };
     }
 
@@ -190,32 +226,39 @@ export class BroadcastService {
       if (broadcastIds.length > 0) {
         const superAdminTypeIds = await getSuperAdminUserTypeIds();
 
-        // Count notifications sent per broadcast
-        const sentGroups = await prisma.notification.groupBy({
-          by: ["entity_id"],
+        // Count unique recipient users sent notifications per broadcast
+        const sentRows = await prisma.notification.findMany({
           where: { entity_type: "broadcast", entity_id: { in: broadcastIds } },
-          _count: { _all: true },
+          select: { entity_id: true, user_id: true },
+          distinct: ["entity_id", "user_id"],
         });
-        for (const row of sentGroups) {
+        for (const row of sentRows) {
           if (row.entity_id) {
-            sentCountMap.set(row.entity_id, row._count._all);
+            const currentCount = sentCountMap.get(row.entity_id) ?? 0;
+            sentCountMap.set(row.entity_id, currentCount + 1);
           }
         }
 
-        // Count read logs per broadcast (excluding super-admin reads)
-        const readGroups = await prisma.broadcastRead.groupBy({
-          by: ["broadcast_id"],
+        // Count read logs per broadcast (excluding super-admin & users created after broadcast publish date)
+        const readLogs = await prisma.broadcastRead.findMany({
           where: {
             broadcast_id: { in: broadcastIds },
             ...(superAdminTypeIds.length > 0
               ? { user: { user_type_id: { notIn: superAdminTypeIds } } }
               : {}),
           },
-          _count: { _all: true },
+          select: {
+            broadcast_id: true,
+            user: { select: { created_at: true } },
+            broadcast: { select: { created_at: true, publish_at: true } },
+          },
         });
-        for (const row of readGroups) {
-          if (row.broadcast_id) {
-            readCountMap.set(row.broadcast_id, row._count._all);
+
+        for (const log of readLogs) {
+          const effectivePublishDate = log.broadcast?.publish_at || log.broadcast?.created_at;
+          if (!effectivePublishDate || !log.user?.created_at || log.user.created_at <= effectivePublishDate) {
+            const currentCount = readCountMap.get(log.broadcast_id) ?? 0;
+            readCountMap.set(log.broadcast_id, currentCount + 1);
           }
         }
       }
@@ -357,10 +400,25 @@ export class BroadcastService {
         updated_by: userId,
       });
 
-      // Replace audiences if provided
-      if (payload.audiences !== undefined) {
+      // Replace audiences if provided or if userTypeId / userTypeIds provided
+      const rawUserTypeId = (payload as any).userTypeId ?? (payload as any).userTypeIds;
+      if (payload.audiences !== undefined || rawUserTypeId !== undefined) {
+        let updateAudiences: Array<{ audienceType: string; targetId?: number | null }> = payload.audiences ? [...payload.audiences] : [];
+        if (rawUserTypeId !== undefined && rawUserTypeId !== null) {
+          const userTypeIdsArray: number[] = Array.isArray(rawUserTypeId) ? rawUserTypeId : [rawUserTypeId];
+          for (const utId of userTypeIdsArray) {
+            if (utId && typeof utId === "number") {
+              const exists = updateAudiences.some(
+                (a) => a.audienceType === "ROLE" && Number(a.targetId) === Number(utId)
+              );
+              if (!exists) {
+                updateAudiences.push({ audienceType: "ROLE", targetId: utId });
+              }
+            }
+          }
+        }
         await this.repository.deleteAudiences(tx, id);
-        await this.repository.createAudiences(tx, id, payload.audiences, userId);
+        await this.repository.createAudiences(tx, id, updateAudiences, userId);
       }
 
       // Replace attachments if provided
@@ -451,13 +509,31 @@ export class BroadcastService {
   // ─── READ TRACKING ─────────────────────────────────────────────────────────
 
   async markRead(broadcastId: number, userId: number) {
-    await this.getById(broadcastId);
+    const broadcast = await prisma.broadcastMaster.findUnique({
+      where: { id: broadcastId },
+      select: { created_at: true, publish_at: true },
+    });
+    if (!broadcast) {
+      const err = new Error(`Broadcast with id ${broadcastId} not found`);
+      (err as any).statusCode = 404;
+      throw err;
+    }
 
     const superAdmin = await isSuperAdminUser(userId);
     let result = null;
 
     if (!superAdmin) {
-      result = await this.repository.markRead(broadcastId, userId);
+      const user = await prisma.userMaster.findUnique({
+        where: { id: userId },
+        select: { created_at: true },
+      });
+      const effectivePublishDate = broadcast.publish_at || broadcast.created_at;
+      const isUserCreatedAfterPublish =
+        user?.created_at && effectivePublishDate && user.created_at > effectivePublishDate;
+
+      if (!isUserCreatedAfterPublish) {
+        result = await this.repository.markRead(broadcastId, userId);
+      }
     }
 
     // Sync matching in-app notification read state
@@ -522,6 +598,7 @@ export class BroadcastService {
             fileName: key.split("/").pop() ?? file.originalname,
             originalFileName: file.originalname,
             fileType: file.mimetype,
+            fileSize: file.size,           // actual bytes from multer
           };
         }
         if (!att.fileUrl) {
@@ -536,6 +613,7 @@ export class BroadcastService {
           fileName: null,
           originalFileName: null,
           fileType: "youtube",
+          fileSize: null,
         };
       })
     );

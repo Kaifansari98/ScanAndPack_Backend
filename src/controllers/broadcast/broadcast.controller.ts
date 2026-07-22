@@ -60,7 +60,12 @@ export class BroadcastController {
         });
       }
 
-      const data = await this.service.create(parsed.data, user.id, this.parseMultipartFiles(req));
+      const payloadData = {
+        ...parsed.data,
+        vendorId: parsed.data.vendorId ?? (user as any).vendor_id ?? (user as any).vendor?.id ?? null,
+      };
+
+      const data = await this.service.create(payloadData, user.id, this.parseMultipartFiles(req));
       return res.status(201).json({ success: true, message: "Broadcast created successfully", data });
     } catch (err: any) {
       return res.status(err.statusCode || 500).json({ success: false, message: err.message || "Something went wrong" });
