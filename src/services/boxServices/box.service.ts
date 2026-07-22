@@ -1405,6 +1405,15 @@ export const generateBoxPdfService = async (
     |--------------------------------------------------------------------------
     */
 
+    const packageNo = String(box.box_name || "").trim();
+
+const packageNoClass =
+  packageNo.length >= 4
+    ? "package-number package-number-4"
+    : packageNo.length === 3
+      ? "package-number package-number-3"
+      : "package-number";
+
     const logoHtml =
       logoUrl
         ? `
@@ -1703,11 +1712,10 @@ body {
 
 .qr-box {
   width: 100%;
-  height: 80px;
+  height: 58px;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* padding-top: 5px; */
 }
 
 .qr-img {
@@ -1719,19 +1727,37 @@ body {
 
 .package-number-box {
   width: 100%;
-  height: 35px;
+  height: 52px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  padding-bottom: 5px;
+  padding: 0 2px;
+  overflow: visible;
 }
 
 .package-number {
-  font-size: 48px;
-  line-height: 40px;
+  display: block;
+  max-width: 100%;
+  font-size: 46px;
+  line-height: 1;
   font-weight: 900;
   color: #231f20;
   letter-spacing: -2px;
+  text-align: center;
+  white-space: nowrap;
+  font-family: Arial Black, Arial, Helvetica, sans-serif;
+}
+
+/* for 3 digit package no */
+.package-number-3 {
+  font-size: 40px;
+  letter-spacing: -2px;
+}
+
+/* for 4 digit package no */
+.package-number-4 {
+  font-size: 32px;
+  letter-spacing: -1.5px;
 }
 
 /*
@@ -2206,11 +2232,9 @@ body {
           </div>
 
           <div class="package-number-box">
-            <span class="package-number">
-              ${escapeHtml(
-      box.box_name
-    )}
-            </span>
+            <span class="${packageNoClass}">
+  ${escapeHtml(packageNo)}
+</span>
           </div>
         </td>
       </tr>
@@ -8116,6 +8140,8 @@ export const generateProjectFullReportService = async (
     |--------------------------------------------------------------------------
     */
 
+    
+
     const logoHtml =
       logoUrl
         ? `
@@ -8375,6 +8401,15 @@ export const generateProjectFullReportService = async (
                 }
               );
 
+              const packageNo = String(box.packet_no || "").trim();
+
+const packageNoClass =
+  packageNo.length >= 4
+    ? "package-number package-number-4"
+    : packageNo.length === 3
+      ? "package-number package-number-3"
+      : "package-number";
+
             const componentRows =
               box.items
                 .map(
@@ -8532,11 +8567,9 @@ export const generateProjectFullReportService = async (
           </div>
 
           <div class="package-number-box">
-            <span class="package-number">
-              ${escapeHtml(
-              box.packet_no
-            )}
-            </span>
+           <span class="${packageNoClass}">
+  ${escapeHtml(packageNo)}
+</span>
           </div>
         </td>
       </tr>
@@ -9026,11 +9059,10 @@ body {
 
 .qr-box {
   width: 100%;
-  height: 80px;
+  height: 58px;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* padding-top: 5px; */
 }
 
 .qr-img {
@@ -9042,19 +9074,37 @@ body {
 
 .package-number-box {
   width: 100%;
-  height: 35px;
+  height: 52px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  padding-bottom: 5px;
+  padding: 0 2px;
+  overflow: visible;
 }
 
 .package-number {
-  font-size: 48px;
-  line-height: 40px;
+  display: block;
+  max-width: 100%;
+  font-size: 46px;
+  line-height: 1;
   font-weight: 900;
   color: #231f20;
   letter-spacing: -2px;
+  text-align: center;
+  white-space: nowrap;
+  font-family: Arial Black, Arial, Helvetica, sans-serif;
+}
+
+/* for 3 digit package no */
+.package-number-3 {
+  font-size: 40px;
+  letter-spacing: -2px;
+}
+
+/* for 4 digit package no */
+.package-number-4 {
+  font-size: 32px;
+  letter-spacing: -1.5px;
 }
 
 /*
