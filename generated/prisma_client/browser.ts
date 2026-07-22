@@ -883,11 +883,6 @@ export type PurchaseOrderSupplierAdditionalCost = Prisma.PurchaseOrderSupplierAd
  */
 export type VendorTypeMaster = Prisma.VendorTypeMasterModel
 /**
- * Model CompanyVendorStatusMaster
- * 
- */
-export type CompanyVendorStatusMaster = Prisma.CompanyVendorStatusMasterModel
-/**
  * Model CompanyVendorTypeMapping
  * 
  */

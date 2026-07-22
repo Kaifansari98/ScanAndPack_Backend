@@ -2259,7 +2259,7 @@ model CompanyVendorsMaster {
   alternate_email         String?
   gst_no                  String?      @unique
   pan_no                  String?      @unique
-  status_id               Int?
+  is_active               Boolean      @default(true)
   primary_contact_id      Int?
   created_at              DateTime     @default(now())
   created_by              Int
@@ -2276,7 +2276,6 @@ model CompanyVendorsMaster {
   default_payment_term_id Int?
   state                   StateMaster? @relation("CompanyVendorState", fields: [state_id], references: [id], onDelete: SetNull)
 
-  status         CompanyVendorStatusMaster?     @relation(fields: [status_id], references: [id])
   primaryContact CompanyVendorContactPerson?    @relation("CompanyVendorPrimaryContact", fields: [primary_contact_id], references: [id], onDelete: SetNull)
   vendorTypes    CompanyVendorTypeMapping[]
   contactPersons CompanyVendorContactPerson[]   @relation("CompanyVendorContacts")
@@ -2303,7 +2302,6 @@ model CompanyVendorsMaster {
 
   @@index([default_payment_term_id])
   @@index([state_id])
-  @@index([status_id])
   @@index([primary_contact_id])
 }
 
@@ -4462,22 +4460,6 @@ model VendorTypeMaster {
   is_deleted Boolean   @default(false) @map("is_deleted")
 
   @@map("VendorTypeMaster")
-}
-
-model CompanyVendorStatusMaster {
-  id             Int                    @id @default(autoincrement()) @map("status_id")
-  status_name    String                 @map("status_name")
-  companyVendors CompanyVendorsMaster[]
-
-  created_at DateTime  @default(now()) @map("created_at")
-  created_by Int       @map("created_by")
-  updated_at DateTime  @updatedAt @map("updated_at")
-  updated_by Int       @map("updated_by")
-  deleted_at DateTime? @map("deleted_at")
-  deleted_by Int?      @map("deleted_by")
-  is_deleted Boolean   @default(false) @map("is_deleted")
-
-  @@map("CompanyVendorStatusMaster")
 }
 
 model CompanyVendorTypeMapping {
