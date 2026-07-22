@@ -70,6 +70,7 @@ export type VendorMasterMinAggregateOutputType = {
   is_self_assign_task_type_master_enabed: boolean | null
   is_email_noti_enabled: boolean | null
   is_in_app_noti_enabled: boolean | null
+  is_broadcast_enabled: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
   state_id: number | null
@@ -112,6 +113,7 @@ export type VendorMasterMaxAggregateOutputType = {
   is_self_assign_task_type_master_enabed: boolean | null
   is_email_noti_enabled: boolean | null
   is_in_app_noti_enabled: boolean | null
+  is_broadcast_enabled: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
   state_id: number | null
@@ -154,6 +156,7 @@ export type VendorMasterCountAggregateOutputType = {
   is_self_assign_task_type_master_enabed: number
   is_email_noti_enabled: number
   is_in_app_noti_enabled: number
+  is_broadcast_enabled: number
   createdAt: number
   updatedAt: number
   state_id: number
@@ -212,6 +215,7 @@ export type VendorMasterMinAggregateInputType = {
   is_self_assign_task_type_master_enabed?: true
   is_email_noti_enabled?: true
   is_in_app_noti_enabled?: true
+  is_broadcast_enabled?: true
   createdAt?: true
   updatedAt?: true
   state_id?: true
@@ -254,6 +258,7 @@ export type VendorMasterMaxAggregateInputType = {
   is_self_assign_task_type_master_enabed?: true
   is_email_noti_enabled?: true
   is_in_app_noti_enabled?: true
+  is_broadcast_enabled?: true
   createdAt?: true
   updatedAt?: true
   state_id?: true
@@ -296,6 +301,7 @@ export type VendorMasterCountAggregateInputType = {
   is_self_assign_task_type_master_enabed?: true
   is_email_noti_enabled?: true
   is_in_app_noti_enabled?: true
+  is_broadcast_enabled?: true
   createdAt?: true
   updatedAt?: true
   state_id?: true
@@ -425,6 +431,7 @@ export type VendorMasterGroupByOutputType = {
   is_self_assign_task_type_master_enabed: boolean
   is_email_noti_enabled: boolean
   is_in_app_noti_enabled: boolean
+  is_broadcast_enabled: boolean
   createdAt: Date
   updatedAt: Date
   state_id: number | null
@@ -490,6 +497,7 @@ export type VendorMasterWhereInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_email_noti_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_in_app_noti_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_broadcast_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
@@ -661,6 +669,7 @@ export type VendorMasterOrderByWithRelationInput = {
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
   is_email_noti_enabled?: Prisma.SortOrder
   is_in_app_noti_enabled?: Prisma.SortOrder
+  is_broadcast_enabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -835,6 +844,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   is_self_assign_task_type_master_enabed?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_email_noti_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_in_app_noti_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_broadcast_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
@@ -1006,6 +1016,7 @@ export type VendorMasterOrderByWithAggregationInput = {
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
   is_email_noti_enabled?: Prisma.SortOrder
   is_in_app_noti_enabled?: Prisma.SortOrder
+  is_broadcast_enabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1056,6 +1067,7 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_email_noti_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_in_app_noti_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
+  is_broadcast_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableWithAggregatesFilter<"VendorMaster"> | number | null
@@ -1097,6 +1109,7 @@ export type VendorMasterCreateInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -1267,6 +1280,7 @@ export type VendorMasterUncheckedCreateInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -1436,6 +1450,7 @@ export type VendorMasterUpdateInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1606,6 +1621,7 @@ export type VendorMasterUncheckedUpdateInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1776,6 +1792,7 @@ export type VendorMasterCreateManyInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -1817,6 +1834,7 @@ export type VendorMasterUpdateManyMutationInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1858,6 +1876,7 @@ export type VendorMasterUncheckedUpdateManyInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1900,6 +1919,7 @@ export type VendorMasterCountOrderByAggregateInput = {
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
   is_email_noti_enabled?: Prisma.SortOrder
   is_in_app_noti_enabled?: Prisma.SortOrder
+  is_broadcast_enabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrder
@@ -1949,6 +1969,7 @@ export type VendorMasterMaxOrderByAggregateInput = {
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
   is_email_noti_enabled?: Prisma.SortOrder
   is_in_app_noti_enabled?: Prisma.SortOrder
+  is_broadcast_enabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrder
@@ -1991,6 +2012,7 @@ export type VendorMasterMinOrderByAggregateInput = {
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
   is_email_noti_enabled?: Prisma.SortOrder
   is_in_app_noti_enabled?: Prisma.SortOrder
+  is_broadcast_enabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrder
@@ -2204,34 +2226,6 @@ export type VendorMasterUpdateOneRequiredWithoutBoxesNestedInput = {
   upsert?: Prisma.VendorMasterUpsertWithoutBoxesInput
   connect?: Prisma.VendorMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutBoxesInput, Prisma.VendorMasterUpdateWithoutBoxesInput>, Prisma.VendorMasterUncheckedUpdateWithoutBoxesInput>
-}
-
-export type VendorMasterCreateNestedOneWithoutBox_info_fieldsInput = {
-  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_fieldsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_fieldsInput>
-  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutBox_info_fieldsInput
-  connect?: Prisma.VendorMasterWhereUniqueInput
-}
-
-export type VendorMasterUpdateOneRequiredWithoutBox_info_fieldsNestedInput = {
-  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_fieldsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_fieldsInput>
-  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutBox_info_fieldsInput
-  upsert?: Prisma.VendorMasterUpsertWithoutBox_info_fieldsInput
-  connect?: Prisma.VendorMasterWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutBox_info_fieldsInput, Prisma.VendorMasterUpdateWithoutBox_info_fieldsInput>, Prisma.VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput>
-}
-
-export type VendorMasterCreateNestedOneWithoutBox_info_valuesInput = {
-  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_valuesInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_valuesInput>
-  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutBox_info_valuesInput
-  connect?: Prisma.VendorMasterWhereUniqueInput
-}
-
-export type VendorMasterUpdateOneRequiredWithoutBox_info_valuesNestedInput = {
-  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_valuesInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_valuesInput>
-  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutBox_info_valuesInput
-  upsert?: Prisma.VendorMasterUpsertWithoutBox_info_valuesInput
-  connect?: Prisma.VendorMasterWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutBox_info_valuesInput, Prisma.VendorMasterUpdateWithoutBox_info_valuesInput>, Prisma.VendorMasterUncheckedUpdateWithoutBox_info_valuesInput>
 }
 
 export type VendorMasterCreateNestedOneWithoutScanItemsInput = {
@@ -3888,6 +3882,34 @@ export type VendorMasterUpdateOneRequiredWithoutPoSupplierAdditionalCostsNestedI
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutPoSupplierAdditionalCostsInput, Prisma.VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput>, Prisma.VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput>
 }
 
+export type VendorMasterCreateNestedOneWithoutBox_info_fieldsInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_fieldsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_fieldsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutBox_info_fieldsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutBox_info_fieldsNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_fieldsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_fieldsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutBox_info_fieldsInput
+  upsert?: Prisma.VendorMasterUpsertWithoutBox_info_fieldsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutBox_info_fieldsInput, Prisma.VendorMasterUpdateWithoutBox_info_fieldsInput>, Prisma.VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput>
+}
+
+export type VendorMasterCreateNestedOneWithoutBox_info_valuesInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_valuesInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_valuesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutBox_info_valuesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutBox_info_valuesNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_valuesInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_valuesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutBox_info_valuesInput
+  upsert?: Prisma.VendorMasterUpsertWithoutBox_info_valuesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutBox_info_valuesInput, Prisma.VendorMasterUpdateWithoutBox_info_valuesInput>, Prisma.VendorMasterUncheckedUpdateWithoutBox_info_valuesInput>
+}
+
 export type VendorMasterCreateNestedOneWithoutBroadcastsInput = {
   create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutBroadcastsInput, Prisma.VendorMasterUncheckedCreateWithoutBroadcastsInput>
   connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutBroadcastsInput
@@ -3933,6 +3955,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -4102,6 +4125,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -4286,6 +4310,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4455,6 +4480,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4623,6 +4649,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -4792,6 +4819,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -4976,6 +5004,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5145,6 +5174,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5313,6 +5343,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -5482,6 +5513,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -5666,6 +5698,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5835,6 +5868,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6003,6 +6037,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -6172,6 +6207,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -6356,6 +6392,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6525,6 +6562,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6693,6 +6731,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -6862,6 +6901,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -7046,6 +7086,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7215,6 +7256,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7383,6 +7425,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -7552,6 +7595,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -7736,6 +7780,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7905,6 +7950,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8073,6 +8119,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -8242,6 +8289,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -8426,6 +8474,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8595,6 +8644,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8763,6 +8813,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -8932,6 +8983,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -9116,6 +9168,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9285,6 +9338,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -9453,6 +9507,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -9622,6 +9677,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -9806,6 +9862,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9975,6 +10032,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -10143,6 +10201,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -10312,6 +10371,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -10496,6 +10556,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10665,6 +10726,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -10801,1386 +10863,6 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
-  broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
-}
-
-export type VendorMasterCreateWithoutBox_info_fieldsInput = {
-  vendor_name: string
-  vendor_code: string
-  vendor_report_code?: string | null
-  primary_contact_number: string
-  primary_contact_email: string
-  primary_contact_name: string
-  country_code: string
-  head_office_id?: number | null
-  status?: string
-  logo: string
-  icon?: string | null
-  login_image?: string | null
-  time_zone: string
-  subdomain_url?: string | null
-  IsAccountLocInEnabled?: boolean | null
-  is_crm_enabled?: boolean
-  is_custom_doc_nomenclature_enabled?: boolean
-  is_inventory_enabled?: boolean
-  is_tracktrace_enabled?: boolean
-  is_approval_task_enabled?: boolean
-  is_client_visit_enabled?: boolean
-  is_this_vendor_is_custom_usertype_only?: boolean | null
-  is_year_wise_lead_code_enabled?: boolean
-  handlesLargeScaleProjects?: boolean
-  eligible_booking_days?: number | null
-  is_self_assign_task_type_master_enabed?: boolean
-  is_email_noti_enabled?: boolean
-  is_in_app_noti_enabled?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  gst_no?: string | null
-  toll_free_no?: string | null
-  website_link?: string | null
-  tag_line?: string | null
-  address?: string | null
-  pincode?: string | null
-  city?: string | null
-  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
-  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
-  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
-  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
-  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
-  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
-  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
-  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
-  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
-  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
-  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
-  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
-  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
-  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
-  carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
-  shutterMaterials?: Prisma.ShutterMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
-  leadSpecifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutVendorInput
-  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutVendorInput
-  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutVendorInput
-  leadHardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutVendorInput
-  lightCarcasTypes?: Prisma.LightCarcasTypeMasterCreateNestedManyWithoutVendorInput
-  lightCarcasUnits?: Prisma.LightCarcasUnitMasterCreateNestedManyWithoutVendorInput
-  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutVendorInput
-  otherAppliances?: Prisma.OtherAppliancesMasterCreateNestedManyWithoutVendorInput
-  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutVendorInput
-  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
-  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
-  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
-  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
-  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
-  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
-  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
-  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
-  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
-  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
-  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
-  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
-  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
-  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
-  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
-  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
-  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
-  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
-  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
-  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutVendorInput
-  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutVendorInput
-  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
-  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutVendorInput
-  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
-  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
-  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
-  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
-  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
-  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
-  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
-  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
-  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
-  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
-  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
-  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
-  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
-  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
-  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
-  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
-  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
-  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
-  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
-  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
-  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
-  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
-  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
-  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutVendorInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutVendorInput
-  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
-  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
-  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
-  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
-  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
-  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
-  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
-  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
-  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
-  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
-  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
-  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
-  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
-  additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
-  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
-  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
-  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
-  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
-  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
-  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
-  units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
-  itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
-  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
-  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
-  clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
-  clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
-  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
-  broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
-}
-
-export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
-  id?: number
-  vendor_name: string
-  vendor_code: string
-  vendor_report_code?: string | null
-  primary_contact_number: string
-  primary_contact_email: string
-  primary_contact_name: string
-  country_code: string
-  head_office_id?: number | null
-  status?: string
-  logo: string
-  icon?: string | null
-  login_image?: string | null
-  time_zone: string
-  subdomain_url?: string | null
-  IsAccountLocInEnabled?: boolean | null
-  is_crm_enabled?: boolean
-  is_custom_doc_nomenclature_enabled?: boolean
-  is_inventory_enabled?: boolean
-  is_tracktrace_enabled?: boolean
-  is_approval_task_enabled?: boolean
-  is_client_visit_enabled?: boolean
-  is_this_vendor_is_custom_usertype_only?: boolean | null
-  is_year_wise_lead_code_enabled?: boolean
-  handlesLargeScaleProjects?: boolean
-  eligible_booking_days?: number | null
-  is_self_assign_task_type_master_enabed?: boolean
-  is_email_noti_enabled?: boolean
-  is_in_app_noti_enabled?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  state_id?: number | null
-  gst_no?: string | null
-  toll_free_no?: string | null
-  website_link?: string | null
-  tag_line?: string | null
-  address?: string | null
-  pincode?: string | null
-  city?: string | null
-  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
-  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
-  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
-  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
-  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
-  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
-  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
-  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
-  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
-  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
-  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
-  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
-  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutVendorInput
-  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
-  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
-  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutVendorInput
-  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedCreateNestedManyWithoutVendorInput
-  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutVendorInput
-  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedCreateNestedManyWithoutVendorInput
-  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutVendorInput
-  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
-  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
-  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
-  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
-  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
-  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
-  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
-  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
-  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
-  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
-  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
-  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
-  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
-  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
-  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
-  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
-  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
-  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutVendorInput
-  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutVendorInput
-  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutVendorInput
-  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
-  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
-  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
-  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
-  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
-  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
-  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
-  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
-  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
-  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
-  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
-  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
-  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
-  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
-  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
-  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
-  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
-  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
-  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
-  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutVendorInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutVendorInput
-  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
-  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
-  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
-  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
-  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
-  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
-  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
-  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
-  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
-  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
-  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
-  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
-  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
-  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
-  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
-  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
-  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
-  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
-  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
-  units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
-  itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
-  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
-  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
-  clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
-  broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
-}
-
-export type VendorMasterCreateOrConnectWithoutBox_info_fieldsInput = {
-  where: Prisma.VendorMasterWhereUniqueInput
-  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_fieldsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_fieldsInput>
-}
-
-export type VendorMasterUpsertWithoutBox_info_fieldsInput = {
-  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutBox_info_fieldsInput, Prisma.VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput>
-  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_fieldsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_fieldsInput>
-  where?: Prisma.VendorMasterWhereInput
-}
-
-export type VendorMasterUpdateToOneWithWhereWithoutBox_info_fieldsInput = {
-  where?: Prisma.VendorMasterWhereInput
-  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutBox_info_fieldsInput, Prisma.VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput>
-}
-
-export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
-  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
-  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
-  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
-  country_code?: Prisma.StringFieldUpdateOperationsInput | string
-  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  logo?: Prisma.StringFieldUpdateOperationsInput | string
-  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
-  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
-  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
-  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
-  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
-  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
-  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
-  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
-  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
-  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
-  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
-  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
-  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
-  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
-  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
-  carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
-  shutterMaterials?: Prisma.ShutterMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
-  leadSpecifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutVendorNestedInput
-  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutVendorNestedInput
-  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutVendorNestedInput
-  leadHardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutVendorNestedInput
-  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUpdateManyWithoutVendorNestedInput
-  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUpdateManyWithoutVendorNestedInput
-  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutVendorNestedInput
-  otherAppliances?: Prisma.OtherAppliancesMasterUpdateManyWithoutVendorNestedInput
-  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutVendorNestedInput
-  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
-  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
-  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
-  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
-  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
-  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
-  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
-  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
-  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
-  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
-  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
-  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
-  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
-  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
-  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
-  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
-  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
-  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
-  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
-  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutVendorNestedInput
-  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutVendorNestedInput
-  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
-  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutVendorNestedInput
-  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
-  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
-  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
-  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
-  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
-  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
-  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
-  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
-  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
-  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
-  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
-  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
-  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
-  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
-  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
-  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
-  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
-  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
-  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
-  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
-  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
-  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
-  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
-  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutVendorNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutVendorNestedInput
-  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
-  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
-  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
-  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
-  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
-  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
-  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
-  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
-  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
-  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
-  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
-  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
-  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
-  additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
-  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
-  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
-  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
-  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
-  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
-  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
-  units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
-  itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
-  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
-  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
-  clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
-  clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
-  broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
-}
-
-export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
-  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
-  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
-  country_code?: Prisma.StringFieldUpdateOperationsInput | string
-  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  logo?: Prisma.StringFieldUpdateOperationsInput | string
-  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
-  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
-  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
-  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
-  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
-  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
-  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
-  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
-  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
-  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
-  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
-  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
-  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
-  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutVendorNestedInput
-  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
-  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
-  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutVendorNestedInput
-  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedUpdateManyWithoutVendorNestedInput
-  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutVendorNestedInput
-  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedUpdateManyWithoutVendorNestedInput
-  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutVendorNestedInput
-  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
-  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
-  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
-  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
-  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
-  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
-  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
-  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
-  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
-  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
-  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
-  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
-  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
-  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
-  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
-  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
-  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
-  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutVendorNestedInput
-  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutVendorNestedInput
-  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutVendorNestedInput
-  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
-  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
-  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
-  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
-  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
-  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
-  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
-  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
-  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
-  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
-  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
-  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
-  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
-  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
-  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
-  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
-  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
-  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutVendorNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutVendorNestedInput
-  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
-  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
-  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
-  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
-  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
-  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
-  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
-  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
-  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
-  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
-  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
-  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
-  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
-  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
-  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
-  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
-  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
-  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
-  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
-  units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
-  itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
-  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
-  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
-  clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
-  broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
-}
-
-export type VendorMasterCreateWithoutBox_info_valuesInput = {
-  vendor_name: string
-  vendor_code: string
-  vendor_report_code?: string | null
-  primary_contact_number: string
-  primary_contact_email: string
-  primary_contact_name: string
-  country_code: string
-  head_office_id?: number | null
-  status?: string
-  logo: string
-  icon?: string | null
-  login_image?: string | null
-  time_zone: string
-  subdomain_url?: string | null
-  IsAccountLocInEnabled?: boolean | null
-  is_crm_enabled?: boolean
-  is_custom_doc_nomenclature_enabled?: boolean
-  is_inventory_enabled?: boolean
-  is_tracktrace_enabled?: boolean
-  is_approval_task_enabled?: boolean
-  is_client_visit_enabled?: boolean
-  is_this_vendor_is_custom_usertype_only?: boolean | null
-  is_year_wise_lead_code_enabled?: boolean
-  handlesLargeScaleProjects?: boolean
-  eligible_booking_days?: number | null
-  is_self_assign_task_type_master_enabed?: boolean
-  is_email_noti_enabled?: boolean
-  is_in_app_noti_enabled?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  gst_no?: string | null
-  toll_free_no?: string | null
-  website_link?: string | null
-  tag_line?: string | null
-  address?: string | null
-  pincode?: string | null
-  city?: string | null
-  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
-  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
-  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
-  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
-  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
-  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
-  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
-  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
-  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
-  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
-  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
-  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
-  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
-  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
-  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
-  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
-  carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
-  shutterMaterials?: Prisma.ShutterMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
-  leadSpecifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutVendorInput
-  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutVendorInput
-  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutVendorInput
-  leadHardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutVendorInput
-  lightCarcasTypes?: Prisma.LightCarcasTypeMasterCreateNestedManyWithoutVendorInput
-  lightCarcasUnits?: Prisma.LightCarcasUnitMasterCreateNestedManyWithoutVendorInput
-  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutVendorInput
-  otherAppliances?: Prisma.OtherAppliancesMasterCreateNestedManyWithoutVendorInput
-  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutVendorInput
-  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
-  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
-  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
-  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
-  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
-  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
-  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
-  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
-  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
-  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
-  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
-  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
-  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
-  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
-  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
-  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
-  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
-  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
-  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
-  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
-  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
-  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
-  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
-  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
-  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
-  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutVendorInput
-  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutVendorInput
-  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
-  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutVendorInput
-  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
-  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
-  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
-  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
-  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
-  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
-  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
-  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
-  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
-  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
-  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
-  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
-  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
-  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
-  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
-  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
-  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
-  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
-  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
-  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
-  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
-  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
-  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
-  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
-  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutVendorInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutVendorInput
-  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
-  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
-  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
-  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
-  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
-  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
-  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
-  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
-  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
-  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
-  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
-  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
-  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
-  additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
-  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
-  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
-  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
-  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
-  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
-  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
-  units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
-  itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
-  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
-  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
-  clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
-  clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
-  broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
-}
-
-export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
-  id?: number
-  vendor_name: string
-  vendor_code: string
-  vendor_report_code?: string | null
-  primary_contact_number: string
-  primary_contact_email: string
-  primary_contact_name: string
-  country_code: string
-  head_office_id?: number | null
-  status?: string
-  logo: string
-  icon?: string | null
-  login_image?: string | null
-  time_zone: string
-  subdomain_url?: string | null
-  IsAccountLocInEnabled?: boolean | null
-  is_crm_enabled?: boolean
-  is_custom_doc_nomenclature_enabled?: boolean
-  is_inventory_enabled?: boolean
-  is_tracktrace_enabled?: boolean
-  is_approval_task_enabled?: boolean
-  is_client_visit_enabled?: boolean
-  is_this_vendor_is_custom_usertype_only?: boolean | null
-  is_year_wise_lead_code_enabled?: boolean
-  handlesLargeScaleProjects?: boolean
-  eligible_booking_days?: number | null
-  is_self_assign_task_type_master_enabed?: boolean
-  is_email_noti_enabled?: boolean
-  is_in_app_noti_enabled?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  state_id?: number | null
-  gst_no?: string | null
-  toll_free_no?: string | null
-  website_link?: string | null
-  tag_line?: string | null
-  address?: string | null
-  pincode?: string | null
-  city?: string | null
-  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
-  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
-  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
-  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
-  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
-  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
-  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
-  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
-  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
-  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
-  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
-  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
-  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutVendorInput
-  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
-  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
-  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutVendorInput
-  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedCreateNestedManyWithoutVendorInput
-  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutVendorInput
-  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedCreateNestedManyWithoutVendorInput
-  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutVendorInput
-  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
-  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
-  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
-  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
-  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
-  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
-  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
-  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
-  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
-  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
-  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
-  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
-  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
-  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
-  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
-  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
-  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
-  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
-  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
-  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
-  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutVendorInput
-  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutVendorInput
-  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutVendorInput
-  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
-  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
-  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
-  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
-  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
-  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
-  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
-  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
-  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
-  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
-  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
-  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
-  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
-  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
-  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
-  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
-  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
-  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
-  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
-  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutVendorInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutVendorInput
-  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
-  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
-  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
-  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
-  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
-  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
-  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
-  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
-  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
-  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
-  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
-  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
-  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
-  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
-  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
-  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
-  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
-  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
-  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
-  units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
-  itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
-  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
-  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
-  clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
-  clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
-  broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
-}
-
-export type VendorMasterCreateOrConnectWithoutBox_info_valuesInput = {
-  where: Prisma.VendorMasterWhereUniqueInput
-  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_valuesInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_valuesInput>
-}
-
-export type VendorMasterUpsertWithoutBox_info_valuesInput = {
-  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutBox_info_valuesInput, Prisma.VendorMasterUncheckedUpdateWithoutBox_info_valuesInput>
-  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_valuesInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_valuesInput>
-  where?: Prisma.VendorMasterWhereInput
-}
-
-export type VendorMasterUpdateToOneWithWhereWithoutBox_info_valuesInput = {
-  where?: Prisma.VendorMasterWhereInput
-  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutBox_info_valuesInput, Prisma.VendorMasterUncheckedUpdateWithoutBox_info_valuesInput>
-}
-
-export type VendorMasterUpdateWithoutBox_info_valuesInput = {
-  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
-  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
-  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
-  country_code?: Prisma.StringFieldUpdateOperationsInput | string
-  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  logo?: Prisma.StringFieldUpdateOperationsInput | string
-  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
-  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
-  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
-  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
-  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
-  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
-  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
-  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
-  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
-  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
-  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
-  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
-  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
-  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
-  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
-  carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
-  shutterMaterials?: Prisma.ShutterMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
-  leadSpecifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutVendorNestedInput
-  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutVendorNestedInput
-  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutVendorNestedInput
-  leadHardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutVendorNestedInput
-  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUpdateManyWithoutVendorNestedInput
-  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUpdateManyWithoutVendorNestedInput
-  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutVendorNestedInput
-  otherAppliances?: Prisma.OtherAppliancesMasterUpdateManyWithoutVendorNestedInput
-  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutVendorNestedInput
-  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
-  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
-  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
-  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
-  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
-  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
-  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
-  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
-  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
-  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
-  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
-  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
-  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
-  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
-  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
-  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
-  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
-  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
-  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
-  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
-  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
-  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
-  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutVendorNestedInput
-  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutVendorNestedInput
-  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
-  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutVendorNestedInput
-  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
-  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
-  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
-  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
-  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
-  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
-  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
-  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
-  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
-  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
-  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
-  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
-  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
-  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
-  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
-  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
-  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
-  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
-  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
-  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
-  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
-  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
-  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
-  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
-  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutVendorNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutVendorNestedInput
-  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
-  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
-  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
-  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
-  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
-  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
-  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
-  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
-  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
-  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
-  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
-  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
-  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
-  additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
-  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
-  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
-  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
-  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
-  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
-  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
-  units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
-  itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
-  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
-  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
-  clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
-  clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
-  broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
-}
-
-export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
-  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
-  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
-  country_code?: Prisma.StringFieldUpdateOperationsInput | string
-  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  logo?: Prisma.StringFieldUpdateOperationsInput | string
-  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
-  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
-  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
-  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
-  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
-  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
-  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
-  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
-  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
-  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
-  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
-  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
-  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
-  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
-  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
-  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
-  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
-  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutVendorNestedInput
-  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
-  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
-  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutVendorNestedInput
-  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedUpdateManyWithoutVendorNestedInput
-  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutVendorNestedInput
-  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedUpdateManyWithoutVendorNestedInput
-  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutVendorNestedInput
-  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
-  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
-  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
-  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
-  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
-  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
-  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
-  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
-  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
-  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
-  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
-  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
-  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
-  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
-  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
-  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
-  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
-  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
-  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
-  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
-  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
-  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
-  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
-  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
-  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
-  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
-  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
-  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
-  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutVendorNestedInput
-  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutVendorNestedInput
-  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutVendorNestedInput
-  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
-  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
-  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
-  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
-  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
-  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
-  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
-  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
-  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
-  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
-  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
-  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
-  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
-  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
-  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
-  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
-  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
-  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
-  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutVendorNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutVendorNestedInput
-  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
-  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
-  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
-  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
-  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
-  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
-  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
-  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
-  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
-  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
-  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
-  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
-  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
-  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
-  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
-  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
-  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
-  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
-  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
-  units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
-  itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
-  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
-  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
-  clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
-  clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
 }
 
@@ -12213,6 +10895,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -12382,6 +11065,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -12566,6 +11250,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12735,6 +11420,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -12903,6 +11589,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -13072,6 +11759,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -13256,6 +11944,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13425,6 +12114,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -13593,6 +12283,7 @@ export type VendorMasterCreateWithoutClientsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -13762,6 +12453,7 @@ export type VendorMasterUncheckedCreateWithoutClientsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -13946,6 +12638,7 @@ export type VendorMasterUpdateWithoutClientsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14115,6 +12808,7 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -14283,6 +12977,7 @@ export type VendorMasterCreateWithoutClientTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -14452,6 +13147,7 @@ export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -14636,6 +13332,7 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14805,6 +13502,7 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -14973,6 +13671,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -15142,6 +13841,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -15326,6 +14026,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15495,6 +14196,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -15663,6 +14365,7 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -15832,6 +14535,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -16016,6 +14720,7 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16185,6 +14890,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -16353,6 +15059,7 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -16522,6 +15229,7 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -16706,6 +15414,7 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16875,6 +15584,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -17043,6 +15753,7 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -17212,6 +15923,7 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -17396,6 +16108,7 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17565,6 +16278,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -17733,6 +16447,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -17902,6 +16617,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -18086,6 +16802,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18255,6 +16972,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -18423,6 +17141,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -18592,6 +17311,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -18776,6 +17496,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18945,6 +17666,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -19113,6 +17835,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -19282,6 +18005,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -19466,6 +18190,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -19635,6 +18360,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -19803,6 +18529,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -19972,6 +18699,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -20156,6 +18884,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20325,6 +19054,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -20493,6 +19223,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -20662,6 +19393,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -20846,6 +19578,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -21015,6 +19748,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -21183,6 +19917,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -21352,6 +20087,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -21536,6 +20272,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -21705,6 +20442,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -21873,6 +20611,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -22042,6 +20781,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -22226,6 +20966,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -22395,6 +21136,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -22563,6 +21305,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -22732,6 +21475,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -22916,6 +21660,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -23085,6 +21830,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -23253,6 +21999,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -23422,6 +22169,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -23606,6 +22354,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -23775,6 +22524,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -23943,6 +22693,7 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -24112,6 +22863,7 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -24296,6 +23048,7 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -24465,6 +23218,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -24633,6 +23387,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -24802,6 +23557,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -24986,6 +23742,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -25155,6 +23912,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -25323,6 +24081,7 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -25492,6 +24251,7 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -25676,6 +24436,7 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -25845,6 +24606,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -26013,6 +24775,7 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -26182,6 +24945,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -26366,6 +25130,7 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -26535,6 +25300,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -26703,6 +25469,7 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -26872,6 +25639,7 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -27056,6 +25824,7 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27225,6 +25994,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -27393,6 +26163,7 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -27562,6 +26333,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -27746,6 +26518,7 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27915,6 +26688,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -28083,6 +26857,7 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -28252,6 +27027,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -28436,6 +27212,7 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -28605,6 +27382,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -28773,6 +27551,7 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -28942,6 +27721,7 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -29126,6 +27906,7 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -29295,6 +28076,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -29463,6 +28245,7 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -29632,6 +28415,7 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -29816,6 +28600,7 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -29985,6 +28770,7 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -30153,6 +28939,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -30322,6 +29109,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -30506,6 +29294,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -30675,6 +29464,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -30843,6 +29633,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -31012,6 +29803,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -31196,6 +29988,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -31365,6 +30158,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -31533,6 +30327,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -31702,6 +30497,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -31886,6 +30682,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -32055,6 +30852,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -32223,6 +31021,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -32392,6 +31191,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -32576,6 +31376,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -32745,6 +31546,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -32913,6 +31715,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -33082,6 +31885,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -33266,6 +32070,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -33435,6 +32240,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -33603,6 +32409,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -33772,6 +32579,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -33956,6 +32764,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -34125,6 +32934,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -34293,6 +33103,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -34462,6 +33273,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -34646,6 +33458,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -34815,6 +33628,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -34983,6 +33797,7 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -35152,6 +33967,7 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -35336,6 +34152,7 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -35505,6 +34322,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -35673,6 +34491,7 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -35842,6 +34661,7 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -36026,6 +34846,7 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -36195,6 +35016,7 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -36363,6 +35185,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -36532,6 +35355,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -36716,6 +35540,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -36885,6 +35710,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -37053,6 +35879,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -37222,6 +36049,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -37406,6 +36234,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -37575,6 +36404,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -37743,6 +36573,7 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -37912,6 +36743,7 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -38096,6 +36928,7 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -38265,6 +37098,7 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -38433,6 +37267,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -38602,6 +37437,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -38786,6 +37622,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -38955,6 +37792,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -39123,6 +37961,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -39292,6 +38131,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -39476,6 +38316,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -39645,6 +38486,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -39813,6 +38655,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -39982,6 +38825,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -40166,6 +39010,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -40335,6 +39180,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -40503,6 +39349,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -40672,6 +39519,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -40856,6 +39704,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -41025,6 +39874,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -41193,6 +40043,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -41362,6 +40213,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -41546,6 +40398,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -41715,6 +40568,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -41883,6 +40737,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -42052,6 +40907,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -42236,6 +41092,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -42405,6 +41262,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -42573,6 +41431,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -42742,6 +41601,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -42926,6 +41786,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -43095,6 +41956,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -43263,6 +42125,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -43432,6 +42295,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -43616,6 +42480,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -43785,6 +42650,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -43953,6 +42819,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -44122,6 +42989,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -44306,6 +43174,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -44475,6 +43344,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -44643,6 +43513,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -44812,6 +43683,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -44996,6 +43868,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -45165,6 +44038,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -45333,6 +44207,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -45502,6 +44377,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -45686,6 +44562,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -45855,6 +44732,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -46023,6 +44901,7 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -46192,6 +45071,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -46376,6 +45256,7 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -46545,6 +45426,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -46713,6 +45595,7 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -46882,6 +45765,7 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -47066,6 +45950,7 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -47235,6 +46120,7 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -47403,6 +46289,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -47572,6 +46459,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -47756,6 +46644,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -47925,6 +46814,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -48093,6 +46983,7 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -48262,6 +47153,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -48446,6 +47338,7 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -48615,6 +47508,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -48783,6 +47677,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -48952,6 +47847,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -49136,6 +48032,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -49305,6 +48202,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -49473,6 +48371,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -49642,6 +48541,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -49826,6 +48726,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -49995,6 +48896,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -50163,6 +49065,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -50332,6 +49235,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -50516,6 +49420,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -50685,6 +49590,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -50853,6 +49759,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -51022,6 +49929,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -51206,6 +50114,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -51375,6 +50284,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -51543,6 +50453,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -51712,6 +50623,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -51896,6 +50808,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -52065,6 +50978,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -52233,6 +51147,7 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -52402,6 +51317,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -52586,6 +51502,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -52755,6 +51672,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -52923,6 +51841,7 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -53092,6 +52011,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -53276,6 +52196,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -53445,6 +52366,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -53613,6 +52535,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -53782,6 +52705,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -53966,6 +52890,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -54135,6 +53060,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -54303,6 +53229,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -54472,6 +53399,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -54656,6 +53584,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -54825,6 +53754,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -54993,6 +53923,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -55162,6 +54093,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -55346,6 +54278,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -55515,6 +54448,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -55683,6 +54617,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -55852,6 +54787,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -56036,6 +54972,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -56205,6 +55142,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -56373,6 +55311,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -56542,6 +55481,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -56726,6 +55666,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -56895,6 +55836,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -57063,6 +56005,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -57232,6 +56175,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -57416,6 +56360,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -57585,6 +56530,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -57753,6 +56699,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -57922,6 +56869,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -58106,6 +57054,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -58275,6 +57224,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -58443,6 +57393,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -58612,6 +57563,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -58796,6 +57748,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -58965,6 +57918,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -59133,6 +58087,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -59302,6 +58257,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -59486,6 +58442,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -59655,6 +58612,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -59823,6 +58781,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -59992,6 +58951,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -60176,6 +59136,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -60345,6 +59306,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -60513,6 +59475,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -60682,6 +59645,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -60866,6 +59830,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -61035,6 +60000,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -61203,6 +60169,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -61372,6 +60339,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -61556,6 +60524,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -61725,6 +60694,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -61893,6 +60863,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -62062,6 +61033,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -62246,6 +61218,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -62415,6 +61388,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -62583,6 +61557,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -62752,6 +61727,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -62936,6 +61912,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -63105,6 +62082,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -63273,6 +62251,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -63442,6 +62421,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -63626,6 +62606,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -63795,6 +62776,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -63963,6 +62945,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -64132,6 +63115,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -64316,6 +63300,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -64485,6 +63470,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -64653,6 +63639,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -64822,6 +63809,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -65006,6 +63994,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -65175,6 +64164,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -65343,6 +64333,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -65512,6 +64503,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -65696,6 +64688,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -65865,6 +64858,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -66033,6 +65027,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -66202,6 +65197,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -66386,6 +65382,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -66555,6 +65552,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -66723,6 +65721,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -66892,6 +65891,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -67076,6 +66076,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -67245,6 +66246,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -67413,6 +66415,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -67582,6 +66585,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -67766,6 +66770,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -67935,6 +66940,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -68103,6 +67109,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -68272,6 +67279,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -68456,6 +67464,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -68625,6 +67634,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -68793,6 +67803,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -68962,6 +67973,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -69146,6 +68158,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -69315,6 +68328,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -69483,6 +68497,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -69652,6 +68667,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -69836,6 +68852,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -70005,6 +69022,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -70173,6 +69191,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -70342,6 +69361,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -70526,6 +69546,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -70695,6 +69716,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -70863,6 +69885,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -71032,6 +70055,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -71216,6 +70240,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -71385,6 +70410,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -71553,6 +70579,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -71722,6 +70749,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -71906,6 +70934,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -72075,6 +71104,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -72243,6 +71273,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -72412,6 +71443,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -72596,6 +71628,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -72765,6 +71798,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -72933,6 +71967,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -73102,6 +72137,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -73286,6 +72322,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -73455,6 +72492,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -73623,6 +72661,7 @@ export type VendorMasterCreateWithoutStateInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -73792,6 +72831,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -73990,6 +73030,7 @@ export type VendorMasterScalarWhereInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_email_noti_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_in_app_noti_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_broadcast_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
@@ -74031,6 +73072,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -74200,6 +73242,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -74384,6 +73427,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -74553,6 +73597,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -74721,6 +73766,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -74890,6 +73936,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -75074,6 +74121,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -75243,6 +74291,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -75411,6 +74460,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -75580,6 +74630,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -75764,6 +74815,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -75933,6 +74985,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -76101,6 +75154,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -76270,6 +75324,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -76454,6 +75509,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -76623,6 +75679,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -76791,6 +75848,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -76960,6 +76018,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -77144,6 +76203,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -77313,6 +76373,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -77481,6 +76542,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -77650,6 +76712,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -77834,6 +76897,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -78003,6 +77067,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -78171,6 +77236,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -78340,6 +77406,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -78524,6 +77591,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -78693,6 +77761,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -78861,6 +77930,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -79030,6 +78100,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -79214,6 +78285,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -79383,6 +78455,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -79551,6 +78624,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -79720,6 +78794,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -79904,6 +78979,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -80073,6 +79149,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -80241,6 +79318,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -80410,6 +79488,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -80594,6 +79673,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -80763,6 +79843,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -80931,6 +80012,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -81100,6 +80182,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -81284,6 +80367,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -81453,6 +80537,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -81621,6 +80706,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -81790,6 +80876,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -81974,6 +81061,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -82143,6 +81231,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -82311,6 +81400,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -82480,6 +81570,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -82664,6 +81755,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -82833,6 +81925,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -83001,6 +82094,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -83170,6 +82264,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -83354,6 +82449,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -83523,6 +82619,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -83691,6 +82788,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -83860,6 +82958,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -84044,6 +83143,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -84213,6 +83313,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -84381,6 +83482,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -84550,6 +83652,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -84734,6 +83837,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -84903,6 +84007,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -85071,6 +84176,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -85240,6 +84346,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -85424,6 +84531,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -85593,6 +84701,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -85761,6 +84870,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -85930,6 +85040,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -86114,6 +85225,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -86283,6 +85395,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -86451,6 +85564,7 @@ export type VendorMasterCreateWithoutUnitsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -86620,6 +85734,7 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -86804,6 +85919,7 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -86973,6 +86089,7 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -87141,6 +86258,7 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -87310,6 +86428,7 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -87494,6 +86613,7 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -87663,6 +86783,7 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -87831,6 +86952,7 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -88000,6 +87122,7 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -88184,6 +87307,7 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -88353,6 +87477,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -88521,6 +87646,7 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -88690,6 +87816,7 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -88874,6 +88001,7 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -89043,6 +88171,7 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -89211,6 +88340,7 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -89380,6 +88510,7 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -89564,6 +88695,7 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -89733,6 +88865,7 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -89901,6 +89034,7 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -90070,6 +89204,7 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -90254,6 +89389,7 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -90423,6 +89559,7 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -90591,6 +89728,7 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -90760,6 +89898,7 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -90944,6 +90083,7 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -91113,6 +90253,7 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -91281,6 +90422,7 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -91450,6 +90592,7 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -91634,6 +90777,7 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -91803,6 +90947,7 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -91942,6 +91087,1394 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
 }
 
+export type VendorMasterCreateWithoutBox_info_fieldsInput = {
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  icon?: string | null
+  login_image?: string | null
+  time_zone: string
+  subdomain_url?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  icon?: string | null
+  login_image?: string | null
+  time_zone: string
+  subdomain_url?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutBox_info_fieldsInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_fieldsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_fieldsInput>
+}
+
+export type VendorMasterUpsertWithoutBox_info_fieldsInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutBox_info_fieldsInput, Prisma.VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_fieldsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_fieldsInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutBox_info_fieldsInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutBox_info_fieldsInput, Prisma.VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput>
+}
+
+export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutBox_info_valuesInput = {
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  icon?: string | null
+  login_image?: string | null
+  time_zone: string
+  subdomain_url?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  icon?: string | null
+  login_image?: string | null
+  time_zone: string
+  subdomain_url?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutBox_info_valuesInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_valuesInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_valuesInput>
+}
+
+export type VendorMasterUpsertWithoutBox_info_valuesInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutBox_info_valuesInput, Prisma.VendorMasterUncheckedUpdateWithoutBox_info_valuesInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_info_valuesInput, Prisma.VendorMasterUncheckedCreateWithoutBox_info_valuesInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutBox_info_valuesInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutBox_info_valuesInput, Prisma.VendorMasterUncheckedUpdateWithoutBox_info_valuesInput>
+}
+
+export type VendorMasterUpdateWithoutBox_info_valuesInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
+}
+
 export type VendorMasterCreateWithoutBroadcastsInput = {
   vendor_name: string
   vendor_code: string
@@ -91971,6 +92504,7 @@ export type VendorMasterCreateWithoutBroadcastsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -92140,6 +92674,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -92324,6 +92859,7 @@ export type VendorMasterUpdateWithoutBroadcastsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -92493,6 +93029,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -92662,6 +93199,7 @@ export type VendorMasterCreateManyStateInput = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   gst_no?: string | null
@@ -92702,6 +93240,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -92871,6 +93410,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -93040,6 +93580,7 @@ export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -94255,6 +94796,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
@@ -94427,6 +94969,7 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
@@ -94470,6 +95013,7 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
@@ -94513,6 +95057,7 @@ export type VendorMasterSelectScalar = {
   is_self_assign_task_type_master_enabed?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
@@ -94525,7 +95070,7 @@ export type VendorMasterSelectScalar = {
   city?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "icon" | "login_image" | "time_zone" | "subdomain_url" | "IsAccountLocInEnabled" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "is_client_visit_enabled" | "is_this_vendor_is_custom_usertype_only" | "is_year_wise_lead_code_enabled" | "handlesLargeScaleProjects" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "createdAt" | "updatedAt" | "state_id" | "gst_no" | "toll_free_no" | "website_link" | "tag_line" | "address" | "pincode" | "city", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "icon" | "login_image" | "time_zone" | "subdomain_url" | "IsAccountLocInEnabled" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "is_client_visit_enabled" | "is_this_vendor_is_custom_usertype_only" | "is_year_wise_lead_code_enabled" | "handlesLargeScaleProjects" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "is_broadcast_enabled" | "createdAt" | "updatedAt" | "state_id" | "gst_no" | "toll_free_no" | "website_link" | "tag_line" | "address" | "pincode" | "city", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
   boxes?: boolean | Prisma.VendorMaster$boxesArgs<ExtArgs>
@@ -94828,6 +95373,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     is_self_assign_task_type_master_enabed: boolean
     is_email_noti_enabled: boolean
     is_in_app_noti_enabled: boolean
+    is_broadcast_enabled: boolean
     createdAt: Date
     updatedAt: Date
     state_id: number | null
@@ -95419,6 +95965,7 @@ export interface VendorMasterFieldRefs {
   readonly is_self_assign_task_type_master_enabed: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_email_noti_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_in_app_noti_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
+  readonly is_broadcast_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"VendorMaster", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"VendorMaster", 'DateTime'>
   readonly state_id: Prisma.FieldRef<"VendorMaster", 'Int'>

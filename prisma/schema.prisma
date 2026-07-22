@@ -37,6 +37,7 @@ model VendorMaster {
   is_self_assign_task_type_master_enabed Boolean  @default(true)
   is_email_noti_enabled                  Boolean  @default(true)
   is_in_app_noti_enabled                 Boolean  @default(true)
+  is_broadcast_enabled                   Boolean  @default(false)
   createdAt                              DateTime @default(now())
   updatedAt                              DateTime @updatedAt
   state_id                               Int?
@@ -376,10 +377,10 @@ model UserMaster {
   poItemsDeleted                             PurchaseOrderItem[]                    @relation("POItemDeletedBy")
   stockHistories                             ProductStockHistory[]                  @relation("StockHistoryUser")
   architechuremasters                        Architechuremaster[]
-  leadSpecificationsCreated                  LeadSpecificationsMaster[]                     @relation("LeadSpecificationsCreatedBy")
-  leadCarcassMaterialMappingsCreated         LeadCarcassMaterialMapping[]                   @relation("LeadCarcassMaterialMappingCreatedBy")
-  leadShutterMaterialMappingsCreated         LeadShutterMaterialMapping[]                   @relation("LeadShutterMaterialMappingCreatedBy")
-  leadHardwareMappingsCreated                LeadHardwareMapping[]                          @relation("LeadHardwareMappingCreatedBy")
+  leadSpecificationsCreated                  LeadSpecificationsMaster[]             @relation("LeadSpecificationsCreatedBy")
+  leadCarcassMaterialMappingsCreated         LeadCarcassMaterialMapping[]           @relation("LeadCarcassMaterialMappingCreatedBy")
+  leadShutterMaterialMappingsCreated         LeadShutterMaterialMapping[]           @relation("LeadShutterMaterialMappingCreatedBy")
+  leadHardwareMappingsCreated                LeadHardwareMapping[]                  @relation("LeadHardwareMappingCreatedBy")
   leadLightCarcasUnitMappingsCreated         LeadLightCarcasUnitMapping[]           @relation("LeadLightCarcasUnitMappingCreatedBy")
   leadOtherAppliancesMappingsCreated         LeadOtherAppliancesMapping[]           @relation("LeadOtherAppliancesMappingCreatedBy")
   poPaymentScheduleHistories                 POPaymentScheduleHistory[]
@@ -562,66 +563,6 @@ model BoxMaster {
   siteInByUser          UserMaster?             @relation("BoxSiteInBy", fields: [site_in_by], references: [id])
   packedByUser          UserMaster?             @relation("BoxPackedByUser", fields: [packed_by], references: [id])
   box_info_values       BoxInfoFieldValue[]
-}
-
-model ProjectBoxInfoField {
-  id         Int @id @default(autoincrement())
-  project_id Int
-  vendor_id  Int
-
-  field_label String
-  field_key   String
-  field_type  BoxInfoFieldType @default(TEXT)
-
-  is_required Boolean @default(false)
-  sort_order  Int     @default(0)
-  active      Boolean @default(true)
-
-  created_by Int?
-  updated_by Int?
-
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-
-  project ProjectMaster @relation(fields: [project_id], references: [id], onDelete: Cascade)
-  vendor  VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-
-  values BoxInfoFieldValue[]
-
-  @@index([project_id, vendor_id])
-}
-
-model BoxInfoFieldValue {
-  id Int @id @default(autoincrement())
-
-  box_id     Int
-  project_id Int
-  vendor_id  Int
-  field_id   Int
-
-  field_value String?
-
-  created_by Int?
-  updated_by Int?
-
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-
-  box     BoxMaster           @relation(fields: [box_id], references: [id], onDelete: Cascade)
-  project ProjectMaster       @relation(fields: [project_id], references: [id], onDelete: Cascade)
-  vendor  VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  field   ProjectBoxInfoField @relation(fields: [field_id], references: [id], onDelete: Cascade)
-
-  @@unique([box_id, field_id])
-  @@index([box_id])
-  @@index([project_id, vendor_id])
-}
-
-enum BoxInfoFieldType {
-  TEXT
-  NUMBER
-  DATE
-  TEXTAREA
 }
 
 model ScanAndPackItem {
@@ -863,9 +804,9 @@ model LeadSpecificationsMaster {
   created_at    DateTime @default(now())
   created_by    Int
 
-  vendor                     VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  lead                       LeadMaster                   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  createdBy               UserMaster                     @relation("LeadSpecificationsCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  vendor                  VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead                    LeadMaster                   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  createdBy               UserMaster                   @relation("LeadSpecificationsCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   productItemCode         ProductItemCode?             @relation(fields: [item_code_id], references: [id], onDelete: SetNull)
   lightCarcasUnitMappings LeadLightCarcasUnitMapping[]
   otherAppliancesMappings LeadOtherAppliancesMapping[]
@@ -4065,6 +4006,66 @@ model PurchaseOrderSupplierAdditionalCost {
   @@index([source_pi_additional_cost_id], map: "po_sup_cost_source_pi_idx")
 }
 
+model ProjectBoxInfoField {
+  id         Int @id @default(autoincrement())
+  project_id Int
+  vendor_id  Int
+
+  field_label String
+  field_key   String
+  field_type  BoxInfoFieldType @default(TEXT)
+
+  is_required Boolean @default(false)
+  sort_order  Int     @default(0)
+  active      Boolean @default(true)
+
+  created_by Int?
+  updated_by Int?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  project ProjectMaster @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor  VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  values BoxInfoFieldValue[]
+
+  @@index([project_id, vendor_id])
+}
+
+model BoxInfoFieldValue {
+  id Int @id @default(autoincrement())
+
+  box_id     Int
+  project_id Int
+  vendor_id  Int
+  field_id   Int
+
+  field_value String?
+
+  created_by Int?
+  updated_by Int?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  box     BoxMaster           @relation(fields: [box_id], references: [id], onDelete: Cascade)
+  project ProjectMaster       @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor  VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  field   ProjectBoxInfoField @relation(fields: [field_id], references: [id], onDelete: Cascade)
+
+  @@unique([box_id, field_id])
+  @@index([box_id])
+  @@index([project_id, vendor_id])
+}
+
+enum BoxInfoFieldType {
+  TEXT
+  NUMBER
+  DATE
+  TEXTAREA
+}
+
 enum PackingType {
   DEFAULT
   GROUPWISE
@@ -4603,6 +4604,7 @@ model CompanyVendorAddress {
 
   @@map("CompanyVendorAddress")
 }
+
 enum BroadcastType {
   CIRCULAR
   DOCUMENT
@@ -4688,6 +4690,7 @@ model BroadcastAttachment {
   original_file_name String?
   file_url           String
   file_type          String?
+  file_size          BigInt? // File size in bytes, null for YouTube links
   created_by         Int
   updated_by         Int?
   created_at         DateTime       @default(now())

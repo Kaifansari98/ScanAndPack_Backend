@@ -93,7 +93,6 @@ export class BookingStageController {
         !account_id ||
         !vendor_id ||
         !created_by ||
-        !client_id ||
         !finalBookingAmount ||
         !mrpValue
       ) {
@@ -201,7 +200,7 @@ export class BookingStageController {
         account_id: parseInt(account_id),
         vendor_id: parseInt(vendor_id),
         created_by: parseInt(created_by),
-        client_id: parseInt(client_id),
+        client_id: client_id ? parseInt(client_id) : undefined,
         bookingAmount: parseFloat(bookingAmount),
         mrpValue: parseFloat(mrpValue),
         bookingAmountPaymentDetailsText,
@@ -1121,7 +1120,6 @@ export class BookingStageController {
         !lead_id ||
         !account_id ||
         !vendor_id ||
-        !client_id ||
         !created_by ||
         !amount ||
         !payment_text ||
@@ -1161,7 +1159,7 @@ export class BookingStageController {
         lead_id: parseInt(lead_id),
         account_id: parseInt(account_id),
         vendor_id: parseInt(vendor_id),
-        client_id: parseInt(client_id),
+        client_id: client_id ? parseInt(client_id) : undefined,
         created_by: parseInt(created_by),
         amount: parseFloat(amount),
         payment_text,
