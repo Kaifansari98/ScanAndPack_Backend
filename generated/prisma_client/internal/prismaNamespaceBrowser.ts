@@ -224,7 +224,6 @@ export const ModelName = {
   ProjectBoxInfoField: 'ProjectBoxInfoField',
   BoxInfoFieldValue: 'BoxInfoFieldValue',
   VendorTypeMaster: 'VendorTypeMaster',
-  CompanyVendorStatusMaster: 'CompanyVendorStatusMaster',
   CompanyVendorTypeMapping: 'CompanyVendorTypeMapping',
   CompanyVendorContactPerson: 'CompanyVendorContactPerson',
   CompanyVendorBankAccount: 'CompanyVendorBankAccount',
@@ -1740,7 +1739,7 @@ export const CompanyVendorsMasterScalarFieldEnum = {
   alternate_email: 'alternate_email',
   gst_no: 'gst_no',
   pan_no: 'pan_no',
-  status_id: 'status_id',
+  is_active: 'is_active',
   primary_contact_id: 'primary_contact_id',
   created_at: 'created_at',
   created_by: 'created_by',
@@ -3160,21 +3159,6 @@ export const VendorTypeMasterScalarFieldEnum = {
 } as const
 
 export type VendorTypeMasterScalarFieldEnum = (typeof VendorTypeMasterScalarFieldEnum)[keyof typeof VendorTypeMasterScalarFieldEnum]
-
-
-export const CompanyVendorStatusMasterScalarFieldEnum = {
-  id: 'id',
-  status_name: 'status_name',
-  created_at: 'created_at',
-  created_by: 'created_by',
-  updated_at: 'updated_at',
-  updated_by: 'updated_by',
-  deleted_at: 'deleted_at',
-  deleted_by: 'deleted_by',
-  is_deleted: 'is_deleted'
-} as const
-
-export type CompanyVendorStatusMasterScalarFieldEnum = (typeof CompanyVendorStatusMasterScalarFieldEnum)[keyof typeof CompanyVendorStatusMasterScalarFieldEnum]
 
 
 export const CompanyVendorTypeMappingScalarFieldEnum = {
