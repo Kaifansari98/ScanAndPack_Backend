@@ -8,7 +8,7 @@ export class CompanyVendorsService {
       throw error;
     }
 
-    const vendors = await prisma.companyVendorsMaster.findMany({
+    return prisma.companyVendorsMaster.findMany({
       where: { vendor_id: vendorId, is_deleted: false, status_id: 1 },
       orderBy: { created_at: "desc" },
       include: {
@@ -17,14 +17,6 @@ export class CompanyVendorsService {
         },
       },
     });
-
-    if (!vendors || vendors.length === 0) {
-      const error = new Error("No company vendors found for this vendor_id");
-      (error as any).statusCode = 404;
-      throw error;
-    }
-
-    return vendors;
   }
 
   async getCompanyVendorsByVendorIdForMaster(vendorId: number) {
