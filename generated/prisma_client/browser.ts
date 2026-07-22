@@ -883,11 +883,6 @@ export type BoxInfoFieldValue = Prisma.BoxInfoFieldValueModel
  */
 export type VendorTypeMaster = Prisma.VendorTypeMasterModel
 /**
- * Model CompanyVendorStatusMaster
- * 
- */
-export type CompanyVendorStatusMaster = Prisma.CompanyVendorStatusMasterModel
-/**
  * Model CompanyVendorTypeMapping
  * 
  */

@@ -12,7 +12,7 @@ export class CompanyVendorsService {
       where: {
         vendor_id: vendorId,
         is_deleted: false,
-        OR: [{ status_id: null }, { status_id: 1 }],
+        is_active: true,
       },
       orderBy: { created_at: "desc" },
       include: {
@@ -37,7 +37,6 @@ export class CompanyVendorsService {
         vendor: {
           select: { vendor_name: true, vendor_code: true },
         },
-        status: true,
       },
     });
   }
@@ -77,7 +76,7 @@ export class CompanyVendorsService {
     return prisma.companyVendorsMaster.update({
       where: { id: companyVendorId },
       data: {
-        status_id: isDeleted ? 2 : 1, // 2 = Inactive, 1 = Active
+        is_active: !isDeleted,
         is_deleted: false, // Ensure not soft-deleted
         updated_by: updatedBy,
         updated_at: new Date(),

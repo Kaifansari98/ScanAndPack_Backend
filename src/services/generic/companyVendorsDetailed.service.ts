@@ -49,14 +49,10 @@ export class CompanyVendorsDetailedService {
    * Fetch all meta-data dropdowns needed for the 5-tab form
    */
   async getCompanyVendorMetaData(vendorId: number) {
-    const [vendorTypes, statuses, documentTypes, states, cities, paymentTerms] = await Promise.all([
+    const [vendorTypes, documentTypes, states, cities, paymentTerms] = await Promise.all([
       prisma.vendorTypeMaster.findMany({
         where: { is_deleted: false },
         select: { id: true, vendor_type_name: true },
-      }),
-      prisma.companyVendorStatusMaster.findMany({
-        where: { is_deleted: false },
-        select: { id: true, status_name: true },
       }),
       prisma.companyVendorDocumentMaster.findMany({
         where: { is_deleted: false },
@@ -78,7 +74,6 @@ export class CompanyVendorsDetailedService {
 
     return {
       vendorTypes,
-      statuses,
       documentTypes,
       states,
       cities,
@@ -111,7 +106,6 @@ export class CompanyVendorsDetailedService {
           where: { is_deleted: false },
           include: { state: true, city: true },
         },
-        status: true,
         defaultPaymentTerm: true,
       },
     });
@@ -180,7 +174,7 @@ export class CompanyVendorsDetailedService {
       gst_no,
       pan_no,
       payment_term_id,
-      status_id,
+      is_active,
       addresses, // Array of address objects
       contacts, // Array of contact objects
       bank_accounts, // Array of bank details
@@ -321,7 +315,7 @@ export class CompanyVendorsDetailedService {
           gst_no: gst_no || null,
           pan_no: pan_no || null,
           in_house: in_house === true || in_house === "true",
-          status_id: status_id ? Number(status_id) : 1,
+          is_active: is_active === undefined ? true : (is_active === true || is_active === "true"),
           default_payment_term_id: payment_term_id ? Number(payment_term_id) : null,
           created_by: userId,
           updated_by: userId,
@@ -486,7 +480,7 @@ export class CompanyVendorsDetailedService {
       gst_no,
       pan_no,
       payment_term_id,
-      status_id,
+      is_active,
       addresses,
       contacts,
       bank_accounts,
@@ -616,7 +610,7 @@ export class CompanyVendorsDetailedService {
           gst_no: gst_no !== undefined ? gst_no : existingVendor.gst_no,
           pan_no: pan_no !== undefined ? pan_no : existingVendor.pan_no,
           in_house: in_house !== undefined ? (in_house === true || in_house === "true") : existingVendor.in_house,
-          status_id: status_id ? Number(status_id) : existingVendor.status_id,
+          is_active: is_active !== undefined ? (is_active === true || is_active === "true") : existingVendor.is_active,
           default_payment_term_id: payment_term_id !== undefined ? (payment_term_id ? Number(payment_term_id) : null) : existingVendor.default_payment_term_id,
           updated_by: userId,
           updated_at: new Date(),
