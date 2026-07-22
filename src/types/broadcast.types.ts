@@ -28,6 +28,8 @@ export interface CreateBroadcastPayload {
   status: BroadcastStatus;
   publishAt?: string | null;
   vendorId?: number | null;
-  audiences: BroadcastAudiencePayload[];
+  userTypeId?: number | number[];
+  userTypeIds?: number | number[];
+  audiences?: BroadcastAudiencePayload[];
   attachments?: BroadcastAttachmentPayload[];
 }

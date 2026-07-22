@@ -37,6 +37,7 @@ model VendorMaster {
   is_self_assign_task_type_master_enabed Boolean  @default(true)
   is_email_noti_enabled                  Boolean  @default(true)
   is_in_app_noti_enabled                 Boolean  @default(true)
+  is_broadcast_enabled                   Boolean  @default(false)
   createdAt                              DateTime @default(now())
   updatedAt                              DateTime @updatedAt
   state_id                               Int?
@@ -376,10 +377,10 @@ model UserMaster {
   poItemsDeleted                             PurchaseOrderItem[]                    @relation("POItemDeletedBy")
   stockHistories                             ProductStockHistory[]                  @relation("StockHistoryUser")
   architechuremasters                        Architechuremaster[]
-  leadSpecificationsCreated                  LeadSpecificationsMaster[]                     @relation("LeadSpecificationsCreatedBy")
-  leadCarcassMaterialMappingsCreated         LeadCarcassMaterialMapping[]                   @relation("LeadCarcassMaterialMappingCreatedBy")
-  leadShutterMaterialMappingsCreated         LeadShutterMaterialMapping[]                   @relation("LeadShutterMaterialMappingCreatedBy")
-  leadHardwareMappingsCreated                LeadHardwareMapping[]                          @relation("LeadHardwareMappingCreatedBy")
+  leadSpecificationsCreated                  LeadSpecificationsMaster[]             @relation("LeadSpecificationsCreatedBy")
+  leadCarcassMaterialMappingsCreated         LeadCarcassMaterialMapping[]           @relation("LeadCarcassMaterialMappingCreatedBy")
+  leadShutterMaterialMappingsCreated         LeadShutterMaterialMapping[]           @relation("LeadShutterMaterialMappingCreatedBy")
+  leadHardwareMappingsCreated                LeadHardwareMapping[]                  @relation("LeadHardwareMappingCreatedBy")
   leadLightCarcasUnitMappingsCreated         LeadLightCarcasUnitMapping[]           @relation("LeadLightCarcasUnitMappingCreatedBy")
   leadOtherAppliancesMappingsCreated         LeadOtherAppliancesMapping[]           @relation("LeadOtherAppliancesMappingCreatedBy")
   poPaymentScheduleHistories                 POPaymentScheduleHistory[]
@@ -863,9 +864,9 @@ model LeadSpecificationsMaster {
   created_at    DateTime @default(now())
   created_by    Int
 
-  vendor                     VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  lead                       LeadMaster                   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  createdBy               UserMaster                     @relation("LeadSpecificationsCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  vendor                  VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead                    LeadMaster                   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  createdBy               UserMaster                   @relation("LeadSpecificationsCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   productItemCode         ProductItemCode?             @relation(fields: [item_code_id], references: [id], onDelete: SetNull)
   lightCarcasUnitMappings LeadLightCarcasUnitMapping[]
   otherAppliancesMappings LeadOtherAppliancesMapping[]
@@ -4603,6 +4604,7 @@ model CompanyVendorAddress {
 
   @@map("CompanyVendorAddress")
 }
+
 enum BroadcastType {
   CIRCULAR
   DOCUMENT
@@ -4688,6 +4690,7 @@ model BroadcastAttachment {
   original_file_name String?
   file_url           String
   file_type          String?
+  file_size          BigInt?        // File size in bytes, null for YouTube links
   created_by         Int
   updated_by         Int?
   created_at         DateTime       @default(now())

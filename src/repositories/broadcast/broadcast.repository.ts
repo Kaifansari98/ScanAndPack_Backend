@@ -54,6 +54,7 @@ export class BroadcastRepository {
       fileName?: string | null;
       originalFileName?: string | null;
       fileType?: string | null;
+      fileSize?: number | null;
     }>,
     userId: number
   ) {
@@ -66,6 +67,7 @@ export class BroadcastRepository {
         file_name: a.fileName ?? null,
         original_file_name: a.originalFileName ?? null,
         file_type: a.fileType ?? null,
+        file_size: a.fileSize != null ? BigInt(a.fileSize) : null,
         created_by: userId,
         updated_by: userId,
       })),
@@ -116,23 +118,40 @@ export class BroadcastRepository {
 
     // Audience-based visibility: show only broadcasts this user is allowed to see
     if (audience) {
-      const audienceConditions: any[] = [
-        { audience_type: "ALL" },
-        { audience_type: "USER", target_id: audience.userId },
-      ];
-      if (audience.userTypeId) {
-        audienceConditions.push({ audience_type: "ROLE", target_id: audience.userTypeId });
-      }
-      if (audience.franchiseId) {
-        audienceConditions.push({ audience_type: "FRANCHISE", target_id: audience.franchiseId });
-      }
-      where.audiences = { some: { OR: audienceConditions } };
-      
-      // Override status to ACTIVE and ensure we only show items published now or in the past
       where.status = "ACTIVE";
       where.OR = [
         { publish_at: null },
         { publish_at: { lte: new Date() } }
+      ];
+
+      where.AND = [
+        {
+          OR: [
+            { audiences: { none: {} } },
+            { audiences: { some: { audience_type: "ALL" } } },
+            { audiences: { some: { audience_type: "USER", target_id: audience.userId } } },
+            {
+              AND: [
+                {
+                  OR: [
+                    { audiences: { none: { audience_type: "FRANCHISE" } } },
+                    ...(audience.franchiseId
+                      ? [{ audiences: { some: { audience_type: "FRANCHISE", target_id: audience.franchiseId } } }]
+                      : []),
+                  ],
+                },
+                {
+                  OR: [
+                    { audiences: { none: { audience_type: "ROLE" } } },
+                    ...(audience.userTypeId
+                      ? [{ audiences: { some: { audience_type: "ROLE", target_id: audience.userTypeId } } }]
+                      : []),
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       ];
     }
 
@@ -238,15 +257,25 @@ export class BroadcastRepository {
       // Non-fatal fallback
     }
 
+    const broadcast = await prisma.broadcastMaster.findUnique({
+      where: { id: broadcastId },
+      select: { created_at: true, publish_at: true },
+    });
+
+    const effectivePublishDate = broadcast?.publish_at || broadcast?.created_at;
+
     const reads = await prisma.broadcastRead.findMany({
       where: {
         broadcast_id: broadcastId,
-        ...(superAdminTypeIds.length > 0
-          ? { user: { user_type_id: { notIn: superAdminTypeIds } } }
-          : {}),
+        user: {
+          ...(superAdminTypeIds.length > 0
+            ? { user_type_id: { notIn: superAdminTypeIds } }
+            : {}),
+          ...(effectivePublishDate ? { created_at: { lte: effectivePublishDate } } : {}),
+        },
       },
       include: {
-        user: { select: { id: true, user_name: true, user_email: true } },
+        user: { select: { id: true, user_name: true, user_email: true, created_at: true } },
       },
       orderBy: { read_at: "desc" },
     });

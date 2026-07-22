@@ -17,6 +17,36 @@ const attachmentSchema = z.object({
   }),
   title: z.string().min(1, "Attachment title is required"),
   fileUrl: z.string().url("fileUrl must be a valid URL").optional(),
+}).superRefine((data, ctx) => {
+  if (data.attachmentType === "YOUTUBE" && data.fileUrl) {
+    try {
+      const parsedUrl = new URL(data.fileUrl);
+      const hostname = parsedUrl.hostname.toLowerCase();
+      const isValidHost = hostname === "youtube.com" || 
+                          hostname.endsWith(".youtube.com") || 
+                          hostname === "youtu.be" || 
+                          hostname === "youtube-nocookie.com" ||
+                          hostname.endsWith(".youtube-nocookie.com");
+      
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = data.fileUrl.match(regExp);
+      const hasValidVideoId = match && match[2] && match[2].length === 11;
+
+      if (!isValidHost || !hasValidVideoId) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Must be a valid YouTube video URL",
+          path: ["fileUrl"],
+        });
+      }
+    } catch (e) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Invalid URL format",
+        path: ["fileUrl"],
+      });
+    }
+  }
 });
 
 // ─── Create Broadcast ────────────────────────────────────────────────────────
@@ -32,7 +62,15 @@ export const createBroadcastSchema = z.object({
   }),
   publishAt: z.string().datetime({ message: "publishAt must be a valid ISO datetime string" }).nullable().optional(),
   vendorId: z.number().int().positive("vendorId must be a positive integer").nullable().optional(),
-  audiences: z.array(audienceSchema).min(1, "At least one audience entry is required"),
+  userTypeId: z.union([
+    z.number().int(),
+    z.array(z.number().int())
+  ]).optional(),
+  userTypeIds: z.union([
+    z.number().int(),
+    z.array(z.number().int())
+  ]).optional(),
+  audiences: z.array(audienceSchema).optional(),
   attachments: z.array(attachmentSchema).optional(),
 });
 
@@ -49,8 +87,16 @@ export const updateBroadcastSchema = z.object({
   }).optional(),
   publishAt: z.string().datetime({ message: "publishAt must be a valid ISO datetime string" }).nullable().optional(),
   vendorId: z.number().int().positive("vendorId must be a positive integer").nullable().optional(),
+  userTypeId: z.union([
+    z.number().int(),
+    z.array(z.number().int())
+  ]).optional(),
+  userTypeIds: z.union([
+    z.number().int(),
+    z.array(z.number().int())
+  ]).optional(),
   // When provided, fully replaces existing audiences
-  audiences: z.array(audienceSchema).min(1, "At least one audience entry is required").optional(),
+  audiences: z.array(audienceSchema).optional(),
   // When provided, fully replaces existing attachments
   attachments: z.array(attachmentSchema).optional(),
 });

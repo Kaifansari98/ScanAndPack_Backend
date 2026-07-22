@@ -6,13 +6,14 @@ import logger from "../../utils/logger";
 
 export async function processPendingNotificationQueue() {
   try {
-    const now = new Date();
+    // Add 15-second buffer to handle minor clock differences between client and database server
+    const nowWithBuffer = new Date(Date.now() + 15000);
 
     // Find pending notifications in the queue that should be sent
     const pendingQueue = await prisma.notificationQueue.findMany({
       where: {
         notification_status: "PENDING",
-        send_at: { lte: now },
+        send_at: { lte: nowWithBuffer },
       },
     });
 
@@ -22,8 +23,32 @@ export async function processPendingNotificationQueue() {
 
       logger.info(`Processing ${pendingQueue.length} notifications in queue`);
 
+      // Fetch super admin user type IDs to exclude them from notifications
+      const superAdmins = await prisma.userTypeMaster.findMany({
+        where: {
+          user_type: {
+            in: ["super-admin", "superadmin", "super_admin"],
+            mode: "insensitive"
+          }
+        },
+        select: { id: true },
+      });
+      const superAdminTypeIds = superAdmins.map((r) => r.id);
+
       for (const queueItem of pendingQueue) {
         try {
+          // Atomically claim the queue item by marking SENT early (enum only has PENDING/SENT/FAILED).
+          // If another parallel execution already claimed it this will return count=0 and we skip.
+          const claimed = await prisma.notificationQueue.updateMany({
+            where: { id: queueItem.id, notification_status: "PENDING" },
+            data: { notification_status: "SENT" },
+          });
+
+          if (claimed.count === 0) {
+            // Already claimed by a parallel execution – skip
+            continue;
+          }
+
           const body = queueItem.request_body as any;
           const broadcastId = body?.broadcastId;
 
@@ -64,6 +89,7 @@ export async function processPendingNotificationQueue() {
               where: {
                 status: { equals: "active", mode: "insensitive" },
                 ...(broadcast.vendor_id ? { vendor_id: broadcast.vendor_id } : {}),
+                ...(superAdminTypeIds.length > 0 ? { user_type_id: { notIn: superAdminTypeIds } } : {}),
               },
               select: { id: true, vendor_id: true },
             });
@@ -73,24 +99,42 @@ export async function processPendingNotificationQueue() {
             });
           } else {
             // Build query conditions for target audiences
-            const conditions: any[] = [];
+            const franchiseTargetIds = broadcast.audiences
+              .filter((a) => a.audience_type === "FRANCHISE" && a.target_id)
+              .map((a) => a.target_id!);
 
-            for (const audience of broadcast.audiences) {
-              if (audience.audience_type === "ROLE" && audience.target_id) {
-                conditions.push({ user_type_id: audience.target_id });
-              } else if (audience.audience_type === "USER" && audience.target_id) {
-                conditions.push({ id: audience.target_id });
-              } else if (audience.audience_type === "FRANCHISE" && audience.target_id) {
-                conditions.push({ franchise_id: audience.target_id });
-              }
+            const roleTargetIds = broadcast.audiences
+              .filter((a) => a.audience_type === "ROLE" && a.target_id)
+              .map((a) => a.target_id!);
+
+            const userTargetIdsFromAudience = broadcast.audiences
+              .filter((a) => a.audience_type === "USER" && a.target_id)
+              .map((a) => a.target_id!);
+
+            const mainOrConditions: any[] = [];
+
+            if (userTargetIdsFromAudience.length > 0) {
+              mainOrConditions.push({ id: { in: userTargetIdsFromAudience } });
             }
 
-            if (conditions.length > 0) {
+            if (franchiseTargetIds.length > 0 || roleTargetIds.length > 0) {
+              const targetedWhere: any = {};
+              if (franchiseTargetIds.length > 0) {
+                targetedWhere.franchise_id = { in: franchiseTargetIds };
+              }
+              if (roleTargetIds.length > 0) {
+                targetedWhere.user_type_id = { in: roleTargetIds };
+              }
+              mainOrConditions.push(targetedWhere);
+            }
+
+            if (mainOrConditions.length > 0) {
               const matchedUsers = await prisma.userMaster.findMany({
                 where: {
                   status: { equals: "active", mode: "insensitive" },
                   ...(broadcast.vendor_id ? { vendor_id: broadcast.vendor_id } : {}),
-                  OR: conditions,
+                  ...(superAdminTypeIds.length > 0 ? { user_type_id: { notIn: superAdminTypeIds } } : {}),
+                  OR: mainOrConditions,
                 },
                 select: { id: true, vendor_id: true },
               });
@@ -103,9 +147,14 @@ export async function processPendingNotificationQueue() {
 
           logger.info(`Sending broadcast ${broadcastId} notification to ${targetUserIds.size} users`);
 
-          // Send notification to each user
+          // Send notification to each user (skip if notification already created)
           for (const userId of targetUserIds) {
             try {
+              const existing = await prisma.notification.findFirst({
+                where: { entity_type: "broadcast", entity_id: broadcastId, user_id: userId },
+              });
+              if (existing) continue;
+
               const userVendorId = broadcast.vendor_id || userVendorMap.get(userId) || 0;
               await NotificationService.createAndSend({
                 vendor_id: userVendorId,
@@ -123,11 +172,7 @@ export async function processPendingNotificationQueue() {
             }
           }
 
-          // Mark queue item as SENT
-          await prisma.notificationQueue.update({
-            where: { id: queueItem.id },
-            data: { notification_status: "SENT" },
-          });
+          // (Queue item already marked SENT at the start of processing as the exclusive claim)
 
         } catch (itemErr: any) {
           logger.error(`Error processing notification queue item ${queueItem.id}:`, itemErr);
@@ -143,9 +188,8 @@ export async function processPendingNotificationQueue() {
 }
 
 export function startCronJobs() {
-  // Run every 1 minute
-  cron.schedule("* * * * *", async () => {
-    logger.info("⏰ BROADCAST SCHEDULER CRON STARTED");
+  // Run every 10 seconds for real-time notification processing
+  cron.schedule("*/10 * * * * *", async () => {
     await processPendingNotificationQueue();
   });
 }
