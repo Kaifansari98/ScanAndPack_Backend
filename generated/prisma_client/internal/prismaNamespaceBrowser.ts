@@ -231,6 +231,7 @@ export const ModelName = {
   CompanyVendorDocumentMapping: 'CompanyVendorDocumentMapping',
   CompanyVendorAddress: 'CompanyVendorAddress',
   BroadcastMaster: 'BroadcastMaster',
+  BroadcastCategoryMaster: 'BroadcastCategoryMaster',
   BroadcastAudienceMapping: 'BroadcastAudienceMapping',
   BroadcastAttachment: 'BroadcastAttachment',
   BroadcastRead: 'BroadcastRead',
@@ -3280,6 +3281,7 @@ export const BroadcastMasterScalarFieldEnum = {
   content: 'content',
   status: 'status',
   type: 'type',
+  category_id: 'category_id',
   publish_at: 'publish_at',
   vendor_id: 'vendor_id',
   created_by: 'created_by',
@@ -3289,6 +3291,19 @@ export const BroadcastMasterScalarFieldEnum = {
 } as const
 
 export type BroadcastMasterScalarFieldEnum = (typeof BroadcastMasterScalarFieldEnum)[keyof typeof BroadcastMasterScalarFieldEnum]
+
+
+export const BroadcastCategoryMasterScalarFieldEnum = {
+  id: 'id',
+  category: 'category',
+  type: 'type',
+  vendor_id: 'vendor_id',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type BroadcastCategoryMasterScalarFieldEnum = (typeof BroadcastCategoryMasterScalarFieldEnum)[keyof typeof BroadcastCategoryMasterScalarFieldEnum]
 
 
 export const BroadcastAudienceMappingScalarFieldEnum = {

@@ -57,6 +57,8 @@ export const createBroadcastSchema = z.object({
   type: z.enum(["CIRCULAR", "DOCUMENT"], {
     message: "type must be one of: CIRCULAR, DOCUMENT",
   }),
+  category: z.string().optional(),
+  category_id: z.number().int().positive().optional(),
   status: z.enum(["ACTIVE", "INACTIVE"], {
     message: "status must be one of: ACTIVE, INACTIVE",
   }),
@@ -82,6 +84,8 @@ export const updateBroadcastSchema = z.object({
   type: z.enum(["CIRCULAR", "DOCUMENT"], {
     message: "type must be one of: CIRCULAR, DOCUMENT",
   }).optional(),
+  category: z.string().optional(),
+  category_id: z.number().int().positive().optional(),
   status: z.enum(["ACTIVE", "INACTIVE"], {
     message: "status must be one of: ACTIVE, INACTIVE",
   }).optional(),

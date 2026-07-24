@@ -10,6 +10,18 @@ const controller = new BroadcastController();
 // All broadcast routes require token verification
 broadcastRouter.use(verifyToken);
 
+// GET    /broadcasts/categories/:vendorId  → List broadcast categories
+broadcastRouter.get("/categories/:vendorId", controller.getBroadcastCategories.bind(controller));
+
+// POST   /broadcasts/categories            → Create a broadcast category
+broadcastRouter.post("/categories", controller.createBroadcastCategory.bind(controller));
+
+// PATCH  /broadcasts/categories/:categoryId → Update a broadcast category
+broadcastRouter.patch("/categories/:categoryId", controller.updateBroadcastCategory.bind(controller));
+
+// PATCH  /broadcasts/categories/:categoryId/status → Toggle broadcast category status
+broadcastRouter.patch("/categories/:categoryId/status", controller.toggleBroadcastCategoryStatus.bind(controller));
+
 // POST   /broadcasts              → Create broadcast
 broadcastRouter.post("/", upload.any(), controller.create.bind(controller));
 

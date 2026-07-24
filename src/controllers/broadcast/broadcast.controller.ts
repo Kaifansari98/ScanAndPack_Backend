@@ -39,6 +39,76 @@ export class BroadcastController {
     return req.body?.data ? JSON.parse(req.body.data) : req.body;
   }
 
+  // ─── CATEGORIES ────────────────────────────────────────────────────────────
+
+  async getBroadcastCategories(req: Request, res: Response) {
+    try {
+      const vendor_id = Number(req.params.vendorId);
+      if (!vendor_id) {
+        return res.status(400).json({ success: false, message: "vendor_id is required" });
+      }
+      const includeInactive = req.query.all === "true" || req.query.includeInactive === "true";
+      const categories = await this.service.getBroadcastCategories(vendor_id, includeInactive);
+      return res.status(200).json({ success: true, message: "Categories fetched successfully", data: categories });
+    } catch (err: any) {
+      return res.status(err.statusCode || 500).json({ success: false, message: err.message || "Something went wrong" });
+    }
+  }
+
+  async createBroadcastCategory(req: Request, res: Response) {
+    try {
+      const user = this.getUser(req, res);
+      if (!user) return;
+      const { vendor_id, category, type } = this.parseBody(req);
+      if (!vendor_id || !category) {
+        return res.status(400).json({ success: false, message: "vendor_id and category are required" });
+      }
+      const newCategory = await this.service.createBroadcastCategory({
+        vendor_id: Number(vendor_id),
+        category: String(category),
+        type: type ? String(type) : "DOCUMENT",
+        created_by: user.id,
+      });
+      return res.status(201).json({ success: true, message: "Category created successfully", data: newCategory });
+    } catch (err: any) {
+      return res.status(err.statusCode || 500).json({ success: false, message: err.message || "Something went wrong" });
+    }
+  }
+
+  async updateBroadcastCategory(req: Request, res: Response) {
+    try {
+      const user = this.getUser(req, res);
+      if (!user) return;
+      const id = Number(req.params.categoryId);
+      const { category, type } = this.parseBody(req);
+      if (!id || !category) {
+        return res.status(400).json({ success: false, message: "Category ID and category name are required" });
+      }
+      const updatedCategory = await this.service.updateBroadcastCategory(id, {
+        category: String(category),
+        type: type ? String(type) : undefined,
+      });
+      return res.status(200).json({ success: true, message: "Category updated successfully", data: updatedCategory });
+    } catch (err: any) {
+      return res.status(err.statusCode || 500).json({ success: false, message: err.message || "Something went wrong" });
+    }
+  }
+
+  async toggleBroadcastCategoryStatus(req: Request, res: Response) {
+    try {
+      const user = this.getUser(req, res);
+      if (!user) return;
+      const id = Number(req.params.categoryId);
+      if (!id) {
+        return res.status(400).json({ success: false, message: "Category ID is required" });
+      }
+      const updatedCategory = await this.service.toggleBroadcastCategoryStatus(id);
+      return res.status(200).json({ success: true, message: "Category status updated successfully", data: updatedCategory });
+    } catch (err: any) {
+      return res.status(err.statusCode || 500).json({ success: false, message: err.message || "Something went wrong" });
+    }
+  }
+
   // ─── POST /broadcasts ──────────────────────────────────────────────────────
 
   /**
