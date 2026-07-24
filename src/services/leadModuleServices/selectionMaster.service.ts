@@ -15,6 +15,7 @@ import {
   LightCarcasType,
   LightCarcasUnit,
   OtherAppliances,
+  OtherApplianceType,
 } from "../../types/leadModule.types";
 
 const ensureVendorExists = async (vendor_id: number) => {
@@ -1097,11 +1098,23 @@ export const getAllOtherAppliances = async (
 
 export const createOtherAppliances = async (
   vendor_id: number,
-  type: string,
+  type: OtherApplianceType,
   article_number: string,
   description: string,
 ): Promise<OtherAppliances> => {
   await ensureVendorExists(vendor_id);
+
+  const existing = await prisma.otherAppliancesMaster.findFirst({
+    where: {
+      vendor_id,
+      type,
+      article_number: { equals: article_number, mode: 'insensitive' },
+    },
+  });
+
+  if (existing) {
+    throw new Error(`Article number "${article_number}" already exists for ${type}.`);
+  }
 
   const created = await prisma.otherAppliancesMaster.create({
     data: { vendor_id, type, article_number, description },
@@ -1167,3 +1180,141 @@ export const getFastProductionTimelineRules = async (vendor_id: number) => {
     ],
   });
 };
+
+export const bulkUploadOtherAppliances = async (
+  vendor_id: number,
+  fileBuffer: any,
+  isCsv: boolean,
+  type: OtherApplianceType,
+) => {
+  await ensureVendorExists(vendor_id);
+
+  const workbook = new ExcelJS.Workbook();
+  if (isCsv) {
+    const stream = Readable.from(fileBuffer);
+    await workbook.csv.read(stream);
+  } else {
+    await workbook.xlsx.load(fileBuffer);
+  }
+
+  const worksheet = workbook.worksheets[0];
+  if (!worksheet) {
+    throw new Error("No worksheet found in the uploaded workbook.");
+  }
+
+  let createdCount = 0;
+  const skippedRows: Array<{ row: number; sheet: string; reason: string }> = [];
+
+  const headers: string[] = [];
+  const firstRow = worksheet.getRow(1);
+  if (!firstRow) {
+    throw new Error("The first row of the worksheet is empty.");
+  }
+
+  firstRow.eachCell({ includeEmpty: true }, (cell) => {
+    headers.push(getCellValue(cell.value).trim().toLowerCase());
+  });
+
+  const articleIndex = headers.findIndex((h) => h.includes("article"));
+  const descIndex = headers.findIndex((h) => h.includes("desc"));
+
+  if (articleIndex === -1 || descIndex === -1) {
+    throw new Error("Required columns ('Article Number' and 'Description') are missing in the sheet.");
+  }
+
+  // Get existing records for this vendor and type to optimize checks
+  const existingRecords = await prisma.otherAppliancesMaster.findMany({
+    where: { vendor_id, type },
+    select: { id: true, article_number: true },
+  });
+  const existingMap = new Map<string, number>(
+    existingRecords.map((r) => [r.article_number.trim().toLowerCase(), r.id])
+  );
+
+  const rowCount = worksheet.rowCount;
+  for (let r = 2; r <= rowCount; r++) {
+    const row = worksheet.getRow(r);
+    const articleVal = getCellValue(row.getCell(articleIndex + 1).value).trim();
+    const descVal = getCellValue(row.getCell(descIndex + 1).value).trim();
+
+    if (!articleVal && !descVal) {
+      continue; // skip empty rows
+    }
+
+    if (!articleVal || !descVal) {
+      skippedRows.push({
+        row: r - 1,
+        sheet: worksheet.name || "Sheet1",
+        reason: `Both 'Article Number' and 'Description' are required.`,
+      });
+      continue;
+    }
+
+    const articleLower = articleVal.toLowerCase();
+    const existingId = existingMap.get(articleLower);
+
+    if (existingId) {
+      skippedRows.push({
+        row: r - 1,
+        sheet: worksheet.name || "Sheet1",
+        reason: `Duplicate article number "${articleVal}"`,
+      });
+      continue;
+    }
+
+    await prisma.otherAppliancesMaster.create({
+      data: {
+        vendor_id,
+        type,
+        article_number: articleVal,
+        description: descVal,
+      },
+    });
+    createdCount++;
+    existingMap.set(articleLower, -1);
+  }
+
+  return {
+    createdCount,
+    updatedCount: 0,
+    successCount: createdCount,
+    skippedCount: skippedRows.length,
+    skippedRows,
+  };
+};
+
+export const getOtherAppliancesReport = async (vendor_id: number) => {
+  await ensureVendorExists(vendor_id);
+
+  const workbook = new ExcelJS.Workbook();
+  const types = ["Appliances", "Stone", "Sinks", "Faucets"] as const;
+
+  for (const type of types) {
+    const worksheet = workbook.addWorksheet(type);
+
+    worksheet.columns = [
+      { header: "Article Number", key: "article_number", width: 25 },
+      { header: "Description", key: "description", width: 50 },
+    ];
+
+    const headerRow = worksheet.getRow(1);
+    headerRow.font = { bold: true };
+
+    const data = await prisma.otherAppliancesMaster.findMany({
+      where: { vendor_id, type },
+      select: { article_number: true, description: true },
+      orderBy: { article_number: "asc" },
+    });
+
+    for (const item of data) {
+      worksheet.addRow({
+        article_number: item.article_number,
+        description: item.description,
+      });
+    }
+  }
+
+  const buffer = await workbook.xlsx.writeBuffer();
+  return buffer;
+};
+

@@ -422,6 +422,23 @@ export type EnumLeadUserStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumLeadUserStatusFilter<$PrismaModel>
 }
 
+export type EnumOtherApplianceTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.OtherApplianceType | Prisma.EnumOtherApplianceTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.OtherApplianceType[] | Prisma.ListEnumOtherApplianceTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OtherApplianceType[] | Prisma.ListEnumOtherApplianceTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOtherApplianceTypeFilter<$PrismaModel> | $Enums.OtherApplianceType
+}
+
+export type EnumOtherApplianceTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.OtherApplianceType | Prisma.EnumOtherApplianceTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.OtherApplianceType[] | Prisma.ListEnumOtherApplianceTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OtherApplianceType[] | Prisma.ListEnumOtherApplianceTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOtherApplianceTypeWithAggregatesFilter<$PrismaModel> | $Enums.OtherApplianceType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumOtherApplianceTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumOtherApplianceTypeFilter<$PrismaModel>
+}
+
 export type EnumTechCheckStatusNullableFilter<$PrismaModel = never> = {
   equals?: $Enums.TechCheckStatus | Prisma.EnumTechCheckStatusFieldRefInput<$PrismaModel> | null
   in?: $Enums.TechCheckStatus[] | Prisma.ListEnumTechCheckStatusFieldRefInput<$PrismaModel> | null
@@ -2056,6 +2073,23 @@ export type NestedEnumLeadUserStatusWithAggregatesFilter<$PrismaModel = never> =
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumLeadUserStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumLeadUserStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumOtherApplianceTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.OtherApplianceType | Prisma.EnumOtherApplianceTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.OtherApplianceType[] | Prisma.ListEnumOtherApplianceTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OtherApplianceType[] | Prisma.ListEnumOtherApplianceTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOtherApplianceTypeFilter<$PrismaModel> | $Enums.OtherApplianceType
+}
+
+export type NestedEnumOtherApplianceTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.OtherApplianceType | Prisma.EnumOtherApplianceTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.OtherApplianceType[] | Prisma.ListEnumOtherApplianceTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OtherApplianceType[] | Prisma.ListEnumOtherApplianceTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOtherApplianceTypeWithAggregatesFilter<$PrismaModel> | $Enums.OtherApplianceType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumOtherApplianceTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumOtherApplianceTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumTechCheckStatusNullableFilter<$PrismaModel = never> = {

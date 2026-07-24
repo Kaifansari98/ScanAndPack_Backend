@@ -636,3 +636,13 @@ export const NotificationStatus = {
 } as const
 
 export type NotificationStatus = (typeof NotificationStatus)[keyof typeof NotificationStatus]
+
+
+export const OtherApplianceType = {
+  Appliances: 'Appliances',
+  Stone: 'Stone',
+  Sinks: 'Sinks',
+  Faucets: 'Faucets'
+} as const
+
+export type OtherApplianceType = (typeof OtherApplianceType)[keyof typeof OtherApplianceType]

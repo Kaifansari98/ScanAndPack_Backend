@@ -480,13 +480,12 @@ export type CompanyVendorsMasterOrderByWithRelationInput = {
 
 export type CompanyVendorsMasterWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  vendor_code?: string
-  gst_no?: string
-  pan_no?: string
+  vendor_id_vendor_code?: Prisma.CompanyVendorsMasterVendor_idVendor_codeCompoundUniqueInput
   AND?: Prisma.CompanyVendorsMasterWhereInput | Prisma.CompanyVendorsMasterWhereInput[]
   OR?: Prisma.CompanyVendorsMasterWhereInput[]
   NOT?: Prisma.CompanyVendorsMasterWhereInput | Prisma.CompanyVendorsMasterWhereInput[]
   vendor_id?: Prisma.IntFilter<"CompanyVendorsMaster"> | number
+  vendor_code?: Prisma.StringFilter<"CompanyVendorsMaster"> | string
   company_name?: Prisma.StringFilter<"CompanyVendorsMaster"> | string
   vendor_name?: Prisma.StringFilter<"CompanyVendorsMaster"> | string
   point_of_contact?: Prisma.StringFilter<"CompanyVendorsMaster"> | string
@@ -495,6 +494,8 @@ export type CompanyVendorsMasterWhereUniqueInput = Prisma.AtLeast<{
   address?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
   alternate_mobile_no?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
   alternate_email?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
+  gst_no?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
+  pan_no?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
   is_active?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
   primary_contact_id?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   created_at?: Prisma.DateTimeFilter<"CompanyVendorsMaster"> | Date | string
@@ -529,7 +530,7 @@ export type CompanyVendorsMasterWhereUniqueInput = Prisma.AtLeast<{
   defaultPaymentTerm?: Prisma.XOR<Prisma.PaymentTermMasterNullableScalarRelationFilter, Prisma.PaymentTermMasterWhereInput> | null
   paymentTerms?: Prisma.PaymentTermMasterListRelationFilter
   productSupplierMappings?: Prisma.ProductSupplierMappingListRelationFilter
-}, "id" | "vendor_code" | "gst_no" | "pan_no">
+}, "id" | "vendor_id_vendor_code">
 
 export type CompanyVendorsMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -849,6 +850,11 @@ export type CompanyVendorsMasterListRelationFilter = {
 
 export type CompanyVendorsMasterOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type CompanyVendorsMasterVendor_idVendor_codeCompoundUniqueInput = {
+  vendor_id: number
+  vendor_code: string
 }
 
 export type CompanyVendorsMasterCountOrderByAggregateInput = {

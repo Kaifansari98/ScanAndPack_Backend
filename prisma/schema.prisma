@@ -1198,9 +1198,9 @@ model LeadLightCarcasUnitMapping {
 }
 
 model OtherAppliancesMaster {
-  id             Int      @id @default(autoincrement())
+  id             Int                @id @default(autoincrement())
   vendor_id      Int
-  type           String
+  type           OtherApplianceType
   article_number String
   description    String
   created_at     DateTime @default(now())
@@ -2188,7 +2188,7 @@ model LeadApprovalRequestDocumentMapping {
 model CompanyVendorsMaster {
   id                      Int          @id @default(autoincrement())
   vendor_id               Int
-  vendor_code             String       @unique
+  vendor_code             String
   company_name            String
   vendor_name             String       @default("")
   point_of_contact        String
@@ -2197,8 +2197,8 @@ model CompanyVendorsMaster {
   address                 String?
   alternate_mobile_no     String?
   alternate_email         String?
-  gst_no                  String?      @unique
-  pan_no                  String?      @unique
+  gst_no                  String?
+  pan_no                  String?
   is_active               Boolean      @default(true)
   primary_contact_id      Int?
   created_at              DateTime     @default(now())
@@ -2240,6 +2240,7 @@ model CompanyVendorsMaster {
   paymentTerms            PaymentTermMaster[]      @relation("SupplierPaymentTerms")
   productSupplierMappings ProductSupplierMapping[]
 
+  @@unique([vendor_id, vendor_code])
   @@index([default_payment_term_id])
   @@index([state_id])
   @@index([primary_contact_id])
@@ -4730,4 +4731,11 @@ model NotificationQueue {
   @@index([created_by])
   @@index([updated_by])
   @@index([notification_status, send_at])
+}
+
+enum OtherApplianceType {
+  Appliances
+  Stone
+  Sinks
+  Faucets
 }

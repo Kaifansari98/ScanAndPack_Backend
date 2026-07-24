@@ -1,3 +1,5 @@
+import { OtherApplianceType } from "../../generated/prisma_client/client";
+export { OtherApplianceType };
 
 export interface ProductTypeInput {
     vendor_id: number;
@@ -208,7 +210,7 @@ export interface LightCarcasType {
 export interface OtherAppliances {
     id: number;
     vendor_id: number;
-    type: string;
+    type: OtherApplianceType;
     article_number: string;
     description: string;
 }
