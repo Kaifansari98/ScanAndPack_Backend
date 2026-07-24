@@ -1,4 +1,5 @@
 import { Router } from "express";
+import multer from "multer";
 
 import {
   createProductType,
@@ -61,6 +62,7 @@ import {
   fetchCarcassMaterialFinishes,
   addCarcassMaterialFinish,
   fetchAllCarcassMaterialFinishesForVendor,
+  uploadCarcassMaterialFinishes,
   fetchFastProductionTimelineRules,
   fetchAllHandleTypes,
   fetchAllShutterTypes,
@@ -70,6 +72,7 @@ import {
   fetchShutterMaterialFinishes,
   addShutterMaterialFinish,
   fetchAllShutterMaterialFinishesForVendor,
+  uploadShutterMaterialFinishes,
   fetchAllCarcassLegs,
   addCarcassLegs,
   fetchSkirtingCarcassLegs,
@@ -78,11 +81,13 @@ import {
   fetchSkirtingCarcassLegsColors,
   addSkirtingCarcassLegsColor,
   fetchAllSkirtingCarcassLegsColorsForVendor,
+  uploadSkirtingCarcassLegsColors,
   fetchAllLightCarcasTypes,
   addLightCarcasType,
   fetchLightCarcasUnits,
   addLightCarcasUnit,
   fetchAllLightCarcasUnitsForVendor,
+  uploadLightCarcasUnits,
   fetchAllOtherAppliances,
   addOtherAppliances,
 } from "../../controllers/leadModuleControllers/selectionMaster.controller";
@@ -104,6 +109,7 @@ import {
 
 const leadsRouter = Router();
 const MAX_FILES = parseInt(process.env.UPLOAD_MAX_FILES || "40");
+const excelUpload = multer();
 
 leadsRouter.post("/create-document-type", createDocumentType);
 leadsRouter.post("/create-payment-type", createPaymentType);
@@ -180,6 +186,11 @@ leadsRouter.get(
   "/get-all-carcass-material-finishes/:vendor_id",
   fetchAllCarcassMaterialFinishesForVendor,
 );
+leadsRouter.post(
+  "/upload-carcass-material-finish",
+  excelUpload.single("file"),
+  uploadCarcassMaterialFinishes,
+);
 leadsRouter.get("/get-all-shutter-types/:vendor_id", fetchAllShutterTypes);
 leadsRouter.post("/create-shutter-type", addShutterType);
 leadsRouter.get(
@@ -196,6 +207,11 @@ leadsRouter.get(
   fetchAllShutterMaterialFinishesForVendor,
 );
 leadsRouter.post("/create-shutter-material-finish", addShutterMaterialFinish);
+leadsRouter.post(
+  "/upload-shutter-material-finish",
+  excelUpload.single("file"),
+  uploadShutterMaterialFinishes,
+);
 leadsRouter.get("/get-all-carcass-legs/:vendor_id", fetchAllCarcassLegs);
 leadsRouter.post("/create-carcass-legs", addCarcassLegs);
 leadsRouter.get(
@@ -219,6 +235,11 @@ leadsRouter.post(
   "/create-skirting-carcass-legs-color",
   addSkirtingCarcassLegsColor,
 );
+leadsRouter.post(
+  "/upload-skirting-carcass-legs-color",
+  excelUpload.single("file"),
+  uploadSkirtingCarcassLegsColors,
+);
 leadsRouter.get(
   "/get-all-light-carcas-types/:vendor_id",
   fetchAllLightCarcasTypes,
@@ -233,6 +254,11 @@ leadsRouter.get(
   fetchAllLightCarcasUnitsForVendor,
 );
 leadsRouter.post("/create-light-carcas-unit", addLightCarcasUnit);
+leadsRouter.post(
+  "/upload-light-carcas-unit",
+  excelUpload.single("file"),
+  uploadLightCarcasUnits,
+);
 leadsRouter.get(
   "/get-all-other-appliances/:vendor_id",
   fetchAllOtherAppliances,
