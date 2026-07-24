@@ -90,6 +90,8 @@ import {
   uploadLightCarcasUnits,
   fetchAllOtherAppliances,
   addOtherAppliances,
+  uploadOtherAppliances,
+  downloadOtherAppliancesReport,
 } from "../../controllers/leadModuleControllers/selectionMaster.controller";
 import { fetchAllSmallOrderRequestTypes } from "../../controllers/leadModuleControllers/smallOrderRequestType.controller";
 import {
@@ -264,6 +266,15 @@ leadsRouter.get(
   fetchAllOtherAppliances,
 );
 leadsRouter.post("/create-other-appliances", addOtherAppliances);
+leadsRouter.post(
+  "/upload-other-appliances",
+  excelUpload.single("file"),
+  uploadOtherAppliances,
+);
+leadsRouter.get(
+  "/download-other-appliances/:vendor_id",
+  downloadOtherAppliancesReport,
+);
 leadsRouter.get("/get-all-handle-types/:vendor_id", fetchAllHandleTypes);
 leadsRouter.get(
   "/get-fast-production-timeline-rules/:vendor_id",

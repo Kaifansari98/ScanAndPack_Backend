@@ -17590,6 +17590,20 @@ export type ListEnumLeadUserStatusFieldRefInput<$PrismaModel> = FieldRefInputTyp
 
 
 /**
+ * Reference to a field of type 'OtherApplianceType'
+ */
+export type EnumOtherApplianceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OtherApplianceType'>
+    
+
+
+/**
+ * Reference to a field of type 'OtherApplianceType[]'
+ */
+export type ListEnumOtherApplianceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OtherApplianceType[]'>
+    
+
+
+/**
  * Reference to a field of type 'TechCheckStatus'
  */
 export type EnumTechCheckStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TechCheckStatus'>
