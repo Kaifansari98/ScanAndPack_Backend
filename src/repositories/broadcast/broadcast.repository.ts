@@ -3,6 +3,7 @@ import { prisma } from "../../prisma/client";
 export class BroadcastRepository {
   // ─── Shared include used across all read queries ─────────────────────────────
   private readonly defaultInclude = {
+    category: true,
     audiences: true,
     attachments: true,
     createdBy: { select: { id: true, user_name: true } },
@@ -18,6 +19,7 @@ export class BroadcastRepository {
       content: string;
       type: string;
       status: string;
+      category_id?: number | null;
       publish_at: Date | null;
       vendor_id: number | null;
       created_by: number;
@@ -185,6 +187,7 @@ export class BroadcastRepository {
       content?: string;
       type?: string;
       status?: string;
+      category_id?: number | null;
       publish_at?: Date | null;
       vendor_id?: number | null;
       updated_by: number;

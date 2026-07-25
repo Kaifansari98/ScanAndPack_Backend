@@ -15,6 +15,10 @@ export async function processPendingNotificationQueue() {
         notification_status: "PENDING",
         send_at: { lte: nowWithBuffer },
       },
+       take: 100,
+  orderBy: {
+    send_at: "asc",
+  },
     });
 
     if (pendingQueue.length === 0) {
@@ -148,30 +152,63 @@ export async function processPendingNotificationQueue() {
           logger.info(`Sending broadcast ${broadcastId} notification to ${targetUserIds.size} users`);
 
           // Send notification to each user (skip if notification already created)
-          for (const userId of targetUserIds) {
-            try {
-              const existing = await prisma.notification.findFirst({
-                where: { entity_type: "broadcast", entity_id: broadcastId, user_id: userId },
-              });
-              if (existing) continue;
+ // Fetch existing notifications once (avoids N+1 queries)
+const existingNotifications = await prisma.notification.findMany({
+  where: {
+    entity_type: "broadcast",
+    entity_id: broadcastId,
+  },
+  select: {
+    user_id: true,
+  },
+});
 
-              const userVendorId = broadcast.vendor_id || userVendorMap.get(userId) || 0;
-              await NotificationService.createAndSend({
-                vendor_id: userVendorId,
-                user_id: userId,
-                sender_id: broadcast.created_by,
-                type: "LEAD_ACTION" as NotificationType,
-                title: broadcast.title,
-                message: queueItem.body,
-                redirect_url: `/dashboard/broadcasts/${broadcastId}`,
-                entity_type: "broadcast",
-                entity_id: broadcastId,
-              });
-            } catch (err: any) {
-              logger.error(`Error sending notification to user ${userId} for broadcast ${broadcastId}:`, err);
-            }
-          }
+const existingUserIds = new Set(
+  existingNotifications.map((n) => n.user_id)
+);
 
+// Process users in small parallel batches
+const users = Array.from(targetUserIds);
+const BATCH_SIZE = 50;
+
+for (let i = 0; i < users.length; i += BATCH_SIZE) {
+  const batch = users.slice(i, i + BATCH_SIZE);
+
+  await Promise.allSettled(
+    batch.map(async (userId) => {
+      try {
+        // Skip if notification already exists
+        if (existingUserIds.has(userId)) {
+          return;
+        }
+
+        const userVendorId =
+          broadcast.vendor_id || userVendorMap.get(userId) || 0;
+
+        await NotificationService.createAndSend({
+          
+          vendor_id: userVendorId,
+          user_id: userId,
+          sender_id: broadcast.created_by,
+          type: NotificationType.LEAD_ACTION,
+          title: broadcast.title,
+          message: queueItem.body,
+          redirect_url: `/dashboard/broadcasts/${broadcastId}`,
+          entity_type: "broadcast",
+          entity_id: broadcastId,
+          
+        });
+        
+      } catch (err: any) {
+        
+        logger.error(
+          `Error sending notification to user ${userId} for broadcast ${broadcastId}:`,
+          err
+        );
+      }
+    })
+  );
+}
           // (Queue item already marked SENT at the start of processing as the exclusive claim)
 
         } catch (itemErr: any) {

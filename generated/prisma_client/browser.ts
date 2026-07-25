@@ -918,6 +918,11 @@ export type CompanyVendorAddress = Prisma.CompanyVendorAddressModel
  */
 export type BroadcastMaster = Prisma.BroadcastMasterModel
 /**
+ * Model BroadcastCategoryMaster
+ * 
+ */
+export type BroadcastCategoryMaster = Prisma.BroadcastCategoryMasterModel
+/**
  * Model BroadcastAudienceMapping
  * 
  */

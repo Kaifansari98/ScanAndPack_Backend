@@ -564,6 +564,7 @@ export const ModelName = {
   CompanyVendorDocumentMapping: 'CompanyVendorDocumentMapping',
   CompanyVendorAddress: 'CompanyVendorAddress',
   BroadcastMaster: 'BroadcastMaster',
+  BroadcastCategoryMaster: 'BroadcastCategoryMaster',
   BroadcastAudienceMapping: 'BroadcastAudienceMapping',
   BroadcastAttachment: 'BroadcastAttachment',
   BroadcastRead: 'BroadcastRead',
@@ -583,7 +584,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "clientTypeMaster" | "leadMaster" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterMaterialFinishMaster" | "carcassLegsMaster" | "skirtingCarcassLegsMaster" | "skirtingCarcassLegsColorMaster" | "leadHardwareMapping" | "lightCarcasTypeMaster" | "lightCarcasUnitMaster" | "leadLightCarcasUnitMapping" | "otherAppliancesMaster" | "leadOtherAppliancesMapping" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost" | "projectBoxInfoField" | "boxInfoFieldValue" | "vendorTypeMaster" | "companyVendorTypeMapping" | "companyVendorContactPerson" | "companyVendorBankAccount" | "companyVendorDocumentMaster" | "companyVendorDocumentMapping" | "companyVendorAddress" | "broadcastMaster" | "broadcastAudienceMapping" | "broadcastAttachment" | "broadcastRead" | "notificationQueue"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "clientTypeMaster" | "leadMaster" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterMaterialFinishMaster" | "carcassLegsMaster" | "skirtingCarcassLegsMaster" | "skirtingCarcassLegsColorMaster" | "leadHardwareMapping" | "lightCarcasTypeMaster" | "lightCarcasUnitMaster" | "leadLightCarcasUnitMapping" | "otherAppliancesMaster" | "leadOtherAppliancesMapping" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost" | "projectBoxInfoField" | "boxInfoFieldValue" | "vendorTypeMaster" | "companyVendorTypeMapping" | "companyVendorContactPerson" | "companyVendorBankAccount" | "companyVendorDocumentMaster" | "companyVendorDocumentMapping" | "companyVendorAddress" | "broadcastMaster" | "broadcastCategoryMaster" | "broadcastAudienceMapping" | "broadcastAttachment" | "broadcastRead" | "notificationQueue"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -13907,6 +13908,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    BroadcastCategoryMaster: {
+      payload: Prisma.$BroadcastCategoryMasterPayload<ExtArgs>
+      fields: Prisma.BroadcastCategoryMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BroadcastCategoryMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastCategoryMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BroadcastCategoryMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastCategoryMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.BroadcastCategoryMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastCategoryMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BroadcastCategoryMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastCategoryMasterPayload>
+        }
+        findMany: {
+          args: Prisma.BroadcastCategoryMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastCategoryMasterPayload>[]
+        }
+        create: {
+          args: Prisma.BroadcastCategoryMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastCategoryMasterPayload>
+        }
+        createMany: {
+          args: Prisma.BroadcastCategoryMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BroadcastCategoryMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastCategoryMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.BroadcastCategoryMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastCategoryMasterPayload>
+        }
+        update: {
+          args: Prisma.BroadcastCategoryMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastCategoryMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.BroadcastCategoryMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BroadcastCategoryMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BroadcastCategoryMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastCategoryMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.BroadcastCategoryMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BroadcastCategoryMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.BroadcastCategoryMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBroadcastCategoryMaster>
+        }
+        groupBy: {
+          args: Prisma.BroadcastCategoryMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BroadcastCategoryMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BroadcastCategoryMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BroadcastCategoryMasterCountAggregateOutputType> | number
+        }
+      }
+    }
     BroadcastAudienceMapping: {
       payload: Prisma.$BroadcastAudienceMappingPayload<ExtArgs>
       fields: Prisma.BroadcastAudienceMappingFieldRefs
@@ -17269,6 +17344,7 @@ export const BroadcastMasterScalarFieldEnum = {
   content: 'content',
   status: 'status',
   type: 'type',
+  category_id: 'category_id',
   publish_at: 'publish_at',
   vendor_id: 'vendor_id',
   created_by: 'created_by',
@@ -17278,6 +17354,19 @@ export const BroadcastMasterScalarFieldEnum = {
 } as const
 
 export type BroadcastMasterScalarFieldEnum = (typeof BroadcastMasterScalarFieldEnum)[keyof typeof BroadcastMasterScalarFieldEnum]
+
+
+export const BroadcastCategoryMasterScalarFieldEnum = {
+  id: 'id',
+  category: 'category',
+  type: 'type',
+  vendor_id: 'vendor_id',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type BroadcastCategoryMasterScalarFieldEnum = (typeof BroadcastCategoryMasterScalarFieldEnum)[keyof typeof BroadcastCategoryMasterScalarFieldEnum]
 
 
 export const BroadcastAudienceMappingScalarFieldEnum = {
@@ -18745,6 +18834,7 @@ export type GlobalOmitConfig = {
   companyVendorDocumentMapping?: Prisma.CompanyVendorDocumentMappingOmit
   companyVendorAddress?: Prisma.CompanyVendorAddressOmit
   broadcastMaster?: Prisma.BroadcastMasterOmit
+  broadcastCategoryMaster?: Prisma.BroadcastCategoryMasterOmit
   broadcastAudienceMapping?: Prisma.BroadcastAudienceMappingOmit
   broadcastAttachment?: Prisma.BroadcastAttachmentOmit
   broadcastRead?: Prisma.BroadcastReadOmit

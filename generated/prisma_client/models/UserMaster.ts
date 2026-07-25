@@ -421,6 +421,7 @@ export type UserMasterWhereInput = {
   boxesPackedBy?: Prisma.BoxMasterListRelationFilter
   broadcastsCreated?: Prisma.BroadcastMasterListRelationFilter
   broadcastsUpdated?: Prisma.BroadcastMasterListRelationFilter
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterListRelationFilter
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingListRelationFilter
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingListRelationFilter
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentListRelationFilter
@@ -582,6 +583,7 @@ export type UserMasterOrderByWithRelationInput = {
   boxesPackedBy?: Prisma.BoxMasterOrderByRelationAggregateInput
   broadcastsCreated?: Prisma.BroadcastMasterOrderByRelationAggregateInput
   broadcastsUpdated?: Prisma.BroadcastMasterOrderByRelationAggregateInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterOrderByRelationAggregateInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingOrderByRelationAggregateInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingOrderByRelationAggregateInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentOrderByRelationAggregateInput
@@ -746,6 +748,7 @@ export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
   boxesPackedBy?: Prisma.BoxMasterListRelationFilter
   broadcastsCreated?: Prisma.BroadcastMasterListRelationFilter
   broadcastsUpdated?: Prisma.BroadcastMasterListRelationFilter
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterListRelationFilter
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingListRelationFilter
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingListRelationFilter
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentListRelationFilter
@@ -941,6 +944,7 @@ export type UserMasterCreateInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -1099,6 +1103,7 @@ export type UserMasterUncheckedCreateInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -1256,6 +1261,7 @@ export type UserMasterUpdateInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -1414,6 +1420,7 @@ export type UserMasterUncheckedUpdateInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -3647,6 +3654,20 @@ export type UserMasterUpdateOneWithoutBroadcastsUpdatedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutBroadcastsUpdatedInput, Prisma.UserMasterUpdateWithoutBroadcastsUpdatedInput>, Prisma.UserMasterUncheckedUpdateWithoutBroadcastsUpdatedInput>
 }
 
+export type UserMasterCreateNestedOneWithoutBroadcastCategoriesCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutBroadcastCategoriesCreatedInput, Prisma.UserMasterUncheckedCreateWithoutBroadcastCategoriesCreatedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutBroadcastCategoriesCreatedInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+}
+
+export type UserMasterUpdateOneRequiredWithoutBroadcastCategoriesCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutBroadcastCategoriesCreatedInput, Prisma.UserMasterUncheckedCreateWithoutBroadcastCategoriesCreatedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutBroadcastCategoriesCreatedInput
+  upsert?: Prisma.UserMasterUpsertWithoutBroadcastCategoriesCreatedInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutBroadcastCategoriesCreatedInput, Prisma.UserMasterUpdateWithoutBroadcastCategoriesCreatedInput>, Prisma.UserMasterUncheckedUpdateWithoutBroadcastCategoriesCreatedInput>
+}
+
 export type UserMasterCreateNestedOneWithoutBroadcastAudienceCreatedInput = {
   create?: Prisma.XOR<Prisma.UserMasterCreateWithoutBroadcastAudienceCreatedInput, Prisma.UserMasterUncheckedCreateWithoutBroadcastAudienceCreatedInput>
   connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutBroadcastAudienceCreatedInput
@@ -3926,6 +3947,7 @@ export type UserMasterCreateWithoutVendorInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -4083,6 +4105,7 @@ export type UserMasterUncheckedCreateWithoutVendorInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -4283,6 +4306,7 @@ export type UserMasterCreateWithoutUser_typeInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -4440,6 +4464,7 @@ export type UserMasterUncheckedCreateWithoutUser_typeInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -4622,6 +4647,7 @@ export type UserMasterCreateWithoutDocumentsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -4779,6 +4805,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -4951,6 +4978,7 @@ export type UserMasterUpdateWithoutDocumentsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -5108,6 +5136,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -5264,6 +5293,7 @@ export type UserMasterCreateWithoutSessionsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -5421,6 +5451,7 @@ export type UserMasterUncheckedCreateWithoutSessionsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -5582,6 +5613,7 @@ export type UserMasterCreateWithoutRevokedSessionsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -5739,6 +5771,7 @@ export type UserMasterUncheckedCreateWithoutRevokedSessionsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -5911,6 +5944,7 @@ export type UserMasterUpdateWithoutSessionsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -6068,6 +6102,7 @@ export type UserMasterUncheckedUpdateWithoutSessionsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -6235,6 +6270,7 @@ export type UserMasterUpdateWithoutRevokedSessionsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -6392,6 +6428,7 @@ export type UserMasterUncheckedUpdateWithoutRevokedSessionsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -6548,6 +6585,7 @@ export type UserMasterCreateWithoutUserPrivilegeMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -6705,6 +6743,7 @@ export type UserMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -6877,6 +6916,7 @@ export type UserMasterUpdateWithoutUserPrivilegeMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -7034,6 +7074,7 @@ export type UserMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -7190,6 +7231,7 @@ export type UserMasterCreateWithoutCreatedProjectsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -7347,6 +7389,7 @@ export type UserMasterUncheckedCreateWithoutCreatedProjectsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -7519,6 +7562,7 @@ export type UserMasterUpdateWithoutCreatedProjectsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -7676,6 +7720,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedProjectsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -7832,6 +7877,7 @@ export type UserMasterCreateWithoutBoxesFactoryOutInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -7989,6 +8035,7 @@ export type UserMasterUncheckedCreateWithoutBoxesFactoryOutInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -8150,6 +8197,7 @@ export type UserMasterCreateWithoutBoxesSiteInInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -8307,6 +8355,7 @@ export type UserMasterUncheckedCreateWithoutBoxesSiteInInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -8468,6 +8517,7 @@ export type UserMasterCreateWithoutBoxesPackedByInput = {
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -8625,6 +8675,7 @@ export type UserMasterUncheckedCreateWithoutBoxesPackedByInput = {
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -8797,6 +8848,7 @@ export type UserMasterUpdateWithoutBoxesFactoryOutInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -8954,6 +9006,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesFactoryOutInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -9121,6 +9174,7 @@ export type UserMasterUpdateWithoutBoxesSiteInInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -9278,6 +9332,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesSiteInInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -9445,6 +9500,7 @@ export type UserMasterUpdateWithoutBoxesPackedByInput = {
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -9602,6 +9658,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesPackedByInput = {
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -9758,6 +9815,7 @@ export type UserMasterCreateWithoutScanItemsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -9915,6 +9973,7 @@ export type UserMasterUncheckedCreateWithoutScanItemsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -10087,6 +10146,7 @@ export type UserMasterUpdateWithoutScanItemsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -10244,6 +10304,7 @@ export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -10400,6 +10461,7 @@ export type UserMasterCreateWithoutLeadsAssignedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -10557,6 +10619,7 @@ export type UserMasterUncheckedCreateWithoutLeadsAssignedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -10718,6 +10781,7 @@ export type UserMasterCreateWithoutLeadsDelegatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -10875,6 +10939,7 @@ export type UserMasterUncheckedCreateWithoutLeadsDelegatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -11036,6 +11101,7 @@ export type UserMasterCreateWithoutLeadsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -11193,6 +11259,7 @@ export type UserMasterUncheckedCreateWithoutLeadsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -11354,6 +11421,7 @@ export type UserMasterCreateWithoutLeadsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -11511,6 +11579,7 @@ export type UserMasterUncheckedCreateWithoutLeadsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -11683,6 +11752,7 @@ export type UserMasterUpdateWithoutLeadsAssignedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -11840,6 +11910,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsAssignedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -12007,6 +12078,7 @@ export type UserMasterUpdateWithoutLeadsDelegatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -12164,6 +12236,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsDelegatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -12331,6 +12404,7 @@ export type UserMasterUpdateWithoutLeadsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -12488,6 +12562,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -12655,6 +12730,7 @@ export type UserMasterUpdateWithoutLeadsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -12812,6 +12888,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -12968,6 +13045,7 @@ export type UserMasterCreateWithoutLeadSpecificationsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -13125,6 +13203,7 @@ export type UserMasterUncheckedCreateWithoutLeadSpecificationsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -13297,6 +13376,7 @@ export type UserMasterUpdateWithoutLeadSpecificationsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -13454,6 +13534,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSpecificationsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -13610,6 +13691,7 @@ export type UserMasterCreateWithoutLeadCarcassMaterialMappingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -13767,6 +13849,7 @@ export type UserMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsCreatedIn
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -13939,6 +14022,7 @@ export type UserMasterUpdateWithoutLeadCarcassMaterialMappingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -14096,6 +14180,7 @@ export type UserMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsCreatedIn
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -14252,6 +14337,7 @@ export type UserMasterCreateWithoutLeadShutterMaterialMappingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -14409,6 +14495,7 @@ export type UserMasterUncheckedCreateWithoutLeadShutterMaterialMappingsCreatedIn
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -14581,6 +14668,7 @@ export type UserMasterUpdateWithoutLeadShutterMaterialMappingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -14738,6 +14826,7 @@ export type UserMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsCreatedIn
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -14894,6 +14983,7 @@ export type UserMasterCreateWithoutLeadSuperAdminApprovalsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -15051,6 +15141,7 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsCreatedInput 
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -15212,6 +15303,7 @@ export type UserMasterCreateWithoutLeadSuperAdminApprovalsApprovedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -15369,6 +15461,7 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsApprovedInput
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -15541,6 +15634,7 @@ export type UserMasterUpdateWithoutLeadSuperAdminApprovalsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -15698,6 +15792,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsCreatedInput 
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -15865,6 +15960,7 @@ export type UserMasterUpdateWithoutLeadSuperAdminApprovalsApprovedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -16022,6 +16118,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsApprovedInput
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -16178,6 +16275,7 @@ export type UserMasterCreateWithoutLeadUserCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -16335,6 +16433,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -16496,6 +16595,7 @@ export type UserMasterCreateWithoutLeadUserUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -16653,6 +16753,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -16814,6 +16915,7 @@ export type UserMasterCreateWithoutLeadUserAsUserInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -16971,6 +17073,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserAsUserInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -17143,6 +17246,7 @@ export type UserMasterUpdateWithoutLeadUserCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -17300,6 +17404,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -17467,6 +17572,7 @@ export type UserMasterUpdateWithoutLeadUserUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -17624,6 +17730,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -17791,6 +17898,7 @@ export type UserMasterUpdateWithoutLeadUserAsUserInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -17948,6 +18056,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -18104,6 +18213,7 @@ export type UserMasterCreateWithoutLeadActivityStatusLogInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -18261,6 +18371,7 @@ export type UserMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -18433,6 +18544,7 @@ export type UserMasterUpdateWithoutLeadActivityStatusLogInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -18590,6 +18702,7 @@ export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -18746,6 +18859,7 @@ export type UserMasterCreateWithoutAccountsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -18903,6 +19017,7 @@ export type UserMasterUncheckedCreateWithoutAccountsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -19064,6 +19179,7 @@ export type UserMasterCreateWithoutAccountsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -19221,6 +19337,7 @@ export type UserMasterUncheckedCreateWithoutAccountsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -19393,6 +19510,7 @@ export type UserMasterUpdateWithoutAccountsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -19550,6 +19668,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -19717,6 +19836,7 @@ export type UserMasterUpdateWithoutAccountsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -19874,6 +19994,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -20030,6 +20151,7 @@ export type UserMasterCreateWithoutLeadProductsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -20187,6 +20309,7 @@ export type UserMasterUncheckedCreateWithoutLeadProductsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -20359,6 +20482,7 @@ export type UserMasterUpdateWithoutLeadProductsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -20516,6 +20640,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -20672,6 +20797,7 @@ export type UserMasterCreateWithoutLeadHardwareMappingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -20829,6 +20955,7 @@ export type UserMasterUncheckedCreateWithoutLeadHardwareMappingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -21001,6 +21128,7 @@ export type UserMasterUpdateWithoutLeadHardwareMappingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -21158,6 +21286,7 @@ export type UserMasterUncheckedUpdateWithoutLeadHardwareMappingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -21314,6 +21443,7 @@ export type UserMasterCreateWithoutLeadLightCarcasUnitMappingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -21471,6 +21601,7 @@ export type UserMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsCreatedIn
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -21643,6 +21774,7 @@ export type UserMasterUpdateWithoutLeadLightCarcasUnitMappingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -21800,6 +21932,7 @@ export type UserMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsCreatedIn
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -21956,6 +22089,7 @@ export type UserMasterCreateWithoutLeadOtherAppliancesMappingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -22113,6 +22247,7 @@ export type UserMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsCreatedIn
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -22285,6 +22420,7 @@ export type UserMasterUpdateWithoutLeadOtherAppliancesMappingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -22442,6 +22578,7 @@ export type UserMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsCreatedIn
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -22598,6 +22735,7 @@ export type UserMasterCreateWithoutDocumentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -22755,6 +22893,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -22916,6 +23055,7 @@ export type UserMasterCreateWithoutDocumentsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -23073,6 +23213,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -23245,6 +23386,7 @@ export type UserMasterUpdateWithoutDocumentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -23402,6 +23544,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -23569,6 +23712,7 @@ export type UserMasterUpdateWithoutDocumentsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -23726,6 +23870,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -23882,6 +24027,7 @@ export type UserMasterCreateWithoutLeadChatMembersAddedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -24039,6 +24185,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersAddedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -24200,6 +24347,7 @@ export type UserMasterCreateWithoutLeadChatMembersInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -24357,6 +24505,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -24529,6 +24678,7 @@ export type UserMasterUpdateWithoutLeadChatMembersAddedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -24686,6 +24836,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersAddedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -24853,6 +25004,7 @@ export type UserMasterUpdateWithoutLeadChatMembersInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -25010,6 +25162,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -25166,6 +25319,7 @@ export type UserMasterCreateWithoutLeadChatMessagesSentInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -25323,6 +25477,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMessagesSentInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -25495,6 +25650,7 @@ export type UserMasterUpdateWithoutLeadChatMessagesSentInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -25652,6 +25808,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -25808,6 +25965,7 @@ export type UserMasterCreateWithoutLeadChatMentionsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -25965,6 +26123,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMentionsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -26137,6 +26296,7 @@ export type UserMasterUpdateWithoutLeadChatMentionsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -26294,6 +26454,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -26450,6 +26611,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -26607,6 +26769,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -26768,6 +26931,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -26925,6 +27089,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -27097,6 +27262,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -27254,6 +27420,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -27421,6 +27588,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -27578,6 +27746,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -27734,6 +27903,7 @@ export type UserMasterCreateWithoutProductStructureInstancesInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -27891,6 +28061,7 @@ export type UserMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -28063,6 +28234,7 @@ export type UserMasterUpdateWithoutProductStructureInstancesInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -28220,6 +28392,7 @@ export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -28376,6 +28549,7 @@ export type UserMasterCreateWithoutPaymentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -28533,6 +28707,7 @@ export type UserMasterUncheckedCreateWithoutPaymentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -28705,6 +28880,7 @@ export type UserMasterUpdateWithoutPaymentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -28862,6 +29038,7 @@ export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -29018,6 +29195,7 @@ export type UserMasterCreateWithoutLedgersCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -29175,6 +29353,7 @@ export type UserMasterUncheckedCreateWithoutLedgersCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -29347,6 +29526,7 @@ export type UserMasterUpdateWithoutLedgersCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -29504,6 +29684,7 @@ export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -29660,6 +29841,7 @@ export type UserMasterCreateWithoutSmallOrderRequestsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -29817,6 +29999,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -29978,6 +30161,7 @@ export type UserMasterCreateWithoutSmallOrderRequestsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -30135,6 +30319,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -30307,6 +30492,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -30464,6 +30650,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -30631,6 +30818,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -30788,6 +30976,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -30944,6 +31133,7 @@ export type UserMasterCreateWithoutSmallOrderRequestDocumentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -31101,6 +31291,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestDocumentsCreatedInp
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -31273,6 +31464,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestDocumentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -31430,6 +31622,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsCreatedInp
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -31586,6 +31779,7 @@ export type UserMasterCreateWithoutLeadAmcContractsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -31743,6 +31937,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -31904,6 +32099,7 @@ export type UserMasterCreateWithoutLeadAmcContractsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -32061,6 +32257,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -32233,6 +32430,7 @@ export type UserMasterUpdateWithoutLeadAmcContractsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -32390,6 +32588,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -32557,6 +32756,7 @@ export type UserMasterUpdateWithoutLeadAmcContractsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -32714,6 +32914,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -32870,6 +33071,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCompletedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -33027,6 +33229,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCompletedInput =
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -33188,6 +33391,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -33345,6 +33549,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -33506,6 +33711,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesRejectedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -33663,6 +33869,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesRejectedInput = 
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -33824,6 +34031,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -33981,6 +34189,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -34153,6 +34362,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCompletedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -34310,6 +34520,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCompletedInput =
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -34477,6 +34688,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -34634,6 +34846,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -34801,6 +35014,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesRejectedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -34958,6 +35172,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesRejectedInput = 
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -35125,6 +35340,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -35282,6 +35498,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -35438,6 +35655,7 @@ export type UserMasterCreateWithoutLeadStatusLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -35595,6 +35813,7 @@ export type UserMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -35767,6 +35986,7 @@ export type UserMasterUpdateWithoutLeadStatusLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -35924,6 +36144,7 @@ export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -36080,6 +36301,7 @@ export type UserMasterCreateWithoutDesignMeetingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -36237,6 +36459,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -36398,6 +36621,7 @@ export type UserMasterCreateWithoutDesignMeetingsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -36555,6 +36779,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -36727,6 +36952,7 @@ export type UserMasterUpdateWithoutDesignMeetingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -36884,6 +37110,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -37051,6 +37278,7 @@ export type UserMasterUpdateWithoutDesignMeetingsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -37208,6 +37436,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -37364,6 +37593,7 @@ export type UserMasterCreateWithoutClientVisitsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -37521,6 +37751,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -37682,6 +37913,7 @@ export type UserMasterCreateWithoutClientVisitsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -37839,6 +38071,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -38011,6 +38244,7 @@ export type UserMasterUpdateWithoutClientVisitsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -38168,6 +38402,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -38335,6 +38570,7 @@ export type UserMasterUpdateWithoutClientVisitsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -38492,6 +38728,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -38648,6 +38885,7 @@ export type UserMasterCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -38805,6 +39043,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingDocsMappingForCreatedBY
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -38977,6 +39216,7 @@ export type UserMasterUpdateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -39134,6 +39374,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBY
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -39290,6 +39531,7 @@ export type UserMasterCreateWithoutClientVisitDocumentMappingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -39447,6 +39689,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitDocumentMappingsCreatedIn
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -39619,6 +39862,7 @@ export type UserMasterUpdateWithoutClientVisitDocumentMappingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -39776,6 +40020,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitDocumentMappingsCreatedIn
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -39932,6 +40177,7 @@ export type UserMasterCreateWithoutDesignSelectionsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -40089,6 +40335,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -40250,6 +40497,7 @@ export type UserMasterCreateWithoutDesignSelectionsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -40407,6 +40655,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -40579,6 +40828,7 @@ export type UserMasterUpdateWithoutDesignSelectionsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -40736,6 +40986,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -40903,6 +41154,7 @@ export type UserMasterUpdateWithoutDesignSelectionsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -41060,6 +41312,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -41216,6 +41469,7 @@ export type UserMasterCreateWithoutChsMappingCreatedByInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -41373,6 +41627,7 @@ export type UserMasterUncheckedCreateWithoutChsMappingCreatedByInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -41534,6 +41789,7 @@ export type UserMasterCreateWithoutChsMappingUpdatedByInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -41691,6 +41947,7 @@ export type UserMasterUncheckedCreateWithoutChsMappingUpdatedByInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -41863,6 +42120,7 @@ export type UserMasterUpdateWithoutChsMappingCreatedByInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -42020,6 +42278,7 @@ export type UserMasterUncheckedUpdateWithoutChsMappingCreatedByInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -42187,6 +42446,7 @@ export type UserMasterUpdateWithoutChsMappingUpdatedByInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -42344,6 +42604,7 @@ export type UserMasterUncheckedUpdateWithoutChsMappingUpdatedByInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -42500,6 +42761,7 @@ export type UserMasterCreateWithoutSupervisorMappingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -42657,6 +42919,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -42818,6 +43081,7 @@ export type UserMasterCreateWithoutSupervisorMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -42975,6 +43239,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -43147,6 +43412,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -43304,6 +43570,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -43471,6 +43738,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -43628,6 +43896,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -43784,6 +44053,7 @@ export type UserMasterCreateWithoutLeadTasksClosedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -43941,6 +44211,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksClosedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -44102,6 +44373,7 @@ export type UserMasterCreateWithoutLeadTasksCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -44259,6 +44531,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -44420,6 +44693,7 @@ export type UserMasterCreateWithoutLeadTasksAssignedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -44577,6 +44851,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksAssignedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -44749,6 +45024,7 @@ export type UserMasterUpdateWithoutLeadTasksClosedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -44906,6 +45182,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksClosedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -45073,6 +45350,7 @@ export type UserMasterUpdateWithoutLeadTasksCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -45230,6 +45508,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -45397,6 +45676,7 @@ export type UserMasterUpdateWithoutLeadTasksAssignedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -45554,6 +45834,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -45710,6 +45991,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesAsRequesterInput 
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -45867,6 +46149,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesAsReques
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -46028,6 +46311,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -46185,6 +46469,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesCreatedI
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -46346,6 +46631,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -46503,6 +46789,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesUpdatedI
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -46664,6 +46951,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesRevokedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -46821,6 +47109,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesRevokedI
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -46993,6 +47282,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesAsRequesterInput 
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -47150,6 +47440,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesAsReques
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -47317,6 +47608,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -47474,6 +47766,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesCreatedI
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -47641,6 +47934,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -47798,6 +48092,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesUpdatedI
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -47965,6 +48260,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesRevokedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -48122,6 +48418,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesRevokedI
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -48278,6 +48575,7 @@ export type UserMasterCreateWithoutFastProductionRequestsAsRequesterInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -48435,6 +48733,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsAsRequesterInp
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -48596,6 +48895,7 @@ export type UserMasterCreateWithoutFastProductionRequestsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -48753,6 +49053,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsCreatedInput =
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -48914,6 +49215,7 @@ export type UserMasterCreateWithoutFastProductionRequestsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -49071,6 +49373,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsUpdatedInput =
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -49232,6 +49535,7 @@ export type UserMasterCreateWithoutFastProductionRequestsRevokedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -49389,6 +49693,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsRevokedInput =
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -49561,6 +49866,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsAsRequesterInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -49718,6 +50024,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsAsRequesterInp
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -49885,6 +50192,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -50042,6 +50350,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsCreatedInput =
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -50209,6 +50518,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -50366,6 +50676,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsUpdatedInput =
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -50533,6 +50844,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsRevokedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -50690,6 +51002,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsRevokedInput =
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -50846,6 +51159,7 @@ export type UserMasterCreateWithoutFastProductionApprovalsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -51003,6 +51317,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionApprovalsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -51175,6 +51490,7 @@ export type UserMasterUpdateWithoutFastProductionApprovalsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -51332,6 +51648,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionApprovalsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -51488,6 +51805,7 @@ export type UserMasterCreateWithoutFastProductionRequestDocumentsCreatedInput = 
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -51645,6 +51963,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestDocumentsCreate
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -51817,6 +52136,7 @@ export type UserMasterUpdateWithoutFastProductionRequestDocumentsCreatedInput = 
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -51974,6 +52294,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestDocumentsCreate
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -52130,6 +52451,7 @@ export type UserMasterCreateWithoutFastProductionStatusLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -52287,6 +52609,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionStatusLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -52459,6 +52782,7 @@ export type UserMasterUpdateWithoutFastProductionStatusLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -52616,6 +52940,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionStatusLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -52772,6 +53097,7 @@ export type UserMasterCreateWithoutLeadDetailedLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -52929,6 +53255,7 @@ export type UserMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -53101,6 +53428,7 @@ export type UserMasterUpdateWithoutLeadDetailedLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -53258,6 +53586,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -53414,6 +53743,7 @@ export type UserMasterCreateWithoutLeadDocumentLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -53571,6 +53901,7 @@ export type UserMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -53743,6 +54074,7 @@ export type UserMasterUpdateWithoutLeadDocumentLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -53900,6 +54232,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -54056,6 +54389,7 @@ export type UserMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -54213,6 +54547,7 @@ export type UserMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -54385,6 +54720,7 @@ export type UserMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -54542,6 +54878,7 @@ export type UserMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -54698,6 +55035,7 @@ export type UserMasterCreateWithoutCompanyVendorsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -54855,6 +55193,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -55016,6 +55355,7 @@ export type UserMasterCreateWithoutCompanyVendorsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -55173,6 +55513,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -55334,6 +55675,7 @@ export type UserMasterCreateWithoutCompanyVendorsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -55491,6 +55833,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -55663,6 +56006,7 @@ export type UserMasterUpdateWithoutCompanyVendorsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -55820,6 +56164,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -55987,6 +56332,7 @@ export type UserMasterUpdateWithoutCompanyVendorsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -56144,6 +56490,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -56311,6 +56658,7 @@ export type UserMasterUpdateWithoutCompanyVendorsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -56468,6 +56816,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -56624,6 +56973,7 @@ export type UserMasterCreateWithoutOrderLoginDetailsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -56781,6 +57131,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -56942,6 +57293,7 @@ export type UserMasterCreateWithoutOrderLoginsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -57099,6 +57451,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -57271,6 +57624,7 @@ export type UserMasterUpdateWithoutOrderLoginDetailsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -57428,6 +57782,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -57595,6 +57950,7 @@ export type UserMasterUpdateWithoutOrderLoginsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -57752,6 +58108,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -57908,6 +58265,7 @@ export type UserMasterCreateWithoutSiteReadinessCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -58065,6 +58423,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -58226,6 +58585,7 @@ export type UserMasterCreateWithoutSiteReadinessUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -58383,6 +58743,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -58555,6 +58916,7 @@ export type UserMasterUpdateWithoutSiteReadinessCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -58712,6 +59074,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -58879,6 +59242,7 @@ export type UserMasterUpdateWithoutSiteReadinessUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -59036,6 +59400,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -59192,6 +59557,7 @@ export type UserMasterCreateWithoutInstallersCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -59349,6 +59715,7 @@ export type UserMasterUncheckedCreateWithoutInstallersCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -59521,6 +59888,7 @@ export type UserMasterUpdateWithoutInstallersCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -59678,6 +60046,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -59834,6 +60203,7 @@ export type UserMasterCreateWithoutInstallersAssignedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -59991,6 +60361,7 @@ export type UserMasterUncheckedCreateWithoutInstallersAssignedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -60163,6 +60534,7 @@ export type UserMasterUpdateWithoutInstallersAssignedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -60320,6 +60692,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -60476,6 +60849,7 @@ export type UserMasterCreateWithoutInstallationUpdatesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -60633,6 +61007,7 @@ export type UserMasterUncheckedCreateWithoutInstallationUpdatesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -60805,6 +61180,7 @@ export type UserMasterUpdateWithoutInstallationUpdatesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -60962,6 +61338,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -61118,6 +61495,7 @@ export type UserMasterCreateWithoutMiscCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -61275,6 +61653,7 @@ export type UserMasterUncheckedCreateWithoutMiscCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -61436,6 +61815,7 @@ export type UserMasterCreateWithoutMiscUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -61593,6 +61973,7 @@ export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -61765,6 +62146,7 @@ export type UserMasterUpdateWithoutMiscCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -61922,6 +62304,7 @@ export type UserMasterUncheckedUpdateWithoutMiscCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -62089,6 +62472,7 @@ export type UserMasterUpdateWithoutMiscUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -62246,6 +62630,7 @@ export type UserMasterUncheckedUpdateWithoutMiscUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -62402,6 +62787,7 @@ export type UserMasterCreateWithoutMiscDocumentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -62559,6 +62945,7 @@ export type UserMasterUncheckedCreateWithoutMiscDocumentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -62731,6 +63118,7 @@ export type UserMasterUpdateWithoutMiscDocumentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -62888,6 +63276,7 @@ export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -63044,6 +63433,7 @@ export type UserMasterCreateWithoutInstallationIssueLogMasterInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -63201,6 +63591,7 @@ export type UserMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -63373,6 +63764,7 @@ export type UserMasterUpdateWithoutInstallationIssueLogMasterInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -63530,6 +63922,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -63686,6 +64079,7 @@ export type UserMasterCreateWithoutNotificationsSentInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -63843,6 +64237,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsSentInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -64004,6 +64399,7 @@ export type UserMasterCreateWithoutNotificationsReceivedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -64161,6 +64557,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsReceivedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -64333,6 +64730,7 @@ export type UserMasterUpdateWithoutNotificationsSentInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -64490,6 +64888,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsSentInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -64657,6 +65056,7 @@ export type UserMasterUpdateWithoutNotificationsReceivedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -64814,6 +65214,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -64970,6 +65371,7 @@ export type UserMasterCreateWithoutPushTokensInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -65127,6 +65529,7 @@ export type UserMasterUncheckedCreateWithoutPushTokensInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -65299,6 +65702,7 @@ export type UserMasterUpdateWithoutPushTokensInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -65456,6 +65860,7 @@ export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -65612,6 +66017,7 @@ export type UserMasterCreateWithoutOperatorInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -65769,6 +66175,7 @@ export type UserMasterUncheckedCreateWithoutOperatorInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -65930,6 +66337,7 @@ export type UserMasterCreateWithoutMappingSiteInsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -66087,6 +66495,7 @@ export type UserMasterUncheckedCreateWithoutMappingSiteInsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -66259,6 +66668,7 @@ export type UserMasterUpdateWithoutOperatorInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -66416,6 +66826,7 @@ export type UserMasterUncheckedUpdateWithoutOperatorInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -66583,6 +66994,7 @@ export type UserMasterUpdateWithoutMappingSiteInsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -66740,6 +67152,7 @@ export type UserMasterUncheckedUpdateWithoutMappingSiteInsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -66896,6 +67309,7 @@ export type UserMasterCreateWithoutCreatedUserMachineMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -67053,6 +67467,7 @@ export type UserMasterUncheckedCreateWithoutCreatedUserMachineMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -67214,6 +67629,7 @@ export type UserMasterCreateWithoutUpdatedUserMachineMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -67371,6 +67787,7 @@ export type UserMasterUncheckedCreateWithoutUpdatedUserMachineMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -67532,6 +67949,7 @@ export type UserMasterCreateWithoutUserMachineMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -67689,6 +68107,7 @@ export type UserMasterUncheckedCreateWithoutUserMachineMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -67861,6 +68280,7 @@ export type UserMasterUpdateWithoutCreatedUserMachineMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -68018,6 +68438,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedUserMachineMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -68185,6 +68606,7 @@ export type UserMasterUpdateWithoutUpdatedUserMachineMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -68342,6 +68764,7 @@ export type UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -68509,6 +68932,7 @@ export type UserMasterUpdateWithoutUserMachineMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -68666,6 +69090,7 @@ export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -68822,6 +69247,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -68979,6 +69405,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -69140,6 +69567,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -69297,6 +69725,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -69469,6 +69898,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -69626,6 +70056,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -69793,6 +70224,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -69950,6 +70382,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -70106,6 +70539,7 @@ export type UserMasterCreateWithoutCreatedDefectsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -70263,6 +70697,7 @@ export type UserMasterUncheckedCreateWithoutCreatedDefectsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -70435,6 +70870,7 @@ export type UserMasterUpdateWithoutCreatedDefectsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -70592,6 +71028,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -70748,6 +71185,7 @@ export type UserMasterCreateWithoutFranchiseInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -70905,6 +71343,7 @@ export type UserMasterUncheckedCreateWithoutFranchiseInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -71087,6 +71526,7 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -71244,6 +71684,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsC
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -71405,6 +71846,7 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -71562,6 +72004,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsI
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -71734,6 +72177,7 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -71891,6 +72335,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsC
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -72058,6 +72503,7 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -72215,6 +72661,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsI
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -72371,6 +72818,7 @@ export type UserMasterCreateWithoutUserGeographicalMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -72528,6 +72976,7 @@ export type UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -72700,6 +73149,7 @@ export type UserMasterUpdateWithoutUserGeographicalMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -72857,6 +73307,7 @@ export type UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -73013,6 +73464,7 @@ export type UserMasterCreateWithoutActivityLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -73170,6 +73622,7 @@ export type UserMasterUncheckedCreateWithoutActivityLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -73342,6 +73795,7 @@ export type UserMasterUpdateWithoutActivityLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -73499,6 +73953,7 @@ export type UserMasterUncheckedUpdateWithoutActivityLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -73655,6 +74110,7 @@ export type UserMasterCreateWithoutExternalPlatformTokensCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -73812,6 +74268,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensCreatedInput =
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -73973,6 +74430,7 @@ export type UserMasterCreateWithoutExternalPlatformTokensUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -74130,6 +74588,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensUpdatedInput =
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -74302,6 +74761,7 @@ export type UserMasterUpdateWithoutExternalPlatformTokensCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -74459,6 +74919,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensCreatedInput =
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -74626,6 +75087,7 @@ export type UserMasterUpdateWithoutExternalPlatformTokensUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -74783,6 +75245,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensUpdatedInput =
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -74939,6 +75402,7 @@ export type UserMasterCreateWithoutCompletionPhotosInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -75096,6 +75560,7 @@ export type UserMasterUncheckedCreateWithoutCompletionPhotosInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -75268,6 +75733,7 @@ export type UserMasterUpdateWithoutCompletionPhotosInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -75425,6 +75891,7 @@ export type UserMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -75581,6 +76048,7 @@ export type UserMasterCreateWithoutProjectCategoriesVendorMappingsCreatedInput =
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -75738,6 +76206,7 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsCreat
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -75899,6 +76368,7 @@ export type UserMasterCreateWithoutProjectCategoriesVendorMappingsUpdatedInput =
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -76056,6 +76526,7 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsUpdat
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -76228,6 +76699,7 @@ export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsCreatedInput =
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -76385,6 +76857,7 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsCreat
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -76552,6 +77025,7 @@ export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsUpdatedInput =
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -76709,6 +77183,7 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsUpdat
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -76865,6 +77340,7 @@ export type UserMasterCreateWithoutPurchaseIntentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -77022,6 +77498,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -77183,6 +77660,7 @@ export type UserMasterCreateWithoutPurchaseIntentsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -77340,6 +77818,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -77501,6 +77980,7 @@ export type UserMasterCreateWithoutPurchaseIntentsApprovedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -77658,6 +78138,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsApprovedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -77819,6 +78300,7 @@ export type UserMasterCreateWithoutPurchaseIntentsRejectedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -77976,6 +78458,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsRejectedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -78137,6 +78620,7 @@ export type UserMasterCreateWithoutPurchaseIntentsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -78294,6 +78778,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -78466,6 +78951,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -78623,6 +79109,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -78790,6 +79277,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -78947,6 +79435,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -79114,6 +79603,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsApprovedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -79271,6 +79761,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsApprovedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -79438,6 +79929,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsRejectedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -79595,6 +80087,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsRejectedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -79762,6 +80255,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -79919,6 +80413,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -80075,6 +80570,7 @@ export type UserMasterCreateWithoutPurchaseIntentStatusLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -80232,6 +80728,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentStatusLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -80404,6 +80901,7 @@ export type UserMasterUpdateWithoutPurchaseIntentStatusLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -80561,6 +81059,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentStatusLogsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -80717,6 +81216,7 @@ export type UserMasterCreateWithoutPurchaseOrdersCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -80874,6 +81374,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseOrdersCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -81035,6 +81536,7 @@ export type UserMasterCreateWithoutPurchaseOrdersUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -81192,6 +81694,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseOrdersUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -81364,6 +81867,7 @@ export type UserMasterUpdateWithoutPurchaseOrdersCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -81521,6 +82025,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseOrdersCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -81688,6 +82193,7 @@ export type UserMasterUpdateWithoutPurchaseOrdersUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -81845,6 +82351,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseOrdersUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -82001,6 +82508,7 @@ export type UserMasterCreateWithoutPoItemsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -82158,6 +82666,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -82319,6 +82828,7 @@ export type UserMasterCreateWithoutPoItemsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -82476,6 +82986,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -82637,6 +83148,7 @@ export type UserMasterCreateWithoutPoItemsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -82794,6 +83306,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -82966,6 +83479,7 @@ export type UserMasterUpdateWithoutPoItemsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -83123,6 +83637,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -83290,6 +83805,7 @@ export type UserMasterUpdateWithoutPoItemsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -83447,6 +83963,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -83614,6 +84131,7 @@ export type UserMasterUpdateWithoutPoItemsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -83771,6 +84289,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsDeletedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -83927,6 +84446,7 @@ export type UserMasterCreateWithoutGrnsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -84084,6 +84604,7 @@ export type UserMasterUncheckedCreateWithoutGrnsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -84245,6 +84766,7 @@ export type UserMasterCreateWithoutGrnsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -84402,6 +84924,7 @@ export type UserMasterUncheckedCreateWithoutGrnsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -84563,6 +85086,7 @@ export type UserMasterCreateWithoutGrnsConfirmedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -84720,6 +85244,7 @@ export type UserMasterUncheckedCreateWithoutGrnsConfirmedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -84892,6 +85417,7 @@ export type UserMasterUpdateWithoutGrnsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -85049,6 +85575,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -85216,6 +85743,7 @@ export type UserMasterUpdateWithoutGrnsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -85373,6 +85901,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -85540,6 +86069,7 @@ export type UserMasterUpdateWithoutGrnsConfirmedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -85697,6 +86227,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsConfirmedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -85853,6 +86384,7 @@ export type UserMasterCreateWithoutDcnsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -86010,6 +86542,7 @@ export type UserMasterUncheckedCreateWithoutDcnsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -86171,6 +86704,7 @@ export type UserMasterCreateWithoutDcnsSettledInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -86328,6 +86862,7 @@ export type UserMasterUncheckedCreateWithoutDcnsSettledInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -86500,6 +87035,7 @@ export type UserMasterUpdateWithoutDcnsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -86657,6 +87193,7 @@ export type UserMasterUncheckedUpdateWithoutDcnsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -86824,6 +87361,7 @@ export type UserMasterUpdateWithoutDcnsSettledInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -86981,6 +87519,7 @@ export type UserMasterUncheckedUpdateWithoutDcnsSettledInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -87137,6 +87676,7 @@ export type UserMasterCreateWithoutRedeliveriesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -87294,6 +87834,7 @@ export type UserMasterUncheckedCreateWithoutRedeliveriesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -87466,6 +88007,7 @@ export type UserMasterUpdateWithoutRedeliveriesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -87623,6 +88165,7 @@ export type UserMasterUncheckedUpdateWithoutRedeliveriesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -87779,6 +88322,7 @@ export type UserMasterCreateWithoutStockHistoriesInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -87936,6 +88480,7 @@ export type UserMasterUncheckedCreateWithoutStockHistoriesInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -88108,6 +88653,7 @@ export type UserMasterUpdateWithoutStockHistoriesInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -88265,6 +88811,7 @@ export type UserMasterUncheckedUpdateWithoutStockHistoriesInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -88421,6 +88968,7 @@ export type UserMasterCreateWithoutPoPaymentScheduleHistoriesInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -88578,6 +89126,7 @@ export type UserMasterUncheckedCreateWithoutPoPaymentScheduleHistoriesInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -88750,6 +89299,7 @@ export type UserMasterUpdateWithoutPoPaymentScheduleHistoriesInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -88907,6 +89457,7 @@ export type UserMasterUncheckedUpdateWithoutPoPaymentScheduleHistoriesInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -89063,6 +89614,7 @@ export type UserMasterCreateWithoutArchitechuremastersInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -89220,6 +89772,7 @@ export type UserMasterUncheckedCreateWithoutArchitechuremastersInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -89392,6 +89945,7 @@ export type UserMasterUpdateWithoutArchitechuremastersInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -89549,6 +90103,7 @@ export type UserMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -89705,6 +90260,7 @@ export type UserMasterCreateWithoutBroadcastsCreatedInput = {
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -89862,6 +90418,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastsCreatedInput = {
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -90023,6 +90580,7 @@ export type UserMasterCreateWithoutBroadcastsUpdatedInput = {
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -90180,6 +90738,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastsUpdatedInput = {
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -90352,6 +90911,7 @@ export type UserMasterUpdateWithoutBroadcastsCreatedInput = {
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -90509,6 +91069,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastsCreatedInput = {
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -90676,6 +91237,7 @@ export type UserMasterUpdateWithoutBroadcastsUpdatedInput = {
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -90833,6 +91395,653 @@ export type UserMasterUncheckedUpdateWithoutBroadcastsUpdatedInput = {
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastReads?: Prisma.BroadcastReadUncheckedUpdateManyWithoutUserNestedInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUncheckedUpdateManyWithoutUpdatedByNestedInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserMasterCreateWithoutBroadcastCategoriesCreatedInput = {
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutCreatedByInput
+  clientVisitsCreated?: Prisma.LeadClientVisitCreateNestedManyWithoutCreatedByInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitCreateNestedManyWithoutUpdatedByInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutUpdatedByInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutUserInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutCreatedByInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestCreateNestedManyWithoutUpdatedByInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
+  createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleCreateNestedManyWithoutRejectedByInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestCreateNestedManyWithoutRequesterInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutRequesterInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutRevokedByInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalCreateNestedManyWithoutApproverInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutCreatedByInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogCreateNestedManyWithoutActorInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
+  user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionCreateNestedManyWithoutRevokedByInput
+  pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutUpdatedByInput
+  boxesFactoryOut?: Prisma.BoxMasterCreateNestedManyWithoutFactoryOutByUserInput
+  boxesSiteIn?: Prisma.BoxMasterCreateNestedManyWithoutSiteInByUserInput
+  mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutCreatedByInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutUpdatedByInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutApprovedByInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutRejectedByInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutDeletedByInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutChangedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCreatedByInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutUpdatedByInput
+  grnsCreated?: Prisma.GRNMasterCreateNestedManyWithoutCreatedByInput
+  grnsUpdated?: Prisma.GRNMasterCreateNestedManyWithoutUpdatedByInput
+  grnsConfirmed?: Prisma.GRNMasterCreateNestedManyWithoutConfirmedByInput
+  dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
+  dcnsSettled?: Prisma.DebitCreditNoteCreateNestedManyWithoutSettledByInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestCreateNestedManyWithoutCreatedByInput
+  poItemsCreated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutCreatedByInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutUserInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutCreatedByInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingCreateNestedManyWithoutCreatedByInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutCreatedByInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutCreatedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
+  broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
+  broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutUpdatedByInput
+  broadcastReads?: Prisma.BroadcastReadCreateNestedManyWithoutUserInput
+  broadcastReadsCreated?: Prisma.BroadcastReadCreateNestedManyWithoutCreatedByInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadCreateNestedManyWithoutUpdatedByInput
+  notificationQueuesCreated?: Prisma.NotificationQueueCreateNestedManyWithoutCreatedByInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserMasterUncheckedCreateWithoutBroadcastCategoriesCreatedInput = {
+  id?: number
+  vendor_id: number
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  user_type_id: number
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  franchise_id?: number | null
+  accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutCreatedByInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutUpdatedByInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutUserInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerUncheckedCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutRejectedByInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutRequesterInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutRequesterInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutRevokedByInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUncheckedCreateNestedManyWithoutApproverInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUncheckedCreateNestedManyWithoutActorInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutRevokedByInput
+  pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutFactoryOutByUserInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutSiteInByUserInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutRejectedByInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutChangedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  grnsCreated?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsUpdated?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  grnsConfirmed?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutConfirmedByInput
+  dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
+  dcnsSettled?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutSettledByInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutCreatedByInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutUserInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
+  broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastReads?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutUserInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutUpdatedByInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserMasterCreateOrConnectWithoutBroadcastCategoriesCreatedInput = {
+  where: Prisma.UserMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutBroadcastCategoriesCreatedInput, Prisma.UserMasterUncheckedCreateWithoutBroadcastCategoriesCreatedInput>
+}
+
+export type UserMasterUpsertWithoutBroadcastCategoriesCreatedInput = {
+  update: Prisma.XOR<Prisma.UserMasterUpdateWithoutBroadcastCategoriesCreatedInput, Prisma.UserMasterUncheckedUpdateWithoutBroadcastCategoriesCreatedInput>
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutBroadcastCategoriesCreatedInput, Prisma.UserMasterUncheckedCreateWithoutBroadcastCategoriesCreatedInput>
+  where?: Prisma.UserMasterWhereInput
+}
+
+export type UserMasterUpdateToOneWithWhereWithoutBroadcastCategoriesCreatedInput = {
+  where?: Prisma.UserMasterWhereInput
+  data: Prisma.XOR<Prisma.UserMasterUpdateWithoutBroadcastCategoriesCreatedInput, Prisma.UserMasterUncheckedUpdateWithoutBroadcastCategoriesCreatedInput>
+}
+
+export type UserMasterUpdateWithoutBroadcastCategoriesCreatedInput = {
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutCreatedByNestedInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUpdateManyWithoutCreatedByNestedInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUpdateManyWithoutUpdatedByNestedInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUpdateManyWithoutUpdatedByNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutUserNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUpdateManyWithoutUpdatedByNestedInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUpdateManyWithoutRejectedByNestedInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUpdateManyWithoutRevokedByNestedInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUpdateManyWithoutApproverNestedInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUpdateManyWithoutCreatedByNestedInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUpdateManyWithoutActorNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
+  user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUpdateManyWithoutRevokedByNestedInput
+  pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutUpdatedByNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUpdateManyWithoutSiteInByUserNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUpdateManyWithoutCreatedByNestedInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUpdateManyWithoutUpdatedByNestedInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUpdateManyWithoutApprovedByNestedInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUpdateManyWithoutRejectedByNestedInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUpdateManyWithoutDeletedByNestedInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutChangedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUpdateManyWithoutCreatedByNestedInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUpdateManyWithoutUpdatedByNestedInput
+  grnsCreated?: Prisma.GRNMasterUpdateManyWithoutCreatedByNestedInput
+  grnsUpdated?: Prisma.GRNMasterUpdateManyWithoutUpdatedByNestedInput
+  grnsConfirmed?: Prisma.GRNMasterUpdateManyWithoutConfirmedByNestedInput
+  dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
+  dcnsSettled?: Prisma.DebitCreditNoteUpdateManyWithoutSettledByNestedInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUpdateManyWithoutCreatedByNestedInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUpdateManyWithoutCreatedByNestedInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutUserNestedInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUpdateManyWithoutCreatedByNestedInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUpdateManyWithoutCreatedByNestedInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutCreatedByNestedInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutCreatedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
+  broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUpdateManyWithoutUpdatedByNestedInput
+  broadcastReads?: Prisma.BroadcastReadUpdateManyWithoutUserNestedInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUpdateManyWithoutCreatedByNestedInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUpdateManyWithoutUpdatedByNestedInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUpdateManyWithoutCreatedByNestedInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserMasterUncheckedUpdateWithoutBroadcastCategoriesCreatedInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutCreatedByNestedInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutUpdatedByNestedInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutUserNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutRejectedByNestedInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutRevokedByNestedInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUncheckedUpdateManyWithoutApproverNestedInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUncheckedUpdateManyWithoutActorNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutRevokedByNestedInput
+  pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutRejectedByNestedInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutChangedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  grnsCreated?: Prisma.GRNMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsUpdated?: Prisma.GRNMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  grnsConfirmed?: Prisma.GRNMasterUncheckedUpdateManyWithoutConfirmedByNestedInput
+  dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
+  dcnsSettled?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutSettledByNestedInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutUserNestedInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
+  broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -90990,6 +92199,7 @@ export type UserMasterCreateWithoutBroadcastAudienceCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
   broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutUpdatedByInput
@@ -91147,6 +92357,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAudienceCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -91308,6 +92519,7 @@ export type UserMasterCreateWithoutBroadcastAudienceUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
   broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutUpdatedByInput
@@ -91465,6 +92677,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAudienceUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -91637,6 +92850,7 @@ export type UserMasterUpdateWithoutBroadcastAudienceCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
   broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUpdateManyWithoutUpdatedByNestedInput
@@ -91794,6 +93008,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAudienceCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -91961,6 +93176,7 @@ export type UserMasterUpdateWithoutBroadcastAudienceUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
   broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUpdateManyWithoutUpdatedByNestedInput
@@ -92118,6 +93334,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAudienceUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -92274,6 +93491,7 @@ export type UserMasterCreateWithoutBroadcastAttachmentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutUpdatedByInput
@@ -92431,6 +93649,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAttachmentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -92592,6 +93811,7 @@ export type UserMasterCreateWithoutBroadcastAttachmentsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -92749,6 +93969,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAttachmentsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -92921,6 +94142,7 @@ export type UserMasterUpdateWithoutBroadcastAttachmentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUpdateManyWithoutUpdatedByNestedInput
@@ -93078,6 +94300,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAttachmentsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -93245,6 +94468,7 @@ export type UserMasterUpdateWithoutBroadcastAttachmentsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -93402,6 +94626,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAttachmentsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -93558,6 +94783,7 @@ export type UserMasterCreateWithoutBroadcastReadsInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -93715,6 +94941,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -93876,6 +95103,7 @@ export type UserMasterCreateWithoutBroadcastReadsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -94033,6 +95261,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -94194,6 +95423,7 @@ export type UserMasterCreateWithoutBroadcastReadsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -94351,6 +95581,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -94523,6 +95754,7 @@ export type UserMasterUpdateWithoutBroadcastReadsInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -94680,6 +95912,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -94847,6 +96080,7 @@ export type UserMasterUpdateWithoutBroadcastReadsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -95004,6 +96238,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -95171,6 +96406,7 @@ export type UserMasterUpdateWithoutBroadcastReadsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -95328,6 +96564,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -95484,6 +96721,7 @@ export type UserMasterCreateWithoutNotificationQueuesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -95641,6 +96879,7 @@ export type UserMasterUncheckedCreateWithoutNotificationQueuesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -95802,6 +97041,7 @@ export type UserMasterCreateWithoutNotificationQueuesUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
@@ -95959,6 +97199,7 @@ export type UserMasterUncheckedCreateWithoutNotificationQueuesUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
@@ -96131,6 +97372,7 @@ export type UserMasterUpdateWithoutNotificationQueuesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -96288,6 +97530,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationQueuesCreatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -96455,6 +97698,7 @@ export type UserMasterUpdateWithoutNotificationQueuesUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -96612,6 +97856,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationQueuesUpdatedInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -96781,6 +98026,7 @@ export type UserMasterUpdateWithoutVendorInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -96938,6 +98184,7 @@ export type UserMasterUncheckedUpdateWithoutVendorInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -97122,6 +98369,7 @@ export type UserMasterUpdateWithoutUser_typeInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -97279,6 +98527,7 @@ export type UserMasterUncheckedUpdateWithoutUser_typeInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -97463,6 +98712,7 @@ export type UserMasterUpdateWithoutFranchiseInput = {
   boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
@@ -97620,6 +98870,7 @@ export type UserMasterUncheckedUpdateWithoutFranchiseInput = {
   boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
   broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -97785,6 +99036,7 @@ export type UserMasterCountOutputType = {
   boxesPackedBy: number
   broadcastsCreated: number
   broadcastsUpdated: number
+  broadcastCategoriesCreated: number
   broadcastAudienceCreated: number
   broadcastAudienceUpdated: number
   broadcastAttachmentsCreated: number
@@ -97931,6 +99183,7 @@ export type UserMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   boxesPackedBy?: boolean | UserMasterCountOutputTypeCountBoxesPackedByArgs
   broadcastsCreated?: boolean | UserMasterCountOutputTypeCountBroadcastsCreatedArgs
   broadcastsUpdated?: boolean | UserMasterCountOutputTypeCountBroadcastsUpdatedArgs
+  broadcastCategoriesCreated?: boolean | UserMasterCountOutputTypeCountBroadcastCategoriesCreatedArgs
   broadcastAudienceCreated?: boolean | UserMasterCountOutputTypeCountBroadcastAudienceCreatedArgs
   broadcastAudienceUpdated?: boolean | UserMasterCountOutputTypeCountBroadcastAudienceUpdatedArgs
   broadcastAttachmentsCreated?: boolean | UserMasterCountOutputTypeCountBroadcastAttachmentsCreatedArgs
@@ -98893,6 +100146,13 @@ export type UserMasterCountOutputTypeCountBroadcastsUpdatedArgs<ExtArgs extends 
 /**
  * UserMasterCountOutputType without action
  */
+export type UserMasterCountOutputTypeCountBroadcastCategoriesCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BroadcastCategoryMasterWhereInput
+}
+
+/**
+ * UserMasterCountOutputType without action
+ */
 export type UserMasterCountOutputTypeCountBroadcastAudienceCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.BroadcastAudienceMappingWhereInput
 }
@@ -99104,6 +100364,7 @@ export type UserMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   boxesPackedBy?: boolean | Prisma.UserMaster$boxesPackedByArgs<ExtArgs>
   broadcastsCreated?: boolean | Prisma.UserMaster$broadcastsCreatedArgs<ExtArgs>
   broadcastsUpdated?: boolean | Prisma.UserMaster$broadcastsUpdatedArgs<ExtArgs>
+  broadcastCategoriesCreated?: boolean | Prisma.UserMaster$broadcastCategoriesCreatedArgs<ExtArgs>
   broadcastAudienceCreated?: boolean | Prisma.UserMaster$broadcastAudienceCreatedArgs<ExtArgs>
   broadcastAudienceUpdated?: boolean | Prisma.UserMaster$broadcastAudienceUpdatedArgs<ExtArgs>
   broadcastAttachmentsCreated?: boolean | Prisma.UserMaster$broadcastAttachmentsCreatedArgs<ExtArgs>
@@ -99306,6 +100567,7 @@ export type UserMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   boxesPackedBy?: boolean | Prisma.UserMaster$boxesPackedByArgs<ExtArgs>
   broadcastsCreated?: boolean | Prisma.UserMaster$broadcastsCreatedArgs<ExtArgs>
   broadcastsUpdated?: boolean | Prisma.UserMaster$broadcastsUpdatedArgs<ExtArgs>
+  broadcastCategoriesCreated?: boolean | Prisma.UserMaster$broadcastCategoriesCreatedArgs<ExtArgs>
   broadcastAudienceCreated?: boolean | Prisma.UserMaster$broadcastAudienceCreatedArgs<ExtArgs>
   broadcastAudienceUpdated?: boolean | Prisma.UserMaster$broadcastAudienceUpdatedArgs<ExtArgs>
   broadcastAttachmentsCreated?: boolean | Prisma.UserMaster$broadcastAttachmentsCreatedArgs<ExtArgs>
@@ -99468,6 +100730,7 @@ export type $UserMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     boxesPackedBy: Prisma.$BoxMasterPayload<ExtArgs>[]
     broadcastsCreated: Prisma.$BroadcastMasterPayload<ExtArgs>[]
     broadcastsUpdated: Prisma.$BroadcastMasterPayload<ExtArgs>[]
+    broadcastCategoriesCreated: Prisma.$BroadcastCategoryMasterPayload<ExtArgs>[]
     broadcastAudienceCreated: Prisma.$BroadcastAudienceMappingPayload<ExtArgs>[]
     broadcastAudienceUpdated: Prisma.$BroadcastAudienceMappingPayload<ExtArgs>[]
     broadcastAttachmentsCreated: Prisma.$BroadcastAttachmentPayload<ExtArgs>[]
@@ -100022,6 +101285,7 @@ export interface Prisma__UserMasterClient<T, Null = never, ExtArgs extends runti
   boxesPackedBy<T extends Prisma.UserMaster$boxesPackedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$boxesPackedByArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   broadcastsCreated<T extends Prisma.UserMaster$broadcastsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$broadcastsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   broadcastsUpdated<T extends Prisma.UserMaster$broadcastsUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$broadcastsUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  broadcastCategoriesCreated<T extends Prisma.UserMaster$broadcastCategoriesCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$broadcastCategoriesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastCategoryMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   broadcastAudienceCreated<T extends Prisma.UserMaster$broadcastAudienceCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$broadcastAudienceCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastAudienceMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   broadcastAudienceUpdated<T extends Prisma.UserMaster$broadcastAudienceUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$broadcastAudienceUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastAudienceMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   broadcastAttachmentsCreated<T extends Prisma.UserMaster$broadcastAttachmentsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$broadcastAttachmentsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -103705,6 +104969,30 @@ export type UserMaster$broadcastsUpdatedArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.BroadcastMasterScalarFieldEnum | Prisma.BroadcastMasterScalarFieldEnum[]
+}
+
+/**
+ * UserMaster.broadcastCategoriesCreated
+ */
+export type UserMaster$broadcastCategoriesCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BroadcastCategoryMaster
+   */
+  select?: Prisma.BroadcastCategoryMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BroadcastCategoryMaster
+   */
+  omit?: Prisma.BroadcastCategoryMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BroadcastCategoryMasterInclude<ExtArgs> | null
+  where?: Prisma.BroadcastCategoryMasterWhereInput
+  orderBy?: Prisma.BroadcastCategoryMasterOrderByWithRelationInput | Prisma.BroadcastCategoryMasterOrderByWithRelationInput[]
+  cursor?: Prisma.BroadcastCategoryMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BroadcastCategoryMasterScalarFieldEnum | Prisma.BroadcastCategoryMasterScalarFieldEnum[]
 }
 
 /**
