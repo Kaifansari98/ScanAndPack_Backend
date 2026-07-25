@@ -58,6 +58,63 @@ export class BroadcastService {
     this.repository = new BroadcastRepository();
   }
 
+  // ─── CATEGORIES ────────────────────────────────────────────────────────────
+
+  async getBroadcastCategories(vendor_id: number, includeInactive: boolean = false) {
+    return await prisma.broadcastCategoryMaster.findMany({
+      where: {
+        vendor_id,
+        ...(includeInactive ? {} : { is_active: true }),
+      },
+      orderBy: {
+        category: "asc",
+      },
+    });
+  }
+
+  async createBroadcastCategory(data: {
+    vendor_id: number;
+    category: string;
+    type?: string;
+    created_by: number;
+  }) {
+    return await prisma.broadcastCategoryMaster.create({
+      data: {
+        vendor_id: data.vendor_id,
+        category: data.category,
+        type: data.type || "DOCUMENT",
+        created_by: data.created_by,
+        is_active: true,
+      },
+    });
+  }
+
+  async updateBroadcastCategory(
+    id: number,
+    data: { category: string; type?: string }
+  ) {
+    return await prisma.broadcastCategoryMaster.update({
+      where: { id },
+      data: {
+        category: data.category,
+        ...(data.type ? { type: data.type } : {}),
+      },
+    });
+  }
+
+  async toggleBroadcastCategoryStatus(id: number) {
+    const category = await prisma.broadcastCategoryMaster.findUnique({
+      where: { id },
+    });
+    if (!category) throw new Error("Category not found");
+    return await prisma.broadcastCategoryMaster.update({
+      where: { id },
+      data: {
+        is_active: !category.is_active,
+      },
+    });
+  }
+
   // ─── CREATE ────────────────────────────────────────────────────────────────
 
   async create(
@@ -96,6 +153,7 @@ export class BroadcastService {
     const broadcast = await prisma.$transaction(async (tx) => {
       const record = await this.repository.createBroadcast(tx, {
         title, content, type, status,
+        category_id: payload.category_id ?? null,
         publish_at: publishAt ? new Date(publishAt) : null,
         vendor_id: vendorId ?? null,
         created_by: userId,
@@ -395,6 +453,7 @@ export class BroadcastService {
         content: payload.content,
         type: payload.type,
         status: payload.status,
+        category_id: payload.category_id !== undefined ? payload.category_id : undefined,
         publish_at: payload.publishAt !== undefined ? (payload.publishAt ? new Date(payload.publishAt) : null) : undefined,
         vendor_id: payload.vendorId !== undefined ? (payload.vendorId ?? null) : undefined,
         updated_by: userId,

@@ -184,6 +184,7 @@ model VendorMaster {
   box_info_fields            ProjectBoxInfoField[]
   box_info_values            BoxInfoFieldValue[]
   broadcasts                 BroadcastMaster[]          @relation("VendorBroadcasts")
+  broadcastCategories        BroadcastCategoryMaster[]  @relation("VendorBroadcastCategories")
 
   @@index([state_id])
 }
@@ -387,6 +388,7 @@ model UserMaster {
   boxesPackedBy                              BoxMaster[]                            @relation("BoxPackedByUser")
   broadcastsCreated                          BroadcastMaster[]                      @relation("BroadcastCreatedBy")
   broadcastsUpdated                          BroadcastMaster[]                      @relation("BroadcastUpdatedBy")
+  broadcastCategoriesCreated                 BroadcastCategoryMaster[]              @relation("BroadcastCategoryCreatedBy")
   broadcastAudienceCreated                   BroadcastAudienceMapping[]             @relation("BroadcastAudienceCreatedBy")
   broadcastAudienceUpdated                   BroadcastAudienceMapping[]             @relation("BroadcastAudienceUpdatedBy")
   broadcastAttachmentsCreated                BroadcastAttachment[]                  @relation("BroadcastAttachmentCreatedBy")
@@ -4622,19 +4624,21 @@ enum NotificationStatus {
 }
 
 model BroadcastMaster {
-  id         Int             @id @default(autoincrement())
-  title      String
-  content    String          @db.Text
-  status     BroadcastStatus @default(ACTIVE)
-  type       BroadcastType
-  publish_at DateTime?
-  vendor_id  Int?
-  created_by Int
-  updated_by Int?
-  created_at DateTime        @default(now())
-  updated_at DateTime        @updatedAt
+  id          Int             @id @default(autoincrement())
+  title       String
+  content     String          @db.Text
+  status      BroadcastStatus @default(ACTIVE)
+  type        BroadcastType
+  category_id Int?
+  publish_at  DateTime?
+  vendor_id   Int?
+  created_by  Int
+  updated_by  Int?
+  created_at  DateTime        @default(now())
+  updated_at  DateTime        @updatedAt
 
   vendor      VendorMaster?              @relation("VendorBroadcasts", fields: [vendor_id], references: [id], onDelete: SetNull)
+  category    BroadcastCategoryMaster?   @relation("BroadcastCategory", fields: [category_id], references: [id], onDelete: SetNull)
   createdBy   UserMaster                 @relation("BroadcastCreatedBy", fields: [created_by], references: [id])
   updatedBy   UserMaster?                @relation("BroadcastUpdatedBy", fields: [updated_by], references: [id])
   audiences   BroadcastAudienceMapping[]
@@ -4642,8 +4646,25 @@ model BroadcastMaster {
   readLogs    BroadcastRead[]
 
   @@index([vendor_id])
+  @@index([category_id])
   @@index([created_by])
   @@index([updated_by])
+}
+
+model BroadcastCategoryMaster {
+  id         Int      @id @default(autoincrement())
+  category   String
+  type       String
+  vendor_id  Int
+  is_active  Boolean  @default(true)
+  created_by Int
+  created_at DateTime @default(now())
+
+  vendor     VendorMaster      @relation("VendorBroadcastCategories", fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdBy  UserMaster        @relation("BroadcastCategoryCreatedBy", fields: [created_by], references: [id])
+  broadcasts BroadcastMaster[] @relation("BroadcastCategory")
+
+  @@index([vendor_id])
 }
 
 model BroadcastAudienceMapping {
