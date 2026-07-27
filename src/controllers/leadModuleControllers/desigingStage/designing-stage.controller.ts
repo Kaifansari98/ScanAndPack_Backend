@@ -1005,6 +1005,14 @@ export class DesigingStageController {
           });
           const useCustomVendorFlow =
             vendor?.is_this_vendor_is_custom_usertype_only === true;
+          const selectedDesignType =
+            typeof req.body.design_type === "string"
+              ? req.body.design_type.trim()
+              : "";
+
+          if (useCustomVendorFlow && !selectedDesignType) {
+            throw new Error("Design type is required");
+          }
           const requestedInstanceIds = Array.isArray(rawInstanceIds)
             ? rawInstanceIds
             : typeof rawInstanceIds === "string" && rawInstanceIds.length > 0
@@ -1099,6 +1107,7 @@ export class DesigingStageController {
               String(now.getMonth() + 1).padStart(2, "0"),
               String(now.getDate()).padStart(2, "0"),
             ].join("-");
+
             const existingDesignDocs = await tx.leadDocuments.findMany({
               where: {
                 vendor_id: Number(vendorId),
@@ -1108,10 +1117,31 @@ export class DesigingStageController {
               },
               select: { doc_og_name: true },
             });
+
             nextRevision =
               existingDesignDocs.reduce((maxRevision, doc) => {
-                const match = doc.doc_og_name?.match(/^(?:\[[^\]]+\]\s*)?[DR](\d+)-/i);
-                const revision = match ? Number(match[1]) : -1;
+                const match = doc.doc_og_name?.match(
+                  /^(?:\[([^\]]+)\]\s*)?D(\d+)-(.+?)(?:\.[^.]+)?$/i,
+                );
+                if (!match) {
+                  return maxRevision;
+                }
+
+                const [, existingDesignType = "", revisionText, nameBody = ""] = match;
+                if (existingDesignType.trim() !== selectedDesignType) {
+                  return maxRevision;
+                }
+
+                const isSameProductType =
+                  nameBody.startsWith(`${structureSegment}-`) ||
+                  nameBody.includes(`-${structureSegment}-`) ||
+                  nameBody.endsWith(`-${structureSegment}`);
+
+                if (!isSameProductType) {
+                  return maxRevision;
+                }
+
+                const revision = Number(revisionText);
                 return Number.isFinite(revision)
                   ? Math.max(maxRevision, revision)
                   : maxRevision;
@@ -1123,11 +1153,13 @@ export class DesigingStageController {
 
           // 3️⃣ DB insert
           for (const file of files) {
-            const designTypePrefix = req.body.design_type ? `[${req.body.design_type}] ` : '';
+            const designTypePrefix = selectedDesignType
+              ? `[${selectedDesignType}] `
+              : "";
             const finalOriginalName = designTypePrefix + (useCustomVendorFlow
               ? (() => {
                 const extension = path.extname(file.originalname || "");
-                const renamedOriginalName = `D${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+                const renamedOriginalName = `D${nextRevision}-${structureSegment}-${clientNameSegment}-${dateSegment}${extension}`;
                 nextRevision += 1;
                 return renamedOriginalName;
               })()
