@@ -98,6 +98,11 @@ export type VendorTokens = Prisma.VendorTokensModel
  */
 export type ClientMaster = Prisma.ClientMasterModel
 /**
+ * Model ClientTypeMaster
+ * 
+ */
+export type ClientTypeMaster = Prisma.ClientTypeMasterModel
+/**
  * Model LeadMaster
  * 
  */
@@ -247,6 +252,11 @@ export type HandleTypeMaster = Prisma.HandleTypeMasterModel
  * 
  */
 export type TimelineRule = Prisma.TimelineRuleModel
+/**
+ * Model specificationDocumentMapping
+ * 
+ */
+export type specificationDocumentMapping = Prisma.specificationDocumentMappingModel
 /**
  * Model LeadDocuments
  * 
@@ -878,11 +888,6 @@ export type BoxInfoFieldValue = Prisma.BoxInfoFieldValueModel
  */
 export type VendorTypeMaster = Prisma.VendorTypeMasterModel
 /**
- * Model CompanyVendorStatusMaster
- * 
- */
-export type CompanyVendorStatusMaster = Prisma.CompanyVendorStatusMasterModel
-/**
  * Model CompanyVendorTypeMapping
  * 
  */
@@ -912,3 +917,33 @@ export type CompanyVendorDocumentMapping = Prisma.CompanyVendorDocumentMappingMo
  * 
  */
 export type CompanyVendorAddress = Prisma.CompanyVendorAddressModel
+/**
+ * Model BroadcastMaster
+ * 
+ */
+export type BroadcastMaster = Prisma.BroadcastMasterModel
+/**
+ * Model BroadcastCategoryMaster
+ * 
+ */
+export type BroadcastCategoryMaster = Prisma.BroadcastCategoryMasterModel
+/**
+ * Model BroadcastAudienceMapping
+ * 
+ */
+export type BroadcastAudienceMapping = Prisma.BroadcastAudienceMappingModel
+/**
+ * Model BroadcastAttachment
+ * 
+ */
+export type BroadcastAttachment = Prisma.BroadcastAttachmentModel
+/**
+ * Model BroadcastRead
+ * 
+ */
+export type BroadcastRead = Prisma.BroadcastReadModel
+/**
+ * Model NotificationQueue
+ * 
+ */
+export type NotificationQueue = Prisma.NotificationQueueModel

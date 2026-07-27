@@ -461,6 +461,7 @@ export class LeadSuperAdminApprovalLockInService {
           user_id: superAdmin.id,
           task_type: "Order Login Approval",
           lead_stage: leadStage,
+          instance_id: input.instance_id ?? null,
           due_date: this.getNextDayDueDate(input.base_date),
           remark: instance?.title
             ? `Order Login approval pending from Super Admin for instance ${instance.title}`

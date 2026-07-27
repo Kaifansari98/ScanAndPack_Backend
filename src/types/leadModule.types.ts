@@ -1,214 +1,215 @@
-
+import { OtherApplianceType } from "../../generated/prisma_client/client";
+export { OtherApplianceType };
 export interface ProductTypeInput {
-    vendor_id: number;
-    type: string;
-    tag?: string;
+  vendor_id: number;
+  type: string;
+  tag?: string;
 }
-  
+
 export interface ProductType {
-    id: number;
-    type: string;
-    tag: string;
-    vendor_id: number;
-    status?: string;
+  id: number;
+  type: string;
+  tag: string;
+  vendor_id: number;
+  status?: string;
 }
 
 export interface SiteTypeInput {
-    vendor_id: number;
-    type: string;
+  vendor_id: number;
+  type: string;
 }
 
 export interface UpdateSiteTypeInput {
-    type: string;
+  type: string;
 }
 
-export interface SiteType{
-    id: number;
-    type: string;
-    vendor_id: number;
-    status?: string;
+export interface SiteType {
+  id: number;
+  type: string;
+  vendor_id: number;
+  status?: string;
 }
 
 export interface SourceTypeInput {
-    vendor_id: number;
-    type: string;
+  vendor_id: number;
+  type: string;
 }
 
 export interface UpdateSourceTypeInput {
-    type: string;
+  type: string;
 }
 
-export interface SourceType{
-    id: number;
-    type: string;
-    vendor_id: number;
-    status?: string;
+export interface SourceType {
+  id: number;
+  type: string;
+  vendor_id: number;
+  status?: string;
 }
 
 export interface ProductStructureTypeInput {
-    vendor_id: number;
-    type: string;
-    parent?: string;
-    product_type_id?: number | null;
+  vendor_id: number;
+  type: string;
+  parent?: string;
+  product_type_id?: number | null;
 }
 
-export interface ProductStructureType{
+export interface ProductStructureType {
+  id: number;
+  type: string;
+  vendor_id: number;
+  product_type_id?: number | null;
+  parent?: string | null;
+  status?: string;
+  productType?: {
     id: number;
     type: string;
-    vendor_id: number;
-    product_type_id?: number | null;
-    parent?: string | null;
-    status?: string;
-    productType?: {
-        id: number;
-        type: string;
-    } | null;
+  } | null;
 }
 
 export interface ProductSubStructureInput {
-    vendor_id: number;
-    type: string;
-    product_structure_id: number;
+  vendor_id: number;
+  type: string;
+  product_structure_id: number;
 }
 
 export interface ProductSubStructureType {
+  id: number;
+  type: string;
+  vendor_id: number;
+  product_structure_id: number;
+  status?: string;
+  productStructure?: {
     id: number;
     type: string;
-    vendor_id: number;
-    product_structure_id: number;
-    status?: string;
-    productStructure?: {
-        id: number;
-        type: string;
-    } | null;
+  } | null;
 }
 
 export interface ProductItemCodeInput {
-    vendor_id: number;
-    item_code: string;
-    product_structure_id: number;
-    sub_product_structure_id: number;
-    description: string;
-    specification: string;
+  vendor_id: number;
+  item_code: string;
+  product_structure_id: number;
+  sub_product_structure_id: number;
+  description: string;
+  specification: string;
 }
 
 export interface ProductItemCodeType {
+  id: number;
+  item_code: string;
+  vendor_id: number;
+  product_structure_id: number;
+  sub_product_structure_id?: number | null;
+  description?: string | null;
+  specification?: string | null;
+  status?: string;
+  productStructure?: {
     id: number;
-    item_code: string;
-    vendor_id: number;
-    product_structure_id: number;
-    sub_product_structure_id?: number | null;
-    description?: string | null;
-    specification?: string | null;
-    status?: string;
-    productStructure?: {
-        id: number;
-        type: string;
-    } | null;
-    subProductStructure?: {
-        id: number;
-        type: string;
-    } | null;
+    type: string;
+  } | null;
+  subProductStructure?: {
+    id: number;
+    type: string;
+  } | null;
 }
 
 export interface CarcassType {
-    id: number;
-    name: string;
-    vendor_id: number;
+  id: number;
+  name: string;
+  vendor_id: number;
 }
 
 export interface ShutterSubType {
-    id: number;
-    name: string;
-    shutter_type_id: number;
+  id: number;
+  name: string;
+  shutter_type_id: number;
 }
 
 export interface ShutterType {
-    id: number;
-    name: string;
-    vendor_id: number;
-    subTypes?: ShutterSubType[];
+  id: number;
+  name: string;
+  vendor_id: number;
+  subTypes?: ShutterSubType[];
 }
 
 export interface HandleType {
-    id: number;
-    name: string;
-    vendor_id: number;
+  id: number;
+  name: string;
+  vendor_id: number;
 }
 
 export interface CarcasMaterialFinish {
-    id: number;
-    name: string;
-    carcas_material_id: number;
-    material?: { id: number; name: string };
+  id: number;
+  name: string;
+  carcas_material_id: number;
+  material?: { id: number; name: string };
 }
 
 export interface CarcasMaterial {
-    id: number;
-    name: string;
-    vendor_id: number;
-    finishes?: CarcasMaterialFinish[];
+  id: number;
+  name: string;
+  vendor_id: number;
+  finishes?: CarcasMaterialFinish[];
 }
 
 export interface ShutterMaterialFinish {
-    id: number;
-    name: string;
-    shutter_material_id: number;
-    material?: { id: number; name: string };
+  id: number;
+  name: string;
+  shutter_material_id: number;
+  material?: { id: number; name: string };
 }
 
 export interface ShutterMaterial {
-    id: number;
-    name: string;
-    vendor_id: number;
-    finishes?: ShutterMaterialFinish[];
+  id: number;
+  name: string;
+  vendor_id: number;
+  finishes?: ShutterMaterialFinish[];
 }
 
 export interface SkirtingCarcassLegsColor {
-    id: number;
-    carcass_legs_id: number;
-    skirting_carcass_legs_id: number;
-    color: string;
-    skirtingCarcassLegs?: { id: number; name: string };
+  id: number;
+  carcass_legs_id: number;
+  skirting_carcass_legs_id: number;
+  color: string;
+  skirtingCarcassLegs?: { id: number; name: string };
 }
 
 export interface SkirtingCarcassLegs {
-    id: number;
-    name: string;
-    carcass_legs_id: number;
-    inScope: boolean;
-    colors?: SkirtingCarcassLegsColor[];
-    carcassLegs?: { id: number; name: string };
+  id: number;
+  name: string;
+  carcass_legs_id: number;
+  inScope: boolean;
+  colors?: SkirtingCarcassLegsColor[];
+  carcassLegs?: { id: number; name: string };
 }
 
 export interface CarcassLegs {
-    id: number;
-    name: string;
-    vendor_id: number;
-    skirtings?: SkirtingCarcassLegs[];
+  id: number;
+  name: string;
+  vendor_id: number;
+  skirtings?: SkirtingCarcassLegs[];
 }
 
 export interface LightCarcasUnit {
-    id: number;
-    vendor_id: number;
-    type: string;
-    light_carcas_type_id: number;
-    is_active: boolean;
-    lightCarcasType?: { id: number; type: string };
+  id: number;
+  vendor_id: number;
+  type: string;
+  light_carcas_type_id: number;
+  is_active: boolean;
+  lightCarcasType?: { id: number; type: string };
 }
 
 export interface LightCarcasType {
-    id: number;
-    vendor_id: number;
-    type: string;
-    is_active: boolean;
-    units?: LightCarcasUnit[];
+  id: number;
+  vendor_id: number;
+  type: string;
+  is_active: boolean;
+  units?: LightCarcasUnit[];
 }
 
 export interface OtherAppliances {
     id: number;
     vendor_id: number;
-    type: string;
+    type: OtherApplianceType;
     article_number: string;
     description: string;
 }
@@ -221,492 +222,497 @@ export interface DocumentTypeInput {
   stage?: string;
 }
 
-export interface DocumentTypeValue{
-    id: number;
-    type: string;
-    tag: string;
-    vendor_id: number;
+export interface DocumentTypeValue {
+  id: number;
+  type: string;
+  tag: string;
+  vendor_id: number;
 }
 export interface PaymentTypeInput {
-    vendor_id: number;
-    type: string;
-    tag: string;
+  vendor_id: number;
+  type: string;
+  tag: string;
 }
 
-export interface PaymentTypeValue{
-    id: number;
-    type: string;
-    tag: string;
-    vendor_id: number;
+export interface PaymentTypeValue {
+  id: number;
+  type: string;
+  tag: string;
+  vendor_id: number;
 }
 export interface StatusTypeInput {
-    vendor_id: number;
-    type: string;
-    tag: string;
+  vendor_id: number;
+  type: string;
+  tag: string;
 }
 
-export interface StatusType{
-    id: number;
-    type: string;
-    tag: string;
-    vendor_id: number;
+export interface StatusType {
+  id: number;
+  type: string;
+  tag: string;
+  vendor_id: number;
 }
 
 export interface CreateLeadDTO {
-    firstname: string;
-    lastname: string;
-    country_code: string;
-    contact_no: string;
-    alt_contact_no?: string;
-    email?: string;
-    site_address: string;
-    site_map_link?: string;
-    site_type_id?: number;
-    source_id: number;
-    archetech_name?: string;
-    architect_id?: number;
-    archetech_number?: string;
-    designer_remark?: string;
-    vendor_id: number;
-    franchise_id: number;
-    created_by: number;
-    status_id: number;
-    priority?: string;
-    assign_to?: number;
-    assigned_by?: number;
-    product_types: number[];
-    product_structures: number[];
-    product_structure_instances?: {
-      product_structure_id: number;
-      title: string;
-      description?: string;
-    }[];
-    initial_site_measurement_date?: Date;
-    is_draft?: boolean;
+  firstname: string;
+  lastname: string;
+  country_code: string;
+  contact_no: string;
+  alt_contact_no?: string;
+  email?: string;
+  site_address?: string;
+  site_map_link?: string;
+  site_type_id?: number;
+  source_id: number;
+  refered_by?: string;
+  archetech_name?: string;
+  architect_id?: number;
+  archetech_number?: string;
+  designer_remark?: string;
+  vendor_id: number;
+  franchise_id: number;
+  created_by: number;
+  status_id: number;
+  priority?: string;
+  assign_to?: number;
+  assigned_by?: number;
+  product_types: number[];
+  product_structures: number[];
+  product_structure_instances?: {
+    product_structure_id: number;
+    title: string;
+    description?: string;
+  }[];
+  initial_site_measurement_date?: Date;
+  is_draft?: boolean;
+  client_id?: number;
+  order_number?: string;
 }
-  
+
 export interface DocumentUpload {
-    file: Express.Multer.File;
-    type?: string;
+  file: Express.Multer.File;
+  type?: string;
 }
 
 export interface UpdateLeadDTO {
-    firstname: string;
-    lastname: string;
-    country_code: string;
-    contact_no: string;
-    alt_contact_no?: string;
-    email?: string;
-    site_address: string;
-    site_map_link?: string;
-    site_type_id?: number;
-    source_id: number;
-    priority?: string;
-    archetech_name?: string;
-    architect_id?: number;
-    archetech_number?: string;
-    designer_remark?: string;
-    updated_by: number;
-    initial_site_measurement_date?: Date | string;
+  firstname: string;
+  lastname: string;
+  country_code: string;
+  contact_no: string;
+  alt_contact_no?: string;
+  email?: string;
+  site_address: string;
+  site_map_link?: string;
+  site_type_id?: number;
+  source_id: number;
+  priority?: string;
+  archetech_name?: string;
+  architect_id?: number;
+  archetech_number?: string;
+  designer_remark?: string;
+  updated_by: number;
+  initial_site_measurement_date?: Date | string;
+  client_id?: number;
+  order_number?: string;
+  refered_by?: string;
 }
 
 export interface SalesExecutiveData {
+  id: number;
+  vendor_id: number;
+  user_name: string;
+  user_contact: string;
+  user_email: string;
+  user_timezone: string;
+  status: string;
+  created_at: Date;
+  updated_at: Date;
+  user_type: {
     id: number;
-    vendor_id: number;
-    user_name: string;
-    user_contact: string;
-    user_email: string;
-    user_timezone: string;
-    status: string;
-    created_at: Date;
-    updated_at: Date;
-    user_type: {
-      id: number;
-      user_type: string;
-    };
-    documents: Array<{
-      id: number;
-      document_name: string;
-      document_number: string;
-      filename: string;
-    }>;
+    user_type: string;
+  };
+  documents: Array<{
+    id: number;
+    document_name: string;
+    document_number: string;
+    filename: string;
+  }>;
 }
 export interface SiteSupervisorData {
+  id: number;
+  vendor_id: number;
+  user_name: string;
+  user_contact: string;
+  user_email: string;
+  user_timezone: string;
+  status: string;
+  created_at: Date;
+  updated_at: Date;
+  user_type: {
     id: number;
-    vendor_id: number;
-    user_name: string;
-    user_contact: string;
-    user_email: string;
-    user_timezone: string;
-    status: string;
-    created_at: Date;
-    updated_at: Date;
-    user_type: {
-      id: number;
-      user_type: string;
-    };
-    documents: Array<{
-      id: number;
-      document_name: string;
-      document_number: string;
-      filename: string;
-    }>;
+    user_type: string;
+  };
+  documents: Array<{
+    id: number;
+    document_name: string;
+    document_number: string;
+    filename: string;
+  }>;
 }
 export interface BackendData {
+  id: number;
+  vendor_id: number;
+  user_name: string;
+  user_contact: string;
+  user_email: string;
+  user_timezone: string;
+  status: string;
+  created_at: Date;
+  updated_at: Date;
+  user_type: {
     id: number;
-    vendor_id: number;
-    user_name: string;
-    user_contact: string;
-    user_email: string;
-    user_timezone: string;
-    status: string;
-    created_at: Date;
-    updated_at: Date;
-    user_type: {
-      id: number;
-      user_type: string;
-    };
-    documents: Array<{
-      id: number;
-      document_name: string;
-      document_number: string;
-      filename: string;
-    }>;
+    user_type: string;
+  };
+  documents: Array<{
+    id: number;
+    document_name: string;
+    document_number: string;
+    filename: string;
+  }>;
 }
 
 /**
  * Interface for assignment payload
  */
 export interface AssignLeadPayload {
-    assign_to: number;
-    assign_by: number;
-    assignment_reason?: string;
+  assign_to: number;
+  assign_by: number;
+  assignment_reason?: string;
 }
 
 /**
  * Interface for user role validation
  */
 export interface UserRoleInfo {
+  id: number;
+  vendor_id: number;
+  user_name: string;
+  status: string;
+  user_type: {
     id: number;
-    vendor_id: number;
-    user_name: string;
-    status: string;
-    user_type: {
-      id: number;
-      user_type: string;
-    };
+    user_type: string;
+  };
 }
 
 /**
  * Interface for lead assignment result
  */
 export interface LeadAssignmentResult {
-    lead: {
-      id: number;
-      firstname: string;
-      lastname: string;
-      contact_no: string;
-      email: string | null;
-      assign_to: number | null;
-      assigned_by: number | null;
-      updated_at: Date;
-    };
-    assignedTo: {
-      id: number;
-      user_name: string;
-      user_contact: string;
-      user_email: string;
-    };
-    assignedBy: {
-      id: number;
-      user_name: string;
-      user_contact: string;
-      user_email: string;
-    };
-}
-
-export interface CreatePaymentUploadDto {
-    lead_id: number;
-    account_id: number;
-    vendor_id: number;
-    created_by: number;
-    client_id: number;
-    user_id: number;
-    baseUrl: string;
-    amount?: number;
-    payment_date?: Date;
-    payment_text?: string;
-    sitePhotos?: Express.Multer.File[];
-    sitePhotoInstanceIds?: (number | null)[];
-    pdfFiles?: Express.Multer.File[];
-    pdfFileInstanceIds?: (number | null)[];
-    paymentImageFile?: Express.Multer.File;
-    skip_status_update?: boolean;
-  }
-  
-  export interface PaymentUploadResponseDto {
-    paymentInfo: {
-      id: number;
-      amount: number | null;
-      payment_date: Date | null;
-      payment_text: string | null;
-    } | null;
-    ledgerEntry: {
-      id: number;
-      amount: number;
-      type: string;
-      payment_date: Date;
-    } | null;
-    documentsUploaded: {
-      id: number;
-      type: string;
-      originalName: string;
-      s3Key: string;
-    }[];
-    message: string;
-  }
-
-  export interface PaymentUploadResponseDtoo {
-    paymentInfo: {
-      id: number;
-      amount: number | null;
-      payment_date: Date | null;
-      payment_text: string | null;
-    } | null;
-    ledgerEntry: {
-      id: number;
-      amount: number;
-      type: string;
-      payment_date: Date;
-    } | null;
-    documentsUploaded: PaymentDocumentDto[];
-    message: string;
-  }
-
-  export interface PaymentUploadDetailDtoo {
-    id: number;
-    lead_id: number;
-    account_id: number;
-    vendor_id: number;
-    amount: number | null;
-    payment_date: Date | null;
-    payment_text: string | null;
-    payment_file_id: number | null;
-    created_at: Date;
-    created_by: number;
-    lead: {
-      id: number;
-      firstname: string;
-      lastname: string;
-      contact_no: string;
-      email: string | null;
-      site_address: string;
-    };
-    account: {
-      id: number;
-      name: string;
-      contact_no: string;
-      email: string | null;
-    };
-    createdBy: {
-      id: number;
-      user_name: string;
-      user_email: string;
-    };
-    documents: PaymentDocumentDto[];
-  }
-
-  export interface PaymentUploadDetailDto {
-    id: number;
-    type: 'payment_upload' | 'document_upload';
-    lead: {
-      id: number;
-      firstname: string;
-      lastname: string;
-      contact_no: string;
-      email: string | null;
-    } | null;
-    account: {
-      id: number;
-      name: string;
-      contact_no: string;
-      email: string | null;
-    } | null;
-    paymentInfo: {
-      id: number;
-      amount: number | null;
-      payment_date: Date | null;
-      payment_text: string | null;
-      payment_file_id: number | null;
-    } | null;
-    ledgerEntry: {
-      id: number;
-      amount: number;
-      type: string;
-      payment_date: Date;
-    } | null;
-    documents: {
-      id: number;
-      doc_og_name: string;
-      doc_sys_name: string;
-      doc_type: string;
-      created_at: Date;
-      createdBy: {
-        id: number;
-        user_name: string;
-      };
-    }[];
-    createdBy: {
-      id: number;
-      user_name: string;
-      user_email: string;
-    };
-    created_at: Date;
-  }
-  
-  export interface PaymentUploadListDto {
-    id: number;
-    lead: {
-      id: number;
-      firstname: string;
-      lastname: string;
-      contact_no: string;
-    };
-    account: {
-      id: number;
-      name: string;
-    };
-    amount: number | null;
-    payment_date: Date | null;
-    payment_text: string | null;
-    createdBy: string;
-    created_at: Date;
-  }
-  
-  export interface DocumentDownloadDto {
-    id: number;
-    originalName: string;
-    downloadUrl: string;
-    expiresAt: Date;
-  }
-  
-  export interface PaymentAnalyticsDto {
-    totalAmount: number;
-    totalPayments: number;
-    averagePayment: number;
-    totalDocuments: number;
-    monthlyBreakdown: {
-      month: string;
-      total_amount: number;
-      payment_count: number;
-    }[];
-    dateRange: {
-      startDate: Date | null;
-      endDate: Date | null;
-    };
-  }
-
-  export interface LeadDetailDto {
+  lead: {
     id: number;
     firstname: string;
     lastname: string;
-    country_code: string;
     contact_no: string;
-    alt_contact_no: string | null;
     email: string | null;
-    site_address: string;
-    archetech_name: string | null;
-    designer_remark: string | null;
-    created_at: Date;
+    assign_to: number | null;
+    assigned_by: number | null;
     updated_at: Date;
-    
-    // Related entities
-    vendor: {
-      id: number;
-      vendor_name: string;
-      vendor_code: string;
-    };
-    
-    siteType: {
-      id: number;
-      type: string;
-    } | null;
-    
-    source: {
-      id: number;
-      type: string;
-    };
-    
-    account: {
-      id: number;
-      name: string;
-      contact_no: string;
-      email: string | null;
-    };
-    
-    statusType: {
-      id: number;
-      type: string;
-    };
-    
-    createdBy: {
-      id: number;
-      user_name: string;
-      user_email: string;
-    };
-    
-    updatedBy: {
-      id: number;
-      user_name: string;
-      user_email: string;
-    } | null;
-    
-    assignedTo: {
-      id: number;
-      user_name: string;
-      user_email: string;
-    } | null;
-    
-    assignedBy: {
-      id: number;
-      user_name: string;
-      user_email: string;
-    } | null;
-    
-    // Summary statistics
-    summary: {
-      totalPayments: number;
-      totalDocuments: number;
-      totalLedgerEntries: number;
-      totalProductMappings: number;
-    };
-  }
+  };
+  assignedTo: {
+    id: number;
+    user_name: string;
+    user_contact: string;
+    user_email: string;
+  };
+  assignedBy: {
+    id: number;
+    user_name: string;
+    user_contact: string;
+    user_email: string;
+  };
+}
 
-  export interface UpdatePaymentUploadDto {
-    lead_id: number;
-    account_id: number;
-    vendor_id: number;
-    updated_by: number;
-    amount?: number;
-    payment_date?: Date;
-    payment_text?: string;
-    currentSitePhotos?: Express.Multer.File[];
-    paymentDetailPhotos?: Express.Multer.File[];
-  }
+export interface CreatePaymentUploadDto {
+  lead_id: number;
+  account_id: number;
+  vendor_id: number;
+  created_by: number;
+  user_id: number;
+  baseUrl: string;
+  amount?: number;
+  payment_date?: Date;
+  payment_text?: string;
+  sitePhotos?: Express.Multer.File[];
+  sitePhotoInstanceIds?: (number | null)[];
+  pdfFiles?: Express.Multer.File[];
+  pdfFileInstanceIds?: (number | null)[];
+  paymentImageFile?: Express.Multer.File;
+  skip_status_update?: boolean;
+}
 
-  export interface PaymentDocumentDto {
+export interface PaymentUploadResponseDto {
+  paymentInfo: {
+    id: number;
+    amount: number | null;
+    payment_date: Date | null;
+    payment_text: string | null;
+  } | null;
+  ledgerEntry: {
+    id: number;
+    amount: number;
+    type: string;
+    payment_date: Date;
+  } | null;
+  documentsUploaded: {
     id: number;
     type: string;
     originalName: string;
     s3Key: string;
-    signed_url?: string;
-    file_type?: string;
-    is_image?: boolean;
-    document_type?: string;
-    created_at?: Date;
-  }
+  }[];
+  message: string;
+}
 
-  // Soft Delete Document Request DTO
+export interface PaymentUploadResponseDtoo {
+  paymentInfo: {
+    id: number;
+    amount: number | null;
+    payment_date: Date | null;
+    payment_text: string | null;
+  } | null;
+  ledgerEntry: {
+    id: number;
+    amount: number;
+    type: string;
+    payment_date: Date;
+  } | null;
+  documentsUploaded: PaymentDocumentDto[];
+  message: string;
+}
+
+export interface PaymentUploadDetailDtoo {
+  id: number;
+  lead_id: number;
+  account_id: number;
+  vendor_id: number;
+  amount: number | null;
+  payment_date: Date | null;
+  payment_text: string | null;
+  payment_file_id: number | null;
+  created_at: Date;
+  created_by: number;
+  lead: {
+    id: number;
+    firstname: string;
+    lastname: string;
+    contact_no: string;
+    email: string | null;
+    site_address: string;
+  };
+  account: {
+    id: number;
+    name: string;
+    contact_no: string;
+    email: string | null;
+  };
+  createdBy: {
+    id: number;
+    user_name: string;
+    user_email: string;
+  };
+  documents: PaymentDocumentDto[];
+}
+
+export interface PaymentUploadDetailDto {
+  id: number;
+  type: "payment_upload" | "document_upload";
+  lead: {
+    id: number;
+    firstname: string;
+    lastname: string;
+    contact_no: string;
+    email: string | null;
+  } | null;
+  account: {
+    id: number;
+    name: string;
+    contact_no: string;
+    email: string | null;
+  } | null;
+  paymentInfo: {
+    id: number;
+    amount: number | null;
+    payment_date: Date | null;
+    payment_text: string | null;
+    payment_file_id: number | null;
+  } | null;
+  ledgerEntry: {
+    id: number;
+    amount: number;
+    type: string;
+    payment_date: Date;
+  } | null;
+  documents: {
+    id: number;
+    doc_og_name: string;
+    doc_sys_name: string;
+    doc_type: string;
+    created_at: Date;
+    createdBy: {
+      id: number;
+      user_name: string;
+    };
+  }[];
+  createdBy: {
+    id: number;
+    user_name: string;
+    user_email: string;
+  };
+  created_at: Date;
+}
+
+export interface PaymentUploadListDto {
+  id: number;
+  lead: {
+    id: number;
+    firstname: string;
+    lastname: string;
+    contact_no: string;
+  };
+  account: {
+    id: number;
+    name: string;
+  };
+  amount: number | null;
+  payment_date: Date | null;
+  payment_text: string | null;
+  createdBy: string;
+  created_at: Date;
+}
+
+export interface DocumentDownloadDto {
+  id: number;
+  originalName: string;
+  downloadUrl: string;
+  expiresAt: Date;
+}
+
+export interface PaymentAnalyticsDto {
+  totalAmount: number;
+  totalPayments: number;
+  averagePayment: number;
+  totalDocuments: number;
+  monthlyBreakdown: {
+    month: string;
+    total_amount: number;
+    payment_count: number;
+  }[];
+  dateRange: {
+    startDate: Date | null;
+    endDate: Date | null;
+  };
+}
+
+export interface LeadDetailDto {
+  id: number;
+  firstname: string;
+  lastname: string;
+  country_code: string;
+  contact_no: string;
+  alt_contact_no: string | null;
+  email: string | null;
+  site_address: string;
+  archetech_name: string | null;
+  designer_remark: string | null;
+  created_at: Date;
+  updated_at: Date;
+
+  // Related entities
+  vendor: {
+    id: number;
+    vendor_name: string;
+    vendor_code: string;
+  };
+
+  siteType: {
+    id: number;
+    type: string;
+  } | null;
+
+  source: {
+    id: number;
+    type: string;
+  };
+
+  account: {
+    id: number;
+    name: string;
+    contact_no: string;
+    email: string | null;
+  };
+
+  statusType: {
+    id: number;
+    type: string;
+  };
+
+  createdBy: {
+    id: number;
+    user_name: string;
+    user_email: string;
+  };
+
+  updatedBy: {
+    id: number;
+    user_name: string;
+    user_email: string;
+  } | null;
+
+  assignedTo: {
+    id: number;
+    user_name: string;
+    user_email: string;
+  } | null;
+
+  assignedBy: {
+    id: number;
+    user_name: string;
+    user_email: string;
+  } | null;
+
+  // Summary statistics
+  summary: {
+    totalPayments: number;
+    totalDocuments: number;
+    totalLedgerEntries: number;
+    totalProductMappings: number;
+  };
+}
+
+export interface UpdatePaymentUploadDto {
+  lead_id: number;
+  account_id: number;
+  vendor_id: number;
+  updated_by: number;
+  amount?: number;
+  payment_date?: Date;
+  payment_text?: string;
+  currentSitePhotos?: Express.Multer.File[];
+  paymentDetailPhotos?: Express.Multer.File[];
+}
+
+export interface PaymentDocumentDto {
+  id: number;
+  type: string;
+  originalName: string;
+  s3Key: string;
+  signed_url?: string;
+  file_type?: string;
+  is_image?: boolean;
+  document_type?: string;
+  created_at?: Date;
+}
+
+// Soft Delete Document Request DTO
 export interface SoftDeleteDocumentDto {
   user_id: number;
   vendor_id: number;
@@ -808,22 +814,22 @@ export interface ApiSuccessResponse<T = any> {
 export interface AssignTaskISMInput {
   lead_id: number;
   task_type: string;
-  due_date: string | Date;  // ISO from FE is fine
+  due_date: string | Date; // ISO from FE is fine
   remark?: string;
   assignee_user_id: number;
   created_by: number;
   baseUrl?: string;
-};
+}
 
 export interface AssignTaskFMInput {
   lead_id: number;
   task_type: string;
-  due_date: string | Date;  // ISO from FE is fine
+  due_date: string | Date; // ISO from FE is fine
   remark?: string;
   assignee_user_id: number;
   created_by: number;
   baseUrl?: string;
-};
+}
 
 export interface AssignTaskBookingInput {
   lead_id: number;
@@ -832,4 +838,4 @@ export interface AssignTaskBookingInput {
   remark?: string;
   assignee_user_id: number;
   created_by: number;
-};
+}

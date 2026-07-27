@@ -35,12 +35,19 @@ const wasabi = new S3Client({
 export const generateSignedUrl = async (
   key: string,
   expiresIn: number = 3600,
-  disposition: "inline" | "attachment" = "inline", // 👈 default inline
+  disposition: "inline" | "attachment" = "inline",
+  originalName?: string
 ) => {
+  let contentDisposition = disposition as string;
+  if (originalName) {
+    const safeName = originalName.replace(/"/g, '');
+    contentDisposition = `${disposition}; filename="${safeName}"`;
+  }
+
   const command = new GetObjectCommand({
     Bucket: process.env.WASABI_BUCKET_NAME!,
     Key: key,
-    ResponseContentDisposition: disposition, // 👈 this controls browser behavior
+    ResponseContentDisposition: contentDisposition,
   });
 
   return await getSignedUrl(wasabi, command, { expiresIn });

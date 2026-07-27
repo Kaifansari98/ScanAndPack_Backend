@@ -7,6 +7,7 @@ import {
   getCarcassMaterialFinishes,
   createCarcassMaterialFinish,
   getAllCarcassMaterialFinishesForVendor,
+  bulkUploadCarcassMaterialFinishes,
   getFastProductionTimelineRules,
   getAllHandleTypes,
   getAllShutterTypes,
@@ -16,6 +17,7 @@ import {
   getShutterMaterialFinishes,
   createShutterMaterialFinish,
   getAllShutterMaterialFinishesForVendor,
+  bulkUploadShutterMaterialFinishes,
   getAllCarcassLegs,
   createCarcassLegs,
   getSkirtingCarcassLegs,
@@ -24,13 +26,17 @@ import {
   getSkirtingCarcassLegsColors,
   createSkirtingCarcassLegsColor,
   getAllSkirtingCarcassLegsColorsForVendor,
+  bulkUploadSkirtingCarcassLegsColors,
   getAllLightCarcasTypes,
   createLightCarcasType,
   getLightCarcasUnits,
   createLightCarcasUnit,
   getAllLightCarcasUnitsForVendor,
+  bulkUploadLightCarcasUnits,
   getAllOtherAppliances,
   createOtherAppliances,
+  bulkUploadOtherAppliances,
+  getOtherAppliancesReport,
 } from "../../services/leadModuleServices/selectionMaster.service";
 
 const getVendorId = (req: Request, res: Response): number | null => {
@@ -182,6 +188,41 @@ export const addCarcassMaterialFinish = async (req: Request, res: Response) => {
   }
 };
 
+export const uploadCarcassMaterialFinishes = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const file = req.file;
+    if (!file) {
+      return res
+        .status(400)
+        .json({ success: false, error: "CSV or XLSX file is required" });
+    }
+
+    const vendor_id = Number(
+      req.body.vendor_id || req.body.vendorId || req.params.vendor_id,
+    );
+    if (!vendor_id) {
+      return res
+        .status(400)
+        .json({ success: false, error: "vendor_id is required" });
+    }
+
+    const isCsv =
+      file.originalname.endsWith(".csv") || file.mimetype === "text/csv";
+
+    const result = await bulkUploadCarcassMaterialFinishes(
+      vendor_id,
+      file.buffer,
+      isCsv,
+    );
+    return res.status(200).json({ success: true, data: result });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
 export const fetchAllShutterMaterials = async (req: Request, res: Response) => {
   try {
     const vendor_id = getVendorId(req, res);
@@ -261,6 +302,41 @@ export const addShutterMaterialFinish = async (req: Request, res: Response) => {
       name,
     );
     return res.status(201).json({ success: true, data: finish });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const uploadShutterMaterialFinishes = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const file = req.file;
+    if (!file) {
+      return res
+        .status(400)
+        .json({ success: false, error: "CSV or XLSX file is required" });
+    }
+
+    const vendor_id = Number(
+      req.body.vendor_id || req.body.vendorId || req.params.vendor_id,
+    );
+    if (!vendor_id) {
+      return res
+        .status(400)
+        .json({ success: false, error: "vendor_id is required" });
+    }
+
+    const isCsv =
+      file.originalname.endsWith(".csv") || file.mimetype === "text/csv";
+
+    const result = await bulkUploadShutterMaterialFinishes(
+      vendor_id,
+      file.buffer,
+      isCsv,
+    );
+    return res.status(200).json({ success: true, data: result });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }
@@ -413,6 +489,41 @@ export const addSkirtingCarcassLegsColor = async (
   }
 };
 
+export const uploadSkirtingCarcassLegsColors = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const file = req.file;
+    if (!file) {
+      return res
+        .status(400)
+        .json({ success: false, error: "CSV or XLSX file is required" });
+    }
+
+    const vendor_id = Number(
+      req.body.vendor_id || req.body.vendorId || req.params.vendor_id,
+    );
+    if (!vendor_id) {
+      return res
+        .status(400)
+        .json({ success: false, error: "vendor_id is required" });
+    }
+
+    const isCsv =
+      file.originalname.endsWith(".csv") || file.mimetype === "text/csv";
+
+    const result = await bulkUploadSkirtingCarcassLegsColors(
+      vendor_id,
+      file.buffer,
+      isCsv,
+    );
+    return res.status(200).json({ success: true, data: result });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
 export const fetchAllLightCarcasTypes = async (req: Request, res: Response) => {
   try {
     const vendor_id = getVendorId(req, res);
@@ -495,6 +606,38 @@ export const addLightCarcasUnit = async (req: Request, res: Response) => {
   }
 };
 
+export const uploadLightCarcasUnits = async (req: Request, res: Response) => {
+  try {
+    const file = req.file;
+    if (!file) {
+      return res
+        .status(400)
+        .json({ success: false, error: "CSV or XLSX file is required" });
+    }
+
+    const vendor_id = Number(
+      req.body.vendor_id || req.body.vendorId || req.params.vendor_id,
+    );
+    if (!vendor_id) {
+      return res
+        .status(400)
+        .json({ success: false, error: "vendor_id is required" });
+    }
+
+    const isCsv =
+      file.originalname.endsWith(".csv") || file.mimetype === "text/csv";
+
+    const result = await bulkUploadLightCarcasUnits(
+      vendor_id,
+      file.buffer,
+      isCsv,
+    );
+    return res.status(200).json({ success: true, data: result });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
 export const fetchAllOtherAppliances = async (req: Request, res: Response) => {
   try {
     const vendor_id = getVendorId(req, res);
@@ -556,3 +699,74 @@ export const fetchFastProductionTimelineRules = async (
     return res.status(500).json({ success: false, error: error.message });
   }
 };
+
+export const uploadOtherAppliances = async (req: Request, res: Response) => {
+  try {
+    const file = req.file;
+    if (!file) {
+      return res
+        .status(400)
+        .json({ success: false, error: "XLSX file is required" });
+    }
+
+    const vendor_id = Number(
+      req.body.vendor_id || req.body.vendorId || req.params.vendor_id
+    );
+    if (!vendor_id) {
+      return res
+        .status(400)
+        .json({ success: false, error: "vendor_id is required" });
+    }
+
+    const isCsv =
+      file.originalname.endsWith(".csv") || file.mimetype === "text/csv";
+    const type = req.body.type || req.query.type;
+    if (!type) {
+      return res
+        .status(400)
+        .json({ success: false, error: "type is required" });
+    }
+
+    const result = await bulkUploadOtherAppliances(
+      vendor_id,
+      file.buffer,
+      isCsv,
+      type
+    );
+    return res.status(200).json({ success: true, data: result });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const downloadOtherAppliancesReport = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const vendor_id = Number(
+      req.params.vendor_id || req.query.vendor_id || req.body.vendor_id
+    );
+    if (!vendor_id) {
+      return res
+        .status(400)
+        .json({ success: false, error: "vendor_id is required" });
+    }
+
+    const buffer = await getOtherAppliancesReport(vendor_id);
+    const filename = `other_appliances_${vendor_id}_${new Date().toISOString().split("T")[0]}.xlsx`;
+
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    );
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename="${filename}"`
+    );
+    return res.send(buffer);
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
