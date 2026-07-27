@@ -516,6 +516,22 @@ export const generateBoxPdfServiceWeb = async (
   }
 };
 
+/* Vector */
+
+
+const fontToBase64 = (relativePath: string) => {
+  const fontPath = path.resolve(process.cwd(), relativePath);
+
+  if (!fs.existsSync(fontPath)) {
+    throw new Error(`Font file not found: ${fontPath}`);
+  }
+
+  return fs.readFileSync(fontPath).toString("base64");
+};
+
+
+
+
 
 
 
@@ -524,6 +540,24 @@ export const generateBoxPdfService = async (
   project_id: number,
   vendor_id: number
 ) => {
+
+
+
+  const calibriRegular = fontToBase64(
+    "src/assets/fonts/calibri/calibri-regular.ttf"
+  );
+  const calibriBold = fontToBase64(
+    "src/assets/fonts/calibri/calibri-bold.ttf"
+  );
+
+  const calibriItalic = fontToBase64(
+    "src/assets/fonts/calibri/calibri-italic.ttf"
+  );
+
+  const calibriBoldItalic = fontToBase64(
+    "src/assets/fonts/calibri/calibri-bold-italic.ttf"
+  );
+
 
   // return generateBoxHtmlService(box_id,project_id,vendor_id);
   const tempDir = path.join(
@@ -1363,7 +1397,7 @@ export const generateBoxPdfService = async (
           "floor_name",
           "floor name",
         ]
-      ) || "7th Floor";
+      ) || "-";
 
     const itemNo =
       findBoxInfoValue(
@@ -1407,12 +1441,12 @@ export const generateBoxPdfService = async (
 
     const packageNo = String(box.box_name || "").trim();
 
-const packageNoClass =
-  packageNo.length >= 4
-    ? "package-number package-number-4"
-    : packageNo.length === 3
-      ? "package-number package-number-3"
-      : "package-number";
+    const packageNoClass =
+      packageNo.length >= 4
+        ? "package-number package-number-4"
+        : packageNo.length === 3
+          ? "package-number package-number-3"
+          : "package-number";
 
     const logoHtml =
       logoUrl
@@ -1500,7 +1534,36 @@ const packageNoClass =
 <head>
 <meta charset="UTF-8"/>
 
+
+
 <style>
+@font-face {
+  font-family: "CalibriPdf";
+  src: url("data:font/truetype;base64,${calibriRegular}") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CalibriPdf";
+  src: url("data:font/truetype;base64,${calibriBold}") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CalibriPdf";
+  src: url("data:font/truetype;base64,${calibriItalic}") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "CalibriPdf";
+  src: url("data:font/truetype;base64,${calibriBoldItalic}") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
 @page {
   size: 3in 5in;
   margin: 0;
@@ -1523,7 +1586,7 @@ body {
 body {
   color: #111827;
   background: #ffffff;
-  font-family: Arial, Helvetica, sans-serif;
+ font-family: "CalibriPdf", Arial, Helvetica, sans-serif;
   font-size: 7px;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
@@ -1532,7 +1595,7 @@ body {
 .page {
   width: 3in;
   height: 5in;
-  padding: 2.4mm;
+  padding: 1.4mm;
   overflow: hidden;
   page-break-after: always;
   background: #ffffff;
@@ -1552,7 +1615,7 @@ body {
   width: 100%;
   height: 100%;
   border: 1px solid #4b5563;
-  padding: 0 3.4mm 3.2mm;
+  padding: 0 1.4mm 1.2mm;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1608,7 +1671,7 @@ body {
   color: #f58220;
   font-size: 28px;
   line-height: 28px;
-  font-weight: 900;
+  font-weight: 700;
   font-style: italic;
   letter-spacing: -1px;
 }
@@ -1635,11 +1698,12 @@ body {
   text-align: center;
 }
 
+
 .company-name {
   font-size: 12px;
   line-height: 15px;
-  font-weight: 900;
-  color: #07101f;
+  font-weight: 700;
+  color: #172033;
   text-transform: uppercase;
   letter-spacing: 0.2px;
   white-space: nowrap;
@@ -1661,34 +1725,26 @@ body {
 }
 
 .contact-text {
+font-family: "CalibriPdf", Arial, Helvetica, sans-serif;
   display: block;
-  font-size: 5.5px;
-  line-height: 8.4px;
-  font-weight: 700;
-  color: #5b667d;
+  font-size: 6pt;
+  line-height: 7pt;
+  font-weight: 500;
+  color: #667085;
   white-space: nowrap;
 }
 
-.address-text{
-  display: block;
-  font-size: 5.5px;
-  line-height: 8.4px;
-  font-weight: 700;
-  color: #5b667d;  
-    white-space: normal;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
+.address-text,
 .gst-text {
-  display: block;
-  margin-top: 2px;
-  font-size: 5.5px;
-  line-height: 6.4px;
-  font-weight: 900;
-  color: #5b667d;
-  white-space: nowrap;
+  font-family: "CalibriPdf", Arial, Helvetica, sans-serif;
+  font-size: 6pt;
+  line-height: 7pt;
+  font-weight: 500;
+  font-style: normal;
+  color: #667085;
 }
+
+
 
 .email-link {
   color: #173f9f;
@@ -1705,12 +1761,13 @@ body {
 .package-label {
   font-size: 9px;
   line-height: 10px;
-  font-weight: 900;
+  font-weight: 700;
   color: #231f20;
   white-space: nowrap;
 }
 
 .qr-box {
+padding-top:20px;
   width: 100%;
   height: 58px;
   display: flex;
@@ -1726,12 +1783,13 @@ body {
 }
 
 .package-number-box {
+padding-top:25px;
   width: 100%;
   height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 2px;
+  // padding: 0 2px;
   overflow: visible;
 }
 
@@ -1740,12 +1798,12 @@ body {
   max-width: 100%;
   font-size: 46px;
   line-height: 1;
-  font-weight: 900;
+  font-weight: 700;
   color: #231f20;
   letter-spacing: -2px;
   text-align: center;
   white-space: nowrap;
-  font-family: Arial Black, Arial, Helvetica, sans-serif;
+  font-family: "CalibriPdf", Arial, Helvetica, sans-serif;
 }
 
 /* for 3 digit package no */
@@ -1787,24 +1845,26 @@ body {
 
 .align-right {
   text-align: right;
+  padding-right:5px;
 }
 
 .field-label {
   color: #64748b;
-  font-size: 5.4px;
-  line-height: 5.9px;
+  font-size: 7.5pt;
+  line-height: 6px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05px;
-  margin-bottom: 0.25mm;
+  margin-bottom: 0.8mm;
 }
 
 .field-value {
   color: #111827;
-  font-size: 5.9px;
-  line-height: 6.8px;
+  font-size: 8px !important;
+  line-height: 8px;
   font-weight: 800;
   overflow-wrap: anywhere;
+   margin-bottom: 0.5mm;
 }
 
 .section-separator {
@@ -1821,15 +1881,28 @@ body {
 */
 
 .product-title {
-  color: #1f2937;
-  font-size: 6.3px;
-  line-height: 7px;
-  font-weight: 800;
+  color: #64748b;
+  font-size: 7.5pt;
+  line-height: 6px;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05px;
   margin: 0 0 1.1mm;
   flex: 0 0 auto;
 }
+
+.project-value{
+color: #111827;
+  font-size: 8pt;
+  line-height: 6px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+   margin-bottom: 0.5mm;
+   text-transform: uppercase;
+}
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -1841,7 +1914,7 @@ body {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-  border: 1px solid #111827;
+  border: 1px solid #111827 !important;
   flex: 0 0 auto;
 }
 
@@ -1878,9 +1951,11 @@ body {
 }
 
 .component-table .table-head-main th {
-  height: 5.4mm;
+  height: 3mm;
   border-bottom: 1px solid #374151;
 }
+
+
 
 .component-table .table-head-sub th {
   height: 4mm;
@@ -1895,12 +1970,12 @@ body {
 
 .component-table td {
   color: #111827;
-  border-left: 1px solid #111827;
-  border-right: 1px solid #111827;
-  border-bottom: 1px solid #d1d5db;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
   font-size: 5.3px;
   line-height: 6.1px;
-  font-weight: 700;
+  font-weight: 600;
   padding: 0.85mm 0.65mm;
   vertical-align: top;
   overflow-wrap: anywhere;
@@ -1915,38 +1990,50 @@ body {
 }
 
 .code-cell {
-  text-align: center;
+  text-align: center;  
+  color: #111827;
+  font-size: 8px !important;
+  line-height: 6.1px;
   font-weight: 800;
 }
+
+
+
+
 
 .component-cell strong {
   display: block;
   color: #111827;
-  font-size: 5.4px;
+  font-size: 8px !important;
   line-height: 6.1px;
   font-weight: 800;
 }
 
 .component-cell span {
   display: block;
-  margin-top: 0.25mm;
+  margin-top: 1mm;
   color: #111827;
-  font-size: 5px;
+  font-size: 8px !important;
   line-height: 5.7px;
-  font-weight: 500;
+  font-weight: 800;
 }
 
 .qty-cell,
 .unit-cell,
 .total-cell {
   text-align: center;
-  font-weight: 700;
+  font-weight: 800;
+  color: #111827;
+  font-size: 8px !important;
+  border-left: 1px solid #fff !important;
+  border-right: 1px solid #fff !important;
+  border-bottom: 1px solid #fff;
 }
 
 .component-table tfoot td {
   background: #b8d7e3;
-  border: 1px solid #111827;
-  font-size: 5px;
+  border: 1px solid #fff;
+  font-size: 8px !important;
   line-height: 5.8px;
   font-weight: 800;
   padding: 1mm 0.65mm;
@@ -1991,7 +2078,7 @@ body {
 .summary-company-name {
   color: #172033;
   font-size: 6.2px;
-  font-weight: 900;
+  font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 0.8mm;
 }
@@ -2010,7 +2097,7 @@ body {
   overflow: hidden;
   color: #111827;
   font-size: 8px;
-  font-weight: 900;
+  font-weight: 700;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -2019,7 +2106,7 @@ body {
   margin-top: 0.6mm;
   color: #667085;
   font-size: 5.4px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .summary-client {
@@ -2061,7 +2148,7 @@ body {
   margin-top: 0.5mm;
   color: #111827;
   font-size: 8px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .summary-address {
@@ -2081,7 +2168,7 @@ body {
 
 .section-title {
   font-size: 6.3px;
-  font-weight: 900;
+  font-weight: 700;
   margin-top: 2mm;
   margin-bottom: 1.2mm;
   letter-spacing: 0.1px;
@@ -2100,7 +2187,7 @@ body {
   border: 1px solid #111827;
   font-size: 4.2px;
   line-height: 5px;
-  font-weight: 900;
+  font-weight: 700;
   text-align: left;
   letter-spacing: 0;
 }
@@ -2111,7 +2198,7 @@ body {
   color: #111827;
   font-size: 4.4px;
   line-height: 5.2px;
-  font-weight: 700;
+  font-weight: 600;
   overflow-wrap: anywhere;
 }
 
@@ -2122,8 +2209,11 @@ body {
 .summary-table tfoot td {
   background: #b8d7e3;
   border: 1px solid #111827;
-  font-weight: 900;
+  font-weight: 700;
 }
+  .fs-10{
+  font-size:10px !important;
+  } 
 </style>
 </head>
 
@@ -2172,19 +2262,19 @@ body {
 
                 <span class="address-text">
                   ${escapeHtml(
-      hardcodedCompany.addressLine2?? ""
+      hardcodedCompany.addressLine2 ?? ""
     )}
                 </span>
 
                 <span class="address-text">
                   ${escapeHtml(
-      hardcodedCompany.addressLine3?? ""
+      hardcodedCompany.addressLine3 ?? ""
     )}
                 </span>
 
                 <span class="gst-text">
                   GST: ${escapeHtml(
-      hardcodedCompany.gst?? ""
+      hardcodedCompany.gst ?? ""
     )}
                 </span>
               </td>
@@ -2193,7 +2283,7 @@ body {
                 <span class="contact-text">
                   Toll Free No. :
                   ${escapeHtml(
-      hardcodedCompany.tollFreeNo?? ""
+      hardcodedCompany.tollFreeNo ?? ""
     )}
                 </span>
 
@@ -2209,7 +2299,7 @@ body {
                 <span class="contact-text">
                   Website :
                   ${escapeHtml(
-      hardcodedCompany.website?? ""
+      hardcodedCompany.website ?? ""
     )}
                 </span>
 
@@ -2387,17 +2477,19 @@ body {
     <!-- ============================== -->
     <!-- PRODUCT TITLE                  -->
     <!-- ============================== -->
-    <div class="product-title">
+    <div class="field-label" style='padding-top:3px;padding-bottom:3px;'>
       PRODUCT :
+      <span class="project-value">
       ${escapeHtml(
       productName
     )}
+    </span>
     </div>
 
     <!-- ============================== -->
     <!-- COMPONENTS TABLE               -->
     <!-- ============================== -->
-    <table class="component-table">
+    <table class="component-table" style="border: 1px solid #000 !important;">
       <colgroup>
         <col class="col-code" />
         <col class="col-component" />
@@ -2410,7 +2502,7 @@ body {
         <tr class="table-head-main">
           <th class="blank-head"></th>
 
-          <th class="component-head">
+          <th class="component-head fs-10" >
             COMPONENTS
           </th>
 
@@ -2418,36 +2510,37 @@ body {
 
           <th
             colspan="2"
-            class="weight-head"
+            class="weight-head fs-10"
+            style="font-size:10px;"
           >
             WEIGHT (KG)
           </th>
         </tr>
 
         <tr class="table-head-sub">
-          <th class="code-head">
+          <th class="code-head fs-10">
             CODE
           </th>
 
-          <th class="name-head">
+          <th class="name-head fs-10" >
             NAME
           </th>
 
-          <th class="qty-head">
+          <th class="qty-head fs-10" >
             QTY
           </th>
 
-          <th class="unit-head">
+          <th class="unit-head fs-10">
             UNIT
           </th>
 
-          <th class="total-head">
+          <th class="total-head fs-10" >
             TOTAL
           </th>
         </tr>
       </thead>
 
-      <tbody>
+      <tbody  >
         ${componentRows ||
       `
             <tr>
@@ -2625,6 +2718,15 @@ body {
     );
   }
 };
+
+
+
+
+
+
+
+
+
 
 export const generateBoxHtmlService = async (
   box_id: number,
@@ -4218,25 +4320,25 @@ body {
               <td class="address-cell">
                 <span class="address-text">
                   ${escapeHtml(
-      hardcodedCompany.addressLine1?? ""
+      hardcodedCompany.addressLine1 ?? ""
     )}
                 </span>
 
                 <span class="address-text">
                   ${escapeHtml(
-      hardcodedCompany.addressLine2?? ""
+      hardcodedCompany.addressLine2 ?? ""
     )}
                 </span>
 
                 <span class="address-text">
                   ${escapeHtml(
-      hardcodedCompany.addressLine3?? ""
+      hardcodedCompany.addressLine3 ?? ""
     )}
                 </span>
 
                 <span class="gst-text">
                   GST: ${escapeHtml(
-      hardcodedCompany.gst?? ""
+      hardcodedCompany.gst ?? ""
     )}
                 </span>
               </td>
@@ -4245,7 +4347,7 @@ body {
                 <span class="contact-text">
                   Toll Free No. :
                   ${escapeHtml(
-      hardcodedCompany.tollFreeNo?? ""
+      hardcodedCompany.tollFreeNo ?? ""
     )}
                 </span>
 
@@ -4253,7 +4355,7 @@ body {
                   Email :
                   <span class="email-link">
                     ${escapeHtml(
-      hardcodedCompany.email?? ""
+      hardcodedCompany.email ?? ""
     )}
                   </span>
                 </span>
@@ -8140,7 +8242,7 @@ export const generateProjectFullReportService = async (
     |--------------------------------------------------------------------------
     */
 
-    
+
 
     const logoHtml =
       logoUrl
@@ -8236,23 +8338,23 @@ export const generateProjectFullReportService = async (
 
             <div>
               ${escapeHtml(
-      hardcodedCompany.addressLine1?? ""
+      hardcodedCompany.addressLine1 ?? ""
     )}
               ${escapeHtml(
-      hardcodedCompany.addressLine2?? ""
+      hardcodedCompany.addressLine2 ?? ""
     )}
             </div>
 
             <div>
               ${escapeHtml(
-      hardcodedCompany.addressLine3?? ""
+      hardcodedCompany.addressLine3 ?? ""
     )}
             </div>
 
             <div>
               GST:
               ${escapeHtml(
-      hardcodedCompany.gst?? ""
+      hardcodedCompany.gst ?? ""
     )}
             </div>
           </div>
@@ -8401,14 +8503,14 @@ export const generateProjectFullReportService = async (
                 }
               );
 
-              const packageNo = String(box.packet_no || "").trim();
+            const packageNo = String(box.packet_no || "").trim();
 
-const packageNoClass =
-  packageNo.length >= 4
-    ? "package-number package-number-4"
-    : packageNo.length === 3
-      ? "package-number package-number-3"
-      : "package-number";
+            const packageNoClass =
+              packageNo.length >= 4
+                ? "package-number package-number-4"
+                : packageNo.length === 3
+                  ? "package-number package-number-3"
+                  : "package-number";
 
             const componentRows =
               box.items
@@ -8501,25 +8603,25 @@ const packageNoClass =
               <td class="address-cell">
                 <span class="address-text">
                   ${escapeHtml(
-              hardcodedCompany.addressLine1?? ""
+              hardcodedCompany.addressLine1 ?? ""
             )}
                 </span>
 
                 <span class="address-text">
                   ${escapeHtml(
-              hardcodedCompany.addressLine2?? ""
+              hardcodedCompany.addressLine2 ?? ""
             )}
                 </span>
 
                 <span class="address-text">
                   ${escapeHtml(
-              hardcodedCompany.addressLine3?? ""
+              hardcodedCompany.addressLine3 ?? ""
             )}
                 </span>
 
                 <span class="gst-text">
                   GST: ${escapeHtml(
-              hardcodedCompany.gst?? ""
+              hardcodedCompany.gst ?? ""
             )}
                 </span>
               </td>
@@ -8528,7 +8630,7 @@ const packageNoClass =
                 <span class="contact-text">
                   Toll Free No. :
                   ${escapeHtml(
-              hardcodedCompany.tollFreeNo?? ""
+              hardcodedCompany.tollFreeNo ?? ""
             )}
                 </span>
 
@@ -8544,7 +8646,7 @@ const packageNoClass =
                 <span class="contact-text">
                   Website :
                   ${escapeHtml(
-              hardcodedCompany.website?? ""
+              hardcodedCompany.website ?? ""
             )}
                 </span>
 
