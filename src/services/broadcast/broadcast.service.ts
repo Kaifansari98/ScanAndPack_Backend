@@ -166,10 +166,13 @@ export class BroadcastService {
 
       // Enqueue notification if broadcast status is ACTIVE
       if (status === "ACTIVE") {
+        const plainContent = stripHtmlAndEntitiesBackend(content);
+        const snippetBody = plainContent.length > 180 ? `${plainContent.substring(0, 180)}...` : plainContent;
+
         await tx.notificationQueue.create({
           data: {
             title: `New Announcement: ${title}`,
-            body: stripHtmlAndEntitiesBackend(content).substring(0, 100),
+            body: snippetBody || "New announcement details are available.",
             notification_source: "IN_APP",
             notification_status: "PENDING",
             send_at: publishAt ? new Date(publishAt) : new Date(),
