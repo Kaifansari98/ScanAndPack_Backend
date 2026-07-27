@@ -1584,7 +1584,18 @@ export class DesigingStageController {
 
       const documentsWithSignedUrls = await Promise.all(
         documents.map(async (doc: any) => {
-          const signedUrl = await generateSignedUrl(doc.doc_sys_name);
+          let signedUrl: string | null = null;
+          try {
+            if (doc.doc_sys_name) {
+              signedUrl = await generateSignedUrl(doc.doc_sys_name);
+            }
+          } catch (error: any) {
+            console.error("getCostingFileDocuments signed URL error:", {
+              docId: doc.id,
+              docSysName: doc.doc_sys_name,
+              message: error?.message || String(error),
+            });
+          }
           const specification = doc.specificationDocumentMappings?.[0]?.specification || null;
           const { specificationDocumentMappings, ...rest } = doc;
           return { ...rest, specification, signedUrl };
