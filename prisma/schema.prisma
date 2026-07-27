@@ -80,6 +80,7 @@ model VendorMaster {
   leadLightCarcasUnitMappings         LeadLightCarcasUnitMapping[]
   otherAppliances                     OtherAppliancesMaster[]
   leadOtherAppliancesMappings         LeadOtherAppliancesMapping[]
+  specificationDocumentMappings       specificationDocumentMapping[]
   handleTypes                         HandleTypeMaster[]
   timelineRules                       TimelineRule[]
   leadActivityStatusLog               LeadActivityStatusLog[]
@@ -384,6 +385,7 @@ model UserMaster {
   leadHardwareMappingsCreated                LeadHardwareMapping[]                  @relation("LeadHardwareMappingCreatedBy")
   leadLightCarcasUnitMappingsCreated         LeadLightCarcasUnitMapping[]           @relation("LeadLightCarcasUnitMappingCreatedBy")
   leadOtherAppliancesMappingsCreated         LeadOtherAppliancesMapping[]           @relation("LeadOtherAppliancesMappingCreatedBy")
+  specificationDocumentMappingsCreated       specificationDocumentMapping[]         @relation("SpecificationDocumentMappingCreatedBy")
   poPaymentScheduleHistories                 POPaymentScheduleHistory[]
   boxesPackedBy                              BoxMaster[]                            @relation("BoxPackedByUser")
   broadcastsCreated                          BroadcastMaster[]                      @relation("BroadcastCreatedBy")
@@ -760,6 +762,7 @@ model LeadMaster {
   hardwareMappings                            LeadHardwareMapping[]
   lightCarcasUnitMappings                     LeadLightCarcasUnitMapping[]
   otherAppliancesMappings                     LeadOtherAppliancesMapping[]
+  specificationDocumentMappings               specificationDocumentMapping[]
   account                                     AccountMaster?                        @relation(fields: [account_id], references: [id], onDelete: Cascade)
   client                                      ClientMaster?                         @relation(fields: [client_id], references: [id], onDelete: SetNull)
   assignedTo                                  UserMaster?                           @relation("LeadAssignedTo", fields: [assign_to], references: [id])
@@ -806,12 +809,13 @@ model LeadSpecificationsMaster {
   created_at    DateTime @default(now())
   created_by    Int
 
-  vendor                  VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  lead                    LeadMaster                   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  createdBy               UserMaster                   @relation("LeadSpecificationsCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
-  productItemCode         ProductItemCode?             @relation(fields: [item_code_id], references: [id], onDelete: SetNull)
-  lightCarcasUnitMappings LeadLightCarcasUnitMapping[]
-  otherAppliancesMappings LeadOtherAppliancesMapping[]
+  vendor                        VendorMaster                   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead                          LeadMaster                     @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  createdBy                     UserMaster                     @relation("LeadSpecificationsCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  productItemCode               ProductItemCode?               @relation(fields: [item_code_id], references: [id], onDelete: SetNull)
+  lightCarcasUnitMappings       LeadLightCarcasUnitMapping[]
+  otherAppliancesMappings       LeadOtherAppliancesMapping[]
+  specificationDocumentMappings specificationDocumentMapping[]
 
   @@index([vendor_id])
   @@index([lead_id])
@@ -1205,7 +1209,7 @@ model OtherAppliancesMaster {
   type           OtherApplianceType
   article_number String
   description    String
-  created_at     DateTime @default(now())
+  created_at     DateTime           @default(now())
 
   vendor       VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   leadMappings LeadOtherAppliancesMapping[]
@@ -1262,6 +1266,28 @@ model TimelineRule {
   @@index([shutter_id])
 }
 
+model specificationDocumentMapping {
+  id          Int      @id @default(autoincrement())
+  vendor_id   Int
+  lead_id     Int
+  specs_id    Int
+  document_id Int
+  created_at  DateTime @default(now())
+  created_by  Int
+
+  vendor        VendorMaster             @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead          LeadMaster               @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  specification LeadSpecificationsMaster @relation(fields: [specs_id], references: [id], onDelete: Cascade)
+  leadDocument  LeadDocuments            @relation(fields: [document_id], references: [id], onDelete: Cascade)
+  createdBy     UserMaster               @relation("SpecificationDocumentMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
+  @@index([lead_id])
+  @@index([specs_id])
+  @@index([document_id])
+  @@index([created_by])
+}
+
 model LeadDocuments {
   id                                  Int                                  @id @default(autoincrement())
   doc_og_name                         String
@@ -1292,6 +1318,7 @@ model LeadDocuments {
   lead                                LeadMaster?                          @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   productStructureInstance            LeadProductStructureInstance?        @relation(fields: [product_structure_instance_id], references: [id])
   vendor                              VendorMaster                         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  specificationDocumentMappings       specificationDocumentMapping[]
   miscellaneousDocument               MiscellaneousDocument[]
   orderLoginPoFiles                   OrderLoginPoFileMapping[]
   paymentInfo                         PaymentInfo[]

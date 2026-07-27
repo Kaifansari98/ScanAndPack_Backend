@@ -275,6 +275,11 @@ export type HandleTypeMaster = Prisma.HandleTypeMasterModel
  */
 export type TimelineRule = Prisma.TimelineRuleModel
 /**
+ * Model specificationDocumentMapping
+ * 
+ */
+export type specificationDocumentMapping = Prisma.specificationDocumentMappingModel
+/**
  * Model LeadDocuments
  * 
  */

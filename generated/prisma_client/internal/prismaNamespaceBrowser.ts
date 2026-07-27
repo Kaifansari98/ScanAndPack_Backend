@@ -98,6 +98,7 @@ export const ModelName = {
   LeadOtherAppliancesMapping: 'LeadOtherAppliancesMapping',
   HandleTypeMaster: 'HandleTypeMaster',
   TimelineRule: 'TimelineRule',
+  specificationDocumentMapping: 'specificationDocumentMapping',
   LeadDocuments: 'LeadDocuments',
   LeadChatRoom: 'LeadChatRoom',
   LeadChatMember: 'LeadChatMember',
@@ -1015,6 +1016,19 @@ export const TimelineRuleScalarFieldEnum = {
 } as const
 
 export type TimelineRuleScalarFieldEnum = (typeof TimelineRuleScalarFieldEnum)[keyof typeof TimelineRuleScalarFieldEnum]
+
+
+export const SpecificationDocumentMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  specs_id: 'specs_id',
+  document_id: 'document_id',
+  created_at: 'created_at',
+  created_by: 'created_by'
+} as const
+
+export type SpecificationDocumentMappingScalarFieldEnum = (typeof SpecificationDocumentMappingScalarFieldEnum)[keyof typeof SpecificationDocumentMappingScalarFieldEnum]
 
 
 export const LeadDocumentsScalarFieldEnum = {
