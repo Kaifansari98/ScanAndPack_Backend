@@ -519,15 +519,28 @@ export const generateBoxPdfServiceWeb = async (
 /* Vector */
 
 
-const fontToBase64 = (relativePath: string) => {
-  const fontPath = path.resolve(process.cwd(), relativePath);
+// const fontToBase64 = (relativePath: string) => {
+//   const fontPath = path.resolve(process.cwd(), relativePath);
 
+//   if (!fs.existsSync(fontPath)) {
+//     throw new Error(`Font file not found: ${fontPath}`);
+//   }
+
+//   return fs.readFileSync(fontPath).toString("base64");
+// };
+
+
+
+
+const fontToBase64 = (fontPath: string): string => {
   if (!fs.existsSync(fontPath)) {
     throw new Error(`Font file not found: ${fontPath}`);
   }
 
   return fs.readFileSync(fontPath).toString("base64");
 };
+
+
 
 
 
@@ -543,19 +556,40 @@ export const generateBoxPdfService = async (
 
 
 
-  const calibriRegular = fontToBase64(
-    "../../assets/fonts/calibri/calibri-regular.ttf"
+  const calibriRegularPath = path.resolve(
+    __dirname,
+    "../../../assets/fonts/calibri/calibri-regular.ttf"
   );
+
+  const calibriBoldPath = path.resolve(
+    __dirname,
+    "../../../assets/fonts/calibri/calibri-bold.ttf"
+  );
+
+  const calibriItalicPath = path.resolve(
+    __dirname,
+    "../../../assets/fonts/calibri/calibri-italic.ttf"
+  );
+
+  const calibriBoldItalicPath = path.resolve(
+    __dirname,
+    "../../../assets/fonts/calibri/calibri-bold-italic.ttf"
+  );
+
+  console.log("Calibri font path:", calibriRegularPath);
+
+  const calibriRegular = fontToBase64(calibriRegularPath);
+
   const calibriBold = fontToBase64(
-    "../../assets/fonts/calibri/calibri-bold.ttf"
+    calibriBoldPath
   );
 
   const calibriItalic = fontToBase64(
-    "../../assets/fonts/calibri/calibri-italic.ttf"
+    calibriItalicPath
   );
 
   const calibriBoldItalic = fontToBase64(
-    "../../assets/fonts/calibri/calibri-bold-italic.ttf"
+    calibriBoldItalicPath
   );
 
 
