@@ -544,18 +544,18 @@ export const generateBoxPdfService = async (
 
 
   const calibriRegular = fontToBase64(
-    "src/assets/fonts/calibri/calibri-regular.ttf"
+    "../../assets/fonts/calibri/calibri-regular.ttf"
   );
   const calibriBold = fontToBase64(
-    "src/assets/fonts/calibri/calibri-bold.ttf"
+    "../../assets/fonts/calibri/calibri-bold.ttf"
   );
 
   const calibriItalic = fontToBase64(
-    "src/assets/fonts/calibri/calibri-italic.ttf"
+    "../../assets/fonts/calibri/calibri-italic.ttf"
   );
 
   const calibriBoldItalic = fontToBase64(
-    "src/assets/fonts/calibri/calibri-bold-italic.ttf"
+    "../../assets/fonts/calibri/calibri-bold-italic.ttf"
   );
 
 
