@@ -558,22 +558,22 @@ export const generateBoxPdfService = async (
 
   const calibriRegularPath = path.resolve(
     __dirname,
-    "../../assets/fonts/calibri/calibri-regular.ttf"
+    "../../../assets/fonts/calibri/calibri-regular.ttf"
   );
 
   const calibriBoldPath = path.resolve(
     __dirname,
-    "../../assets/fonts/calibri/calibri-bold.ttf"
+    "../../../assets/fonts/calibri/calibri-bold.ttf"
   );
 
   const calibriItalicPath = path.resolve(
     __dirname,
-    "../../assets/fonts/calibri/calibri-italic.ttf"
+    "../../../assets/fonts/calibri/calibri-italic.ttf"
   );
 
   const calibriBoldItalicPath = path.resolve(
     __dirname,
-    "../../assets/fonts/calibri/calibri-bold-italic.ttf"
+    "../../../assets/fonts/calibri/calibri-bold-italic.ttf"
   );
 
   console.log("Calibri font path:", calibriRegularPath);
