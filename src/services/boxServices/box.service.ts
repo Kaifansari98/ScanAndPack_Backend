@@ -978,6 +978,7 @@ export const generateBoxPdfService = async (
     */
 
     let logoUrl = "";
+    let embeddedLogoUrl = "";
 
 
     const hardcodedCompany = {
@@ -998,11 +999,18 @@ export const generateBoxPdfService = async (
           await generateSignedUrl(
             vendor.logo
           );
+
+        embeddedLogoUrl =
+          await fetchImageAsDataUrl(
+            logoUrl
+          );
       } catch (error) {
         console.error(
           "Error generating logo signed URL:",
           error
         );
+
+        embeddedLogoUrl = "";
       }
     }
 
@@ -1483,10 +1491,10 @@ export const generateBoxPdfService = async (
           : "package-number";
 
     const logoHtml =
-      logoUrl
+      embeddedLogoUrl || logoUrl
         ? `
           <img
-            src="${logoUrl}"
+            src="${embeddedLogoUrl || logoUrl}"
             class="logo-img"
             alt="Adarsh Logo"
           />
@@ -10009,6 +10017,8 @@ const generateCustomSizePdf = async (
   options: CustomPdfOptions
 ) => {
   const t0 = Date.now();
+  const contentTimeoutMs = 45000;
+  const assetWaitTimeoutMs = 15000;
   console.log(`[pdf-timing] launch:start`);
 
   const browser =
@@ -10051,15 +10061,67 @@ const generateCustomSizePdf = async (
       console.log(`[pdf-timing] page-console: ${msg.text()}`);
     });
 
+    page.setDefaultNavigationTimeout(contentTimeoutMs);
+    page.setDefaultTimeout(contentTimeoutMs);
+
     await page.setContent(
       html,
       {
         waitUntil:
-          "networkidle0",
+          "domcontentloaded",
+        timeout:
+          contentTimeoutMs,
       }
     );
 
     console.log(`[pdf-timing] setContent:done +${Date.now() - t0}ms`);
+
+    try {
+      await page.evaluate(
+        async (timeoutMs) => {
+          const fonts =
+            typeof document.fonts?.ready?.then === "function"
+              ? document.fonts.ready.catch(() => undefined)
+              : Promise.resolve();
+
+          const images =
+            Promise.all(
+              Array.from(document.images).map(async (image) => {
+                if (image.complete) {
+                  return;
+                }
+
+                await new Promise<void>((resolve) => {
+                  const cleanup = () => {
+                    image.removeEventListener("load", onDone);
+                    image.removeEventListener("error", onDone);
+                  };
+
+                  const onDone = () => {
+                    cleanup();
+                    resolve();
+                  };
+
+                  image.addEventListener("load", onDone, { once: true });
+                  image.addEventListener("error", onDone, { once: true });
+                });
+              })
+            );
+
+          await Promise.race([
+            Promise.all([fonts, images]),
+            new Promise((resolve) => setTimeout(resolve, timeoutMs)),
+          ]);
+        },
+        assetWaitTimeoutMs
+      );
+
+      console.log(`[pdf-timing] assets:ready +${Date.now() - t0}ms`);
+    } catch (error) {
+      console.warn(
+        `[pdf-timing] assets:wait-skipped error=${error instanceof Error ? error.message : String(error)} +${Date.now() - t0}ms`
+      );
+    }
 
     await page.pdf({
       path:
@@ -10106,6 +10168,47 @@ const generateCustomSizePdf = async (
   } finally {
     await browser.close();
     console.log(`[pdf-timing] browser-closed +${Date.now() - t0}ms`);
+  }
+};
+
+const fetchImageAsDataUrl = async (
+  imageUrl: string,
+  timeoutMs: number = 8000
+) => {
+  const controller = new AbortController();
+  const timeout = setTimeout(
+    () => controller.abort(),
+    timeoutMs
+  );
+
+  try {
+    const response = await fetch(
+      imageUrl,
+      {
+        signal:
+          controller.signal,
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `HTTP ${response.status}`
+      );
+    }
+
+    const contentType =
+      response.headers.get(
+        "content-type"
+      ) || "image/png";
+
+    const arrayBuffer =
+      await response.arrayBuffer();
+
+    return `data:${contentType};base64,${Buffer.from(
+      arrayBuffer
+    ).toString("base64")}`;
+  } finally {
+    clearTimeout(timeout);
   }
 };
 
