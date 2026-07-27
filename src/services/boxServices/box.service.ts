@@ -10029,6 +10029,12 @@ const generateCustomSizePdf = async (
 
     console.log(`[pdf-timing] newPage:done +${Date.now() - t0}ms`);
 
+    page.on("request", (req) => {
+      console.log(
+        `[pdf-timing] request-start url=${req.url()} type=${req.resourceType()} +${Date.now() - t0}ms`
+      );
+    });
+
     page.on("requestfailed", (req) => {
       console.log(
         `[pdf-timing] requestfailed url=${req.url()} errorText=${req.failure()?.errorText} +${Date.now() - t0}ms`
