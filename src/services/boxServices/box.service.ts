@@ -10008,6 +10008,9 @@ const generateCustomSizePdf = async (
   outputPath: string,
   options: CustomPdfOptions
 ) => {
+  const t0 = Date.now();
+  console.log(`[pdf-timing] launch:start`);
+
   const browser =
     await puppeteer.launch({
       headless: true,
@@ -10018,9 +10021,29 @@ const generateCustomSizePdf = async (
       ],
     });
 
+  console.log(`[pdf-timing] launch:done +${Date.now() - t0}ms`);
+
   try {
     const page =
       await browser.newPage();
+
+    console.log(`[pdf-timing] newPage:done +${Date.now() - t0}ms`);
+
+    page.on("requestfailed", (req) => {
+      console.log(
+        `[pdf-timing] requestfailed url=${req.url()} errorText=${req.failure()?.errorText} +${Date.now() - t0}ms`
+      );
+    });
+
+    page.on("requestfinished", (req) => {
+      console.log(
+        `[pdf-timing] requestfinished url=${req.url()} +${Date.now() - t0}ms`
+      );
+    });
+
+    page.on("console", (msg) => {
+      console.log(`[pdf-timing] page-console: ${msg.text()}`);
+    });
 
     await page.setContent(
       html,
@@ -10029,6 +10052,8 @@ const generateCustomSizePdf = async (
           "networkidle0",
       }
     );
+
+    console.log(`[pdf-timing] setContent:done +${Date.now() - t0}ms`);
 
     await page.pdf({
       path:
@@ -10070,8 +10095,11 @@ const generateCustomSizePdf = async (
       preferCSSPageSize:
         true,
     });
+
+    console.log(`[pdf-timing] pdf:done +${Date.now() - t0}ms`);
   } finally {
     await browser.close();
+    console.log(`[pdf-timing] browser-closed +${Date.now() - t0}ms`);
   }
 };
 
