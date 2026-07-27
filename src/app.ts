@@ -2,6 +2,12 @@ import express from "express";
 import { router } from "./routes";
 import path from "path";
 import cors from "cors";
+
+// Fix BigInt serialization for JSON responses
+(BigInt.prototype as any).toJSON = function () {
+  const num = Number(this);
+  return Number.isSafeInteger(num) ? num : this.toString();
+};
 import logger from "./utils/logger";
 import { requestLogger, errorLogger } from "./middlewares/requestLogger";
 import { connectRedis } from "./config/redis";
