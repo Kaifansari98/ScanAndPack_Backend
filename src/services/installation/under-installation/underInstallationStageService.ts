@@ -4011,6 +4011,10 @@ export class UnderInstallationStageService {
         franchise: {
           select: { franchise_name: true },
         },
+        installationUpdates: {
+          select: { update_date: true },
+          orderBy: { update_date: "asc" },
+        },
         _count: {
           select: {
             miscellaneousMaster: true,
@@ -4021,23 +4025,29 @@ export class UnderInstallationStageService {
       orderBy: { actual_installation_start_date: "asc" },
     });
 
-    return leads.map((lead) => ({
-      id: lead.id,
-      lead_code: lead.lead_code,
-      firstname: lead.firstname,
-      lastname: lead.lastname,
-      franchise_id: lead.franchise_id,
-      franchise_name: lead.franchise?.franchise_name ?? null,
-      actual_installation_start_date: lead.actual_installation_start_date,
-      expected_installation_end_date: lead.expected_installation_end_date,
-      actual_installation_completion_at: lead.actual_installation_completion_at,
-      carcass_installation_completion_date: lead.carcass_installation_completion_date,
-      shutter_installation_completion_date: lead.shutter_installation_completion_date,
-      usable_handover_completed_at: lead.usable_handover_completed_at,
-      final_handover_marked_at: lead.final_handover_marked_at,
-      misc_count: lead._count.miscellaneousMaster,
-      issue_count: lead._count.installationIssueLogMaster,
-    }));
+    return leads.map((lead) => {
+      const sortedUpdates = lead.installationUpdates || [];
+      return {
+        id: lead.id,
+        lead_code: lead.lead_code,
+        firstname: lead.firstname,
+        lastname: lead.lastname,
+        franchise_id: lead.franchise_id,
+        franchise_name: lead.franchise?.franchise_name ?? null,
+        actual_installation_start_date: lead.actual_installation_start_date,
+        expected_installation_end_date: lead.expected_installation_end_date,
+        actual_installation_completion_at: lead.actual_installation_completion_at,
+        carcass_installation_completion_date: lead.carcass_installation_completion_date,
+        shutter_installation_completion_date: lead.shutter_installation_completion_date,
+        usable_handover_completed_at: lead.usable_handover_completed_at,
+        final_handover_marked_at: lead.final_handover_marked_at,
+        misc_count: lead._count.miscellaneousMaster,
+        issue_count: lead._count.installationIssueLogMaster,
+        installation_day_1: sortedUpdates[0]?.update_date ?? null,
+        installation_day_2: sortedUpdates[1]?.update_date ?? null,
+        installation_day_3: sortedUpdates[2]?.update_date ?? null,
+      };
+    });
   }
   static async getMiscIssueLogReportData(
     vendorId: number,
