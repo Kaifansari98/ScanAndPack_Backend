@@ -1074,6 +1074,7 @@ export class DesigingStageController {
 
           const newDocs: any[] = [];
           let nextRevision = 0;
+          let designTypeSegment = "";
           let clientNameSegment = "";
           let structureSegment = "";
           let dateSegment = "";
@@ -1101,6 +1102,9 @@ export class DesigingStageController {
             )
               .replace(/_+/g, "_")
               .slice(0, 50);
+            designTypeSegment = sanitizeFilename(selectedDesignType)
+              .replace(/_+/g, "_")
+              .slice(0, 20);
             const now = new Date();
             dateSegment = [
               now.getFullYear(),
@@ -1121,21 +1125,21 @@ export class DesigingStageController {
             nextRevision =
               existingDesignDocs.reduce((maxRevision, doc) => {
                 const match = doc.doc_og_name?.match(
-                  /^(?:\[([^\]]+)\]\s*)?D(\d+)-(.+?)(?:\.[^.]+)?$/i,
+                  /^D(\d+)_([^_]+)_(.+?)(?:\.[^.]+)?$/i,
                 );
                 if (!match) {
                   return maxRevision;
                 }
 
-                const [, existingDesignType = "", revisionText, nameBody = ""] = match;
-                if (existingDesignType.trim() !== selectedDesignType) {
+                const [, revisionText, existingDesignType = "", nameBody = ""] = match;
+                if (existingDesignType.trim().toLowerCase() !== designTypeSegment.toLowerCase()) {
                   return maxRevision;
                 }
 
                 const isSameProductType =
-                  nameBody.startsWith(`${structureSegment}-`) ||
-                  nameBody.includes(`-${structureSegment}-`) ||
-                  nameBody.endsWith(`-${structureSegment}`);
+                  nameBody.includes(`_${structureSegment}_`) ||
+                  nameBody.endsWith(`_${structureSegment}`) ||
+                  nameBody.startsWith(`${structureSegment}_`);
 
                 if (!isSameProductType) {
                   return maxRevision;
@@ -1153,17 +1157,14 @@ export class DesigingStageController {
 
           // 3️⃣ DB insert
           for (const file of files) {
-            const designTypePrefix = selectedDesignType
-              ? `[${selectedDesignType}] `
-              : "";
-            const finalOriginalName = designTypePrefix + (useCustomVendorFlow
+            const finalOriginalName = useCustomVendorFlow
               ? (() => {
                 const extension = path.extname(file.originalname || "");
-                const renamedOriginalName = `D${nextRevision}-${structureSegment}-${clientNameSegment}-${dateSegment}${extension}`;
+                const renamedOriginalName = `D${nextRevision}_${designTypeSegment}_${clientNameSegment}_${structureSegment}_${dateSegment}${extension}`;
                 nextRevision += 1;
                 return renamedOriginalName;
               })()
-              : file.originalname);
+              : file.originalname;
             const sysName = await uploadToWasabStage1DesingsFile(
               file.path,
               Number(vendorId),
