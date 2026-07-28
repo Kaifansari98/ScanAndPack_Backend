@@ -1238,8 +1238,24 @@ export class DesigingStageController {
                   : maxRevision;
               }, -1) + 1;
 
-            instanceIdToPersist =
-              selectedInstances.length === 1 ? selectedInstances[0].id : null;
+            if (selectedInstances.length === 1) {
+              instanceIdToPersist = selectedInstances[0].id;
+            } else if (selectedInstances.length > 1) {
+              const uniqueSelectedProductTypes = [
+                ...new Set(
+                  selectedInstances
+                    .map((instance) => instance.productType?.type?.trim())
+                    .filter(Boolean),
+                ),
+              ];
+
+              instanceIdToPersist =
+                uniqueSelectedProductTypes.length === 1
+                  ? selectedInstances[0].id
+                  : null;
+            } else {
+              instanceIdToPersist = null;
+            }
           }
 
           // 3️⃣ DB insert
