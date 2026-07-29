@@ -27,18 +27,18 @@ function buildQuotationNameFromDesign(
   designNameWithoutExtension = designNameWithoutExtension.replace(/^\[.*?\]\s*/, "");
   const quotationExtension = path.extname(quotationOriginalName || "");
   const designMatch = designNameWithoutExtension.match(
-    /^[DR](\d+)-(.+)-\d{4}-\d{2}-\d{2}$/i,
+    /^D(\d+)_(?:(2D|3D)_)?(.+)_\d{4}-\d{2}-\d{2}$/i,
   );
 
   if (!designMatch) {
     throw new Error("Selected design file name is invalid for quotation naming");
   }
 
-  const [, revisionNumber, baseSegment] = designMatch;
+  const [, revisionNumber, , baseSegment] = designMatch;
   const todaySegment = formatDateSegment(new Date());
 
   return sanitizeFilename(
-    `Q${revisionNumber}-${baseSegment}-${todaySegment}${quotationExtension}`,
+    `Q${revisionNumber}_${baseSegment}_${todaySegment}${quotationExtension}`,
   ).replace(/_+/g, "_");
 }
 export type StageType =

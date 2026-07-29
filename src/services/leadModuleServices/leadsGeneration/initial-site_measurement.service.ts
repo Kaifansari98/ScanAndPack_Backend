@@ -37,7 +37,6 @@ export interface CreateBDISMPaymentUploadDto {
   account_id: number;
   vendor_id: number;
   created_by: number;
-  client_id: number;
   user_id: number;
   amount?: number;
   payment_date?: Date;
@@ -158,8 +157,7 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
     assignee_user_id,
     created_by,
     baseUrl,
-  } =
-    value;
+  } = value;
 
   const result = await prisma.$transaction(async (tx) => {
     // 1) Lead (for vendor/account)
@@ -428,7 +426,12 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
       new_status_id: updatedLead.status_id,
     });
 
-    return { task, lead: updatedLead, isStageChanged: (task_type.toLowerCase() !== "follow up" && !isSelfAssignTask) };
+    return {
+      task,
+      lead: updatedLead,
+      isStageChanged:
+        task_type.toLowerCase() !== "follow up" && !isSelfAssignTask,
+    };
   });
 
   // ✅ Send Notifications outside the transaction if the lead stage was actually updated to ISM
@@ -437,35 +440,45 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
       const [leadData, actor] = await Promise.all([
         prisma.leadMaster.findUnique({
           where: { id: lead_id },
-          select: { firstname: true, lastname: true, lead_code: true, account_id: true, vendor_id: true, franchise_id: true }
+          select: {
+            firstname: true,
+            lastname: true,
+            lead_code: true,
+            account_id: true,
+            vendor_id: true,
+            franchise_id: true,
+          },
         }),
         prisma.userMaster.findUnique({
           where: { id: created_by },
-          select: { user_name: true }
-        })
+          select: { user_name: true },
+        }),
       ]);
 
       if (leadData) {
-        const leadName = `${leadData.firstname ?? ""} ${leadData.lastname ?? ""}`.trim();
-        const leadCode = leadData.lead_code ?? `LEAD-${String(lead_id).padStart(4, "0")}`;
+        const leadName =
+          `${leadData.firstname ?? ""} ${leadData.lastname ?? ""}`.trim();
+        const leadCode =
+          leadData.lead_code ?? `LEAD-${String(lead_id).padStart(4, "0")}`;
         const accountId = leadData.account_id;
-        
-        const redirectUrl = accountId 
+
+        const redirectUrl = accountId
           ? `/dashboard/leads/details/${lead_id}?accountId=${accountId}`
           : `/dashboard/leads/details/${lead_id}`;
-        const resolvedBaseUrl =
-          (typeof baseUrl === "string" && baseUrl.trim().length > 0
+        const resolvedBaseUrl = (
+          typeof baseUrl === "string" && baseUrl.trim().length > 0
             ? baseUrl
             : process.env.CLIENT_BASE_URL ||
               process.env.FRONTEND_URL ||
               "http://localhost:3000"
-          ).replace(/\/$/, "");
+        ).replace(/\/$/, "");
         const projectUrl = `${resolvedBaseUrl}${redirectUrl}`;
 
-        const { recipients, isSuperAdminFallback } = await getFranchiseAdminRecipients({
-          vendorId: leadData.vendor_id,
-          franchiseId: leadData.franchise_id ?? null,
-        });
+        const { recipients, isSuperAdminFallback } =
+          await getFranchiseAdminRecipients({
+            vendorId: leadData.vendor_id,
+            franchiseId: leadData.franchise_id ?? null,
+          });
 
         const updatedAt = new Date().toLocaleString("en-IN", {
           day: "2-digit",
@@ -490,7 +503,9 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
 
           // Email
           try {
-            const { sendLeadMovedToISMEmail } = require("../../email/brevoEmail.service");
+            const {
+              sendLeadMovedToISMEmail,
+            } = require("../../email/brevoEmail.service");
             await sendLeadMovedToISMEmail({
               allowSuperAdmin: isSuperAdminFallback,
               vendor_id: leadData.vendor_id,
@@ -503,7 +518,7 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
               projectUrl,
             });
           } catch (e) {
-             logger.warn("Brevo email failed for ISM stage", e);
+            logger.warn("Brevo email failed for ISM stage", e);
           }
         }
       }
@@ -645,7 +660,9 @@ export class PaymentUploadService {
     }
   }
 
-  public async checkIsmUploaded(leadId: number): Promise<{ isUploaded: boolean }> {
+  public async checkIsmUploaded(
+    leadId: number,
+  ): Promise<{ isUploaded: boolean }> {
     try {
       const lead = await prisma.leadMaster.findUnique({
         where: { id: leadId },
@@ -742,10 +759,11 @@ export class PaymentUploadService {
       const pdfFiles = data.pdfFiles ?? [];
 
       if (!pdfFiles.length) {
-        const existingMeasurementDocType = await prisma.documentTypeMaster.findFirst({
-          where: { vendor_id: data.vendor_id, tag: "Type 3" },
-          select: { id: true },
-        });
+        const existingMeasurementDocType =
+          await prisma.documentTypeMaster.findFirst({
+            where: { vendor_id: data.vendor_id, tag: "Type 3" },
+            select: { id: true },
+          });
 
         const existingMeasurementDocsCount = existingMeasurementDocType
           ? await prisma.leadDocuments.count({
@@ -983,7 +1001,6 @@ export class PaymentUploadService {
               data: {
                 lead_id: data.lead_id,
                 account_id: data.account_id,
-                client_id: data.client_id,
                 vendor_id: data.vendor_id,
                 amount: data.amount,
                 payment_date: data.payment_date,
@@ -1083,7 +1100,9 @@ export class PaymentUploadService {
             }
 
             // Also invalidate for the user completing this stage
-            await cache.del(`dashboard:tasks:${data.vendor_id}:${data.user_id}`);
+            await cache.del(
+              `dashboard:tasks:${data.vendor_id}:${data.user_id}`,
+            );
           }
 
           // 8️⃣ Create LeadDetailedLogs + LeadDocumentLogs (Audit Trail)
@@ -1198,48 +1217,53 @@ export class PaymentUploadService {
           select: { is_this_vendor_is_custom_usertype_only: true },
         });
 
-        const shouldSendNotification = !data.skip_status_update && !vendor?.is_this_vendor_is_custom_usertype_only;
+        const shouldSendNotification =
+          !data.skip_status_update &&
+          !vendor?.is_this_vendor_is_custom_usertype_only;
 
         if (shouldSendNotification) {
-          const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
-            vendorId: lead.vendor_id,
-            franchiseId: lead.franchise_id ?? null,
-            excludeUserId: actorId,
-          });
+          const { recipients: admins, isSuperAdminFallback } =
+            await getFranchiseAdminRecipients({
+              vendorId: lead.vendor_id,
+              franchiseId: lead.franchise_id ?? null,
+              excludeUserId: actorId,
+            });
 
           for (const admin of admins) {
-          // 🔔 In-App
-          await NotificationService.createAndSend({
-            vendor_id: lead.vendor_id,
-            user_id: admin.id,
-            sender_id: actorId,
-            type: NotificationType.LEAD_MILESTONE,
-            title: "Lead Entered Designing Stage",
-            message: `${leadCode} - ${leadName} moved to Designing stage.`,
-            entity_type: "lead",
-            entity_id: data.lead_id,
-            redirect_url: lead.account_id
-              ? `/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
-              : `/dashboard/leads/details/${data.lead_id}`,
-          });
-
-          // 📧 Send Email Notification
-          if (admin.user_email) {
-            await sendLeadMovedToDesigningEmail({
-              allowSuperAdmin: isSuperAdminFallback,
+            // 🔔 In-App
+            await NotificationService.createAndSend({
               vendor_id: lead.vendor_id,
-              toEmail: admin.user_email,
-              toName: admin.user_name || "Admin",
-              leadCode: leadCode,
-              leadName: leadName,
-              updatedBy: actor?.user_name || "System",
-              updatedAt: updatedAt,
-              projectUrl: projectUrl,
-            }).catch((e) =>
-              logger.error("Failed to send designing email", { error: e.message }),
-            );
+              user_id: admin.id,
+              sender_id: actorId,
+              type: NotificationType.LEAD_MILESTONE,
+              title: "Lead Entered Designing Stage",
+              message: `${leadCode} - ${leadName} moved to Designing stage.`,
+              entity_type: "lead",
+              entity_id: data.lead_id,
+              redirect_url: lead.account_id
+                ? `/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
+                : `/dashboard/leads/details/${data.lead_id}`,
+            });
+
+            // 📧 Send Email Notification
+            if (admin.user_email) {
+              await sendLeadMovedToDesigningEmail({
+                allowSuperAdmin: isSuperAdminFallback,
+                vendor_id: lead.vendor_id,
+                toEmail: admin.user_email,
+                toName: admin.user_name || "Admin",
+                leadCode: leadCode,
+                leadName: leadName,
+                updatedBy: actor?.user_name || "System",
+                updatedAt: updatedAt,
+                projectUrl: projectUrl,
+              }).catch((e) =>
+                logger.error("Failed to send designing email", {
+                  error: e.message,
+                }),
+              );
+            }
           }
-        }
         }
       } catch (err: any) {
         logger.warn("⚠️ Designing stage notification failed", {
@@ -1289,7 +1313,8 @@ export class PaymentUploadService {
         }
       }
 
-      const uploadedPdfDocuments: { originalName: string; s3Key: string }[] = [];
+      const uploadedPdfDocuments: { originalName: string; s3Key: string }[] =
+        [];
       for (const pdfFile of data.pdfFiles) {
         const pdfKey = await uploadToWasabiInitialSiteMeasurementFile(
           pdfFile.path,
@@ -1466,7 +1491,6 @@ export class PaymentUploadService {
               data: {
                 lead_id: data.lead_id,
                 account_id: data.account_id,
-                client_id: data.client_id,
                 vendor_id: data.vendor_id,
                 amount: data.amount,
                 payment_date: data.payment_date,
@@ -2470,7 +2494,7 @@ export class PaymentUploadService {
         // Fetch correct account_id from the lead to avoid foreign key constraints from bad frontend data
         const lead = await tx.leadMaster.findUnique({
           where: { id: data.lead_id },
-          select: { account_id: true }
+          select: { account_id: true },
         });
 
         if (!lead) {
@@ -2497,7 +2521,8 @@ export class PaymentUploadService {
               account_id: lead.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
-              product_structure_instance_id: uploaded.productStructureInstanceId,
+              product_structure_instance_id:
+                uploaded.productStructureInstanceId,
             },
           });
 
@@ -2512,8 +2537,13 @@ export class PaymentUploadService {
 
       return response;
     } catch (error: any) {
-      console.error("[PaymentUploadService] Error uploading additional photos:", error);
-      throw new Error(`Failed to upload additional site photos: ${error.message}`);
+      console.error(
+        "[PaymentUploadService] Error uploading additional photos:",
+        error,
+      );
+      throw new Error(
+        `Failed to upload additional site photos: ${error.message}`,
+      );
     }
   }
 
@@ -2555,15 +2585,14 @@ export class PaymentUploadService {
         uploadedPdfDocuments.push({
           originalName: pdfFile.originalname,
           s3Key,
-          productStructureInstanceId:
-            data.pdfFileInstanceIds?.[index] ?? null,
+          productStructureInstanceId: data.pdfFileInstanceIds?.[index] ?? null,
         });
       }
 
       await prisma.$transaction(async (tx: any) => {
         const lead = await tx.leadMaster.findUnique({
           where: { id: data.lead_id },
-          select: { account_id: true }
+          select: { account_id: true },
         });
 
         if (!lead) {
@@ -2590,7 +2619,8 @@ export class PaymentUploadService {
               account_id: lead.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
-              product_structure_instance_id: uploaded.productStructureInstanceId,
+              product_structure_instance_id:
+                uploaded.productStructureInstanceId,
             },
           });
 
@@ -2605,8 +2635,13 @@ export class PaymentUploadService {
 
       return response;
     } catch (error: any) {
-      console.error("[PaymentUploadService] Error uploading measurement documents:", error);
-      throw new Error(`Failed to upload measurement documents: ${error.message}`);
+      console.error(
+        "[PaymentUploadService] Error uploading measurement documents:",
+        error,
+      );
+      throw new Error(
+        `Failed to upload measurement documents: ${error.message}`,
+      );
     }
   }
 

@@ -8,8 +8,12 @@ export class CompanyVendorsService {
       throw error;
     }
 
-    const vendors = await prisma.companyVendorsMaster.findMany({
-      where: { vendor_id: vendorId, is_deleted: false, status_id: 1 },
+    return prisma.companyVendorsMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        is_deleted: false,
+        is_active: true,
+      },
       orderBy: { created_at: "desc" },
       include: {
         vendor: {
@@ -17,14 +21,6 @@ export class CompanyVendorsService {
         },
       },
     });
-
-    if (!vendors || vendors.length === 0) {
-      const error = new Error("No company vendors found for this vendor_id");
-      (error as any).statusCode = 404;
-      throw error;
-    }
-
-    return vendors;
   }
 
   async getCompanyVendorsByVendorIdForMaster(vendorId: number) {
@@ -41,7 +37,6 @@ export class CompanyVendorsService {
         vendor: {
           select: { vendor_name: true, vendor_code: true },
         },
-        status: true,
       },
     });
   }
@@ -81,7 +76,7 @@ export class CompanyVendorsService {
     return prisma.companyVendorsMaster.update({
       where: { id: companyVendorId },
       data: {
-        status_id: isDeleted ? 2 : 1, // 2 = Inactive, 1 = Active
+        is_active: !isDeleted,
         is_deleted: false, // Ensure not soft-deleted
         updated_by: updatedBy,
         updated_at: new Date(),

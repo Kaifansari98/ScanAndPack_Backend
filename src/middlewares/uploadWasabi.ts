@@ -631,7 +631,8 @@ export const uploadBookingStageFiles = multer({
       cb(null, dir);
     },
     filename: (_req, file, cb) => {
-      cb(null, `${Date.now()}-${file.originalname}`);
+      const unique = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+      cb(null, `${unique}-${file.originalname}`);
     },
   }),
   limits: { fileSize: 200 * 1024 * 1024, files: 11 },

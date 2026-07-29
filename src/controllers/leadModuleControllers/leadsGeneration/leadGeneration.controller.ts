@@ -280,10 +280,16 @@ export class LeadController {
       }
 
       // 1. Resolve the vendor's Open status ID dynamically
-      const [vendor, openStatus] = await Promise.all([
+      const numericFranchiseId = Number(req.body.franchise_id);
+
+      const [vendor, franchise, openStatus] = await Promise.all([
         prisma.vendorMaster.findUnique({
           where: { id: numericVendorId },
           select: { handlesLargeScaleProjects: true },
+        }),
+        prisma.franchiseMaster.findUnique({
+          where: { id: numericFranchiseId },
+          select: { vendor_id: true, moduled_for_b2b: true },
         }),
         prisma.statusTypeMaster.findFirst({
           where: {
@@ -298,13 +304,18 @@ export class LeadController {
         throw new Error(`Vendor ${vendor_id} not found`);
       }
 
+      if (!franchise || franchise.vendor_id !== numericVendorId) {
+        throw new Error(`Franchise ${req.body.franchise_id} not found for vendor ${vendor_id}`);
+      }
+
       if (!openStatus) {
         throw new Error(
           `Open status (Type 1) not found for vendor ${vendor_id}`,
         );
       }
 
-      const requiresFurnitureSelection = !vendor.handlesLargeScaleProjects;
+      const requiresFurnitureSelection =
+        !vendor.handlesLargeScaleProjects && !franchise.moduled_for_b2b;
 
       const payload = {
         ...req.body,
@@ -314,7 +325,7 @@ export class LeadController {
         status_id: openStatus.id, // <-- use openStatus' id here
         source_id: Number(req.body.source_id) || undefined,
         vendor_id: numericVendorId,
-        franchise_id: Number(req.body.franchise_id),
+        franchise_id: numericFranchiseId,
         created_by: Number(req.body.created_by),
         priority: getSingleBodyValue(req.body.priority)?.trim() || undefined,
         assign_to: req.body.assign_to ? Number(req.body.assign_to) : undefined,
@@ -334,6 +345,9 @@ export class LeadController {
           ? new Date(req.body.initial_site_measurement_date)
           : undefined,
         site_map_link: req.body.site_map_link || null,
+        refered_by: req.body.refered_by?.trim() || undefined,
+        client_id: req.body.client_id ? Number(req.body.client_id) : undefined,
+        order_number: req.body.order_number || undefined,
       };
 
       if (!requiresFurnitureSelection) {

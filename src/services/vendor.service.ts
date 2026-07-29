@@ -23,6 +23,7 @@ interface LeadsOverviewReportRow {
   furniture_structure: string;
   instance: string;
   architect_name: string;
+  architect_number: string;
   carcass_selection: string;
   shutter_selection: string;
   handle_selection: string;
@@ -44,9 +45,12 @@ interface TechCheckStageReportRow {
 
 interface ErdReportRow {
   lead_id: number;
+  instance_id: number | null;
   lead_code: string;
   client_name: string;
   franchise_store: string;
+  designer: string;
+  ol_moved_date: Date | null;
   required_date: Date | null;
   erd_date: Date | null;
 }
@@ -62,9 +66,11 @@ interface LeadTrackingReportRow {
   furniture_type: string;
   furniture_structure: string;
   lead_creation_date: Date | null;
+  ism_scheduled_date: Date | null;
   ism_completion_date: Date | null;
   booking_done_date: Date | null;
   booking_adv_cleared_date: Date | null;
+  client_doc_completion_date: Date | null;
   fm_scheduled_date: Date | null;
   fm_completion_date: Date | null;
   client_approval_date: Date | null;
@@ -164,23 +170,23 @@ export const getAllVendorsPaginated = async ({
 
   const where = search
     ? {
-        OR: [
-          { vendor_name: { contains: search, mode: "insensitive" as const } },
-          { vendor_code: { contains: search, mode: "insensitive" as const } },
-          {
-            primary_contact_email: {
-              contains: search,
-              mode: "insensitive" as const,
-            },
+      OR: [
+        { vendor_name: { contains: search, mode: "insensitive" as const } },
+        { vendor_code: { contains: search, mode: "insensitive" as const } },
+        {
+          primary_contact_email: {
+            contains: search,
+            mode: "insensitive" as const,
           },
-          {
-            primary_contact_name: {
-              contains: search,
-              mode: "insensitive" as const,
-            },
+        },
+        {
+          primary_contact_name: {
+            contains: search,
+            mode: "insensitive" as const,
           },
-        ],
-      }
+        },
+      ],
+    }
     : {};
 
   const [data, totalCount] = await Promise.all([
@@ -209,6 +215,20 @@ export const getAllVendorsPaginated = async ({
         login_image: true,
         createdAt: true,
         updatedAt: true,
+        gst_no: true,
+        toll_free_no: true,
+        website_link: true,
+        tag_line: true,
+        address: true,
+        pincode: true,
+        city: true,
+        state_id: true,
+        state: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
       },
     }),
     prisma.vendorMaster.count({ where }),
@@ -367,6 +387,8 @@ export const getLeadsOverviewReportData = async (
       contact_no: true,
       site_address: true,
       archetech_name: true,
+      archetech_number: true,
+      activity_status: true,
       statusType: {
         select: {
           type: true,
@@ -504,11 +526,13 @@ export const getLeadsOverviewReportData = async (
           furniture_structure: defaultFurnitureStructures.join(", ") || "-",
           instance: "-",
           architect_name: lead.archetech_name ?? "-",
+          architect_number: lead.archetech_number ?? "-",
           carcass_selection: "-",
           shutter_selection: "-",
           handle_selection: "-",
           designer_assigned: designerAssigned,
           supervisor_assigned: supervisorAssigned,
+          activity_status: lead.activity_status,
         },
       ];
     }
@@ -552,11 +576,13 @@ export const getLeadsOverviewReportData = async (
           instance.title?.trim() ||
           `Instance ${instance.quantity_index ?? instance.id}`,
         architect_name: lead.archetech_name ?? "-",
+        architect_number: lead.archetech_number ?? "-",
         carcass_selection: carcassSelection,
         shutter_selection: shutterSelection,
         handle_selection: handleSelection,
         designer_assigned: designerAssigned,
         supervisor_assigned: supervisorAssigned,
+        activity_status: lead.activity_status,
       };
     });
   });
@@ -598,6 +624,30 @@ export const getTechCheckStageReportData = async (
       franchise: {
         select: {
           franchise_name: true,
+        },
+      },
+      userMappings: {
+        where: {
+          status: "active",
+        },
+        select: {
+          user_id: true,
+          type: true,
+          created_at: true,
+          user: {
+            select: {
+              id: true,
+              user_name: true,
+              user_type: {
+                select: {
+                  user_type: true,
+                },
+              },
+            },
+          },
+        },
+        orderBy: {
+          created_at: "asc",
         },
       },
       productStructureInstances: {
@@ -696,6 +746,14 @@ export const getTechCheckStageReportData = async (
         )
         .map((log) => log.created_at);
 
+      const designer =
+        lead.userMappings.find(
+          (mapping) =>
+            mapping.type === "designer" ||
+            mapping.user.user_type.user_type.trim().toLowerCase() === "designer" ||
+            mapping.user.user_type.user_type.trim().toLowerCase() === "sales-executive",
+        )?.user.user_name ?? "-";
+
       return {
         lead_id: lead.id,
         instance_id: instanceId,
@@ -706,6 +764,7 @@ export const getTechCheckStageReportData = async (
         ),
         client_name: `${lead.firstname} ${lead.lastname}`.trim(),
         franchise_store: lead.franchise?.franchise_name ?? "-",
+        designer,
         tech_check_req_date: lead.tech_check_reached_at,
         rejection_dates: rejectionDates,
         revised_upload_dates: revisedDates,
@@ -732,10 +791,9 @@ export const getErdReportData = async (
   const where: any = {
     vendor_id: vendorId,
     is_deleted: false,
-    OR: [
-      { client_required_order_login_complition_date: { not: null } },
-      { expected_order_login_ready_date: { not: null } },
-    ],
+    statusType: {
+      tag: "Type 10",
+    },
   };
 
   if (franchiseId !== null) {
@@ -757,11 +815,55 @@ export const getErdReportData = async (
       firstname: true,
       lastname: true,
       client_required_order_login_complition_date: true,
-      expected_order_login_ready_date: true,
       franchise: {
         select: {
           franchise_name: true,
         },
+      },
+      userMappings: {
+        where: {
+          status: "active",
+        },
+        select: {
+          user_id: true,
+          type: true,
+          created_at: true,
+          user: {
+            select: {
+              id: true,
+              user_name: true,
+              user_type: {
+                select: {
+                  user_type: true,
+                },
+              },
+            },
+          },
+        },
+        orderBy: {
+          created_at: "asc",
+        },
+      },
+      leadStatusLogs: {
+        where: {
+          statusType: {
+            tag: "Type 10",
+          },
+        },
+        select: {
+          created_at: true,
+        },
+        orderBy: {
+          created_at: "asc",
+        },
+      },
+      productStructureInstances: {
+        select: {
+          id: true,
+          quantity_index: true,
+          production_erd_date: true,
+        },
+        orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
       },
     },
     orderBy: {
@@ -769,14 +871,47 @@ export const getErdReportData = async (
     },
   });
 
-  return leads.map((lead) => ({
-    lead_id: lead.id,
-    lead_code: lead.lead_code,
-    client_name: `${lead.firstname} ${lead.lastname}`.trim(),
-    franchise_store: lead.franchise?.franchise_name ?? "-",
-    required_date: lead.client_required_order_login_complition_date,
-    erd_date: lead.expected_order_login_ready_date,
-  }));
+  return leads.flatMap<ErdReportRow>((lead) => {
+    const hasMultipleInstances = lead.productStructureInstances.length > 1;
+
+    const designer =
+      lead.userMappings.find(
+        (mapping) =>
+          mapping.type === "designer" ||
+          mapping.user.user_type.user_type.trim().toLowerCase() === "designer" ||
+          mapping.user.user_type.user_type.trim().toLowerCase() === "sales-executive",
+      )?.user.user_name ?? "-";
+
+    const olMovedDate = lead.leadStatusLogs[0]?.created_at ?? null;
+
+    const buildRow = (
+      instanceId: number | null,
+      quantityIndex?: number | null,
+      erdDate?: Date | null,
+    ) => ({
+      lead_id: lead.id,
+      instance_id: instanceId,
+      lead_code: formatOverviewLeadCode(
+        lead.lead_code,
+        quantityIndex,
+        hasMultipleInstances,
+      ),
+      client_name: `${lead.firstname} ${lead.lastname}`.trim(),
+      franchise_store: lead.franchise?.franchise_name ?? "-",
+      designer,
+      ol_moved_date: olMovedDate,
+      required_date: lead.client_required_order_login_complition_date,
+      erd_date: erdDate ?? null,
+    });
+
+    if (!lead.productStructureInstances.length) {
+      return [buildRow(null, null, null)];
+    }
+
+    return lead.productStructureInstances.map((instance) =>
+      buildRow(instance.id, instance.quantity_index, instance.production_erd_date),
+    );
+  });
 };
 
 export const getLeadTrackingReportData = async (
@@ -819,6 +954,7 @@ export const getLeadTrackingReportData = async (
       firstname: true,
       lastname: true,
       created_at: true,
+      initial_site_measurement_date: true,
       actual_installation_start_date: true,
       actual_installation_completion_at: true,
       carcass_installation_completion_date: true,
@@ -981,14 +1117,14 @@ export const getLeadTrackingReportData = async (
     const supervisorUsers =
       normalizedUserType === "site-supervisor"
         ? lead.siteSupervisors
-            .filter(
-              (mapping) =>
-                mapping.supervisor.user_type.user_type.trim().toLowerCase() ===
-                "site-supervisor",
-            )
-            .map((mapping) => ({
-              id: mapping.supervisor.id,
-            }))
+          .filter(
+            (mapping) =>
+              mapping.supervisor.user_type.user_type.trim().toLowerCase() ===
+              "site-supervisor",
+          )
+          .map((mapping) => ({
+            id: mapping.supervisor.id,
+          }))
         : [];
 
     const matchedUsers = [...mappedUsers, ...supervisorUsers];
@@ -1043,9 +1179,11 @@ export const getLeadTrackingReportData = async (
         furniture_type: instance.productType?.type ?? "-",
         furniture_structure: instance.productStructure?.type ?? "-",
         lead_creation_date: lead.created_at,
+        ism_scheduled_date: lead.initial_site_measurement_date,
         ism_completion_date: firstStatusDate("Type 3"),
         booking_done_date: firstStatusDate("Type 4"),
         booking_adv_cleared_date: bookingAdvanceClearedDate,
+        client_doc_completion_date: firstStatusDate("Type 7"),
         fm_scheduled_date: firstTaskCreatedAt("Final Measurements"),
         fm_completion_date: firstTaskClosedAt("Final Measurements"),
         client_approval_date: firstStatusDate("Type 7"),
@@ -1123,11 +1261,11 @@ export const getPaymentsBetweenClientAndStoreReportData = async (
         where: {
           ...(fromDate && toDate
             ? {
-                created_at: {
-                  gte: new Date(fromDate),
-                  lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
-                },
-              }
+              created_at: {
+                gte: new Date(fromDate),
+                lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
+              },
+            }
             : {}),
         },
         select: {
@@ -1720,6 +1858,15 @@ export const onboardVendor = async (data: any) => {
     primary_contact_name,
     primary_contact_number,
     primary_contact_email,
+    gst_no,
+    toll_free_no,
+    website_link,
+    tag_line,
+    address,
+    pincode,
+    city,
+    state_id,
+
     country_code,
     head_office_id,
     status,
@@ -1741,6 +1888,14 @@ export const onboardVendor = async (data: any) => {
       primary_contact_name,
       primary_contact_number,
       primary_contact_email,
+      gst_no,
+      toll_free_no,
+      website_link,
+      tag_line,
+      address,
+      pincode,
+      city,
+      state_id,
       country_code,
       head_office_id,
       status,
@@ -1794,6 +1949,16 @@ export const updateVendor = async (vendorId: number, data: any) => {
     primary_contact_name,
     primary_contact_number,
     primary_contact_email,
+    gst_no,
+    toll_free_no,
+    website_link,
+    tag_line,
+    address,
+    pincode,
+    city,
+    state_id,
+
+
     status,
     logo,
     icon,
@@ -1815,6 +1980,14 @@ export const updateVendor = async (vendorId: number, data: any) => {
       primary_contact_name,
       primary_contact_number,
       primary_contact_email,
+      gst_no,
+      toll_free_no,
+      website_link,
+      tag_line,
+      address,
+      pincode,
+      city,
+      state_id,
       status,
       logo,
       icon,
@@ -1862,7 +2035,7 @@ export const getVendorBySubdomain = async (subdomain: string) => {
     clean = clean.substring(4);
   }
   // E.g., if subdomain was "https://vloq.com/" -> clean is now "vloq.com"
-  
+
   // Get the main name part (vloq from vloq.com or vloq.localhost)
   const namePart = clean.split(".")[0];
 
@@ -1918,4 +2091,17 @@ export const getVendorBySubdomain = async (subdomain: string) => {
     iconUrl,
     loginImageUrl,
   };
+};
+
+
+export const getStates = async () => {
+  return prisma.stateMaster.findMany({
+    select: {
+      id: true,
+      name: true,
+    },
+    orderBy: {
+      name: "asc",
+    },
+  });
 };

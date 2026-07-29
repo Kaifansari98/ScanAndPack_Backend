@@ -3,11 +3,16 @@ import { app } from "./app";
 import { env } from "./config/env";
 import logger from "./utils/logger";
 
+import { startCronJobs } from "./services/schedulers/cron";
+
 const PORT = env.PORT || 7777;
 
 const server = app.listen(PORT, () => {
   logger.info("Server started", { port: PORT, env: process.env.NODE_ENV });
   console.log('DATABASE_URL:', process.env.DATABASE_URL);
+  
+  // Start scheduler jobs
+  startCronJobs();
 });
 
 // Graceful shutdown (optional but recommended)

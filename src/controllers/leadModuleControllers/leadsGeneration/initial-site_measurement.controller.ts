@@ -84,7 +84,9 @@ export class PaymentUploadController {
     instanceIds: (number | null)[] | undefined,
   ) {
     const concreteIds = Array.from(
-      new Set((instanceIds ?? []).filter((value): value is number => value != null)),
+      new Set(
+        (instanceIds ?? []).filter((value): value is number => value != null),
+      ),
     );
 
     if (!concreteIds.length) return;
@@ -99,7 +101,9 @@ export class PaymentUploadController {
     });
 
     if (instances.length !== concreteIds.length) {
-      throw new Error("One or more product structure instances are invalid for this lead");
+      throw new Error(
+        "One or more product structure instances are invalid for this lead",
+      );
     }
   }
 
@@ -331,8 +335,6 @@ export class PaymentUploadController {
             redirect_url: `/dashboard/my-tasks?taskId=${result.task.id}`,
           });
         }
-
-
       } catch (notificationError: any) {
         logger.warn("⚠️ Failed to send notification", {
           error: notificationError?.message,
@@ -356,7 +358,9 @@ export class PaymentUploadController {
         (errorMessage
           .toLowerCase()
           .includes("already exists for this lead and is not completed") ||
-          errorMessage.toLowerCase().includes("follow up task is already assigned"));
+          errorMessage
+            .toLowerCase()
+            .includes("follow up task is already assigned"));
 
       logger.error("[ERROR] assignTaskISM:", { err: error });
 
@@ -375,18 +379,10 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { lead_id, account_id, vendor_id, created_by, client_id, user_id } =
-        req.body;
+      const { lead_id, account_id, vendor_id, created_by, user_id } = req.body;
 
       // Validate required fields
-      if (
-        !lead_id ||
-        !account_id ||
-        !vendor_id ||
-        !created_by ||
-        !client_id ||
-        !user_id
-      ) {
+      if (!lead_id || !account_id || !vendor_id || !created_by || !user_id) {
         res.status(400).json({
           success: false,
           message:
@@ -469,7 +465,9 @@ export class PaymentUploadController {
       } catch (instanceError: any) {
         res.status(400).json({
           success: false,
-          message: instanceError?.message || "Invalid product structure instance mapping",
+          message:
+            instanceError?.message ||
+            "Invalid product structure instance mapping",
         });
         return;
       }
@@ -480,7 +478,6 @@ export class PaymentUploadController {
         account_id: parseInt(account_id),
         vendor_id: parseInt(vendor_id),
         created_by: parseInt(created_by),
-        client_id: parseInt(client_id),
         user_id: parseInt(user_id),
         amount: req.body.amount ? parseFloat(req.body.amount) : undefined,
         baseUrl: resolveClientBaseUrl(req),
@@ -563,7 +560,6 @@ export class PaymentUploadController {
         account_id: +account_id,
         vendor_id: +vendor_id,
         created_by: +created_by,
-        client_id: +client_id,
         user_id: +user_id,
         amount: req.body.amount ? +req.body.amount : undefined,
         baseUrl: resolveClientBaseUrl(req),
@@ -1101,8 +1097,7 @@ export class PaymentUploadController {
         if (!isValidImage(photo)) {
           res.status(400).json({
             success: false,
-            message:
-              "Current site photos must be valid image files",
+            message: "Current site photos must be valid image files",
           });
           return;
         }
@@ -1113,8 +1108,7 @@ export class PaymentUploadController {
         if (!isValidImage(photo)) {
           res.status(400).json({
             success: false,
-            message:
-              "Payment detail photos must be valid image files",
+            message: "Payment detail photos must be valid image files",
           });
           return;
         }
@@ -1247,7 +1241,8 @@ export class PaymentUploadController {
       if (!lead_id || !account_id || !vendor_id || !updated_by) {
         res.status(400).json({
           success: false,
-          message: "lead_id, account_id, vendor_id, and updated_by are required",
+          message:
+            "lead_id, account_id, vendor_id, and updated_by are required",
         });
         return;
       }
@@ -1281,7 +1276,8 @@ export class PaymentUploadController {
         if (!validImageTypes.includes(photo.mimetype)) {
           res.status(400).json({
             success: false,
-            message: "Site photos must be valid image files (JPEG, JPG, PNG, GIF, etc)",
+            message:
+              "Site photos must be valid image files (JPEG, JPG, PNG, GIF, etc)",
           });
           return;
         }
@@ -1296,14 +1292,16 @@ export class PaymentUploadController {
         console.warn("Could not parse site_photo_instance_ids");
       }
 
-      const result = await this.paymentUploadService.uploadAdditionalSitePhotos({
-        lead_id: Number(lead_id),
-        account_id: Number(account_id),
-        vendor_id: Number(vendor_id),
-        updated_by: Number(updated_by),
-        currentSitePhotos,
-        sitePhotoInstanceIds,
-      });
+      const result = await this.paymentUploadService.uploadAdditionalSitePhotos(
+        {
+          lead_id: Number(lead_id),
+          account_id: Number(account_id),
+          vendor_id: Number(vendor_id),
+          updated_by: Number(updated_by),
+          currentSitePhotos,
+          sitePhotoInstanceIds,
+        },
+      );
 
       res.status(200).json({
         success: true,
@@ -1329,7 +1327,8 @@ export class PaymentUploadController {
       if (!lead_id || !account_id || !vendor_id || !updated_by) {
         res.status(400).json({
           success: false,
-          message: "lead_id, account_id, vendor_id, and updated_by are required",
+          message:
+            "lead_id, account_id, vendor_id, and updated_by are required",
         });
         return;
       }
@@ -1371,14 +1370,16 @@ export class PaymentUploadController {
         console.warn("Could not parse upload_pdf_instance_ids");
       }
 
-      const result = await this.paymentUploadService.uploadMeasurementDocuments({
-        lead_id: Number(lead_id),
-        account_id: Number(account_id),
-        vendor_id: Number(vendor_id),
-        updated_by: Number(updated_by),
-        uploadPdf,
-        pdfFileInstanceIds,
-      });
+      const result = await this.paymentUploadService.uploadMeasurementDocuments(
+        {
+          lead_id: Number(lead_id),
+          account_id: Number(account_id),
+          vendor_id: Number(vendor_id),
+          updated_by: Number(updated_by),
+          uploadPdf,
+          pdfFileInstanceIds,
+        },
+      );
 
       res.status(200).json({
         success: true,

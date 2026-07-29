@@ -67,6 +67,7 @@ export const ModelName = {
   ScanAndPackItem: 'ScanAndPackItem',
   VendorTokens: 'VendorTokens',
   ClientMaster: 'ClientMaster',
+  ClientTypeMaster: 'ClientTypeMaster',
   LeadMaster: 'LeadMaster',
   LeadSpecificationsMaster: 'LeadSpecificationsMaster',
   LeadCarcassMaterialMapping: 'LeadCarcassMaterialMapping',
@@ -97,6 +98,7 @@ export const ModelName = {
   LeadOtherAppliancesMapping: 'LeadOtherAppliancesMapping',
   HandleTypeMaster: 'HandleTypeMaster',
   TimelineRule: 'TimelineRule',
+  specificationDocumentMapping: 'specificationDocumentMapping',
   LeadDocuments: 'LeadDocuments',
   LeadChatRoom: 'LeadChatRoom',
   LeadChatMember: 'LeadChatMember',
@@ -220,14 +222,21 @@ export const ModelName = {
   AdditionalCostMaster: 'AdditionalCostMaster',
   PurchaseIntentSupplierAdditionalCost: 'PurchaseIntentSupplierAdditionalCost',
   PurchaseOrderSupplierAdditionalCost: 'PurchaseOrderSupplierAdditionalCost',
+  ProjectBoxInfoField: 'ProjectBoxInfoField',
+  BoxInfoFieldValue: 'BoxInfoFieldValue',
   VendorTypeMaster: 'VendorTypeMaster',
-  CompanyVendorStatusMaster: 'CompanyVendorStatusMaster',
   CompanyVendorTypeMapping: 'CompanyVendorTypeMapping',
   CompanyVendorContactPerson: 'CompanyVendorContactPerson',
   CompanyVendorBankAccount: 'CompanyVendorBankAccount',
   CompanyVendorDocumentMaster: 'CompanyVendorDocumentMaster',
   CompanyVendorDocumentMapping: 'CompanyVendorDocumentMapping',
-  CompanyVendorAddress: 'CompanyVendorAddress'
+  CompanyVendorAddress: 'CompanyVendorAddress',
+  BroadcastMaster: 'BroadcastMaster',
+  BroadcastCategoryMaster: 'BroadcastCategoryMaster',
+  BroadcastAudienceMapping: 'BroadcastAudienceMapping',
+  BroadcastAttachment: 'BroadcastAttachment',
+  BroadcastRead: 'BroadcastRead',
+  NotificationQueue: 'NotificationQueue'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -276,9 +285,17 @@ export const VendorMasterScalarFieldEnum = {
   is_self_assign_task_type_master_enabed: 'is_self_assign_task_type_master_enabed',
   is_email_noti_enabled: 'is_email_noti_enabled',
   is_in_app_noti_enabled: 'is_in_app_noti_enabled',
+  is_broadcast_enabled: 'is_broadcast_enabled',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  state_id: 'state_id'
+  state_id: 'state_id',
+  gst_no: 'gst_no',
+  toll_free_no: 'toll_free_no',
+  website_link: 'website_link',
+  tag_line: 'tag_line',
+  address: 'address',
+  pincode: 'pincode',
+  city: 'city'
 } as const
 
 export type VendorMasterScalarFieldEnum = (typeof VendorMasterScalarFieldEnum)[keyof typeof VendorMasterScalarFieldEnum]
@@ -523,6 +540,7 @@ export type VendorTokensScalarFieldEnum = (typeof VendorTokensScalarFieldEnum)[k
 
 export const ClientMasterScalarFieldEnum = {
   id: 'id',
+  vendor_id: 'vendor_id',
   name: 'name',
   contact: 'contact',
   alt_contact: 'alt_contact',
@@ -532,10 +550,27 @@ export const ClientMasterScalarFieldEnum = {
   state: 'state',
   country: 'country',
   pincode: 'pincode',
-  clientCode: 'clientCode'
+  clientCode: 'clientCode',
+  gst_number: 'gst_number',
+  company_name: 'company_name',
+  client_type_id: 'client_type_id',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
 export type ClientMasterScalarFieldEnum = (typeof ClientMasterScalarFieldEnum)[keyof typeof ClientMasterScalarFieldEnum]
+
+
+export const ClientTypeMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  type: 'type',
+  is_active: 'is_active',
+  created_at: 'created_at'
+} as const
+
+export type ClientTypeMasterScalarFieldEnum = (typeof ClientTypeMasterScalarFieldEnum)[keyof typeof ClientTypeMasterScalarFieldEnum]
 
 
 export const LeadMasterScalarFieldEnum = {
@@ -549,6 +584,7 @@ export const LeadMasterScalarFieldEnum = {
   site_address: 'site_address',
   site_type_id: 'site_type_id',
   source_id: 'source_id',
+  refered_by: 'refered_by',
   archetech_name: 'archetech_name',
   archetech_number: 'archetech_number',
   architect_id: 'architect_id',
@@ -561,6 +597,7 @@ export const LeadMasterScalarFieldEnum = {
   assign_to: 'assign_to',
   assigned_by: 'assigned_by',
   account_id: 'account_id',
+  client_id: 'client_id',
   deleted_at: 'deleted_at',
   deleted_by: 'deleted_by',
   is_deleted: 'is_deleted',
@@ -625,6 +662,7 @@ export const LeadMasterScalarFieldEnum = {
   franchise_id: 'franchise_id',
   order_login_prod_files_remark: 'order_login_prod_files_remark',
   total_required_chs_manufacturing_days: 'total_required_chs_manufacturing_days',
+  order_number: 'order_number',
   is_blocked: 'is_blocked',
   lead_blocked_at: 'lead_blocked_at'
 } as const
@@ -638,6 +676,7 @@ export const LeadSpecificationsMasterScalarFieldEnum = {
   lead_id: 'lead_id',
   name: 'name',
   lights_remark: 'lights_remark',
+  item_code_id: 'item_code_id',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -979,6 +1018,19 @@ export const TimelineRuleScalarFieldEnum = {
 export type TimelineRuleScalarFieldEnum = (typeof TimelineRuleScalarFieldEnum)[keyof typeof TimelineRuleScalarFieldEnum]
 
 
+export const SpecificationDocumentMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  specs_id: 'specs_id',
+  document_id: 'document_id',
+  created_at: 'created_at',
+  created_by: 'created_by'
+} as const
+
+export type SpecificationDocumentMappingScalarFieldEnum = (typeof SpecificationDocumentMappingScalarFieldEnum)[keyof typeof SpecificationDocumentMappingScalarFieldEnum]
+
+
 export const LeadDocumentsScalarFieldEnum = {
   id: 'id',
   doc_og_name: 'doc_og_name',
@@ -993,6 +1045,7 @@ export const LeadDocumentsScalarFieldEnum = {
   doc_type_id: 'doc_type_id',
   is_deleted: 'is_deleted',
   tech_check_status: 'tech_check_status',
+  product_type_id: 'product_type_id',
   product_structure_instance_id: 'product_structure_instance_id'
 } as const
 
@@ -1189,7 +1242,8 @@ export const PaymentInfoScalarFieldEnum = {
   created_at: 'created_at',
   created_by: 'created_by',
   vendor_id: 'vendor_id',
-  payment_type_id: 'payment_type_id'
+  payment_type_id: 'payment_type_id',
+  product_type_id: 'product_type_id'
 } as const
 
 export type PaymentInfoScalarFieldEnum = (typeof PaymentInfoScalarFieldEnum)[keyof typeof PaymentInfoScalarFieldEnum]
@@ -1205,7 +1259,8 @@ export const LedgerScalarFieldEnum = {
   payment_date: 'payment_date',
   type: 'type',
   created_by: 'created_by',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  product_type_id: 'product_type_id'
 } as const
 
 export type LedgerScalarFieldEnum = (typeof LedgerScalarFieldEnum)[keyof typeof LedgerScalarFieldEnum]
@@ -1626,6 +1681,7 @@ export const LeadDetailedLogsScalarFieldEnum = {
   lead_id: 'lead_id',
   account_id: 'account_id',
   task_id: 'task_id',
+  product_type_id: 'product_type_id',
   action: 'action',
   action_type: 'action_type',
   history_type: 'history_type',
@@ -1702,7 +1758,7 @@ export const CompanyVendorsMasterScalarFieldEnum = {
   alternate_email: 'alternate_email',
   gst_no: 'gst_no',
   pan_no: 'pan_no',
-  status_id: 'status_id',
+  is_active: 'is_active',
   primary_contact_id: 'primary_contact_id',
   created_at: 'created_at',
   created_by: 'created_by',
@@ -3074,6 +3130,41 @@ export const PurchaseOrderSupplierAdditionalCostScalarFieldEnum = {
 export type PurchaseOrderSupplierAdditionalCostScalarFieldEnum = (typeof PurchaseOrderSupplierAdditionalCostScalarFieldEnum)[keyof typeof PurchaseOrderSupplierAdditionalCostScalarFieldEnum]
 
 
+export const ProjectBoxInfoFieldScalarFieldEnum = {
+  id: 'id',
+  project_id: 'project_id',
+  vendor_id: 'vendor_id',
+  field_label: 'field_label',
+  field_key: 'field_key',
+  field_type: 'field_type',
+  is_required: 'is_required',
+  sort_order: 'sort_order',
+  active: 'active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ProjectBoxInfoFieldScalarFieldEnum = (typeof ProjectBoxInfoFieldScalarFieldEnum)[keyof typeof ProjectBoxInfoFieldScalarFieldEnum]
+
+
+export const BoxInfoFieldValueScalarFieldEnum = {
+  id: 'id',
+  box_id: 'box_id',
+  project_id: 'project_id',
+  vendor_id: 'vendor_id',
+  field_id: 'field_id',
+  field_value: 'field_value',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type BoxInfoFieldValueScalarFieldEnum = (typeof BoxInfoFieldValueScalarFieldEnum)[keyof typeof BoxInfoFieldValueScalarFieldEnum]
+
+
 export const VendorTypeMasterScalarFieldEnum = {
   id: 'id',
   vendor_type_name: 'vendor_type_name',
@@ -3087,21 +3178,6 @@ export const VendorTypeMasterScalarFieldEnum = {
 } as const
 
 export type VendorTypeMasterScalarFieldEnum = (typeof VendorTypeMasterScalarFieldEnum)[keyof typeof VendorTypeMasterScalarFieldEnum]
-
-
-export const CompanyVendorStatusMasterScalarFieldEnum = {
-  id: 'id',
-  status_name: 'status_name',
-  created_at: 'created_at',
-  created_by: 'created_by',
-  updated_at: 'updated_at',
-  updated_by: 'updated_by',
-  deleted_at: 'deleted_at',
-  deleted_by: 'deleted_by',
-  is_deleted: 'is_deleted'
-} as const
-
-export type CompanyVendorStatusMasterScalarFieldEnum = (typeof CompanyVendorStatusMasterScalarFieldEnum)[keyof typeof CompanyVendorStatusMasterScalarFieldEnum]
 
 
 export const CompanyVendorTypeMappingScalarFieldEnum = {
@@ -3215,6 +3291,103 @@ export const CompanyVendorAddressScalarFieldEnum = {
 } as const
 
 export type CompanyVendorAddressScalarFieldEnum = (typeof CompanyVendorAddressScalarFieldEnum)[keyof typeof CompanyVendorAddressScalarFieldEnum]
+
+
+export const BroadcastMasterScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  status: 'status',
+  type: 'type',
+  category_id: 'category_id',
+  publish_at: 'publish_at',
+  vendor_id: 'vendor_id',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type BroadcastMasterScalarFieldEnum = (typeof BroadcastMasterScalarFieldEnum)[keyof typeof BroadcastMasterScalarFieldEnum]
+
+
+export const BroadcastCategoryMasterScalarFieldEnum = {
+  id: 'id',
+  category: 'category',
+  type: 'type',
+  vendor_id: 'vendor_id',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type BroadcastCategoryMasterScalarFieldEnum = (typeof BroadcastCategoryMasterScalarFieldEnum)[keyof typeof BroadcastCategoryMasterScalarFieldEnum]
+
+
+export const BroadcastAudienceMappingScalarFieldEnum = {
+  id: 'id',
+  broadcast_id: 'broadcast_id',
+  audience_type: 'audience_type',
+  target_id: 'target_id',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type BroadcastAudienceMappingScalarFieldEnum = (typeof BroadcastAudienceMappingScalarFieldEnum)[keyof typeof BroadcastAudienceMappingScalarFieldEnum]
+
+
+export const BroadcastAttachmentScalarFieldEnum = {
+  id: 'id',
+  broadcast_id: 'broadcast_id',
+  attachment_type: 'attachment_type',
+  title: 'title',
+  file_name: 'file_name',
+  original_file_name: 'original_file_name',
+  file_url: 'file_url',
+  file_type: 'file_type',
+  file_size: 'file_size',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type BroadcastAttachmentScalarFieldEnum = (typeof BroadcastAttachmentScalarFieldEnum)[keyof typeof BroadcastAttachmentScalarFieldEnum]
+
+
+export const BroadcastReadScalarFieldEnum = {
+  id: 'id',
+  broadcast_id: 'broadcast_id',
+  user_id: 'user_id',
+  read_at: 'read_at',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type BroadcastReadScalarFieldEnum = (typeof BroadcastReadScalarFieldEnum)[keyof typeof BroadcastReadScalarFieldEnum]
+
+
+export const NotificationQueueScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  body: 'body',
+  redirect_url: 'redirect_url',
+  image: 'image',
+  notification_source: 'notification_source',
+  notification_status: 'notification_status',
+  send_at: 'send_at',
+  request_body: 'request_body',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type NotificationQueueScalarFieldEnum = (typeof NotificationQueueScalarFieldEnum)[keyof typeof NotificationQueueScalarFieldEnum]
 
 
 export const SortOrder = {

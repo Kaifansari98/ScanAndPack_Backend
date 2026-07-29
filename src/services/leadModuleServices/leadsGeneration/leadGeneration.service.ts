@@ -37,7 +37,6 @@ import {
 } from "../../email/brevoEmail.service";
 import { sendBrevoEmail } from "../../email/brevoEmail.service";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
-import { sanitizeFilename } from "../../../utils/fileUtils";
 
 type TxClient = Prisma.TransactionClient | typeof prisma;
 
@@ -193,6 +192,7 @@ export const createLeadService = async (
     site_type_id,
     status_id,
     source_id,
+    refered_by,
     archetech_name,
     architect_id,
     archetech_number,
@@ -207,6 +207,8 @@ export const createLeadService = async (
     product_structures = [],
     product_structure_instances = [],
     initial_site_measurement_date,
+    client_id,
+    order_number,
   } = payload;
 
   const transactionResult = await prisma.$transaction(
@@ -234,6 +236,17 @@ export const createLeadService = async (
 
         if (!franchise) {
           throw new Error("Invalid franchise_id for the given vendor_id.");
+        }
+
+        if (client_id) {
+          const client = await tx.clientMaster.findFirst({
+            where: { id: client_id, vendor_id },
+            select: { id: true },
+          });
+
+          if (!client) {
+            throw new Error("Invalid client_id for the given vendor_id.");
+          }
         }
 
         if (!payload.is_draft) {
@@ -321,6 +334,7 @@ export const createLeadService = async (
           site_type_id,
           status_id,
           source_id,
+          refered_by: refered_by?.trim() || null,
           archetech_name,
           architect_id: architect_id ? Number(architect_id) : null,
           archetech_number,
@@ -334,6 +348,8 @@ export const createLeadService = async (
           assigned_by,
           initial_site_measurement_date,
           is_draft: !!payload.is_draft,
+          client_id: client_id ?? null,
+          order_number: order_number || null,
         };
 
         const lead = await tx.leadMaster.create({
@@ -1316,31 +1332,38 @@ export const assignDesignerToLead = async (
       select: { is_this_vendor_is_custom_usertype_only: true },
     });
 
-    if (vendor?.is_this_vendor_is_custom_usertype_only !== true) {
-      throw new Error("Designer assignment is available only for custom-user-type vendors");
-    }
-
     const designerUser = await tx.userMaster.findFirst({
       where: {
         id: data.assign_to_user_id,
         vendor_id: data.vendor_id,
         status: "active",
         ...(lead.franchise_id ? { franchise_id: lead.franchise_id } : {}),
-        user_type: {
-          user_type: {
-            equals: "custom",
-            mode: "insensitive",
-          },
-        },
-        userPrivilegeMappings: {
-          some: {
-            is_allowed: true,
-            privilege: {
-              code: requiredPrivilegeCode,
-              is_active: true,
-            },
-          },
-        },
+        ...(vendor?.is_this_vendor_is_custom_usertype_only === true
+          ? {
+              user_type: {
+                user_type: {
+                  equals: "custom",
+                  mode: "insensitive",
+                },
+              },
+              userPrivilegeMappings: {
+                some: {
+                  is_allowed: true,
+                  privilege: {
+                    code: requiredPrivilegeCode,
+                    is_active: true,
+                  },
+                },
+              },
+            }
+          : {
+              user_type: {
+                user_type: {
+                  equals: "designer",
+                  mode: "insensitive",
+                },
+              },
+            }),
       },
       select: {
         id: true,
@@ -2153,6 +2176,9 @@ export const updateLeadService = async (
     designer_remark,
     updated_by,
     initial_site_measurement_date,
+    client_id,
+    order_number,
+    refered_by,
   } = payload;
 
   const result = await prisma.$transaction(async (tx) => {
@@ -2243,6 +2269,10 @@ export const updateLeadService = async (
       leadUpdateData.archetech_number = archetech_number;
     if (designer_remark !== undefined)
       leadUpdateData.designer_remark = designer_remark;
+    if (client_id !== undefined)
+      leadUpdateData.client_id = client_id ? Number(client_id) : null;
+    if (order_number !== undefined) leadUpdateData.order_number = order_number;
+    if (refered_by !== undefined) leadUpdateData.refered_by = refered_by;
 
     const updatedLead = await tx.leadMaster.update({
       where: { id: leadId },
@@ -2770,6 +2800,50 @@ export const getSalesExecutivesByVendor = async (
 
     const normalizedAssigneeUserType =
       options?.assigneeUserType?.trim().toLowerCase() ?? null;
+
+    if (normalizedAssigneeUserType === "designer") {
+      const designers = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+          status: "active",
+          ...(franchiseId !== undefined ? { franchise_id: franchiseId } : {}),
+          user_type: {
+            user_type: { equals: "designer", mode: "insensitive" },
+          },
+        },
+        include: {
+          user_type: true,
+          documents: true,
+        },
+        orderBy: {
+          created_at: "desc",
+        },
+      });
+
+      console.log(`[SERVICE] Found ${designers.length} eligible designers`);
+
+      return designers.map((user) => ({
+        id: user.id,
+        vendor_id: user.vendor_id,
+        user_name: user.user_name,
+        user_contact: user.user_contact,
+        user_email: user.user_email,
+        user_timezone: user.user_timezone,
+        status: user.status,
+        created_at: user.created_at,
+        updated_at: user.updated_at,
+        user_type: {
+          id: user.user_type.id,
+          user_type: user.user_type.user_type,
+        },
+        documents: user.documents.map((doc) => ({
+          id: doc.id,
+          document_name: doc.document_name,
+          document_number: doc.document_number,
+          filename: doc.filename,
+        })),
+      }));
+    }
 
     if (normalizedAssigneeUserType === "custom") {
       const customUsers = await prisma.userMaster.findMany({
@@ -3942,55 +4016,6 @@ export const updateLeadStageService = async (
         stage_id: newStatusId, // Explicity set the stage_id for the log
       });
 
-      // On moving to the Designing stage, create a specifications entry —
-      // but only for vendors that handle large scale projects.
-      if (statusType.tag === "Type 3") {
-        const vendor = await tx.vendorMaster.findUnique({
-          where: { id: vendorId },
-          select: { handlesLargeScaleProjects: true },
-        });
-
-        if (vendor?.handlesLargeScaleProjects === true) {
-          const existingSpecificationCount =
-            await tx.leadSpecificationsMaster.count({
-              where: { vendor_id: vendorId, lead_id: leadId },
-            });
-
-          if (existingSpecificationCount === 0) {
-            const leadProductMapping = await tx.leadProductMapping.findFirst({
-              where: { vendor_id: vendorId, lead_id: leadId },
-              orderBy: { id: "asc" },
-              select: { productType: { select: { type: true } } },
-            });
-
-            const clientNameSegment = sanitizeFilename(
-              `${existingLead.firstname ?? ""}${existingLead.lastname ?? ""}` ||
-                "Client",
-            );
-            const itemGroupSegment = sanitizeFilename(
-              leadProductMapping?.productType?.type || "General",
-            );
-            const now = new Date();
-            const dateSegment = [
-              now.getFullYear(),
-              String(now.getMonth() + 1).padStart(2, "0"),
-              String(now.getDate()).padStart(2, "0"),
-            ].join("-");
-
-            const specificationName = `S${existingSpecificationCount}-${clientNameSegment}-${itemGroupSegment}-${dateSegment}`;
-
-            await tx.leadSpecificationsMaster.create({
-              data: {
-                vendor_id: vendorId,
-                lead_id: leadId,
-                name: specificationName,
-                created_by: userId,
-              },
-            });
-          }
-        }
-      }
-
       return updatedLead;
     });
 
@@ -4000,4 +4025,3 @@ export const updateLeadStageService = async (
     throw new Error(error.message || "Failed to update lead stage");
   }
 };
-

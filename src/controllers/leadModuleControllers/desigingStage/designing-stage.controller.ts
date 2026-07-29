@@ -45,6 +45,93 @@ const isValidMeetingTime = (value?: string): boolean =>
   typeof value === "string" && meetingTimePattern.test(value);
 
 export class DesigingStageController {
+  private static normalizeSpecItemCodeId(value: number | null | undefined) {
+    return value ?? -1;
+  }
+
+  private static async getActorRole(
+    req: Request,
+    fallbackUserId?: number | null,
+  ) {
+    const requestUserId = Number((req as any)?.user?.id);
+    const resolvedUserId =
+      (Number.isFinite(requestUserId) && requestUserId > 0
+        ? requestUserId
+        : undefined) ??
+      (fallbackUserId && Number.isFinite(fallbackUserId) && fallbackUserId > 0
+        ? fallbackUserId
+        : undefined);
+
+    if (!resolvedUserId) {
+      return null;
+    }
+
+    const actor = await prisma.userMaster.findUnique({
+      where: { id: resolvedUserId },
+      select: {
+        id: true,
+        user_type: {
+          select: {
+            user_type: true,
+          },
+        },
+      },
+    });
+
+    return actor?.user_type?.user_type?.toLowerCase() ?? null;
+  }
+
+  private static async ensureSpecificationEditable(
+    req: Request,
+    specificationId: number,
+    fallbackUserId?: number | null,
+  ) {
+    const specification = await prisma.leadSpecificationsMaster.findUnique({
+      where: { id: specificationId },
+      select: {
+        id: true,
+        vendor_id: true,
+        lead_id: true,
+        item_code_id: true,
+        created_at: true,
+      },
+    });
+
+    if (!specification) {
+      throw new Error("Specification not found");
+    }
+
+    const actorRole = await DesigingStageController.getActorRole(
+      req,
+      fallbackUserId,
+    );
+
+    if (actorRole === "super-admin") {
+      return specification;
+    }
+
+    const latestSpecification = await prisma.leadSpecificationsMaster.findFirst({
+      where: {
+        vendor_id: specification.vendor_id,
+        lead_id: specification.lead_id,
+        item_code_id: specification.item_code_id,
+      },
+      orderBy: [
+        { created_at: "desc" },
+        { id: "desc" },
+      ],
+      select: { id: true },
+    });
+
+    if (!latestSpecification || latestSpecification.id !== specification.id) {
+      throw new Error(
+        "Only the latest specification for this item code can be edited",
+      );
+    }
+
+    return specification;
+  }
+
   public static async addToDesigingStage(req: Request, res: Response) {
     try {
       // ✅ Validate
@@ -1005,6 +1092,14 @@ export class DesigingStageController {
           });
           const useCustomVendorFlow =
             vendor?.is_this_vendor_is_custom_usertype_only === true;
+          const selectedDesignType =
+            typeof req.body.design_type === "string"
+              ? req.body.design_type.trim()
+              : "";
+
+          if (useCustomVendorFlow && !selectedDesignType) {
+            throw new Error("Design type is required");
+          }
           const requestedInstanceIds = Array.isArray(rawInstanceIds)
             ? rawInstanceIds
             : typeof rawInstanceIds === "string" && rawInstanceIds.length > 0
@@ -1066,6 +1161,7 @@ export class DesigingStageController {
 
           const newDocs: any[] = [];
           let nextRevision = 0;
+          let designTypeSegment = "";
           let clientNameSegment = "";
           let structureSegment = "";
           let dateSegment = "";
@@ -1093,12 +1189,19 @@ export class DesigingStageController {
             )
               .replace(/_+/g, "_")
               .slice(0, 50);
+            designTypeSegment =
+              selectedDesignType === "2D + 3D"
+                ? ""
+                : sanitizeFilename(selectedDesignType)
+                    .replace(/_+/g, "_")
+                    .slice(0, 20);
             const now = new Date();
             dateSegment = [
               now.getFullYear(),
               String(now.getMonth() + 1).padStart(2, "0"),
               String(now.getDate()).padStart(2, "0"),
             ].join("-");
+
             const existingDesignDocs = await tx.leadDocuments.findMany({
               where: {
                 vendor_id: Number(vendorId),
@@ -1108,30 +1211,69 @@ export class DesigingStageController {
               },
               select: { doc_og_name: true },
             });
+
             nextRevision =
               existingDesignDocs.reduce((maxRevision, doc) => {
-                const match = doc.doc_og_name?.match(/^(?:\[[^\]]+\]\s*)?[DR](\d+)-/i);
-                const revision = match ? Number(match[1]) : -1;
+                const match = doc.doc_og_name?.match(
+                  /^D(\d+)_([^_]+)_(.+?)(?:\.[^.]+)?$/i,
+                );
+                if (!match) {
+                  return maxRevision;
+                }
+
+                const [, revisionText, existingDesignType = "", nameBody = ""] = match;
+                if (existingDesignType.trim().toLowerCase() !== designTypeSegment.toLowerCase()) {
+                  return maxRevision;
+                }
+
+                const isSameProductType =
+                  nameBody.includes(`_${structureSegment}_`) ||
+                  nameBody.endsWith(`_${structureSegment}`) ||
+                  nameBody.startsWith(`${structureSegment}_`);
+
+                if (!isSameProductType) {
+                  return maxRevision;
+                }
+
+                const revision = Number(revisionText);
                 return Number.isFinite(revision)
                   ? Math.max(maxRevision, revision)
                   : maxRevision;
               }, -1) + 1;
 
-            instanceIdToPersist =
-              selectedInstances.length === 1 ? selectedInstances[0].id : null;
+            if (selectedInstances.length === 1) {
+              instanceIdToPersist = selectedInstances[0].id;
+            } else if (selectedInstances.length > 1) {
+              const uniqueSelectedProductTypes = [
+                ...new Set(
+                  selectedInstances
+                    .map((instance) => instance.productType?.type?.trim())
+                    .filter(Boolean),
+                ),
+              ];
+
+              instanceIdToPersist =
+                uniqueSelectedProductTypes.length === 1
+                  ? selectedInstances[0].id
+                  : null;
+            } else {
+              instanceIdToPersist = null;
+            }
           }
 
           // 3️⃣ DB insert
           for (const file of files) {
-            const designTypePrefix = req.body.design_type ? `[${req.body.design_type}] ` : '';
-            const finalOriginalName = designTypePrefix + (useCustomVendorFlow
+            const finalOriginalName = useCustomVendorFlow
               ? (() => {
                 const extension = path.extname(file.originalname || "");
-                const renamedOriginalName = `D${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+                const designTypePrefix = designTypeSegment
+                  ? `${designTypeSegment}_`
+                  : "";
+                const renamedOriginalName = `D${nextRevision}_${designTypePrefix}${clientNameSegment}_${structureSegment}_${dateSegment}${extension}`;
                 nextRevision += 1;
                 return renamedOriginalName;
               })()
-              : file.originalname);
+              : file.originalname;
             const sysName = await uploadToWasabStage1DesingsFile(
               file.path,
               Number(vendorId),
@@ -1206,8 +1348,9 @@ export class DesigingStageController {
 
   public static async uploadCostingFile(req: Request, res: Response) {
     try {
-      const { vendorId, leadId, userId } = req.body;
+      const { vendorId, leadId, userId, specification_id } = req.body;
       const rawInstanceIds = req.body.product_structure_instance_ids;
+      const specId = specification_id ? Number(specification_id) : null;
 
       if (!req.files || (req.files as Express.Multer.File[]).length === 0) {
         return res.status(400).json({
@@ -1404,6 +1547,18 @@ export class DesigingStageController {
               },
             });
 
+            if (specId) {
+              await tx.specificationDocumentMapping.create({
+                data: {
+                  vendor_id: Number(vendorId),
+                  lead_id: Number(leadId),
+                  specs_id: specId,
+                  document_id: doc.id,
+                  created_by: Number(userId),
+                },
+              });
+            }
+
             newDocs.push(doc);
           }
 
@@ -1519,6 +1674,13 @@ export class DesigingStageController {
           documentType: {
             select: { id: true, type: true, tag: true },
           },
+          specificationDocumentMappings: {
+            select: {
+              specification: {
+                select: { id: true, name: true },
+              },
+            },
+          },
           createdBy: {
             select: {
               id: true,
@@ -1532,8 +1694,21 @@ export class DesigingStageController {
 
       const documentsWithSignedUrls = await Promise.all(
         documents.map(async (doc: any) => {
-          const signedUrl = await generateSignedUrl(doc.doc_sys_name);
-          return { ...doc, signedUrl };
+          let signedUrl: string | null = null;
+          try {
+            if (doc.doc_sys_name) {
+              signedUrl = await generateSignedUrl(doc.doc_sys_name);
+            }
+          } catch (error: any) {
+            console.error("getCostingFileDocuments signed URL error:", {
+              docId: doc.id,
+              docSysName: doc.doc_sys_name,
+              message: error?.message || String(error),
+            });
+          }
+          const specification = doc.specificationDocumentMappings?.[0]?.specification || null;
+          const { specificationDocumentMappings, ...rest } = doc;
+          return { ...rest, specification, signedUrl };
         }),
       );
 
@@ -3228,13 +3403,51 @@ export class DesigingStageController {
           vendor_id: Number(vendorId),
           lead_id: Number(leadId),
         },
+        include: {
+          productItemCode: {
+            select: { id: true, item_code: true },
+          },
+        },
         orderBy: { created_at: "asc" },
+      });
+
+      const actorRole = await DesigingStageController.getActorRole(req);
+      const latestSpecByItemCode = new Map<number, number>();
+
+      [...specifications]
+        .sort((a, b) => {
+          const timeDiff =
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+          return timeDiff !== 0 ? timeDiff : b.id - a.id;
+        })
+        .forEach((specification) => {
+          const key = DesigingStageController.normalizeSpecItemCodeId(
+            specification.item_code_id,
+          );
+          if (!latestSpecByItemCode.has(key)) {
+            latestSpecByItemCode.set(key, specification.id);
+          }
+        });
+
+      const specificationsWithMeta = specifications.map((specification) => {
+        const key = DesigingStageController.normalizeSpecItemCodeId(
+          specification.item_code_id,
+        );
+        const isLatestForItemCode =
+          latestSpecByItemCode.get(key) === specification.id;
+
+        return {
+          ...specification,
+          is_latest_for_item_code: isLatestForItemCode,
+          is_editable:
+            actorRole === "super-admin" ? true : isLatestForItemCode,
+        };
       });
 
       return res.status(200).json({
         success: true,
         message: "Lead specifications fetched successfully",
-        data: specifications,
+        data: specificationsWithMeta,
       });
     } catch (error: any) {
       console.error("Error fetching lead specifications:", error);
@@ -3249,7 +3462,7 @@ export class DesigingStageController {
   public static async createLeadSpecification(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
-      const { created_by } = req.body;
+      const { created_by, item_code_id } = req.body;
 
       if (!vendorId || !leadId || !created_by) {
         return res.status(400).json({
@@ -3267,8 +3480,49 @@ export class DesigingStageController {
           throw new Error("Lead not found or access denied");
         }
 
+        let existingItemCode: { id: number; item_code: string } | null = null;
+        if (item_code_id) {
+          existingItemCode = await tx.productItemCode.findFirst({
+            where: { id: Number(item_code_id), vendor_id: Number(vendorId) },
+            select: { id: true, item_code: true },
+          });
+
+          if (!existingItemCode) {
+            throw new Error("Item code not found or access denied");
+          }
+        }
+
         const existingCount = await tx.leadSpecificationsMaster.count({
           where: { vendor_id: Number(vendorId), lead_id: Number(leadId) },
+        });
+
+        const previousLatestSpecification = await tx.leadSpecificationsMaster.findFirst({
+          where: {
+            vendor_id: Number(vendorId),
+            lead_id: Number(leadId),
+            item_code_id: item_code_id ? Number(item_code_id) : null,
+          },
+          orderBy: [
+            { created_at: "desc" },
+            { id: "desc" },
+          ],
+          include: {
+            lightCarcasUnitMappings: {
+              select: {
+                light_carcas_unit_master_id: true,
+              },
+            },
+            otherAppliancesMappings: {
+              select: {
+                other_appliances_master_id: true,
+              },
+            },
+            specificationDocumentMappings: {
+              select: {
+                document_id: true,
+              },
+            },
+          },
         });
 
         const leadProductMapping = await tx.leadProductMapping.findFirst({
@@ -3282,7 +3536,9 @@ export class DesigingStageController {
             "Client",
         );
         const itemGroupSegment = sanitizeFilename(
-          leadProductMapping?.productType?.type || "General",
+          existingItemCode?.item_code ||
+            leadProductMapping?.productType?.type ||
+            "General",
         );
         const now = new Date();
         const dateSegment = [
@@ -3293,14 +3549,73 @@ export class DesigingStageController {
 
         const specificationName = `S${existingCount}-${clientNameSegment}-${itemGroupSegment}-${dateSegment}`;
 
-        return tx.leadSpecificationsMaster.create({
+        const createdSpecification = await tx.leadSpecificationsMaster.create({
           data: {
             vendor_id: Number(vendorId),
             lead_id: Number(leadId),
             name: specificationName,
             created_by: Number(created_by),
+            item_code_id: item_code_id ? Number(item_code_id) : undefined,
+            lights_remark: previousLatestSpecification?.lights_remark ?? undefined,
+          },
+          include: {
+            productItemCode: {
+              select: { id: true, item_code: true },
+            },
           },
         });
+
+        if (previousLatestSpecification) {
+          if (previousLatestSpecification.lightCarcasUnitMappings.length > 0) {
+            await tx.leadLightCarcasUnitMapping.createMany({
+              data: previousLatestSpecification.lightCarcasUnitMappings.map(
+                (mapping) => ({
+                  vendor_id: Number(vendorId),
+                  lead_id: Number(leadId),
+                  specs_id: createdSpecification.id,
+                  light_carcas_unit_master_id:
+                    mapping.light_carcas_unit_master_id,
+                  created_by: Number(created_by),
+                }),
+              ),
+            });
+          }
+
+          if (previousLatestSpecification.otherAppliancesMappings.length > 0) {
+            await tx.leadOtherAppliancesMapping.createMany({
+              data: previousLatestSpecification.otherAppliancesMappings.map(
+                (mapping) => ({
+                  vendor_id: Number(vendorId),
+                  lead_id: Number(leadId),
+                  specs_id: createdSpecification.id,
+                  other_appliances_master_id:
+                    mapping.other_appliances_master_id,
+                  created_by: Number(created_by),
+                }),
+              ),
+            });
+          }
+
+          if (previousLatestSpecification.specificationDocumentMappings.length > 0) {
+            await tx.specificationDocumentMapping.createMany({
+              data: previousLatestSpecification.specificationDocumentMappings.map(
+                (mapping) => ({
+                  vendor_id: Number(vendorId),
+                  lead_id: Number(leadId),
+                  specs_id: createdSpecification.id,
+                  document_id: mapping.document_id,
+                  created_by: Number(created_by),
+                }),
+              ),
+            });
+          }
+        }
+
+        return {
+          ...createdSpecification,
+          is_latest_for_item_code: true,
+          is_editable: true,
+        };
       });
 
       return res.status(201).json({
@@ -3338,6 +3653,8 @@ export class DesigingStageController {
           message: `specsId is required and lights_remark must be one of: ${allowedValues.join(", ")}`,
         });
       }
+
+      await DesigingStageController.ensureSpecificationEditable(req, specsId);
 
       const specification = await prisma.leadSpecificationsMaster.update({
         where: { id: specsId },
@@ -3839,6 +4156,12 @@ export class DesigingStageController {
         });
       }
 
+      await DesigingStageController.ensureSpecificationEditable(
+        req,
+        specsId,
+        createdBy,
+      );
+
       const data = {
         vendor_id: vendorId,
         lead_id: leadId,
@@ -3973,6 +4296,12 @@ export class DesigingStageController {
             "vendor_id, lead_id, specs_id, other_appliances_master_id and created_by are required",
         });
       }
+
+      await DesigingStageController.ensureSpecificationEditable(
+        req,
+        specsId,
+        createdBy,
+      );
 
       const data = {
         vendor_id: vendorId,
