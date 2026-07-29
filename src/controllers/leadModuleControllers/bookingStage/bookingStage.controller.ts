@@ -72,6 +72,7 @@ export class BookingStageController {
         account_id,
         vendor_id,
         created_by,
+        product_type_id,
         client_id,
         bookingAmount,
         bookingAmountPaymentDetailsText,
@@ -155,6 +156,19 @@ export class BookingStageController {
         return;
       }
 
+      if (
+        typeof product_type_id !== "undefined" &&
+        product_type_id !== null &&
+        (!Number.isFinite(Number(product_type_id)) ||
+          Number(product_type_id) <= 0)
+      ) {
+        res.status(400).json({
+          success: false,
+          message: "product_type_id must be a valid positive number",
+        });
+        return;
+      }
+
       const uploadedFinalDocuments: UploadedFileRef[] = [];
 
       for (const file of finalDocuments) {
@@ -200,6 +214,10 @@ export class BookingStageController {
         account_id: parseInt(account_id),
         vendor_id: parseInt(vendor_id),
         created_by: parseInt(created_by),
+        product_type_id:
+          product_type_id && Number(product_type_id) > 0
+            ? parseInt(product_type_id)
+            : undefined,
         client_id: client_id ? parseInt(client_id) : undefined,
         bookingAmount: parseFloat(bookingAmount),
         mrpValue: parseFloat(mrpValue),

@@ -5,6 +5,7 @@ export interface CreateBookingStageDto {
   account_id: number;
   vendor_id: number;
   created_by: number;
+  product_type_id?: number;
   client_id?: number;
   bookingAmount: number;
   bookingAmountPaymentDetailsText?: string;
@@ -12,6 +13,7 @@ export interface CreateBookingStageDto {
   siteSupervisorId?: number;
   mrpValue: number;
   baseUrl: string;
+  scopedInstanceIds?: number[];
   // Files
   finalDocuments: UploadedFileRef[];
   bookingAmountPaymentDetailsFile?: UploadedFileRef;

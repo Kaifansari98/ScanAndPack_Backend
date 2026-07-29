@@ -294,8 +294,37 @@ export class BookingStageService {
           documentsUploaded: [],
           paymentInfo: null,
           supervisorAssigned: null,
+          productTypeId: data.product_type_id ?? null,
+          scopedInstanceIds: [] as number[],
           message: "Booking stage completed successfully",
         };
+
+        let scopedInstanceIds: number[] = [];
+        if (data.product_type_id) {
+          const scopedInstances = await tx.leadProductStructureInstance.findMany({
+            where: {
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+              product_type_id: data.product_type_id,
+            },
+            select: {
+              id: true,
+            },
+          });
+
+          if (scopedInstances.length === 0) {
+            throw new Error(
+              `No product structure instances found for lead ${data.lead_id} and product_type_id ${data.product_type_id}`,
+            );
+          }
+
+          scopedInstanceIds = scopedInstances.map((instance: { id: number }) => instance.id);
+          data.scopedInstanceIds = scopedInstanceIds;
+          response.scopedInstanceIds = scopedInstanceIds;
+        }
+
+        const singleScopedInstanceId =
+          scopedInstanceIds.length === 1 ? scopedInstanceIds[0] : undefined;
 
         // 1. Upload Final Documents (mandatory)
         if (!data.finalDocuments || data.finalDocuments.length === 0) {
@@ -321,6 +350,9 @@ export class BookingStageService {
               account_id: data.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
+              ...(singleScopedInstanceId
+                ? { product_structure_instance_id: singleScopedInstanceId }
+                : {}),
             },
           });
 
@@ -368,6 +400,9 @@ export class BookingStageService {
               account_id: data.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
+              ...(singleScopedInstanceId
+                ? { product_structure_instance_id: singleScopedInstanceId }
+                : {}),
             },
           });
 
