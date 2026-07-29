@@ -183,7 +183,7 @@ export class BroadcastController {
       const id = parseInt(String(req.params.id));
       if (isNaN(id)) return res.status(400).json({ success: false, message: "Invalid broadcast ID" });
 
-      const data = await this.service.getById(id);
+      const data = await this.service.getById(id, user);
       return res.status(200).json({ success: true, data });
     } catch (err: any) {
       return res.status(err.statusCode || 500).json({ success: false, message: err.message || "Something went wrong" });

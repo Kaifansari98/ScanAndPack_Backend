@@ -21,6 +21,51 @@ async function getSuperAdminUserTypeIds(): Promise<number[]> {
   }
 }
 
+/**
+ * Returns true if the user (identified by userId / userTypeId / franchiseId)
+ * belongs to the target audience of a broadcast.
+ *
+ * Rules (mirrors cron.ts audience resolution):
+ *  - ALL          → everyone
+ *  - USER         → exact user match
+ *  - ROLE only    → user_type_id must match
+ *  - FRANCHISE only → franchise_id must match
+ *  - ROLE + FRANCHISE → user must match BOTH
+ */
+function isUserInAudience(
+  audiences: Array<{ audience_type: string; target_id: number | null }>,
+  userId: number,
+  userTypeId: number | null | undefined,
+  franchiseId: number | null | undefined
+): boolean {
+  if (!audiences || audiences.length === 0) return true; // no restrictions
+
+  if (audiences.some((a) => a.audience_type === "ALL")) return true;
+
+  // Specific user match
+  if (audiences.some((a) => a.audience_type === "USER" && a.target_id === userId)) return true;
+
+  const franchiseAudiences = audiences.filter((a) => a.audience_type === "FRANCHISE" && a.target_id);
+  const roleAudiences = audiences.filter((a) => a.audience_type === "ROLE" && a.target_id);
+
+  if (franchiseAudiences.length > 0 && roleAudiences.length > 0) {
+    // AND logic: must match BOTH franchise AND role
+    const matchesFranchise = !!franchiseId && franchiseAudiences.some((a) => a.target_id === franchiseId);
+    const matchesRole = !!userTypeId && roleAudiences.some((a) => a.target_id === userTypeId);
+    return matchesFranchise && matchesRole;
+  }
+
+  if (franchiseAudiences.length > 0) {
+    return !!franchiseId && franchiseAudiences.some((a) => a.target_id === franchiseId);
+  }
+
+  if (roleAudiences.length > 0) {
+    return !!userTypeId && roleAudiences.some((a) => a.target_id === userTypeId);
+  }
+
+  return false;
+}
+
 function stripHtmlAndEntitiesBackend(html: string): string {
   if (!html) return "";
   return html
@@ -196,13 +241,40 @@ export class BroadcastService {
 
   // ─── GET ONE ───────────────────────────────────────────────────────────────
 
-  async getById(id: number) {
+  async getById(
+    id: number,
+    currentUser?: { id: number; user_type_id?: number; franchise_id?: number }
+  ) {
     const broadcast = await this.repository.findById(id);
     if (!broadcast) {
       const err = new Error(`Broadcast with id ${id} not found`);
       (err as any).statusCode = 404;
       throw err;
     }
+
+    if (currentUser) {
+      const superAdmin = await isSuperAdminUser(currentUser.id);
+      if (!superAdmin) {
+        const userRecord = await prisma.userMaster.findUnique({
+          where: { id: currentUser.id },
+          select: { id: true, user_type_id: true, franchise_id: true },
+        });
+
+        const inAudience = isUserInAudience(
+          (broadcast as any).audiences || [],
+          currentUser.id,
+          userRecord?.user_type_id ?? currentUser.user_type_id,
+          userRecord?.franchise_id ?? currentUser.franchise_id
+        );
+
+        if (!inAudience) {
+          const err = new Error(`Broadcast with id ${id} not found`);
+          (err as any).statusCode = 404;
+          throw err;
+        }
+      }
+    }
+
     const [enriched] = await this.enrichBroadcastData([broadcast]);
 
     let sentCount = 0;
@@ -252,7 +324,10 @@ export class BroadcastService {
   ) {
     let audience: { userId: number; userTypeId?: number; franchiseId?: number; createdAt?: Date } | undefined;
 
-    if (filters.forMe) {
+    const superAdmin = await isSuperAdminUser(currentUser.id);
+
+    // Always enforce audience filtering for non-superadmins (or when forMe=true)
+    if (filters.forMe || !superAdmin) {
       const userRecord = await prisma.userMaster.findUnique({
         where: { id: currentUser.id },
         select: { id: true, user_type_id: true, franchise_id: true, created_at: true },
@@ -573,7 +648,7 @@ export class BroadcastService {
   async markRead(broadcastId: number, userId: number) {
     const broadcast = await prisma.broadcastMaster.findUnique({
       where: { id: broadcastId },
-      select: { created_at: true, publish_at: true },
+      select: { created_at: true, publish_at: true, audiences: true },
     });
     if (!broadcast) {
       const err = new Error(`Broadcast with id ${broadcastId} not found`);
@@ -587,18 +662,37 @@ export class BroadcastService {
     if (!superAdmin) {
       const user = await prisma.userMaster.findUnique({
         where: { id: userId },
-        select: { created_at: true },
+        select: { created_at: true, user_type_id: true, franchise_id: true },
       });
+
       const effectivePublishDate = broadcast.publish_at || broadcast.created_at;
       const isUserCreatedAfterPublish =
         user?.created_at && effectivePublishDate && user.created_at > effectivePublishDate;
 
       if (!isUserCreatedAfterPublish) {
-        result = await this.repository.markRead(broadcastId, userId);
+        // ── Audience membership check ──────────────────────────────────────
+        // Only record a read if the user is actually in the target audience.
+        // This prevents non-target users (e.g. Tech Check) from appearing in
+        // Read Activity simply by opening the broadcast URL directly.
+        const audiences = (broadcast as any).audiences as Array<{
+          audience_type: string;
+          target_id: number | null;
+        }>;
+
+        const inAudience = isUserInAudience(
+          audiences,
+          userId,
+          user?.user_type_id ?? null,
+          user?.franchise_id ?? null
+        );
+
+        if (inAudience) {
+          result = await this.repository.markRead(broadcastId, userId);
+        }
       }
     }
 
-    // Sync matching in-app notification read state
+    // Sync in-app notification read state (only if user actually received a notification)
     try {
       await prisma.notification.updateMany({
         where: {
