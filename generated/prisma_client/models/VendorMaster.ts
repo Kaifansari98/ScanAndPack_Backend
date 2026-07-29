@@ -61,6 +61,7 @@ export type VendorMasterMinAggregateOutputType = {
   is_custom_doc_nomenclature_enabled: boolean | null
   is_inventory_enabled: boolean | null
   is_tracktrace_enabled: boolean | null
+  is_scanpack_enabled: boolean | null
   is_approval_task_enabled: boolean | null
   is_client_visit_enabled: boolean | null
   is_this_vendor_is_custom_usertype_only: boolean | null
@@ -104,6 +105,7 @@ export type VendorMasterMaxAggregateOutputType = {
   is_custom_doc_nomenclature_enabled: boolean | null
   is_inventory_enabled: boolean | null
   is_tracktrace_enabled: boolean | null
+  is_scanpack_enabled: boolean | null
   is_approval_task_enabled: boolean | null
   is_client_visit_enabled: boolean | null
   is_this_vendor_is_custom_usertype_only: boolean | null
@@ -147,6 +149,7 @@ export type VendorMasterCountAggregateOutputType = {
   is_custom_doc_nomenclature_enabled: number
   is_inventory_enabled: number
   is_tracktrace_enabled: number
+  is_scanpack_enabled: number
   is_approval_task_enabled: number
   is_client_visit_enabled: number
   is_this_vendor_is_custom_usertype_only: number
@@ -206,6 +209,7 @@ export type VendorMasterMinAggregateInputType = {
   is_custom_doc_nomenclature_enabled?: true
   is_inventory_enabled?: true
   is_tracktrace_enabled?: true
+  is_scanpack_enabled?: true
   is_approval_task_enabled?: true
   is_client_visit_enabled?: true
   is_this_vendor_is_custom_usertype_only?: true
@@ -249,6 +253,7 @@ export type VendorMasterMaxAggregateInputType = {
   is_custom_doc_nomenclature_enabled?: true
   is_inventory_enabled?: true
   is_tracktrace_enabled?: true
+  is_scanpack_enabled?: true
   is_approval_task_enabled?: true
   is_client_visit_enabled?: true
   is_this_vendor_is_custom_usertype_only?: true
@@ -292,6 +297,7 @@ export type VendorMasterCountAggregateInputType = {
   is_custom_doc_nomenclature_enabled?: true
   is_inventory_enabled?: true
   is_tracktrace_enabled?: true
+  is_scanpack_enabled?: true
   is_approval_task_enabled?: true
   is_client_visit_enabled?: true
   is_this_vendor_is_custom_usertype_only?: true
@@ -422,6 +428,7 @@ export type VendorMasterGroupByOutputType = {
   is_custom_doc_nomenclature_enabled: boolean
   is_inventory_enabled: boolean
   is_tracktrace_enabled: boolean
+  is_scanpack_enabled: boolean
   is_approval_task_enabled: boolean
   is_client_visit_enabled: boolean
   is_this_vendor_is_custom_usertype_only: boolean | null
@@ -488,6 +495,7 @@ export type VendorMasterWhereInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_scanpack_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_client_visit_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
@@ -662,6 +670,7 @@ export type VendorMasterOrderByWithRelationInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  is_scanpack_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   is_client_visit_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -839,6 +848,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_scanpack_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_client_visit_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
@@ -1013,6 +1023,7 @@ export type VendorMasterOrderByWithAggregationInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  is_scanpack_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   is_client_visit_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1064,6 +1075,7 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_inventory_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
+  is_scanpack_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_client_visit_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableWithAggregatesFilter<"VendorMaster"> | boolean | null
@@ -1106,6 +1118,7 @@ export type VendorMasterCreateInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -1279,6 +1292,7 @@ export type VendorMasterUncheckedCreateInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -1451,6 +1465,7 @@ export type VendorMasterUpdateInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1624,6 +1639,7 @@ export type VendorMasterUncheckedUpdateInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1797,6 +1813,7 @@ export type VendorMasterCreateManyInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -1839,6 +1856,7 @@ export type VendorMasterUpdateManyMutationInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1881,6 +1899,7 @@ export type VendorMasterUncheckedUpdateManyInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1924,6 +1943,7 @@ export type VendorMasterCountOrderByAggregateInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  is_scanpack_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   is_client_visit_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrder
@@ -1974,6 +1994,7 @@ export type VendorMasterMaxOrderByAggregateInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  is_scanpack_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   is_client_visit_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrder
@@ -2017,6 +2038,7 @@ export type VendorMasterMinOrderByAggregateInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  is_scanpack_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   is_client_visit_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrder
@@ -3988,6 +4010,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -4160,6 +4183,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -4347,6 +4371,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -4519,6 +4544,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -4690,6 +4716,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -4862,6 +4889,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -5049,6 +5077,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -5221,6 +5250,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -5392,6 +5422,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -5564,6 +5595,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -5751,6 +5783,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -5923,6 +5956,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6094,6 +6128,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -6266,6 +6301,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -6453,6 +6489,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6625,6 +6662,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6796,6 +6834,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -6968,6 +7007,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -7155,6 +7195,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -7327,6 +7368,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -7498,6 +7540,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -7670,6 +7713,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -7857,6 +7901,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8029,6 +8074,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8200,6 +8246,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -8372,6 +8419,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -8559,6 +8607,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8731,6 +8780,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8902,6 +8952,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -9074,6 +9125,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -9261,6 +9313,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -9433,6 +9486,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -9604,6 +9658,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -9776,6 +9831,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -9963,6 +10019,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -10135,6 +10192,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -10306,6 +10364,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -10478,6 +10537,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -10665,6 +10725,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -10837,6 +10898,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -11008,6 +11070,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -11180,6 +11243,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -11367,6 +11431,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -11539,6 +11604,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -11710,6 +11776,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -11882,6 +11949,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -12069,6 +12137,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12241,6 +12310,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12412,6 +12482,7 @@ export type VendorMasterCreateWithoutClientsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -12584,6 +12655,7 @@ export type VendorMasterUncheckedCreateWithoutClientsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -12771,6 +12843,7 @@ export type VendorMasterUpdateWithoutClientsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12943,6 +13016,7 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -13114,6 +13188,7 @@ export type VendorMasterCreateWithoutClientTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -13286,6 +13361,7 @@ export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -13473,6 +13549,7 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -13645,6 +13722,7 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -13816,6 +13894,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -13988,6 +14067,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -14175,6 +14255,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -14347,6 +14428,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -14518,6 +14600,7 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -14690,6 +14773,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -14877,6 +14961,7 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -15049,6 +15134,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -15220,6 +15306,7 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -15392,6 +15479,7 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -15579,6 +15667,7 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -15751,6 +15840,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -15922,6 +16012,7 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -16094,6 +16185,7 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -16281,6 +16373,7 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -16453,6 +16546,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -16624,6 +16718,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -16796,6 +16891,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -16983,6 +17079,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17155,6 +17252,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17326,6 +17424,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -17498,6 +17597,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -17685,6 +17785,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17857,6 +17958,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18028,6 +18130,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -18200,6 +18303,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -18387,6 +18491,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18559,6 +18664,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18730,6 +18836,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -18902,6 +19009,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -19089,6 +19197,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -19261,6 +19370,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -19432,6 +19542,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -19604,6 +19715,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -19791,6 +19903,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -19963,6 +20076,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -20134,6 +20248,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -20306,6 +20421,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -20493,6 +20609,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -20665,6 +20782,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -20836,6 +20954,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -21008,6 +21127,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -21195,6 +21315,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -21367,6 +21488,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -21538,6 +21660,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -21710,6 +21833,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -21897,6 +22021,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -22069,6 +22194,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -22240,6 +22366,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -22412,6 +22539,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -22599,6 +22727,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -22771,6 +22900,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -22942,6 +23072,7 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -23114,6 +23245,7 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -23301,6 +23433,7 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -23473,6 +23606,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -23644,6 +23778,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -23816,6 +23951,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -24003,6 +24139,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -24175,6 +24312,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -24346,6 +24484,7 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -24518,6 +24657,7 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -24705,6 +24845,7 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -24877,6 +25018,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -25048,6 +25190,7 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -25220,6 +25363,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -25407,6 +25551,7 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -25579,6 +25724,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -25750,6 +25896,7 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -25922,6 +26069,7 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -26109,6 +26257,7 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -26281,6 +26430,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -26452,6 +26602,7 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -26624,6 +26775,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -26811,6 +26963,7 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -26983,6 +27136,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -27154,6 +27308,7 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -27326,6 +27481,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -27513,6 +27669,7 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -27685,6 +27842,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -27856,6 +28014,7 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -28028,6 +28187,7 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -28215,6 +28375,7 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -28387,6 +28548,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -28558,6 +28720,7 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -28730,6 +28893,7 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -28917,6 +29081,7 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -29089,6 +29254,7 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -29260,6 +29426,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -29432,6 +29599,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -29619,6 +29787,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -29791,6 +29960,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -29962,6 +30132,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -30134,6 +30305,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -30321,6 +30493,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -30493,6 +30666,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -30664,6 +30838,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -30836,6 +31011,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -31023,6 +31199,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -31195,6 +31372,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -31366,6 +31544,7 @@ export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -31538,6 +31717,7 @@ export type VendorMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -31725,6 +31905,7 @@ export type VendorMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -31897,6 +32078,7 @@ export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -32068,6 +32250,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -32240,6 +32423,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -32427,6 +32611,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -32599,6 +32784,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -32770,6 +32956,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -32942,6 +33129,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -33129,6 +33317,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -33301,6 +33490,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -33472,6 +33662,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -33644,6 +33835,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -33831,6 +34023,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -34003,6 +34196,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -34174,6 +34368,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -34346,6 +34541,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -34533,6 +34729,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -34705,6 +34902,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -34876,6 +35074,7 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -35048,6 +35247,7 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -35235,6 +35435,7 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -35407,6 +35608,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -35578,6 +35780,7 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -35750,6 +35953,7 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -35937,6 +36141,7 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -36109,6 +36314,7 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -36280,6 +36486,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -36452,6 +36659,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -36639,6 +36847,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -36811,6 +37020,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -36982,6 +37192,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -37154,6 +37365,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -37341,6 +37553,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -37513,6 +37726,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -37684,6 +37898,7 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -37856,6 +38071,7 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -38043,6 +38259,7 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -38215,6 +38432,7 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -38386,6 +38604,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -38558,6 +38777,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -38745,6 +38965,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -38917,6 +39138,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -39088,6 +39310,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -39260,6 +39483,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -39447,6 +39671,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -39619,6 +39844,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -39790,6 +40016,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -39962,6 +40189,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -40149,6 +40377,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -40321,6 +40550,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -40492,6 +40722,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -40664,6 +40895,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -40851,6 +41083,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -41023,6 +41256,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -41194,6 +41428,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -41366,6 +41601,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -41553,6 +41789,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -41725,6 +41962,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -41896,6 +42134,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -42068,6 +42307,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -42255,6 +42495,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -42427,6 +42668,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -42598,6 +42840,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -42770,6 +43013,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -42957,6 +43201,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -43129,6 +43374,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -43300,6 +43546,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -43472,6 +43719,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -43659,6 +43907,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -43831,6 +44080,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -44002,6 +44252,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -44174,6 +44425,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -44361,6 +44613,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -44533,6 +44786,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -44704,6 +44958,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -44876,6 +45131,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -45063,6 +45319,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -45235,6 +45492,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -45406,6 +45664,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -45578,6 +45837,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -45765,6 +46025,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -45937,6 +46198,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -46108,6 +46370,7 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -46280,6 +46543,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -46467,6 +46731,7 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -46639,6 +46904,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -46810,6 +47076,7 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -46982,6 +47249,7 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -47169,6 +47437,7 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -47341,6 +47610,7 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -47512,6 +47782,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -47684,6 +47955,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -47871,6 +48143,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -48043,6 +48316,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -48214,6 +48488,7 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -48386,6 +48661,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -48573,6 +48849,7 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -48745,6 +49022,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -48916,6 +49194,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -49088,6 +49367,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -49275,6 +49555,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -49447,6 +49728,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -49618,6 +49900,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -49790,6 +50073,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -49977,6 +50261,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -50149,6 +50434,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -50320,6 +50606,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -50492,6 +50779,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -50679,6 +50967,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -50851,6 +51140,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -51022,6 +51312,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -51194,6 +51485,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -51381,6 +51673,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -51553,6 +51846,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -51724,6 +52018,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -51896,6 +52191,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -52083,6 +52379,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -52255,6 +52552,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -52426,6 +52724,7 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -52598,6 +52897,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -52785,6 +53085,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -52957,6 +53258,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -53128,6 +53430,7 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -53300,6 +53603,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -53487,6 +53791,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -53659,6 +53964,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -53830,6 +54136,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -54002,6 +54309,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -54189,6 +54497,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -54361,6 +54670,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -54532,6 +54842,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -54704,6 +55015,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -54891,6 +55203,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -55063,6 +55376,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -55234,6 +55548,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -55406,6 +55721,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -55593,6 +55909,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -55765,6 +56082,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -55936,6 +56254,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -56108,6 +56427,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -56295,6 +56615,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -56467,6 +56788,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -56638,6 +56960,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -56810,6 +57133,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -56997,6 +57321,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -57169,6 +57494,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -57340,6 +57666,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -57512,6 +57839,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -57699,6 +58027,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -57871,6 +58200,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -58042,6 +58372,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -58214,6 +58545,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -58401,6 +58733,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -58573,6 +58906,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -58744,6 +59078,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -58916,6 +59251,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -59103,6 +59439,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -59275,6 +59612,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -59446,6 +59784,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -59618,6 +59957,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -59805,6 +60145,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -59977,6 +60318,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -60148,6 +60490,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -60320,6 +60663,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -60507,6 +60851,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -60679,6 +61024,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -60850,6 +61196,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -61022,6 +61369,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -61209,6 +61557,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -61381,6 +61730,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -61552,6 +61902,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -61724,6 +62075,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -61911,6 +62263,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -62083,6 +62436,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -62254,6 +62608,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -62426,6 +62781,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -62613,6 +62969,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -62785,6 +63142,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -62956,6 +63314,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -63128,6 +63487,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -63315,6 +63675,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -63487,6 +63848,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -63658,6 +64020,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -63830,6 +64193,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -64017,6 +64381,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -64189,6 +64554,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -64360,6 +64726,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -64532,6 +64899,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -64719,6 +65087,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -64891,6 +65260,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -65062,6 +65432,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -65234,6 +65605,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -65421,6 +65793,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -65593,6 +65966,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -65764,6 +66138,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -65936,6 +66311,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -66123,6 +66499,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -66295,6 +66672,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -66466,6 +66844,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -66638,6 +67017,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -66825,6 +67205,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -66997,6 +67378,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -67168,6 +67550,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -67340,6 +67723,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -67527,6 +67911,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -67699,6 +68084,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -67870,6 +68256,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -68042,6 +68429,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -68229,6 +68617,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -68401,6 +68790,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -68572,6 +68962,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -68744,6 +69135,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -68931,6 +69323,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -69103,6 +69496,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -69274,6 +69668,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -69446,6 +69841,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -69633,6 +70029,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -69805,6 +70202,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -69976,6 +70374,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -70148,6 +70547,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -70335,6 +70735,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -70507,6 +70908,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -70678,6 +71080,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -70850,6 +71253,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -71037,6 +71441,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -71209,6 +71614,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -71380,6 +71786,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -71552,6 +71959,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -71739,6 +72147,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -71911,6 +72320,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -72082,6 +72492,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -72254,6 +72665,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -72441,6 +72853,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -72613,6 +73026,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -72784,6 +73198,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -72956,6 +73371,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -73143,6 +73559,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -73315,6 +73732,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -73486,6 +73904,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -73658,6 +74077,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -73845,6 +74265,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -74017,6 +74438,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -74188,6 +74610,7 @@ export type VendorMasterCreateWithoutStateInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -74360,6 +74783,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -74561,6 +74985,7 @@ export type VendorMasterScalarWhereInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_scanpack_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_client_visit_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
@@ -74603,6 +75028,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -74775,6 +75201,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -74962,6 +75389,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -75134,6 +75562,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -75305,6 +75734,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -75477,6 +75907,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -75664,6 +76095,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -75836,6 +76268,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -76007,6 +76440,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -76179,6 +76613,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -76366,6 +76801,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -76538,6 +76974,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -76709,6 +77146,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -76881,6 +77319,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -77068,6 +77507,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -77240,6 +77680,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -77411,6 +77852,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -77583,6 +78025,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -77770,6 +78213,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -77942,6 +78386,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -78113,6 +78558,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -78285,6 +78731,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -78472,6 +78919,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -78644,6 +79092,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -78815,6 +79264,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -78987,6 +79437,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -79174,6 +79625,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -79346,6 +79798,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -79517,6 +79970,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -79689,6 +80143,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -79876,6 +80331,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -80048,6 +80504,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -80219,6 +80676,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -80391,6 +80849,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -80578,6 +81037,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -80750,6 +81210,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -80921,6 +81382,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -81093,6 +81555,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -81280,6 +81743,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -81452,6 +81916,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -81623,6 +82088,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -81795,6 +82261,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -81982,6 +82449,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -82154,6 +82622,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -82325,6 +82794,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -82497,6 +82967,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -82684,6 +83155,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -82856,6 +83328,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -83027,6 +83500,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -83199,6 +83673,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -83386,6 +83861,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -83558,6 +84034,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -83729,6 +84206,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -83901,6 +84379,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -84088,6 +84567,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -84260,6 +84740,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -84431,6 +84912,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -84603,6 +85085,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -84790,6 +85273,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -84962,6 +85446,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -85133,6 +85618,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -85305,6 +85791,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -85492,6 +85979,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -85664,6 +86152,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -85835,6 +86324,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -86007,6 +86497,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -86194,6 +86685,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -86366,6 +86858,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -86537,6 +87030,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -86709,6 +87203,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -86896,6 +87391,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -87068,6 +87564,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -87239,6 +87736,7 @@ export type VendorMasterCreateWithoutUnitsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -87411,6 +87909,7 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -87598,6 +88097,7 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -87770,6 +88270,7 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -87941,6 +88442,7 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -88113,6 +88615,7 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -88300,6 +88803,7 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -88472,6 +88976,7 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -88643,6 +89148,7 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -88815,6 +89321,7 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -89002,6 +89509,7 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -89174,6 +89682,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -89345,6 +89854,7 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -89517,6 +90027,7 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -89704,6 +90215,7 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -89876,6 +90388,7 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -90047,6 +90560,7 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -90219,6 +90733,7 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -90406,6 +90921,7 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -90578,6 +91094,7 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -90749,6 +91266,7 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -90921,6 +91439,7 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -91108,6 +91627,7 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -91280,6 +91800,7 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -91451,6 +91972,7 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -91623,6 +92145,7 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -91810,6 +92333,7 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -91982,6 +92506,7 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -92153,6 +92678,7 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -92325,6 +92851,7 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -92512,6 +93039,7 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -92684,6 +93212,7 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -92855,6 +93384,7 @@ export type VendorMasterCreateWithoutBox_info_fieldsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -93027,6 +93557,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -93214,6 +93745,7 @@ export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -93386,6 +93918,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -93557,6 +94090,7 @@ export type VendorMasterCreateWithoutBox_info_valuesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -93729,6 +94263,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -93916,6 +94451,7 @@ export type VendorMasterUpdateWithoutBox_info_valuesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -94088,6 +94624,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -94259,6 +94796,7 @@ export type VendorMasterCreateWithoutBroadcastsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -94431,6 +94969,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -94618,6 +95157,7 @@ export type VendorMasterUpdateWithoutBroadcastsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -94790,6 +95330,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -94961,6 +95502,7 @@ export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -95133,6 +95675,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastCategoriesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -95320,6 +95863,7 @@ export type VendorMasterUpdateWithoutBroadcastCategoriesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -95492,6 +96036,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -95664,6 +96209,7 @@ export type VendorMasterCreateManyStateInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -95705,6 +96251,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -95877,6 +96424,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -96049,6 +96597,7 @@ export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -97283,6 +97832,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
@@ -97458,6 +98008,7 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
@@ -97502,6 +98053,7 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
@@ -97546,6 +98098,7 @@ export type VendorMasterSelectScalar = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
@@ -97568,7 +98121,7 @@ export type VendorMasterSelectScalar = {
   city?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "icon" | "login_image" | "time_zone" | "subdomain_url" | "IsAccountLocInEnabled" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "is_client_visit_enabled" | "is_this_vendor_is_custom_usertype_only" | "is_year_wise_lead_code_enabled" | "handlesLargeScaleProjects" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "is_broadcast_enabled" | "createdAt" | "updatedAt" | "state_id" | "gst_no" | "toll_free_no" | "website_link" | "tag_line" | "address" | "pincode" | "city", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "icon" | "login_image" | "time_zone" | "subdomain_url" | "IsAccountLocInEnabled" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_scanpack_enabled" | "is_approval_task_enabled" | "is_client_visit_enabled" | "is_this_vendor_is_custom_usertype_only" | "is_year_wise_lead_code_enabled" | "handlesLargeScaleProjects" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "is_broadcast_enabled" | "createdAt" | "updatedAt" | "state_id" | "gst_no" | "toll_free_no" | "website_link" | "tag_line" | "address" | "pincode" | "city", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
   boxes?: boolean | Prisma.VendorMaster$boxesArgs<ExtArgs>
@@ -97866,6 +98419,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     is_custom_doc_nomenclature_enabled: boolean
     is_inventory_enabled: boolean
     is_tracktrace_enabled: boolean
+    is_scanpack_enabled: boolean
     is_approval_task_enabled: boolean
     is_client_visit_enabled: boolean
     is_this_vendor_is_custom_usertype_only: boolean | null
@@ -98460,6 +99014,7 @@ export interface VendorMasterFieldRefs {
   readonly is_custom_doc_nomenclature_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_inventory_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_tracktrace_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
+  readonly is_scanpack_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_approval_task_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_client_visit_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_this_vendor_is_custom_usertype_only: Prisma.FieldRef<"VendorMaster", 'Boolean'>
