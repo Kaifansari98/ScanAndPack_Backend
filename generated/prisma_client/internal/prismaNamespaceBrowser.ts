@@ -1045,6 +1045,7 @@ export const LeadDocumentsScalarFieldEnum = {
   doc_type_id: 'doc_type_id',
   is_deleted: 'is_deleted',
   tech_check_status: 'tech_check_status',
+  product_type_id: 'product_type_id',
   product_structure_instance_id: 'product_structure_instance_id'
 } as const
 
@@ -1241,7 +1242,8 @@ export const PaymentInfoScalarFieldEnum = {
   created_at: 'created_at',
   created_by: 'created_by',
   vendor_id: 'vendor_id',
-  payment_type_id: 'payment_type_id'
+  payment_type_id: 'payment_type_id',
+  product_type_id: 'product_type_id'
 } as const
 
 export type PaymentInfoScalarFieldEnum = (typeof PaymentInfoScalarFieldEnum)[keyof typeof PaymentInfoScalarFieldEnum]
@@ -1257,7 +1259,8 @@ export const LedgerScalarFieldEnum = {
   payment_date: 'payment_date',
   type: 'type',
   created_by: 'created_by',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  product_type_id: 'product_type_id'
 } as const
 
 export type LedgerScalarFieldEnum = (typeof LedgerScalarFieldEnum)[keyof typeof LedgerScalarFieldEnum]
@@ -1678,6 +1681,7 @@ export const LeadDetailedLogsScalarFieldEnum = {
   lead_id: 'lead_id',
   account_id: 'account_id',
   task_id: 'task_id',
+  product_type_id: 'product_type_id',
   action: 'action',
   action_type: 'action_type',
   history_type: 'history_type',
