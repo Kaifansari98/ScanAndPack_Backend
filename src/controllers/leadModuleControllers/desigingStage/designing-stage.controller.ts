@@ -1189,9 +1189,12 @@ export class DesigingStageController {
             )
               .replace(/_+/g, "_")
               .slice(0, 50);
-            designTypeSegment = sanitizeFilename(selectedDesignType)
-              .replace(/_+/g, "_")
-              .slice(0, 20);
+            designTypeSegment =
+              selectedDesignType === "2D + 3D"
+                ? ""
+                : sanitizeFilename(selectedDesignType)
+                    .replace(/_+/g, "_")
+                    .slice(0, 20);
             const now = new Date();
             dateSegment = [
               now.getFullYear(),
@@ -1263,7 +1266,10 @@ export class DesigingStageController {
             const finalOriginalName = useCustomVendorFlow
               ? (() => {
                 const extension = path.extname(file.originalname || "");
-                const renamedOriginalName = `D${nextRevision}_${designTypeSegment}_${clientNameSegment}_${structureSegment}_${dateSegment}${extension}`;
+                const designTypePrefix = designTypeSegment
+                  ? `${designTypeSegment}_`
+                  : "";
+                const renamedOriginalName = `D${nextRevision}_${designTypePrefix}${clientNameSegment}_${structureSegment}_${dateSegment}${extension}`;
                 nextRevision += 1;
                 return renamedOriginalName;
               })()
