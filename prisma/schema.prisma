@@ -1027,6 +1027,10 @@ model ProductTypeMaster {
   vendor_id                 Int
   tag                       String
   status                    String                         @default("active")
+  documents                 LeadDocuments[]
+  payments                  PaymentInfo[]
+  ledgers                   Ledger[]
+  detailedLogs              LeadDetailedLogs[]
   leads                     LeadProductMapping[]
   productStructures         ProductStructure[]
   productStructureInstances LeadProductStructureInstance[]
@@ -1302,6 +1306,7 @@ model LeadDocuments {
   doc_type_id                         Int
   is_deleted                          Boolean                              @default(false)
   tech_check_status                   TechCheckStatus?
+  product_type_id                     Int?
   product_structure_instance_id       Int?
   installationUpdateDocs              InstallationUpdateDocuments[]        @relation("InstallationUpdateDocumentLink")
   leadApprovalRequestDocumentMappings LeadApprovalRequestDocumentMapping[]
@@ -1316,6 +1321,7 @@ model LeadDocuments {
   deletedBy                           UserMaster?                          @relation("DocumentDeletedBy", fields: [deleted_by], references: [id])
   documentType                        DocumentTypeMaster                   @relation(fields: [doc_type_id], references: [id], onDelete: Cascade)
   lead                                LeadMaster?                          @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  productType                         ProductTypeMaster?                   @relation(fields: [product_type_id], references: [id], onDelete: SetNull)
   productStructureInstance            LeadProductStructureInstance?        @relation(fields: [product_structure_instance_id], references: [id])
   vendor                              VendorMaster                         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   specificationDocumentMappings       specificationDocumentMapping[]
@@ -1323,6 +1329,8 @@ model LeadDocuments {
   orderLoginPoFiles                   OrderLoginPoFileMapping[]
   paymentInfo                         PaymentInfo[]
   site_readiness_photos               SiteReadiness[]                      @relation("LeadDocumentsToSiteReadiness")
+
+  @@index([product_type_id])
 }
 
 model LeadChatRoom {
@@ -1561,13 +1569,17 @@ model PaymentInfo {
   created_by      Int
   vendor_id       Int
   payment_type_id Int
+  product_type_id Int?
   account         AccountMaster     @relation(fields: [account_id], references: [id], onDelete: Cascade)
   createdBy       UserMaster        @relation(fields: [created_by], references: [id], onDelete: Cascade)
   lead            LeadMaster        @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   document        LeadDocuments?    @relation(fields: [payment_file_id], references: [id])
   paymentType     PaymentTypeMaster @relation(fields: [payment_type_id], references: [id], onDelete: Cascade)
+  productType     ProductTypeMaster? @relation(fields: [product_type_id], references: [id], onDelete: SetNull)
   statusType      StatusTypeMaster? @relation(fields: [status_id], references: [id], onDelete: Cascade)
   vendor          VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  @@index([product_type_id])
 }
 
 model Ledger {
@@ -1581,11 +1593,15 @@ model Ledger {
   type         LedgerType
   created_by   Int
   created_at   DateTime      @default(now())
+  product_type_id Int?
   account      AccountMaster @relation(fields: [account_id], references: [id], onDelete: Cascade)
   client       ClientMaster? @relation(fields: [client_id], references: [id], onDelete: Cascade)
   createdBy    UserMaster    @relation(fields: [created_by], references: [id], onDelete: Cascade)
   lead         LeadMaster    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  productType  ProductTypeMaster? @relation(fields: [product_type_id], references: [id], onDelete: SetNull)
   vendor       VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  @@index([product_type_id])
 }
 
 model DocumentTypeMaster {
@@ -2139,6 +2155,7 @@ model LeadDetailedLogs {
   lead_id      Int
   account_id   Int
   task_id      Int?
+  product_type_id Int?
   action       String
   action_type  ActionType
   history_type HistoryType        @default(Lead) @map("HistoryType")
@@ -2148,12 +2165,14 @@ model LeadDetailedLogs {
   account      AccountMaster      @relation(fields: [account_id], references: [id])
   user         UserMaster         @relation(fields: [created_by], references: [id])
   lead         LeadMaster         @relation(fields: [lead_id], references: [id])
+  productType  ProductTypeMaster? @relation(fields: [product_type_id], references: [id], onDelete: SetNull)
   stage        StatusTypeMaster?  @relation("LeadDetailedLogStage", fields: [stage_id], references: [id])
   task         UserLeadTask?      @relation(fields: [task_id], references: [id])
   vendor       VendorMaster       @relation(fields: [vendor_id], references: [id])
   docLogs      LeadDocumentLogs[]
 
   @@index([task_id])
+  @@index([product_type_id])
 }
 
 model LeadDocumentLogs {

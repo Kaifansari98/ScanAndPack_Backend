@@ -350,6 +350,7 @@ export class BookingStageService {
               account_id: data.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
+              product_type_id: data.product_type_id ?? null,
               ...(singleScopedInstanceId
                 ? { product_structure_instance_id: singleScopedInstanceId }
                 : {}),
@@ -385,6 +386,7 @@ export class BookingStageService {
             amount: data.bookingAmount,
             payment_date: new Date(),
             type: "credit",
+            product_type_id: data.product_type_id ?? null,
           },
         });
 
@@ -400,6 +402,7 @@ export class BookingStageService {
               account_id: data.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
+              product_type_id: data.product_type_id ?? null,
               ...(singleScopedInstanceId
                 ? { product_structure_instance_id: singleScopedInstanceId }
                 : {}),
@@ -420,6 +423,7 @@ export class BookingStageService {
             payment_file_id: paymentFileId, // may be null if no file
             payment_date: new Date(),
             payment_type_id: bookingPaymentType.id,
+            product_type_id: data.product_type_id ?? null,
           },
         });
         response.paymentInfo = bookingPayment;
@@ -587,6 +591,7 @@ export class BookingStageService {
             vendor_id: data.vendor_id,
             lead_id: data.lead_id,
             account_id: data.account_id,
+            product_type_id: data.product_type_id ?? null,
             action: actionMessage,
             action_type: "CREATE",
             created_by: data.created_by,
