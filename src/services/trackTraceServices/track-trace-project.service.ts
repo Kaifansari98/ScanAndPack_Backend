@@ -30,6 +30,7 @@ export interface CadbidItem {
   l2: number;
   l3: number;
   qty: number;
+  weight?: number | string | null; 
 
   barcode1?: string | null;
   barcode2?: string | null;
@@ -78,6 +79,21 @@ const requiredString = (field: string) =>
 const requiredNumber = (field: string) =>
   z.coerce.number({ error: `${field} missing` });
 
+const optionalWeight = z.preprocess((value) => {
+  if (value === null || value === undefined || value === "") {
+    return 0;
+  }
+
+  if (typeof value === "string") {
+    return value
+      .replace(/,/g, "")
+      .replace(/kg/gi, "")
+      .trim();
+  }
+
+  return value;
+}, z.coerce.number().min(0, "weight cannot be negative").default(0));
+
 /**
  * Excel headers supported:
  *
@@ -89,6 +105,7 @@ const requiredNumber = (field: string) =>
  * Width          -> l2
  * Thickness      -> l3
  * Qty            -> qty
+ * Weight         -> weight
  * Unique Code    -> barcode1
  * Barcode 1      -> barcode1
  * Barcode 2      -> barcode2
@@ -126,7 +143,14 @@ const HEADER_FIELD_MAP: Record<string, keyof CadbidItem | "customer_id"> = {
 
   "qty": "qty",
   "quantity": "qty",
-
+  "weight": "weight",
+  "wt": "weight",
+  "wt.": "weight",
+  "weight kg": "weight",
+  "weight (kg)": "weight",
+  "total weight": "weight",
+  "totalweight": "weight",
+  "total_weight": "weight",
   "unique code": "barcode1",
   "barcode1": "barcode1",
   "barcode 1": "barcode1",
@@ -222,8 +246,13 @@ async function parseProjectExcel(filePath: string): Promise<{
     if (rowNumber === 1) return;
 
     const rawRowValues = (row.values as ExcelJS.CellValue[]).slice(1);
-    const hasData = rawRowValues.some((v) => {
-      return v !== null && v !== undefined && String(v).trim() !== "";
+
+    const hasData = rawRowValues.some((value) => {
+      return (
+        value !== null &&
+        value !== undefined &&
+        String(value).trim() !== ""
+      );
     });
 
     if (!hasData) return;
@@ -247,7 +276,7 @@ async function parseProjectExcel(filePath: string): Promise<{
         return;
       }
 
-      if (["l1", "l2", "l3", "qty"].includes(field)) {
+      if (["l1", "l2", "l3", "qty", "weight"].includes(field)) {
         (item as any)[field] = toNumberOrRaw(value);
       } else {
         (item as any)[field] = toNullableString(value);
@@ -285,6 +314,7 @@ function cleanAndDeduplicateRows(rows: CadbidItem[]): CadbidItem[] {
       l2: row.l2,
       l3: row.l3,
       qty: row.qty,
+      weight: row.weight,
       barcode1: cleanText(row.barcode1),
       barcode2: cleanText(row.barcode2),
       el1: cleanText(row.el1),
@@ -324,6 +354,8 @@ const itemSchema = z.object({
     .number()
     .int()
     .positive("qty must be greater than 0"),
+
+  weight: optionalWeight,
 
   barcode1: z.string().optional().nullable(),
   barcode2: z.string().optional().nullable(),
@@ -1324,6 +1356,7 @@ export const createProjectService = async (
     |--------------------------------------------------------------------------
     */
     const parsedExcel = await parseProjectExcel(file.path);
+    console.log(parsedExcel);
 
     logger.info("Excel parsed", {
       totalRows: parsedExcel.items.length,
@@ -1588,19 +1621,41 @@ export const createProjectService = async (
           });
         };
 
+        const toNumber = (value: any): number => {
+          if (value === undefined || value === null || value === "") {
+            return 0;
+          }
+
+          const numericValue = Number(
+            String(value)
+              .replace(/,/g, "")
+              .replace(/kg/gi, "")
+              .trim()
+          );
+
+          return Number.isFinite(numericValue) ? numericValue : 0;
+        };
+
+        const roundWeight = (value: number): number => {
+          return Number(value.toFixed(4));
+        };
+
         const cutListMachineMappingRows: any[] = [];
 
         const pushMachineMappingRows = ({
           cutListId,
           machine,
           quantity,
+          perItemWeight,
         }: {
           cutListId: number;
           machine: {
             id: number;
+            machine_type_id: number | null;
             sequence_no: number | null;
           };
           quantity: number;
+          perItemWeight: number;
         }) => {
           for (let i = 0; i < quantity; i++) {
             cutListMachineMappingRows.push({
@@ -1612,7 +1667,16 @@ export const createProjectService = async (
               sequence_no: machine.sequence_no ?? 0,
               status: "Pending",
               created_by: createdByUserId,
-              expected_in: true,
+              expected_in: true,              
+              /*
+              |--------------------------------------------------------------------------
+              | Weight is stored only against packaging machine type 18
+              |--------------------------------------------------------------------------
+              */
+              weight:
+                Number(machine.machine_type_id) === 18
+                  ? perItemWeight
+                  : 0,
             });
           }
         };
@@ -1624,6 +1688,20 @@ export const createProjectService = async (
         */
         for (const item of validPayload.items) {
           const quantity = Number(item.qty);
+
+          /*
+          |--------------------------------------------------------------------------
+          | Excel weight
+          |--------------------------------------------------------------------------
+          | Excel row weight is total row weight.
+          | Example: qty = 4 and weight = 6
+          | CutList.weight = 6
+          | CutListMachineMapping.weight = 1.5 only for machine type 18
+          |--------------------------------------------------------------------------
+          */
+          const excelRowWeight = toNumber((item as any).weight);
+          const perItemWeight =
+            quantity > 0 ? roundWeight(excelRowWeight / quantity) : 0;
 
           const hasEdgeBanding =
             !!item.el1 || !!item.el2 || !!item.sl1 || !!item.sl2;
@@ -1651,6 +1729,7 @@ export const createProjectService = async (
               group_name: item.groupName || null,
               category_name: item.categoryName || null,
               procurement: item.procurement || null,
+              weight: excelRowWeight,
             },
           });
 
@@ -1703,6 +1782,7 @@ export const createProjectService = async (
                 cutListId: row.id,
                 machine: scanMachine,
                 quantity,
+                perItemWeight,
               });
             }
 
@@ -1711,6 +1791,7 @@ export const createProjectService = async (
                 cutListId: row.id,
                 machine: packMachine,
                 quantity,
+                perItemWeight,
               });
             }
 
@@ -1733,6 +1814,7 @@ export const createProjectService = async (
               cutListId: row.id,
               machine: edgeBandingMachine,
               quantity,
+              perItemWeight,
             });
           }
 
@@ -1743,6 +1825,7 @@ export const createProjectService = async (
               cutListId: row.id,
               machine: cuttingMachine,
               quantity,
+              perItemWeight,
             });
           }
 
@@ -1754,6 +1837,7 @@ export const createProjectService = async (
                 cutListId: row.id,
                 machine: cncMachine,
                 quantity,
+                perItemWeight,
               });
             }
           }
@@ -1766,6 +1850,7 @@ export const createProjectService = async (
               cutListId: row.id,
               machine: scanMachine,
               quantity,
+              perItemWeight,
             });
           }
 
@@ -1774,6 +1859,7 @@ export const createProjectService = async (
               cutListId: row.id,
               machine: packMachine,
               quantity,
+              perItemWeight,
             });
           }
         }
@@ -1891,6 +1977,7 @@ export const createProjectService = async (
     throw error;
   }
 };
+
 
 
 

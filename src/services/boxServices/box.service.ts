@@ -544,10 +544,6 @@ const fontToBase64 = (fontPath: string): string => {
 
 
 
-
-
-
-
 export const generateBoxPdfService = async (
   box_id: number,
   project_id: number,
@@ -1097,6 +1093,7 @@ export const generateBoxPdfService = async (
                 category_name: true,
                 group_name: true,
                 unique_code: true,
+                material_details: true,
                 weight: true,
                 length: true,
                 width: true,
@@ -1154,6 +1151,7 @@ export const generateBoxPdfService = async (
           category_name: string | null;
           group_name: string | null;
           unique_code: string | null;
+          material_details: string | null;
           length: any;
           width: any;
           thickness: any;
@@ -1193,6 +1191,7 @@ export const generateBoxPdfService = async (
             category_name: cutList.category_name,
             group_name: cutList.group_name,
             unique_code: cutList.unique_code,
+            material_details: cutList.material_details,
             length: cutList.length,
             width: cutList.width,
             thickness: cutList.thickness,
@@ -1442,14 +1441,15 @@ export const generateBoxPdfService = async (
       ) || "-";
 
     const itemNo =
-      findBoxInfoValue(
-        boxInfoValues,
-        [
-          "item_no",
-          "item no",
-          "item number",
-        ]
-      ) || "-";
+      Array.from(
+        new Set(
+          items
+            .map((item) =>
+              String(item.material_details || "").trim()
+            )
+            .filter(Boolean)
+        )
+      ).join(", ") || "-";
 
     /*
     |--------------------------------------------------------------------------
@@ -2762,2137 +2762,6 @@ color: #111827;
 };
 
 
-
-
-
-
-
-
-
-
-export const generateBoxHtmlService = async (
-  box_id: number,
-  project_id: number,
-  vendor_id: number
-) => {
-  const tempDir = path.join(
-    process.cwd(),
-    "tmp"
-  );
-
-  if (!fs.existsSync(tempDir)) {
-    fs.mkdirSync(tempDir, {
-      recursive: true,
-    });
-  }
-
-  let tempFilePath: string | null =
-    null;
-
-  const hardcodedCompany = {
-    tollFreeNo: "18002674949",
-    email: "info@adarshindia.in",
-    website: "www.adarshindia.in",
-    addressLine1: "280 & 283, Bilavali,",
-    addressLine2: "Kudus, Wada, Palghar",
-    addressLine3: "421312 Maharashtra",
-    gst: "27AAZFA7533R1ZC",
-    tagline: "Design. Build. Deliver",
-    fallbackName: "ADARSH INFRAINTERIO",
-  };
-
-  const toNumber = (
-    value: any
-  ) => {
-    const numberValue = Number(
-      String(value ?? "")
-        .replace(/[^0-9.]/g, "")
-    );
-
-    return Number.isFinite(numberValue)
-      ? numberValue
-      : 0;
-  };
-
-  const formatDimension = (
-    value: any
-  ) => {
-    const numberValue = toNumber(value);
-
-    if (!numberValue) {
-      return "0";
-    }
-
-    return Number.isInteger(numberValue)
-      ? String(numberValue)
-      : numberValue.toFixed(2);
-  };
-
-  const formatQuantity = (
-    value: number
-  ) => {
-    return String(value || 0).padStart(
-      2,
-      "0"
-    );
-  };
-
-  const getItemSizeText = (
-    item: {
-      length?: any;
-      width?: any;
-      thickness?: any;
-    }
-  ) => {
-    const length = toNumber(item.length);
-    const width = toNumber(item.width);
-
-    if (!length || !width) {
-      return "2400 x 1200 mm";
-    }
-
-    return `${formatDimension(length)} x ${formatDimension(width)} mm`;
-  };
-
-  const getPackageSizeText = (
-    items: {
-      length?: any;
-      width?: any;
-    }[]
-  ) => {
-    const maxLength =
-      Math.max(
-        0,
-        ...items.map((item) =>
-          toNumber(item.length)
-        )
-      );
-
-    const maxWidth =
-      Math.max(
-        0,
-        ...items.map((item) =>
-          toNumber(item.width)
-        )
-      );
-
-    if (!maxLength || !maxWidth) {
-      return "2400 x 1200 mm";
-    }
-
-    return `${formatDimension(maxLength)} x ${formatDimension(maxWidth)} mm`;
-  };
-
-  const findBoxInfoValue = (
-    values: {
-      field_label: string;
-      field_key: string;
-      field_value: string;
-    }[],
-    keywords: string[]
-  ) => {
-    const normalizedKeywords =
-      keywords.map((keyword) =>
-        keyword.toLowerCase()
-      );
-
-    const matchedValue =
-      values.find((item) => {
-        const label =
-          String(item.field_label || "")
-            .toLowerCase();
-
-        const key =
-          String(item.field_key || "")
-            .toLowerCase();
-
-        return normalizedKeywords.some(
-          (keyword) =>
-            label.includes(keyword) ||
-            key.includes(keyword)
-        );
-      });
-
-    return matchedValue
-      ?.field_value
-      ?.trim() || "";
-  };
-
-  const resolveProductName = (
-    items: {
-      category_name?: string | null;
-      group_name?: string | null;
-      item_name?: string | null;
-    }[]
-  ) => {
-    const firstItem =
-      items.find(Boolean);
-
-    return (
-      firstItem?.category_name ||
-      firstItem?.group_name ||
-      firstItem?.item_name ||
-      "ELICIT LINEAR WORKSTATION"
-    );
-  };
-
-  try {
-    /*
-    |--------------------------------------------------------------------------
-    | 1. Fetch project, box, vendor, packaging machine and project boxes
-    |--------------------------------------------------------------------------
-    */
-
-    const [
-      project,
-      box,
-      vendor,
-      packagingMachine,
-      projectBoxes,
-    ] = await Promise.all([
-      prisma.projectMaster.findFirst({
-        where: {
-          id: project_id,
-          vendor_id,
-        },
-
-        select: {
-          id: true,
-          project_name: true,
-          packing_type: true,
-          lead_id: true,
-          order_no: true,
-          client_name: true,
-          client_address: true,
-          client_contact_no: true,
-        },
-      }),
-
-      prisma.boxMaster.findFirst({
-        where: {
-          id: box_id,
-          project_id,
-          vendor_id,
-          is_deleted: false,
-        },
-
-        select: {
-          id: true,
-          box_name: true,
-          box_status: true,
-          created_date: true,
-          packed_at: true,
-          packed_by: true,
-
-          packedByUser: {
-            select: {
-              id: true,
-              user_name: true,
-            },
-          },
-
-          box_info_values: {
-            select: {
-              id: true,
-              field_id: true,
-              field_value: true,
-
-              field: {
-                select: {
-                  id: true,
-                  field_label: true,
-                  field_key: true,
-                  field_type: true,
-                  is_required: true,
-                  sort_order: true,
-                  active: true,
-                },
-              },
-            },
-          },
-        },
-      }),
-
-      prisma.vendorMaster.findUnique({
-        where: {
-          id: vendor_id,
-        },
-
-        select: {
-          vendor_name: true,
-          primary_contact_number: true,
-          primary_contact_email: true,
-          logo: true,
-        },
-      }),
-
-      prisma.machineMaster.findFirst({
-        where: {
-          vendor_id,
-          machine_type_id: 18,
-        },
-
-        select: {
-          id: true,
-        },
-
-        orderBy: {
-          id: "asc",
-        },
-      }),
-
-      prisma.boxMaster.findMany({
-        where: {
-          project_id,
-          vendor_id,
-          is_deleted: false,
-        },
-
-        select: {
-          id: true,
-          created_date: true,
-        },
-
-        orderBy: [
-          {
-            created_date: "asc",
-          },
-
-          {
-            id: "asc",
-          },
-        ],
-      }),
-    ]);
-
-    /*
-    |--------------------------------------------------------------------------
-    | 2. Validate records
-    |--------------------------------------------------------------------------
-    */
-
-    if (!project) {
-      return validationResponse(
-        0,
-        "Project not found"
-      );
-    }
-
-    if (!box) {
-      return validationResponse(
-        0,
-        "Box not found"
-      );
-    }
-
-    if (!vendor) {
-      return validationResponse(
-        0,
-        "Vendor not found"
-      );
-    }
-
-    if (!packagingMachine) {
-      return validationResponse(
-        0,
-        "Packaging machine not configured"
-      );
-    }
-
-    const totalBoxes =
-      projectBoxes.length;
-
-    /*
-    |--------------------------------------------------------------------------
-    | 3. Format dynamic box information values
-    |--------------------------------------------------------------------------
-    */
-
-    const boxInfoValues =
-      box.box_info_values
-        .filter(
-          (item) =>
-            item.field &&
-            item.field.active
-        )
-        .sort(
-          (
-            a,
-            b
-          ) =>
-            Number(
-              a.field.sort_order || 0
-            ) -
-            Number(
-              b.field.sort_order || 0
-            )
-        )
-        .map((item) => ({
-          id: item.id,
-          field_id: item.field_id,
-          field_label: item.field.field_label,
-          field_key: item.field.field_key,
-          field_type: item.field.field_type,
-          is_required: item.field.is_required,
-          sort_order: item.field.sort_order,
-          field_value: item.field_value || "",
-        }));
-
-    /*
-    |--------------------------------------------------------------------------
-    | 4. Vendor logo
-    |--------------------------------------------------------------------------
-    */
-
-    let logoUrl = "";
-
-    if (vendor.logo) {
-      try {
-        logoUrl =
-          await generateSignedUrl(
-            vendor.logo
-          );
-      } catch (error) {
-        console.error(
-          "Error generating logo signed URL:",
-          error
-        );
-      }
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | 5. Lead fallback
-    |--------------------------------------------------------------------------
-    */
-
-    const lead =
-      project.lead_id
-        ? await prisma.leadMaster.findUnique({
-          where: {
-            id: project.lead_id,
-          },
-
-          select: {
-            firstname: true,
-            lastname: true,
-            contact_no: true,
-            email: true,
-            site_address: true,
-          },
-        })
-        : null;
-
-    /*
-    |--------------------------------------------------------------------------
-    | 6. Resolve client information
-    |--------------------------------------------------------------------------
-    */
-
-    const clientName =
-      project.client_name ||
-      (
-        lead
-          ? `${lead.firstname || ""} ${lead.lastname || ""
-            }`.trim()
-          : ""
-      ) ||
-      "N/A";
-
-    const clientContact =
-      project.client_contact_no ||
-      lead?.contact_no ||
-      "N/A";
-
-    const deliveryAddress =
-      project.client_address ||
-      lead?.site_address ||
-      "N/A";
-
-    const orderNumber =
-      project.order_no ||
-      "N/A";
-
-    /*
-    |--------------------------------------------------------------------------
-    | 7. Fetch current box items and all box group mappings
-    |--------------------------------------------------------------------------
-    */
-
-    const [
-      mappingRows,
-      allBoxGroupMappings,
-    ] =
-      await Promise.all([
-        prisma.cutListMachineMapping.findMany({
-          where: {
-            box_id,
-            project_id,
-            vendor_id,
-            machine_id: packagingMachine.id,
-            expected_in: true,
-          },
-
-          select: {
-            id: true,
-
-            cut_list: {
-              select: {
-                id: true,
-                item_name: true,
-                category_name: true,
-                group_name: true,
-                unique_code: true,
-                weight: true,
-                length: true,
-                width: true,
-                thickness: true,
-              },
-            },
-          },
-
-          orderBy: {
-            created_at: "asc",
-          },
-        }),
-
-        prisma.cutListMachineMapping.findMany({
-          where: {
-            project_id,
-            vendor_id,
-            machine_id: packagingMachine.id,
-            expected_in: true,
-
-            box_id: {
-              not: null,
-            },
-          },
-
-          select: {
-            id: true,
-            box_id: true,
-
-            cut_list: {
-              select: {
-                group_name: true,
-              },
-            },
-          },
-
-          orderBy: {
-            created_at: "asc",
-          },
-        }),
-      ]);
-
-    /*
-    |--------------------------------------------------------------------------
-    | 8. Merge repeated cut-list rows
-    |--------------------------------------------------------------------------
-    */
-
-    const itemMap =
-      new Map<
-        number,
-        {
-          id: number;
-          item_name: string;
-          category_name: string | null;
-          group_name: string | null;
-          unique_code: string | null;
-          length: any;
-          width: any;
-          thickness: any;
-          unit_weight: number;
-          quantity: number;
-          total_weight: number;
-        }
-      >();
-
-    for (const mapping of mappingRows) {
-      const cutList =
-        mapping.cut_list;
-
-      if (!cutList) {
-        continue;
-      }
-
-      const itemWeight =
-        Number(
-          cutList.weight || 0
-        );
-
-      const existingItem =
-        itemMap.get(
-          cutList.id
-        );
-
-      if (existingItem) {
-        existingItem.quantity += 1;
-        existingItem.total_weight += itemWeight;
-      } else {
-        itemMap.set(
-          cutList.id,
-          {
-            id: cutList.id,
-            item_name: cutList.item_name,
-            category_name: cutList.category_name,
-            group_name: cutList.group_name,
-            unique_code: cutList.unique_code,
-            length: cutList.length,
-            width: cutList.width,
-            thickness: cutList.thickness,
-            unit_weight: itemWeight,
-            quantity: 1,
-            total_weight: itemWeight,
-          }
-        );
-      }
-    }
-
-    const items =
-      Array.from(
-        itemMap.values()
-      ).map((item) => ({
-        ...item,
-
-        unit_weight:
-          Number(
-            item.unit_weight.toFixed(
-              2
-            )
-          ),
-
-        total_weight:
-          Number(
-            item.total_weight.toFixed(
-              2
-            )
-          ),
-      }));
-
-    /*
-    |--------------------------------------------------------------------------
-    | 9. Calculate box totals
-    |--------------------------------------------------------------------------
-    */
-
-    const totalQuantity =
-      items.reduce(
-        (
-          total,
-          item
-        ) =>
-          total +
-          item.quantity,
-        0
-      );
-
-    const totalWeight =
-      items.reduce(
-        (
-          total,
-          item
-        ) =>
-          total +
-          item.total_weight,
-        0
-      );
-
-    /*
-    |--------------------------------------------------------------------------
-    | 10. Resolve current box group
-    |--------------------------------------------------------------------------
-    */
-
-    const groupedItem =
-      items.find((item) =>
-        Boolean(
-          item.group_name
-            ?.trim()
-        )
-      );
-
-    const currentBoxGroupName =
-      groupedItem
-        ?.group_name
-        ?.trim() ||
-      null;
-
-    const normalizeGroupName = (
-      value:
-        string |
-        null |
-        undefined
-    ) =>
-      value
-        ?.trim()
-        .toLowerCase() ||
-      null;
-
-    /*
-    |--------------------------------------------------------------------------
-    | 11. Build first group map for every box
-    |--------------------------------------------------------------------------
-    */
-
-    const boxGroupMap =
-      new Map<
-        number,
-        string | null
-      >();
-
-    for (const mapping of allBoxGroupMappings) {
-      if (!mapping.box_id) {
-        continue;
-      }
-
-      if (
-        boxGroupMap.has(
-          mapping.box_id
-        )
-      ) {
-        continue;
-      }
-
-      boxGroupMap.set(
-        mapping.box_id,
-
-        mapping
-          .cut_list
-          ?.group_name
-          ?.trim() ||
-        null
-      );
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | 12. Calculate PRODUCT BOX COUNT
-    |--------------------------------------------------------------------------
-    */
-
-    let currentProductBoxNumber = 1;
-
-    let productBoxTotal =
-      Math.max(
-        totalBoxes,
-        1
-      );
-
-    if (
-      project.packing_type ===
-      PackingType.GROUPWISE
-    ) {
-      const currentGroupKey =
-        normalizeGroupName(
-          currentBoxGroupName
-        );
-
-      if (currentGroupKey) {
-        const currentGroupBoxes =
-          projectBoxes.filter(
-            (
-              projectBox
-            ) => {
-              const boxGroupKey =
-                normalizeGroupName(
-                  boxGroupMap.get(
-                    projectBox.id
-                  )
-                );
-
-              return (
-                boxGroupKey ===
-                currentGroupKey
-              );
-            }
-          );
-
-        const currentGroupBoxIndex =
-          currentGroupBoxes.findIndex(
-            (
-              projectBox
-            ) =>
-              projectBox.id === box.id
-          );
-
-        currentProductBoxNumber =
-          currentGroupBoxIndex >= 0
-            ? currentGroupBoxIndex + 1
-            : 1;
-
-        productBoxTotal =
-          Math.max(
-            currentGroupBoxes.length,
-            1
-          );
-      } else {
-        currentProductBoxNumber = 1;
-        productBoxTotal = 1;
-      }
-    } else {
-      const currentBoxIndex =
-        projectBoxes.findIndex(
-          (
-            projectBox
-          ) =>
-            projectBox.id === box.id
-        );
-
-      currentProductBoxNumber =
-        currentBoxIndex >= 0
-          ? currentBoxIndex + 1
-          : 1;
-
-      productBoxTotal =
-        Math.max(
-          totalBoxes,
-          1
-        );
-    }
-
-    const productBoxCount =
-      `${currentProductBoxNumber} of ${productBoxTotal}`;
-
-    /*
-    |--------------------------------------------------------------------------
-    | 13. Package / product derived values
-    |--------------------------------------------------------------------------
-    */
-
-    const packageDate =
-      formatReportDate(
-        box.packed_at ||
-        box.created_date
-      );
-
-    const packageSize =
-      getPackageSizeText(
-        items
-      );
-
-    const productName =
-      resolveProductName(
-        items
-      );
-
-    const floorName =
-      findBoxInfoValue(
-        boxInfoValues,
-        [
-          "floor",
-          "floor_name",
-          "floor name",
-        ]
-      ) || "7th Floor";
-
-    const itemNo =
-      findBoxInfoValue(
-        boxInfoValues,
-        [
-          "item_no",
-          "item no",
-          "item number",
-        ]
-      ) || "-";
-
-    /*
-    |--------------------------------------------------------------------------
-    | 14. QR code
-    |--------------------------------------------------------------------------
-    */
-
-    const qrValue =
-      `vendor:${vendor_id},project:${project_id},box:${box_id}`;
-
-    const qrImage =
-      await QRCode.toDataURL(
-        qrValue,
-        {
-          width: 400,
-          margin: 1,
-          errorCorrectionLevel: "M",
-
-          color: {
-            dark: "#000000",
-            light: "#FFFFFF",
-          },
-        }
-      );
-
-    /*
-    |--------------------------------------------------------------------------
-    | 15. Vendor logo
-    |--------------------------------------------------------------------------
-    */
-
-    const logoHtml =
-      logoUrl
-        ? `
-          <img
-            src="${logoUrl}"
-            class="logo-img"
-            alt="Adarsh Logo"
-          />
-        `
-        : `
-          <div class="fallback-logo-text">
-            adarsh
-          </div>
-        `;
-
-    /*
-    |--------------------------------------------------------------------------
-    | 16. Component rows
-    |--------------------------------------------------------------------------
-    */
-
-    const componentRows =
-      items
-        .map(
-          (
-            item
-          ) => `
-            <tr>
-              <td class="code-cell">
-                ${escapeHtml(
-            item.unique_code ||
-            "-"
-          )}
-              </td>
-
-              <td class="component-cell">
-                <strong>
-                  ${escapeHtml(
-            item.item_name ||
-            "-"
-          )}
-                </strong>
-
-                <span>
-                  ${escapeHtml(
-            getItemSizeText(
-              item
-            )
-          )}
-                </span>
-              </td>
-
-              <td class="qty-cell">
-                ${formatQuantity(
-            item.quantity
-          )}
-              </td>
-
-              <td class="unit-cell">
-                ${item.unit_weight.toFixed(
-            2
-          )}
-              </td>
-
-              <td class="total-cell">
-                ${item.total_weight.toFixed(
-            2
-          )}
-              </td>
-            </tr>
-          `
-        )
-        .join("");
-
-    /*
-    |--------------------------------------------------------------------------
-    | 17. HTML
-    |--------------------------------------------------------------------------
-    */
-
-    const html = `
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"/>
-
-<style>
-@page {
-  size: 3in 5in;
-  margin: 0;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html,
-body {
-  width: 3in;
-  height: 5in;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  color: #111827;
-  background: #ffffff;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 7px;
-  -webkit-print-color-adjust: exact;
-  print-color-adjust: exact;
-}
-
-.page {
-  width: 3in;
-  height: 5in;
-  padding: 2.4mm;
-  overflow: hidden;
-  page-break-after: always;
-  background: #ffffff;
-}
-
-.page:last-child {
-  page-break-after: auto;
-}
-
-/*
-|--------------------------------------------------------------------------
-| Sticker container - 3 inch x 5 inch
-|--------------------------------------------------------------------------
-*/
-
-.sticker {
-  width: 100%;
-  height: 100%;
-  border: 1px solid #4b5563;
-  padding: 0 3.4mm 3.2mm;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-/*
-|--------------------------------------------------------------------------
-| Header - user provided table format
-|--------------------------------------------------------------------------
-*/
-
-.label-header {
-  width: calc(100% + 6.8mm);
-  margin-left: -3.4mm;
-  margin-right: -3.4mm;
-  min-height: 0.75in;
-  border-collapse: collapse;
-  table-layout: fixed;
-  background: #ffffff;
-  flex: 0 0 auto;
-}
-
-.label-header td {
-  padding: 0;
-}
-
-.left-area {
-  width: 70%;
-}
-
-.right-area {
-  width: 30%;
-  text-align: center;
-  vertical-align: top;
-}
-
-.logo-cell {
-  height: 20px;
-  text-align: center;
-  vertical-align: middle !important;
-  border-bottom: none !important;
-}
-
-.logo-img {
-  width: 150px;
-  height: auto;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.fallback-logo-text {
-  display: inline-block;
-  color: #f58220;
-  font-size: 28px;
-  line-height: 28px;
-  font-weight: 900;
-  font-style: italic;
-  letter-spacing: -1px;
-}
-
-.tagline-cell {
-  height: 16px;
-  text-align: center;
-  vertical-align: middle !important;
-  border-top: none !important;
-}
-
-.tagline {
-  font-size: 7px;
-  line-height: 8px;
-  font-weight: 800;
-  font-style: italic;
-  color: #101a4c;
-  display: block;
-  margin-top: -2px;
-}
-
-.company-cell {
-  height: 0;
-  text-align: center;
-}
-
-.company-name {
-  font-size: 12px;
-  line-height: 11px;
-  font-weight: 900;
-  color: #07101f;
-  text-transform: uppercase;
-  letter-spacing: 0.2px;
-  white-space: nowrap;
-}
-
-.address-cell,
-.contact-cell {
-  height: 30px;
-  padding: 3px 4px !important;
-  vertical-align: top !important;
-}
-
-.address-cell {
-  width: 45%;
-}
-
-.contact-cell {
-  width: 55%;
-}
-
-.contact-text {
-  display: block;
-  font-size: 5.5px;
-  line-height: 8.4px;
-  font-weight: 700;
-  color: #5b667d;
-  white-space: nowrap;
-}
-
-.address-text{
-  display: block;
-  font-size: 5.5px;
-  line-height: 8.4px;
-  font-weight: 700;
-  color: #5b667d;  
-    white-space: normal;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
-.gst-text {
-  display: block;
-  margin-top: 2px;
-  font-size: 5.5px;
-  line-height: 6.4px;
-  font-weight: 900;
-  color: #5b667d;
-  white-space: nowrap;
-}
-
-.email-link {
-  color: #173f9f;
-  text-decoration: underline;
-  font-weight: 800;
-}
-
-.package-label-cell {
-  height: 24px;
-  text-align: center;
-  vertical-align: middle !important;
-}
-
-.package-label {
-  font-size: 9px;
-  line-height: 10px;
-  font-weight: 900;
-  color: #231f20;
-  white-space: nowrap;
-}
-
-.qr-box {
-  width: 100%;
-  height: 82px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 5px;
-}
-
-.qr-img {
-  width: 66px;
-  height: 66px;
-  object-fit: contain;
-  display: block;
-}
-
-.package-number-box {
-  width: 100%;
-  height: 70px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 5px;
-}
-
-.package-number {
-  font-size: 48px;
-  line-height: 46px;
-  font-weight: 900;
-  color: #231f20;
-  letter-spacing: -2px;
-}
-
-/*
-|--------------------------------------------------------------------------
-| Information rows - CDR final
-|--------------------------------------------------------------------------
-*/
-
-.info-row {
-  display: grid;
-  gap: 1.3mm;
-  padding: 0.45mm 0;
-  flex: 0 0 auto;
-}
-
-.row-2col {
-  grid-template-columns: 62% 38%;
-}
-
-.row-3col {
-  grid-template-columns: 30% 40% 30%;
-}
-
-.info-cell {
-  min-width: 0;
-}
-
-.align-right {
-  text-align: right;
-}
-
-.field-label {
-  color: #64748b;
-  font-size: 5.4px;
-  line-height: 5.9px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05px;
-  margin-bottom: 0.25mm;
-}
-
-.field-value {
-  color: #111827;
-  font-size: 5.9px;
-  line-height: 6.8px;
-  font-weight: 800;
-  overflow-wrap: anywhere;
-}
-
-.section-separator {
-  height: 1px;
-  background: #4b5563;
-  margin: 1.1mm 0 1mm;
-  flex: 0 0 auto;
-}
-
-/*
-|--------------------------------------------------------------------------
-| Product title
-|--------------------------------------------------------------------------
-*/
-
-.product-title {
-  color: #1f2937;
-  font-size: 6.3px;
-  line-height: 7px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05px;
-  margin: 0 0 1.1mm;
-  flex: 0 0 auto;
-}
-
-/*
-|--------------------------------------------------------------------------
-| Components table - CDR final
-|--------------------------------------------------------------------------
-*/
-
-.component-table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
-  border: 1px solid #111827;
-  flex: 0 0 auto;
-}
-
-.col-code {
-  width: 10%;
-}
-
-.col-component {
-  width: 55%;
-}
-
-.col-qty {
-  width: 9%;
-}
-
-.col-unit {
-  width: 12%;
-}
-
-.col-total {
-  width: 14%;
-}
-
-.component-table th {
-  background: #111827;
-  color: #ffffff;
-  border: 1px solid #111827;
-  font-size: 4.7px;
-  line-height: 5.3px;
-  font-weight: 800;
-  text-align: center;
-  vertical-align: middle;
-  padding: 0.9mm 0.45mm;
-}
-
-.component-table .table-head-main th {
-  height: 5.4mm;
-  border-bottom: 1px solid #374151;
-}
-
-.component-table .table-head-sub th {
-  height: 4mm;
-  font-size: 4.5px;
-  line-height: 5px;
-}
-
-.blank-head {
-  background: #111827;
-  color: transparent;
-}
-
-.component-table td {
-  color: #111827;
-  border-left: 1px solid #111827;
-  border-right: 1px solid #111827;
-  border-bottom: 1px solid #d1d5db;
-  font-size: 5.3px;
-  line-height: 6.1px;
-  font-weight: 700;
-  padding: 0.85mm 0.65mm;
-  vertical-align: top;
-  overflow-wrap: anywhere;
-}
-
-.component-table tbody tr:nth-child(odd) {
-  background: #f4f4f5;
-}
-
-.component-table tbody tr:nth-child(even) {
-  background: #e5e7eb;
-}
-
-.code-cell {
-  text-align: center;
-  font-weight: 800;
-}
-
-.component-cell strong {
-  display: block;
-  color: #111827;
-  font-size: 5.4px;
-  line-height: 6.1px;
-  font-weight: 800;
-}
-
-.component-cell span {
-  display: block;
-  margin-top: 0.25mm;
-  color: #111827;
-  font-size: 5px;
-  line-height: 5.7px;
-  font-weight: 500;
-}
-
-.qty-cell,
-.unit-cell,
-.total-cell {
-  text-align: center;
-  font-weight: 700;
-}
-
-.component-table tfoot td {
-  background: #b8d7e3;
-  border: 1px solid #111827;
-  font-size: 5px;
-  line-height: 5.8px;
-  font-weight: 800;
-  padding: 1mm 0.65mm;
-}
-
-.total-title {
-  text-align: left;
-}
-
-.empty-row {
-  text-align: center;
-  padding: 4mm 1mm !important;
-  font-weight: 800;
-}
-
-/*
-|--------------------------------------------------------------------------
-| Summary page - 3 inch x 5 inch
-|--------------------------------------------------------------------------
-*/
-
-.summary-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  min-height: 15mm;
-  padding-bottom: 2mm;
-  border-bottom: 1px solid #172033;
-}
-
-.summary-logo-wrap {
-  max-width: 45%;
-}
-
-.summary-company-info {
-  color: #667085;
-  font-size: 5px;
-  line-height: 1.35;
-  text-align: right;
-}
-
-.summary-company-name {
-  color: #172033;
-  font-size: 6.2px;
-  font-weight: 900;
-  text-transform: uppercase;
-  margin-bottom: 0.8mm;
-}
-
-.summary-project-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 13mm;
-  padding: 2mm 0;
-  border-bottom: 1px solid #d9dee7;
-}
-
-.summary-title {
-  max-width: 42mm;
-  overflow: hidden;
-  color: #111827;
-  font-size: 8px;
-  font-weight: 900;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.summary-subtitle {
-  margin-top: 0.6mm;
-  color: #667085;
-  font-size: 5.4px;
-  font-weight: 700;
-}
-
-.summary-client {
-  width: 35%;
-  color: #667085;
-  font-size: 5.3px;
-  line-height: 1.25;
-  text-align: right;
-}
-
-.summary-client strong {
-  display: block;
-  overflow: hidden;
-  color: #111827;
-  font-size: 5.8px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  margin-bottom: 0.4mm;
-}
-
-.summary-line {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.6mm;
-  padding: 2.2mm 0;
-  border-bottom: 1px solid #d9dee7;
-}
-
-.summary-line span {
-  display: block;
-  color: #667085;
-  font-size: 4.8px;
-  font-weight: 800;
-  letter-spacing: 0.1px;
-}
-
-.summary-line strong {
-  display: block;
-  margin-top: 0.5mm;
-  color: #111827;
-  font-size: 8px;
-  font-weight: 900;
-}
-
-.summary-address {
-  padding: 2mm 0;
-  border-bottom: 1px solid #d9dee7;
-  color: #111827;
-  font-size: 5.2px;
-  line-height: 6.2px;
-}
-
-.summary-address strong {
-  color: #6b7280;
-  font-size: 4.8px;
-  letter-spacing: 0.1px;
-  margin-right: 1mm;
-}
-
-.section-title {
-  font-size: 6.3px;
-  font-weight: 900;
-  margin-top: 2mm;
-  margin-bottom: 1.2mm;
-  letter-spacing: 0.1px;
-}
-
-.summary-table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
-}
-
-.summary-table th {
-  padding: 1.1mm 0.6mm;
-  background: #111827;
-  color: #ffffff;
-  border: 1px solid #111827;
-  font-size: 4.2px;
-  line-height: 5px;
-  font-weight: 900;
-  text-align: left;
-  letter-spacing: 0;
-}
-
-.summary-table td {
-  padding: 1mm 0.6mm;
-  border: 1px solid #d1d5db;
-  color: #111827;
-  font-size: 4.4px;
-  line-height: 5.2px;
-  font-weight: 700;
-  overflow-wrap: anywhere;
-}
-
-.summary-table tbody tr:nth-child(even) {
-  background: #f3f4f6;
-}
-
-.summary-table tfoot td {
-  background: #b8d7e3;
-  border: 1px solid #111827;
-  font-weight: 900;
-}
-</style>
-</head>
-
-<body>
-
-<section class="page">
-  <div class="sticker">
-
-    <!-- ============================== -->
-    <!-- TOP HEADER : USER TABLE HTML    -->
-    <!-- ============================== -->
-    <table class="label-header">
-      <colgroup>
-        <col class="left-area" />
-        <col class="right-area" />
-      </colgroup>
-
-      <tr>
-        <!-- LEFT SIDE FULL TABLE -->
-        <td>
-          <table style="width:100%; height:100%; border-collapse:collapse; table-layout:fixed;">
-            <tr>
-              <td colspan="2" class="logo-cell">
-                ${logoHtml}
-              </td>
-            </tr>
-
-            <tr>
-              <td colspan="2" class="company-cell">
-                <span class="company-name">
-                  ${escapeHtml(
-      vendor.vendor_name ||
-      hardcodedCompany.fallbackName
-    )}
-                </span>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="address-cell">
-                <span class="address-text">
-                  ${escapeHtml(
-      hardcodedCompany.addressLine1 ?? ""
-    )}
-                </span>
-
-                <span class="address-text">
-                  ${escapeHtml(
-      hardcodedCompany.addressLine2 ?? ""
-    )}
-                </span>
-
-                <span class="address-text">
-                  ${escapeHtml(
-      hardcodedCompany.addressLine3 ?? ""
-    )}
-                </span>
-
-                <span class="gst-text">
-                  GST: ${escapeHtml(
-      hardcodedCompany.gst ?? ""
-    )}
-                </span>
-              </td>
-
-              <td class="contact-cell">
-                <span class="contact-text">
-                  Toll Free No. :
-                  ${escapeHtml(
-      hardcodedCompany.tollFreeNo ?? ""
-    )}
-                </span>
-
-                <span class="contact-text">
-                  Email :
-                  <span class="email-link">
-                    ${escapeHtml(
-      hardcodedCompany.email ?? ""
-    )}
-                  </span>
-                </span>
-
-                <span class="contact-text">
-                  Website :
-                  ${escapeHtml(
-      hardcodedCompany.website
-    )}
-                </span>
-
-                <span style="float: right;" class="package-label">
-                  PACKAGE NO.:
-                </span>
-              </td>
-            </tr>
-          </table>
-        </td>
-
-        <!-- RIGHT SIDE QR + NUMBER -->
-        <td class="right-area">
-          <div class="qr-box">
-            <img
-              src="${qrImage}"
-              class="qr-img"
-              alt="QR Code"
-            />
-          </div>
-
-          <div class="package-number-box">
-            <span class="package-number">
-              ${escapeHtml(
-      box.box_name
-    )}
-            </span>
-          </div>
-        </td>
-      </tr>
-    </table>
-
-<!-- ============================== -->
-    <!-- CLIENT ROW                     -->
-    <!-- ============================== -->
-    <div class="info-row row-2col">
-      <div class="info-cell">
-        <div class="field-label">
-          CLIENT NAME
-        </div>
-
-        <div class="field-value">
-          ${escapeHtml(
-      clientName
-    )}
-        </div>
-      </div>
-
-      <div class="info-cell align-right">
-        <div class="field-label">
-          CONTACT NUMBER
-        </div>
-
-        <div class="field-value">
-          ${escapeHtml(
-      clientContact
-    )}
-        </div>
-      </div>
-    </div>
-
-    <!-- ============================== -->
-    <!-- ADDRESS + PROJECT              -->
-    <!-- ============================== -->
-    <div class="info-row row-2col">
-      <div class="info-cell">
-        <div class="field-label">
-          DELIVERY ADDRESS
-        </div>
-
-        <div class="field-value">
-          ${escapeHtml(
-      deliveryAddress
-    )}
-        </div>
-      </div>
-
-      <div class="info-cell align-right">
-        <div class="field-label">
-          PROJECT NAME
-        </div>
-
-        <div class="field-value">
-          ${escapeHtml(
-      project.project_name
-    )}
-        </div>
-      </div>
-    </div>
-
-    <div class="section-separator"></div>
-
-    <!-- ============================== -->
-    <!-- PROJECT CODE / SIZE / DATE     -->
-    <!-- ============================== -->
-    <div class="info-row row-3col">
-      <div class="info-cell">
-        <div class="field-label">
-          PROJECT CODE
-        </div>
-
-        <div class="field-value">
-          ${escapeHtml(
-      orderNumber
-    )}
-        </div>
-      </div>
-
-      <div class="info-cell">
-        <div class="field-label">
-          PACKAGE SIZE
-        </div>
-
-        <div class="field-value">
-          ${escapeHtml(
-      packageSize
-    )}
-        </div>
-      </div>
-
-      <div class="info-cell">
-        <div class="field-label">
-          PACKAGE DATE
-        </div>
-
-        <div class="field-value">
-          ${packageDate}
-        </div>
-      </div>
-    </div>
-
-    <!-- ============================== -->
-    <!-- FLOOR / BOX COUNT / ITEM NO    -->
-    <!-- ============================== -->
-    <div class="info-row row-3col">
-      <div class="info-cell">
-        <div class="field-label">
-          FLOOR
-        </div>
-
-        <div class="field-value">
-          ${escapeHtml(
-      floorName
-    )}
-        </div>
-      </div>
-
-      <div class="info-cell">
-        <div class="field-label">
-          PRODUCT BOX COUNT
-        </div>
-
-        <div class="field-value">
-          ${escapeHtml(
-      productBoxCount
-    )}
-        </div>
-      </div>
-
-      <div class="info-cell">
-        <div class="field-label">
-          ITEM NO.
-        </div>
-
-        <div class="field-value">
-          ${escapeHtml(
-      itemNo
-    )}
-        </div>
-      </div>
-    </div>
-
-    <div class="section-separator"></div>
-
-    <!-- ============================== -->
-    <!-- PRODUCT TITLE                  -->
-    <!-- ============================== -->
-    <div class="product-title">
-      PRODUCT :
-      ${escapeHtml(
-      productName
-    )}
-    </div>
-
-    <!-- ============================== -->
-    <!-- COMPONENTS TABLE               -->
-    <!-- ============================== -->
-    <table class="component-table">
-      <colgroup>
-        <col class="col-code" />
-        <col class="col-component" />
-        <col class="col-qty" />
-        <col class="col-unit" />
-        <col class="col-total" />
-      </colgroup>
-
-      <thead>
-        <tr class="table-head-main">
-          <th class="blank-head"></th>
-
-          <th class="component-head">
-            COMPONENTS
-          </th>
-
-          <th class="blank-head"></th>
-
-          <th
-            colspan="2"
-            class="weight-head"
-          >
-            WEIGHT (KG)
-          </th>
-        </tr>
-
-        <tr class="table-head-sub">
-          <th class="code-head">
-            CODE
-          </th>
-
-          <th class="name-head">
-            NAME
-          </th>
-
-          <th class="qty-head">
-            QTY
-          </th>
-
-          <th class="unit-head">
-            UNIT
-          </th>
-
-          <th class="total-head">
-            TOTAL
-          </th>
-        </tr>
-      </thead>
-
-      <tbody>
-        ${componentRows ||
-      `
-            <tr>
-              <td
-                colspan="5"
-                class="empty-row"
-              >
-                No products found
-              </td>
-            </tr>
-          `
-      }
-      </tbody>
-
-      <tfoot>
-        <tr>
-          <td
-            colspan="2"
-            class="total-title"
-          >
-            TOTAL PACKAGE QUANTITY / WEIGHT
-          </td>
-
-          <td class="qty-cell">
-            ${formatQuantity(
-        totalQuantity
-      )}
-          </td>
-
-          <td class="unit-cell">
-            -
-          </td>
-
-          <td class="total-cell">
-            ${totalWeight.toFixed(
-        2
-      )}KG
-          </td>
-        </tr>
-      </tfoot>
-    </table>
-
-  </div>
-</section>
-
-</body>
-</html>
-`;
-
-    /*
-    |--------------------------------------------------------------------------
-    | 18. Generate HTML file
-    |--------------------------------------------------------------------------
-    */
-
-    const fileName =
-      `box_${sanitizeFileName(
-        project.project_name
-      )}_${sanitizeFileName(
-        box.box_name
-      )}_${Date.now()}.html`;
-
-    tempFilePath =
-      path.join(
-        tempDir,
-        fileName
-      );
-
-    fs.writeFileSync(
-      tempFilePath,
-      html,
-      "utf8"
-    );
-
-    if (
-      !fs.existsSync(
-        tempFilePath
-      )
-    ) {
-      throw new Error(
-        "HTML generation failed. File was not created."
-      );
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | 19. Upload HTML
-    |--------------------------------------------------------------------------
-    */
-
-    const {
-      signedUrl,
-      wasabiKey,
-    } =
-      await uploadPdfAndGetSignedUrl(
-        tempFilePath,
-        vendor_id,
-        project_id,
-        fileName
-      );
-
-    tempFilePath = null;
-
-    return validationResponse(
-      1,
-      "Box HTML generated successfully",
-      {
-        download_url:
-          signedUrl,
-
-        file_name:
-          fileName,
-
-        wasabi_key:
-          wasabiKey,
-
-        file_type:
-          "html",
-
-        box_id:
-          box.id,
-
-        packing_type:
-          project.packing_type,
-
-        product_box_count:
-          productBoxCount,
-
-        group_name:
-          currentBoxGroupName,
-
-        total_quantity:
-          totalQuantity,
-
-        total_weight:
-          Number(
-            totalWeight.toFixed(
-              2
-            )
-          ),
-
-        box_info_values:
-          boxInfoValues,
-      }
-    );
-  } catch (error) {
-    console.error(
-      "generateBoxHtmlService:",
-      error
-    );
-
-    if (
-      tempFilePath &&
-      fs.existsSync(
-        tempFilePath
-      )
-    ) {
-      fs.unlinkSync(
-        tempFilePath
-      );
-    }
-
-    return validationResponse(
-      0,
-      "Failed to generate box HTML"
-    );
-  }
-};
-
-
-// import { randomUUID } from "crypto";
-
-
-// export async function generatePdfAndUploadToWasabi({
-//   html,
-//   vendorId,
-//   fileNamePrefix = "box-pdf",
-// }: {
-//   html: string;
-//   vendorId: number;
-//   fileNamePrefix?: string;
-// }) {
-//   let browser: Awaited<ReturnType<typeof puppeteer.launch>> | null = null;
-//   let tempFilePath = "";
-
-//   try {
-//     const tempDir = path.join(process.cwd(), "tmp", "pdfs");
-
-//     if (!fs.existsSync(tempDir)) {
-//       fs.mkdirSync(tempDir, { recursive: true });
-//     }
-
-//     const safeFileName = `${fileNamePrefix}-${Date.now()}-${randomUUID()}.pdf`;
-//     tempFilePath = path.join(tempDir, safeFileName);
-
-//     browser = await puppeteer.launch({
-//       headless: true,
-//       args: ["--no-sandbox", "--disable-setuid-sandbox"],
-
-//       // Use this only if you are using puppeteer-core or local Chrome path is needed:
-//       // executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-//     });
-
-//     const page = await browser.newPage();
-
-//     await page.setContent(html, {
-//       waitUntil: "networkidle0",
-//     });
-
-//     const pdfBuffer = await page.pdf({
-//       format: "A4",
-//       printBackground: true,
-//       margin: {
-//         top: "10mm",
-//         bottom: "10mm",
-//         left: "10mm",
-//         right: "10mm",
-//       },
-//     });
-
-//     fs.writeFileSync(tempFilePath, pdfBuffer);
-
-//     const uploaded = await uploadPdfToWasabi({
-//       filePath: tempFilePath,
-//       vendorId,
-//       fileName: safeFileName,
-//       mimeType: "application/pdf",
-//     });
-
-//     return {
-//       success: true,
-//       file_name: safeFileName,
-//       pdf_url: uploaded.url,
-//       storage_key: uploaded.key,
-//       buffer: Buffer.from(pdfBuffer),
-//     };
-//   } catch (error) {
-//     console.error("generatePdfAndUploadToWasabi error:", error);
-//     throw error;
-//   } finally {
-//     if (browser) {
-//       await browser.close();
-//     }
-
-//     if (tempFilePath && fs.existsSync(tempFilePath)) {
-//       fs.unlinkSync(tempFilePath);
-//     }
-//   }
-// }
 
 export async function generatePdf(html: string, filePath: string) {
   let browser;
@@ -7466,6 +5335,46 @@ export const generateProjectFullReportService = async (
   project_id: number,
   vendor_id: number
 ) => {
+
+
+
+  const calibriRegularPath = path.resolve(
+    __dirname,
+    "../../../assets/fonts/calibri/calibri-regular.ttf"
+  );
+
+  const calibriBoldPath = path.resolve(
+    __dirname,
+    "../../../assets/fonts/calibri/calibri-bold.ttf"
+  );
+
+  const calibriItalicPath = path.resolve(
+    __dirname,
+    "../../../assets/fonts/calibri/calibri-italic.ttf"
+  );
+
+  const calibriBoldItalicPath = path.resolve(
+    __dirname,
+    "../../../assets/fonts/calibri/calibri-bold-italic.ttf"
+  );
+
+  console.log("Calibri font path:", calibriRegularPath);
+
+  const calibriRegular = fontToBase64(calibriRegularPath);
+
+  const calibriBold = fontToBase64(
+    calibriBoldPath
+  );
+
+  const calibriItalic = fontToBase64(
+    calibriItalicPath
+  );
+
+  const calibriBoldItalic = fontToBase64(
+    calibriBoldItalicPath
+  );
+
+
   const tempDir = path.join(
     process.cwd(),
     "tmp"
@@ -7895,6 +5804,7 @@ export const generateProjectFullReportService = async (
                       category_name: true,
                       group_name: true,
                       unique_code: true,
+                      material_details: true,
                       weight: true,
                       length: true,
                       width: true,
@@ -7917,6 +5827,7 @@ export const generateProjectFullReportService = async (
                   category_name: string | null;
                   group_name: string | null;
                   unique_code: string | null;
+                  material_details: string | null;
                   length: any;
                   width: any;
                   thickness: any;
@@ -7957,6 +5868,7 @@ export const generateProjectFullReportService = async (
                     category_name: cutList.category_name,
                     group_name: cutList.group_name,
                     unique_code: cutList.unique_code,
+                    material_details: cutList.material_details,
                     length: cutList.length,
                     width: cutList.width,
                     thickness: cutList.thickness,
@@ -8103,10 +6015,18 @@ export const generateProjectFullReportService = async (
                     "floor_name",
                     "floor name",
                   ]
-                ) || "7th Floor",
+                ) || "-",
 
               item_no:
-                "-",
+                Array.from(
+                  new Set(
+                    items
+                      .map((item) =>
+                        String(item.material_details || "").trim()
+                      )
+                      .filter(Boolean)
+                  )
+                ).join(", ") || "-",
 
               total_quantity:
                 totalQuantity,
@@ -8992,6 +6912,33 @@ export const generateProjectFullReportService = async (
 <meta charset="UTF-8"/>
 
 <style>
+@font-face {
+  font-family: "CalibriPdf";
+  src: url("data:font/truetype;base64,${calibriRegular}") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CalibriPdf";
+  src: url("data:font/truetype;base64,${calibriBold}") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CalibriPdf";
+  src: url("data:font/truetype;base64,${calibriItalic}") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "CalibriPdf";
+  src: url("data:font/truetype;base64,${calibriBoldItalic}") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
 @page {
   size: 3in 5in;
   margin: 0;
@@ -9014,7 +6961,7 @@ body {
 body {
   color: #111827;
   background: #ffffff;
-  font-family: Arial, Helvetica, sans-serif;
+ font-family: "CalibriPdf", Arial, Helvetica, sans-serif;
   font-size: 7px;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
@@ -9023,7 +6970,7 @@ body {
 .page {
   width: 3in;
   height: 5in;
-  padding: 2.4mm;
+  padding: 1.4mm;
   overflow: hidden;
   page-break-after: always;
   background: #ffffff;
@@ -9043,7 +6990,7 @@ body {
   width: 100%;
   height: 100%;
   border: 1px solid #4b5563;
-  padding: 0 3.4mm 3.2mm;
+  padding: 0 1.4mm 1.2mm;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -9054,6 +7001,7 @@ body {
 | Header - user provided table format
 |--------------------------------------------------------------------------
 */
+
 
 .label-header {
   width: calc(100% + 6.8mm);
@@ -9099,7 +7047,7 @@ body {
   color: #f58220;
   font-size: 28px;
   line-height: 28px;
-  font-weight: 900;
+  font-weight: 700;
   font-style: italic;
   letter-spacing: -1px;
 }
@@ -9126,11 +7074,12 @@ body {
   text-align: center;
 }
 
+
 .company-name {
   font-size: 12px;
   line-height: 15px;
-  font-weight: 900;
-  color: #07101f;
+  font-weight: 700;
+  color: #172033;
   text-transform: uppercase;
   letter-spacing: 0.2px;
   white-space: nowrap;
@@ -9152,34 +7101,26 @@ body {
 }
 
 .contact-text {
+font-family: "CalibriPdf", Arial, Helvetica, sans-serif;
   display: block;
-  font-size: 5.5px;
-  line-height: 8.4px;
-  font-weight: 700;
-  color: #5b667d;
+  font-size: 6pt;
+  line-height: 7pt;
+  font-weight: 500;
+  color: #667085;
   white-space: nowrap;
 }
 
-.address-text{
-  display: block;
-  font-size: 5.5px;
-  line-height: 8.4px;
-  font-weight: 700;
-  color: #5b667d;  
-    white-space: normal;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
+.address-text,
 .gst-text {
-  display: block;
-  margin-top: 2px;
-  font-size: 5.5px;
-  line-height: 6.4px;
-  font-weight: 900;
-  color: #5b667d;
-  white-space: nowrap;
+  font-family: "CalibriPdf", Arial, Helvetica, sans-serif;
+  font-size: 6pt;
+  line-height: 7pt;
+  font-weight: 500;
+  font-style: normal;
+  color: #667085;
 }
+
+
 
 .email-link {
   color: #173f9f;
@@ -9196,12 +7137,13 @@ body {
 .package-label {
   font-size: 9px;
   line-height: 10px;
-  font-weight: 900;
+  font-weight: 700;
   color: #231f20;
   white-space: nowrap;
 }
 
 .qr-box {
+padding-top:20px;
   width: 100%;
   height: 58px;
   display: flex;
@@ -9217,12 +7159,13 @@ body {
 }
 
 .package-number-box {
+padding-top:25px;
   width: 100%;
   height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 2px;
+  // padding: 0 2px;
   overflow: visible;
 }
 
@@ -9231,12 +7174,12 @@ body {
   max-width: 100%;
   font-size: 46px;
   line-height: 1;
-  font-weight: 900;
+  font-weight: 700;
   color: #231f20;
   letter-spacing: -2px;
   text-align: center;
   white-space: nowrap;
-  font-family: Arial Black, Arial, Helvetica, sans-serif;
+  font-family: "CalibriPdf", Arial, Helvetica, sans-serif;
 }
 
 /* for 3 digit package no */
@@ -9278,24 +7221,36 @@ body {
 
 .align-right {
   text-align: right;
+  padding-right:5px;
 }
 
 .field-label {
   color: #64748b;
-  font-size: 5.4px;
-  line-height: 5.9px;
+  font-size: 7.5pt;
+  line-height: 6px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05px;
-  margin-bottom: 0.25mm;
+  margin-bottom: 0.8mm;
 }
 
 .field-value {
   color: #111827;
-  font-size: 5.9px;
-  line-height: 6.8px;
+  font-size: 8px !important;
+  line-height: 8px;
   font-weight: 800;
   overflow-wrap: anywhere;
+   margin-bottom: 0.5mm;
+}
+
+.item-no-value {
+  font-size: 7px !important;
+  line-height: 7.2px;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  max-height: 15px;
+  overflow: hidden;
 }
 
 .section-separator {
@@ -9312,27 +7267,32 @@ body {
 */
 
 .product-title {
-  color: #1f2937;
-  font-size: 6.3px;
-  line-height: 7px;
-  font-weight: 800;
+  color: #64748b;
+  font-size: 7.5pt;
+  line-height: 6px;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05px;
   margin: 0 0 1.1mm;
   flex: 0 0 auto;
 }
 
-/*
-|--------------------------------------------------------------------------
-| Components table - CDR final
-|--------------------------------------------------------------------------
-*/
+.project-value{
+color: #111827;
+  font-size: 8pt;
+  line-height: 6px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+   margin-bottom: 0.5mm;
+   text-transform: uppercase;
+}
+
 
 .component-table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-  border: 1px solid #111827;
+  border: 1px solid #111827 !important;
   flex: 0 0 auto;
 }
 
@@ -9369,9 +7329,11 @@ body {
 }
 
 .component-table .table-head-main th {
-  height: 5.4mm;
+  height: 3mm;
   border-bottom: 1px solid #374151;
 }
+
+
 
 .component-table .table-head-sub th {
   height: 4mm;
@@ -9386,12 +7348,12 @@ body {
 
 .component-table td {
   color: #111827;
-  border-left: 1px solid #111827;
-  border-right: 1px solid #111827;
-  border-bottom: 1px solid #d1d5db;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
   font-size: 5.3px;
   line-height: 6.1px;
-  font-weight: 700;
+  font-weight: 600;
   padding: 0.85mm 0.65mm;
   vertical-align: top;
   overflow-wrap: anywhere;
@@ -9406,38 +7368,50 @@ body {
 }
 
 .code-cell {
-  text-align: center;
+  text-align: center;  
+  color: #111827;
+  font-size: 8px !important;
+  line-height: 6.1px;
   font-weight: 800;
 }
+
+
+
+
 
 .component-cell strong {
   display: block;
   color: #111827;
-  font-size: 5.4px;
+  font-size: 8px !important;
   line-height: 6.1px;
   font-weight: 800;
 }
 
 .component-cell span {
   display: block;
-  margin-top: 0.25mm;
+  margin-top: 1mm;
   color: #111827;
-  font-size: 5px;
+  font-size: 8px !important;
   line-height: 5.7px;
-  font-weight: 500;
+  font-weight: 800;
 }
 
 .qty-cell,
 .unit-cell,
 .total-cell {
   text-align: center;
-  font-weight: 700;
+  font-weight: 800;
+  color: #111827;
+  font-size: 8px !important;
+  border-left: 1px solid #fff !important;
+  border-right: 1px solid #fff !important;
+  border-bottom: 1px solid #fff;
 }
 
 .component-table tfoot td {
   background: #b8d7e3;
-  border: 1px solid #111827;
-  font-size: 5px;
+  border: 1px solid #fff;
+  font-size: 8px !important;
   line-height: 5.8px;
   font-weight: 800;
   padding: 1mm 0.65mm;
@@ -9452,6 +7426,7 @@ body {
   padding: 4mm 1mm !important;
   font-weight: 800;
 }
+
 
 /*
 |--------------------------------------------------------------------------
@@ -9472,16 +7447,6 @@ body {
   max-width: 45%;
 }
 
-.summary-logo-wrap .logo-img {
-  width: 95px;
-  max-width: 95px;
-}
-
-.summary-logo-wrap .fallback-logo-text {
-  font-size: 22px;
-  line-height: 22px;
-}
-
 .summary-company-info {
   color: #667085;
   font-size: 5px;
@@ -9492,7 +7457,7 @@ body {
 .summary-company-name {
   color: #172033;
   font-size: 6.2px;
-  font-weight: 900;
+  font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 0.8mm;
 }
@@ -9511,7 +7476,7 @@ body {
   overflow: hidden;
   color: #111827;
   font-size: 8px;
-  font-weight: 900;
+  font-weight: 700;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -9520,7 +7485,7 @@ body {
   margin-top: 0.6mm;
   color: #667085;
   font-size: 5.4px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .summary-client {
@@ -9562,7 +7527,7 @@ body {
   margin-top: 0.5mm;
   color: #111827;
   font-size: 8px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .summary-address {
@@ -9582,7 +7547,7 @@ body {
 
 .section-title {
   font-size: 6.3px;
-  font-weight: 900;
+  font-weight: 700;
   margin-top: 2mm;
   margin-bottom: 1.2mm;
   letter-spacing: 0.1px;
@@ -9601,7 +7566,7 @@ body {
   border: 1px solid #111827;
   font-size: 4.2px;
   line-height: 5px;
-  font-weight: 900;
+  font-weight: 700;
   text-align: left;
   letter-spacing: 0;
 }
@@ -9612,7 +7577,7 @@ body {
   color: #111827;
   font-size: 4.4px;
   line-height: 5.2px;
-  font-weight: 700;
+  font-weight: 600;
   overflow-wrap: anywhere;
 }
 
@@ -9623,8 +7588,11 @@ body {
 .summary-table tfoot td {
   background: #b8d7e3;
   border: 1px solid #111827;
-  font-weight: 900;
+  font-weight: 700;
 }
+  .fs-10{
+  font-size:10px !important;
+  } 
 </style>
 </head>
 

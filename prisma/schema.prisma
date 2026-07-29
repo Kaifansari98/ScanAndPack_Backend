@@ -2707,6 +2707,7 @@ model CutListMachineMapping {
   box_id        Int?
   site_in_at    DateTime?
   site_in_by    Int?
+  weight                Float                   @default(0)
 
   cut_list         CutList                 @relation(fields: [cut_list_id], references: [id])
   operator         UserMaster?             @relation(fields: [in_operator], references: [id])

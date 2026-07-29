@@ -2157,7 +2157,8 @@ export const CutListMachineMappingScalarFieldEnum = {
   created_at: 'created_at',
   box_id: 'box_id',
   site_in_at: 'site_in_at',
-  site_in_by: 'site_in_by'
+  site_in_by: 'site_in_by',
+  weight: 'weight'
 } as const
 
 export type CutListMachineMappingScalarFieldEnum = (typeof CutListMachineMappingScalarFieldEnum)[keyof typeof CutListMachineMappingScalarFieldEnum]
