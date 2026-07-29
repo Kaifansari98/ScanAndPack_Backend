@@ -136,16 +136,24 @@ export async function processPendingNotificationQueue() {
 
             const mainOrConditions: any[] = [];
 
+            // Specific user IDs are always added as a separate OR condition
             if (userTargetIdsFromAudience.length > 0) {
               mainOrConditions.push({ id: { in: userTargetIdsFromAudience } });
             }
 
-            // FIX: push franchise and role as SEPARATE OR conditions (not merged into one AND object)
-            if (franchiseTargetIds.length > 0) {
+            // AND logic: if both franchise AND role are selected, intersect them
+            // e.g. Mumbai franchise + Site Supervisor → only Site Supervisors IN Mumbai
+            if (franchiseTargetIds.length > 0 && roleTargetIds.length > 0) {
+              // Intersection: users must match BOTH franchise AND role
+              mainOrConditions.push({
+                franchise_id: { in: franchiseTargetIds },
+                user_type_id: { in: roleTargetIds },
+              });
+            } else if (franchiseTargetIds.length > 0) {
+              // Only franchise selected → all users in that franchise
               mainOrConditions.push({ franchise_id: { in: franchiseTargetIds } });
-            }
-
-            if (roleTargetIds.length > 0) {
+            } else if (roleTargetIds.length > 0) {
+              // Only role selected → all users with that role
               mainOrConditions.push({ user_type_id: { in: roleTargetIds } });
             }
 
