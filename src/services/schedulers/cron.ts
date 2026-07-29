@@ -84,6 +84,25 @@ export async function processPendingNotificationQueue() {
           const targetUserIds = new Set<number>();
           const userVendorMap = new Map<number, number>();
 
+          // Resolve effective vendor_id: use broadcast's vendor_id or fall back to the creator's vendor
+          let effectiveVendorId: number | null = broadcast.vendor_id ?? null;
+          if (!effectiveVendorId && broadcast.created_by) {
+            const creatorUser = await prisma.userMaster.findUnique({
+              where: { id: broadcast.created_by },
+              select: { vendor_id: true },
+            });
+            effectiveVendorId = creatorUser?.vendor_id ?? null;
+          }
+
+          if (!effectiveVendorId) {
+            logger.warn(`Broadcast ${broadcastId} has no vendor_id and creator has no vendor — skipping to prevent cross-vendor notification leak`);
+            await prisma.notificationQueue.update({
+              where: { id: queueItem.id },
+              data: { notification_status: "FAILED" },
+            });
+            continue;
+          }
+
           // Check if there is an 'ALL' audience type
           const hasAllAudience = broadcast.audiences.some((a) => a.audience_type === "ALL");
 
@@ -92,7 +111,7 @@ export async function processPendingNotificationQueue() {
             const activeUsers = await prisma.userMaster.findMany({
               where: {
                 status: { equals: "active", mode: "insensitive" },
-                ...(broadcast.vendor_id ? { vendor_id: broadcast.vendor_id } : {}),
+                vendor_id: effectiveVendorId,
                 ...(superAdminTypeIds.length > 0 ? { user_type_id: { notIn: superAdminTypeIds } } : {}),
               },
               select: { id: true, vendor_id: true },
@@ -117,26 +136,32 @@ export async function processPendingNotificationQueue() {
 
             const mainOrConditions: any[] = [];
 
+            // Specific user IDs are always added as a separate OR condition
             if (userTargetIdsFromAudience.length > 0) {
               mainOrConditions.push({ id: { in: userTargetIdsFromAudience } });
             }
 
-            if (franchiseTargetIds.length > 0 || roleTargetIds.length > 0) {
-              const targetedWhere: any = {};
-              if (franchiseTargetIds.length > 0) {
-                targetedWhere.franchise_id = { in: franchiseTargetIds };
-              }
-              if (roleTargetIds.length > 0) {
-                targetedWhere.user_type_id = { in: roleTargetIds };
-              }
-              mainOrConditions.push(targetedWhere);
+            // AND logic: if both franchise AND role are selected, intersect them
+            // e.g. Mumbai franchise + Site Supervisor → only Site Supervisors IN Mumbai
+            if (franchiseTargetIds.length > 0 && roleTargetIds.length > 0) {
+              // Intersection: users must match BOTH franchise AND role
+              mainOrConditions.push({
+                franchise_id: { in: franchiseTargetIds },
+                user_type_id: { in: roleTargetIds },
+              });
+            } else if (franchiseTargetIds.length > 0) {
+              // Only franchise selected → all users in that franchise
+              mainOrConditions.push({ franchise_id: { in: franchiseTargetIds } });
+            } else if (roleTargetIds.length > 0) {
+              // Only role selected → all users with that role
+              mainOrConditions.push({ user_type_id: { in: roleTargetIds } });
             }
 
             if (mainOrConditions.length > 0) {
               const matchedUsers = await prisma.userMaster.findMany({
                 where: {
                   status: { equals: "active", mode: "insensitive" },
-                  ...(broadcast.vendor_id ? { vendor_id: broadcast.vendor_id } : {}),
+                  vendor_id: effectiveVendorId,
                   ...(superAdminTypeIds.length > 0 ? { user_type_id: { notIn: superAdminTypeIds } } : {}),
                   OR: mainOrConditions,
                 },
@@ -183,7 +208,7 @@ for (let i = 0; i < users.length; i += BATCH_SIZE) {
         }
 
         const userVendorId =
-          broadcast.vendor_id || userVendorMap.get(userId) || 0;
+          userVendorMap.get(userId) || effectiveVendorId || 0;
 
         await NotificationService.createAndSend({
           
