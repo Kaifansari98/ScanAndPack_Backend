@@ -126,34 +126,51 @@ export class BroadcastRepository {
         { publish_at: { lte: new Date() } }
       ];
 
-      where.AND = [
-        {
-          OR: [
-            { audiences: { none: {} } },
-            { audiences: { some: { audience_type: "ALL" } } },
-            { audiences: { some: { audience_type: "USER", target_id: audience.userId } } },
-            {
-              AND: [
-                {
-                  OR: [
-                    { audiences: { none: { audience_type: "FRANCHISE" } } },
-                    ...(audience.franchiseId
-                      ? [{ audiences: { some: { audience_type: "FRANCHISE", target_id: audience.franchiseId } } }]
-                      : []),
-                  ],
-                },
-                {
-                  OR: [
-                    { audiences: { none: { audience_type: "ROLE" } } },
-                    ...(audience.userTypeId
-                      ? [{ audiences: { some: { audience_type: "ROLE", target_id: audience.userTypeId } } }]
-                      : []),
-                  ],
-                },
-              ],
-            },
+      const audienceConditions: any[] = [
+        // 1. Broadcast has no audiences defined (unrestricted)
+        { audiences: { none: {} } },
+        // 2. Broadcast is sent to ALL
+        { audiences: { some: { audience_type: "ALL" } } },
+        // 3. Broadcast is explicitly sent to this user ID
+        { audiences: { some: { audience_type: "USER", target_id: audience.userId } } },
+      ];
+
+      // 4a. Broadcast has BOTH Franchise and Role targets -> user must match BOTH
+      if (audience.franchiseId && audience.userTypeId) {
+        audienceConditions.push({
+          AND: [
+            { audiences: { some: { audience_type: "FRANCHISE" } } },
+            { audiences: { some: { audience_type: "FRANCHISE", target_id: audience.franchiseId } } },
+            { audiences: { some: { audience_type: "ROLE" } } },
+            { audiences: { some: { audience_type: "ROLE", target_id: audience.userTypeId } } },
           ],
-        },
+        });
+      }
+
+      // 4b. Broadcast has ONLY Franchise targets (no Role targets) -> user must match Franchise
+      if (audience.franchiseId) {
+        audienceConditions.push({
+          AND: [
+            { audiences: { some: { audience_type: "FRANCHISE" } } },
+            { audiences: { some: { audience_type: "FRANCHISE", target_id: audience.franchiseId } } },
+            { audiences: { none: { audience_type: "ROLE" } } },
+          ],
+        });
+      }
+
+      // 4c. Broadcast has ONLY Role targets (no Franchise targets) -> user must match Role
+      if (audience.userTypeId) {
+        audienceConditions.push({
+          AND: [
+            { audiences: { none: { audience_type: "FRANCHISE" } } },
+            { audiences: { some: { audience_type: "ROLE" } } },
+            { audiences: { some: { audience_type: "ROLE", target_id: audience.userTypeId } } },
+          ],
+        });
+      }
+
+      where.AND = [
+        { OR: audienceConditions }
       ];
     }
 
