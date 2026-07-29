@@ -334,67 +334,112 @@ export const getScanItemsByFields = async ({
   };
 };
 
-export const deleteScanAndPackItemById = async (id: number) => {
-  // Step 1: Find the scan item
-  const existing = await prisma.scanAndPackItem.findUnique({ where: { id } });
+export const deleteScanAndPackItemById = async (
+  id: number,
+  vendor_id: number,
+  project_id: number,
+  box_id: number
+) => {
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 1 — Validate required params
+  |--------------------------------------------------------------------------
+  */
 
-  if (!existing) {
-    throw new Error('Scan item not found');
+  if (!id || !vendor_id || !project_id || !box_id) {
+    throw new Error("id, vendor_id, project_id and box_id are required");
+  }else{
+    console.log(vendor_id,project_id,box_id);
   }
 
-  // Step 2: Delete the scan item
-  await prisma.scanAndPackItem.delete({
-    where: { id },
-  });
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 2 — Check box exists and is not packed
+  |--------------------------------------------------------------------------
+  */
 
-  // Step 3: Recalculate total_packed and total_unpacked for the specific room
-  const { project_id, vendor_id, client_id, project_details_id } = existing;
-
-  // Get packed count for this specific project_details_id only
-  const packedCountForRoom = await prisma.scanAndPackItem.count({
+  const box = await prisma.boxMaster.findFirst({
     where: {
-      project_details_id: project_details_id,
-      project_id,
-      vendor_id,
-      client_id,
-      is_deleted: false, 
+      id: Number(box_id),
+      vendor_id: Number(vendor_id),
+      project_id: Number(project_id),
+      is_deleted: false,
+    },
+    select: {
+      id: true,
+      box_name: true,
+      box_status: true,
     },
   });
 
-  // Get the specific ProjectDetails row (room)
-  const projectDetails = await prisma.projectDetails.findUnique({
+  if (!box) {
+    throw new Error("Box not found");
+  }
+
+  if (String(box.box_status).toLowerCase() === "packed") {
+    throw new Error("Packed box cannot be updated");
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 3 — Check mapping exists inside this box
+  |--------------------------------------------------------------------------
+  */
+
+  const existingMapping = await prisma.cutListMachineMapping.findFirst({
     where: {
-      id: project_details_id,
+      id: Number(id),
+      vendor_id: Number(vendor_id),
+      project_id: Number(project_id),
+      box_id: Number(box_id),
+    },
+    select: {
+      id: true,
+      box_id: true,
+      cut_list_id: true,
+      machine_id: true,
+      project_id: true,
+      vendor_id: true,
     },
   });
 
-  if (!projectDetails) {
-    throw new Error('Related projectDetails not found');
+  if (!existingMapping) {
+    throw new Error("Item not found in this box");
   }
 
-  const total_items = projectDetails.total_items || 0;
-  const total_packed = packedCountForRoom;
-  const total_unpacked = Math.max(total_items - total_packed, 0);
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 4 — Remove item from box
+  |--------------------------------------------------------------------------
+  | Do not delete ScanAndPackItem.
+  | Only set CutListMachineMapping.box_id = null.
+  |--------------------------------------------------------------------------
+  */
 
-  // Step 4: Update only the specific ProjectDetails row (room)
-  await prisma.projectDetails.update({
+  const updatedMapping = await prisma.cutListMachineMapping.update({
     where: {
-      id: project_details_id,
+      id: existingMapping.id,
     },
     data: {
-      total_packed,
-      total_unpacked,
+      box_id: null,
+    },
+    select: {
+      id: true,
+      box_id: true,
+      cut_list_id: true,
+      machine_id: true,
+      project_id: true,
+      vendor_id: true,
     },
   });
+  console.log("Item removed from box successfully");
 
-  return { 
-    deletedId: id, 
-    updatedProjectDetails: {
-      project_details_id: project_details_id,
-      room_name: projectDetails.room_name,
-      total_items,
-      total_packed, 
-      total_unpacked 
-    }
+  return {
+    message: "Item removed from box successfully",
+    removed_mapping_id: updatedMapping.id,
+    previous_box_id: Number(box_id),
+    current_box_id: updatedMapping.box_id,
+    project_id: updatedMapping.project_id,
+    vendor_id: updatedMapping.vendor_id,
   };
 };
