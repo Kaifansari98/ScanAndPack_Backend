@@ -1226,6 +1226,24 @@ export const createProjectService = async (
       throw new Error("Vendor not found");
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 0.0 — Resolve workstation mode
+    |--------------------------------------------------------------------------
+    | Actual rule:
+    | - is_tracktrace_enabled = true  -> Track & Trace machines: 3, 7, 11
+    | - is_scanpack_enabled = true    -> ScanPack machines: 17, 18
+    | - both true                     -> 3, 7, 11, 17, 18
+    | - both false                    -> stop before creating project/cutlist
+    |--------------------------------------------------------------------------
+    */
+    const isTrackTraceEnabled = vendor.is_tracktrace_enabled === true;
+    const isScanPackEnabled = vendor.is_scanpack_enabled === true;
+
+    if (!isTrackTraceEnabled && !isScanPackEnabled) {
+      throw new Error("workstation not configured");
+    }
+
     const resolvedPackingType:
       PackingType =
       packing_type ===
@@ -1591,11 +1609,16 @@ export const createProjectService = async (
         | Fetch machines only once
         |--------------------------------------------------------------------------
         */
+        const enabledMachineTypeIds = [
+          ...(isTrackTraceEnabled ? [3, 7, 11] : []),
+          ...(isScanPackEnabled ? [17, 18] : []),
+        ];
+
         const machines = await tx.machineMaster.findMany({
           where: {
             vendor_id: vendor.id,
             machine_type_id: {
-              in: [3, 7, 11, 17, 18],
+              in: [...new Set(enabledMachineTypeIds)],
             },
           },
           select: {
@@ -1667,7 +1690,7 @@ export const createProjectService = async (
               sequence_no: machine.sequence_no ?? 0,
               status: "Pending",
               created_by: createdByUserId,
-              expected_in: true,              
+              expected_in: true,
               /*
               |--------------------------------------------------------------------------
               | Weight is stored only against packaging machine type 18
@@ -1678,6 +1701,100 @@ export const createProjectService = async (
                   ? perItemWeight
                   : 0,
             });
+          }
+        };
+
+        const pushScanPackMachineMappingRows = ({
+          cutListId,
+          quantity,
+          perItemWeight,
+        }: {
+          cutListId: number;
+          quantity: number;
+          perItemWeight: number;
+        }) => {
+          const scanMachine = getMachine(17);
+          const packMachine = getMachine(18);
+
+          if (scanMachine) {
+            pushMachineMappingRows({
+              cutListId,
+              machine: scanMachine,
+              quantity,
+              perItemWeight,
+            });
+          }
+
+          if (packMachine) {
+            pushMachineMappingRows({
+              cutListId,
+              machine: packMachine,
+              quantity,
+              perItemWeight,
+            });
+          }
+        };
+
+        const pushTrackTraceMachineMappingRows = ({
+          cutListId,
+          item,
+          hasEdgeBanding,
+          quantity,
+          perItemWeight,
+        }: {
+          cutListId: number;
+          item: any;
+          hasEdgeBanding: boolean;
+          quantity: number;
+          perItemWeight: number;
+        }) => {
+          /*
+          |--------------------------------------------------------------------------
+          | Track & Trace flow
+          |--------------------------------------------------------------------------
+          | Only machine types 3, 7 and 11 are considered here.
+          | ScanPack machines 17 and 18 are added separately only when
+          | is_scanpack_enabled is true.
+          |--------------------------------------------------------------------------
+          */
+
+          if (hasEdgeBanding) {
+            const edgeBandingMachine = getMachine(11);
+
+            if (!edgeBandingMachine) {
+              throw new Error("Edgebanding machine is not configured");
+            }
+
+            pushMachineMappingRows({
+              cutListId,
+              machine: edgeBandingMachine,
+              quantity,
+              perItemWeight,
+            });
+          }
+
+          const cuttingMachine = getMachine(3, true);
+
+          if (cuttingMachine) {
+            pushMachineMappingRows({
+              cutListId,
+              machine: cuttingMachine,
+              quantity,
+              perItemWeight,
+            });
+          }
+
+          if (Number(item.l3) > 9) {
+            const cncMachine = getMachine(7, true);
+
+            if (cncMachine) {
+              pushMachineMappingRows({
+                cutListId,
+                machine: cncMachine,
+                quantity,
+                perItemWeight,
+              });
+            }
           }
         };
 
@@ -1770,26 +1887,16 @@ export const createProjectService = async (
 
           /*
           |--------------------------------------------------------------------------
-          | Type 3 — Only Scan/Pack machine types 17 and 18
+          | Type 3 — ScanPack category
+          |--------------------------------------------------------------------------
+          | Type 3 items belong to Quality/Packaging flow.
+          | They get machine types 17 and 18 only when ScanPack is enabled.
           |--------------------------------------------------------------------------
           */
           if (hasType3 && !isNormalFlow) {
-            const scanMachine = getMachine(17);
-            const packMachine = getMachine(18);
-
-            if (scanMachine) {
-              pushMachineMappingRows({
+            if (isScanPackEnabled) {
+              pushScanPackMachineMappingRows({
                 cutListId: row.id,
-                machine: scanMachine,
-                quantity,
-                perItemWeight,
-              });
-            }
-
-            if (packMachine) {
-              pushMachineMappingRows({
-                cutListId: row.id,
-                machine: packMachine,
                 quantity,
                 perItemWeight,
               });
@@ -1802,62 +1909,24 @@ export const createProjectService = async (
           |--------------------------------------------------------------------------
           | Normal flow
           |--------------------------------------------------------------------------
+          | Track & Trace enabled  -> 3, 7, 11
+          | ScanPack enabled      -> 17, 18
+          | Both enabled          -> 3, 7, 11, 17, 18
+          |--------------------------------------------------------------------------
           */
-          if (hasEdgeBanding) {
-            const edgeBandingMachine = getMachine(11);
-
-            if (!edgeBandingMachine) {
-              throw new Error("Edgebanding machine is not configured");
-            }
-
-            pushMachineMappingRows({
+          if (isTrackTraceEnabled) {
+            pushTrackTraceMachineMappingRows({
               cutListId: row.id,
-              machine: edgeBandingMachine,
+              item,
+              hasEdgeBanding,
               quantity,
               perItemWeight,
             });
           }
 
-          const cuttingMachine = getMachine(3, true);
-
-          if (cuttingMachine) {
-            pushMachineMappingRows({
+          if (isScanPackEnabled) {
+            pushScanPackMachineMappingRows({
               cutListId: row.id,
-              machine: cuttingMachine,
-              quantity,
-              perItemWeight,
-            });
-          }
-
-          if (Number(item.l3) > 9) {
-            const cncMachine = getMachine(7, true);
-
-            if (cncMachine) {
-              pushMachineMappingRows({
-                cutListId: row.id,
-                machine: cncMachine,
-                quantity,
-                perItemWeight,
-              });
-            }
-          }
-
-          const scanMachine = getMachine(17);
-          const packMachine = getMachine(18);
-
-          if (scanMachine) {
-            pushMachineMappingRows({
-              cutListId: row.id,
-              machine: scanMachine,
-              quantity,
-              perItemWeight,
-            });
-          }
-
-          if (packMachine) {
-            pushMachineMappingRows({
-              cutListId: row.id,
-              machine: packMachine,
               quantity,
               perItemWeight,
             });
