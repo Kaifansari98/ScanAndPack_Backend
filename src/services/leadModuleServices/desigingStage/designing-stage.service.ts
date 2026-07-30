@@ -514,6 +514,7 @@ export class DesigingStage {
                 id: true,
                 doc_og_name: true,
                 product_type_id: true,
+                product_structure_instance_id: true,
               },
             })
           : null;
@@ -526,6 +527,10 @@ export class DesigingStage {
       const inheritedProductTypeId =
         vendor?.handlesLargeScaleProjects === true
           ? selectedDesignDocument?.product_type_id ?? null
+          : null;
+      const inheritedInstanceId =
+        vendor?.handlesLargeScaleProjects === true
+          ? selectedDesignDocument?.product_structure_instance_id ?? null
           : null;
       const uploadedDocs: any[] = [];
 
@@ -558,6 +563,7 @@ export class DesigingStage {
             doc_type_id: quotationDocType.id,
             created_by: data.userId,
             product_type_id: inheritedProductTypeId,
+            product_structure_instance_id: inheritedInstanceId,
           },
         });
 
