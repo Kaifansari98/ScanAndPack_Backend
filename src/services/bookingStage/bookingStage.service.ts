@@ -987,6 +987,8 @@ export class BookingStageService {
           originalName: doc.doc_og_name,
           s3Key: doc.doc_sys_name,
           type: doc.documentType?.tag,
+          product_type_id: doc.product_type_id,
+          product_structure_instance_id: doc.product_structure_instance_id,
           created_at: doc.created_at,
           signedUrl,
         };
