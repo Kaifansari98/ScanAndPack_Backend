@@ -32,6 +32,10 @@ export type PaymentInfoAvgAggregateOutputType = {
   account_id: number | null
   status_id: number | null
   amount: number | null
+  basic_amount: number | null
+  gst_percentage: number | null
+  gst_amount: number | null
+  total_amount: number | null
   payment_file_id: number | null
   created_by: number | null
   vendor_id: number | null
@@ -45,6 +49,10 @@ export type PaymentInfoSumAggregateOutputType = {
   account_id: number | null
   status_id: number | null
   amount: number | null
+  basic_amount: number | null
+  gst_percentage: number | null
+  gst_amount: number | null
+  total_amount: number | null
   payment_file_id: number | null
   created_by: number | null
   vendor_id: number | null
@@ -58,6 +66,10 @@ export type PaymentInfoMinAggregateOutputType = {
   account_id: number | null
   status_id: number | null
   amount: number | null
+  basic_amount: number | null
+  gst_percentage: number | null
+  gst_amount: number | null
+  total_amount: number | null
   payment_date: Date | null
   payment_text: string | null
   payment_file_id: number | null
@@ -74,6 +86,10 @@ export type PaymentInfoMaxAggregateOutputType = {
   account_id: number | null
   status_id: number | null
   amount: number | null
+  basic_amount: number | null
+  gst_percentage: number | null
+  gst_amount: number | null
+  total_amount: number | null
   payment_date: Date | null
   payment_text: string | null
   payment_file_id: number | null
@@ -90,6 +106,10 @@ export type PaymentInfoCountAggregateOutputType = {
   account_id: number
   status_id: number
   amount: number
+  basic_amount: number
+  gst_percentage: number
+  gst_amount: number
+  total_amount: number
   payment_date: number
   payment_text: number
   payment_file_id: number
@@ -108,6 +128,10 @@ export type PaymentInfoAvgAggregateInputType = {
   account_id?: true
   status_id?: true
   amount?: true
+  basic_amount?: true
+  gst_percentage?: true
+  gst_amount?: true
+  total_amount?: true
   payment_file_id?: true
   created_by?: true
   vendor_id?: true
@@ -121,6 +145,10 @@ export type PaymentInfoSumAggregateInputType = {
   account_id?: true
   status_id?: true
   amount?: true
+  basic_amount?: true
+  gst_percentage?: true
+  gst_amount?: true
+  total_amount?: true
   payment_file_id?: true
   created_by?: true
   vendor_id?: true
@@ -134,6 +162,10 @@ export type PaymentInfoMinAggregateInputType = {
   account_id?: true
   status_id?: true
   amount?: true
+  basic_amount?: true
+  gst_percentage?: true
+  gst_amount?: true
+  total_amount?: true
   payment_date?: true
   payment_text?: true
   payment_file_id?: true
@@ -150,6 +182,10 @@ export type PaymentInfoMaxAggregateInputType = {
   account_id?: true
   status_id?: true
   amount?: true
+  basic_amount?: true
+  gst_percentage?: true
+  gst_amount?: true
+  total_amount?: true
   payment_date?: true
   payment_text?: true
   payment_file_id?: true
@@ -166,6 +202,10 @@ export type PaymentInfoCountAggregateInputType = {
   account_id?: true
   status_id?: true
   amount?: true
+  basic_amount?: true
+  gst_percentage?: true
+  gst_amount?: true
+  total_amount?: true
   payment_date?: true
   payment_text?: true
   payment_file_id?: true
@@ -269,6 +309,10 @@ export type PaymentInfoGroupByOutputType = {
   account_id: number
   status_id: number | null
   amount: number | null
+  basic_amount: number | null
+  gst_percentage: number | null
+  gst_amount: number | null
+  total_amount: number | null
   payment_date: Date | null
   payment_text: string | null
   payment_file_id: number | null
@@ -308,6 +352,10 @@ export type PaymentInfoWhereInput = {
   account_id?: Prisma.IntFilter<"PaymentInfo"> | number
   status_id?: Prisma.IntNullableFilter<"PaymentInfo"> | number | null
   amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
+  basic_amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
+  gst_percentage?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
+  gst_amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
+  total_amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
   payment_date?: Prisma.DateTimeNullableFilter<"PaymentInfo"> | Date | string | null
   payment_text?: Prisma.StringNullableFilter<"PaymentInfo"> | string | null
   payment_file_id?: Prisma.IntNullableFilter<"PaymentInfo"> | number | null
@@ -332,6 +380,10 @@ export type PaymentInfoOrderByWithRelationInput = {
   account_id?: Prisma.SortOrder
   status_id?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  basic_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  gst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
+  gst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  total_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   payment_date?: Prisma.SortOrderInput | Prisma.SortOrder
   payment_text?: Prisma.SortOrderInput | Prisma.SortOrder
   payment_file_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -359,6 +411,10 @@ export type PaymentInfoWhereUniqueInput = Prisma.AtLeast<{
   account_id?: Prisma.IntFilter<"PaymentInfo"> | number
   status_id?: Prisma.IntNullableFilter<"PaymentInfo"> | number | null
   amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
+  basic_amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
+  gst_percentage?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
+  gst_amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
+  total_amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
   payment_date?: Prisma.DateTimeNullableFilter<"PaymentInfo"> | Date | string | null
   payment_text?: Prisma.StringNullableFilter<"PaymentInfo"> | string | null
   payment_file_id?: Prisma.IntNullableFilter<"PaymentInfo"> | number | null
@@ -383,6 +439,10 @@ export type PaymentInfoOrderByWithAggregationInput = {
   account_id?: Prisma.SortOrder
   status_id?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  basic_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  gst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
+  gst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  total_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   payment_date?: Prisma.SortOrderInput | Prisma.SortOrder
   payment_text?: Prisma.SortOrderInput | Prisma.SortOrder
   payment_file_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -407,6 +467,10 @@ export type PaymentInfoScalarWhereWithAggregatesInput = {
   account_id?: Prisma.IntWithAggregatesFilter<"PaymentInfo"> | number
   status_id?: Prisma.IntNullableWithAggregatesFilter<"PaymentInfo"> | number | null
   amount?: Prisma.FloatNullableWithAggregatesFilter<"PaymentInfo"> | number | null
+  basic_amount?: Prisma.FloatNullableWithAggregatesFilter<"PaymentInfo"> | number | null
+  gst_percentage?: Prisma.FloatNullableWithAggregatesFilter<"PaymentInfo"> | number | null
+  gst_amount?: Prisma.FloatNullableWithAggregatesFilter<"PaymentInfo"> | number | null
+  total_amount?: Prisma.FloatNullableWithAggregatesFilter<"PaymentInfo"> | number | null
   payment_date?: Prisma.DateTimeNullableWithAggregatesFilter<"PaymentInfo"> | Date | string | null
   payment_text?: Prisma.StringNullableWithAggregatesFilter<"PaymentInfo"> | string | null
   payment_file_id?: Prisma.IntNullableWithAggregatesFilter<"PaymentInfo"> | number | null
@@ -419,6 +483,10 @@ export type PaymentInfoScalarWhereWithAggregatesInput = {
 
 export type PaymentInfoCreateInput = {
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   created_at?: Date | string
@@ -438,6 +506,10 @@ export type PaymentInfoUncheckedCreateInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   payment_file_id?: number | null
@@ -450,6 +522,10 @@ export type PaymentInfoUncheckedCreateInput = {
 
 export type PaymentInfoUpdateInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -469,6 +545,10 @@ export type PaymentInfoUncheckedUpdateInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_file_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -485,6 +565,10 @@ export type PaymentInfoCreateManyInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   payment_file_id?: number | null
@@ -497,6 +581,10 @@ export type PaymentInfoCreateManyInput = {
 
 export type PaymentInfoUpdateManyMutationInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -508,6 +596,10 @@ export type PaymentInfoUncheckedUpdateManyInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_file_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -534,6 +626,10 @@ export type PaymentInfoCountOrderByAggregateInput = {
   account_id?: Prisma.SortOrder
   status_id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  basic_amount?: Prisma.SortOrder
+  gst_percentage?: Prisma.SortOrder
+  gst_amount?: Prisma.SortOrder
+  total_amount?: Prisma.SortOrder
   payment_date?: Prisma.SortOrder
   payment_text?: Prisma.SortOrder
   payment_file_id?: Prisma.SortOrder
@@ -550,6 +646,10 @@ export type PaymentInfoAvgOrderByAggregateInput = {
   account_id?: Prisma.SortOrder
   status_id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  basic_amount?: Prisma.SortOrder
+  gst_percentage?: Prisma.SortOrder
+  gst_amount?: Prisma.SortOrder
+  total_amount?: Prisma.SortOrder
   payment_file_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
@@ -563,6 +663,10 @@ export type PaymentInfoMaxOrderByAggregateInput = {
   account_id?: Prisma.SortOrder
   status_id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  basic_amount?: Prisma.SortOrder
+  gst_percentage?: Prisma.SortOrder
+  gst_amount?: Prisma.SortOrder
+  total_amount?: Prisma.SortOrder
   payment_date?: Prisma.SortOrder
   payment_text?: Prisma.SortOrder
   payment_file_id?: Prisma.SortOrder
@@ -579,6 +683,10 @@ export type PaymentInfoMinOrderByAggregateInput = {
   account_id?: Prisma.SortOrder
   status_id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  basic_amount?: Prisma.SortOrder
+  gst_percentage?: Prisma.SortOrder
+  gst_amount?: Prisma.SortOrder
+  total_amount?: Prisma.SortOrder
   payment_date?: Prisma.SortOrder
   payment_text?: Prisma.SortOrder
   payment_file_id?: Prisma.SortOrder
@@ -595,6 +703,10 @@ export type PaymentInfoSumOrderByAggregateInput = {
   account_id?: Prisma.SortOrder
   status_id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  basic_amount?: Prisma.SortOrder
+  gst_percentage?: Prisma.SortOrder
+  gst_amount?: Prisma.SortOrder
+  total_amount?: Prisma.SortOrder
   payment_file_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
@@ -940,6 +1052,10 @@ export type PaymentInfoUncheckedUpdateManyWithoutPaymentTypeNestedInput = {
 
 export type PaymentInfoCreateWithoutVendorInput = {
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   created_at?: Date | string
@@ -958,6 +1074,10 @@ export type PaymentInfoUncheckedCreateWithoutVendorInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   payment_file_id?: number | null
@@ -1002,6 +1122,10 @@ export type PaymentInfoScalarWhereInput = {
   account_id?: Prisma.IntFilter<"PaymentInfo"> | number
   status_id?: Prisma.IntNullableFilter<"PaymentInfo"> | number | null
   amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
+  basic_amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
+  gst_percentage?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
+  gst_amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
+  total_amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
   payment_date?: Prisma.DateTimeNullableFilter<"PaymentInfo"> | Date | string | null
   payment_text?: Prisma.StringNullableFilter<"PaymentInfo"> | string | null
   payment_file_id?: Prisma.IntNullableFilter<"PaymentInfo"> | number | null
@@ -1014,6 +1138,10 @@ export type PaymentInfoScalarWhereInput = {
 
 export type PaymentInfoCreateWithoutCreatedByInput = {
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   created_at?: Date | string
@@ -1032,6 +1160,10 @@ export type PaymentInfoUncheckedCreateWithoutCreatedByInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   payment_file_id?: number | null
@@ -1069,6 +1201,10 @@ export type PaymentInfoUpdateManyWithWhereWithoutCreatedByInput = {
 
 export type PaymentInfoCreateWithoutLeadInput = {
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   created_at?: Date | string
@@ -1086,6 +1222,10 @@ export type PaymentInfoUncheckedCreateWithoutLeadInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   payment_file_id?: number | null
@@ -1124,6 +1264,10 @@ export type PaymentInfoUpdateManyWithWhereWithoutLeadInput = {
 
 export type PaymentInfoCreateWithoutAccountInput = {
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   created_at?: Date | string
@@ -1141,6 +1285,10 @@ export type PaymentInfoUncheckedCreateWithoutAccountInput = {
   lead_id: number
   status_id?: number | null
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   payment_file_id?: number | null
@@ -1179,6 +1327,10 @@ export type PaymentInfoUpdateManyWithWhereWithoutAccountInput = {
 
 export type PaymentInfoCreateWithoutProductTypeInput = {
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   created_at?: Date | string
@@ -1197,6 +1349,10 @@ export type PaymentInfoUncheckedCreateWithoutProductTypeInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   payment_file_id?: number | null
@@ -1234,6 +1390,10 @@ export type PaymentInfoUpdateManyWithWhereWithoutProductTypeInput = {
 
 export type PaymentInfoCreateWithoutDocumentInput = {
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   created_at?: Date | string
@@ -1252,6 +1412,10 @@ export type PaymentInfoUncheckedCreateWithoutDocumentInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   created_at?: Date | string
@@ -1289,6 +1453,10 @@ export type PaymentInfoUpdateManyWithWhereWithoutDocumentInput = {
 
 export type PaymentInfoCreateWithoutStatusTypeInput = {
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   created_at?: Date | string
@@ -1306,6 +1474,10 @@ export type PaymentInfoUncheckedCreateWithoutStatusTypeInput = {
   lead_id: number
   account_id: number
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   payment_file_id?: number | null
@@ -1344,6 +1516,10 @@ export type PaymentInfoUpdateManyWithWhereWithoutStatusTypeInput = {
 
 export type PaymentInfoCreateWithoutPaymentTypeInput = {
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   created_at?: Date | string
@@ -1362,6 +1538,10 @@ export type PaymentInfoUncheckedCreateWithoutPaymentTypeInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   payment_file_id?: number | null
@@ -1403,6 +1583,10 @@ export type PaymentInfoCreateManyVendorInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   payment_file_id?: number | null
@@ -1414,6 +1598,10 @@ export type PaymentInfoCreateManyVendorInput = {
 
 export type PaymentInfoUpdateWithoutVendorInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1432,6 +1620,10 @@ export type PaymentInfoUncheckedUpdateWithoutVendorInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_file_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1447,6 +1639,10 @@ export type PaymentInfoUncheckedUpdateManyWithoutVendorInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_file_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1462,6 +1658,10 @@ export type PaymentInfoCreateManyCreatedByInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   payment_file_id?: number | null
@@ -1473,6 +1673,10 @@ export type PaymentInfoCreateManyCreatedByInput = {
 
 export type PaymentInfoUpdateWithoutCreatedByInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1491,6 +1695,10 @@ export type PaymentInfoUncheckedUpdateWithoutCreatedByInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_file_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1506,6 +1714,10 @@ export type PaymentInfoUncheckedUpdateManyWithoutCreatedByInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_file_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1520,6 +1732,10 @@ export type PaymentInfoCreateManyLeadInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   payment_file_id?: number | null
@@ -1532,6 +1748,10 @@ export type PaymentInfoCreateManyLeadInput = {
 
 export type PaymentInfoUpdateWithoutLeadInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1549,6 +1769,10 @@ export type PaymentInfoUncheckedUpdateWithoutLeadInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_file_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1564,6 +1788,10 @@ export type PaymentInfoUncheckedUpdateManyWithoutLeadInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_file_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1579,6 +1807,10 @@ export type PaymentInfoCreateManyAccountInput = {
   lead_id: number
   status_id?: number | null
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   payment_file_id?: number | null
@@ -1591,6 +1823,10 @@ export type PaymentInfoCreateManyAccountInput = {
 
 export type PaymentInfoUpdateWithoutAccountInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1608,6 +1844,10 @@ export type PaymentInfoUncheckedUpdateWithoutAccountInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_file_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1623,6 +1863,10 @@ export type PaymentInfoUncheckedUpdateManyWithoutAccountInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_file_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1639,6 +1883,10 @@ export type PaymentInfoCreateManyProductTypeInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   payment_file_id?: number | null
@@ -1650,6 +1898,10 @@ export type PaymentInfoCreateManyProductTypeInput = {
 
 export type PaymentInfoUpdateWithoutProductTypeInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1668,6 +1920,10 @@ export type PaymentInfoUncheckedUpdateWithoutProductTypeInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_file_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1683,6 +1939,10 @@ export type PaymentInfoUncheckedUpdateManyWithoutProductTypeInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_file_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1698,6 +1958,10 @@ export type PaymentInfoCreateManyDocumentInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   created_at?: Date | string
@@ -1709,6 +1973,10 @@ export type PaymentInfoCreateManyDocumentInput = {
 
 export type PaymentInfoUpdateWithoutDocumentInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1727,6 +1995,10 @@ export type PaymentInfoUncheckedUpdateWithoutDocumentInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1742,6 +2014,10 @@ export type PaymentInfoUncheckedUpdateManyWithoutDocumentInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1756,6 +2032,10 @@ export type PaymentInfoCreateManyStatusTypeInput = {
   lead_id: number
   account_id: number
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   payment_file_id?: number | null
@@ -1768,6 +2048,10 @@ export type PaymentInfoCreateManyStatusTypeInput = {
 
 export type PaymentInfoUpdateWithoutStatusTypeInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1785,6 +2069,10 @@ export type PaymentInfoUncheckedUpdateWithoutStatusTypeInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_file_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1800,6 +2088,10 @@ export type PaymentInfoUncheckedUpdateManyWithoutStatusTypeInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_file_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1816,6 +2108,10 @@ export type PaymentInfoCreateManyPaymentTypeInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  basic_amount?: number | null
+  gst_percentage?: number | null
+  gst_amount?: number | null
+  total_amount?: number | null
   payment_date?: Date | string | null
   payment_text?: string | null
   payment_file_id?: number | null
@@ -1827,6 +2123,10 @@ export type PaymentInfoCreateManyPaymentTypeInput = {
 
 export type PaymentInfoUpdateWithoutPaymentTypeInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1845,6 +2145,10 @@ export type PaymentInfoUncheckedUpdateWithoutPaymentTypeInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_file_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1860,6 +2164,10 @@ export type PaymentInfoUncheckedUpdateManyWithoutPaymentTypeInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   payment_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment_file_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1877,6 +2185,10 @@ export type PaymentInfoSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   account_id?: boolean
   status_id?: boolean
   amount?: boolean
+  basic_amount?: boolean
+  gst_percentage?: boolean
+  gst_amount?: boolean
+  total_amount?: boolean
   payment_date?: boolean
   payment_text?: boolean
   payment_file_id?: boolean
@@ -1901,6 +2213,10 @@ export type PaymentInfoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   account_id?: boolean
   status_id?: boolean
   amount?: boolean
+  basic_amount?: boolean
+  gst_percentage?: boolean
+  gst_amount?: boolean
+  total_amount?: boolean
   payment_date?: boolean
   payment_text?: boolean
   payment_file_id?: boolean
@@ -1925,6 +2241,10 @@ export type PaymentInfoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   account_id?: boolean
   status_id?: boolean
   amount?: boolean
+  basic_amount?: boolean
+  gst_percentage?: boolean
+  gst_amount?: boolean
+  total_amount?: boolean
   payment_date?: boolean
   payment_text?: boolean
   payment_file_id?: boolean
@@ -1949,6 +2269,10 @@ export type PaymentInfoSelectScalar = {
   account_id?: boolean
   status_id?: boolean
   amount?: boolean
+  basic_amount?: boolean
+  gst_percentage?: boolean
+  gst_amount?: boolean
+  total_amount?: boolean
   payment_date?: boolean
   payment_text?: boolean
   payment_file_id?: boolean
@@ -1959,7 +2283,7 @@ export type PaymentInfoSelectScalar = {
   product_type_id?: boolean
 }
 
-export type PaymentInfoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "status_id" | "amount" | "payment_date" | "payment_text" | "payment_file_id" | "created_at" | "created_by" | "vendor_id" | "payment_type_id" | "product_type_id", ExtArgs["result"]["paymentInfo"]>
+export type PaymentInfoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "status_id" | "amount" | "basic_amount" | "gst_percentage" | "gst_amount" | "total_amount" | "payment_date" | "payment_text" | "payment_file_id" | "created_at" | "created_by" | "vendor_id" | "payment_type_id" | "product_type_id", ExtArgs["result"]["paymentInfo"]>
 export type PaymentInfoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -2009,6 +2333,10 @@ export type $PaymentInfoPayload<ExtArgs extends runtime.Types.Extensions.Interna
     account_id: number
     status_id: number | null
     amount: number | null
+    basic_amount: number | null
+    gst_percentage: number | null
+    gst_amount: number | null
+    total_amount: number | null
     payment_date: Date | null
     payment_text: string | null
     payment_file_id: number | null
@@ -2453,6 +2781,10 @@ export interface PaymentInfoFieldRefs {
   readonly account_id: Prisma.FieldRef<"PaymentInfo", 'Int'>
   readonly status_id: Prisma.FieldRef<"PaymentInfo", 'Int'>
   readonly amount: Prisma.FieldRef<"PaymentInfo", 'Float'>
+  readonly basic_amount: Prisma.FieldRef<"PaymentInfo", 'Float'>
+  readonly gst_percentage: Prisma.FieldRef<"PaymentInfo", 'Float'>
+  readonly gst_amount: Prisma.FieldRef<"PaymentInfo", 'Float'>
+  readonly total_amount: Prisma.FieldRef<"PaymentInfo", 'Float'>
   readonly payment_date: Prisma.FieldRef<"PaymentInfo", 'DateTime'>
   readonly payment_text: Prisma.FieldRef<"PaymentInfo", 'String'>
   readonly payment_file_id: Prisma.FieldRef<"PaymentInfo", 'Int'>

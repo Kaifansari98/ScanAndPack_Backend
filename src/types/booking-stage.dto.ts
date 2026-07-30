@@ -8,6 +8,10 @@ export interface CreateBookingStageDto {
   product_type_id?: number;
   client_id?: number;
   bookingAmount: number;
+  basic_amount?: number;
+  gst_percentage?: number;
+  gst_amount?: number;
+  total_amount?: number;
   bookingAmountPaymentDetailsText?: string;
   finalBookingAmount: number;
   siteSupervisorId?: number;
