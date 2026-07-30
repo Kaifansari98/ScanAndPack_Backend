@@ -75,6 +75,10 @@ export class BookingStageController {
         product_type_id,
         client_id,
         bookingAmount,
+        basic_amount,
+        gst_percentage,
+        gst_amount,
+        total_amount,
         bookingAmountPaymentDetailsText,
         finalBookingAmount,
         siteSupervisorId,
@@ -169,6 +173,28 @@ export class BookingStageController {
         return;
       }
 
+      const optionalAmountFields = [
+        ["basic_amount", basic_amount],
+        ["gst_percentage", gst_percentage],
+        ["gst_amount", gst_amount],
+        ["total_amount", total_amount],
+      ] as const;
+
+      for (const [fieldName, fieldValue] of optionalAmountFields) {
+        if (
+          typeof fieldValue !== "undefined" &&
+          fieldValue !== null &&
+          fieldValue !== "" &&
+          (!Number.isFinite(Number(fieldValue)) || Number(fieldValue) < 0)
+        ) {
+          res.status(400).json({
+            success: false,
+            message: `${fieldName} must be a valid non-negative number`,
+          });
+          return;
+        }
+      }
+
       const uploadedFinalDocuments: UploadedFileRef[] = [];
 
       for (const file of finalDocuments) {
@@ -220,6 +246,24 @@ export class BookingStageController {
             : undefined,
         client_id: client_id ? parseInt(client_id) : undefined,
         bookingAmount: parseFloat(bookingAmount),
+        basic_amount:
+          basic_amount !== undefined && basic_amount !== null && basic_amount !== ""
+            ? parseFloat(basic_amount)
+            : undefined,
+        gst_percentage:
+          gst_percentage !== undefined &&
+          gst_percentage !== null &&
+          gst_percentage !== ""
+            ? parseFloat(gst_percentage)
+            : undefined,
+        gst_amount:
+          gst_amount !== undefined && gst_amount !== null && gst_amount !== ""
+            ? parseFloat(gst_amount)
+            : undefined,
+        total_amount:
+          total_amount !== undefined && total_amount !== null && total_amount !== ""
+            ? parseFloat(total_amount)
+            : undefined,
         mrpValue: parseFloat(mrpValue),
         bookingAmountPaymentDetailsText,
         finalBookingAmount: parseFloat(finalBookingAmount),

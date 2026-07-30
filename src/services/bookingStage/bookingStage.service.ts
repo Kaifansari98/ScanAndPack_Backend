@@ -419,6 +419,10 @@ export class BookingStageService {
             vendor_id: data.vendor_id,
             created_by: data.created_by,
             amount: data.bookingAmount,
+            basic_amount: data.basic_amount ?? null,
+            gst_percentage: data.gst_percentage ?? null,
+            gst_amount: data.gst_amount ?? null,
+            total_amount: data.total_amount ?? null,
             payment_text: data.bookingAmountPaymentDetailsText || null,
             payment_file_id: paymentFileId, // may be null if no file
             payment_date: new Date(),
@@ -1016,6 +1020,11 @@ export class BookingStageService {
           return {
             id: p.id,
             amount: p.amount,
+            basic_amount: p.basic_amount,
+            gst_percentage: p.gst_percentage,
+            gst_amount: p.gst_amount,
+            total_amount: p.total_amount,
+            product_type_id: p.product_type_id,
             date: p.payment_date,
             text: p.payment_text,
             type: p.paymentType?.tag,

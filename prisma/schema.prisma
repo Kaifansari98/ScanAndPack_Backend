@@ -1563,6 +1563,10 @@ model PaymentInfo {
   account_id      Int
   status_id       Int?
   amount          Float?
+  basic_amount    Float?
+  gst_percentage  Float?
+  gst_amount      Float?
+  total_amount    Float?
   payment_date    DateTime?
   payment_text    String?           @db.VarChar(2000)
   payment_file_id Int?
