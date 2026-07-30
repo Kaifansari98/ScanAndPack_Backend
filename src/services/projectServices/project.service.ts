@@ -1837,8 +1837,7 @@ export const handelItems = async (
   payload: CadbidPayload
 ) => {
   try {
-
-    console.log("handelItems......");
+    
     let resolvedVendorId: number | null = null;
     let resolvedProjectId: number | null = null;
 

@@ -208,6 +208,7 @@ export const getAllVendorsPaginated = async ({
         is_crm_enabled: true,
         is_inventory_enabled: true,
         is_tracktrace_enabled: true,
+        is_scanpack_enabled:true,
         is_this_vendor_is_custom_usertype_only: true,
         is_year_wise_lead_code_enabled: true,
         logo: true,
@@ -1878,6 +1879,7 @@ export const onboardVendor = async (data: any) => {
     is_inventory_enabled,
     is_tracktrace_enabled,
     is_year_wise_lead_code_enabled,
+    is_scanpack_enabled
   } = data;
 
   const vendor = await prisma.vendorMaster.create({
@@ -1907,6 +1909,7 @@ export const onboardVendor = async (data: any) => {
       is_inventory_enabled,
       is_tracktrace_enabled,
       is_year_wise_lead_code_enabled,
+      is_scanpack_enabled
     },
   });
 
@@ -1969,6 +1972,7 @@ export const updateVendor = async (vendorId: number, data: any) => {
     is_tracktrace_enabled,
     handlesLargeScaleProjects,
     is_year_wise_lead_code_enabled,
+    is_scanpack_enabled
   } = data;
 
   const vendor = await prisma.vendorMaster.update({
@@ -1998,6 +2002,7 @@ export const updateVendor = async (vendorId: number, data: any) => {
       is_tracktrace_enabled,
       handlesLargeScaleProjects,
       is_year_wise_lead_code_enabled,
+      is_scanpack_enabled
     },
   });
 
