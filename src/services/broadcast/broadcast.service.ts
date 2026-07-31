@@ -279,6 +279,7 @@ export class BroadcastService {
 
     let sentCount = 0;
     let readersCount = 0;
+    let isRead = false;
     try {
       const superAdminTypeIds = await getSuperAdminUserTypeIds();
       const broadcastRecord = await prisma.broadcastMaster.findUnique({
@@ -305,12 +306,25 @@ export class BroadcastService {
           },
         },
       });
+
+      if (currentUser?.id) {
+        const userRead = await prisma.broadcastRead.findUnique({
+          where: {
+            broadcast_id_user_id: {
+              broadcast_id: id,
+              user_id: currentUser.id,
+            },
+          },
+        });
+        isRead = !!userRead;
+      }
     } catch (err) {
       // Non-fatal
     }
 
     return {
       ...enriched,
+      isRead,
       readersCount,
       sentCount,
     };
