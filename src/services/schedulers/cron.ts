@@ -27,17 +27,20 @@ export async function processPendingNotificationQueue() {
 
       logger.info(`Processing ${pendingQueue.length} notifications in queue`);
 
-      // Fetch super admin user type IDs to exclude them from notifications
-      const superAdmins = await prisma.userTypeMaster.findMany({
+      // Fetch super admin and master user type IDs to exclude them from notifications
+      const excludedRoles = await prisma.userTypeMaster.findMany({
         where: {
           user_type: {
-            in: ["super-admin", "superadmin", "super_admin"],
+            in: [
+              "super-admin", "superadmin", "super_admin",
+              "master-admin", "masteradmin", "master_admin", "master", "vloq master"
+            ],
             mode: "insensitive"
           }
         },
         select: { id: true },
       });
-      const superAdminTypeIds = superAdmins.map((r) => r.id);
+      const superAdminTypeIds = excludedRoles.map((r) => r.id);
 
       for (const queueItem of pendingQueue) {
         try {
