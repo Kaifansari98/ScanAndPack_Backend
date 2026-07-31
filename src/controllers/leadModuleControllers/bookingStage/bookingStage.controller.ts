@@ -1636,6 +1636,61 @@ export class BookingStageController {
     }
   };
 
+  public updatePaymentAmount = async (
+    req: Request,
+    res: Response,
+  ): Promise<void> => {
+    try {
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
+      const paymentId = Number(getParam(req.params.paymentId));
+      const amount = Number(req.body.amount);
+      const updatedBy = parseInt(req.body.updated_by);
+      const productTypeId = Number(req.body.product_type_id);
+
+      if (
+        !leadId ||
+        !vendorId ||
+        !paymentId ||
+        Number.isNaN(amount) ||
+        !updatedBy ||
+        !productTypeId ||
+        Number.isNaN(productTypeId)
+      ) {
+        res.status(400).json({
+          success: false,
+          message:
+            "leadId, vendorId, paymentId, amount, updated_by, and product_type_id are required",
+        });
+        return;
+      }
+
+      const result = await this.bookingStageService.updatePaymentAmount({
+        lead_id: leadId,
+        vendor_id: vendorId,
+        payment_id: paymentId,
+        amount,
+        updated_by: updatedBy,
+        product_type_id: productTypeId,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Payment amount updated successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[BookingStageController] updatePaymentAmount Error:",
+        error,
+      );
+      res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
   public getPayments = async (req: Request, res: Response) => {
     // 👈 arrow fn preserves `this`
     try {
