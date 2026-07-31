@@ -3718,6 +3718,183 @@ export class BookingStageService {
     });
   }
 
+  public async updatePaymentAmount(data: {
+    lead_id: number;
+    vendor_id: number;
+    payment_id: number;
+    amount: number;
+    updated_by: number;
+    product_type_id: number;
+  }) {
+    return await prisma.$transaction(async (tx) => {
+      const lead = await tx.leadMaster.findFirst({
+        where: {
+          id: data.lead_id,
+          vendor_id: data.vendor_id,
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+          account_id: true,
+          booking_amount: true,
+          total_project_amount: true,
+          pending_amount: true,
+        },
+      });
+
+      if (!lead) {
+        throw Object.assign(
+          new Error(
+            `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`,
+          ),
+          { statusCode: 404 },
+        );
+      }
+
+      if (lead.account_id == null) {
+        throw Object.assign(
+          new Error(`Lead ${data.lead_id} does not have a valid account`),
+          { statusCode: 400 },
+        );
+      }
+
+      if (data.amount < 1) {
+        throw Object.assign(
+          new Error("Amount received must be at least ₹1"),
+          { statusCode: 400 },
+        );
+      }
+
+      const payment = await tx.paymentInfo.findFirst({
+        where: {
+          id: data.payment_id,
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          product_type_id: data.product_type_id,
+        },
+        select: {
+          id: true,
+          amount: true,
+          is_booking_received_amt: true,
+          product_type_id: true,
+        },
+      });
+
+      if (!payment) {
+        throw Object.assign(
+          new Error("Payment record not found for the selected product type"),
+          { statusCode: 404 },
+        );
+      }
+
+      const bookingPayment = await tx.paymentInfo.findFirst({
+        where: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          product_type_id: data.product_type_id,
+          is_booking_received_amt: true,
+        },
+        orderBy: { created_at: "desc" },
+        select: {
+          total_amount: true,
+        },
+      });
+
+      const productTotalAmount = Number(bookingPayment?.total_amount ?? 0);
+      if (productTotalAmount <= 0) {
+        throw Object.assign(
+          new Error("Total project amount is not available for this product type"),
+          { statusCode: 400 },
+        );
+      }
+
+      const paymentTotals = await tx.paymentInfo.aggregate({
+        where: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          product_type_id: data.product_type_id,
+        },
+        _sum: {
+          amount: true,
+        },
+      });
+
+      const currentProductReceived = Number(paymentTotals._sum.amount ?? 0);
+      const currentPaymentAmount = Number(payment.amount ?? 0);
+      const currentProductPending = Math.max(
+        productTotalAmount - currentProductReceived,
+        0,
+      );
+      const maxEditableAmount = currentPaymentAmount + currentProductPending;
+
+      if (data.amount > maxEditableAmount) {
+        throw Object.assign(
+          new Error(
+            `Amount cannot exceed ₹${maxEditableAmount.toLocaleString("en-IN")} for this product type`,
+          ),
+          { statusCode: 400 },
+        );
+      }
+
+      const paymentDelta = data.amount - currentPaymentAmount;
+      const updatedLeadPending = Number(lead.pending_amount ?? 0) - paymentDelta;
+
+      if (updatedLeadPending < 0) {
+        throw Object.assign(
+          new Error("Amount cannot exceed the remaining pending amount"),
+          { statusCode: 400 },
+        );
+      }
+
+      await tx.paymentInfo.update({
+        where: { id: payment.id },
+        data: {
+          amount: data.amount,
+        },
+      });
+
+      const bookingAmountAggregate = await tx.paymentInfo.aggregate({
+        where: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          is_booking_received_amt: true,
+        },
+        _sum: {
+          amount: true,
+        },
+      });
+
+      const updatedLead = await tx.leadMaster.update({
+        where: { id: lead.id },
+        data: {
+          booking_amount: Number(bookingAmountAggregate._sum.amount ?? 0),
+          pending_amount: updatedLeadPending,
+          updated_by: data.updated_by,
+          updated_at: new Date(),
+        },
+        select: {
+          id: true,
+          booking_amount: true,
+          pending_amount: true,
+          updated_at: true,
+        },
+      });
+
+      await createLeadLog(tx as any, {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        account_id: lead.account_id,
+        product_type_id: data.product_type_id,
+        action: `Amount received updated to ₹${data.amount.toLocaleString("en-IN")} for product type ${data.product_type_id}.`,
+        action_type: "UPDATE",
+        created_by: data.updated_by,
+        created_at: new Date(),
+      });
+
+      return updatedLead;
+    });
+  }
+
   // post api for lead fetching stage with user id
   public static async getUniversalTableData(
     vendorId: number,
