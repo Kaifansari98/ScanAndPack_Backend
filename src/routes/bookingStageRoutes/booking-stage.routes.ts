@@ -99,6 +99,11 @@ bookingStageRouter.put(
   bookingStageController.updateBasicAmount,
 );
 
+bookingStageRouter.put(
+  "/update-gst-percentage/vendor/:vendorId/lead/:leadId",
+  bookingStageController.updateGstPercentage,
+);
+
 bookingStageRouter.post(
   "/add-additional-payment",
   handleMulterUpload(

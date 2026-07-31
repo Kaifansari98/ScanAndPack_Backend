@@ -1584,6 +1584,58 @@ export class BookingStageController {
     }
   };
 
+  public updateGstPercentage = async (
+    req: Request,
+    res: Response,
+  ): Promise<void> => {
+    try {
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
+      const gstPercentage = Number(req.body.gst_percentage);
+      const updatedBy = parseInt(req.body.updated_by);
+      const productTypeId = Number(req.body.product_type_id);
+
+      if (
+        !leadId ||
+        !vendorId ||
+        Number.isNaN(gstPercentage) ||
+        !updatedBy ||
+        !productTypeId ||
+        Number.isNaN(productTypeId)
+      ) {
+        res.status(400).json({
+          success: false,
+          message:
+            "leadId, vendorId, gst_percentage, updated_by, and product_type_id are required",
+        });
+        return;
+      }
+
+      const result = await this.bookingStageService.updateGstPercentage({
+        lead_id: leadId,
+        vendor_id: vendorId,
+        gst_percentage: gstPercentage,
+        updated_by: updatedBy,
+        product_type_id: productTypeId,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "GST percentage updated successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[BookingStageController] updateGstPercentage Error:",
+        error,
+      );
+      res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
   public getPayments = async (req: Request, res: Response) => {
     // 👈 arrow fn preserves `this`
     try {

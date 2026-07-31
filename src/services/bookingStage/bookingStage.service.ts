@@ -3553,6 +3553,171 @@ export class BookingStageService {
     });
   }
 
+  public async updateGstPercentage(data: {
+    lead_id: number;
+    vendor_id: number;
+    gst_percentage: number;
+    updated_by: number;
+    product_type_id: number;
+  }) {
+    return await prisma.$transaction(async (tx) => {
+      const lead = await tx.leadMaster.findFirst({
+        where: {
+          id: data.lead_id,
+          vendor_id: data.vendor_id,
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+          account_id: true,
+          total_project_amount: true,
+          pending_amount: true,
+        },
+      });
+
+      if (!lead) {
+        throw Object.assign(
+          new Error(
+            `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`,
+          ),
+          { statusCode: 404 },
+        );
+      }
+
+      if (lead.account_id == null) {
+        throw Object.assign(
+          new Error(`Lead ${data.lead_id} does not have a valid account`),
+          { statusCode: 400 },
+        );
+      }
+
+      if (![0, 5, 12, 18, 28].includes(data.gst_percentage)) {
+        throw Object.assign(new Error("Invalid GST percentage selected"), {
+          statusCode: 400,
+        });
+      }
+
+      const bookingPaymentType = await tx.paymentTypeMaster.findFirst({
+        where: {
+          vendor_id: data.vendor_id,
+          tag: "Type 2",
+        },
+        select: { id: true },
+      });
+
+      if (!bookingPaymentType) {
+        throw Object.assign(
+          new Error("Payment type (Booking Amount) not found for this vendor"),
+          { statusCode: 404 },
+        );
+      }
+
+      const existingPayment = await tx.paymentInfo.findFirst({
+        where: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          payment_type_id: bookingPaymentType.id,
+          is_booking_received_amt: true,
+          product_type_id: data.product_type_id,
+        },
+        orderBy: { created_at: "desc" },
+        select: {
+          id: true,
+          basic_amount: true,
+        },
+      });
+
+      if (!existingPayment) {
+        throw Object.assign(
+          new Error("Booking amount entry not found for the selected product type"),
+          { statusCode: 404 },
+        );
+      }
+
+      const currentTotalProject = Number(lead.total_project_amount ?? 0);
+      const currentPending = Number(lead.pending_amount ?? 0);
+      const overallReceivedAmount = Math.max(
+        currentTotalProject - currentPending,
+        0,
+      );
+
+      const basicAmount = Number(existingPayment.basic_amount ?? 0);
+      const updatedGstAmount =
+        data.gst_percentage > 0 ? (basicAmount * data.gst_percentage) / 100 : 0;
+      const updatedTotalAmount = basicAmount + updatedGstAmount;
+
+      await tx.paymentInfo.update({
+        where: { id: existingPayment.id },
+        data: {
+          gst_percentage: data.gst_percentage,
+          gst_amount: updatedGstAmount,
+          total_amount: updatedTotalAmount,
+        },
+      });
+
+      const totalAggregate = await tx.paymentInfo.aggregate({
+        where: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          payment_type_id: bookingPaymentType.id,
+          is_booking_received_amt: true,
+        },
+        _sum: {
+          total_amount: true,
+        },
+      });
+
+      const updatedLeadTotalProject = Number(
+        totalAggregate._sum.total_amount ?? 0,
+      );
+      const updatedLeadPending = updatedLeadTotalProject - overallReceivedAmount;
+
+      if (updatedLeadPending < 0) {
+        throw Object.assign(
+          new Error(
+            "GST update cannot reduce total project amount below the amount already received",
+          ),
+          { statusCode: 400 },
+        );
+      }
+
+      const updatedLead = await tx.leadMaster.update({
+        where: { id: lead.id },
+        data: {
+          total_project_amount: updatedLeadTotalProject,
+          pending_amount: updatedLeadPending,
+          updated_by: data.updated_by,
+          updated_at: new Date(),
+        },
+        select: {
+          id: true,
+          total_project_amount: true,
+          pending_amount: true,
+          updated_at: true,
+        },
+      });
+
+      await createLeadLog(tx as any, {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        account_id: lead.account_id,
+        product_type_id: data.product_type_id,
+        action: `GST percentage updated to ${data.gst_percentage}% for product type ${data.product_type_id}.`,
+        action_type: "UPDATE",
+        created_by: data.updated_by,
+        created_at: new Date(),
+      });
+
+      return {
+        ...updatedLead,
+        basic_amount: basicAmount,
+        gst_percentage: data.gst_percentage,
+        gst_amount: updatedGstAmount,
+        total_amount: updatedTotalAmount,
+      };
+    });
+  }
+
   // post api for lead fetching stage with user id
   public static async getUniversalTableData(
     vendorId: number,
