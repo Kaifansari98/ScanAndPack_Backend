@@ -21,23 +21,74 @@ async function getSuperAdminUserTypeIds(): Promise<number[]> {
   }
 }
 
+async function getMasterUserTypeIds(): Promise<number[]> {
+  try {
+    const roles = await prisma.userTypeMaster.findMany({
+      where: {
+        user_type: {
+          in: ["master-admin", "masteradmin", "master_admin", "master", "vloq master"],
+          mode: "insensitive",
+        },
+      },
+      select: { id: true },
+    });
+    return roles.map((r) => r.id);
+  } catch (err) {
+    return [];
+  }
+}
+
+async function isMasterAdminUser(userId: number): Promise<boolean> {
+  try {
+    const masterTypeIds = await getMasterUserTypeIds();
+    const user = await prisma.userMaster.findUnique({
+      where: { id: userId },
+      select: { user_type_id: true, user_type: { select: { user_type: true } } },
+    });
+
+    if (!user) return false;
+    const typeName = (user.user_type?.user_type || "").toLowerCase().trim();
+    if (
+      typeName === "master-admin" ||
+      typeName === "master" ||
+      typeName === "vloq master" ||
+      typeName === "masteradmin" ||
+      typeName === "master_admin"
+    ) {
+      return true;
+    }
+    return user.user_type_id ? masterTypeIds.includes(user.user_type_id) : false;
+  } catch (err) {
+    return false;
+  }
+}
+
 /**
  * Returns true if the user (identified by userId / userTypeId / franchiseId)
  * belongs to the target audience of a broadcast.
  *
  * Rules (mirrors cron.ts audience resolution):
- *  - ALL          → everyone
+ *  - ALL          → everyone (except master admin / master users)
  *  - USER         → exact user match
  *  - ROLE only    → user_type_id must match
  *  - FRANCHISE only → franchise_id must match
  *  - ROLE + FRANCHISE → user must match BOTH
  */
-function isUserInAudience(
+async function isUserInAudience(
   audiences: Array<{ audience_type: string; target_id: number | null }>,
   userId: number,
   userTypeId: number | null | undefined,
   franchiseId: number | null | undefined
-): boolean {
+): Promise<boolean> {
+  // Master-admin / master users are strictly restricted from all broadcasts
+  const isMaster = await isMasterAdminUser(userId);
+  if (isMaster) return false;
+
+  if (userTypeId) {
+    const masterTypeIds = await getMasterUserTypeIds();
+    if (masterTypeIds.includes(userTypeId)) return false;
+  }
+
   if (!audiences || audiences.length === 0) return true; // no restrictions
 
   if (audiences.some((a) => a.audience_type === "ALL")) return true;
@@ -253,6 +304,13 @@ export class BroadcastService {
     }
 
     if (currentUser) {
+      const isMaster = await isMasterAdminUser(currentUser.id);
+      if (isMaster) {
+        const err = new Error(`Broadcast with id ${id} not found`);
+        (err as any).statusCode = 404;
+        throw err;
+      }
+
       const superAdmin = await isSuperAdminUser(currentUser.id);
       if (!superAdmin) {
         const userRecord = await prisma.userMaster.findUnique({
@@ -260,7 +318,7 @@ export class BroadcastService {
           select: { id: true, user_type_id: true, franchise_id: true },
         });
 
-        const inAudience = isUserInAudience(
+        const inAudience = await isUserInAudience(
           (broadcast as any).audiences || [],
           currentUser.id,
           userRecord?.user_type_id ?? currentUser.user_type_id,
@@ -336,6 +394,11 @@ export class BroadcastService {
     filters: ListBroadcastsInput,
     currentUser: { id: number; user_type_id?: number; franchise_id?: number }
   ) {
+    const isMaster = await isMasterAdminUser(currentUser.id);
+    if (isMaster) {
+      return { data: [], total: 0, page: filters.page || 1, limit: filters.limit || 10, totalPages: 0 };
+    }
+
     let audience: { userId: number; userTypeId?: number; franchiseId?: number; createdAt?: Date } | undefined;
 
     const superAdmin = await isSuperAdminUser(currentUser.id);
@@ -693,7 +756,7 @@ export class BroadcastService {
           target_id: number | null;
         }>;
 
-        const inAudience = isUserInAudience(
+        const inAudience = await isUserInAudience(
           audiences,
           userId,
           user?.user_type_id ?? null,
