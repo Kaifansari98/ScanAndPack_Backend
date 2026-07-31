@@ -108,6 +108,11 @@ export type ClientTypeMaster = Prisma.ClientTypeMasterModel
  */
 export type LeadMaster = Prisma.LeadMasterModel
 /**
+ * Model LeadBillingAddress
+ * 
+ */
+export type LeadBillingAddress = Prisma.LeadBillingAddressModel
+/**
  * Model LeadSpecificationsMaster
  * 
  */

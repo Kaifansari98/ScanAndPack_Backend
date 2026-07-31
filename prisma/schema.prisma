@@ -172,6 +172,7 @@ model VendorMaster {
   poSupplierAdditionalCosts PurchaseOrderSupplierAdditionalCost[] @relation("POSupplierAdditionalCostVendor")
 
   paymentTerms PaymentTermMaster[]
+  leadBillingAddresses LeadBillingAddress[]
 
   poPaymentSchedules POPaymentSchedule[]
 
@@ -189,6 +190,11 @@ model VendorMaster {
   broadcastCategories        BroadcastCategoryMaster[]  @relation("VendorBroadcastCategories")
 
   @@index([state_id])
+}
+
+enum LeadBillingAddressType {
+  BILL_TO
+  SHIP_TO
 }
 
 model VendorAddress {
@@ -796,8 +802,29 @@ model LeadMaster {
   BoxMaster                                   BoxMaster[]
   fastProductionRequests                      FastProductionRequest[]
   fastProductionRequestBatches                FastProductionRequestBatch[]
+  billingAddresses                            LeadBillingAddress[]
 
   @@unique([vendor_id, lead_code], name: "uniq_vendor_lead_code")
+}
+
+model LeadBillingAddress {
+  id              Int                    @id @default(autoincrement())
+  lead_id         Int
+  vendor_id       Int
+  address_type    LeadBillingAddressType
+  name            String?
+  address         String?                @db.VarChar(2000)
+  map_link        String?
+  gst_number      String?
+  state_name      String?
+  place_of_supply String?
+  created_at      DateTime               @default(now())
+  updated_at      DateTime               @updatedAt
+  lead            LeadMaster             @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  vendor          VendorMaster           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  @@unique([lead_id, vendor_id, address_type])
+  @@index([vendor_id])
 }
 
 model LeadSpecificationsMaster {
@@ -1563,6 +1590,7 @@ model PaymentInfo {
   account_id      Int
   status_id       Int?
   amount          Float?
+  is_booking_received_amt Boolean   @default(false)
   basic_amount    Float?
   gst_percentage  Float?
   gst_amount      Float?
