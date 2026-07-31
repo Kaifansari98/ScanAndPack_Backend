@@ -94,6 +94,11 @@ bookingStageRouter.put(
   bookingStageController.updateBookingAmount,
 );
 
+bookingStageRouter.put(
+  "/update-basic-amount/vendor/:vendorId/lead/:leadId",
+  bookingStageController.updateBasicAmount,
+);
+
 bookingStageRouter.post(
   "/add-additional-payment",
   handleMulterUpload(

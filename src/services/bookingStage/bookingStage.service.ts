@@ -3199,74 +3199,357 @@ export class BookingStageService {
     vendor_id: number;
     booking_amount: number;
     updated_by: number;
+    product_type_id?: number;
   }) {
-    const lead = await prisma.leadMaster.findFirst({
-      where: {
-        id: data.lead_id,
-        vendor_id: data.vendor_id,
-        is_deleted: false,
-      },
-      select: {
-        id: true,
-        booking_amount: true,
-        pending_amount: true,
-        total_project_amount: true,
-      },
-    });
-
-    if (!lead) {
-      throw Object.assign(
-        new Error(
-          `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`,
-        ),
-        { statusCode: 404 },
-      );
-    }
-
-    const currentBooking = Number(lead.booking_amount ?? 0);
-    const currentPending = Number(lead.pending_amount ?? 0);
-    const totalProjectAmount = Number(
-      lead.total_project_amount ?? currentBooking + currentPending,
-    );
-    const bookingDelta = data.booking_amount - currentBooking;
-    const updatedPending = currentPending - bookingDelta;
-
-    if (data.booking_amount < 0) {
-      throw Object.assign(new Error("Booking amount cannot be negative"), {
-        statusCode: 400,
+    return await prisma.$transaction(async (tx) => {
+      const lead = await tx.leadMaster.findFirst({
+        where: {
+          id: data.lead_id,
+          vendor_id: data.vendor_id,
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+          account_id: true,
+          booking_amount: true,
+          pending_amount: true,
+          total_project_amount: true,
+        },
       });
-    }
 
-    if (updatedPending < 0) {
-      throw Object.assign(
-        new Error(
-          `Booking amount increase cannot be greater than pending amount (₹${currentPending.toLocaleString("en-IN")})`,
-        ),
-        { statusCode: 400 },
+      if (!lead) {
+        throw Object.assign(
+          new Error(
+            `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`,
+          ),
+          { statusCode: 404 },
+        );
+      }
+
+      if (lead.account_id == null) {
+        throw Object.assign(
+          new Error(`Lead ${data.lead_id} does not have a valid account`),
+          { statusCode: 400 },
+        );
+      }
+
+      if (data.booking_amount < 0) {
+        throw Object.assign(new Error("Booking amount cannot be negative"), {
+          statusCode: 400,
+        });
+      }
+
+      const bookingPaymentType = await tx.paymentTypeMaster.findFirst({
+        where: {
+          vendor_id: data.vendor_id,
+          tag: "Type 2",
+        },
+        select: { id: true },
+      });
+
+      if (!bookingPaymentType) {
+        throw Object.assign(
+          new Error("Payment type (Booking Amount) not found for this vendor"),
+          { statusCode: 404 },
+        );
+      }
+
+      const bookingPaymentWhere = {
+        lead_id: data.lead_id,
+        vendor_id: data.vendor_id,
+        payment_type_id: bookingPaymentType.id,
+        is_booking_received_amt: true,
+        ...(data.product_type_id != null
+          ? { product_type_id: data.product_type_id }
+          : {}),
+      };
+
+      const existingPayment = await tx.paymentInfo.findFirst({
+        where: bookingPaymentWhere,
+        orderBy: { created_at: "desc" },
+        select: {
+          id: true,
+          amount: true,
+          product_type_id: true,
+        },
+      });
+
+      if (!existingPayment) {
+        throw Object.assign(
+          new Error(
+            data.product_type_id != null
+              ? "Booking amount entry not found for the selected product type"
+              : "Booking amount entry not found for this lead",
+          ),
+          { statusCode: 404 },
+        );
+      }
+
+      const currentBooking = Number(existingPayment.amount ?? 0);
+      const currentPending = Number(lead.pending_amount ?? 0);
+      const totalProjectAmount = Number(
+        lead.total_project_amount ?? Number(lead.booking_amount ?? 0) + currentPending,
       );
-    }
+      const bookingDelta = data.booking_amount - currentBooking;
+      const updatedPending = currentPending - bookingDelta;
 
-    if (data.booking_amount > totalProjectAmount) {
-      throw Object.assign(
-        new Error("Booking amount cannot exceed total project amount"),
-        { statusCode: 400 },
+      if (updatedPending < 0) {
+        throw Object.assign(
+          new Error(
+            `Booking amount increase cannot be greater than pending amount (₹${currentPending.toLocaleString("en-IN")})`,
+          ),
+          { statusCode: 400 },
+        );
+      }
+
+      if (data.booking_amount > totalProjectAmount) {
+        throw Object.assign(
+          new Error("Booking amount cannot exceed total project amount"),
+          { statusCode: 400 },
+        );
+      }
+
+      await tx.paymentInfo.update({
+        where: { id: existingPayment.id },
+        data: {
+          amount: data.booking_amount,
+          product_type_id: data.product_type_id ?? existingPayment.product_type_id ?? null,
+        },
+      });
+
+      const bookingPaymentAggregate = await tx.paymentInfo.aggregate({
+        where: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          payment_type_id: bookingPaymentType.id,
+          is_booking_received_amt: true,
+        },
+        _sum: {
+          amount: true,
+        },
+      });
+
+      const updatedLead = await tx.leadMaster.update({
+        where: { id: lead.id },
+        data: {
+          booking_amount: Number(bookingPaymentAggregate._sum.amount ?? 0),
+          pending_amount: updatedPending,
+          updated_by: data.updated_by,
+          updated_at: new Date(),
+        },
+        select: {
+          id: true,
+          booking_amount: true,
+          pending_amount: true,
+          updated_at: true,
+        },
+      });
+
+      await createLeadLog(tx as any, {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        account_id: lead.account_id,
+        product_type_id: data.product_type_id,
+        action:
+          data.product_type_id != null
+            ? `Booking amount updated to ₹${data.booking_amount.toLocaleString("en-IN")} for product type ${data.product_type_id}.`
+            : `Booking amount updated to ₹${data.booking_amount.toLocaleString("en-IN")}.`,
+        action_type: "UPDATE",
+        created_by: data.updated_by,
+        created_at: new Date(),
+      });
+
+      return updatedLead;
+    });
+  }
+
+  public async updateBasicAmount(data: {
+    lead_id: number;
+    vendor_id: number;
+    basic_amount: number;
+    updated_by: number;
+    product_type_id: number;
+  }) {
+    return await prisma.$transaction(async (tx) => {
+      const lead = await tx.leadMaster.findFirst({
+        where: {
+          id: data.lead_id,
+          vendor_id: data.vendor_id,
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+          account_id: true,
+          total_project_amount: true,
+          pending_amount: true,
+        },
+      });
+
+      if (!lead) {
+        throw Object.assign(
+          new Error(
+            `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`,
+          ),
+          { statusCode: 404 },
+        );
+      }
+
+      if (lead.account_id == null) {
+        throw Object.assign(
+          new Error(`Lead ${data.lead_id} does not have a valid account`),
+          { statusCode: 400 },
+        );
+      }
+
+      if (data.basic_amount < 0) {
+        throw Object.assign(new Error("Basic amount cannot be negative"), {
+          statusCode: 400,
+        });
+      }
+
+      const bookingPaymentType = await tx.paymentTypeMaster.findFirst({
+        where: {
+          vendor_id: data.vendor_id,
+          tag: "Type 2",
+        },
+        select: { id: true },
+      });
+
+      if (!bookingPaymentType) {
+        throw Object.assign(
+          new Error("Payment type (Booking Amount) not found for this vendor"),
+          { statusCode: 404 },
+        );
+      }
+
+      const existingPayment = await tx.paymentInfo.findFirst({
+        where: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          payment_type_id: bookingPaymentType.id,
+          is_booking_received_amt: true,
+          product_type_id: data.product_type_id,
+        },
+        orderBy: { created_at: "desc" },
+        select: {
+          id: true,
+          basic_amount: true,
+          gst_percentage: true,
+          gst_amount: true,
+          total_amount: true,
+        },
+      });
+
+      if (!existingPayment) {
+        throw Object.assign(
+          new Error("Booking amount entry not found for the selected product type"),
+          { statusCode: 404 },
+        );
+      }
+
+      const currentTotalProject = Number(lead.total_project_amount ?? 0);
+      const currentPending = Number(lead.pending_amount ?? 0);
+      const overallReceivedAmount = Math.max(
+        currentTotalProject - currentPending,
+        0,
       );
-    }
 
-    return await prisma.leadMaster.update({
-      where: { id: lead.id },
-      data: {
-        booking_amount: data.booking_amount,
-        pending_amount: updatedPending,
-        updated_by: data.updated_by,
-        updated_at: new Date(),
-      },
-      select: {
-        id: true,
-        booking_amount: true,
-        pending_amount: true,
-        updated_at: true,
-      },
+      const productPayments = await tx.paymentInfo.aggregate({
+        where: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          product_type_id: data.product_type_id,
+        },
+        _sum: {
+          amount: true,
+        },
+      });
+
+      const productReceivedAmount = Number(productPayments._sum.amount ?? 0);
+
+      if (data.basic_amount < productReceivedAmount) {
+        throw Object.assign(
+          new Error(
+            `Basic amount cannot be less than received amount (₹${productReceivedAmount.toLocaleString("en-IN")})`,
+          ),
+          { statusCode: 400 },
+        );
+      }
+
+      const gstPercentage = Number(existingPayment.gst_percentage ?? 0);
+      const updatedGstAmount =
+        gstPercentage > 0 ? (data.basic_amount * gstPercentage) / 100 : 0;
+      const updatedTotalAmount = data.basic_amount + updatedGstAmount;
+
+      await tx.paymentInfo.update({
+        where: { id: existingPayment.id },
+        data: {
+          basic_amount: data.basic_amount,
+          gst_amount: updatedGstAmount,
+          total_amount: updatedTotalAmount,
+        },
+      });
+
+      const totalAggregate = await tx.paymentInfo.aggregate({
+        where: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          payment_type_id: bookingPaymentType.id,
+          is_booking_received_amt: true,
+        },
+        _sum: {
+          total_amount: true,
+        },
+      });
+
+      const updatedLeadTotalProject = Number(
+        totalAggregate._sum.total_amount ?? 0,
+      );
+      const updatedLeadPending = updatedLeadTotalProject - overallReceivedAmount;
+
+      if (updatedLeadPending < 0) {
+        throw Object.assign(
+          new Error(
+            "Basic amount cannot be reduced below the amount already received",
+          ),
+          { statusCode: 400 },
+        );
+      }
+
+      const updatedLead = await tx.leadMaster.update({
+        where: { id: lead.id },
+        data: {
+          total_project_amount: updatedLeadTotalProject,
+          pending_amount: updatedLeadPending,
+          updated_by: data.updated_by,
+          updated_at: new Date(),
+        },
+        select: {
+          id: true,
+          total_project_amount: true,
+          pending_amount: true,
+          updated_at: true,
+        },
+      });
+
+      await createLeadLog(tx as any, {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        account_id: lead.account_id,
+        product_type_id: data.product_type_id,
+        action: `Basic amount updated to ₹${data.basic_amount.toLocaleString("en-IN")} for product type ${data.product_type_id}.`,
+        action_type: "UPDATE",
+        created_by: data.updated_by,
+        created_at: new Date(),
+      });
+
+      return {
+        ...updatedLead,
+        gst_percentage: gstPercentage,
+        gst_amount: updatedGstAmount,
+        product_received_amount: productReceivedAmount,
+        total_amount: updatedTotalAmount,
+      };
     });
   }
 

@@ -1487,6 +1487,13 @@ export class BookingStageController {
       const vendorId = Number(getParam(req.params.vendorId));
       const bookingAmount = Number(req.body.booking_amount);
       const updatedBy = parseInt(req.body.updated_by);
+      const rawProductTypeId = req.body.product_type_id;
+      const productTypeId =
+        rawProductTypeId !== undefined &&
+        rawProductTypeId !== null &&
+        String(rawProductTypeId).trim() !== ""
+          ? Number(rawProductTypeId)
+          : undefined;
 
       if (!leadId || !vendorId || Number.isNaN(bookingAmount) || !updatedBy) {
         res.status(400).json({
@@ -1502,6 +1509,10 @@ export class BookingStageController {
         vendor_id: vendorId,
         booking_amount: bookingAmount,
         updated_by: updatedBy,
+        product_type_id:
+          productTypeId != null && !Number.isNaN(productTypeId)
+            ? productTypeId
+            : undefined,
       });
 
       res.status(200).json({
@@ -1512,6 +1523,58 @@ export class BookingStageController {
     } catch (error: any) {
       console.error(
         "[BookingStageController] updateBookingAmount Error:",
+        error,
+      );
+      res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public updateBasicAmount = async (
+    req: Request,
+    res: Response,
+  ): Promise<void> => {
+    try {
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
+      const basicAmount = Number(req.body.basic_amount);
+      const updatedBy = parseInt(req.body.updated_by);
+      const productTypeId = Number(req.body.product_type_id);
+
+      if (
+        !leadId ||
+        !vendorId ||
+        Number.isNaN(basicAmount) ||
+        !updatedBy ||
+        !productTypeId ||
+        Number.isNaN(productTypeId)
+      ) {
+        res.status(400).json({
+          success: false,
+          message:
+            "leadId, vendorId, basic_amount, updated_by, and product_type_id are required",
+        });
+        return;
+      }
+
+      const result = await this.bookingStageService.updateBasicAmount({
+        lead_id: leadId,
+        vendor_id: vendorId,
+        basic_amount: basicAmount,
+        updated_by: updatedBy,
+        product_type_id: productTypeId,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Basic amount updated successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[BookingStageController] updateBasicAmount Error:",
         error,
       );
       res.status(error.statusCode || 500).json({
