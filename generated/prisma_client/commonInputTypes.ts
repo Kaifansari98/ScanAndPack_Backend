@@ -388,6 +388,23 @@ export type EnumFastProductionRequestStatusNullableWithAggregatesFilter<$PrismaM
   _max?: Prisma.NestedEnumFastProductionRequestStatusNullableFilter<$PrismaModel>
 }
 
+export type EnumLeadBillingAddressTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadBillingAddressType | Prisma.EnumLeadBillingAddressTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadBillingAddressType[] | Prisma.ListEnumLeadBillingAddressTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadBillingAddressType[] | Prisma.ListEnumLeadBillingAddressTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadBillingAddressTypeFilter<$PrismaModel> | $Enums.LeadBillingAddressType
+}
+
+export type EnumLeadBillingAddressTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadBillingAddressType | Prisma.EnumLeadBillingAddressTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadBillingAddressType[] | Prisma.ListEnumLeadBillingAddressTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadBillingAddressType[] | Prisma.ListEnumLeadBillingAddressTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadBillingAddressTypeWithAggregatesFilter<$PrismaModel> | $Enums.LeadBillingAddressType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumLeadBillingAddressTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumLeadBillingAddressTypeFilter<$PrismaModel>
+}
+
 export type EnumSuperAdminApprovalTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.SuperAdminApprovalType | Prisma.EnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel>
   in?: $Enums.SuperAdminApprovalType[] | Prisma.ListEnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel>
@@ -2039,6 +2056,23 @@ export type NestedEnumFastProductionRequestStatusNullableWithAggregatesFilter<$P
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumFastProductionRequestStatusNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumFastProductionRequestStatusNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumLeadBillingAddressTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadBillingAddressType | Prisma.EnumLeadBillingAddressTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadBillingAddressType[] | Prisma.ListEnumLeadBillingAddressTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadBillingAddressType[] | Prisma.ListEnumLeadBillingAddressTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadBillingAddressTypeFilter<$PrismaModel> | $Enums.LeadBillingAddressType
+}
+
+export type NestedEnumLeadBillingAddressTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadBillingAddressType | Prisma.EnumLeadBillingAddressTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadBillingAddressType[] | Prisma.ListEnumLeadBillingAddressTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadBillingAddressType[] | Prisma.ListEnumLeadBillingAddressTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadBillingAddressTypeWithAggregatesFilter<$PrismaModel> | $Enums.LeadBillingAddressType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumLeadBillingAddressTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumLeadBillingAddressTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumSuperAdminApprovalTypeFilter<$PrismaModel = never> = {

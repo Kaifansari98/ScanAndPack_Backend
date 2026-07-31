@@ -9,6 +9,14 @@
 * 🟢 You can import this file directly.
 */
 
+export const LeadBillingAddressType = {
+  BILL_TO: 'BILL_TO',
+  SHIP_TO: 'SHIP_TO'
+} as const
+
+export type LeadBillingAddressType = (typeof LeadBillingAddressType)[keyof typeof LeadBillingAddressType]
+
+
 export const BoxInfoFieldType = {
   TEXT: 'TEXT',
   NUMBER: 'NUMBER',

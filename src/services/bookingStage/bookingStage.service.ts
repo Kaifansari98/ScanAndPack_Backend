@@ -11,6 +11,8 @@ import {
 import {
   AddPaymentDto,
   CreateBookingStageDto,
+  LeadBillingAddressInput,
+  UpsertLeadBillingAddressesDto,
 } from "../../types/booking-stage.dto";
 import { GetObjectCommand } from "@aws-sdk/client-s3";
 import wasabi, { generateSignedUrl } from "../../utils/wasabiClient";
@@ -419,6 +421,7 @@ export class BookingStageService {
             vendor_id: data.vendor_id,
             created_by: data.created_by,
             amount: data.bookingAmount,
+            is_booking_received_amt: true,
             basic_amount: data.basic_amount ?? null,
             gst_percentage: data.gst_percentage ?? null,
             gst_amount: data.gst_amount ?? null,
@@ -2205,6 +2208,7 @@ export class BookingStageService {
             where: { id: existingPayment.id },
             data: {
               amount: data.bookingAmount,
+              is_booking_received_amt: true,
               payment_text:
                 data.bookingAmountPaymentDetailsText ||
                 existingPayment.payment_text, // ✅ added
@@ -2224,6 +2228,7 @@ export class BookingStageService {
               created_by: data.created_by!,
               status_id: leadForPayment?.status_id ?? null,
               amount: data.bookingAmount,
+              is_booking_received_amt: true,
               payment_date: new Date(),
               payment_type_id: bookingPaymentType.id,
               payment_text: data.bookingAmountPaymentDetailsText || null, // ✅ added
@@ -2350,6 +2355,7 @@ export class BookingStageService {
             account_id: data.account_id,
             lead_id: data.lead_id,
             vendor_id: data.vendor_id,
+            product_type_id: data.product_type_id ?? null,
           },
         });
 
@@ -2375,6 +2381,7 @@ export class BookingStageService {
           payment_file_id: paymentFileId,
           payment_date: new Date(data.payment_date),
           payment_type_id: paymentType.id,
+          product_type_id: data.product_type_id ?? null,
         },
       });
       response.payment = payment;
@@ -2390,6 +2397,7 @@ export class BookingStageService {
           amount: data.amount,
           payment_date: new Date(data.payment_date),
           type: "credit",
+          product_type_id: data.product_type_id ?? null,
         },
       });
       response.ledger = ledger;
@@ -2594,8 +2602,11 @@ export class BookingStageService {
         paymentLogs.push({
           id: p.id,
           amount: p.amount,
+          total_amount: p.total_amount,
           status_id: p.status_id,
           status_type: p.statusType?.type ?? null,
+          product_type_id: p.product_type_id,
+          is_booking_received_amt: p.is_booking_received_amt,
           payment_text: p.payment_text,
           payment_date: p.payment_date,
           entry_date: p.created_at,
@@ -2621,6 +2632,113 @@ export class BookingStageService {
       });
       throw error;
     }
+  }
+
+  private normalizeBillingAddress(
+    address?: LeadBillingAddressInput | null,
+  ): LeadBillingAddressInput | null {
+    if (!address) return null;
+
+    const normalized = {
+      name: address.name?.trim() || null,
+      address: address.address?.trim() || null,
+      map_link: address.map_link?.trim() || null,
+      gst_number: address.gst_number?.trim() || null,
+      state_name: address.state_name?.trim() || null,
+      place_of_supply: address.place_of_supply?.trim() || null,
+    };
+
+    const hasAnyValue = Object.values(normalized).some(Boolean);
+    return hasAnyValue ? normalized : null;
+  }
+
+  public async getLeadBillingAddresses(leadId: number, vendorId: number) {
+    const billingAddressDelegate = (prisma as any).leadBillingAddress;
+    const addresses = await billingAddressDelegate.findMany({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+      },
+    });
+
+    const billingAddress =
+      addresses.find((address: any) => address.address_type === "BILL_TO") ??
+      null;
+    const shippingAddress =
+      addresses.find((address: any) => address.address_type === "SHIP_TO") ??
+      null;
+
+    return {
+      billingAddress,
+      shippingAddress,
+    };
+  }
+
+  public async upsertLeadBillingAddresses(
+    data: UpsertLeadBillingAddressesDto,
+  ) {
+    const billingAddress = this.normalizeBillingAddress(data.billingAddress);
+    const shippingAddress = this.normalizeBillingAddress(data.shippingAddress);
+
+    return prisma.$transaction(async (tx) => {
+      const billingAddressDelegate = (tx as any).leadBillingAddress;
+      const lead = await tx.leadMaster.findFirst({
+        where: {
+          id: data.lead_id,
+          vendor_id: data.vendor_id,
+        },
+        select: { id: true },
+      });
+
+      if (!lead) {
+        throw new Error("Lead not found for the given vendor");
+      }
+
+      const upsertAddress = async (
+        addressType: "BILL_TO" | "SHIP_TO",
+        address: LeadBillingAddressInput | null,
+      ) => {
+        if (!address) {
+          await billingAddressDelegate.deleteMany({
+            where: {
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+              address_type: addressType,
+            },
+          });
+          return null;
+        }
+
+        return billingAddressDelegate.upsert({
+          where: {
+            lead_id_vendor_id_address_type: {
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+              address_type: addressType,
+            },
+          },
+          create: {
+            lead_id: data.lead_id,
+            vendor_id: data.vendor_id,
+            address_type: addressType,
+            ...address,
+          },
+          update: {
+            ...address,
+          },
+        });
+      };
+
+      const [savedBillingAddress, savedShippingAddress] = await Promise.all([
+        upsertAddress("BILL_TO", billingAddress),
+        upsertAddress("SHIP_TO", shippingAddress),
+      ]);
+
+      return {
+        billingAddress: savedBillingAddress,
+        shippingAddress: savedShippingAddress,
+      };
+    });
   }
 
   public async uploadCSPBookingService(data: {
@@ -3092,6 +3210,7 @@ export class BookingStageService {
         id: true,
         booking_amount: true,
         pending_amount: true,
+        total_project_amount: true,
       },
     });
 
@@ -3106,18 +3225,30 @@ export class BookingStageService {
 
     const currentBooking = Number(lead.booking_amount ?? 0);
     const currentPending = Number(lead.pending_amount ?? 0);
+    const totalProjectAmount = Number(
+      lead.total_project_amount ?? currentBooking + currentPending,
+    );
     const bookingDelta = data.booking_amount - currentBooking;
     const updatedPending = currentPending - bookingDelta;
 
-    if (updatedPending < 0) {
-      throw Object.assign(new Error("Pending amount cannot be negative"), {
+    if (data.booking_amount < 0) {
+      throw Object.assign(new Error("Booking amount cannot be negative"), {
         statusCode: 400,
       });
     }
 
-    if (data.booking_amount > updatedPending) {
+    if (updatedPending < 0) {
       throw Object.assign(
-        new Error("Booking amount cannot be greater than pending amount"),
+        new Error(
+          `Booking amount increase cannot be greater than pending amount (₹${currentPending.toLocaleString("en-IN")})`,
+        ),
+        { statusCode: 400 },
+      );
+    }
+
+    if (data.booking_amount > totalProjectAmount) {
+      throw Object.assign(
+        new Error("Booking amount cannot exceed total project amount"),
         { statusCode: 400 },
       );
     }

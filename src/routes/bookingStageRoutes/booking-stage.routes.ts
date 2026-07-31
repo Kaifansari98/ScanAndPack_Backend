@@ -107,6 +107,16 @@ bookingStageRouter.get(
   bookingStageController.getPayments,
 );
 
+bookingStageRouter.get(
+  "/billing-information/vendor/:vendorId/lead/:leadId",
+  bookingStageController.getLeadBillingAddresses,
+);
+
+bookingStageRouter.put(
+  "/billing-information/vendor/:vendorId/lead/:leadId",
+  bookingStageController.upsertLeadBillingAddresses,
+);
+
 const uploadFinalMeasurement = uploadCSPBookingFiles.fields([
   { name: "current_site_photos" },
 ]);

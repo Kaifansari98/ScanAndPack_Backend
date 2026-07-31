@@ -69,6 +69,7 @@ export const ModelName = {
   ClientMaster: 'ClientMaster',
   ClientTypeMaster: 'ClientTypeMaster',
   LeadMaster: 'LeadMaster',
+  LeadBillingAddress: 'LeadBillingAddress',
   LeadSpecificationsMaster: 'LeadSpecificationsMaster',
   LeadCarcassMaterialMapping: 'LeadCarcassMaterialMapping',
   LeadShutterMaterialMapping: 'LeadShutterMaterialMapping',
@@ -671,6 +672,24 @@ export const LeadMasterScalarFieldEnum = {
 export type LeadMasterScalarFieldEnum = (typeof LeadMasterScalarFieldEnum)[keyof typeof LeadMasterScalarFieldEnum]
 
 
+export const LeadBillingAddressScalarFieldEnum = {
+  id: 'id',
+  lead_id: 'lead_id',
+  vendor_id: 'vendor_id',
+  address_type: 'address_type',
+  name: 'name',
+  address: 'address',
+  map_link: 'map_link',
+  gst_number: 'gst_number',
+  state_name: 'state_name',
+  place_of_supply: 'place_of_supply',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type LeadBillingAddressScalarFieldEnum = (typeof LeadBillingAddressScalarFieldEnum)[keyof typeof LeadBillingAddressScalarFieldEnum]
+
+
 export const LeadSpecificationsMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
@@ -1237,6 +1256,7 @@ export const PaymentInfoScalarFieldEnum = {
   account_id: 'account_id',
   status_id: 'status_id',
   amount: 'amount',
+  is_booking_received_amt: 'is_booking_received_amt',
   basic_amount: 'basic_amount',
   gst_percentage: 'gst_percentage',
   gst_amount: 'gst_amount',

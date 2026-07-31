@@ -3,6 +3,7 @@ import { BookingStageService } from "../../../services/bookingStage/bookingStage
 import {
   AddPaymentDto,
   CreateBookingStageDto,
+  LeadBillingAddressInput,
   UploadedFileRef,
 } from "../../../types/booking-stage.dto";
 import logger, { log } from "../../../utils/logger";
@@ -1171,6 +1172,7 @@ export class BookingStageController {
         lead_id,
         account_id,
         vendor_id,
+        product_type_id,
         client_id,
         created_by,
         amount,
@@ -1221,6 +1223,10 @@ export class BookingStageController {
         lead_id: parseInt(lead_id),
         account_id: parseInt(account_id),
         vendor_id: parseInt(vendor_id),
+        product_type_id:
+          product_type_id && Number(product_type_id) > 0
+            ? parseInt(product_type_id)
+            : undefined,
         client_id: client_id ? parseInt(client_id) : undefined,
         created_by: parseInt(created_by),
         amount: parseFloat(amount),
@@ -1536,6 +1542,97 @@ export class BookingStageController {
     } catch (error: any) {
       logger.error("[PaymentController] Error", { error: error.message });
       res.status(500).json({ success: false, message: error.message });
+    }
+  };
+
+  public getLeadBillingAddresses = async (req: Request, res: Response) => {
+    try {
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
+
+      if (!leadId || !vendorId) {
+        res.status(400).json({
+          success: false,
+          message: "leadId and vendorId are required",
+        });
+        return;
+      }
+
+      const result = await this.bookingStageService.getLeadBillingAddresses(
+        leadId,
+        vendorId,
+      );
+
+      res.status(200).json({
+        success: true,
+        data: result,
+      });
+    } catch (error: any) {
+      logger.error("[BookingStageController] getLeadBillingAddresses Error", {
+        error: error.message,
+      });
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public upsertLeadBillingAddresses = async (req: Request, res: Response) => {
+    try {
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
+
+      if (!leadId || !vendorId) {
+        res.status(400).json({
+          success: false,
+          message: "leadId and vendorId are required",
+        });
+        return;
+      }
+
+      const normalizeAddress = (
+        value: any,
+      ): LeadBillingAddressInput | null => {
+        if (!value || typeof value !== "object") return null;
+
+        return {
+          name: typeof value.name === "string" ? value.name : null,
+          address: typeof value.address === "string" ? value.address : null,
+          map_link: typeof value.map_link === "string" ? value.map_link : null,
+          gst_number:
+            typeof value.gst_number === "string" ? value.gst_number : null,
+          state_name:
+            typeof value.state_name === "string" ? value.state_name : null,
+          place_of_supply:
+            typeof value.place_of_supply === "string"
+              ? value.place_of_supply
+              : null,
+        };
+      };
+
+      const result = await this.bookingStageService.upsertLeadBillingAddresses({
+        lead_id: leadId,
+        vendor_id: vendorId,
+        billingAddress: normalizeAddress(req.body.billingAddress),
+        shippingAddress: normalizeAddress(req.body.shippingAddress),
+      });
+
+      res.status(200).json({
+        success: true,
+        data: result,
+      });
+    } catch (error: any) {
+      logger.error(
+        "[BookingStageController] upsertLeadBillingAddresses Error",
+        {
+          error: error.message,
+        },
+      );
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
     }
   };
 
