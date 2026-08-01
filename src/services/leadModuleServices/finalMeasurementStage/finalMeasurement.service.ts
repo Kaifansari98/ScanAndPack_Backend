@@ -1450,4 +1450,96 @@ export class FinalMeasurementService {
       return updatedTask;
     });
   }
+
+  public async skipFinalMeasurementStage(data: {
+    lead_id: number;
+    account_id: number;
+    vendor_id: number;
+    created_by: number;
+    critical_discussion_notes?: string;
+  }) {
+    return await prisma.$transaction(
+      async (tx: any) => {
+        const response: any = {
+          success: true,
+          message: "Final measurement stage skipped successfully",
+        };
+
+        // 1️⃣ Resolve the vendor’s Client Documentation status (Type 6)
+        const clientDocumentationStatus = await tx.statusTypeMaster.findFirst({
+          where: { vendor_id: data.vendor_id, tag: "Type 6" },
+          select: { id: true },
+        });
+        if (!clientDocumentationStatus) {
+          throw new Error(
+            `Client documentation status (Type 6) not found for vendor ${data.vendor_id}`,
+          );
+        }
+
+        // 2️⃣ Update LeadMaster with notes and new status
+        await tx.leadMaster.update({
+          where: { id: data.lead_id },
+          data: {
+            final_desc_note: data.critical_discussion_notes || "Skipped Final Measurement Stage.",
+            status_id: clientDocumentationStatus.id,
+          },
+        });
+
+        await ensureLeadStatusLog(tx, {
+          vendorId: data.vendor_id,
+          leadId: data.lead_id,
+          accountId: data.account_id,
+          statusId: clientDocumentationStatus.id,
+          createdBy: data.created_by,
+        });
+
+        // 3️⃣ Mark related Final Measurement task as completed/cancelled
+        await tx.userLeadTask.updateMany({
+          where: {
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            task_type: "Final Measurements",
+            status: "open",
+          },
+          data: {
+            status: "completed",
+            closed_by: data.created_by,
+            closed_at: new Date(),
+            updated_by: data.created_by,
+            updated_at: new Date(),
+          },
+        });
+
+        // 🧹 Redis Cache Invalidation — Sales Executive Dashboard
+        const fmAssignees = await tx.userLeadTask.findMany({
+          where: {
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            task_type: "Final Measurements",
+          },
+          select: { user_id: true },
+        });
+
+        for (const t of fmAssignees) {
+          await cache.del(`dashboard:tasks:${data.vendor_id}:${t.user_id}`);
+        }
+
+        // 4️⃣ Create Action Log Entry
+        const actionMessage = `Final Measurement Stage skipped. Move to Client Documentation Stage. — Remark: ${
+          data.critical_discussion_notes?.trim() || "Skipped Final Measurement Stage."
+        }`;
+
+        await createLeadLog(tx, {
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          created_by: data.created_by,
+          action: actionMessage,
+          action_type: "STATUS_CHANGE",
+        });
+
+        return response;
+      }
+    );
+  }
 }
