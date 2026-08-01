@@ -2,6 +2,9 @@ import { Request, Response } from "express";
 import { FinalMeasurementService } from "../../../services/leadModuleServices/finalMeasurementStage/finalMeasurement.service";
 import logger from "../../../utils/logger";
 import { prisma } from "../../../prisma/client";
+import { sanitizeFilename } from "../../../utils/fileUtils";
+import path from "path";
+
 import { NotificationService } from "../../../services/notification/notification.service";
 import { getFranchiseAdminRecipients } from "../../../services/notification/adminRecipients.service";
 import { NotificationType } from "../../../prisma/generated";
@@ -630,20 +633,90 @@ export class FinalMeasurementController {
         sysName: string;
       }[] = [];
 
+      // Custom renaming logic
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: parseInt(vendor_id) },
+        select: { is_custom_doc_nomenclature_enabled: true },
+      });
+      const useCustomVendorFlow = vendor?.is_custom_doc_nomenclature_enabled === true;
+
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: parseInt(lead_id) },
+        select: { firstname: true, lastname: true, account_id: true },
+      });
+
+      const sitePhotoDocType = await prisma.documentTypeMaster.findFirst({
+        where: { vendor_id: parseInt(vendor_id), tag: "Type 10" },
+      });
+
+      let clientNameSegment = "";
+      let dateSegment = "";
+      let structureSegment = "General";
+      let currentRev = -1;
+
+      if (useCustomVendorFlow && lead && sitePhotoDocType) {
+        clientNameSegment = sanitizeFilename(`${lead.firstname ?? ""}${lead.lastname ?? ""}` || "Client")
+          .replace(/_+/g, "_").slice(0, 50);
+
+        const now = new Date();
+        dateSegment = [
+          now.getFullYear(),
+          String(now.getMonth() + 1).padStart(2, "0"),
+          String(now.getDate()).padStart(2, "0"),
+        ].join("-");
+
+        if (product_structure_instance_id) {
+          const inst = await prisma.leadProductStructureInstance.findUnique({
+            where: { id: Number(product_structure_instance_id) },
+            select: { productType: { select: { type: true } } }
+          });
+          if (inst && inst.productType?.type) {
+            structureSegment = sanitizeFilename(inst.productType.type).replace(/_+/g, "_").slice(0, 80);
+          }
+        }
+
+        const existingDocs = await prisma.leadDocuments.findMany({
+          where: {
+            vendor_id: parseInt(vendor_id),
+            lead_id: parseInt(lead_id),
+            doc_type_id: sitePhotoDocType.id,
+            product_structure_instance_id: product_structure_instance_id ? Number(product_structure_instance_id) : null,
+            is_deleted: false,
+          },
+          select: { doc_og_name: true },
+        });
+
+        for (const doc of existingDocs) {
+          const match = doc.doc_og_name?.match(/^FM(\d+)-CSP-/i);
+          if (match) {
+            const rev = Number(match[1]);
+            currentRev = Math.max(currentRev, rev);
+          }
+        }
+      }
+
       for (const photo of sitePhotos) {
         await ensureTempFileExists(photo);
+
+        let finalOriginalName = photo.originalname;
+        if (useCustomVendorFlow) {
+          currentRev += 1;
+          const extension = path.extname(photo.originalname || "");
+          finalOriginalName = `FM${currentRev}-CSP-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+        }
+
         const sysName = await uploadToWasabiFinalMeasurementSitePhotoFile(
           photo.path,
           Number(vendor_id),
           Number(lead_id),
-          photo.originalname,
+          finalOriginalName,
           photo.mimetype
         );
 
         await safeUnlink(photo.path);
 
         uploadedSitePhotos.push({
-          originalName: photo.originalname,
+          originalName: finalOriginalName,
           sysName,
         });
       }
@@ -703,20 +776,90 @@ export class FinalMeasurementController {
         sysName: string;
       }[] = [];
 
+      // Custom renaming logic
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: parseInt(vendor_id) },
+        select: { is_custom_doc_nomenclature_enabled: true },
+      });
+      const useCustomVendorFlow = vendor?.is_custom_doc_nomenclature_enabled === true;
+
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: parseInt(lead_id) },
+        select: { firstname: true, lastname: true, account_id: true },
+      });
+
+      const fmDocType = await prisma.documentTypeMaster.findFirst({
+        where: { vendor_id: parseInt(vendor_id), tag: "Type 9" },
+      });
+
+      let clientNameSegment = "";
+      let dateSegment = "";
+      let structureSegment = "General";
+      let currentRev = -1;
+
+      if (useCustomVendorFlow && lead && fmDocType) {
+        clientNameSegment = sanitizeFilename(`${lead.firstname ?? ""}${lead.lastname ?? ""}` || "Client")
+          .replace(/_+/g, "_").slice(0, 50);
+
+        const now = new Date();
+        dateSegment = [
+          now.getFullYear(),
+          String(now.getMonth() + 1).padStart(2, "0"),
+          String(now.getDate()).padStart(2, "0"),
+        ].join("-");
+
+        if (product_structure_instance_id) {
+          const inst = await prisma.leadProductStructureInstance.findUnique({
+            where: { id: Number(product_structure_instance_id) },
+            select: { productType: { select: { type: true } } }
+          });
+          if (inst && inst.productType?.type) {
+            structureSegment = sanitizeFilename(inst.productType.type).replace(/_+/g, "_").slice(0, 80);
+          }
+        }
+
+        const existingDocs = await prisma.leadDocuments.findMany({
+          where: {
+            vendor_id: parseInt(vendor_id),
+            lead_id: parseInt(lead_id),
+            doc_type_id: fmDocType.id,
+            product_structure_instance_id: product_structure_instance_id ? Number(product_structure_instance_id) : null,
+            is_deleted: false,
+          },
+          select: { doc_og_name: true },
+        });
+
+        for (const doc of existingDocs) {
+          const match = doc.doc_og_name?.match(/^FM(\d+)-FMD-/i);
+          if (match) {
+            const rev = Number(match[1]);
+            currentRev = Math.max(currentRev, rev);
+          }
+        }
+      }
+
       for (const doc of finalMeasurementDocs) {
         await ensureTempFileExists(doc);
+        
+        let finalOriginalName = doc.originalname;
+        if (useCustomVendorFlow) {
+          currentRev += 1;
+          const extension = path.extname(doc.originalname || "");
+          finalOriginalName = `FM${currentRev}-FMD-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+        }
+
         const sysName = await uploadToWasabiFinalMeasurementDocFile(
           doc.path,
           Number(vendor_id),
           Number(lead_id),
-          doc.originalname,
+          finalOriginalName,
           doc.mimetype
         );
 
         await safeUnlink(doc.path);
 
         uploadedFinalMeasurementDocs.push({
-          originalName: doc.originalname,
+          originalName: finalOriginalName,
           sysName,
         });
       }
