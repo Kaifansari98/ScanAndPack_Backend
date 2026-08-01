@@ -165,10 +165,15 @@ export class FinalMeasurementController {
 
       const vendor = await prisma.vendorMaster.findUnique({
         where: { id: Number(vendor_id) },
-        select: { is_this_vendor_is_custom_usertype_only: true },
+        select: {
+          is_this_vendor_is_custom_usertype_only: true,
+          handlesLargeScaleProjects: true,
+        },
       });
       const isCustomVendorFlow =
         vendor?.is_this_vendor_is_custom_usertype_only === true;
+      const handlesLargeScaleProjects =
+        vendor?.handlesLargeScaleProjects === true;
 
       const instances = await prisma.leadProductStructureInstance.findMany({
         where: {
@@ -178,12 +183,11 @@ export class FinalMeasurementController {
         select: { id: true },
       });
 
-      const isMultiInstanceFlow = instances.length > 1;
+      const isMultiInstanceFlow = handlesLargeScaleProjects && instances.length >= 1;
       let canUseExistingInstanceFilesOnly = false;
 
       if (
         isCustomVendorFlow &&
-        isMultiInstanceFlow &&
         finalMeasurementDocs.length === 0 &&
         sitePhotos.length === 0
       ) {
@@ -206,46 +210,37 @@ export class FinalMeasurementController {
           return;
         }
 
-        const existingDocs = await prisma.leadDocuments.findMany({
-          where: {
-            lead_id: Number(lead_id),
-            vendor_id: Number(vendor_id),
-            is_deleted: false,
-            doc_type_id: { in: [measurementDocType.id, sitePhotoType.id] },
-            product_structure_instance_id: {
-              in: instances.map((instance) => instance.id),
+        if (isMultiInstanceFlow) {
+          const existingDocs = await prisma.leadDocuments.findMany({
+            where: {
+              lead_id: Number(lead_id),
+              vendor_id: Number(vendor_id),
+              is_deleted: false,
+              doc_type_id: { in: [measurementDocType.id, sitePhotoType.id] },
+              product_structure_instance_id: {
+                in: instances.map((instance) => instance.id),
+              },
             },
-          },
-          select: {
-            doc_type_id: true,
-            product_structure_instance_id: true,
-          },
-        });
-
-        const hasAllRequiredInstanceDocs = instances.every((instance) => {
-          const hasMeasurementDoc = existingDocs.some(
-            (doc) =>
-              doc.product_structure_instance_id === instance.id &&
-              doc.doc_type_id === measurementDocType.id,
-          );
-          const hasSitePhoto = existingDocs.some(
-            (doc) =>
-              doc.product_structure_instance_id === instance.id &&
-              doc.doc_type_id === sitePhotoType.id,
-          );
-
-          return hasMeasurementDoc && hasSitePhoto;
-        });
-
-        if (!hasAllRequiredInstanceDocs) {
-          res.status(400).json({
-            success: false,
-            message: "At least one Final Measurement document is required",
+            select: {
+              doc_type_id: true,
+              product_structure_instance_id: true,
+            },
           });
-          return;
-        }
 
-        canUseExistingInstanceFilesOnly = true;
+          const hasAtLeastOneDoc = existingDocs.some(
+            (doc) => doc.doc_type_id === measurementDocType.id,
+          );
+
+          if (!hasAtLeastOneDoc) {
+            res.status(400).json({
+              success: false,
+              message: "At least one Final Measurement document is required",
+            });
+            return;
+          }
+
+          canUseExistingInstanceFilesOnly = true;
+        }
       }
 
       if (
@@ -351,6 +346,67 @@ export class FinalMeasurementController {
         });
         return;
       }
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public skipFinalMeasurementStage = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const {
+        lead_id,
+        account_id,
+        vendor_id,
+        created_by,
+        critical_discussion_notes,
+      } = req.body;
+
+      if (!lead_id || !account_id || !vendor_id || !created_by) {
+        res
+          .status(400)
+          .json({ success: false, message: "Missing required fields" });
+        return;
+      }
+
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: Number(vendor_id) },
+        select: {
+          is_this_vendor_is_custom_usertype_only: true,
+          handlesLargeScaleProjects: true,
+        },
+      });
+
+      if (
+        vendor?.is_this_vendor_is_custom_usertype_only !== true ||
+        vendor?.handlesLargeScaleProjects !== true
+      ) {
+        res.status(400).json({
+          success: false,
+          message: "Vendor does not support skipping Final Measurement",
+        });
+        return;
+      }
+
+      const result = await finalMeasurementService.skipFinalMeasurementStage({
+        lead_id: Number(lead_id),
+        account_id: Number(account_id),
+        vendor_id: Number(vendor_id),
+        created_by: Number(created_by),
+        critical_discussion_notes,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Final measurement stage skipped successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error("[FinalMeasurementController] Error:", error);
       res.status(500).json({
         success: false,
         message: error.message || "Internal server error",
