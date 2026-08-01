@@ -3507,6 +3507,28 @@ export class DesigingStageController {
             { id: "desc" },
           ],
           include: {
+            carcassMaterialMappings: {
+              select: {
+                carcass_type_id: true,
+                carcas_material_id: true,
+                carcass_material_finish_id: true,
+              },
+            },
+            shutterMaterialMappings: {
+              select: {
+                shutter_type_id: true,
+                shutter_material_id: true,
+                shutter_material_finish_id: true,
+              },
+            },
+            hardwareMappings: {
+              select: {
+                carcass_legs_id: true,
+                skirting_carcass_legs_id: true,
+                skirting_carcass_legs_color_id: true,
+                note: true,
+              },
+            },
             lightCarcasUnitMappings: {
               select: {
                 light_carcas_unit_master_id: true,
@@ -3566,6 +3588,57 @@ export class DesigingStageController {
         });
 
         if (previousLatestSpecification) {
+          if (previousLatestSpecification.carcassMaterialMappings.length > 0) {
+            await tx.leadCarcassMaterialMapping.createMany({
+              data: previousLatestSpecification.carcassMaterialMappings.map(
+                (mapping) => ({
+                  vendor_id: Number(vendorId),
+                  lead_id: Number(leadId),
+                  specs_id: createdSpecification.id,
+                  carcass_type_id: mapping.carcass_type_id,
+                  carcas_material_id: mapping.carcas_material_id,
+                  carcass_material_finish_id: mapping.carcass_material_finish_id,
+                  created_by: Number(created_by),
+                }),
+              ),
+            });
+          }
+
+          if (previousLatestSpecification.shutterMaterialMappings.length > 0) {
+            await tx.leadShutterMaterialMapping.createMany({
+              data: previousLatestSpecification.shutterMaterialMappings.map(
+                (mapping) => ({
+                  vendor_id: Number(vendorId),
+                  lead_id: Number(leadId),
+                  specs_id: createdSpecification.id,
+                  shutter_type_id: mapping.shutter_type_id,
+                  shutter_material_id: mapping.shutter_material_id,
+                  shutter_material_finish_id:
+                    mapping.shutter_material_finish_id,
+                  created_by: Number(created_by),
+                }),
+              ),
+            });
+          }
+
+          if (previousLatestSpecification.hardwareMappings.length > 0) {
+            await tx.leadHardwareMapping.createMany({
+              data: previousLatestSpecification.hardwareMappings.map(
+                (mapping) => ({
+                  vendor_id: Number(vendorId),
+                  lead_id: Number(leadId),
+                  specs_id: createdSpecification.id,
+                  carcass_legs_id: mapping.carcass_legs_id,
+                  skirting_carcass_legs_id: mapping.skirting_carcass_legs_id,
+                  skirting_carcass_legs_color_id:
+                    mapping.skirting_carcass_legs_color_id,
+                  note: mapping.note,
+                  created_by: Number(created_by),
+                }),
+              ),
+            });
+          }
+
           if (previousLatestSpecification.lightCarcasUnitMappings.length > 0) {
             await tx.leadLightCarcasUnitMapping.createMany({
               data: previousLatestSpecification.lightCarcasUnitMappings.map(
@@ -3683,11 +3756,12 @@ export class DesigingStageController {
     try {
       const vendorId = Number(req.params.vendorId);
       const leadId = Number(req.params.leadId);
+      const specsId = Number(req.params.specsId);
 
-      if (!vendorId || !leadId) {
+      if (!vendorId || !leadId || !specsId) {
         return res.status(400).json({
           success: false,
-          message: "vendorId and leadId are required",
+          message: "vendorId, leadId and specsId are required",
         });
       }
 
@@ -3695,6 +3769,7 @@ export class DesigingStageController {
         where: {
           vendor_id: vendorId,
           lead_id: leadId,
+          specs_id: specsId,
         },
         include: {
           carcassType: { select: { id: true, name: true } },
@@ -3727,6 +3802,7 @@ export class DesigingStageController {
       const id = req.body.id ? Number(req.body.id) : undefined;
       const vendorId = Number(req.body.vendor_id);
       const leadId = Number(req.body.lead_id);
+      const specsId = Number(req.body.specs_id);
       const carcassTypeId = Number(req.body.carcass_type_id);
       const carcasMaterialId = Number(req.body.carcas_material_id);
       const carcassMaterialFinishId = Number(req.body.carcass_material_finish_id);
@@ -3735,6 +3811,7 @@ export class DesigingStageController {
       if (
         !vendorId ||
         !leadId ||
+        !specsId ||
         !carcassTypeId ||
         !carcasMaterialId ||
         !carcassMaterialFinishId ||
@@ -3743,13 +3820,20 @@ export class DesigingStageController {
         return res.status(400).json({
           success: false,
           message:
-            "vendor_id, lead_id, carcass_type_id, carcas_material_id, carcass_material_finish_id and created_by are required",
+            "vendor_id, lead_id, specs_id, carcass_type_id, carcas_material_id, carcass_material_finish_id and created_by are required",
         });
       }
+
+      await DesigingStageController.ensureSpecificationEditable(
+        req,
+        specsId,
+        createdBy,
+      );
 
       const data = {
         vendor_id: vendorId,
         lead_id: leadId,
+        specs_id: specsId,
         carcass_type_id: carcassTypeId,
         carcas_material_id: carcasMaterialId,
         carcass_material_finish_id: carcassMaterialFinishId,
@@ -3760,6 +3844,7 @@ export class DesigingStageController {
         where: {
           vendor_id: vendorId,
           lead_id: leadId,
+          specs_id: specsId,
           carcass_type_id: carcassTypeId,
           carcas_material_id: carcasMaterialId,
           carcass_material_finish_id: carcassMaterialFinishId,
@@ -3772,7 +3857,7 @@ export class DesigingStageController {
         return res.status(400).json({
           success: false,
           message:
-            "This carcass type, material, and finish combination already exists for this lead.",
+            "This carcass type, material, and finish combination already exists for this specification.",
         });
       }
 
@@ -3819,11 +3904,12 @@ export class DesigingStageController {
     try {
       const vendorId = Number(req.params.vendorId);
       const leadId = Number(req.params.leadId);
+      const specsId = Number(req.params.specsId);
 
-      if (!vendorId || !leadId) {
+      if (!vendorId || !leadId || !specsId) {
         return res.status(400).json({
           success: false,
-          message: "vendorId and leadId are required",
+          message: "vendorId, leadId and specsId are required",
         });
       }
 
@@ -3831,6 +3917,7 @@ export class DesigingStageController {
         where: {
           vendor_id: vendorId,
           lead_id: leadId,
+          specs_id: specsId,
         },
         include: {
           shutterType: { select: { id: true, name: true } },
@@ -3863,6 +3950,7 @@ export class DesigingStageController {
       const id = req.body.id ? Number(req.body.id) : undefined;
       const vendorId = Number(req.body.vendor_id);
       const leadId = Number(req.body.lead_id);
+      const specsId = Number(req.body.specs_id);
       const shutterTypeId = Number(req.body.shutter_type_id);
       const shutterMaterialId = Number(req.body.shutter_material_id);
       const shutterMaterialFinishId = Number(req.body.shutter_material_finish_id);
@@ -3871,6 +3959,7 @@ export class DesigingStageController {
       if (
         !vendorId ||
         !leadId ||
+        !specsId ||
         !shutterTypeId ||
         !shutterMaterialId ||
         !shutterMaterialFinishId ||
@@ -3879,13 +3968,20 @@ export class DesigingStageController {
         return res.status(400).json({
           success: false,
           message:
-            "vendor_id, lead_id, shutter_type_id, shutter_material_id, shutter_material_finish_id and created_by are required",
+            "vendor_id, lead_id, specs_id, shutter_type_id, shutter_material_id, shutter_material_finish_id and created_by are required",
         });
       }
+
+      await DesigingStageController.ensureSpecificationEditable(
+        req,
+        specsId,
+        createdBy,
+      );
 
       const data = {
         vendor_id: vendorId,
         lead_id: leadId,
+        specs_id: specsId,
         shutter_type_id: shutterTypeId,
         shutter_material_id: shutterMaterialId,
         shutter_material_finish_id: shutterMaterialFinishId,
@@ -3896,6 +3992,7 @@ export class DesigingStageController {
         where: {
           vendor_id: vendorId,
           lead_id: leadId,
+          specs_id: specsId,
           shutter_type_id: shutterTypeId,
           shutter_material_id: shutterMaterialId,
           shutter_material_finish_id: shutterMaterialFinishId,
@@ -3908,7 +4005,7 @@ export class DesigingStageController {
         return res.status(400).json({
           success: false,
           message:
-            "This shutter type, material, and finish combination already exists for this lead.",
+            "This shutter type, material, and finish combination already exists for this specification.",
         });
       }
 
@@ -3952,11 +4049,12 @@ export class DesigingStageController {
     try {
       const vendorId = Number(req.params.vendorId);
       const leadId = Number(req.params.leadId);
+      const specsId = Number(req.params.specsId);
 
-      if (!vendorId || !leadId) {
+      if (!vendorId || !leadId || !specsId) {
         return res.status(400).json({
           success: false,
-          message: "vendorId and leadId are required",
+          message: "vendorId, leadId and specsId are required",
         });
       }
 
@@ -3964,6 +4062,7 @@ export class DesigingStageController {
         where: {
           vendor_id: vendorId,
           lead_id: leadId,
+          specs_id: specsId,
         },
         include: {
           carcassLegs: { select: { id: true, name: true } },
@@ -3995,6 +4094,7 @@ export class DesigingStageController {
       const id = req.body.id ? Number(req.body.id) : undefined;
       const vendorId = Number(req.body.vendor_id);
       const leadId = Number(req.body.lead_id);
+      const specsId = Number(req.body.specs_id);
       const carcassLegsId = Number(req.body.carcass_legs_id);
       const skirtingCarcassLegsId = Number(req.body.skirting_carcass_legs_id);
       const skirtingCarcassLegsColorId = req.body.skirting_carcass_legs_color_id
@@ -4009,6 +4109,7 @@ export class DesigingStageController {
       if (
         !vendorId ||
         !leadId ||
+        !specsId ||
         !carcassLegsId ||
         !skirtingCarcassLegsId ||
         !createdBy
@@ -4016,13 +4117,20 @@ export class DesigingStageController {
         return res.status(400).json({
           success: false,
           message:
-            "vendor_id, lead_id, carcass_legs_id, skirting_carcass_legs_id and created_by are required",
+            "vendor_id, lead_id, specs_id, carcass_legs_id, skirting_carcass_legs_id and created_by are required",
         });
       }
+
+      await DesigingStageController.ensureSpecificationEditable(
+        req,
+        specsId,
+        createdBy,
+      );
 
       const data = {
         vendor_id: vendorId,
         lead_id: leadId,
+        specs_id: specsId,
         carcass_legs_id: carcassLegsId,
         skirting_carcass_legs_id: skirtingCarcassLegsId,
         skirting_carcass_legs_color_id: skirtingCarcassLegsColorId,
@@ -4034,6 +4142,7 @@ export class DesigingStageController {
         where: {
           vendor_id: vendorId,
           lead_id: leadId,
+          specs_id: specsId,
           carcass_legs_id: carcassLegsId,
           skirting_carcass_legs_id: skirtingCarcassLegsId,
           skirting_carcass_legs_color_id: skirtingCarcassLegsColorId,
@@ -4046,7 +4155,7 @@ export class DesigingStageController {
         return res.status(400).json({
           success: false,
           message:
-            "This carcass legs, skirting, and color combination already exists for this lead.",
+            "This carcass legs, skirting, and color combination already exists for this specification.",
         });
       }
 

@@ -211,7 +211,7 @@ DesigningStageRouter.put(
 );
 
 DesigningStageRouter.get(
-  "/vendor/:vendorId/lead/:leadId/carcass-material-mappings",
+  "/vendor/:vendorId/lead/:leadId/specs/:specsId/carcass-material-mappings",
   (req, res) => DesigingStageController.getLeadCarcassMaterialMappings(req, res),
 );
 
@@ -221,7 +221,7 @@ DesigningStageRouter.post(
 );
 
 DesigningStageRouter.get(
-  "/vendor/:vendorId/lead/:leadId/shutter-material-mappings",
+  "/vendor/:vendorId/lead/:leadId/specs/:specsId/shutter-material-mappings",
   (req, res) => DesigingStageController.getLeadShutterMaterialMappings(req, res),
 );
 
@@ -231,7 +231,7 @@ DesigningStageRouter.post(
 );
 
 DesigningStageRouter.get(
-  "/vendor/:vendorId/lead/:leadId/hardware-mappings",
+  "/vendor/:vendorId/lead/:leadId/specs/:specsId/hardware-mappings",
   (req, res) => DesigingStageController.getLeadHardwareMappings(req, res),
 );
 
