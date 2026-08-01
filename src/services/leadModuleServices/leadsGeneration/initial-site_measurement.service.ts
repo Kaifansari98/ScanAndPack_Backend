@@ -19,6 +19,7 @@ import {
   PaymentUploadDetailDtoo,
   UpdatePaymentUploadDto,
 } from "../../../types/leadModule.types";
+import * as path from 'path';
 import { prisma } from "../../../prisma/client";
 import Joi from "joi";
 import logger from "../../../utils/logger";
@@ -2465,6 +2466,77 @@ export class PaymentUploadService {
         message: "Site photos uploaded successfully",
       };
 
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: data.lead_id },
+        select: { account_id: true, firstname: true, lastname: true },
+      });
+
+      if (!lead) {
+        throw new Error("Lead not found");
+      }
+
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: data.vendor_id },
+        select: { is_custom_doc_nomenclature_enabled: true },
+      });
+      const useCustomVendorFlow = vendor?.is_custom_doc_nomenclature_enabled === true;
+
+      const sitePhotoDocType = await prisma.documentTypeMaster.findFirst({
+        where: { vendor_id: data.vendor_id, tag: "Type 2" },
+      });
+
+      if (!sitePhotoDocType) {
+        throw new Error("Document type (site photos) not found for this vendor");
+      }
+
+      const allLeadInstances = useCustomVendorFlow
+        ? await prisma.leadProductStructureInstance.findMany({
+            where: {
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+              account_id: lead.account_id ?? undefined,
+            },
+            select: { id: true, productType: { select: { type: true } } },
+            orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+          })
+        : [];
+
+      let clientNameSegment = "";
+      let dateSegment = "";
+      const revisionMap = new Map<number | null, number>();
+
+      if (useCustomVendorFlow) {
+        clientNameSegment = sanitizeFilename(`${lead.firstname ?? ""}${lead.lastname ?? ""}` || "Client")
+          .replace(/_+/g, "_").slice(0, 50);
+        
+        const now = new Date();
+        dateSegment = [
+          now.getFullYear(),
+          String(now.getMonth() + 1).padStart(2, "0"),
+          String(now.getDate()).padStart(2, "0"),
+        ].join("-");
+
+        const existingDocs = await prisma.leadDocuments.findMany({
+          where: {
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            doc_type_id: sitePhotoDocType.id,
+            is_deleted: false,
+          },
+          select: { doc_og_name: true, product_structure_instance_id: true },
+        });
+
+        for (const doc of existingDocs) {
+          const instId = doc.product_structure_instance_id;
+          const match = doc.doc_og_name?.match(/^ISM(\d+)-CSP-/i);
+          if (match) {
+            const rev = Number(match[1]);
+            const currentMax = revisionMap.get(instId) ?? -1;
+            revisionMap.set(instId, Math.max(currentMax, rev));
+          }
+        }
+      }
+
       const uploadedSitePhotos: {
         originalName: string;
         s3Key: string;
@@ -2472,45 +2544,45 @@ export class PaymentUploadService {
       }[] = [];
 
       for (const [index, photo] of data.currentSitePhotos.entries()) {
+        const instanceId = data.sitePhotoInstanceIds?.[index] ?? null;
+
+        const finalOriginalName = useCustomVendorFlow
+          ? (() => {
+              let structureSegment = "General";
+              if (instanceId !== null) {
+                const inst = allLeadInstances.find(i => i.id === instanceId);
+                if (inst && inst.productType?.type) {
+                  structureSegment = sanitizeFilename(inst.productType.type).replace(/_+/g, "_").slice(0, 80);
+                }
+              }
+
+              let currentRev = revisionMap.get(instanceId) ?? -1;
+              currentRev += 1;
+              revisionMap.set(instanceId, currentRev);
+
+              const extension = path.extname(photo.originalname || "");
+              return `ISM${currentRev}-CSP-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+            })()
+          : photo.originalname;
+
         const s3Key = await uploadToWasabiInitialSiteMeasurementFile(
           photo.path,
           data.vendor_id,
           data.lead_id,
-          photo.originalname,
+          finalOriginalName,
           photo.mimetype,
           "current_site_photos",
         );
 
         await fs.unlink(photo.path);
         uploadedSitePhotos.push({
-          originalName: photo.originalname,
+          originalName: finalOriginalName,
           s3Key,
-          productStructureInstanceId:
-            data.sitePhotoInstanceIds?.[index] ?? null,
+          productStructureInstanceId: data.sitePhotoInstanceIds?.[index] ?? null,
         });
       }
 
       await prisma.$transaction(async (tx: any) => {
-        // Fetch correct account_id from the lead to avoid foreign key constraints from bad frontend data
-        const lead = await tx.leadMaster.findUnique({
-          where: { id: data.lead_id },
-          select: { account_id: true },
-        });
-
-        if (!lead) {
-          throw new Error("Lead not found");
-        }
-
-        const sitePhotoDocType = await tx.documentTypeMaster.findFirst({
-          where: { vendor_id: data.vendor_id, tag: "Type 2" },
-        });
-
-        if (!sitePhotoDocType) {
-          throw new Error(
-            "Document type (site photos) not found for this vendor",
-          );
-        }
-
         for (const uploaded of uploadedSitePhotos) {
           const document = await tx.leadDocuments.create({
             data: {
@@ -2521,8 +2593,7 @@ export class PaymentUploadService {
               account_id: lead.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
-              product_structure_instance_id:
-                uploaded.productStructureInstanceId,
+              product_structure_instance_id: uploaded.productStructureInstanceId,
             },
           });
 
@@ -2565,6 +2636,77 @@ export class PaymentUploadService {
         message: "Measurement documents uploaded successfully",
       };
 
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: data.lead_id },
+        select: { account_id: true, firstname: true, lastname: true },
+      });
+
+      if (!lead) {
+        throw new Error("Lead not found");
+      }
+
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: data.vendor_id },
+        select: { is_custom_doc_nomenclature_enabled: true },
+      });
+      const useCustomVendorFlow = vendor?.is_custom_doc_nomenclature_enabled === true;
+
+      const pdfDocType = await prisma.documentTypeMaster.findFirst({
+        where: { vendor_id: data.vendor_id, tag: "Type 3" },
+      });
+
+      if (!pdfDocType) {
+        throw new Error("Document type (measurement documents) not found for this vendor");
+      }
+
+      const allLeadInstances = useCustomVendorFlow
+        ? await prisma.leadProductStructureInstance.findMany({
+            where: {
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+              account_id: lead.account_id ?? undefined,
+            },
+            select: { id: true, productType: { select: { type: true } } },
+            orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+          })
+        : [];
+
+      let clientNameSegment = "";
+      let dateSegment = "";
+      const revisionMap = new Map<number | null, number>();
+
+      if (useCustomVendorFlow) {
+        clientNameSegment = sanitizeFilename(`${lead.firstname ?? ""}${lead.lastname ?? ""}` || "Client")
+          .replace(/_+/g, "_").slice(0, 50);
+        
+        const now = new Date();
+        dateSegment = [
+          now.getFullYear(),
+          String(now.getMonth() + 1).padStart(2, "0"),
+          String(now.getDate()).padStart(2, "0"),
+        ].join("-");
+
+        const existingDocs = await prisma.leadDocuments.findMany({
+          where: {
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            doc_type_id: pdfDocType.id,
+            is_deleted: false,
+          },
+          select: { doc_og_name: true, product_structure_instance_id: true },
+        });
+
+        for (const doc of existingDocs) {
+          const instId = doc.product_structure_instance_id;
+          const match = doc.doc_og_name?.match(/^ISM(\d+)-MD-/i);
+          if (match) {
+            const rev = Number(match[1]);
+            const currentMax = revisionMap.get(instId) ?? -1;
+            revisionMap.set(instId, Math.max(currentMax, rev));
+          }
+        }
+      }
+
       const uploadedPdfDocuments: {
         originalName: string;
         s3Key: string;
@@ -2572,43 +2714,45 @@ export class PaymentUploadService {
       }[] = [];
 
       for (const [index, pdfFile] of data.uploadPdf.entries()) {
+        const instanceId = data.pdfFileInstanceIds?.[index] ?? null;
+
+        const finalOriginalName = useCustomVendorFlow
+          ? (() => {
+              let structureSegment = "General";
+              if (instanceId !== null) {
+                const inst = allLeadInstances.find(i => i.id === instanceId);
+                if (inst && inst.productType?.type) {
+                  structureSegment = sanitizeFilename(inst.productType.type).replace(/_+/g, "_").slice(0, 80);
+                }
+              }
+
+              let currentRev = revisionMap.get(instanceId) ?? -1;
+              currentRev += 1;
+              revisionMap.set(instanceId, currentRev);
+
+              const extension = path.extname(pdfFile.originalname || "");
+              return `ISM${currentRev}-MD-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+            })()
+          : pdfFile.originalname;
+
         const s3Key = await uploadToWasabiInitialSiteMeasurementFile(
           pdfFile.path,
           data.vendor_id,
           data.lead_id,
-          pdfFile.originalname,
+          finalOriginalName,
           pdfFile.mimetype,
           "initial_site_measurement_documents",
         );
 
         await fs.unlink(pdfFile.path);
         uploadedPdfDocuments.push({
-          originalName: pdfFile.originalname,
+          originalName: finalOriginalName,
           s3Key,
           productStructureInstanceId: data.pdfFileInstanceIds?.[index] ?? null,
         });
       }
 
       await prisma.$transaction(async (tx: any) => {
-        const lead = await tx.leadMaster.findUnique({
-          where: { id: data.lead_id },
-          select: { account_id: true },
-        });
-
-        if (!lead) {
-          throw new Error("Lead not found");
-        }
-
-        const pdfDocType = await tx.documentTypeMaster.findFirst({
-          where: { vendor_id: data.vendor_id, tag: "Type 3" },
-        });
-
-        if (!pdfDocType) {
-          throw new Error(
-            "Document type (measurement documents) not found for this vendor",
-          );
-        }
-
         for (const uploaded of uploadedPdfDocuments) {
           const document = await tx.leadDocuments.create({
             data: {
@@ -2619,8 +2763,7 @@ export class PaymentUploadService {
               account_id: lead.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
-              product_structure_instance_id:
-                uploaded.productStructureInstanceId,
+              product_structure_instance_id: uploaded.productStructureInstanceId,
             },
           });
 
