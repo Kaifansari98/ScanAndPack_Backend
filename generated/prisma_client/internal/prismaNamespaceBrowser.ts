@@ -198,6 +198,11 @@ export const ModelName = {
   ProjectCategoriesMasterVendorMapping: 'ProjectCategoriesMasterVendorMapping',
   BrandMaster: 'BrandMaster',
   ProductMaster: 'ProductMaster',
+  CoreProductMaster: 'CoreProductMaster',
+  GradeMaster: 'GradeMaster',
+  FinishMaster: 'FinishMaster',
+  TypeMaster: 'TypeMaster',
+  ItemTypeMaster: 'ItemTypeMaster',
   PurchaseIntentMaster: 'PurchaseIntentMaster',
   PurchaseIntentItem: 'PurchaseIntentItem',
   PurchaseIntentItemVendorMapping: 'PurchaseIntentItemVendorMapping',
@@ -2503,7 +2508,10 @@ export const ProjectCategoriesMasterScalarFieldEnum = {
   vendor_id: 'vendor_id',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  external_category_id: 'external_category_id'
+  external_category_id: 'external_category_id',
+  parent_id: 'parent_id',
+  created_by: 'created_by',
+  updated_by: 'updated_by'
 } as const
 
 export type ProjectCategoriesMasterScalarFieldEnum = (typeof ProjectCategoriesMasterScalarFieldEnum)[keyof typeof ProjectCategoriesMasterScalarFieldEnum]
@@ -2528,6 +2536,11 @@ export const BrandMasterScalarFieldEnum = {
   vendor_id: 'vendor_id',
   brand_name: 'brand_name',
   active: 'active',
+  brand_short_name: 'brand_short_name',
+  logo: 'logo',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const
@@ -2592,10 +2605,93 @@ export const ProductMasterScalarFieldEnum = {
   reorder_level_unit_id: 'reorder_level_unit_id',
   reorder_batch_qty: 'reorder_batch_qty',
   reorder_batch_unit_id: 'reorder_batch_unit_id',
-  item_type: 'item_type'
+  item_type: 'item_type',
+  sub_category_id: 'sub_category_id',
+  item_code: 'item_code',
+  barcode: 'barcode',
+  purchase_unit_id: 'purchase_unit_id',
+  item_type_master_id: 'item_type_master_id',
+  core_product_id: 'core_product_id',
+  grade_id: 'grade_id',
+  type_id: 'type_id',
+  finish_id: 'finish_id',
+  length: 'length',
+  height: 'height',
+  thickness: 'thickness',
+  size: 'size'
 } as const
 
 export type ProductMasterScalarFieldEnum = (typeof ProductMasterScalarFieldEnum)[keyof typeof ProductMasterScalarFieldEnum]
+
+
+export const CoreProductMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  core_product_name: 'core_product_name',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type CoreProductMasterScalarFieldEnum = (typeof CoreProductMasterScalarFieldEnum)[keyof typeof CoreProductMasterScalarFieldEnum]
+
+
+export const GradeMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  grade_name: 'grade_name',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type GradeMasterScalarFieldEnum = (typeof GradeMasterScalarFieldEnum)[keyof typeof GradeMasterScalarFieldEnum]
+
+
+export const FinishMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  finish_name: 'finish_name',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type FinishMasterScalarFieldEnum = (typeof FinishMasterScalarFieldEnum)[keyof typeof FinishMasterScalarFieldEnum]
+
+
+export const TypeMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  type_name: 'type_name',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type TypeMasterScalarFieldEnum = (typeof TypeMasterScalarFieldEnum)[keyof typeof TypeMasterScalarFieldEnum]
+
+
+export const ItemTypeMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  item_type_name: 'item_type_name',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ItemTypeMasterScalarFieldEnum = (typeof ItemTypeMasterScalarFieldEnum)[keyof typeof ItemTypeMasterScalarFieldEnum]
 
 
 export const PurchaseIntentMasterScalarFieldEnum = {
@@ -2973,6 +3069,8 @@ export const UnitMasterScalarFieldEnum = {
   unit_name: 'unit_name',
   unit_class: 'unit_class',
   is_active: 'is_active',
+  short_name: 'short_name',
+  decimal_allowed: 'decimal_allowed',
   created_by: 'created_by',
   updated_by: 'updated_by',
   created_at: 'created_at',

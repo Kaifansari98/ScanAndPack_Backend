@@ -775,6 +775,31 @@ export type BrandMaster = Prisma.BrandMasterModel
  */
 export type ProductMaster = Prisma.ProductMasterModel
 /**
+ * Model CoreProductMaster
+ * 
+ */
+export type CoreProductMaster = Prisma.CoreProductMasterModel
+/**
+ * Model GradeMaster
+ * 
+ */
+export type GradeMaster = Prisma.GradeMasterModel
+/**
+ * Model FinishMaster
+ * 
+ */
+export type FinishMaster = Prisma.FinishMasterModel
+/**
+ * Model TypeMaster
+ * 
+ */
+export type TypeMaster = Prisma.TypeMasterModel
+/**
+ * Model ItemTypeMaster
+ * 
+ */
+export type ItemTypeMaster = Prisma.ItemTypeMasterModel
+/**
  * Model PurchaseIntentMaster
  * 
  */

@@ -30,12 +30,18 @@ export type ProjectCategoriesMasterAvgAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   external_category_id: number | null
+  parent_id: number | null
+  created_by: number | null
+  updated_by: number | null
 }
 
 export type ProjectCategoriesMasterSumAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   external_category_id: number | null
+  parent_id: number | null
+  created_by: number | null
+  updated_by: number | null
 }
 
 export type ProjectCategoriesMasterMinAggregateOutputType = {
@@ -46,6 +52,9 @@ export type ProjectCategoriesMasterMinAggregateOutputType = {
   created_at: Date | null
   updated_at: Date | null
   external_category_id: number | null
+  parent_id: number | null
+  created_by: number | null
+  updated_by: number | null
 }
 
 export type ProjectCategoriesMasterMaxAggregateOutputType = {
@@ -56,6 +65,9 @@ export type ProjectCategoriesMasterMaxAggregateOutputType = {
   created_at: Date | null
   updated_at: Date | null
   external_category_id: number | null
+  parent_id: number | null
+  created_by: number | null
+  updated_by: number | null
 }
 
 export type ProjectCategoriesMasterCountAggregateOutputType = {
@@ -66,6 +78,9 @@ export type ProjectCategoriesMasterCountAggregateOutputType = {
   created_at: number
   updated_at: number
   external_category_id: number
+  parent_id: number
+  created_by: number
+  updated_by: number
   _all: number
 }
 
@@ -74,12 +89,18 @@ export type ProjectCategoriesMasterAvgAggregateInputType = {
   id?: true
   vendor_id?: true
   external_category_id?: true
+  parent_id?: true
+  created_by?: true
+  updated_by?: true
 }
 
 export type ProjectCategoriesMasterSumAggregateInputType = {
   id?: true
   vendor_id?: true
   external_category_id?: true
+  parent_id?: true
+  created_by?: true
+  updated_by?: true
 }
 
 export type ProjectCategoriesMasterMinAggregateInputType = {
@@ -90,6 +111,9 @@ export type ProjectCategoriesMasterMinAggregateInputType = {
   created_at?: true
   updated_at?: true
   external_category_id?: true
+  parent_id?: true
+  created_by?: true
+  updated_by?: true
 }
 
 export type ProjectCategoriesMasterMaxAggregateInputType = {
@@ -100,6 +124,9 @@ export type ProjectCategoriesMasterMaxAggregateInputType = {
   created_at?: true
   updated_at?: true
   external_category_id?: true
+  parent_id?: true
+  created_by?: true
+  updated_by?: true
 }
 
 export type ProjectCategoriesMasterCountAggregateInputType = {
@@ -110,6 +137,9 @@ export type ProjectCategoriesMasterCountAggregateInputType = {
   created_at?: true
   updated_at?: true
   external_category_id?: true
+  parent_id?: true
+  created_by?: true
+  updated_by?: true
   _all?: true
 }
 
@@ -207,6 +237,9 @@ export type ProjectCategoriesMasterGroupByOutputType = {
   created_at: Date
   updated_at: Date
   external_category_id: number | null
+  parent_id: number | null
+  created_by: number | null
+  updated_by: number | null
   _count: ProjectCategoriesMasterCountAggregateOutputType | null
   _avg: ProjectCategoriesMasterAvgAggregateOutputType | null
   _sum: ProjectCategoriesMasterSumAggregateOutputType | null
@@ -240,9 +273,15 @@ export type ProjectCategoriesMasterWhereInput = {
   created_at?: Prisma.DateTimeFilter<"ProjectCategoriesMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ProjectCategoriesMaster"> | Date | string
   external_category_id?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
+  parent_id?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
+  created_by?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
+  updated_by?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  parent?: Prisma.XOR<Prisma.ProjectCategoriesMasterNullableScalarRelationFilter, Prisma.ProjectCategoriesMasterWhereInput> | null
+  children?: Prisma.ProjectCategoriesMasterListRelationFilter
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingListRelationFilter
   products?: Prisma.ProductMasterListRelationFilter
+  subCategoryProducts?: Prisma.ProductMasterListRelationFilter
   purchaseIntents?: Prisma.PurchaseIntentMasterListRelationFilter
 }
 
@@ -254,9 +293,15 @@ export type ProjectCategoriesMasterOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   external_category_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  parent_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  parent?: Prisma.ProjectCategoriesMasterOrderByWithRelationInput
+  children?: Prisma.ProjectCategoriesMasterOrderByRelationAggregateInput
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingOrderByRelationAggregateInput
   products?: Prisma.ProductMasterOrderByRelationAggregateInput
+  subCategoryProducts?: Prisma.ProductMasterOrderByRelationAggregateInput
   purchaseIntents?: Prisma.PurchaseIntentMasterOrderByRelationAggregateInput
 }
 
@@ -271,9 +316,15 @@ export type ProjectCategoriesMasterWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"ProjectCategoriesMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ProjectCategoriesMaster"> | Date | string
   external_category_id?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
+  parent_id?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
+  created_by?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
+  updated_by?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  parent?: Prisma.XOR<Prisma.ProjectCategoriesMasterNullableScalarRelationFilter, Prisma.ProjectCategoriesMasterWhereInput> | null
+  children?: Prisma.ProjectCategoriesMasterListRelationFilter
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingListRelationFilter
   products?: Prisma.ProductMasterListRelationFilter
+  subCategoryProducts?: Prisma.ProductMasterListRelationFilter
   purchaseIntents?: Prisma.PurchaseIntentMasterListRelationFilter
 }, "id">
 
@@ -285,6 +336,9 @@ export type ProjectCategoriesMasterOrderByWithAggregationInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   external_category_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  parent_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ProjectCategoriesMasterCountOrderByAggregateInput
   _avg?: Prisma.ProjectCategoriesMasterAvgOrderByAggregateInput
   _max?: Prisma.ProjectCategoriesMasterMaxOrderByAggregateInput
@@ -303,6 +357,9 @@ export type ProjectCategoriesMasterScalarWhereWithAggregatesInput = {
   created_at?: Prisma.DateTimeWithAggregatesFilter<"ProjectCategoriesMaster"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"ProjectCategoriesMaster"> | Date | string
   external_category_id?: Prisma.IntNullableWithAggregatesFilter<"ProjectCategoriesMaster"> | number | null
+  parent_id?: Prisma.IntNullableWithAggregatesFilter<"ProjectCategoriesMaster"> | number | null
+  created_by?: Prisma.IntNullableWithAggregatesFilter<"ProjectCategoriesMaster"> | number | null
+  updated_by?: Prisma.IntNullableWithAggregatesFilter<"ProjectCategoriesMaster"> | number | null
 }
 
 export type ProjectCategoriesMasterCreateInput = {
@@ -311,9 +368,14 @@ export type ProjectCategoriesMasterCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
+  created_by?: number | null
+  updated_by?: number | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectCategoriesMasterInput
+  parent?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutChildrenInput
+  children?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutParentInput
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutProjectCategoriesMasterInput
   products?: Prisma.ProductMasterCreateNestedManyWithoutCategoryInput
+  subCategoryProducts?: Prisma.ProductMasterCreateNestedManyWithoutSubCategoryInput
   purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutCategoryInput
 }
 
@@ -325,8 +387,13 @@ export type ProjectCategoriesMasterUncheckedCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
+  parent_id?: number | null
+  created_by?: number | null
+  updated_by?: number | null
+  children?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutParentInput
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutProjectCategoriesMasterInput
   products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutCategoryInput
+  subCategoryProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutSubCategoryInput
   purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutCategoryInput
 }
 
@@ -336,9 +403,14 @@ export type ProjectCategoriesMasterUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectCategoriesMasterNestedInput
+  parent?: Prisma.ProjectCategoriesMasterUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.ProjectCategoriesMasterUpdateManyWithoutParentNestedInput
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutProjectCategoriesMasterNestedInput
   products?: Prisma.ProductMasterUpdateManyWithoutCategoryNestedInput
+  subCategoryProducts?: Prisma.ProductMasterUpdateManyWithoutSubCategoryNestedInput
   purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutCategoryNestedInput
 }
 
@@ -350,8 +422,13 @@ export type ProjectCategoriesMasterUncheckedUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  children?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutParentNestedInput
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutProjectCategoriesMasterNestedInput
   products?: Prisma.ProductMasterUncheckedUpdateManyWithoutCategoryNestedInput
+  subCategoryProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutSubCategoryNestedInput
   purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
@@ -363,6 +440,9 @@ export type ProjectCategoriesMasterCreateManyInput = {
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
+  parent_id?: number | null
+  created_by?: number | null
+  updated_by?: number | null
 }
 
 export type ProjectCategoriesMasterUpdateManyMutationInput = {
@@ -371,6 +451,8 @@ export type ProjectCategoriesMasterUpdateManyMutationInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProjectCategoriesMasterUncheckedUpdateManyInput = {
@@ -381,6 +463,9 @@ export type ProjectCategoriesMasterUncheckedUpdateManyInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProjectCategoriesMasterListRelationFilter = {
@@ -393,6 +478,11 @@ export type ProjectCategoriesMasterOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type ProjectCategoriesMasterNullableScalarRelationFilter = {
+  is?: Prisma.ProjectCategoriesMasterWhereInput | null
+  isNot?: Prisma.ProjectCategoriesMasterWhereInput | null
+}
+
 export type ProjectCategoriesMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   category_name?: Prisma.SortOrder
@@ -401,12 +491,18 @@ export type ProjectCategoriesMasterCountOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   external_category_id?: Prisma.SortOrder
+  parent_id?: Prisma.SortOrder
+  created_by?: Prisma.SortOrder
+  updated_by?: Prisma.SortOrder
 }
 
 export type ProjectCategoriesMasterAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   external_category_id?: Prisma.SortOrder
+  parent_id?: Prisma.SortOrder
+  created_by?: Prisma.SortOrder
+  updated_by?: Prisma.SortOrder
 }
 
 export type ProjectCategoriesMasterMaxOrderByAggregateInput = {
@@ -417,6 +513,9 @@ export type ProjectCategoriesMasterMaxOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   external_category_id?: Prisma.SortOrder
+  parent_id?: Prisma.SortOrder
+  created_by?: Prisma.SortOrder
+  updated_by?: Prisma.SortOrder
 }
 
 export type ProjectCategoriesMasterMinOrderByAggregateInput = {
@@ -427,22 +526,23 @@ export type ProjectCategoriesMasterMinOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   external_category_id?: Prisma.SortOrder
+  parent_id?: Prisma.SortOrder
+  created_by?: Prisma.SortOrder
+  updated_by?: Prisma.SortOrder
 }
 
 export type ProjectCategoriesMasterSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   external_category_id?: Prisma.SortOrder
+  parent_id?: Prisma.SortOrder
+  created_by?: Prisma.SortOrder
+  updated_by?: Prisma.SortOrder
 }
 
 export type ProjectCategoriesMasterScalarRelationFilter = {
   is?: Prisma.ProjectCategoriesMasterWhereInput
   isNot?: Prisma.ProjectCategoriesMasterWhereInput
-}
-
-export type ProjectCategoriesMasterNullableScalarRelationFilter = {
-  is?: Prisma.ProjectCategoriesMasterWhereInput | null
-  isNot?: Prisma.ProjectCategoriesMasterWhereInput | null
 }
 
 export type ProjectCategoriesMasterCreateNestedManyWithoutVendorInput = {
@@ -487,8 +587,66 @@ export type ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput =
   deleteMany?: Prisma.ProjectCategoriesMasterScalarWhereInput | Prisma.ProjectCategoriesMasterScalarWhereInput[]
 }
 
+export type ProjectCategoriesMasterCreateNestedOneWithoutChildrenInput = {
+  create?: Prisma.XOR<Prisma.ProjectCategoriesMasterCreateWithoutChildrenInput, Prisma.ProjectCategoriesMasterUncheckedCreateWithoutChildrenInput>
+  connectOrCreate?: Prisma.ProjectCategoriesMasterCreateOrConnectWithoutChildrenInput
+  connect?: Prisma.ProjectCategoriesMasterWhereUniqueInput
+}
+
+export type ProjectCategoriesMasterCreateNestedManyWithoutParentInput = {
+  create?: Prisma.XOR<Prisma.ProjectCategoriesMasterCreateWithoutParentInput, Prisma.ProjectCategoriesMasterUncheckedCreateWithoutParentInput> | Prisma.ProjectCategoriesMasterCreateWithoutParentInput[] | Prisma.ProjectCategoriesMasterUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.ProjectCategoriesMasterCreateOrConnectWithoutParentInput | Prisma.ProjectCategoriesMasterCreateOrConnectWithoutParentInput[]
+  createMany?: Prisma.ProjectCategoriesMasterCreateManyParentInputEnvelope
+  connect?: Prisma.ProjectCategoriesMasterWhereUniqueInput | Prisma.ProjectCategoriesMasterWhereUniqueInput[]
+}
+
+export type ProjectCategoriesMasterUncheckedCreateNestedManyWithoutParentInput = {
+  create?: Prisma.XOR<Prisma.ProjectCategoriesMasterCreateWithoutParentInput, Prisma.ProjectCategoriesMasterUncheckedCreateWithoutParentInput> | Prisma.ProjectCategoriesMasterCreateWithoutParentInput[] | Prisma.ProjectCategoriesMasterUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.ProjectCategoriesMasterCreateOrConnectWithoutParentInput | Prisma.ProjectCategoriesMasterCreateOrConnectWithoutParentInput[]
+  createMany?: Prisma.ProjectCategoriesMasterCreateManyParentInputEnvelope
+  connect?: Prisma.ProjectCategoriesMasterWhereUniqueInput | Prisma.ProjectCategoriesMasterWhereUniqueInput[]
+}
+
 export type EnumProjectCategoriesStatusFieldUpdateOperationsInput = {
   set?: $Enums.ProjectCategoriesStatus
+}
+
+export type ProjectCategoriesMasterUpdateOneWithoutChildrenNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCategoriesMasterCreateWithoutChildrenInput, Prisma.ProjectCategoriesMasterUncheckedCreateWithoutChildrenInput>
+  connectOrCreate?: Prisma.ProjectCategoriesMasterCreateOrConnectWithoutChildrenInput
+  upsert?: Prisma.ProjectCategoriesMasterUpsertWithoutChildrenInput
+  disconnect?: Prisma.ProjectCategoriesMasterWhereInput | boolean
+  delete?: Prisma.ProjectCategoriesMasterWhereInput | boolean
+  connect?: Prisma.ProjectCategoriesMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectCategoriesMasterUpdateToOneWithWhereWithoutChildrenInput, Prisma.ProjectCategoriesMasterUpdateWithoutChildrenInput>, Prisma.ProjectCategoriesMasterUncheckedUpdateWithoutChildrenInput>
+}
+
+export type ProjectCategoriesMasterUpdateManyWithoutParentNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCategoriesMasterCreateWithoutParentInput, Prisma.ProjectCategoriesMasterUncheckedCreateWithoutParentInput> | Prisma.ProjectCategoriesMasterCreateWithoutParentInput[] | Prisma.ProjectCategoriesMasterUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.ProjectCategoriesMasterCreateOrConnectWithoutParentInput | Prisma.ProjectCategoriesMasterCreateOrConnectWithoutParentInput[]
+  upsert?: Prisma.ProjectCategoriesMasterUpsertWithWhereUniqueWithoutParentInput | Prisma.ProjectCategoriesMasterUpsertWithWhereUniqueWithoutParentInput[]
+  createMany?: Prisma.ProjectCategoriesMasterCreateManyParentInputEnvelope
+  set?: Prisma.ProjectCategoriesMasterWhereUniqueInput | Prisma.ProjectCategoriesMasterWhereUniqueInput[]
+  disconnect?: Prisma.ProjectCategoriesMasterWhereUniqueInput | Prisma.ProjectCategoriesMasterWhereUniqueInput[]
+  delete?: Prisma.ProjectCategoriesMasterWhereUniqueInput | Prisma.ProjectCategoriesMasterWhereUniqueInput[]
+  connect?: Prisma.ProjectCategoriesMasterWhereUniqueInput | Prisma.ProjectCategoriesMasterWhereUniqueInput[]
+  update?: Prisma.ProjectCategoriesMasterUpdateWithWhereUniqueWithoutParentInput | Prisma.ProjectCategoriesMasterUpdateWithWhereUniqueWithoutParentInput[]
+  updateMany?: Prisma.ProjectCategoriesMasterUpdateManyWithWhereWithoutParentInput | Prisma.ProjectCategoriesMasterUpdateManyWithWhereWithoutParentInput[]
+  deleteMany?: Prisma.ProjectCategoriesMasterScalarWhereInput | Prisma.ProjectCategoriesMasterScalarWhereInput[]
+}
+
+export type ProjectCategoriesMasterUncheckedUpdateManyWithoutParentNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCategoriesMasterCreateWithoutParentInput, Prisma.ProjectCategoriesMasterUncheckedCreateWithoutParentInput> | Prisma.ProjectCategoriesMasterCreateWithoutParentInput[] | Prisma.ProjectCategoriesMasterUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.ProjectCategoriesMasterCreateOrConnectWithoutParentInput | Prisma.ProjectCategoriesMasterCreateOrConnectWithoutParentInput[]
+  upsert?: Prisma.ProjectCategoriesMasterUpsertWithWhereUniqueWithoutParentInput | Prisma.ProjectCategoriesMasterUpsertWithWhereUniqueWithoutParentInput[]
+  createMany?: Prisma.ProjectCategoriesMasterCreateManyParentInputEnvelope
+  set?: Prisma.ProjectCategoriesMasterWhereUniqueInput | Prisma.ProjectCategoriesMasterWhereUniqueInput[]
+  disconnect?: Prisma.ProjectCategoriesMasterWhereUniqueInput | Prisma.ProjectCategoriesMasterWhereUniqueInput[]
+  delete?: Prisma.ProjectCategoriesMasterWhereUniqueInput | Prisma.ProjectCategoriesMasterWhereUniqueInput[]
+  connect?: Prisma.ProjectCategoriesMasterWhereUniqueInput | Prisma.ProjectCategoriesMasterWhereUniqueInput[]
+  update?: Prisma.ProjectCategoriesMasterUpdateWithWhereUniqueWithoutParentInput | Prisma.ProjectCategoriesMasterUpdateWithWhereUniqueWithoutParentInput[]
+  updateMany?: Prisma.ProjectCategoriesMasterUpdateManyWithWhereWithoutParentInput | Prisma.ProjectCategoriesMasterUpdateManyWithWhereWithoutParentInput[]
+  deleteMany?: Prisma.ProjectCategoriesMasterScalarWhereInput | Prisma.ProjectCategoriesMasterScalarWhereInput[]
 }
 
 export type ProjectCategoriesMasterCreateNestedOneWithoutProjectCategoriesMasterVendorMappingInput = {
@@ -511,12 +669,28 @@ export type ProjectCategoriesMasterCreateNestedOneWithoutProductsInput = {
   connect?: Prisma.ProjectCategoriesMasterWhereUniqueInput
 }
 
+export type ProjectCategoriesMasterCreateNestedOneWithoutSubCategoryProductsInput = {
+  create?: Prisma.XOR<Prisma.ProjectCategoriesMasterCreateWithoutSubCategoryProductsInput, Prisma.ProjectCategoriesMasterUncheckedCreateWithoutSubCategoryProductsInput>
+  connectOrCreate?: Prisma.ProjectCategoriesMasterCreateOrConnectWithoutSubCategoryProductsInput
+  connect?: Prisma.ProjectCategoriesMasterWhereUniqueInput
+}
+
 export type ProjectCategoriesMasterUpdateOneRequiredWithoutProductsNestedInput = {
   create?: Prisma.XOR<Prisma.ProjectCategoriesMasterCreateWithoutProductsInput, Prisma.ProjectCategoriesMasterUncheckedCreateWithoutProductsInput>
   connectOrCreate?: Prisma.ProjectCategoriesMasterCreateOrConnectWithoutProductsInput
   upsert?: Prisma.ProjectCategoriesMasterUpsertWithoutProductsInput
   connect?: Prisma.ProjectCategoriesMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectCategoriesMasterUpdateToOneWithWhereWithoutProductsInput, Prisma.ProjectCategoriesMasterUpdateWithoutProductsInput>, Prisma.ProjectCategoriesMasterUncheckedUpdateWithoutProductsInput>
+}
+
+export type ProjectCategoriesMasterUpdateOneWithoutSubCategoryProductsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCategoriesMasterCreateWithoutSubCategoryProductsInput, Prisma.ProjectCategoriesMasterUncheckedCreateWithoutSubCategoryProductsInput>
+  connectOrCreate?: Prisma.ProjectCategoriesMasterCreateOrConnectWithoutSubCategoryProductsInput
+  upsert?: Prisma.ProjectCategoriesMasterUpsertWithoutSubCategoryProductsInput
+  disconnect?: Prisma.ProjectCategoriesMasterWhereInput | boolean
+  delete?: Prisma.ProjectCategoriesMasterWhereInput | boolean
+  connect?: Prisma.ProjectCategoriesMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectCategoriesMasterUpdateToOneWithWhereWithoutSubCategoryProductsInput, Prisma.ProjectCategoriesMasterUpdateWithoutSubCategoryProductsInput>, Prisma.ProjectCategoriesMasterUncheckedUpdateWithoutSubCategoryProductsInput>
 }
 
 export type ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput = {
@@ -541,8 +715,13 @@ export type ProjectCategoriesMasterCreateWithoutVendorInput = {
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
+  created_by?: number | null
+  updated_by?: number | null
+  parent?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutChildrenInput
+  children?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutParentInput
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutProjectCategoriesMasterInput
   products?: Prisma.ProductMasterCreateNestedManyWithoutCategoryInput
+  subCategoryProducts?: Prisma.ProductMasterCreateNestedManyWithoutSubCategoryInput
   purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutCategoryInput
 }
 
@@ -553,8 +732,13 @@ export type ProjectCategoriesMasterUncheckedCreateWithoutVendorInput = {
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
+  parent_id?: number | null
+  created_by?: number | null
+  updated_by?: number | null
+  children?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutParentInput
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutProjectCategoriesMasterInput
   products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutCategoryInput
+  subCategoryProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutSubCategoryInput
   purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutCategoryInput
 }
 
@@ -595,6 +779,150 @@ export type ProjectCategoriesMasterScalarWhereInput = {
   created_at?: Prisma.DateTimeFilter<"ProjectCategoriesMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ProjectCategoriesMaster"> | Date | string
   external_category_id?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
+  parent_id?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
+  created_by?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
+  updated_by?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
+}
+
+export type ProjectCategoriesMasterCreateWithoutChildrenInput = {
+  category_name: string
+  status?: $Enums.ProjectCategoriesStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+  external_category_id?: number | null
+  created_by?: number | null
+  updated_by?: number | null
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectCategoriesMasterInput
+  parent?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutChildrenInput
+  projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutProjectCategoriesMasterInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutCategoryInput
+  subCategoryProducts?: Prisma.ProductMasterCreateNestedManyWithoutSubCategoryInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutCategoryInput
+}
+
+export type ProjectCategoriesMasterUncheckedCreateWithoutChildrenInput = {
+  id?: number
+  category_name: string
+  status?: $Enums.ProjectCategoriesStatus
+  vendor_id: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  external_category_id?: number | null
+  parent_id?: number | null
+  created_by?: number | null
+  updated_by?: number | null
+  projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutProjectCategoriesMasterInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutCategoryInput
+  subCategoryProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutSubCategoryInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutCategoryInput
+}
+
+export type ProjectCategoriesMasterCreateOrConnectWithoutChildrenInput = {
+  where: Prisma.ProjectCategoriesMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCategoriesMasterCreateWithoutChildrenInput, Prisma.ProjectCategoriesMasterUncheckedCreateWithoutChildrenInput>
+}
+
+export type ProjectCategoriesMasterCreateWithoutParentInput = {
+  category_name: string
+  status?: $Enums.ProjectCategoriesStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+  external_category_id?: number | null
+  created_by?: number | null
+  updated_by?: number | null
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectCategoriesMasterInput
+  children?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutParentInput
+  projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutProjectCategoriesMasterInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutCategoryInput
+  subCategoryProducts?: Prisma.ProductMasterCreateNestedManyWithoutSubCategoryInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutCategoryInput
+}
+
+export type ProjectCategoriesMasterUncheckedCreateWithoutParentInput = {
+  id?: number
+  category_name: string
+  status?: $Enums.ProjectCategoriesStatus
+  vendor_id: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  external_category_id?: number | null
+  created_by?: number | null
+  updated_by?: number | null
+  children?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutParentInput
+  projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutProjectCategoriesMasterInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutCategoryInput
+  subCategoryProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutSubCategoryInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutCategoryInput
+}
+
+export type ProjectCategoriesMasterCreateOrConnectWithoutParentInput = {
+  where: Prisma.ProjectCategoriesMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCategoriesMasterCreateWithoutParentInput, Prisma.ProjectCategoriesMasterUncheckedCreateWithoutParentInput>
+}
+
+export type ProjectCategoriesMasterCreateManyParentInputEnvelope = {
+  data: Prisma.ProjectCategoriesMasterCreateManyParentInput | Prisma.ProjectCategoriesMasterCreateManyParentInput[]
+  skipDuplicates?: boolean
+}
+
+export type ProjectCategoriesMasterUpsertWithoutChildrenInput = {
+  update: Prisma.XOR<Prisma.ProjectCategoriesMasterUpdateWithoutChildrenInput, Prisma.ProjectCategoriesMasterUncheckedUpdateWithoutChildrenInput>
+  create: Prisma.XOR<Prisma.ProjectCategoriesMasterCreateWithoutChildrenInput, Prisma.ProjectCategoriesMasterUncheckedCreateWithoutChildrenInput>
+  where?: Prisma.ProjectCategoriesMasterWhereInput
+}
+
+export type ProjectCategoriesMasterUpdateToOneWithWhereWithoutChildrenInput = {
+  where?: Prisma.ProjectCategoriesMasterWhereInput
+  data: Prisma.XOR<Prisma.ProjectCategoriesMasterUpdateWithoutChildrenInput, Prisma.ProjectCategoriesMasterUncheckedUpdateWithoutChildrenInput>
+}
+
+export type ProjectCategoriesMasterUpdateWithoutChildrenInput = {
+  category_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProjectCategoriesStatusFieldUpdateOperationsInput | $Enums.ProjectCategoriesStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectCategoriesMasterNestedInput
+  parent?: Prisma.ProjectCategoriesMasterUpdateOneWithoutChildrenNestedInput
+  projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutProjectCategoriesMasterNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutCategoryNestedInput
+  subCategoryProducts?: Prisma.ProductMasterUpdateManyWithoutSubCategoryNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutCategoryNestedInput
+}
+
+export type ProjectCategoriesMasterUncheckedUpdateWithoutChildrenInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProjectCategoriesStatusFieldUpdateOperationsInput | $Enums.ProjectCategoriesStatus
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutProjectCategoriesMasterNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutCategoryNestedInput
+  subCategoryProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutSubCategoryNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutCategoryNestedInput
+}
+
+export type ProjectCategoriesMasterUpsertWithWhereUniqueWithoutParentInput = {
+  where: Prisma.ProjectCategoriesMasterWhereUniqueInput
+  update: Prisma.XOR<Prisma.ProjectCategoriesMasterUpdateWithoutParentInput, Prisma.ProjectCategoriesMasterUncheckedUpdateWithoutParentInput>
+  create: Prisma.XOR<Prisma.ProjectCategoriesMasterCreateWithoutParentInput, Prisma.ProjectCategoriesMasterUncheckedCreateWithoutParentInput>
+}
+
+export type ProjectCategoriesMasterUpdateWithWhereUniqueWithoutParentInput = {
+  where: Prisma.ProjectCategoriesMasterWhereUniqueInput
+  data: Prisma.XOR<Prisma.ProjectCategoriesMasterUpdateWithoutParentInput, Prisma.ProjectCategoriesMasterUncheckedUpdateWithoutParentInput>
+}
+
+export type ProjectCategoriesMasterUpdateManyWithWhereWithoutParentInput = {
+  where: Prisma.ProjectCategoriesMasterScalarWhereInput
+  data: Prisma.XOR<Prisma.ProjectCategoriesMasterUpdateManyMutationInput, Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutParentInput>
 }
 
 export type ProjectCategoriesMasterCreateWithoutProjectCategoriesMasterVendorMappingInput = {
@@ -603,8 +931,13 @@ export type ProjectCategoriesMasterCreateWithoutProjectCategoriesMasterVendorMap
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
+  created_by?: number | null
+  updated_by?: number | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectCategoriesMasterInput
+  parent?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutChildrenInput
+  children?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutParentInput
   products?: Prisma.ProductMasterCreateNestedManyWithoutCategoryInput
+  subCategoryProducts?: Prisma.ProductMasterCreateNestedManyWithoutSubCategoryInput
   purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutCategoryInput
 }
 
@@ -616,7 +949,12 @@ export type ProjectCategoriesMasterUncheckedCreateWithoutProjectCategoriesMaster
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
+  parent_id?: number | null
+  created_by?: number | null
+  updated_by?: number | null
+  children?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutParentInput
   products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutCategoryInput
+  subCategoryProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutSubCategoryInput
   purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutCategoryInput
 }
 
@@ -642,8 +980,13 @@ export type ProjectCategoriesMasterUpdateWithoutProjectCategoriesMasterVendorMap
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectCategoriesMasterNestedInput
+  parent?: Prisma.ProjectCategoriesMasterUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.ProjectCategoriesMasterUpdateManyWithoutParentNestedInput
   products?: Prisma.ProductMasterUpdateManyWithoutCategoryNestedInput
+  subCategoryProducts?: Prisma.ProductMasterUpdateManyWithoutSubCategoryNestedInput
   purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutCategoryNestedInput
 }
 
@@ -655,7 +998,12 @@ export type ProjectCategoriesMasterUncheckedUpdateWithoutProjectCategoriesMaster
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  children?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutParentNestedInput
   products?: Prisma.ProductMasterUncheckedUpdateManyWithoutCategoryNestedInput
+  subCategoryProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutSubCategoryNestedInput
   purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
@@ -665,8 +1013,13 @@ export type ProjectCategoriesMasterCreateWithoutProductsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
+  created_by?: number | null
+  updated_by?: number | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectCategoriesMasterInput
+  parent?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutChildrenInput
+  children?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutParentInput
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutProjectCategoriesMasterInput
+  subCategoryProducts?: Prisma.ProductMasterCreateNestedManyWithoutSubCategoryInput
   purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutCategoryInput
 }
 
@@ -678,13 +1031,56 @@ export type ProjectCategoriesMasterUncheckedCreateWithoutProductsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
+  parent_id?: number | null
+  created_by?: number | null
+  updated_by?: number | null
+  children?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutParentInput
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutProjectCategoriesMasterInput
+  subCategoryProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutSubCategoryInput
   purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutCategoryInput
 }
 
 export type ProjectCategoriesMasterCreateOrConnectWithoutProductsInput = {
   where: Prisma.ProjectCategoriesMasterWhereUniqueInput
   create: Prisma.XOR<Prisma.ProjectCategoriesMasterCreateWithoutProductsInput, Prisma.ProjectCategoriesMasterUncheckedCreateWithoutProductsInput>
+}
+
+export type ProjectCategoriesMasterCreateWithoutSubCategoryProductsInput = {
+  category_name: string
+  status?: $Enums.ProjectCategoriesStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+  external_category_id?: number | null
+  created_by?: number | null
+  updated_by?: number | null
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectCategoriesMasterInput
+  parent?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutChildrenInput
+  children?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutParentInput
+  projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutProjectCategoriesMasterInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutCategoryInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutCategoryInput
+}
+
+export type ProjectCategoriesMasterUncheckedCreateWithoutSubCategoryProductsInput = {
+  id?: number
+  category_name: string
+  status?: $Enums.ProjectCategoriesStatus
+  vendor_id: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  external_category_id?: number | null
+  parent_id?: number | null
+  created_by?: number | null
+  updated_by?: number | null
+  children?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutParentInput
+  projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutProjectCategoriesMasterInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutCategoryInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutCategoryInput
+}
+
+export type ProjectCategoriesMasterCreateOrConnectWithoutSubCategoryProductsInput = {
+  where: Prisma.ProjectCategoriesMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCategoriesMasterCreateWithoutSubCategoryProductsInput, Prisma.ProjectCategoriesMasterUncheckedCreateWithoutSubCategoryProductsInput>
 }
 
 export type ProjectCategoriesMasterUpsertWithoutProductsInput = {
@@ -704,8 +1100,13 @@ export type ProjectCategoriesMasterUpdateWithoutProductsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectCategoriesMasterNestedInput
+  parent?: Prisma.ProjectCategoriesMasterUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.ProjectCategoriesMasterUpdateManyWithoutParentNestedInput
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutProjectCategoriesMasterNestedInput
+  subCategoryProducts?: Prisma.ProductMasterUpdateManyWithoutSubCategoryNestedInput
   purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutCategoryNestedInput
 }
 
@@ -717,7 +1118,56 @@ export type ProjectCategoriesMasterUncheckedUpdateWithoutProductsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  children?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutParentNestedInput
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutProjectCategoriesMasterNestedInput
+  subCategoryProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutSubCategoryNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutCategoryNestedInput
+}
+
+export type ProjectCategoriesMasterUpsertWithoutSubCategoryProductsInput = {
+  update: Prisma.XOR<Prisma.ProjectCategoriesMasterUpdateWithoutSubCategoryProductsInput, Prisma.ProjectCategoriesMasterUncheckedUpdateWithoutSubCategoryProductsInput>
+  create: Prisma.XOR<Prisma.ProjectCategoriesMasterCreateWithoutSubCategoryProductsInput, Prisma.ProjectCategoriesMasterUncheckedCreateWithoutSubCategoryProductsInput>
+  where?: Prisma.ProjectCategoriesMasterWhereInput
+}
+
+export type ProjectCategoriesMasterUpdateToOneWithWhereWithoutSubCategoryProductsInput = {
+  where?: Prisma.ProjectCategoriesMasterWhereInput
+  data: Prisma.XOR<Prisma.ProjectCategoriesMasterUpdateWithoutSubCategoryProductsInput, Prisma.ProjectCategoriesMasterUncheckedUpdateWithoutSubCategoryProductsInput>
+}
+
+export type ProjectCategoriesMasterUpdateWithoutSubCategoryProductsInput = {
+  category_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProjectCategoriesStatusFieldUpdateOperationsInput | $Enums.ProjectCategoriesStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectCategoriesMasterNestedInput
+  parent?: Prisma.ProjectCategoriesMasterUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.ProjectCategoriesMasterUpdateManyWithoutParentNestedInput
+  projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutProjectCategoriesMasterNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutCategoryNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutCategoryNestedInput
+}
+
+export type ProjectCategoriesMasterUncheckedUpdateWithoutSubCategoryProductsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProjectCategoriesStatusFieldUpdateOperationsInput | $Enums.ProjectCategoriesStatus
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  children?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutParentNestedInput
+  projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutProjectCategoriesMasterNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutCategoryNestedInput
   purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
@@ -727,9 +1177,14 @@ export type ProjectCategoriesMasterCreateWithoutPurchaseIntentsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
+  created_by?: number | null
+  updated_by?: number | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectCategoriesMasterInput
+  parent?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutChildrenInput
+  children?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutParentInput
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutProjectCategoriesMasterInput
   products?: Prisma.ProductMasterCreateNestedManyWithoutCategoryInput
+  subCategoryProducts?: Prisma.ProductMasterCreateNestedManyWithoutSubCategoryInput
 }
 
 export type ProjectCategoriesMasterUncheckedCreateWithoutPurchaseIntentsInput = {
@@ -740,8 +1195,13 @@ export type ProjectCategoriesMasterUncheckedCreateWithoutPurchaseIntentsInput = 
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
+  parent_id?: number | null
+  created_by?: number | null
+  updated_by?: number | null
+  children?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutParentInput
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutProjectCategoriesMasterInput
   products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutCategoryInput
+  subCategoryProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutSubCategoryInput
 }
 
 export type ProjectCategoriesMasterCreateOrConnectWithoutPurchaseIntentsInput = {
@@ -766,9 +1226,14 @@ export type ProjectCategoriesMasterUpdateWithoutPurchaseIntentsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectCategoriesMasterNestedInput
+  parent?: Prisma.ProjectCategoriesMasterUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.ProjectCategoriesMasterUpdateManyWithoutParentNestedInput
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutProjectCategoriesMasterNestedInput
   products?: Prisma.ProductMasterUpdateManyWithoutCategoryNestedInput
+  subCategoryProducts?: Prisma.ProductMasterUpdateManyWithoutSubCategoryNestedInput
 }
 
 export type ProjectCategoriesMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
@@ -779,8 +1244,13 @@ export type ProjectCategoriesMasterUncheckedUpdateWithoutPurchaseIntentsInput = 
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  children?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutParentNestedInput
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutProjectCategoriesMasterNestedInput
   products?: Prisma.ProductMasterUncheckedUpdateManyWithoutCategoryNestedInput
+  subCategoryProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutSubCategoryNestedInput
 }
 
 export type ProjectCategoriesMasterCreateManyVendorInput = {
@@ -790,6 +1260,9 @@ export type ProjectCategoriesMasterCreateManyVendorInput = {
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
+  parent_id?: number | null
+  created_by?: number | null
+  updated_by?: number | null
 }
 
 export type ProjectCategoriesMasterUpdateWithoutVendorInput = {
@@ -798,8 +1271,13 @@ export type ProjectCategoriesMasterUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent?: Prisma.ProjectCategoriesMasterUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.ProjectCategoriesMasterUpdateManyWithoutParentNestedInput
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutProjectCategoriesMasterNestedInput
   products?: Prisma.ProductMasterUpdateManyWithoutCategoryNestedInput
+  subCategoryProducts?: Prisma.ProductMasterUpdateManyWithoutSubCategoryNestedInput
   purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutCategoryNestedInput
 }
 
@@ -810,8 +1288,13 @@ export type ProjectCategoriesMasterUncheckedUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  children?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutParentNestedInput
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutProjectCategoriesMasterNestedInput
   products?: Prisma.ProductMasterUncheckedUpdateManyWithoutCategoryNestedInput
+  subCategoryProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutSubCategoryNestedInput
   purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
@@ -822,6 +1305,66 @@ export type ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type ProjectCategoriesMasterCreateManyParentInput = {
+  id?: number
+  category_name: string
+  status?: $Enums.ProjectCategoriesStatus
+  vendor_id: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  external_category_id?: number | null
+  created_by?: number | null
+  updated_by?: number | null
+}
+
+export type ProjectCategoriesMasterUpdateWithoutParentInput = {
+  category_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProjectCategoriesStatusFieldUpdateOperationsInput | $Enums.ProjectCategoriesStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectCategoriesMasterNestedInput
+  children?: Prisma.ProjectCategoriesMasterUpdateManyWithoutParentNestedInput
+  projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutProjectCategoriesMasterNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutCategoryNestedInput
+  subCategoryProducts?: Prisma.ProductMasterUpdateManyWithoutSubCategoryNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutCategoryNestedInput
+}
+
+export type ProjectCategoriesMasterUncheckedUpdateWithoutParentInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProjectCategoriesStatusFieldUpdateOperationsInput | $Enums.ProjectCategoriesStatus
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  children?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutParentNestedInput
+  projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutProjectCategoriesMasterNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutCategoryNestedInput
+  subCategoryProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutSubCategoryNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutCategoryNestedInput
+}
+
+export type ProjectCategoriesMasterUncheckedUpdateManyWithoutParentInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProjectCategoriesStatusFieldUpdateOperationsInput | $Enums.ProjectCategoriesStatus
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -830,14 +1373,18 @@ export type ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorInput = {
  */
 
 export type ProjectCategoriesMasterCountOutputType = {
+  children: number
   projectCategoriesMasterVendorMapping: number
   products: number
+  subCategoryProducts: number
   purchaseIntents: number
 }
 
 export type ProjectCategoriesMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  children?: boolean | ProjectCategoriesMasterCountOutputTypeCountChildrenArgs
   projectCategoriesMasterVendorMapping?: boolean | ProjectCategoriesMasterCountOutputTypeCountProjectCategoriesMasterVendorMappingArgs
   products?: boolean | ProjectCategoriesMasterCountOutputTypeCountProductsArgs
+  subCategoryProducts?: boolean | ProjectCategoriesMasterCountOutputTypeCountSubCategoryProductsArgs
   purchaseIntents?: boolean | ProjectCategoriesMasterCountOutputTypeCountPurchaseIntentsArgs
 }
 
@@ -849,6 +1396,13 @@ export type ProjectCategoriesMasterCountOutputTypeDefaultArgs<ExtArgs extends ru
    * Select specific fields to fetch from the ProjectCategoriesMasterCountOutputType
    */
   select?: Prisma.ProjectCategoriesMasterCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ProjectCategoriesMasterCountOutputType without action
+ */
+export type ProjectCategoriesMasterCountOutputTypeCountChildrenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProjectCategoriesMasterWhereInput
 }
 
 /**
@@ -868,6 +1422,13 @@ export type ProjectCategoriesMasterCountOutputTypeCountProductsArgs<ExtArgs exte
 /**
  * ProjectCategoriesMasterCountOutputType without action
  */
+export type ProjectCategoriesMasterCountOutputTypeCountSubCategoryProductsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProductMasterWhereInput
+}
+
+/**
+ * ProjectCategoriesMasterCountOutputType without action
+ */
 export type ProjectCategoriesMasterCountOutputTypeCountPurchaseIntentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PurchaseIntentMasterWhereInput
 }
@@ -881,9 +1442,15 @@ export type ProjectCategoriesMasterSelect<ExtArgs extends runtime.Types.Extensio
   created_at?: boolean
   updated_at?: boolean
   external_category_id?: boolean
+  parent_id?: boolean
+  created_by?: boolean
+  updated_by?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  parent?: boolean | Prisma.ProjectCategoriesMaster$parentArgs<ExtArgs>
+  children?: boolean | Prisma.ProjectCategoriesMaster$childrenArgs<ExtArgs>
   projectCategoriesMasterVendorMapping?: boolean | Prisma.ProjectCategoriesMaster$projectCategoriesMasterVendorMappingArgs<ExtArgs>
   products?: boolean | Prisma.ProjectCategoriesMaster$productsArgs<ExtArgs>
+  subCategoryProducts?: boolean | Prisma.ProjectCategoriesMaster$subCategoryProductsArgs<ExtArgs>
   purchaseIntents?: boolean | Prisma.ProjectCategoriesMaster$purchaseIntentsArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCategoriesMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectCategoriesMaster"]>
@@ -896,7 +1463,11 @@ export type ProjectCategoriesMasterSelectCreateManyAndReturn<ExtArgs extends run
   created_at?: boolean
   updated_at?: boolean
   external_category_id?: boolean
+  parent_id?: boolean
+  created_by?: boolean
+  updated_by?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  parent?: boolean | Prisma.ProjectCategoriesMaster$parentArgs<ExtArgs>
 }, ExtArgs["result"]["projectCategoriesMaster"]>
 
 export type ProjectCategoriesMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -907,7 +1478,11 @@ export type ProjectCategoriesMasterSelectUpdateManyAndReturn<ExtArgs extends run
   created_at?: boolean
   updated_at?: boolean
   external_category_id?: boolean
+  parent_id?: boolean
+  created_by?: boolean
+  updated_by?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  parent?: boolean | Prisma.ProjectCategoriesMaster$parentArgs<ExtArgs>
 }, ExtArgs["result"]["projectCategoriesMaster"]>
 
 export type ProjectCategoriesMasterSelectScalar = {
@@ -918,29 +1493,40 @@ export type ProjectCategoriesMasterSelectScalar = {
   created_at?: boolean
   updated_at?: boolean
   external_category_id?: boolean
+  parent_id?: boolean
+  created_by?: boolean
+  updated_by?: boolean
 }
 
-export type ProjectCategoriesMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "category_name" | "status" | "vendor_id" | "created_at" | "updated_at" | "external_category_id", ExtArgs["result"]["projectCategoriesMaster"]>
+export type ProjectCategoriesMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "category_name" | "status" | "vendor_id" | "created_at" | "updated_at" | "external_category_id" | "parent_id" | "created_by" | "updated_by", ExtArgs["result"]["projectCategoriesMaster"]>
 export type ProjectCategoriesMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  parent?: boolean | Prisma.ProjectCategoriesMaster$parentArgs<ExtArgs>
+  children?: boolean | Prisma.ProjectCategoriesMaster$childrenArgs<ExtArgs>
   projectCategoriesMasterVendorMapping?: boolean | Prisma.ProjectCategoriesMaster$projectCategoriesMasterVendorMappingArgs<ExtArgs>
   products?: boolean | Prisma.ProjectCategoriesMaster$productsArgs<ExtArgs>
+  subCategoryProducts?: boolean | Prisma.ProjectCategoriesMaster$subCategoryProductsArgs<ExtArgs>
   purchaseIntents?: boolean | Prisma.ProjectCategoriesMaster$purchaseIntentsArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCategoriesMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectCategoriesMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  parent?: boolean | Prisma.ProjectCategoriesMaster$parentArgs<ExtArgs>
 }
 export type ProjectCategoriesMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  parent?: boolean | Prisma.ProjectCategoriesMaster$parentArgs<ExtArgs>
 }
 
 export type $ProjectCategoriesMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProjectCategoriesMaster"
   objects: {
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
+    parent: Prisma.$ProjectCategoriesMasterPayload<ExtArgs> | null
+    children: Prisma.$ProjectCategoriesMasterPayload<ExtArgs>[]
     projectCategoriesMasterVendorMapping: Prisma.$ProjectCategoriesMasterVendorMappingPayload<ExtArgs>[]
     products: Prisma.$ProductMasterPayload<ExtArgs>[]
+    subCategoryProducts: Prisma.$ProductMasterPayload<ExtArgs>[]
     purchaseIntents: Prisma.$PurchaseIntentMasterPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -951,6 +1537,9 @@ export type $ProjectCategoriesMasterPayload<ExtArgs extends runtime.Types.Extens
     created_at: Date
     updated_at: Date
     external_category_id: number | null
+    parent_id: number | null
+    created_by: number | null
+    updated_by: number | null
   }, ExtArgs["result"]["projectCategoriesMaster"]>
   composites: {}
 }
@@ -1346,8 +1935,11 @@ readonly fields: ProjectCategoriesMasterFieldRefs;
 export interface Prisma__ProjectCategoriesMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  parent<T extends Prisma.ProjectCategoriesMaster$parentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectCategoriesMaster$parentArgs<ExtArgs>>): Prisma.Prisma__ProjectCategoriesMasterClient<runtime.Types.Result.GetResult<Prisma.$ProjectCategoriesMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  children<T extends Prisma.ProjectCategoriesMaster$childrenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectCategoriesMaster$childrenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectCategoriesMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projectCategoriesMasterVendorMapping<T extends Prisma.ProjectCategoriesMaster$projectCategoriesMasterVendorMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectCategoriesMaster$projectCategoriesMasterVendorMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectCategoriesMasterVendorMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   products<T extends Prisma.ProjectCategoriesMaster$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectCategoriesMaster$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  subCategoryProducts<T extends Prisma.ProjectCategoriesMaster$subCategoryProductsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectCategoriesMaster$subCategoryProductsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   purchaseIntents<T extends Prisma.ProjectCategoriesMaster$purchaseIntentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectCategoriesMaster$purchaseIntentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1385,6 +1977,9 @@ export interface ProjectCategoriesMasterFieldRefs {
   readonly created_at: Prisma.FieldRef<"ProjectCategoriesMaster", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"ProjectCategoriesMaster", 'DateTime'>
   readonly external_category_id: Prisma.FieldRef<"ProjectCategoriesMaster", 'Int'>
+  readonly parent_id: Prisma.FieldRef<"ProjectCategoriesMaster", 'Int'>
+  readonly created_by: Prisma.FieldRef<"ProjectCategoriesMaster", 'Int'>
+  readonly updated_by: Prisma.FieldRef<"ProjectCategoriesMaster", 'Int'>
 }
     
 
@@ -1786,6 +2381,49 @@ export type ProjectCategoriesMasterDeleteManyArgs<ExtArgs extends runtime.Types.
 }
 
 /**
+ * ProjectCategoriesMaster.parent
+ */
+export type ProjectCategoriesMaster$parentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectCategoriesMaster
+   */
+  select?: Prisma.ProjectCategoriesMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectCategoriesMaster
+   */
+  omit?: Prisma.ProjectCategoriesMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectCategoriesMasterInclude<ExtArgs> | null
+  where?: Prisma.ProjectCategoriesMasterWhereInput
+}
+
+/**
+ * ProjectCategoriesMaster.children
+ */
+export type ProjectCategoriesMaster$childrenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectCategoriesMaster
+   */
+  select?: Prisma.ProjectCategoriesMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectCategoriesMaster
+   */
+  omit?: Prisma.ProjectCategoriesMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectCategoriesMasterInclude<ExtArgs> | null
+  where?: Prisma.ProjectCategoriesMasterWhereInput
+  orderBy?: Prisma.ProjectCategoriesMasterOrderByWithRelationInput | Prisma.ProjectCategoriesMasterOrderByWithRelationInput[]
+  cursor?: Prisma.ProjectCategoriesMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProjectCategoriesMasterScalarFieldEnum | Prisma.ProjectCategoriesMasterScalarFieldEnum[]
+}
+
+/**
  * ProjectCategoriesMaster.projectCategoriesMasterVendorMapping
  */
 export type ProjectCategoriesMaster$projectCategoriesMasterVendorMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1813,6 +2451,30 @@ export type ProjectCategoriesMaster$projectCategoriesMasterVendorMappingArgs<Ext
  * ProjectCategoriesMaster.products
  */
 export type ProjectCategoriesMaster$productsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProductMaster
+   */
+  select?: Prisma.ProductMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProductMaster
+   */
+  omit?: Prisma.ProductMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductMasterInclude<ExtArgs> | null
+  where?: Prisma.ProductMasterWhereInput
+  orderBy?: Prisma.ProductMasterOrderByWithRelationInput | Prisma.ProductMasterOrderByWithRelationInput[]
+  cursor?: Prisma.ProductMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProductMasterScalarFieldEnum | Prisma.ProductMasterScalarFieldEnum[]
+}
+
+/**
+ * ProjectCategoriesMaster.subCategoryProducts
+ */
+export type ProjectCategoriesMaster$subCategoryProductsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the ProductMaster
    */

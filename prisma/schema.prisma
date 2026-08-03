@@ -186,6 +186,11 @@ model VendorMaster {
   box_info_values            BoxInfoFieldValue[]
   broadcasts                 BroadcastMaster[]          @relation("VendorBroadcasts")
   broadcastCategories        BroadcastCategoryMaster[]  @relation("VendorBroadcastCategories")
+  grades                     GradeMaster[]
+  finishes                   FinishMaster[]
+  types                      TypeMaster[]
+  itemTypes                  ItemTypeMaster[]
+  coreProducts               CoreProductMaster[]
 
   @@index([state_id])
 }
@@ -3092,10 +3097,23 @@ model ProjectCategoriesMaster {
   created_at                           DateTime                               @default(now())
   updated_at                           DateTime                               @updatedAt
   external_category_id                 Int?
+
+  // Inventory FRD extension
+  parent_id                            Int?
+  created_by                           Int?
+  updated_by                           Int?
+
   vendor                               VendorMaster                           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  parent                               ProjectCategoriesMaster?               @relation("CategoryParentChild", fields: [parent_id], references: [id], onDelete: Restrict)
+  children                             ProjectCategoriesMaster[]              @relation("CategoryParentChild")
+
   projectCategoriesMasterVendorMapping ProjectCategoriesMasterVendorMapping[]
-  products                             ProductMaster[]
+  products                             ProductMaster[]                        @relation("ProductCategory")
+  subCategoryProducts                  ProductMaster[]                        @relation("ProductSubCategory")
   purchaseIntents                      PurchaseIntentMaster[]                 @relation("PICategory")
+
+  @@index([vendor_id])
+  @@index([parent_id])
 }
 
 model ProjectCategoriesMasterVendorMapping {
@@ -3116,10 +3134,17 @@ model ProjectCategoriesMasterVendorMapping {
 }
 
 model BrandMaster {
-  id         Int             @id @default(autoincrement())
-  vendor_id  Int
-  brand_name String
-  active     BrandActiveFlag @default(Yes)
+  id               Int             @id @default(autoincrement())
+  vendor_id        Int
+  brand_name       String
+  active           BrandActiveFlag @default(Yes)
+
+  // Inventory FRD extension
+  brand_short_name String?
+  logo             String?
+  is_active        Boolean         @default(true)
+  created_by       Int?
+  updated_by       Int?
 
   vendor   VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   products ProductMaster[]
@@ -3197,9 +3222,28 @@ model ProductMaster {
 
   item_type ProductItemType @default(Goods)
 
+  // Inventory FRD Extensions
+  sub_category_id     Int?
+  item_code           String?
+  barcode             String?
+  purchase_unit_id    Int?
+
+  item_type_master_id Int?
+  core_product_id     Int?
+  grade_id            Int?
+  type_id             Int?
+  finish_id           Int?
+
+  length              Decimal? @db.Decimal(12, 4)
+  height              Decimal? @db.Decimal(12, 4)
+  thickness           Decimal? @db.Decimal(12, 4)
+  size                String?
+
+
   vendor              VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   brand               BrandMaster?            @relation(fields: [brand_id], references: [id], onDelete: SetNull)
-  category            ProjectCategoriesMaster @relation(fields: [category_id], references: [id], onDelete: Cascade)
+  category            ProjectCategoriesMaster @relation("ProductCategory", fields: [category_id], references: [id], onDelete: Cascade)
+  subCategory         ProjectCategoriesMaster? @relation("ProductSubCategory", fields: [sub_category_id], references: [id], onDelete: SetNull)
   purchaseIntentItems PurchaseIntentItem[]    @relation("PIItemProduct")
   purchaseOrderItems  PurchaseOrderItem[]     @relation("POItemProduct")
   grnItems            GRNItem[]               @relation("GRNItemProduct")
@@ -3207,6 +3251,7 @@ model ProductMaster {
   itemGroup           ItemGroupMaster?        @relation(fields: [item_group_id], references: [id], onDelete: SetNull)
 
   primaryUnit     UnitMaster? @relation("ProductPrimaryUnit", fields: [primary_unit_id], references: [id], onDelete: SetNull)
+  purchaseUnit    UnitMaster? @relation("ProductPurchaseUnit", fields: [purchase_unit_id], references: [id], onDelete: SetNull)
   stockUnit       UnitMaster? @relation("ProductStockUnit", fields: [stock_unit_id], references: [id], onDelete: SetNull)
   consumptionUnit UnitMaster? @relation("ProductConsumptionUnit", fields: [consumption_unit_id], references: [id], onDelete: SetNull)
 
@@ -3215,22 +3260,120 @@ model ProductMaster {
   reorderLevelUnit UnitMaster? @relation("ProductReorderLevelUnit", fields: [reorder_level_unit_id], references: [id], onDelete: SetNull)
   reorderBatchUnit UnitMaster? @relation("ProductReorderBatchUnit", fields: [reorder_batch_unit_id], references: [id], onDelete: SetNull)
 
+  itemTypeMaster ItemTypeMaster? @relation(fields: [item_type_master_id], references: [id], onDelete: SetNull)
+  grade          GradeMaster?    @relation(fields: [grade_id], references: [id], onDelete: SetNull)
+  type           TypeMaster?     @relation(fields: [type_id], references: [id], onDelete: SetNull)
+  finishMaster   FinishMaster?   @relation(fields: [finish_id], references: [id], onDelete: SetNull)
+  coreProduct    CoreProductMaster? @relation(fields: [core_product_id], references: [id], onDelete: SetNull)
+
   stockHistories   ProductStockHistory[]    @relation("StockHistoryProduct")
   supplierMappings ProductSupplierMapping[]
 
   @@index([vendor_id])
   @@index([brand_id])
   @@index([category_id])
+  @@index([sub_category_id])
   @@index([item_id])
   @@index([hsn_id])
   @@index([item_group_id])
   @@index([primary_unit_id])
+  @@index([purchase_unit_id])
   @@index([stock_unit_id])
   @@index([consumption_unit_id])
   @@index([min_stock_unit_id])
   @@index([max_stock_unit_id])
   @@index([reorder_level_unit_id])
   @@index([reorder_batch_unit_id])
+  @@index([item_type_master_id])
+  @@index([grade_id])
+  @@index([type_id])
+  @@index([finish_id])
+  @@index([core_product_id])
+}
+
+model CoreProductMaster {
+  id                Int      @id @default(autoincrement())
+  vendor_id         Int
+  core_product_name String
+  is_active         Boolean  @default(true)
+  created_by        Int?
+  updated_by        Int?
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+
+  vendor   VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  products ProductMaster[]
+
+  @@unique([vendor_id, core_product_name])
+  @@index([vendor_id])
+}
+
+model GradeMaster {
+  id         Int      @id @default(autoincrement())
+  vendor_id  Int
+  grade_name String
+  is_active  Boolean  @default(true)
+  created_by Int?
+  updated_by Int?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  vendor   VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  products ProductMaster[]
+
+  @@unique([vendor_id, grade_name])
+  @@index([vendor_id])
+}
+
+model FinishMaster {
+  id          Int      @id @default(autoincrement())
+  vendor_id   Int
+  finish_name String
+  is_active   Boolean  @default(true)
+  created_by  Int?
+  updated_by  Int?
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  vendor   VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  products ProductMaster[]
+
+  @@unique([vendor_id, finish_name])
+  @@index([vendor_id])
+}
+
+model TypeMaster {
+  id         Int      @id @default(autoincrement())
+  vendor_id  Int
+  type_name  String
+  is_active  Boolean  @default(true)
+  created_by Int?
+  updated_by Int?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  vendor   VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  products ProductMaster[]
+
+  @@unique([vendor_id, type_name])
+  @@index([vendor_id])
+}
+
+model ItemTypeMaster {
+  id             Int      @id @default(autoincrement())
+  vendor_id      Int
+  item_type_name String
+  is_active      Boolean  @default(true)
+  created_by     Int?
+  updated_by     Int?
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+
+  vendor   VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  products ProductMaster[]
+
+  @@unique([vendor_id, item_type_name])
+  @@index([vendor_id])
 }
 
 model PurchaseIntentMaster {
@@ -3781,11 +3924,15 @@ model POPayment {
 }
 
 model UnitMaster {
-  id         Int     @id @default(autoincrement())
-  vendor_id  Int
-  unit_name  String
-  unit_class String
-  is_active  Boolean @default(true)
+  id              Int     @id @default(autoincrement())
+  vendor_id       Int
+  unit_name       String
+  unit_class      String
+  is_active       Boolean @default(true)
+
+  // Inventory FRD Extension
+  short_name      String?
+  decimal_allowed Boolean @default(false)
 
   created_by Int?
   updated_by Int?
@@ -3796,6 +3943,7 @@ model UnitMaster {
   vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   primaryUnitProducts     ProductMaster[] @relation("ProductPrimaryUnit")
+  purchaseUnitProducts    ProductMaster[] @relation("ProductPurchaseUnit")
   stockUnitProducts       ProductMaster[] @relation("ProductStockUnit")
   consumptionUnitProducts ProductMaster[] @relation("ProductConsumptionUnit")
 
