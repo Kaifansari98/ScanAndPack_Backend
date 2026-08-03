@@ -81,6 +81,48 @@ export class LeadActivityStatusService {
       throw new Error("Remark is required when changing activity status.");
     }
 
+    let effectiveStatus = status;
+
+    if (status === ActivityStatus.lost) {
+      const actor = await prisma.userMaster.findUnique({
+        where: { id: createdBy },
+        select: {
+          user_type: { select: { user_type: true } },
+        },
+      });
+
+      const actorRole = (actor?.user_type?.user_type || "").toLowerCase();
+      const isActorAdmin = actorRole === "admin" || actorRole === "super-admin";
+
+      if (!isActorAdmin) {
+        const targetLead = await prisma.leadMaster.findUnique({
+          where: { id: leadId, vendor_id: vendorId },
+          select: { franchise_id: true },
+        });
+
+        if (targetLead?.franchise_id) {
+          const storeAdminExists = await prisma.userMaster.findFirst({
+            where: {
+              vendor_id: vendorId,
+              franchise_id: targetLead.franchise_id,
+              status: "active",
+              user_type: {
+                user_type: {
+                  equals: "admin",
+                  mode: "insensitive",
+                },
+              },
+            },
+            select: { id: true },
+          });
+
+          if (storeAdminExists) {
+            effectiveStatus = ActivityStatus.lostApproval;
+          }
+        }
+      }
+    }
+
     const affectedTaskUserIds = new Set<number>();
 
     const lead = await prisma.$transaction(async (tx) => {
@@ -88,7 +130,7 @@ export class LeadActivityStatusService {
       const updatedLead = await tx.leadMaster.update({
         where: { id: leadId, vendor_id: vendorId },
         data: {
-          activity_status: status,
+          activity_status: effectiveStatus,
           activity_status_remark: remark,
           updated_by: createdBy,
         },
@@ -101,14 +143,14 @@ export class LeadActivityStatusService {
           account_id: accountId,
           lead_id: leadId,
           user_id: userId,
-          activity_status: status,
+          activity_status: effectiveStatus,
           activity_status_remark: remark,
           created_by: createdBy,
         },
       });
 
       // 3. If status is lost → cancel all still-open tasks for this lead
-      if (status === ActivityStatus.lost) {
+      if (effectiveStatus === ActivityStatus.lost) {
         const openTasks = await tx.userLeadTask.findMany({
           where: {
             lead_id: leadId,
@@ -276,10 +318,12 @@ export class LeadActivityStatusService {
       const lostApprovalUrl = `${baseUrl}${lostApprovalPath}`;
       const lostUrl = `${baseUrl}${lostPath}`;
 
+      const finalStatus = lead.activity_status;
+
       // 🔔 Handle onHold and lostApproval notifications
       if (
-        status === ActivityStatus.onHold ||
-        status === ActivityStatus.lostApproval
+        finalStatus === ActivityStatus.onHold ||
+        finalStatus === ActivityStatus.lostApproval
       ) {
         const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
           vendorId,
@@ -287,7 +331,7 @@ export class LeadActivityStatusService {
           excludeUserId: createdBy,
         });
 
-        const isOnHold = status === ActivityStatus.onHold;
+        const isOnHold = finalStatus === ActivityStatus.onHold;
         const redirectUrl = isOnHold ? onHoldPath : lostApprovalPath; // ✅ UPDATED
         const leadUrl = isOnHold ? onHoldUrl : lostApprovalUrl;
 

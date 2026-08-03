@@ -1459,6 +1459,7 @@ export class BookingStageService {
       date_range?: { from: string; to: string };
       production_status?: string;
       pending_services?: boolean;
+      franchises?: Array<number | string>;
     },
   ): Promise<{ leads: any[]; count: number }> {
     logger.info("[BookingStageService] getVendorLeadsByTag2 called", {
@@ -1781,6 +1782,20 @@ export class BookingStageService {
       // ASSIGN TO (MULTI SELECT)
       // --------------------
 
+      if (Array.isArray(filters.franchises) && filters.franchises.length > 0) {
+        const franchiseIds = filters.franchises
+          .map(Number)
+          .filter((id) => !Number.isNaN(id));
+
+        if (franchiseIds.length > 0) {
+          addAnd({
+            franchise_id: {
+              in: franchiseIds,
+            },
+          });
+        }
+      }
+
       if (Array.isArray(filters.assign_to) && filters.assign_to.length > 0) {
         const assignIds = filters.assign_to
           .map(Number)
@@ -1895,9 +1910,14 @@ export class BookingStageService {
     // FINAL QUERY
     // ============================
 
+    const hasExplicitFranchiseFilter =
+      Array.isArray(filters.franchises) && filters.franchises.length > 0;
+
     const whereClause = addFilterConditions({
       vendor_id: vendorId,
-      franchise_id: franchiseId,
+      ...(!hasExplicitFranchiseFilter && franchiseId && !Number.isNaN(franchiseId)
+        ? { franchise_id: franchiseId }
+        : {}),
       is_deleted: false,
       ...(statusIds !== null && { status_id: { in: statusIds } }),
       ...(shouldExcludeLaterStageTags && {
@@ -3153,6 +3173,7 @@ export class BookingStageService {
       date_range?: { from: string; to: string };
       production_status?: string;
       pending_services?: boolean;
+      franchises?: number[];
     } = {},
     options: {
       requireMiscellaneous?: boolean;
@@ -3546,6 +3567,20 @@ export class BookingStageService {
         }
       }
 
+      if (Array.isArray(filters.franchises) && filters.franchises.length > 0) {
+        const franchiseIds = filters.franchises
+          .map(Number)
+          .filter((id) => !Number.isNaN(id));
+
+        if (franchiseIds.length > 0) {
+          addAnd({
+            franchise_id: {
+              in: franchiseIds,
+            },
+          });
+        }
+      }
+
       if (Array.isArray(filters.priority) && filters.priority.length > 0) {
         const priorities = filters.priority
           .map((item) => String(item).trim())
@@ -3762,7 +3797,11 @@ export class BookingStageService {
           ? "onGoing"
           : { in: ["onGoing", "lostApproval"] },
       };
+      const hasExplicitFranchiseFilter =
+        Array.isArray(filters.franchises) && filters.franchises.length > 0;
+
       const includeFranchise =
+        !hasExplicitFranchiseFilter &&
         (isType4To16 ? shouldIncludeFranchiseByRole : shouldIncludeFranchise) &&
         franchiseId &&
         !ignoreFranchiseForStage;
