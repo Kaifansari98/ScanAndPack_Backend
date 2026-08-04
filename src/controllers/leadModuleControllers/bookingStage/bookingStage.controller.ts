@@ -60,6 +60,24 @@ const normalizeStringArray = (value: unknown): string[] | undefined => {
   return undefined;
 };
 
+const normalizeNumberArray = (value: unknown): number[] | undefined => {
+  if (Array.isArray(value)) {
+    const normalized = value
+      .map((item) => Number(item))
+      .filter((item) => Number.isFinite(item) && item > 0);
+    return normalized.length > 0 ? normalized : undefined;
+  }
+
+  if (value === undefined || value === null || value === "") {
+    return undefined;
+  }
+
+  const normalized = Number(value);
+  return Number.isFinite(normalized) && normalized > 0
+    ? [normalized]
+    : undefined;
+};
+
 export class BookingStageController {
   private bookingStageService = new BookingStageService();
 
@@ -611,7 +629,14 @@ export class BookingStageController {
     try {
       const vendorId = Number(getParam(req.params.vendorId));
       const userId = req.body.userId ? Number(req.body.userId) : null;
-      const franchiseId = Number(req.body.franchise_id);
+      const franchiseIdRaw = req.body.franchise_id;
+      const franchiseId =
+        franchiseIdRaw !== undefined &&
+        franchiseIdRaw !== null &&
+        franchiseIdRaw !== ""
+          ? Number(franchiseIdRaw)
+          : undefined;
+      const franchiseIds = normalizeNumberArray(req.body.franchise_ids);
       const tag = req.body.tag as string;
 
       const page = parseInt((req.body.page as string) || "1");
@@ -659,7 +684,6 @@ export class BookingStageController {
 
       const filters = {
         global_search: req.body.global_search,
-        filter_lead_code: req.body.filter_lead_code,
         filter_name: req.body.filter_name,
         contact: req.body.contact,
         furniture_type: req.body.furniture_type,
@@ -684,22 +708,31 @@ export class BookingStageController {
       // ============================
       // VALIDATION GATE
       // ============================
-      if (!vendorId || !tag || !franchiseId) {
-        logger.warn("[BookingStageController] Missing vendorId, tag, or franchiseId", {
+      if (!vendorId || !tag) {
+        logger.warn("[BookingStageController] Missing vendorId or tag", {
           vendorId,
           tag,
           franchiseId,
+          franchiseIds,
         });
 
         return res.status(400).json({
           success: false,
-          message: "Vendor ID, franchise ID, and tag are required",
+          message: "Vendor ID and tag are required",
+        });
+      }
+
+      if (franchiseId !== undefined && (isNaN(franchiseId) || franchiseId <= 0)) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid Franchise ID provided",
         });
       }
 
       logger.info("[BookingStageController] getVendorLeadsByTag2 called", {
         vendorId,
         franchiseId,
+        franchiseIds,
         tag,
         page,
         limit,
@@ -708,6 +741,7 @@ export class BookingStageController {
       console.log("[getVendorLeadsByTag2] payload", {
         vendorId,
         franchiseId,
+        franchiseIds,
         userId,
         tag,
         page,
@@ -718,6 +752,7 @@ export class BookingStageController {
       const { leads, count } = await BookingStageService.getVendorLeadsByTag2(
         vendorId,
         franchiseId,
+        franchiseIds,
         tag,
         userId,
         page,
@@ -761,6 +796,7 @@ export class BookingStageController {
         franchiseIdRaw !== undefined && franchiseIdRaw !== null && franchiseIdRaw !== ""
           ? Number(franchiseIdRaw)
           : undefined;
+      const franchiseIds = normalizeNumberArray(req.body.franchise_ids);
       const tag = req.body.tag as string;
       const page = parseInt((req.body.page as string) || "1");
       const limit = parseInt((req.body.limit as string) || "10");
@@ -807,7 +843,6 @@ export class BookingStageController {
 
       const filters = {
         global_search: req.body.global_search,
-        filter_lead_code: req.body.filter_lead_code,
         filter_name: req.body.filter_name,
         contact: req.body.contact,
         furniture_type: req.body.furniture_type,
@@ -834,6 +869,7 @@ export class BookingStageController {
           vendorId,
           userId,
           franchiseId,
+          franchiseIds,
           tag,
         });
         return res.status(400).json({
@@ -858,6 +894,7 @@ export class BookingStageController {
         vendorId,
         userId,
         franchiseId,
+        franchiseIds,
         tag,
         dateRange,
       });
@@ -865,6 +902,7 @@ export class BookingStageController {
         vendorId,
         userId,
         franchiseId,
+        franchiseIds,
         tag,
         page,
         limit,
@@ -875,6 +913,7 @@ export class BookingStageController {
         vendorId,
         userId,
         franchiseId,
+        franchiseIds,
         tag,
         page,
         limit,
@@ -955,7 +994,6 @@ export class BookingStageController {
 
       const filters = {
         global_search: req.body.global_search,
-        filter_lead_code: req.body.filter_lead_code,
         filter_name: req.body.filter_name,
         contact: req.body.contact,
         furniture_type: req.body.furniture_type,
@@ -1090,6 +1128,7 @@ export class BookingStageController {
         vendorId,
         userId,
         franchiseId,
+        undefined,
         tag,
         page,
         limit,
