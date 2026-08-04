@@ -684,7 +684,6 @@ export class BookingStageController {
 
       const filters = {
         global_search: req.body.global_search,
-        filter_lead_code: req.body.filter_lead_code,
         filter_name: req.body.filter_name,
         contact: req.body.contact,
         furniture_type: req.body.furniture_type,
@@ -704,7 +703,6 @@ export class BookingStageController {
         date_range: dateRange,
         production_status: req.body.production_status,
         pending_services: req.body.pending_services,
-        franchise_ids: franchiseIds,
       };
 
       // ============================
@@ -845,7 +843,6 @@ export class BookingStageController {
 
       const filters = {
         global_search: req.body.global_search,
-        filter_lead_code: req.body.filter_lead_code,
         filter_name: req.body.filter_name,
         contact: req.body.contact,
         furniture_type: req.body.furniture_type,
@@ -865,7 +862,6 @@ export class BookingStageController {
         date_range: dateRange,
         production_status: req.body.production_status,
         pending_services: req.body.pending_services,
-        franchise_ids: franchiseIds,
       };
 
       if (!vendorId || !userId) {
@@ -998,7 +994,6 @@ export class BookingStageController {
 
       const filters = {
         global_search: req.body.global_search,
-        filter_lead_code: req.body.filter_lead_code,
         filter_name: req.body.filter_name,
         contact: req.body.contact,
         furniture_type: req.body.furniture_type,

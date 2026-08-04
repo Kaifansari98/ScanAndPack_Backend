@@ -1612,13 +1612,7 @@ export class BookingStageService {
         return { numbers, strings };
       };
 
-      const selectedFranchiseIds = parseNumberList(
-        filters.franchise_ids ?? franchiseIds,
-      ).numbers;
 
-      if (selectedFranchiseIds.length > 0) {
-        addAnd({ franchise_id: { in: selectedFranchiseIds } });
-      }
 
       // ---------- GLOBAL SEARCH ----------
 
@@ -1657,10 +1651,7 @@ export class BookingStageService {
         }
       }
 
-      const leadCode = toString(filters.filter_lead_code);
-      if (leadCode) {
-        addAnd({ lead_code: { contains: leadCode, mode: "insensitive" } });
-      }
+
 
       const nameFilter = toString(filters.filter_name);
       if (nameFilter) {
@@ -4115,18 +4106,7 @@ export class BookingStageService {
         return { numbers, strings };
       };
 
-      const selectedFranchiseIds = parseNumberList(
-        filters.franchise_ids ?? franchiseIds,
-      ).numbers;
 
-      if (selectedFranchiseIds.length > 0) {
-        addAnd({ franchise_id: { in: selectedFranchiseIds } });
-      }
-
-      const leadCode = toString(filters.filter_lead_code);
-      if (leadCode) {
-        addAnd({ lead_code: { contains: leadCode, mode: "insensitive" } });
-      }
 
       const nameFilter = toString(filters.filter_name);
       if (nameFilter) {
@@ -4907,10 +4887,7 @@ export class BookingStageService {
         return { numbers, strings };
       };
 
-      const leadCode = toString(filters.filter_lead_code);
-      if (leadCode) {
-        addAnd({ lead_code: { contains: leadCode, mode: "insensitive" } });
-      }
+
 
       const nameFilter = toString(filters.filter_name);
       if (nameFilter) {
