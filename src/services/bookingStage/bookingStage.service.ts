@@ -1451,7 +1451,8 @@ export class BookingStageService {
   // post filter service
   public static async getVendorLeadsByTag2(
     vendorId: number,
-    franchiseId: number,
+    franchiseId: number | undefined,
+    franchiseIds: number[] | undefined,
     tag: string,
     userId: number | null,
     page: number = 1,
@@ -1478,11 +1479,13 @@ export class BookingStageService {
       date_range?: { from: string; to: string };
       production_status?: string;
       pending_services?: boolean;
+      franchise_ids?: number[];
     },
   ): Promise<{ leads: any[]; count: number }> {
     logger.info("[BookingStageService] getVendorLeadsByTag2 called", {
       vendorId,
       franchiseId,
+      franchiseIds,
       tag,
       userId,
       page,
@@ -1491,6 +1494,7 @@ export class BookingStageService {
     console.log("[Service] getVendorLeadsByTag2 ids", {
       vendorId,
       franchiseId,
+      franchiseIds,
       tag,
       userId,
       page,
@@ -1562,7 +1566,7 @@ export class BookingStageService {
       const taskLeads = await prisma.userLeadTask.findMany({
         where: {
           vendor_id: vendorId,
-          franchise_id: franchiseId,
+          ...(franchiseId ? { franchise_id: franchiseId } : {}),
           OR: [{ created_by: userId }, { user_id: userId }],
         },
         select: { lead_id: true },
@@ -1607,6 +1611,14 @@ export class BookingStageService {
         const strings = raw.filter((v) => isNaN(Number(v))).map(String);
         return { numbers, strings };
       };
+
+      const selectedFranchiseIds = parseNumberList(
+        filters.franchise_ids ?? franchiseIds,
+      ).numbers;
+
+      if (selectedFranchiseIds.length > 0) {
+        addAnd({ franchise_id: { in: selectedFranchiseIds } });
+      }
 
       // ---------- GLOBAL SEARCH ----------
 
@@ -3900,6 +3912,7 @@ export class BookingStageService {
     vendorId: number,
     userId: number,
     franchiseId: number | undefined,
+    franchiseIds: number[] | undefined,
     tag?: string,
     page: number = 1,
     limit: number = 10,
@@ -3925,6 +3938,7 @@ export class BookingStageService {
       date_range?: { from: string; to: string };
       production_status?: string;
       pending_services?: boolean;
+      franchise_ids?: number[];
     } = {},
     options: {
       requireMiscellaneous?: boolean;
@@ -3935,6 +3949,7 @@ export class BookingStageService {
       vendorId,
       userId,
       franchiseId,
+      franchiseIds,
       tag,
       page,
       limit,
@@ -3943,6 +3958,7 @@ export class BookingStageService {
       vendorId,
       userId,
       franchiseId,
+      franchiseIds,
       tag,
       page,
       limit,
@@ -4098,6 +4114,14 @@ export class BookingStageService {
           .map((item) => String(item));
         return { numbers, strings };
       };
+
+      const selectedFranchiseIds = parseNumberList(
+        filters.franchise_ids ?? franchiseIds,
+      ).numbers;
+
+      if (selectedFranchiseIds.length > 0) {
+        addAnd({ franchise_id: { in: selectedFranchiseIds } });
+      }
 
       const leadCode = toString(filters.filter_lead_code);
       if (leadCode) {
