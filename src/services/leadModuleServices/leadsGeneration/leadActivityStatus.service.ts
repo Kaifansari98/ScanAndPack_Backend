@@ -182,7 +182,7 @@ export class LeadActivityStatusService {
       }
 
       // 4. If status is onHold → create a follow-up task
-      if (status === ActivityStatus.onHold) {
+      if (effectiveStatus === ActivityStatus.onHold) {
         if (!dueDate) {
           throw new Error("Due date is required when marking lead as On Hold.");
         }
@@ -231,16 +231,16 @@ export class LeadActivityStatusService {
       // 5. Insert into LeadDetailedLogs (Audit Trail)
       let actionMessage = "";
 
-      if (status === ActivityStatus.onHold) {
+      if (effectiveStatus === ActivityStatus.onHold) {
         const formattedDate = new Date(dueDate!).toLocaleDateString("en-IN", {
           day: "2-digit",
           month: "short",
           year: "numeric",
         });
         actionMessage = `Lead has been put On Hold till ${formattedDate}.`;
-      } else if (status === ActivityStatus.lostApproval) {
+      } else if (effectiveStatus === ActivityStatus.lostApproval) {
         actionMessage = `Lead has been sent for Lost Approval.`;
-      } else if (status === ActivityStatus.lost) {
+      } else if (effectiveStatus === ActivityStatus.lost) {
         actionMessage = `Lead has been marked as Lost.`;
       }
 
@@ -260,10 +260,10 @@ export class LeadActivityStatusService {
 
       logger.info(
         "✅ LeadDetailedLogs entry created for activity status change",
-        { leadId, status, actionMessage },
+        { leadId, status: effectiveStatus, actionMessage },
       );
 
-      logger.info("Lead activity status updated", { leadId, vendorId, status });
+      logger.info("Lead activity status updated", { leadId, vendorId, status: effectiveStatus });
       return updatedLead;
     });
 
@@ -447,7 +447,7 @@ export class LeadActivityStatusService {
       }
 
       // 🔔 Handle lost status notifications
-      if (status === ActivityStatus.lost) {
+      if (finalStatus === ActivityStatus.lost) {
         const lostApprovalLog = await prisma.leadActivityStatusLog.findFirst({
           where: {
             lead_id: leadId,
@@ -513,7 +513,7 @@ export class LeadActivityStatusService {
       logger.warn("⚠️ Failed to send activity status notifications", {
         error: notifyError?.message,
         lead_id: leadId,
-        status,
+        status: lead.activity_status,
       });
     }
 
