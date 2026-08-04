@@ -320,6 +320,13 @@ export class DesigingStageController {
               tag: true,
             },
           },
+          specificationDocumentMappings: {
+            select: {
+              specification: {
+                select: { id: true, name: true },
+              },
+            },
+          },
           createdBy: {
             select: {
               id: true,
@@ -342,8 +349,12 @@ export class DesigingStageController {
       const documentsWithSignedUrls = await Promise.all(
         documents.map(async (doc: any) => {
           const signedUrl = await generateSignedUrl(doc.doc_sys_name);
+          const specification =
+            doc.specificationDocumentMappings?.[0]?.specification || null;
+          const { specificationDocumentMappings, ...rest } = doc;
           return {
-            ...doc,
+            ...rest,
+            specification,
             signedUrl,
           };
         }),
@@ -445,6 +456,13 @@ export class DesigingStageController {
               tag: true,
             },
           },
+          specificationDocumentMappings: {
+            select: {
+              specification: {
+                select: { id: true, name: true },
+              },
+            },
+          },
           createdBy: {
             select: {
               id: true,
@@ -467,8 +485,12 @@ export class DesigingStageController {
       const documentsWithSignedUrls = await Promise.all(
         documents.map(async (doc: any) => {
           const signedUrl = await generateSignedUrl(doc.doc_sys_name);
+          const specification =
+            doc.specificationDocumentMappings?.[0]?.specification || null;
+          const { specificationDocumentMappings, ...rest } = doc;
           return {
-            ...doc,
+            ...rest,
+            specification,
             signedUrl,
           };
         }),
@@ -1051,6 +1073,9 @@ export class DesigingStageController {
       console.log("[BACKEND UPLOAD DESIGNS] req.body:", req.body);
       const { vendorId, leadId, userId } = req.body;
       const rawInstanceIds = req.body.product_structure_instance_ids;
+      const specId = req.body.specification_id
+        ? Number(req.body.specification_id)
+        : null;
 
       if (!req.files || (req.files as Express.Multer.File[]).length === 0) {
         return res.status(400).json({
@@ -1157,6 +1182,47 @@ export class DesigingStageController {
 
           if (!designDocType) {
             throw new Error("Design document type (Type 6) not found");
+          }
+
+          if (specId != null) {
+            if (!Number.isFinite(specId) || specId <= 0) {
+              throw new Error("Invalid specification selected");
+            }
+
+            const specification = await tx.leadSpecificationsMaster.findFirst({
+              where: {
+                id: specId,
+                vendor_id: Number(vendorId),
+                lead_id: Number(leadId),
+              },
+              select: { id: true },
+            });
+
+            if (!specification) {
+              throw new Error(
+                "Selected specification does not belong to this lead",
+              );
+            }
+
+            const existingDesignSpecMapping =
+              await tx.specificationDocumentMapping.findFirst({
+                where: {
+                  vendor_id: Number(vendorId),
+                  lead_id: Number(leadId),
+                  specs_id: specId,
+                  leadDocument: {
+                    is_deleted: false,
+                    doc_type_id: designDocType.id,
+                  },
+                },
+                select: { id: true },
+              });
+
+            if (existingDesignSpecMapping) {
+              throw new Error(
+                "Selected specification is already linked with another design file",
+              );
+            }
           }
 
           const newDocs: any[] = [];
@@ -1296,6 +1362,18 @@ export class DesigingStageController {
                 product_structure_instance_id: instanceIdToPersist,
               },
             });
+
+            if (specId) {
+              await tx.specificationDocumentMapping.create({
+                data: {
+                  vendor_id: Number(vendorId),
+                  lead_id: Number(leadId),
+                  specs_id: specId,
+                  document_id: doc.id,
+                  created_by: Number(userId),
+                },
+              });
+            }
 
             newDocs.push(doc);
           }
