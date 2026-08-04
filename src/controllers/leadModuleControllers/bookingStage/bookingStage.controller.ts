@@ -703,6 +703,7 @@ export class BookingStageController {
         date_range: dateRange,
         production_status: req.body.production_status,
         pending_services: req.body.pending_services,
+        franchises: req.body.franchises,
       };
 
       // ============================
@@ -862,6 +863,7 @@ export class BookingStageController {
         date_range: dateRange,
         production_status: req.body.production_status,
         pending_services: req.body.pending_services,
+        franchises: req.body.franchises,
       };
 
       if (!vendorId || !userId) {
