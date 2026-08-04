@@ -3726,6 +3726,7 @@ export class DesigingStageController {
                   specs_id: createdSpecification.id,
                   light_carcas_unit_master_id:
                     mapping.light_carcas_unit_master_id,
+                  custom_remark: mapping.custom_remark,
                   created_by: Number(created_by),
                 }),
               ),
@@ -4326,20 +4327,37 @@ export class DesigingStageController {
       const vendorId = Number(req.body.vendor_id);
       const leadId = Number(req.body.lead_id);
       const specsId = Number(req.body.specs_id);
-      const lightCarcasUnitMasterId = Number(req.body.light_carcas_unit_master_id);
+      const rawLightCarcasUnitMasterId = req.body.light_carcas_unit_master_id;
+      const lightCarcasUnitMasterId = rawLightCarcasUnitMasterId
+        ? Number(rawLightCarcasUnitMasterId)
+        : undefined;
+      const customRemark =
+        typeof req.body.custom_remark === "string"
+          ? req.body.custom_remark.trim()
+          : "";
       const createdBy = Number(req.body.created_by);
 
       if (
         !vendorId ||
         !leadId ||
         !specsId ||
-        !lightCarcasUnitMasterId ||
         !createdBy
       ) {
         return res.status(400).json({
           success: false,
           message:
-            "vendor_id, lead_id, specs_id, light_carcas_unit_master_id and created_by are required",
+            "vendor_id, lead_id, specs_id and created_by are required",
+        });
+      }
+
+      if (
+        (!lightCarcasUnitMasterId && !customRemark) ||
+        (lightCarcasUnitMasterId && customRemark)
+      ) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Provide either light_carcas_unit_master_id or custom_remark.",
         });
       }
 
@@ -4353,7 +4371,8 @@ export class DesigingStageController {
         vendor_id: vendorId,
         lead_id: leadId,
         specs_id: specsId,
-        light_carcas_unit_master_id: lightCarcasUnitMasterId,
+        light_carcas_unit_master_id: lightCarcasUnitMasterId ?? null,
+        custom_remark: customRemark || null,
         created_by: createdBy,
       };
 
@@ -4362,7 +4381,14 @@ export class DesigingStageController {
           vendor_id: vendorId,
           lead_id: leadId,
           specs_id: specsId,
-          light_carcas_unit_master_id: lightCarcasUnitMasterId,
+          ...(lightCarcasUnitMasterId
+            ? { light_carcas_unit_master_id: lightCarcasUnitMasterId }
+            : {
+                custom_remark: {
+                  equals: customRemark,
+                  mode: "insensitive",
+                },
+              }),
           ...(id ? { NOT: { id } } : {}),
         },
         select: { id: true },
@@ -4371,7 +4397,9 @@ export class DesigingStageController {
       if (existingDuplicate) {
         return res.status(400).json({
           success: false,
-          message: "This carcas type and remark combination has already been added.",
+          message: lightCarcasUnitMasterId
+            ? "This carcas type and remark combination has already been added."
+            : "This custom light remark has already been added.",
         });
       }
 

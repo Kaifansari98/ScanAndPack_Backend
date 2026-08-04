@@ -1230,14 +1230,15 @@ model LeadLightCarcasUnitMapping {
   vendor_id                   Int
   lead_id                     Int
   specs_id                    Int
-  light_carcas_unit_master_id Int
+  light_carcas_unit_master_id Int?
+  custom_remark               String?
   created_at                  DateTime @default(now())
   created_by                  Int
 
   vendor          VendorMaster             @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   lead            LeadMaster               @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   specification   LeadSpecificationsMaster @relation(fields: [specs_id], references: [id], onDelete: Cascade)
-  lightCarcasUnit LightCarcasUnitMaster    @relation(fields: [light_carcas_unit_master_id], references: [id], onDelete: Cascade)
+  lightCarcasUnit LightCarcasUnitMaster?   @relation(fields: [light_carcas_unit_master_id], references: [id], onDelete: Cascade)
   createdBy       UserMaster               @relation("LeadLightCarcasUnitMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
 
   @@index([vendor_id])
