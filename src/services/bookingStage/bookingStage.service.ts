@@ -3303,12 +3303,12 @@ export class BookingStageService {
       normalizedUserType === "auditor" ||
       normalizedUserType === "sales-executive";
     const skip = (page - 1) * limit;
-    const orderBy = {
-      created_at:
-        filters.created_at === "asc"
-          ? Prisma.SortOrder.asc
-          : Prisma.SortOrder.desc,
-    };
+    const sortDir = filters.created_at === "asc" ? Prisma.SortOrder.asc : Prisma.SortOrder.desc;
+    const orderBy: Prisma.LeadMasterOrderByWithRelationInput[] = [
+      { updated_at: sortDir },
+      { created_at: sortDir },
+      { id: sortDir },
+    ];
     const normalizedStageTag = String(tag || "").trim();
     const includeConfig = BookingStageService.leadIncludes(normalizedStageTag);
     const shouldApplyStageSort =
