@@ -15209,6 +15209,7 @@ export const LeadLightCarcasUnitMappingScalarFieldEnum = {
   lead_id: 'lead_id',
   specs_id: 'specs_id',
   light_carcas_unit_master_id: 'light_carcas_unit_master_id',
+  custom_remark: 'custom_remark',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
