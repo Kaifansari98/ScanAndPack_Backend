@@ -52,6 +52,12 @@ export type LeadOtherAppliancesMappingMinAggregateOutputType = {
   other_appliance_type: $Enums.OtherApplianceType | null
   other_appliances_master_id: number | null
   custom_remark: string | null
+  is_approved: boolean | null
+  approved_at: Date | null
+  is_amended: boolean | null
+  amended_at: Date | null
+  is_deleted_item: boolean | null
+  deleted_item_at: Date | null
   created_at: Date | null
   created_by: number | null
 }
@@ -64,6 +70,12 @@ export type LeadOtherAppliancesMappingMaxAggregateOutputType = {
   other_appliance_type: $Enums.OtherApplianceType | null
   other_appliances_master_id: number | null
   custom_remark: string | null
+  is_approved: boolean | null
+  approved_at: Date | null
+  is_amended: boolean | null
+  amended_at: Date | null
+  is_deleted_item: boolean | null
+  deleted_item_at: Date | null
   created_at: Date | null
   created_by: number | null
 }
@@ -76,6 +88,12 @@ export type LeadOtherAppliancesMappingCountAggregateOutputType = {
   other_appliance_type: number
   other_appliances_master_id: number
   custom_remark: number
+  is_approved: number
+  approved_at: number
+  is_amended: number
+  amended_at: number
+  is_deleted_item: number
+  deleted_item_at: number
   created_at: number
   created_by: number
   _all: number
@@ -108,6 +126,12 @@ export type LeadOtherAppliancesMappingMinAggregateInputType = {
   other_appliance_type?: true
   other_appliances_master_id?: true
   custom_remark?: true
+  is_approved?: true
+  approved_at?: true
+  is_amended?: true
+  amended_at?: true
+  is_deleted_item?: true
+  deleted_item_at?: true
   created_at?: true
   created_by?: true
 }
@@ -120,6 +144,12 @@ export type LeadOtherAppliancesMappingMaxAggregateInputType = {
   other_appliance_type?: true
   other_appliances_master_id?: true
   custom_remark?: true
+  is_approved?: true
+  approved_at?: true
+  is_amended?: true
+  amended_at?: true
+  is_deleted_item?: true
+  deleted_item_at?: true
   created_at?: true
   created_by?: true
 }
@@ -132,6 +162,12 @@ export type LeadOtherAppliancesMappingCountAggregateInputType = {
   other_appliance_type?: true
   other_appliances_master_id?: true
   custom_remark?: true
+  is_approved?: true
+  approved_at?: true
+  is_amended?: true
+  amended_at?: true
+  is_deleted_item?: true
+  deleted_item_at?: true
   created_at?: true
   created_by?: true
   _all?: true
@@ -231,6 +267,12 @@ export type LeadOtherAppliancesMappingGroupByOutputType = {
   other_appliance_type: $Enums.OtherApplianceType | null
   other_appliances_master_id: number | null
   custom_remark: string | null
+  is_approved: boolean
+  approved_at: Date | null
+  is_amended: boolean
+  amended_at: Date | null
+  is_deleted_item: boolean
+  deleted_item_at: Date | null
   created_at: Date
   created_by: number
   _count: LeadOtherAppliancesMappingCountAggregateOutputType | null
@@ -266,6 +308,12 @@ export type LeadOtherAppliancesMappingWhereInput = {
   other_appliance_type?: Prisma.EnumOtherApplianceTypeNullableFilter<"LeadOtherAppliancesMapping"> | $Enums.OtherApplianceType | null
   other_appliances_master_id?: Prisma.IntNullableFilter<"LeadOtherAppliancesMapping"> | number | null
   custom_remark?: Prisma.StringNullableFilter<"LeadOtherAppliancesMapping"> | string | null
+  is_approved?: Prisma.BoolFilter<"LeadOtherAppliancesMapping"> | boolean
+  approved_at?: Prisma.DateTimeNullableFilter<"LeadOtherAppliancesMapping"> | Date | string | null
+  is_amended?: Prisma.BoolFilter<"LeadOtherAppliancesMapping"> | boolean
+  amended_at?: Prisma.DateTimeNullableFilter<"LeadOtherAppliancesMapping"> | Date | string | null
+  is_deleted_item?: Prisma.BoolFilter<"LeadOtherAppliancesMapping"> | boolean
+  deleted_item_at?: Prisma.DateTimeNullableFilter<"LeadOtherAppliancesMapping"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"LeadOtherAppliancesMapping"> | Date | string
   created_by?: Prisma.IntFilter<"LeadOtherAppliancesMapping"> | number
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
@@ -283,6 +331,12 @@ export type LeadOtherAppliancesMappingOrderByWithRelationInput = {
   other_appliance_type?: Prisma.SortOrderInput | Prisma.SortOrder
   other_appliances_master_id?: Prisma.SortOrderInput | Prisma.SortOrder
   custom_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_approved?: Prisma.SortOrder
+  approved_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_amended?: Prisma.SortOrder
+  amended_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_deleted_item?: Prisma.SortOrder
+  deleted_item_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
@@ -303,6 +357,12 @@ export type LeadOtherAppliancesMappingWhereUniqueInput = Prisma.AtLeast<{
   other_appliance_type?: Prisma.EnumOtherApplianceTypeNullableFilter<"LeadOtherAppliancesMapping"> | $Enums.OtherApplianceType | null
   other_appliances_master_id?: Prisma.IntNullableFilter<"LeadOtherAppliancesMapping"> | number | null
   custom_remark?: Prisma.StringNullableFilter<"LeadOtherAppliancesMapping"> | string | null
+  is_approved?: Prisma.BoolFilter<"LeadOtherAppliancesMapping"> | boolean
+  approved_at?: Prisma.DateTimeNullableFilter<"LeadOtherAppliancesMapping"> | Date | string | null
+  is_amended?: Prisma.BoolFilter<"LeadOtherAppliancesMapping"> | boolean
+  amended_at?: Prisma.DateTimeNullableFilter<"LeadOtherAppliancesMapping"> | Date | string | null
+  is_deleted_item?: Prisma.BoolFilter<"LeadOtherAppliancesMapping"> | boolean
+  deleted_item_at?: Prisma.DateTimeNullableFilter<"LeadOtherAppliancesMapping"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"LeadOtherAppliancesMapping"> | Date | string
   created_by?: Prisma.IntFilter<"LeadOtherAppliancesMapping"> | number
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
@@ -320,6 +380,12 @@ export type LeadOtherAppliancesMappingOrderByWithAggregationInput = {
   other_appliance_type?: Prisma.SortOrderInput | Prisma.SortOrder
   other_appliances_master_id?: Prisma.SortOrderInput | Prisma.SortOrder
   custom_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_approved?: Prisma.SortOrder
+  approved_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_amended?: Prisma.SortOrder
+  amended_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_deleted_item?: Prisma.SortOrder
+  deleted_item_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   _count?: Prisma.LeadOtherAppliancesMappingCountOrderByAggregateInput
@@ -340,6 +406,12 @@ export type LeadOtherAppliancesMappingScalarWhereWithAggregatesInput = {
   other_appliance_type?: Prisma.EnumOtherApplianceTypeNullableWithAggregatesFilter<"LeadOtherAppliancesMapping"> | $Enums.OtherApplianceType | null
   other_appliances_master_id?: Prisma.IntNullableWithAggregatesFilter<"LeadOtherAppliancesMapping"> | number | null
   custom_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadOtherAppliancesMapping"> | string | null
+  is_approved?: Prisma.BoolWithAggregatesFilter<"LeadOtherAppliancesMapping"> | boolean
+  approved_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadOtherAppliancesMapping"> | Date | string | null
+  is_amended?: Prisma.BoolWithAggregatesFilter<"LeadOtherAppliancesMapping"> | boolean
+  amended_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadOtherAppliancesMapping"> | Date | string | null
+  is_deleted_item?: Prisma.BoolWithAggregatesFilter<"LeadOtherAppliancesMapping"> | boolean
+  deleted_item_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadOtherAppliancesMapping"> | Date | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"LeadOtherAppliancesMapping"> | Date | string
   created_by?: Prisma.IntWithAggregatesFilter<"LeadOtherAppliancesMapping"> | number
 }
@@ -347,6 +419,12 @@ export type LeadOtherAppliancesMappingScalarWhereWithAggregatesInput = {
 export type LeadOtherAppliancesMappingCreateInput = {
   other_appliance_type?: $Enums.OtherApplianceType | null
   custom_remark?: string | null
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadOtherAppliancesMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutOtherAppliancesMappingsInput
@@ -363,6 +441,12 @@ export type LeadOtherAppliancesMappingUncheckedCreateInput = {
   other_appliance_type?: $Enums.OtherApplianceType | null
   other_appliances_master_id?: number | null
   custom_remark?: string | null
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
@@ -370,6 +454,12 @@ export type LeadOtherAppliancesMappingUncheckedCreateInput = {
 export type LeadOtherAppliancesMappingUpdateInput = {
   other_appliance_type?: Prisma.NullableEnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType | null
   custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadOtherAppliancesMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOtherAppliancesMappingsNestedInput
@@ -386,6 +476,12 @@ export type LeadOtherAppliancesMappingUncheckedUpdateInput = {
   other_appliance_type?: Prisma.NullableEnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType | null
   other_appliances_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -398,6 +494,12 @@ export type LeadOtherAppliancesMappingCreateManyInput = {
   other_appliance_type?: $Enums.OtherApplianceType | null
   other_appliances_master_id?: number | null
   custom_remark?: string | null
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
@@ -405,6 +507,12 @@ export type LeadOtherAppliancesMappingCreateManyInput = {
 export type LeadOtherAppliancesMappingUpdateManyMutationInput = {
   other_appliance_type?: Prisma.NullableEnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType | null
   custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -416,6 +524,12 @@ export type LeadOtherAppliancesMappingUncheckedUpdateManyInput = {
   other_appliance_type?: Prisma.NullableEnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType | null
   other_appliances_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -438,6 +552,12 @@ export type LeadOtherAppliancesMappingCountOrderByAggregateInput = {
   other_appliance_type?: Prisma.SortOrder
   other_appliances_master_id?: Prisma.SortOrder
   custom_remark?: Prisma.SortOrder
+  is_approved?: Prisma.SortOrder
+  approved_at?: Prisma.SortOrder
+  is_amended?: Prisma.SortOrder
+  amended_at?: Prisma.SortOrder
+  is_deleted_item?: Prisma.SortOrder
+  deleted_item_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -459,6 +579,12 @@ export type LeadOtherAppliancesMappingMaxOrderByAggregateInput = {
   other_appliance_type?: Prisma.SortOrder
   other_appliances_master_id?: Prisma.SortOrder
   custom_remark?: Prisma.SortOrder
+  is_approved?: Prisma.SortOrder
+  approved_at?: Prisma.SortOrder
+  is_amended?: Prisma.SortOrder
+  amended_at?: Prisma.SortOrder
+  is_deleted_item?: Prisma.SortOrder
+  deleted_item_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -471,6 +597,12 @@ export type LeadOtherAppliancesMappingMinOrderByAggregateInput = {
   other_appliance_type?: Prisma.SortOrder
   other_appliances_master_id?: Prisma.SortOrder
   custom_remark?: Prisma.SortOrder
+  is_approved?: Prisma.SortOrder
+  approved_at?: Prisma.SortOrder
+  is_amended?: Prisma.SortOrder
+  amended_at?: Prisma.SortOrder
+  is_deleted_item?: Prisma.SortOrder
+  deleted_item_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -701,6 +833,12 @@ export type NullableEnumOtherApplianceTypeFieldUpdateOperationsInput = {
 export type LeadOtherAppliancesMappingCreateWithoutVendorInput = {
   other_appliance_type?: $Enums.OtherApplianceType | null
   custom_remark?: string | null
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadOtherAppliancesMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutOtherAppliancesMappingsInput
@@ -715,6 +853,12 @@ export type LeadOtherAppliancesMappingUncheckedCreateWithoutVendorInput = {
   other_appliance_type?: $Enums.OtherApplianceType | null
   other_appliances_master_id?: number | null
   custom_remark?: string | null
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
@@ -756,6 +900,12 @@ export type LeadOtherAppliancesMappingScalarWhereInput = {
   other_appliance_type?: Prisma.EnumOtherApplianceTypeNullableFilter<"LeadOtherAppliancesMapping"> | $Enums.OtherApplianceType | null
   other_appliances_master_id?: Prisma.IntNullableFilter<"LeadOtherAppliancesMapping"> | number | null
   custom_remark?: Prisma.StringNullableFilter<"LeadOtherAppliancesMapping"> | string | null
+  is_approved?: Prisma.BoolFilter<"LeadOtherAppliancesMapping"> | boolean
+  approved_at?: Prisma.DateTimeNullableFilter<"LeadOtherAppliancesMapping"> | Date | string | null
+  is_amended?: Prisma.BoolFilter<"LeadOtherAppliancesMapping"> | boolean
+  amended_at?: Prisma.DateTimeNullableFilter<"LeadOtherAppliancesMapping"> | Date | string | null
+  is_deleted_item?: Prisma.BoolFilter<"LeadOtherAppliancesMapping"> | boolean
+  deleted_item_at?: Prisma.DateTimeNullableFilter<"LeadOtherAppliancesMapping"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"LeadOtherAppliancesMapping"> | Date | string
   created_by?: Prisma.IntFilter<"LeadOtherAppliancesMapping"> | number
 }
@@ -763,6 +913,12 @@ export type LeadOtherAppliancesMappingScalarWhereInput = {
 export type LeadOtherAppliancesMappingCreateWithoutCreatedByInput = {
   other_appliance_type?: $Enums.OtherApplianceType | null
   custom_remark?: string | null
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   lead: Prisma.LeadMasterCreateNestedOneWithoutOtherAppliancesMappingsInput
   otherAppliances?: Prisma.OtherAppliancesMasterCreateNestedOneWithoutLeadMappingsInput
@@ -778,6 +934,12 @@ export type LeadOtherAppliancesMappingUncheckedCreateWithoutCreatedByInput = {
   other_appliance_type?: $Enums.OtherApplianceType | null
   other_appliances_master_id?: number | null
   custom_remark?: string | null
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
 }
 
@@ -810,6 +972,12 @@ export type LeadOtherAppliancesMappingUpdateManyWithWhereWithoutCreatedByInput =
 export type LeadOtherAppliancesMappingCreateWithoutLeadInput = {
   other_appliance_type?: $Enums.OtherApplianceType | null
   custom_remark?: string | null
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadOtherAppliancesMappingsCreatedInput
   otherAppliances?: Prisma.OtherAppliancesMasterCreateNestedOneWithoutLeadMappingsInput
@@ -824,6 +992,12 @@ export type LeadOtherAppliancesMappingUncheckedCreateWithoutLeadInput = {
   other_appliance_type?: $Enums.OtherApplianceType | null
   other_appliances_master_id?: number | null
   custom_remark?: string | null
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
@@ -857,6 +1031,12 @@ export type LeadOtherAppliancesMappingUpdateManyWithWhereWithoutLeadInput = {
 export type LeadOtherAppliancesMappingCreateWithoutSpecificationInput = {
   other_appliance_type?: $Enums.OtherApplianceType | null
   custom_remark?: string | null
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadOtherAppliancesMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutOtherAppliancesMappingsInput
@@ -871,6 +1051,12 @@ export type LeadOtherAppliancesMappingUncheckedCreateWithoutSpecificationInput =
   other_appliance_type?: $Enums.OtherApplianceType | null
   other_appliances_master_id?: number | null
   custom_remark?: string | null
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
@@ -904,6 +1090,12 @@ export type LeadOtherAppliancesMappingUpdateManyWithWhereWithoutSpecificationInp
 export type LeadOtherAppliancesMappingCreateWithoutOtherAppliancesInput = {
   other_appliance_type?: $Enums.OtherApplianceType | null
   custom_remark?: string | null
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadOtherAppliancesMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutOtherAppliancesMappingsInput
@@ -918,6 +1110,12 @@ export type LeadOtherAppliancesMappingUncheckedCreateWithoutOtherAppliancesInput
   specs_id: number
   other_appliance_type?: $Enums.OtherApplianceType | null
   custom_remark?: string | null
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
@@ -955,6 +1153,12 @@ export type LeadOtherAppliancesMappingCreateManyVendorInput = {
   other_appliance_type?: $Enums.OtherApplianceType | null
   other_appliances_master_id?: number | null
   custom_remark?: string | null
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
@@ -962,6 +1166,12 @@ export type LeadOtherAppliancesMappingCreateManyVendorInput = {
 export type LeadOtherAppliancesMappingUpdateWithoutVendorInput = {
   other_appliance_type?: Prisma.NullableEnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType | null
   custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadOtherAppliancesMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOtherAppliancesMappingsNestedInput
@@ -976,6 +1186,12 @@ export type LeadOtherAppliancesMappingUncheckedUpdateWithoutVendorInput = {
   other_appliance_type?: Prisma.NullableEnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType | null
   other_appliances_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -987,6 +1203,12 @@ export type LeadOtherAppliancesMappingUncheckedUpdateManyWithoutVendorInput = {
   other_appliance_type?: Prisma.NullableEnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType | null
   other_appliances_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -999,12 +1221,24 @@ export type LeadOtherAppliancesMappingCreateManyCreatedByInput = {
   other_appliance_type?: $Enums.OtherApplianceType | null
   other_appliances_master_id?: number | null
   custom_remark?: string | null
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
 }
 
 export type LeadOtherAppliancesMappingUpdateWithoutCreatedByInput = {
   other_appliance_type?: Prisma.NullableEnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType | null
   custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOtherAppliancesMappingsNestedInput
   otherAppliances?: Prisma.OtherAppliancesMasterUpdateOneWithoutLeadMappingsNestedInput
@@ -1020,6 +1254,12 @@ export type LeadOtherAppliancesMappingUncheckedUpdateWithoutCreatedByInput = {
   other_appliance_type?: Prisma.NullableEnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType | null
   other_appliances_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1031,6 +1271,12 @@ export type LeadOtherAppliancesMappingUncheckedUpdateManyWithoutCreatedByInput =
   other_appliance_type?: Prisma.NullableEnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType | null
   other_appliances_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1041,6 +1287,12 @@ export type LeadOtherAppliancesMappingCreateManyLeadInput = {
   other_appliance_type?: $Enums.OtherApplianceType | null
   other_appliances_master_id?: number | null
   custom_remark?: string | null
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1048,6 +1300,12 @@ export type LeadOtherAppliancesMappingCreateManyLeadInput = {
 export type LeadOtherAppliancesMappingUpdateWithoutLeadInput = {
   other_appliance_type?: Prisma.NullableEnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType | null
   custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadOtherAppliancesMappingsCreatedNestedInput
   otherAppliances?: Prisma.OtherAppliancesMasterUpdateOneWithoutLeadMappingsNestedInput
@@ -1062,6 +1320,12 @@ export type LeadOtherAppliancesMappingUncheckedUpdateWithoutLeadInput = {
   other_appliance_type?: Prisma.NullableEnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType | null
   other_appliances_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1073,6 +1337,12 @@ export type LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadInput = {
   other_appliance_type?: Prisma.NullableEnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType | null
   other_appliances_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1084,6 +1354,12 @@ export type LeadOtherAppliancesMappingCreateManySpecificationInput = {
   other_appliance_type?: $Enums.OtherApplianceType | null
   other_appliances_master_id?: number | null
   custom_remark?: string | null
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1091,6 +1367,12 @@ export type LeadOtherAppliancesMappingCreateManySpecificationInput = {
 export type LeadOtherAppliancesMappingUpdateWithoutSpecificationInput = {
   other_appliance_type?: Prisma.NullableEnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType | null
   custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadOtherAppliancesMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOtherAppliancesMappingsNestedInput
@@ -1105,6 +1387,12 @@ export type LeadOtherAppliancesMappingUncheckedUpdateWithoutSpecificationInput =
   other_appliance_type?: Prisma.NullableEnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType | null
   other_appliances_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1116,6 +1404,12 @@ export type LeadOtherAppliancesMappingUncheckedUpdateManyWithoutSpecificationInp
   other_appliance_type?: Prisma.NullableEnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType | null
   other_appliances_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1127,6 +1421,12 @@ export type LeadOtherAppliancesMappingCreateManyOtherAppliancesInput = {
   specs_id: number
   other_appliance_type?: $Enums.OtherApplianceType | null
   custom_remark?: string | null
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1134,6 +1434,12 @@ export type LeadOtherAppliancesMappingCreateManyOtherAppliancesInput = {
 export type LeadOtherAppliancesMappingUpdateWithoutOtherAppliancesInput = {
   other_appliance_type?: Prisma.NullableEnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType | null
   custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadOtherAppliancesMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOtherAppliancesMappingsNestedInput
@@ -1148,6 +1454,12 @@ export type LeadOtherAppliancesMappingUncheckedUpdateWithoutOtherAppliancesInput
   specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   other_appliance_type?: Prisma.NullableEnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType | null
   custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1159,6 +1471,12 @@ export type LeadOtherAppliancesMappingUncheckedUpdateManyWithoutOtherAppliancesI
   specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   other_appliance_type?: Prisma.NullableEnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType | null
   custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1173,6 +1491,12 @@ export type LeadOtherAppliancesMappingSelect<ExtArgs extends runtime.Types.Exten
   other_appliance_type?: boolean
   other_appliances_master_id?: boolean
   custom_remark?: boolean
+  is_approved?: boolean
+  approved_at?: boolean
+  is_amended?: boolean
+  amended_at?: boolean
+  is_deleted_item?: boolean
+  deleted_item_at?: boolean
   created_at?: boolean
   created_by?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -1190,6 +1514,12 @@ export type LeadOtherAppliancesMappingSelectCreateManyAndReturn<ExtArgs extends 
   other_appliance_type?: boolean
   other_appliances_master_id?: boolean
   custom_remark?: boolean
+  is_approved?: boolean
+  approved_at?: boolean
+  is_amended?: boolean
+  amended_at?: boolean
+  is_deleted_item?: boolean
+  deleted_item_at?: boolean
   created_at?: boolean
   created_by?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -1207,6 +1537,12 @@ export type LeadOtherAppliancesMappingSelectUpdateManyAndReturn<ExtArgs extends 
   other_appliance_type?: boolean
   other_appliances_master_id?: boolean
   custom_remark?: boolean
+  is_approved?: boolean
+  approved_at?: boolean
+  is_amended?: boolean
+  amended_at?: boolean
+  is_deleted_item?: boolean
+  deleted_item_at?: boolean
   created_at?: boolean
   created_by?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -1224,11 +1560,17 @@ export type LeadOtherAppliancesMappingSelectScalar = {
   other_appliance_type?: boolean
   other_appliances_master_id?: boolean
   custom_remark?: boolean
+  is_approved?: boolean
+  approved_at?: boolean
+  is_amended?: boolean
+  amended_at?: boolean
+  is_deleted_item?: boolean
+  deleted_item_at?: boolean
   created_at?: boolean
   created_by?: boolean
 }
 
-export type LeadOtherAppliancesMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "vendor_id" | "specs_id" | "other_appliance_type" | "other_appliances_master_id" | "custom_remark" | "created_at" | "created_by", ExtArgs["result"]["leadOtherAppliancesMapping"]>
+export type LeadOtherAppliancesMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "vendor_id" | "specs_id" | "other_appliance_type" | "other_appliances_master_id" | "custom_remark" | "is_approved" | "approved_at" | "is_amended" | "amended_at" | "is_deleted_item" | "deleted_item_at" | "created_at" | "created_by", ExtArgs["result"]["leadOtherAppliancesMapping"]>
 export type LeadOtherAppliancesMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -1268,6 +1610,12 @@ export type $LeadOtherAppliancesMappingPayload<ExtArgs extends runtime.Types.Ext
     other_appliance_type: $Enums.OtherApplianceType | null
     other_appliances_master_id: number | null
     custom_remark: string | null
+    is_approved: boolean
+    approved_at: Date | null
+    is_amended: boolean
+    amended_at: Date | null
+    is_deleted_item: boolean
+    deleted_item_at: Date | null
     created_at: Date
     created_by: number
   }, ExtArgs["result"]["leadOtherAppliancesMapping"]>
@@ -1705,6 +2053,12 @@ export interface LeadOtherAppliancesMappingFieldRefs {
   readonly other_appliance_type: Prisma.FieldRef<"LeadOtherAppliancesMapping", 'OtherApplianceType'>
   readonly other_appliances_master_id: Prisma.FieldRef<"LeadOtherAppliancesMapping", 'Int'>
   readonly custom_remark: Prisma.FieldRef<"LeadOtherAppliancesMapping", 'String'>
+  readonly is_approved: Prisma.FieldRef<"LeadOtherAppliancesMapping", 'Boolean'>
+  readonly approved_at: Prisma.FieldRef<"LeadOtherAppliancesMapping", 'DateTime'>
+  readonly is_amended: Prisma.FieldRef<"LeadOtherAppliancesMapping", 'Boolean'>
+  readonly amended_at: Prisma.FieldRef<"LeadOtherAppliancesMapping", 'DateTime'>
+  readonly is_deleted_item: Prisma.FieldRef<"LeadOtherAppliancesMapping", 'Boolean'>
+  readonly deleted_item_at: Prisma.FieldRef<"LeadOtherAppliancesMapping", 'DateTime'>
   readonly created_at: Prisma.FieldRef<"LeadOtherAppliancesMapping", 'DateTime'>
   readonly created_by: Prisma.FieldRef<"LeadOtherAppliancesMapping", 'Int'>
 }

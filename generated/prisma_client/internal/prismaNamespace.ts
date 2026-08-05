@@ -14918,6 +14918,12 @@ export const LeadCarcassMaterialMappingScalarFieldEnum = {
   carcass_type_id: 'carcass_type_id',
   carcas_material_id: 'carcas_material_id',
   carcass_material_finish_id: 'carcass_material_finish_id',
+  is_approved: 'is_approved',
+  approved_at: 'approved_at',
+  is_amended: 'is_amended',
+  amended_at: 'amended_at',
+  is_deleted_item: 'is_deleted_item',
+  deleted_item_at: 'deleted_item_at',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -14933,6 +14939,12 @@ export const LeadShutterMaterialMappingScalarFieldEnum = {
   shutter_type_id: 'shutter_type_id',
   shutter_material_id: 'shutter_material_id',
   shutter_material_finish_id: 'shutter_material_finish_id',
+  is_approved: 'is_approved',
+  approved_at: 'approved_at',
+  is_amended: 'is_amended',
+  amended_at: 'amended_at',
+  is_deleted_item: 'is_deleted_item',
+  deleted_item_at: 'deleted_item_at',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -15155,6 +15167,12 @@ export const LeadHardwareMappingScalarFieldEnum = {
   skirting_carcass_legs_id: 'skirting_carcass_legs_id',
   skirting_carcass_legs_color_id: 'skirting_carcass_legs_color_id',
   note: 'note',
+  is_approved: 'is_approved',
+  approved_at: 'approved_at',
+  is_amended: 'is_amended',
+  amended_at: 'amended_at',
+  is_deleted_item: 'is_deleted_item',
+  deleted_item_at: 'deleted_item_at',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -15192,6 +15210,12 @@ export const LeadLightCarcasUnitMappingScalarFieldEnum = {
   specs_id: 'specs_id',
   light_carcas_unit_master_id: 'light_carcas_unit_master_id',
   custom_remark: 'custom_remark',
+  is_approved: 'is_approved',
+  approved_at: 'approved_at',
+  is_amended: 'is_amended',
+  amended_at: 'amended_at',
+  is_deleted_item: 'is_deleted_item',
+  deleted_item_at: 'deleted_item_at',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -15219,6 +15243,12 @@ export const LeadOtherAppliancesMappingScalarFieldEnum = {
   other_appliance_type: 'other_appliance_type',
   other_appliances_master_id: 'other_appliances_master_id',
   custom_remark: 'custom_remark',
+  is_approved: 'is_approved',
+  approved_at: 'approved_at',
+  is_amended: 'is_amended',
+  amended_at: 'amended_at',
+  is_deleted_item: 'is_deleted_item',
+  deleted_item_at: 'deleted_item_at',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
