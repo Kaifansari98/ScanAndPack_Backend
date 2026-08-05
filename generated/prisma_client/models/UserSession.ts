@@ -356,9 +356,9 @@ export type UserSessionWhereInput = {
   revoke_reason?: Prisma.StringNullableFilter<"UserSession"> | string | null
   created_at?: Prisma.DateTimeFilter<"UserSession"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UserSession"> | Date | string
+  revokedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  revokedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
 }
 
 export type UserSessionOrderByWithRelationInput = {
@@ -383,9 +383,9 @@ export type UserSessionOrderByWithRelationInput = {
   revoke_reason?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  revokedBy?: Prisma.UserMasterOrderByWithRelationInput
   user?: Prisma.UserMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  revokedBy?: Prisma.UserMasterOrderByWithRelationInput
 }
 
 export type UserSessionWhereUniqueInput = Prisma.AtLeast<{
@@ -413,9 +413,9 @@ export type UserSessionWhereUniqueInput = Prisma.AtLeast<{
   revoke_reason?: Prisma.StringNullableFilter<"UserSession"> | string | null
   created_at?: Prisma.DateTimeFilter<"UserSession"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UserSession"> | Date | string
+  revokedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  revokedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
 }, "id" | "access_jti">
 
 export type UserSessionOrderByWithAggregationInput = {
@@ -492,9 +492,9 @@ export type UserSessionCreateInput = {
   revoke_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  revokedBy?: Prisma.UserMasterCreateNestedOneWithoutRevokedSessionsInput
   user: Prisma.UserMasterCreateNestedOneWithoutSessionsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserSessionsInput
-  revokedBy?: Prisma.UserMasterCreateNestedOneWithoutRevokedSessionsInput
 }
 
 export type UserSessionUncheckedCreateInput = {
@@ -539,9 +539,9 @@ export type UserSessionUpdateInput = {
   revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  revokedBy?: Prisma.UserMasterUpdateOneWithoutRevokedSessionsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutSessionsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserSessionsNestedInput
-  revokedBy?: Prisma.UserMasterUpdateOneWithoutRevokedSessionsNestedInput
 }
 
 export type UserSessionUncheckedUpdateInput = {
@@ -774,13 +774,6 @@ export type UserSessionUncheckedUpdateManyWithoutVendorNestedInput = {
   deleteMany?: Prisma.UserSessionScalarWhereInput | Prisma.UserSessionScalarWhereInput[]
 }
 
-export type UserSessionCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.UserSessionCreateWithoutUserInput, Prisma.UserSessionUncheckedCreateWithoutUserInput> | Prisma.UserSessionCreateWithoutUserInput[] | Prisma.UserSessionUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.UserSessionCreateOrConnectWithoutUserInput | Prisma.UserSessionCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.UserSessionCreateManyUserInputEnvelope
-  connect?: Prisma.UserSessionWhereUniqueInput | Prisma.UserSessionWhereUniqueInput[]
-}
-
 export type UserSessionCreateNestedManyWithoutRevokedByInput = {
   create?: Prisma.XOR<Prisma.UserSessionCreateWithoutRevokedByInput, Prisma.UserSessionUncheckedCreateWithoutRevokedByInput> | Prisma.UserSessionCreateWithoutRevokedByInput[] | Prisma.UserSessionUncheckedCreateWithoutRevokedByInput[]
   connectOrCreate?: Prisma.UserSessionCreateOrConnectWithoutRevokedByInput | Prisma.UserSessionCreateOrConnectWithoutRevokedByInput[]
@@ -788,7 +781,7 @@ export type UserSessionCreateNestedManyWithoutRevokedByInput = {
   connect?: Prisma.UserSessionWhereUniqueInput | Prisma.UserSessionWhereUniqueInput[]
 }
 
-export type UserSessionUncheckedCreateNestedManyWithoutUserInput = {
+export type UserSessionCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.UserSessionCreateWithoutUserInput, Prisma.UserSessionUncheckedCreateWithoutUserInput> | Prisma.UserSessionCreateWithoutUserInput[] | Prisma.UserSessionUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.UserSessionCreateOrConnectWithoutUserInput | Prisma.UserSessionCreateOrConnectWithoutUserInput[]
   createMany?: Prisma.UserSessionCreateManyUserInputEnvelope
@@ -802,18 +795,11 @@ export type UserSessionUncheckedCreateNestedManyWithoutRevokedByInput = {
   connect?: Prisma.UserSessionWhereUniqueInput | Prisma.UserSessionWhereUniqueInput[]
 }
 
-export type UserSessionUpdateManyWithoutUserNestedInput = {
+export type UserSessionUncheckedCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.UserSessionCreateWithoutUserInput, Prisma.UserSessionUncheckedCreateWithoutUserInput> | Prisma.UserSessionCreateWithoutUserInput[] | Prisma.UserSessionUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.UserSessionCreateOrConnectWithoutUserInput | Prisma.UserSessionCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.UserSessionUpsertWithWhereUniqueWithoutUserInput | Prisma.UserSessionUpsertWithWhereUniqueWithoutUserInput[]
   createMany?: Prisma.UserSessionCreateManyUserInputEnvelope
-  set?: Prisma.UserSessionWhereUniqueInput | Prisma.UserSessionWhereUniqueInput[]
-  disconnect?: Prisma.UserSessionWhereUniqueInput | Prisma.UserSessionWhereUniqueInput[]
-  delete?: Prisma.UserSessionWhereUniqueInput | Prisma.UserSessionWhereUniqueInput[]
   connect?: Prisma.UserSessionWhereUniqueInput | Prisma.UserSessionWhereUniqueInput[]
-  update?: Prisma.UserSessionUpdateWithWhereUniqueWithoutUserInput | Prisma.UserSessionUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.UserSessionUpdateManyWithWhereWithoutUserInput | Prisma.UserSessionUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.UserSessionScalarWhereInput | Prisma.UserSessionScalarWhereInput[]
 }
 
 export type UserSessionUpdateManyWithoutRevokedByNestedInput = {
@@ -830,7 +816,7 @@ export type UserSessionUpdateManyWithoutRevokedByNestedInput = {
   deleteMany?: Prisma.UserSessionScalarWhereInput | Prisma.UserSessionScalarWhereInput[]
 }
 
-export type UserSessionUncheckedUpdateManyWithoutUserNestedInput = {
+export type UserSessionUpdateManyWithoutUserNestedInput = {
   create?: Prisma.XOR<Prisma.UserSessionCreateWithoutUserInput, Prisma.UserSessionUncheckedCreateWithoutUserInput> | Prisma.UserSessionCreateWithoutUserInput[] | Prisma.UserSessionUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.UserSessionCreateOrConnectWithoutUserInput | Prisma.UserSessionCreateOrConnectWithoutUserInput[]
   upsert?: Prisma.UserSessionUpsertWithWhereUniqueWithoutUserInput | Prisma.UserSessionUpsertWithWhereUniqueWithoutUserInput[]
@@ -855,6 +841,20 @@ export type UserSessionUncheckedUpdateManyWithoutRevokedByNestedInput = {
   connect?: Prisma.UserSessionWhereUniqueInput | Prisma.UserSessionWhereUniqueInput[]
   update?: Prisma.UserSessionUpdateWithWhereUniqueWithoutRevokedByInput | Prisma.UserSessionUpdateWithWhereUniqueWithoutRevokedByInput[]
   updateMany?: Prisma.UserSessionUpdateManyWithWhereWithoutRevokedByInput | Prisma.UserSessionUpdateManyWithWhereWithoutRevokedByInput[]
+  deleteMany?: Prisma.UserSessionScalarWhereInput | Prisma.UserSessionScalarWhereInput[]
+}
+
+export type UserSessionUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.UserSessionCreateWithoutUserInput, Prisma.UserSessionUncheckedCreateWithoutUserInput> | Prisma.UserSessionCreateWithoutUserInput[] | Prisma.UserSessionUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.UserSessionCreateOrConnectWithoutUserInput | Prisma.UserSessionCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.UserSessionUpsertWithWhereUniqueWithoutUserInput | Prisma.UserSessionUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.UserSessionCreateManyUserInputEnvelope
+  set?: Prisma.UserSessionWhereUniqueInput | Prisma.UserSessionWhereUniqueInput[]
+  disconnect?: Prisma.UserSessionWhereUniqueInput | Prisma.UserSessionWhereUniqueInput[]
+  delete?: Prisma.UserSessionWhereUniqueInput | Prisma.UserSessionWhereUniqueInput[]
+  connect?: Prisma.UserSessionWhereUniqueInput | Prisma.UserSessionWhereUniqueInput[]
+  update?: Prisma.UserSessionUpdateWithWhereUniqueWithoutUserInput | Prisma.UserSessionUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.UserSessionUpdateManyWithWhereWithoutUserInput | Prisma.UserSessionUpdateManyWithWhereWithoutUserInput[]
   deleteMany?: Prisma.UserSessionScalarWhereInput | Prisma.UserSessionScalarWhereInput[]
 }
 
@@ -888,8 +888,8 @@ export type UserSessionCreateWithoutVendorInput = {
   revoke_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  user: Prisma.UserMasterCreateNestedOneWithoutSessionsInput
   revokedBy?: Prisma.UserMasterCreateNestedOneWithoutRevokedSessionsInput
+  user: Prisma.UserMasterCreateNestedOneWithoutSessionsInput
 }
 
 export type UserSessionUncheckedCreateWithoutVendorInput = {
@@ -968,61 +968,6 @@ export type UserSessionScalarWhereInput = {
   updated_at?: Prisma.DateTimeFilter<"UserSession"> | Date | string
 }
 
-export type UserSessionCreateWithoutUserInput = {
-  refresh_token_hash: string
-  access_jti?: string | null
-  device_id?: string | null
-  device_name?: string | null
-  platform?: string | null
-  ip_address?: string | null
-  user_agent?: string | null
-  login_type?: $Enums.UserSessionLoginType
-  status?: $Enums.UserSessionStatus
-  is_current?: boolean | null
-  last_seen_at?: Date | string | null
-  expires_at: Date | string
-  logged_out_at?: Date | string | null
-  revoked_at?: Date | string | null
-  revoke_reason?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutUserSessionsInput
-  revokedBy?: Prisma.UserMasterCreateNestedOneWithoutRevokedSessionsInput
-}
-
-export type UserSessionUncheckedCreateWithoutUserInput = {
-  id?: number
-  vendor_id: number
-  refresh_token_hash: string
-  access_jti?: string | null
-  device_id?: string | null
-  device_name?: string | null
-  platform?: string | null
-  ip_address?: string | null
-  user_agent?: string | null
-  login_type?: $Enums.UserSessionLoginType
-  status?: $Enums.UserSessionStatus
-  is_current?: boolean | null
-  last_seen_at?: Date | string | null
-  expires_at: Date | string
-  logged_out_at?: Date | string | null
-  revoked_at?: Date | string | null
-  revoked_by?: number | null
-  revoke_reason?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-}
-
-export type UserSessionCreateOrConnectWithoutUserInput = {
-  where: Prisma.UserSessionWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserSessionCreateWithoutUserInput, Prisma.UserSessionUncheckedCreateWithoutUserInput>
-}
-
-export type UserSessionCreateManyUserInputEnvelope = {
-  data: Prisma.UserSessionCreateManyUserInput | Prisma.UserSessionCreateManyUserInput[]
-  skipDuplicates?: boolean
-}
-
 export type UserSessionCreateWithoutRevokedByInput = {
   refresh_token_hash: string
   access_jti?: string | null
@@ -1078,20 +1023,59 @@ export type UserSessionCreateManyRevokedByInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type UserSessionUpsertWithWhereUniqueWithoutUserInput = {
+export type UserSessionCreateWithoutUserInput = {
+  refresh_token_hash: string
+  access_jti?: string | null
+  device_id?: string | null
+  device_name?: string | null
+  platform?: string | null
+  ip_address?: string | null
+  user_agent?: string | null
+  login_type?: $Enums.UserSessionLoginType
+  status?: $Enums.UserSessionStatus
+  is_current?: boolean | null
+  last_seen_at?: Date | string | null
+  expires_at: Date | string
+  logged_out_at?: Date | string | null
+  revoked_at?: Date | string | null
+  revoke_reason?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  revokedBy?: Prisma.UserMasterCreateNestedOneWithoutRevokedSessionsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUserSessionsInput
+}
+
+export type UserSessionUncheckedCreateWithoutUserInput = {
+  id?: number
+  vendor_id: number
+  refresh_token_hash: string
+  access_jti?: string | null
+  device_id?: string | null
+  device_name?: string | null
+  platform?: string | null
+  ip_address?: string | null
+  user_agent?: string | null
+  login_type?: $Enums.UserSessionLoginType
+  status?: $Enums.UserSessionStatus
+  is_current?: boolean | null
+  last_seen_at?: Date | string | null
+  expires_at: Date | string
+  logged_out_at?: Date | string | null
+  revoked_at?: Date | string | null
+  revoked_by?: number | null
+  revoke_reason?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type UserSessionCreateOrConnectWithoutUserInput = {
   where: Prisma.UserSessionWhereUniqueInput
-  update: Prisma.XOR<Prisma.UserSessionUpdateWithoutUserInput, Prisma.UserSessionUncheckedUpdateWithoutUserInput>
   create: Prisma.XOR<Prisma.UserSessionCreateWithoutUserInput, Prisma.UserSessionUncheckedCreateWithoutUserInput>
 }
 
-export type UserSessionUpdateWithWhereUniqueWithoutUserInput = {
-  where: Prisma.UserSessionWhereUniqueInput
-  data: Prisma.XOR<Prisma.UserSessionUpdateWithoutUserInput, Prisma.UserSessionUncheckedUpdateWithoutUserInput>
-}
-
-export type UserSessionUpdateManyWithWhereWithoutUserInput = {
-  where: Prisma.UserSessionScalarWhereInput
-  data: Prisma.XOR<Prisma.UserSessionUpdateManyMutationInput, Prisma.UserSessionUncheckedUpdateManyWithoutUserInput>
+export type UserSessionCreateManyUserInputEnvelope = {
+  data: Prisma.UserSessionCreateManyUserInput | Prisma.UserSessionCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type UserSessionUpsertWithWhereUniqueWithoutRevokedByInput = {
@@ -1108,6 +1092,22 @@ export type UserSessionUpdateWithWhereUniqueWithoutRevokedByInput = {
 export type UserSessionUpdateManyWithWhereWithoutRevokedByInput = {
   where: Prisma.UserSessionScalarWhereInput
   data: Prisma.XOR<Prisma.UserSessionUpdateManyMutationInput, Prisma.UserSessionUncheckedUpdateManyWithoutRevokedByInput>
+}
+
+export type UserSessionUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.UserSessionWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserSessionUpdateWithoutUserInput, Prisma.UserSessionUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.UserSessionCreateWithoutUserInput, Prisma.UserSessionUncheckedCreateWithoutUserInput>
+}
+
+export type UserSessionUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.UserSessionWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserSessionUpdateWithoutUserInput, Prisma.UserSessionUncheckedUpdateWithoutUserInput>
+}
+
+export type UserSessionUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.UserSessionScalarWhereInput
+  data: Prisma.XOR<Prisma.UserSessionUpdateManyMutationInput, Prisma.UserSessionUncheckedUpdateManyWithoutUserInput>
 }
 
 export type UserSessionCreateManyVendorInput = {
@@ -1151,8 +1151,8 @@ export type UserSessionUpdateWithoutVendorInput = {
   revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutSessionsNestedInput
   revokedBy?: Prisma.UserMasterUpdateOneWithoutRevokedSessionsNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutSessionsNestedInput
 }
 
 export type UserSessionUncheckedUpdateWithoutVendorInput = {
@@ -1201,29 +1201,6 @@ export type UserSessionUncheckedUpdateManyWithoutVendorInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type UserSessionCreateManyUserInput = {
-  id?: number
-  vendor_id: number
-  refresh_token_hash: string
-  access_jti?: string | null
-  device_id?: string | null
-  device_name?: string | null
-  platform?: string | null
-  ip_address?: string | null
-  user_agent?: string | null
-  login_type?: $Enums.UserSessionLoginType
-  status?: $Enums.UserSessionStatus
-  is_current?: boolean | null
-  last_seen_at?: Date | string | null
-  expires_at: Date | string
-  logged_out_at?: Date | string | null
-  revoked_at?: Date | string | null
-  revoked_by?: number | null
-  revoke_reason?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-}
-
 export type UserSessionCreateManyRevokedByInput = {
   id?: number
   user_id: number
@@ -1247,72 +1224,27 @@ export type UserSessionCreateManyRevokedByInput = {
   updated_at?: Date | string
 }
 
-export type UserSessionUpdateWithoutUserInput = {
-  refresh_token_hash?: Prisma.StringFieldUpdateOperationsInput | string
-  access_jti?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  device_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  platform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ip_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
-  status?: Prisma.EnumUserSessionStatusFieldUpdateOperationsInput | $Enums.UserSessionStatus
-  is_current?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  last_seen_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expires_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  logged_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  revoked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserSessionsNestedInput
-  revokedBy?: Prisma.UserMasterUpdateOneWithoutRevokedSessionsNestedInput
-}
-
-export type UserSessionUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  refresh_token_hash?: Prisma.StringFieldUpdateOperationsInput | string
-  access_jti?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  device_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  platform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ip_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
-  status?: Prisma.EnumUserSessionStatusFieldUpdateOperationsInput | $Enums.UserSessionStatus
-  is_current?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  last_seen_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expires_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  logged_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  revoked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  revoked_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type UserSessionUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  refresh_token_hash?: Prisma.StringFieldUpdateOperationsInput | string
-  access_jti?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  device_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  platform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ip_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
-  status?: Prisma.EnumUserSessionStatusFieldUpdateOperationsInput | $Enums.UserSessionStatus
-  is_current?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  last_seen_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expires_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  logged_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  revoked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  revoked_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type UserSessionCreateManyUserInput = {
+  id?: number
+  vendor_id: number
+  refresh_token_hash: string
+  access_jti?: string | null
+  device_id?: string | null
+  device_name?: string | null
+  platform?: string | null
+  ip_address?: string | null
+  user_agent?: string | null
+  login_type?: $Enums.UserSessionLoginType
+  status?: $Enums.UserSessionStatus
+  is_current?: boolean | null
+  last_seen_at?: Date | string | null
+  expires_at: Date | string
+  logged_out_at?: Date | string | null
+  revoked_at?: Date | string | null
+  revoked_by?: number | null
+  revoke_reason?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type UserSessionUpdateWithoutRevokedByInput = {
@@ -1383,6 +1315,74 @@ export type UserSessionUncheckedUpdateManyWithoutRevokedByInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type UserSessionUpdateWithoutUserInput = {
+  refresh_token_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  access_jti?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  device_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  platform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ip_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
+  status?: Prisma.EnumUserSessionStatusFieldUpdateOperationsInput | $Enums.UserSessionStatus
+  is_current?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  last_seen_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expires_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  logged_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revoked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  revokedBy?: Prisma.UserMasterUpdateOneWithoutRevokedSessionsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserSessionsNestedInput
+}
+
+export type UserSessionUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  refresh_token_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  access_jti?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  device_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  platform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ip_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
+  status?: Prisma.EnumUserSessionStatusFieldUpdateOperationsInput | $Enums.UserSessionStatus
+  is_current?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  last_seen_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expires_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  logged_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revoked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revoked_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserSessionUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  refresh_token_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  access_jti?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  device_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  device_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  platform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ip_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
+  status?: Prisma.EnumUserSessionStatusFieldUpdateOperationsInput | $Enums.UserSessionStatus
+  is_current?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  last_seen_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expires_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  logged_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revoked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revoked_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 
 
 export type UserSessionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1407,9 +1407,9 @@ export type UserSessionSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   revoke_reason?: boolean
   created_at?: boolean
   updated_at?: boolean
+  revokedBy?: boolean | Prisma.UserSession$revokedByArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  revokedBy?: boolean | Prisma.UserSession$revokedByArgs<ExtArgs>
 }, ExtArgs["result"]["userSession"]>
 
 export type UserSessionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1434,9 +1434,9 @@ export type UserSessionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   revoke_reason?: boolean
   created_at?: boolean
   updated_at?: boolean
+  revokedBy?: boolean | Prisma.UserSession$revokedByArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  revokedBy?: boolean | Prisma.UserSession$revokedByArgs<ExtArgs>
 }, ExtArgs["result"]["userSession"]>
 
 export type UserSessionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1461,9 +1461,9 @@ export type UserSessionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   revoke_reason?: boolean
   created_at?: boolean
   updated_at?: boolean
+  revokedBy?: boolean | Prisma.UserSession$revokedByArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  revokedBy?: boolean | Prisma.UserSession$revokedByArgs<ExtArgs>
 }, ExtArgs["result"]["userSession"]>
 
 export type UserSessionSelectScalar = {
@@ -1492,27 +1492,27 @@ export type UserSessionSelectScalar = {
 
 export type UserSessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "vendor_id" | "refresh_token_hash" | "access_jti" | "device_id" | "device_name" | "platform" | "ip_address" | "user_agent" | "login_type" | "status" | "is_current" | "last_seen_at" | "expires_at" | "logged_out_at" | "revoked_at" | "revoked_by" | "revoke_reason" | "created_at" | "updated_at", ExtArgs["result"]["userSession"]>
 export type UserSessionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  revokedBy?: boolean | Prisma.UserSession$revokedByArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  revokedBy?: boolean | Prisma.UserSession$revokedByArgs<ExtArgs>
 }
 export type UserSessionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  revokedBy?: boolean | Prisma.UserSession$revokedByArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  revokedBy?: boolean | Prisma.UserSession$revokedByArgs<ExtArgs>
 }
 export type UserSessionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  revokedBy?: boolean | Prisma.UserSession$revokedByArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  revokedBy?: boolean | Prisma.UserSession$revokedByArgs<ExtArgs>
 }
 
 export type $UserSessionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "UserSession"
   objects: {
+    revokedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     user: Prisma.$UserMasterPayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    revokedBy: Prisma.$UserMasterPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1930,9 +1930,9 @@ readonly fields: UserSessionFieldRefs;
  */
 export interface Prisma__UserSessionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  revokedBy<T extends Prisma.UserSession$revokedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserSession$revokedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  revokedBy<T extends Prisma.UserSession$revokedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserSession$revokedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

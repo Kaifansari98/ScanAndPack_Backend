@@ -252,11 +252,11 @@ export type specificationDocumentMappingWhereInput = {
   document_id?: Prisma.IntFilter<"specificationDocumentMapping"> | number
   created_at?: Prisma.DateTimeFilter<"specificationDocumentMapping"> | Date | string
   created_by?: Prisma.IntFilter<"specificationDocumentMapping"> | number
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  leadDocument?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   specification?: Prisma.XOR<Prisma.LeadSpecificationsMasterScalarRelationFilter, Prisma.LeadSpecificationsMasterWhereInput>
-  leadDocument?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
-  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type specificationDocumentMappingOrderByWithRelationInput = {
@@ -267,11 +267,11 @@ export type specificationDocumentMappingOrderByWithRelationInput = {
   document_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  leadDocument?: Prisma.LeadDocumentsOrderByWithRelationInput
   lead?: Prisma.LeadMasterOrderByWithRelationInput
   specification?: Prisma.LeadSpecificationsMasterOrderByWithRelationInput
-  leadDocument?: Prisma.LeadDocumentsOrderByWithRelationInput
-  createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type specificationDocumentMappingWhereUniqueInput = Prisma.AtLeast<{
@@ -285,11 +285,11 @@ export type specificationDocumentMappingWhereUniqueInput = Prisma.AtLeast<{
   document_id?: Prisma.IntFilter<"specificationDocumentMapping"> | number
   created_at?: Prisma.DateTimeFilter<"specificationDocumentMapping"> | Date | string
   created_by?: Prisma.IntFilter<"specificationDocumentMapping"> | number
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  leadDocument?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   specification?: Prisma.XOR<Prisma.LeadSpecificationsMasterScalarRelationFilter, Prisma.LeadSpecificationsMasterWhereInput>
-  leadDocument?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
-  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type specificationDocumentMappingOrderByWithAggregationInput = {
@@ -322,11 +322,11 @@ export type specificationDocumentMappingScalarWhereWithAggregatesInput = {
 
 export type specificationDocumentMappingCreateInput = {
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutSpecificationDocumentMappingsCreatedInput
+  leadDocument: Prisma.LeadDocumentsCreateNestedOneWithoutSpecificationDocumentMappingsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
   specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
-  leadDocument: Prisma.LeadDocumentsCreateNestedOneWithoutSpecificationDocumentMappingsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutSpecificationDocumentMappingsCreatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
 }
 
 export type specificationDocumentMappingUncheckedCreateInput = {
@@ -341,11 +341,11 @@ export type specificationDocumentMappingUncheckedCreateInput = {
 
 export type specificationDocumentMappingUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsCreatedNestedInput
+  leadDocument?: Prisma.LeadDocumentsUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
   specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
-  leadDocument?: Prisma.LeadDocumentsUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsCreatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
 }
 
 export type specificationDocumentMappingUncheckedUpdateInput = {
@@ -652,10 +652,10 @@ export type specificationDocumentMappingUncheckedUpdateManyWithoutLeadDocumentNe
 
 export type specificationDocumentMappingCreateWithoutVendorInput = {
   created_at?: Date | string
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutSpecificationDocumentMappingsCreatedInput
+  leadDocument: Prisma.LeadDocumentsCreateNestedOneWithoutSpecificationDocumentMappingsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
   specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
-  leadDocument: Prisma.LeadDocumentsCreateNestedOneWithoutSpecificationDocumentMappingsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutSpecificationDocumentMappingsCreatedInput
 }
 
 export type specificationDocumentMappingUncheckedCreateWithoutVendorInput = {
@@ -708,10 +708,10 @@ export type specificationDocumentMappingScalarWhereInput = {
 
 export type specificationDocumentMappingCreateWithoutCreatedByInput = {
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
+  leadDocument: Prisma.LeadDocumentsCreateNestedOneWithoutSpecificationDocumentMappingsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
   specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
-  leadDocument: Prisma.LeadDocumentsCreateNestedOneWithoutSpecificationDocumentMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
 }
 
 export type specificationDocumentMappingUncheckedCreateWithoutCreatedByInput = {
@@ -751,10 +751,10 @@ export type specificationDocumentMappingUpdateManyWithWhereWithoutCreatedByInput
 
 export type specificationDocumentMappingCreateWithoutLeadInput = {
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
-  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
-  leadDocument: Prisma.LeadDocumentsCreateNestedOneWithoutSpecificationDocumentMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutSpecificationDocumentMappingsCreatedInput
+  leadDocument: Prisma.LeadDocumentsCreateNestedOneWithoutSpecificationDocumentMappingsInput
+  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
 }
 
 export type specificationDocumentMappingUncheckedCreateWithoutLeadInput = {
@@ -794,10 +794,10 @@ export type specificationDocumentMappingUpdateManyWithWhereWithoutLeadInput = {
 
 export type specificationDocumentMappingCreateWithoutSpecificationInput = {
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
-  leadDocument: Prisma.LeadDocumentsCreateNestedOneWithoutSpecificationDocumentMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutSpecificationDocumentMappingsCreatedInput
+  leadDocument: Prisma.LeadDocumentsCreateNestedOneWithoutSpecificationDocumentMappingsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
 }
 
 export type specificationDocumentMappingUncheckedCreateWithoutSpecificationInput = {
@@ -837,10 +837,10 @@ export type specificationDocumentMappingUpdateManyWithWhereWithoutSpecificationI
 
 export type specificationDocumentMappingCreateWithoutLeadDocumentInput = {
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutSpecificationDocumentMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
   specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutSpecificationDocumentMappingsCreatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutSpecificationDocumentMappingsInput
 }
 
 export type specificationDocumentMappingUncheckedCreateWithoutLeadDocumentInput = {
@@ -889,10 +889,10 @@ export type specificationDocumentMappingCreateManyVendorInput = {
 
 export type specificationDocumentMappingUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsCreatedNestedInput
+  leadDocument?: Prisma.LeadDocumentsUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
   specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
-  leadDocument?: Prisma.LeadDocumentsUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsCreatedNestedInput
 }
 
 export type specificationDocumentMappingUncheckedUpdateWithoutVendorInput = {
@@ -924,10 +924,10 @@ export type specificationDocumentMappingCreateManyCreatedByInput = {
 
 export type specificationDocumentMappingUpdateWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
+  leadDocument?: Prisma.LeadDocumentsUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
   specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
-  leadDocument?: Prisma.LeadDocumentsUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
 }
 
 export type specificationDocumentMappingUncheckedUpdateWithoutCreatedByInput = {
@@ -959,10 +959,10 @@ export type specificationDocumentMappingCreateManyLeadInput = {
 
 export type specificationDocumentMappingUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
-  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
-  leadDocument?: Prisma.LeadDocumentsUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsCreatedNestedInput
+  leadDocument?: Prisma.LeadDocumentsUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
+  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
 }
 
 export type specificationDocumentMappingUncheckedUpdateWithoutLeadInput = {
@@ -994,10 +994,10 @@ export type specificationDocumentMappingCreateManySpecificationInput = {
 
 export type specificationDocumentMappingUpdateWithoutSpecificationInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
-  leadDocument?: Prisma.LeadDocumentsUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsCreatedNestedInput
+  leadDocument?: Prisma.LeadDocumentsUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
 }
 
 export type specificationDocumentMappingUncheckedUpdateWithoutSpecificationInput = {
@@ -1029,10 +1029,10 @@ export type specificationDocumentMappingCreateManyLeadDocumentInput = {
 
 export type specificationDocumentMappingUpdateWithoutLeadDocumentInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
   specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsCreatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSpecificationDocumentMappingsNestedInput
 }
 
 export type specificationDocumentMappingUncheckedUpdateWithoutLeadDocumentInput = {
@@ -1063,11 +1063,11 @@ export type specificationDocumentMappingSelect<ExtArgs extends runtime.Types.Ext
   document_id?: boolean
   created_at?: boolean
   created_by?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  leadDocument?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
-  leadDocument?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["specificationDocumentMapping"]>
 
 export type specificationDocumentMappingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1078,11 +1078,11 @@ export type specificationDocumentMappingSelectCreateManyAndReturn<ExtArgs extend
   document_id?: boolean
   created_at?: boolean
   created_by?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  leadDocument?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
-  leadDocument?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["specificationDocumentMapping"]>
 
 export type specificationDocumentMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1093,11 +1093,11 @@ export type specificationDocumentMappingSelectUpdateManyAndReturn<ExtArgs extend
   document_id?: boolean
   created_at?: boolean
   created_by?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  leadDocument?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
-  leadDocument?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["specificationDocumentMapping"]>
 
 export type specificationDocumentMappingSelectScalar = {
@@ -1112,35 +1112,35 @@ export type specificationDocumentMappingSelectScalar = {
 
 export type specificationDocumentMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "specs_id" | "document_id" | "created_at" | "created_by", ExtArgs["result"]["specificationDocumentMapping"]>
 export type specificationDocumentMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  leadDocument?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
-  leadDocument?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type specificationDocumentMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  leadDocument?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
-  leadDocument?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type specificationDocumentMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  leadDocument?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
-  leadDocument?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $specificationDocumentMappingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "specificationDocumentMapping"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
+    createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    leadDocument: Prisma.$LeadDocumentsPayload<ExtArgs>
     lead: Prisma.$LeadMasterPayload<ExtArgs>
     specification: Prisma.$LeadSpecificationsMasterPayload<ExtArgs>
-    leadDocument: Prisma.$LeadDocumentsPayload<ExtArgs>
-    createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1544,11 +1544,11 @@ readonly fields: specificationDocumentMappingFieldRefs;
  */
 export interface Prisma__specificationDocumentMappingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  leadDocument<T extends Prisma.LeadDocumentsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocumentsDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadDocumentsClient<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   specification<T extends Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadSpecificationsMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadSpecificationsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  leadDocument<T extends Prisma.LeadDocumentsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocumentsDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadDocumentsClient<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

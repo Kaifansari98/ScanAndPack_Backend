@@ -257,9 +257,9 @@ export type BroadcastReadWhereInput = {
   created_at?: Prisma.DateTimeFilter<"BroadcastRead"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"BroadcastRead"> | Date | string
   broadcast?: Prisma.XOR<Prisma.BroadcastMasterScalarRelationFilter, Prisma.BroadcastMasterWhereInput>
-  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
 }
 
 export type BroadcastReadOrderByWithRelationInput = {
@@ -272,9 +272,9 @@ export type BroadcastReadOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   broadcast?: Prisma.BroadcastMasterOrderByWithRelationInput
-  user?: Prisma.UserMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
+  user?: Prisma.UserMasterOrderByWithRelationInput
 }
 
 export type BroadcastReadWhereUniqueInput = Prisma.AtLeast<{
@@ -291,9 +291,9 @@ export type BroadcastReadWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"BroadcastRead"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"BroadcastRead"> | Date | string
   broadcast?: Prisma.XOR<Prisma.BroadcastMasterScalarRelationFilter, Prisma.BroadcastMasterWhereInput>
-  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
 }, "id" | "broadcast_id_user_id">
 
 export type BroadcastReadOrderByWithAggregationInput = {
@@ -331,9 +331,9 @@ export type BroadcastReadCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
   broadcast: Prisma.BroadcastMasterCreateNestedOneWithoutReadLogsInput
-  user: Prisma.UserMasterCreateNestedOneWithoutBroadcastReadsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutBroadcastReadsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutBroadcastReadsUpdatedInput
+  user: Prisma.UserMasterCreateNestedOneWithoutBroadcastReadsInput
 }
 
 export type BroadcastReadUncheckedCreateInput = {
@@ -352,9 +352,9 @@ export type BroadcastReadUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   broadcast?: Prisma.BroadcastMasterUpdateOneRequiredWithoutReadLogsNestedInput
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastReadsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastReadsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutBroadcastReadsUpdatedNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastReadsNestedInput
 }
 
 export type BroadcastReadUncheckedUpdateInput = {
@@ -460,13 +460,6 @@ export type BroadcastReadSumOrderByAggregateInput = {
   updated_by?: Prisma.SortOrder
 }
 
-export type BroadcastReadCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.BroadcastReadCreateWithoutUserInput, Prisma.BroadcastReadUncheckedCreateWithoutUserInput> | Prisma.BroadcastReadCreateWithoutUserInput[] | Prisma.BroadcastReadUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.BroadcastReadCreateOrConnectWithoutUserInput | Prisma.BroadcastReadCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.BroadcastReadCreateManyUserInputEnvelope
-  connect?: Prisma.BroadcastReadWhereUniqueInput | Prisma.BroadcastReadWhereUniqueInput[]
-}
-
 export type BroadcastReadCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.BroadcastReadCreateWithoutCreatedByInput, Prisma.BroadcastReadUncheckedCreateWithoutCreatedByInput> | Prisma.BroadcastReadCreateWithoutCreatedByInput[] | Prisma.BroadcastReadUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.BroadcastReadCreateOrConnectWithoutCreatedByInput | Prisma.BroadcastReadCreateOrConnectWithoutCreatedByInput[]
@@ -481,7 +474,7 @@ export type BroadcastReadCreateNestedManyWithoutUpdatedByInput = {
   connect?: Prisma.BroadcastReadWhereUniqueInput | Prisma.BroadcastReadWhereUniqueInput[]
 }
 
-export type BroadcastReadUncheckedCreateNestedManyWithoutUserInput = {
+export type BroadcastReadCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.BroadcastReadCreateWithoutUserInput, Prisma.BroadcastReadUncheckedCreateWithoutUserInput> | Prisma.BroadcastReadCreateWithoutUserInput[] | Prisma.BroadcastReadUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.BroadcastReadCreateOrConnectWithoutUserInput | Prisma.BroadcastReadCreateOrConnectWithoutUserInput[]
   createMany?: Prisma.BroadcastReadCreateManyUserInputEnvelope
@@ -502,18 +495,11 @@ export type BroadcastReadUncheckedCreateNestedManyWithoutUpdatedByInput = {
   connect?: Prisma.BroadcastReadWhereUniqueInput | Prisma.BroadcastReadWhereUniqueInput[]
 }
 
-export type BroadcastReadUpdateManyWithoutUserNestedInput = {
+export type BroadcastReadUncheckedCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.BroadcastReadCreateWithoutUserInput, Prisma.BroadcastReadUncheckedCreateWithoutUserInput> | Prisma.BroadcastReadCreateWithoutUserInput[] | Prisma.BroadcastReadUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.BroadcastReadCreateOrConnectWithoutUserInput | Prisma.BroadcastReadCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.BroadcastReadUpsertWithWhereUniqueWithoutUserInput | Prisma.BroadcastReadUpsertWithWhereUniqueWithoutUserInput[]
   createMany?: Prisma.BroadcastReadCreateManyUserInputEnvelope
-  set?: Prisma.BroadcastReadWhereUniqueInput | Prisma.BroadcastReadWhereUniqueInput[]
-  disconnect?: Prisma.BroadcastReadWhereUniqueInput | Prisma.BroadcastReadWhereUniqueInput[]
-  delete?: Prisma.BroadcastReadWhereUniqueInput | Prisma.BroadcastReadWhereUniqueInput[]
   connect?: Prisma.BroadcastReadWhereUniqueInput | Prisma.BroadcastReadWhereUniqueInput[]
-  update?: Prisma.BroadcastReadUpdateWithWhereUniqueWithoutUserInput | Prisma.BroadcastReadUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.BroadcastReadUpdateManyWithWhereWithoutUserInput | Prisma.BroadcastReadUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.BroadcastReadScalarWhereInput | Prisma.BroadcastReadScalarWhereInput[]
 }
 
 export type BroadcastReadUpdateManyWithoutCreatedByNestedInput = {
@@ -544,7 +530,7 @@ export type BroadcastReadUpdateManyWithoutUpdatedByNestedInput = {
   deleteMany?: Prisma.BroadcastReadScalarWhereInput | Prisma.BroadcastReadScalarWhereInput[]
 }
 
-export type BroadcastReadUncheckedUpdateManyWithoutUserNestedInput = {
+export type BroadcastReadUpdateManyWithoutUserNestedInput = {
   create?: Prisma.XOR<Prisma.BroadcastReadCreateWithoutUserInput, Prisma.BroadcastReadUncheckedCreateWithoutUserInput> | Prisma.BroadcastReadCreateWithoutUserInput[] | Prisma.BroadcastReadUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.BroadcastReadCreateOrConnectWithoutUserInput | Prisma.BroadcastReadCreateOrConnectWithoutUserInput[]
   upsert?: Prisma.BroadcastReadUpsertWithWhereUniqueWithoutUserInput | Prisma.BroadcastReadUpsertWithWhereUniqueWithoutUserInput[]
@@ -583,6 +569,20 @@ export type BroadcastReadUncheckedUpdateManyWithoutUpdatedByNestedInput = {
   connect?: Prisma.BroadcastReadWhereUniqueInput | Prisma.BroadcastReadWhereUniqueInput[]
   update?: Prisma.BroadcastReadUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.BroadcastReadUpdateWithWhereUniqueWithoutUpdatedByInput[]
   updateMany?: Prisma.BroadcastReadUpdateManyWithWhereWithoutUpdatedByInput | Prisma.BroadcastReadUpdateManyWithWhereWithoutUpdatedByInput[]
+  deleteMany?: Prisma.BroadcastReadScalarWhereInput | Prisma.BroadcastReadScalarWhereInput[]
+}
+
+export type BroadcastReadUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.BroadcastReadCreateWithoutUserInput, Prisma.BroadcastReadUncheckedCreateWithoutUserInput> | Prisma.BroadcastReadCreateWithoutUserInput[] | Prisma.BroadcastReadUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.BroadcastReadCreateOrConnectWithoutUserInput | Prisma.BroadcastReadCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.BroadcastReadUpsertWithWhereUniqueWithoutUserInput | Prisma.BroadcastReadUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.BroadcastReadCreateManyUserInputEnvelope
+  set?: Prisma.BroadcastReadWhereUniqueInput | Prisma.BroadcastReadWhereUniqueInput[]
+  disconnect?: Prisma.BroadcastReadWhereUniqueInput | Prisma.BroadcastReadWhereUniqueInput[]
+  delete?: Prisma.BroadcastReadWhereUniqueInput | Prisma.BroadcastReadWhereUniqueInput[]
+  connect?: Prisma.BroadcastReadWhereUniqueInput | Prisma.BroadcastReadWhereUniqueInput[]
+  update?: Prisma.BroadcastReadUpdateWithWhereUniqueWithoutUserInput | Prisma.BroadcastReadUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.BroadcastReadUpdateManyWithWhereWithoutUserInput | Prisma.BroadcastReadUpdateManyWithWhereWithoutUserInput[]
   deleteMany?: Prisma.BroadcastReadScalarWhereInput | Prisma.BroadcastReadScalarWhereInput[]
 }
 
@@ -628,6 +628,64 @@ export type BroadcastReadUncheckedUpdateManyWithoutBroadcastNestedInput = {
   deleteMany?: Prisma.BroadcastReadScalarWhereInput | Prisma.BroadcastReadScalarWhereInput[]
 }
 
+export type BroadcastReadCreateWithoutCreatedByInput = {
+  read_at?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
+  broadcast: Prisma.BroadcastMasterCreateNestedOneWithoutReadLogsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutBroadcastReadsUpdatedInput
+  user: Prisma.UserMasterCreateNestedOneWithoutBroadcastReadsInput
+}
+
+export type BroadcastReadUncheckedCreateWithoutCreatedByInput = {
+  id?: number
+  broadcast_id: number
+  user_id: number
+  read_at?: Date | string
+  updated_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type BroadcastReadCreateOrConnectWithoutCreatedByInput = {
+  where: Prisma.BroadcastReadWhereUniqueInput
+  create: Prisma.XOR<Prisma.BroadcastReadCreateWithoutCreatedByInput, Prisma.BroadcastReadUncheckedCreateWithoutCreatedByInput>
+}
+
+export type BroadcastReadCreateManyCreatedByInputEnvelope = {
+  data: Prisma.BroadcastReadCreateManyCreatedByInput | Prisma.BroadcastReadCreateManyCreatedByInput[]
+  skipDuplicates?: boolean
+}
+
+export type BroadcastReadCreateWithoutUpdatedByInput = {
+  read_at?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
+  broadcast: Prisma.BroadcastMasterCreateNestedOneWithoutReadLogsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutBroadcastReadsCreatedInput
+  user: Prisma.UserMasterCreateNestedOneWithoutBroadcastReadsInput
+}
+
+export type BroadcastReadUncheckedCreateWithoutUpdatedByInput = {
+  id?: number
+  broadcast_id: number
+  user_id: number
+  read_at?: Date | string
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type BroadcastReadCreateOrConnectWithoutUpdatedByInput = {
+  where: Prisma.BroadcastReadWhereUniqueInput
+  create: Prisma.XOR<Prisma.BroadcastReadCreateWithoutUpdatedByInput, Prisma.BroadcastReadUncheckedCreateWithoutUpdatedByInput>
+}
+
+export type BroadcastReadCreateManyUpdatedByInputEnvelope = {
+  data: Prisma.BroadcastReadCreateManyUpdatedByInput | Prisma.BroadcastReadCreateManyUpdatedByInput[]
+  skipDuplicates?: boolean
+}
+
 export type BroadcastReadCreateWithoutUserInput = {
   read_at?: Date | string
   created_at?: Date | string
@@ -657,94 +715,6 @@ export type BroadcastReadCreateManyUserInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type BroadcastReadCreateWithoutCreatedByInput = {
-  read_at?: Date | string
-  created_at?: Date | string
-  updated_at?: Date | string
-  broadcast: Prisma.BroadcastMasterCreateNestedOneWithoutReadLogsInput
-  user: Prisma.UserMasterCreateNestedOneWithoutBroadcastReadsInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutBroadcastReadsUpdatedInput
-}
-
-export type BroadcastReadUncheckedCreateWithoutCreatedByInput = {
-  id?: number
-  broadcast_id: number
-  user_id: number
-  read_at?: Date | string
-  updated_by?: number | null
-  created_at?: Date | string
-  updated_at?: Date | string
-}
-
-export type BroadcastReadCreateOrConnectWithoutCreatedByInput = {
-  where: Prisma.BroadcastReadWhereUniqueInput
-  create: Prisma.XOR<Prisma.BroadcastReadCreateWithoutCreatedByInput, Prisma.BroadcastReadUncheckedCreateWithoutCreatedByInput>
-}
-
-export type BroadcastReadCreateManyCreatedByInputEnvelope = {
-  data: Prisma.BroadcastReadCreateManyCreatedByInput | Prisma.BroadcastReadCreateManyCreatedByInput[]
-  skipDuplicates?: boolean
-}
-
-export type BroadcastReadCreateWithoutUpdatedByInput = {
-  read_at?: Date | string
-  created_at?: Date | string
-  updated_at?: Date | string
-  broadcast: Prisma.BroadcastMasterCreateNestedOneWithoutReadLogsInput
-  user: Prisma.UserMasterCreateNestedOneWithoutBroadcastReadsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutBroadcastReadsCreatedInput
-}
-
-export type BroadcastReadUncheckedCreateWithoutUpdatedByInput = {
-  id?: number
-  broadcast_id: number
-  user_id: number
-  read_at?: Date | string
-  created_by: number
-  created_at?: Date | string
-  updated_at?: Date | string
-}
-
-export type BroadcastReadCreateOrConnectWithoutUpdatedByInput = {
-  where: Prisma.BroadcastReadWhereUniqueInput
-  create: Prisma.XOR<Prisma.BroadcastReadCreateWithoutUpdatedByInput, Prisma.BroadcastReadUncheckedCreateWithoutUpdatedByInput>
-}
-
-export type BroadcastReadCreateManyUpdatedByInputEnvelope = {
-  data: Prisma.BroadcastReadCreateManyUpdatedByInput | Prisma.BroadcastReadCreateManyUpdatedByInput[]
-  skipDuplicates?: boolean
-}
-
-export type BroadcastReadUpsertWithWhereUniqueWithoutUserInput = {
-  where: Prisma.BroadcastReadWhereUniqueInput
-  update: Prisma.XOR<Prisma.BroadcastReadUpdateWithoutUserInput, Prisma.BroadcastReadUncheckedUpdateWithoutUserInput>
-  create: Prisma.XOR<Prisma.BroadcastReadCreateWithoutUserInput, Prisma.BroadcastReadUncheckedCreateWithoutUserInput>
-}
-
-export type BroadcastReadUpdateWithWhereUniqueWithoutUserInput = {
-  where: Prisma.BroadcastReadWhereUniqueInput
-  data: Prisma.XOR<Prisma.BroadcastReadUpdateWithoutUserInput, Prisma.BroadcastReadUncheckedUpdateWithoutUserInput>
-}
-
-export type BroadcastReadUpdateManyWithWhereWithoutUserInput = {
-  where: Prisma.BroadcastReadScalarWhereInput
-  data: Prisma.XOR<Prisma.BroadcastReadUpdateManyMutationInput, Prisma.BroadcastReadUncheckedUpdateManyWithoutUserInput>
-}
-
-export type BroadcastReadScalarWhereInput = {
-  AND?: Prisma.BroadcastReadScalarWhereInput | Prisma.BroadcastReadScalarWhereInput[]
-  OR?: Prisma.BroadcastReadScalarWhereInput[]
-  NOT?: Prisma.BroadcastReadScalarWhereInput | Prisma.BroadcastReadScalarWhereInput[]
-  id?: Prisma.IntFilter<"BroadcastRead"> | number
-  broadcast_id?: Prisma.IntFilter<"BroadcastRead"> | number
-  user_id?: Prisma.IntFilter<"BroadcastRead"> | number
-  read_at?: Prisma.DateTimeFilter<"BroadcastRead"> | Date | string
-  created_by?: Prisma.IntFilter<"BroadcastRead"> | number
-  updated_by?: Prisma.IntNullableFilter<"BroadcastRead"> | number | null
-  created_at?: Prisma.DateTimeFilter<"BroadcastRead"> | Date | string
-  updated_at?: Prisma.DateTimeFilter<"BroadcastRead"> | Date | string
-}
-
 export type BroadcastReadUpsertWithWhereUniqueWithoutCreatedByInput = {
   where: Prisma.BroadcastReadWhereUniqueInput
   update: Prisma.XOR<Prisma.BroadcastReadUpdateWithoutCreatedByInput, Prisma.BroadcastReadUncheckedUpdateWithoutCreatedByInput>
@@ -759,6 +729,20 @@ export type BroadcastReadUpdateWithWhereUniqueWithoutCreatedByInput = {
 export type BroadcastReadUpdateManyWithWhereWithoutCreatedByInput = {
   where: Prisma.BroadcastReadScalarWhereInput
   data: Prisma.XOR<Prisma.BroadcastReadUpdateManyMutationInput, Prisma.BroadcastReadUncheckedUpdateManyWithoutCreatedByInput>
+}
+
+export type BroadcastReadScalarWhereInput = {
+  AND?: Prisma.BroadcastReadScalarWhereInput | Prisma.BroadcastReadScalarWhereInput[]
+  OR?: Prisma.BroadcastReadScalarWhereInput[]
+  NOT?: Prisma.BroadcastReadScalarWhereInput | Prisma.BroadcastReadScalarWhereInput[]
+  id?: Prisma.IntFilter<"BroadcastRead"> | number
+  broadcast_id?: Prisma.IntFilter<"BroadcastRead"> | number
+  user_id?: Prisma.IntFilter<"BroadcastRead"> | number
+  read_at?: Prisma.DateTimeFilter<"BroadcastRead"> | Date | string
+  created_by?: Prisma.IntFilter<"BroadcastRead"> | number
+  updated_by?: Prisma.IntNullableFilter<"BroadcastRead"> | number | null
+  created_at?: Prisma.DateTimeFilter<"BroadcastRead"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"BroadcastRead"> | Date | string
 }
 
 export type BroadcastReadUpsertWithWhereUniqueWithoutUpdatedByInput = {
@@ -777,13 +761,29 @@ export type BroadcastReadUpdateManyWithWhereWithoutUpdatedByInput = {
   data: Prisma.XOR<Prisma.BroadcastReadUpdateManyMutationInput, Prisma.BroadcastReadUncheckedUpdateManyWithoutUpdatedByInput>
 }
 
+export type BroadcastReadUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.BroadcastReadWhereUniqueInput
+  update: Prisma.XOR<Prisma.BroadcastReadUpdateWithoutUserInput, Prisma.BroadcastReadUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.BroadcastReadCreateWithoutUserInput, Prisma.BroadcastReadUncheckedCreateWithoutUserInput>
+}
+
+export type BroadcastReadUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.BroadcastReadWhereUniqueInput
+  data: Prisma.XOR<Prisma.BroadcastReadUpdateWithoutUserInput, Prisma.BroadcastReadUncheckedUpdateWithoutUserInput>
+}
+
+export type BroadcastReadUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.BroadcastReadScalarWhereInput
+  data: Prisma.XOR<Prisma.BroadcastReadUpdateManyMutationInput, Prisma.BroadcastReadUncheckedUpdateManyWithoutUserInput>
+}
+
 export type BroadcastReadCreateWithoutBroadcastInput = {
   read_at?: Date | string
   created_at?: Date | string
   updated_at?: Date | string
-  user: Prisma.UserMasterCreateNestedOneWithoutBroadcastReadsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutBroadcastReadsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutBroadcastReadsUpdatedInput
+  user: Prisma.UserMasterCreateNestedOneWithoutBroadcastReadsInput
 }
 
 export type BroadcastReadUncheckedCreateWithoutBroadcastInput = {
@@ -822,16 +822,6 @@ export type BroadcastReadUpdateManyWithWhereWithoutBroadcastInput = {
   data: Prisma.XOR<Prisma.BroadcastReadUpdateManyMutationInput, Prisma.BroadcastReadUncheckedUpdateManyWithoutBroadcastInput>
 }
 
-export type BroadcastReadCreateManyUserInput = {
-  id?: number
-  broadcast_id: number
-  read_at?: Date | string
-  created_by: number
-  updated_by?: number | null
-  created_at?: Date | string
-  updated_at?: Date | string
-}
-
 export type BroadcastReadCreateManyCreatedByInput = {
   id?: number
   broadcast_id: number
@@ -850,6 +840,74 @@ export type BroadcastReadCreateManyUpdatedByInput = {
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
+}
+
+export type BroadcastReadCreateManyUserInput = {
+  id?: number
+  broadcast_id: number
+  read_at?: Date | string
+  created_by: number
+  updated_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type BroadcastReadUpdateWithoutCreatedByInput = {
+  read_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  broadcast?: Prisma.BroadcastMasterUpdateOneRequiredWithoutReadLogsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutBroadcastReadsUpdatedNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastReadsNestedInput
+}
+
+export type BroadcastReadUncheckedUpdateWithoutCreatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  broadcast_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  read_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BroadcastReadUncheckedUpdateManyWithoutCreatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  broadcast_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  read_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BroadcastReadUpdateWithoutUpdatedByInput = {
+  read_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  broadcast?: Prisma.BroadcastMasterUpdateOneRequiredWithoutReadLogsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastReadsCreatedNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastReadsNestedInput
+}
+
+export type BroadcastReadUncheckedUpdateWithoutUpdatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  broadcast_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  read_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BroadcastReadUncheckedUpdateManyWithoutUpdatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  broadcast_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  read_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BroadcastReadUpdateWithoutUserInput = {
@@ -881,64 +939,6 @@ export type BroadcastReadUncheckedUpdateManyWithoutUserInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type BroadcastReadUpdateWithoutCreatedByInput = {
-  read_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  broadcast?: Prisma.BroadcastMasterUpdateOneRequiredWithoutReadLogsNestedInput
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastReadsNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutBroadcastReadsUpdatedNestedInput
-}
-
-export type BroadcastReadUncheckedUpdateWithoutCreatedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  broadcast_id?: Prisma.IntFieldUpdateOperationsInput | number
-  user_id?: Prisma.IntFieldUpdateOperationsInput | number
-  read_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type BroadcastReadUncheckedUpdateManyWithoutCreatedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  broadcast_id?: Prisma.IntFieldUpdateOperationsInput | number
-  user_id?: Prisma.IntFieldUpdateOperationsInput | number
-  read_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type BroadcastReadUpdateWithoutUpdatedByInput = {
-  read_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  broadcast?: Prisma.BroadcastMasterUpdateOneRequiredWithoutReadLogsNestedInput
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastReadsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastReadsCreatedNestedInput
-}
-
-export type BroadcastReadUncheckedUpdateWithoutUpdatedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  broadcast_id?: Prisma.IntFieldUpdateOperationsInput | number
-  user_id?: Prisma.IntFieldUpdateOperationsInput | number
-  read_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type BroadcastReadUncheckedUpdateManyWithoutUpdatedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  broadcast_id?: Prisma.IntFieldUpdateOperationsInput | number
-  user_id?: Prisma.IntFieldUpdateOperationsInput | number
-  read_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 export type BroadcastReadCreateManyBroadcastInput = {
   id?: number
   user_id: number
@@ -953,9 +953,9 @@ export type BroadcastReadUpdateWithoutBroadcastInput = {
   read_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastReadsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastReadsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutBroadcastReadsUpdatedNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastReadsNestedInput
 }
 
 export type BroadcastReadUncheckedUpdateWithoutBroadcastInput = {
@@ -990,9 +990,9 @@ export type BroadcastReadSelect<ExtArgs extends runtime.Types.Extensions.Interna
   created_at?: boolean
   updated_at?: boolean
   broadcast?: boolean | Prisma.BroadcastMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.BroadcastRead$updatedByArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["broadcastRead"]>
 
 export type BroadcastReadSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1005,9 +1005,9 @@ export type BroadcastReadSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   created_at?: boolean
   updated_at?: boolean
   broadcast?: boolean | Prisma.BroadcastMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.BroadcastRead$updatedByArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["broadcastRead"]>
 
 export type BroadcastReadSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1020,9 +1020,9 @@ export type BroadcastReadSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   created_at?: boolean
   updated_at?: boolean
   broadcast?: boolean | Prisma.BroadcastMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.BroadcastRead$updatedByArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["broadcastRead"]>
 
 export type BroadcastReadSelectScalar = {
@@ -1039,30 +1039,30 @@ export type BroadcastReadSelectScalar = {
 export type BroadcastReadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "broadcast_id" | "user_id" | "read_at" | "created_by" | "updated_by" | "created_at" | "updated_at", ExtArgs["result"]["broadcastRead"]>
 export type BroadcastReadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   broadcast?: boolean | Prisma.BroadcastMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.BroadcastRead$updatedByArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
 }
 export type BroadcastReadIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   broadcast?: boolean | Prisma.BroadcastMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.BroadcastRead$updatedByArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
 }
 export type BroadcastReadIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   broadcast?: boolean | Prisma.BroadcastMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.BroadcastRead$updatedByArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
 }
 
 export type $BroadcastReadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "BroadcastRead"
   objects: {
     broadcast: Prisma.$BroadcastMasterPayload<ExtArgs>
-    user: Prisma.$UserMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    user: Prisma.$UserMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1468,9 +1468,9 @@ readonly fields: BroadcastReadFieldRefs;
 export interface Prisma__BroadcastReadClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   broadcast<T extends Prisma.BroadcastMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BroadcastMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__BroadcastMasterClient<runtime.Types.Result.GetResult<Prisma.$BroadcastMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.BroadcastRead$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BroadcastRead$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

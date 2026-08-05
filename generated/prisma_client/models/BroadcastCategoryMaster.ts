@@ -240,8 +240,8 @@ export type BroadcastCategoryMasterWhereInput = {
   is_active?: Prisma.BoolFilter<"BroadcastCategoryMaster"> | boolean
   created_by?: Prisma.IntFilter<"BroadcastCategoryMaster"> | number
   created_at?: Prisma.DateTimeFilter<"BroadcastCategoryMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   broadcasts?: Prisma.BroadcastMasterListRelationFilter
 }
 
@@ -253,8 +253,8 @@ export type BroadcastCategoryMasterOrderByWithRelationInput = {
   is_active?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   broadcasts?: Prisma.BroadcastMasterOrderByRelationAggregateInput
 }
 
@@ -269,8 +269,8 @@ export type BroadcastCategoryMasterWhereUniqueInput = Prisma.AtLeast<{
   is_active?: Prisma.BoolFilter<"BroadcastCategoryMaster"> | boolean
   created_by?: Prisma.IntFilter<"BroadcastCategoryMaster"> | number
   created_at?: Prisma.DateTimeFilter<"BroadcastCategoryMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   broadcasts?: Prisma.BroadcastMasterListRelationFilter
 }, "id">
 
@@ -307,8 +307,8 @@ export type BroadcastCategoryMasterCreateInput = {
   type: string
   is_active?: boolean
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutBroadcastCategoriesInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutBroadcastCategoriesCreatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutBroadcastCategoriesInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutCategoryInput
 }
 
@@ -328,8 +328,8 @@ export type BroadcastCategoryMasterUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBroadcastCategoriesNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastCategoriesCreatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBroadcastCategoriesNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutCategoryNestedInput
 }
 
@@ -636,8 +636,8 @@ export type BroadcastCategoryMasterCreateWithoutBroadcastsInput = {
   type: string
   is_active?: boolean
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutBroadcastCategoriesInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutBroadcastCategoriesCreatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutBroadcastCategoriesInput
 }
 
 export type BroadcastCategoryMasterUncheckedCreateWithoutBroadcastsInput = {
@@ -671,8 +671,8 @@ export type BroadcastCategoryMasterUpdateWithoutBroadcastsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBroadcastCategoriesNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastCategoriesCreatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBroadcastCategoriesNestedInput
 }
 
 export type BroadcastCategoryMasterUncheckedUpdateWithoutBroadcastsInput = {
@@ -798,8 +798,8 @@ export type BroadcastCategoryMasterSelect<ExtArgs extends runtime.Types.Extensio
   is_active?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   broadcasts?: boolean | Prisma.BroadcastCategoryMaster$broadcastsArgs<ExtArgs>
   _count?: boolean | Prisma.BroadcastCategoryMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["broadcastCategoryMaster"]>
@@ -812,8 +812,8 @@ export type BroadcastCategoryMasterSelectCreateManyAndReturn<ExtArgs extends run
   is_active?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["broadcastCategoryMaster"]>
 
 export type BroadcastCategoryMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -824,8 +824,8 @@ export type BroadcastCategoryMasterSelectUpdateManyAndReturn<ExtArgs extends run
   is_active?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["broadcastCategoryMaster"]>
 
 export type BroadcastCategoryMasterSelectScalar = {
@@ -840,25 +840,25 @@ export type BroadcastCategoryMasterSelectScalar = {
 
 export type BroadcastCategoryMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "category" | "type" | "vendor_id" | "is_active" | "created_by" | "created_at", ExtArgs["result"]["broadcastCategoryMaster"]>
 export type BroadcastCategoryMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   broadcasts?: boolean | Prisma.BroadcastCategoryMaster$broadcastsArgs<ExtArgs>
   _count?: boolean | Prisma.BroadcastCategoryMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BroadcastCategoryMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type BroadcastCategoryMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $BroadcastCategoryMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "BroadcastCategoryMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     broadcasts: Prisma.$BroadcastMasterPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1263,8 +1263,8 @@ readonly fields: BroadcastCategoryMasterFieldRefs;
  */
 export interface Prisma__BroadcastCategoryMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   broadcasts<T extends Prisma.BroadcastCategoryMaster$broadcastsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BroadcastCategoryMaster$broadcastsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.

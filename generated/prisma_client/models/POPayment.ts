@@ -272,8 +272,8 @@ export type POPaymentWhereInput = {
   remarks?: Prisma.StringNullableFilter<"POPayment"> | string | null
   created_by?: Prisma.IntNullableFilter<"POPayment"> | number | null
   created_at?: Prisma.DateTimeFilter<"POPayment"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   paymentSchedule?: Prisma.XOR<Prisma.POPaymentScheduleScalarRelationFilter, Prisma.POPaymentScheduleWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   scheduleHistories?: Prisma.POPaymentScheduleHistoryListRelationFilter
 }
 
@@ -288,8 +288,8 @@ export type POPaymentOrderByWithRelationInput = {
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   paymentSchedule?: Prisma.POPaymentScheduleOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   scheduleHistories?: Prisma.POPaymentScheduleHistoryOrderByRelationAggregateInput
 }
 
@@ -307,8 +307,8 @@ export type POPaymentWhereUniqueInput = Prisma.AtLeast<{
   remarks?: Prisma.StringNullableFilter<"POPayment"> | string | null
   created_by?: Prisma.IntNullableFilter<"POPayment"> | number | null
   created_at?: Prisma.DateTimeFilter<"POPayment"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   paymentSchedule?: Prisma.XOR<Prisma.POPaymentScheduleScalarRelationFilter, Prisma.POPaymentScheduleWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   scheduleHistories?: Prisma.POPaymentScheduleHistoryListRelationFilter
 }, "id">
 
@@ -354,8 +354,8 @@ export type POPaymentCreateInput = {
   remarks?: string | null
   created_by?: number | null
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPoPaymentsInput
   paymentSchedule: Prisma.POPaymentScheduleCreateNestedOneWithoutPaymentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPoPaymentsInput
   scheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutPaymentInput
 }
 
@@ -381,8 +381,8 @@ export type POPaymentUpdateInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPoPaymentsNestedInput
   paymentSchedule?: Prisma.POPaymentScheduleUpdateOneRequiredWithoutPaymentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPoPaymentsNestedInput
   scheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutPaymentNestedInput
 }
 
@@ -736,8 +736,8 @@ export type POPaymentCreateWithoutScheduleHistoriesInput = {
   remarks?: string | null
   created_by?: number | null
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPoPaymentsInput
   paymentSchedule: Prisma.POPaymentScheduleCreateNestedOneWithoutPaymentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPoPaymentsInput
 }
 
 export type POPaymentUncheckedCreateWithoutScheduleHistoriesInput = {
@@ -777,8 +777,8 @@ export type POPaymentUpdateWithoutScheduleHistoriesInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPoPaymentsNestedInput
   paymentSchedule?: Prisma.POPaymentScheduleUpdateOneRequiredWithoutPaymentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPoPaymentsNestedInput
 }
 
 export type POPaymentUncheckedUpdateWithoutScheduleHistoriesInput = {
@@ -934,8 +934,8 @@ export type POPaymentSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   remarks?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   paymentSchedule?: boolean | Prisma.POPaymentScheduleDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   scheduleHistories?: boolean | Prisma.POPayment$scheduleHistoriesArgs<ExtArgs>
   _count?: boolean | Prisma.POPaymentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["pOPayment"]>
@@ -951,8 +951,8 @@ export type POPaymentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   remarks?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   paymentSchedule?: boolean | Prisma.POPaymentScheduleDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["pOPayment"]>
 
 export type POPaymentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -966,8 +966,8 @@ export type POPaymentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   remarks?: boolean
   created_by?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   paymentSchedule?: boolean | Prisma.POPaymentScheduleDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["pOPayment"]>
 
 export type POPaymentSelectScalar = {
@@ -985,25 +985,25 @@ export type POPaymentSelectScalar = {
 
 export type POPaymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "po_payment_schedule_id" | "payment_date" | "amount" | "payment_mode" | "reference_no" | "remarks" | "created_by" | "created_at", ExtArgs["result"]["pOPayment"]>
 export type POPaymentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   paymentSchedule?: boolean | Prisma.POPaymentScheduleDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   scheduleHistories?: boolean | Prisma.POPayment$scheduleHistoriesArgs<ExtArgs>
   _count?: boolean | Prisma.POPaymentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type POPaymentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   paymentSchedule?: boolean | Prisma.POPaymentScheduleDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type POPaymentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   paymentSchedule?: boolean | Prisma.POPaymentScheduleDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $POPaymentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "POPayment"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     paymentSchedule: Prisma.$POPaymentSchedulePayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     scheduleHistories: Prisma.$POPaymentScheduleHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1411,8 +1411,8 @@ readonly fields: POPaymentFieldRefs;
  */
 export interface Prisma__POPaymentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   paymentSchedule<T extends Prisma.POPaymentScheduleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.POPaymentScheduleDefaultArgs<ExtArgs>>): Prisma.Prisma__POPaymentScheduleClient<runtime.Types.Result.GetResult<Prisma.$POPaymentSchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   scheduleHistories<T extends Prisma.POPayment$scheduleHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.POPayment$scheduleHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$POPaymentScheduleHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.

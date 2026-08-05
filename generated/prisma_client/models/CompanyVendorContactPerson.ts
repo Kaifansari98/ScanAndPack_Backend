@@ -529,15 +529,15 @@ export type CompanyVendorContactPersonUncheckedUpdateManyInput = {
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
-export type CompanyVendorContactPersonNullableScalarRelationFilter = {
-  is?: Prisma.CompanyVendorContactPersonWhereInput | null
-  isNot?: Prisma.CompanyVendorContactPersonWhereInput | null
-}
-
 export type CompanyVendorContactPersonListRelationFilter = {
   every?: Prisma.CompanyVendorContactPersonWhereInput
   some?: Prisma.CompanyVendorContactPersonWhereInput
   none?: Prisma.CompanyVendorContactPersonWhereInput
+}
+
+export type CompanyVendorContactPersonNullableScalarRelationFilter = {
+  is?: Prisma.CompanyVendorContactPersonWhereInput | null
+  isNot?: Prisma.CompanyVendorContactPersonWhereInput | null
 }
 
 export type CompanyVendorContactPersonOrderByRelationAggregateInput = {
@@ -614,12 +614,6 @@ export type CompanyVendorContactPersonSumOrderByAggregateInput = {
   deleted_by?: Prisma.SortOrder
 }
 
-export type CompanyVendorContactPersonCreateNestedOneWithoutPrimaryForVendorsInput = {
-  create?: Prisma.XOR<Prisma.CompanyVendorContactPersonCreateWithoutPrimaryForVendorsInput, Prisma.CompanyVendorContactPersonUncheckedCreateWithoutPrimaryForVendorsInput>
-  connectOrCreate?: Prisma.CompanyVendorContactPersonCreateOrConnectWithoutPrimaryForVendorsInput
-  connect?: Prisma.CompanyVendorContactPersonWhereUniqueInput
-}
-
 export type CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput = {
   create?: Prisma.XOR<Prisma.CompanyVendorContactPersonCreateWithoutCompanyVendorInput, Prisma.CompanyVendorContactPersonUncheckedCreateWithoutCompanyVendorInput> | Prisma.CompanyVendorContactPersonCreateWithoutCompanyVendorInput[] | Prisma.CompanyVendorContactPersonUncheckedCreateWithoutCompanyVendorInput[]
   connectOrCreate?: Prisma.CompanyVendorContactPersonCreateOrConnectWithoutCompanyVendorInput | Prisma.CompanyVendorContactPersonCreateOrConnectWithoutCompanyVendorInput[]
@@ -627,21 +621,17 @@ export type CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput 
   connect?: Prisma.CompanyVendorContactPersonWhereUniqueInput | Prisma.CompanyVendorContactPersonWhereUniqueInput[]
 }
 
+export type CompanyVendorContactPersonCreateNestedOneWithoutPrimaryForVendorsInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorContactPersonCreateWithoutPrimaryForVendorsInput, Prisma.CompanyVendorContactPersonUncheckedCreateWithoutPrimaryForVendorsInput>
+  connectOrCreate?: Prisma.CompanyVendorContactPersonCreateOrConnectWithoutPrimaryForVendorsInput
+  connect?: Prisma.CompanyVendorContactPersonWhereUniqueInput
+}
+
 export type CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput = {
   create?: Prisma.XOR<Prisma.CompanyVendorContactPersonCreateWithoutCompanyVendorInput, Prisma.CompanyVendorContactPersonUncheckedCreateWithoutCompanyVendorInput> | Prisma.CompanyVendorContactPersonCreateWithoutCompanyVendorInput[] | Prisma.CompanyVendorContactPersonUncheckedCreateWithoutCompanyVendorInput[]
   connectOrCreate?: Prisma.CompanyVendorContactPersonCreateOrConnectWithoutCompanyVendorInput | Prisma.CompanyVendorContactPersonCreateOrConnectWithoutCompanyVendorInput[]
   createMany?: Prisma.CompanyVendorContactPersonCreateManyCompanyVendorInputEnvelope
   connect?: Prisma.CompanyVendorContactPersonWhereUniqueInput | Prisma.CompanyVendorContactPersonWhereUniqueInput[]
-}
-
-export type CompanyVendorContactPersonUpdateOneWithoutPrimaryForVendorsNestedInput = {
-  create?: Prisma.XOR<Prisma.CompanyVendorContactPersonCreateWithoutPrimaryForVendorsInput, Prisma.CompanyVendorContactPersonUncheckedCreateWithoutPrimaryForVendorsInput>
-  connectOrCreate?: Prisma.CompanyVendorContactPersonCreateOrConnectWithoutPrimaryForVendorsInput
-  upsert?: Prisma.CompanyVendorContactPersonUpsertWithoutPrimaryForVendorsInput
-  disconnect?: Prisma.CompanyVendorContactPersonWhereInput | boolean
-  delete?: Prisma.CompanyVendorContactPersonWhereInput | boolean
-  connect?: Prisma.CompanyVendorContactPersonWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyVendorContactPersonUpdateToOneWithWhereWithoutPrimaryForVendorsInput, Prisma.CompanyVendorContactPersonUpdateWithoutPrimaryForVendorsInput>, Prisma.CompanyVendorContactPersonUncheckedUpdateWithoutPrimaryForVendorsInput>
 }
 
 export type CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput = {
@@ -658,6 +648,16 @@ export type CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput 
   deleteMany?: Prisma.CompanyVendorContactPersonScalarWhereInput | Prisma.CompanyVendorContactPersonScalarWhereInput[]
 }
 
+export type CompanyVendorContactPersonUpdateOneWithoutPrimaryForVendorsNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorContactPersonCreateWithoutPrimaryForVendorsInput, Prisma.CompanyVendorContactPersonUncheckedCreateWithoutPrimaryForVendorsInput>
+  connectOrCreate?: Prisma.CompanyVendorContactPersonCreateOrConnectWithoutPrimaryForVendorsInput
+  upsert?: Prisma.CompanyVendorContactPersonUpsertWithoutPrimaryForVendorsInput
+  disconnect?: Prisma.CompanyVendorContactPersonWhereInput | boolean
+  delete?: Prisma.CompanyVendorContactPersonWhereInput | boolean
+  connect?: Prisma.CompanyVendorContactPersonWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyVendorContactPersonUpdateToOneWithWhereWithoutPrimaryForVendorsInput, Prisma.CompanyVendorContactPersonUpdateWithoutPrimaryForVendorsInput>, Prisma.CompanyVendorContactPersonUncheckedUpdateWithoutPrimaryForVendorsInput>
+}
+
 export type CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput = {
   create?: Prisma.XOR<Prisma.CompanyVendorContactPersonCreateWithoutCompanyVendorInput, Prisma.CompanyVendorContactPersonUncheckedCreateWithoutCompanyVendorInput> | Prisma.CompanyVendorContactPersonCreateWithoutCompanyVendorInput[] | Prisma.CompanyVendorContactPersonUncheckedCreateWithoutCompanyVendorInput[]
   connectOrCreate?: Prisma.CompanyVendorContactPersonCreateOrConnectWithoutCompanyVendorInput | Prisma.CompanyVendorContactPersonCreateOrConnectWithoutCompanyVendorInput[]
@@ -670,46 +670,6 @@ export type CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNes
   update?: Prisma.CompanyVendorContactPersonUpdateWithWhereUniqueWithoutCompanyVendorInput | Prisma.CompanyVendorContactPersonUpdateWithWhereUniqueWithoutCompanyVendorInput[]
   updateMany?: Prisma.CompanyVendorContactPersonUpdateManyWithWhereWithoutCompanyVendorInput | Prisma.CompanyVendorContactPersonUpdateManyWithWhereWithoutCompanyVendorInput[]
   deleteMany?: Prisma.CompanyVendorContactPersonScalarWhereInput | Prisma.CompanyVendorContactPersonScalarWhereInput[]
-}
-
-export type CompanyVendorContactPersonCreateWithoutPrimaryForVendorsInput = {
-  name: string
-  department?: string | null
-  phone: string
-  designation?: string | null
-  email?: string | null
-  is_primary?: boolean
-  created_at?: Date | string
-  created_by: number
-  updated_at?: Date | string
-  updated_by: number
-  deleted_at?: Date | string | null
-  deleted_by?: number | null
-  is_deleted?: boolean
-  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutContactPersonsInput
-}
-
-export type CompanyVendorContactPersonUncheckedCreateWithoutPrimaryForVendorsInput = {
-  id?: number
-  company_vendor_id: number
-  name: string
-  department?: string | null
-  phone: string
-  designation?: string | null
-  email?: string | null
-  is_primary?: boolean
-  created_at?: Date | string
-  created_by: number
-  updated_at?: Date | string
-  updated_by: number
-  deleted_at?: Date | string | null
-  deleted_by?: number | null
-  is_deleted?: boolean
-}
-
-export type CompanyVendorContactPersonCreateOrConnectWithoutPrimaryForVendorsInput = {
-  where: Prisma.CompanyVendorContactPersonWhereUniqueInput
-  create: Prisma.XOR<Prisma.CompanyVendorContactPersonCreateWithoutPrimaryForVendorsInput, Prisma.CompanyVendorContactPersonUncheckedCreateWithoutPrimaryForVendorsInput>
 }
 
 export type CompanyVendorContactPersonCreateWithoutCompanyVendorInput = {
@@ -757,6 +717,83 @@ export type CompanyVendorContactPersonCreateManyCompanyVendorInputEnvelope = {
   skipDuplicates?: boolean
 }
 
+export type CompanyVendorContactPersonCreateWithoutPrimaryForVendorsInput = {
+  name: string
+  department?: string | null
+  phone: string
+  designation?: string | null
+  email?: string | null
+  is_primary?: boolean
+  created_at?: Date | string
+  created_by: number
+  updated_at?: Date | string
+  updated_by: number
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutContactPersonsInput
+}
+
+export type CompanyVendorContactPersonUncheckedCreateWithoutPrimaryForVendorsInput = {
+  id?: number
+  company_vendor_id: number
+  name: string
+  department?: string | null
+  phone: string
+  designation?: string | null
+  email?: string | null
+  is_primary?: boolean
+  created_at?: Date | string
+  created_by: number
+  updated_at?: Date | string
+  updated_by: number
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+}
+
+export type CompanyVendorContactPersonCreateOrConnectWithoutPrimaryForVendorsInput = {
+  where: Prisma.CompanyVendorContactPersonWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyVendorContactPersonCreateWithoutPrimaryForVendorsInput, Prisma.CompanyVendorContactPersonUncheckedCreateWithoutPrimaryForVendorsInput>
+}
+
+export type CompanyVendorContactPersonUpsertWithWhereUniqueWithoutCompanyVendorInput = {
+  where: Prisma.CompanyVendorContactPersonWhereUniqueInput
+  update: Prisma.XOR<Prisma.CompanyVendorContactPersonUpdateWithoutCompanyVendorInput, Prisma.CompanyVendorContactPersonUncheckedUpdateWithoutCompanyVendorInput>
+  create: Prisma.XOR<Prisma.CompanyVendorContactPersonCreateWithoutCompanyVendorInput, Prisma.CompanyVendorContactPersonUncheckedCreateWithoutCompanyVendorInput>
+}
+
+export type CompanyVendorContactPersonUpdateWithWhereUniqueWithoutCompanyVendorInput = {
+  where: Prisma.CompanyVendorContactPersonWhereUniqueInput
+  data: Prisma.XOR<Prisma.CompanyVendorContactPersonUpdateWithoutCompanyVendorInput, Prisma.CompanyVendorContactPersonUncheckedUpdateWithoutCompanyVendorInput>
+}
+
+export type CompanyVendorContactPersonUpdateManyWithWhereWithoutCompanyVendorInput = {
+  where: Prisma.CompanyVendorContactPersonScalarWhereInput
+  data: Prisma.XOR<Prisma.CompanyVendorContactPersonUpdateManyMutationInput, Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorInput>
+}
+
+export type CompanyVendorContactPersonScalarWhereInput = {
+  AND?: Prisma.CompanyVendorContactPersonScalarWhereInput | Prisma.CompanyVendorContactPersonScalarWhereInput[]
+  OR?: Prisma.CompanyVendorContactPersonScalarWhereInput[]
+  NOT?: Prisma.CompanyVendorContactPersonScalarWhereInput | Prisma.CompanyVendorContactPersonScalarWhereInput[]
+  id?: Prisma.IntFilter<"CompanyVendorContactPerson"> | number
+  company_vendor_id?: Prisma.IntFilter<"CompanyVendorContactPerson"> | number
+  name?: Prisma.StringFilter<"CompanyVendorContactPerson"> | string
+  department?: Prisma.StringNullableFilter<"CompanyVendorContactPerson"> | string | null
+  phone?: Prisma.StringFilter<"CompanyVendorContactPerson"> | string
+  designation?: Prisma.StringNullableFilter<"CompanyVendorContactPerson"> | string | null
+  email?: Prisma.StringNullableFilter<"CompanyVendorContactPerson"> | string | null
+  is_primary?: Prisma.BoolFilter<"CompanyVendorContactPerson"> | boolean
+  created_at?: Prisma.DateTimeFilter<"CompanyVendorContactPerson"> | Date | string
+  created_by?: Prisma.IntFilter<"CompanyVendorContactPerson"> | number
+  updated_at?: Prisma.DateTimeFilter<"CompanyVendorContactPerson"> | Date | string
+  updated_by?: Prisma.IntFilter<"CompanyVendorContactPerson"> | number
+  deleted_at?: Prisma.DateTimeNullableFilter<"CompanyVendorContactPerson"> | Date | string | null
+  deleted_by?: Prisma.IntNullableFilter<"CompanyVendorContactPerson"> | number | null
+  is_deleted?: Prisma.BoolFilter<"CompanyVendorContactPerson"> | boolean
+}
+
 export type CompanyVendorContactPersonUpsertWithoutPrimaryForVendorsInput = {
   update: Prisma.XOR<Prisma.CompanyVendorContactPersonUpdateWithoutPrimaryForVendorsInput, Prisma.CompanyVendorContactPersonUncheckedUpdateWithoutPrimaryForVendorsInput>
   create: Prisma.XOR<Prisma.CompanyVendorContactPersonCreateWithoutPrimaryForVendorsInput, Prisma.CompanyVendorContactPersonUncheckedCreateWithoutPrimaryForVendorsInput>
@@ -801,43 +838,6 @@ export type CompanyVendorContactPersonUncheckedUpdateWithoutPrimaryForVendorsInp
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-}
-
-export type CompanyVendorContactPersonUpsertWithWhereUniqueWithoutCompanyVendorInput = {
-  where: Prisma.CompanyVendorContactPersonWhereUniqueInput
-  update: Prisma.XOR<Prisma.CompanyVendorContactPersonUpdateWithoutCompanyVendorInput, Prisma.CompanyVendorContactPersonUncheckedUpdateWithoutCompanyVendorInput>
-  create: Prisma.XOR<Prisma.CompanyVendorContactPersonCreateWithoutCompanyVendorInput, Prisma.CompanyVendorContactPersonUncheckedCreateWithoutCompanyVendorInput>
-}
-
-export type CompanyVendorContactPersonUpdateWithWhereUniqueWithoutCompanyVendorInput = {
-  where: Prisma.CompanyVendorContactPersonWhereUniqueInput
-  data: Prisma.XOR<Prisma.CompanyVendorContactPersonUpdateWithoutCompanyVendorInput, Prisma.CompanyVendorContactPersonUncheckedUpdateWithoutCompanyVendorInput>
-}
-
-export type CompanyVendorContactPersonUpdateManyWithWhereWithoutCompanyVendorInput = {
-  where: Prisma.CompanyVendorContactPersonScalarWhereInput
-  data: Prisma.XOR<Prisma.CompanyVendorContactPersonUpdateManyMutationInput, Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorInput>
-}
-
-export type CompanyVendorContactPersonScalarWhereInput = {
-  AND?: Prisma.CompanyVendorContactPersonScalarWhereInput | Prisma.CompanyVendorContactPersonScalarWhereInput[]
-  OR?: Prisma.CompanyVendorContactPersonScalarWhereInput[]
-  NOT?: Prisma.CompanyVendorContactPersonScalarWhereInput | Prisma.CompanyVendorContactPersonScalarWhereInput[]
-  id?: Prisma.IntFilter<"CompanyVendorContactPerson"> | number
-  company_vendor_id?: Prisma.IntFilter<"CompanyVendorContactPerson"> | number
-  name?: Prisma.StringFilter<"CompanyVendorContactPerson"> | string
-  department?: Prisma.StringNullableFilter<"CompanyVendorContactPerson"> | string | null
-  phone?: Prisma.StringFilter<"CompanyVendorContactPerson"> | string
-  designation?: Prisma.StringNullableFilter<"CompanyVendorContactPerson"> | string | null
-  email?: Prisma.StringNullableFilter<"CompanyVendorContactPerson"> | string | null
-  is_primary?: Prisma.BoolFilter<"CompanyVendorContactPerson"> | boolean
-  created_at?: Prisma.DateTimeFilter<"CompanyVendorContactPerson"> | Date | string
-  created_by?: Prisma.IntFilter<"CompanyVendorContactPerson"> | number
-  updated_at?: Prisma.DateTimeFilter<"CompanyVendorContactPerson"> | Date | string
-  updated_by?: Prisma.IntFilter<"CompanyVendorContactPerson"> | number
-  deleted_at?: Prisma.DateTimeNullableFilter<"CompanyVendorContactPerson"> | Date | string | null
-  deleted_by?: Prisma.IntNullableFilter<"CompanyVendorContactPerson"> | number | null
-  is_deleted?: Prisma.BoolFilter<"CompanyVendorContactPerson"> | boolean
 }
 
 export type CompanyVendorContactPersonCreateManyCompanyVendorInput = {

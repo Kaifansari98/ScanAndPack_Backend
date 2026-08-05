@@ -368,15 +368,15 @@ export type PurchaseOrderMasterWhereInput = {
   tax_amount?: Prisma.DecimalNullableFilter<"PurchaseOrderMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.DecimalNullableFilter<"PurchaseOrderMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.IntNullableFilter<"PurchaseOrderMaster"> | number | null
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  purchaseIntent?: Prisma.XOR<Prisma.PurchaseIntentMasterScalarRelationFilter, Prisma.PurchaseIntentMasterWhereInput>
+  grns?: Prisma.GRNMasterListRelationFilter
+  paymentSchedules?: Prisma.POPaymentScheduleListRelationFilter
+  items?: Prisma.PurchaseOrderItemListRelationFilter
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
-  items?: Prisma.PurchaseOrderItemListRelationFilter
   paymentTerm?: Prisma.XOR<Prisma.PaymentTermMasterNullableScalarRelationFilter, Prisma.PaymentTermMasterWhereInput> | null
-  paymentSchedules?: Prisma.POPaymentScheduleListRelationFilter
-  grns?: Prisma.GRNMasterListRelationFilter
+  purchaseIntent?: Prisma.XOR<Prisma.PurchaseIntentMasterScalarRelationFilter, Prisma.PurchaseIntentMasterWhereInput>
+  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostListRelationFilter
 }
 
@@ -400,15 +400,15 @@ export type PurchaseOrderMasterOrderByWithRelationInput = {
   tax_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   total_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   payment_term_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  purchaseIntent?: Prisma.PurchaseIntentMasterOrderByWithRelationInput
+  grns?: Prisma.GRNMasterOrderByRelationAggregateInput
+  paymentSchedules?: Prisma.POPaymentScheduleOrderByRelationAggregateInput
+  items?: Prisma.PurchaseOrderItemOrderByRelationAggregateInput
   companyVendor?: Prisma.CompanyVendorsMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
-  updatedBy?: Prisma.UserMasterOrderByWithRelationInput
-  items?: Prisma.PurchaseOrderItemOrderByRelationAggregateInput
   paymentTerm?: Prisma.PaymentTermMasterOrderByWithRelationInput
-  paymentSchedules?: Prisma.POPaymentScheduleOrderByRelationAggregateInput
-  grns?: Prisma.GRNMasterOrderByRelationAggregateInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterOrderByWithRelationInput
+  updatedBy?: Prisma.UserMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostOrderByRelationAggregateInput
 }
 
@@ -435,15 +435,15 @@ export type PurchaseOrderMasterWhereUniqueInput = Prisma.AtLeast<{
   tax_amount?: Prisma.DecimalNullableFilter<"PurchaseOrderMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.DecimalNullableFilter<"PurchaseOrderMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.IntNullableFilter<"PurchaseOrderMaster"> | number | null
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  purchaseIntent?: Prisma.XOR<Prisma.PurchaseIntentMasterScalarRelationFilter, Prisma.PurchaseIntentMasterWhereInput>
+  grns?: Prisma.GRNMasterListRelationFilter
+  paymentSchedules?: Prisma.POPaymentScheduleListRelationFilter
+  items?: Prisma.PurchaseOrderItemListRelationFilter
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
-  items?: Prisma.PurchaseOrderItemListRelationFilter
   paymentTerm?: Prisma.XOR<Prisma.PaymentTermMasterNullableScalarRelationFilter, Prisma.PaymentTermMasterWhereInput> | null
-  paymentSchedules?: Prisma.POPaymentScheduleListRelationFilter
-  grns?: Prisma.GRNMasterListRelationFilter
+  purchaseIntent?: Prisma.XOR<Prisma.PurchaseIntentMasterScalarRelationFilter, Prisma.PurchaseIntentMasterWhereInput>
+  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostListRelationFilter
 }, "id" | "po_no">
 
@@ -512,15 +512,15 @@ export type PurchaseOrderMasterCreateInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
-  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutPurchaseOrderInput
+  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPurchaseOrdersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersUpdatedInput
-  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
   paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPurchaseOrdersInput
-  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
-  grns?: Prisma.GRNMasterCreateNestedManyWithoutPurchaseOrderInput
+  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -544,9 +544,9 @@ export type PurchaseOrderMasterUncheckedCreateInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: number | null
-  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutPurchaseOrderInput
   grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -563,15 +563,15 @@ export type PurchaseOrderMasterUpdateInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
-  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutPurchaseOrderNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseOrdersCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseOrdersUpdatedNestedInput
-  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
   paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPurchaseOrdersNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
-  grns?: Prisma.GRNMasterUpdateManyWithoutPurchaseOrderNestedInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseOrdersUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -595,9 +595,9 @@ export type PurchaseOrderMasterUncheckedUpdateInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -1094,14 +1094,14 @@ export type PurchaseOrderMasterCreateWithoutVendorInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutPurchaseOrderInput
+  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPurchaseOrdersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersUpdatedInput
-  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
   paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPurchaseOrdersInput
-  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
-  grns?: Prisma.GRNMasterCreateNestedManyWithoutPurchaseOrderInput
+  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersUpdatedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1124,9 +1124,9 @@ export type PurchaseOrderMasterUncheckedCreateWithoutVendorInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: number | null
-  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutPurchaseOrderInput
   grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1194,14 +1194,14 @@ export type PurchaseOrderMasterCreateWithoutCreatedByInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
-  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
-  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPurchaseOrdersInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersUpdatedInput
-  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
-  paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPurchaseOrdersInput
-  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
   grns?: Prisma.GRNMasterCreateNestedManyWithoutPurchaseOrderInput
+  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
+  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPurchaseOrdersInput
+  paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPurchaseOrdersInput
+  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1224,9 +1224,9 @@ export type PurchaseOrderMasterUncheckedCreateWithoutCreatedByInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: number | null
-  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutPurchaseOrderInput
   grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1253,14 +1253,14 @@ export type PurchaseOrderMasterCreateWithoutUpdatedByInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
-  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutPurchaseOrderInput
+  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPurchaseOrdersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersCreatedInput
-  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
   paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPurchaseOrdersInput
-  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
-  grns?: Prisma.GRNMasterCreateNestedManyWithoutPurchaseOrderInput
+  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1283,9 +1283,9 @@ export type PurchaseOrderMasterUncheckedCreateWithoutUpdatedByInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: number | null
-  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutPurchaseOrderInput
   grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1344,14 +1344,14 @@ export type PurchaseOrderMasterCreateWithoutCompanyVendorInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
-  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersUpdatedInput
-  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
-  paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPurchaseOrdersInput
-  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
   grns?: Prisma.GRNMasterCreateNestedManyWithoutPurchaseOrderInput
+  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersCreatedInput
+  paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPurchaseOrdersInput
+  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1374,9 +1374,9 @@ export type PurchaseOrderMasterUncheckedCreateWithoutCompanyVendorInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: number | null
-  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutPurchaseOrderInput
   grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1419,14 +1419,14 @@ export type PurchaseOrderMasterCreateWithoutPurchaseIntentInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutPurchaseOrderInput
+  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPurchaseOrdersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersUpdatedInput
-  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
   paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPurchaseOrdersInput
-  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
-  grns?: Prisma.GRNMasterCreateNestedManyWithoutPurchaseOrderInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1449,9 +1449,9 @@ export type PurchaseOrderMasterUncheckedCreateWithoutPurchaseIntentInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: number | null
-  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutPurchaseOrderInput
   grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1494,14 +1494,14 @@ export type PurchaseOrderMasterCreateWithoutItemsInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
-  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutPurchaseOrderInput
+  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPurchaseOrdersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersUpdatedInput
   paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPurchaseOrdersInput
-  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
-  grns?: Prisma.GRNMasterCreateNestedManyWithoutPurchaseOrderInput
+  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1525,8 +1525,8 @@ export type PurchaseOrderMasterUncheckedCreateWithoutItemsInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: number | null
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutPurchaseOrderInput
   grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutPurchaseOrderInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1559,14 +1559,14 @@ export type PurchaseOrderMasterUpdateWithoutItemsInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
-  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutPurchaseOrderNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseOrdersCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseOrdersUpdatedNestedInput
   paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPurchaseOrdersNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
-  grns?: Prisma.GRNMasterUpdateManyWithoutPurchaseOrderNestedInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseOrdersUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -1590,8 +1590,8 @@ export type PurchaseOrderMasterUncheckedUpdateWithoutItemsInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -1608,14 +1608,14 @@ export type PurchaseOrderMasterCreateWithoutGrnsInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
-  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
+  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPurchaseOrdersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersUpdatedInput
-  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
   paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPurchaseOrdersInput
-  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
+  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1639,8 +1639,8 @@ export type PurchaseOrderMasterUncheckedCreateWithoutGrnsInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: number | null
-  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1673,14 +1673,14 @@ export type PurchaseOrderMasterUpdateWithoutGrnsInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
-  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseOrdersCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseOrdersUpdatedNestedInput
-  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
   paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPurchaseOrdersNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseOrdersUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -1704,8 +1704,8 @@ export type PurchaseOrderMasterUncheckedUpdateWithoutGrnsInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -1722,14 +1722,14 @@ export type PurchaseOrderMasterCreateWithoutPaymentTermInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
-  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutPurchaseOrderInput
+  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPurchaseOrdersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersCreatedInput
+  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersUpdatedInput
-  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
-  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
-  grns?: Prisma.GRNMasterCreateNestedManyWithoutPurchaseOrderInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1752,9 +1752,9 @@ export type PurchaseOrderMasterUncheckedCreateWithoutPaymentTermInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutPurchaseOrderInput
   grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1797,14 +1797,14 @@ export type PurchaseOrderMasterCreateWithoutPaymentSchedulesInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
-  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPurchaseOrdersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersUpdatedInput
-  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
   paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPurchaseOrdersInput
-  grns?: Prisma.GRNMasterCreateNestedManyWithoutPurchaseOrderInput
+  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1828,8 +1828,8 @@ export type PurchaseOrderMasterUncheckedCreateWithoutPaymentSchedulesInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: number | null
-  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
   grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1862,14 +1862,14 @@ export type PurchaseOrderMasterUpdateWithoutPaymentSchedulesInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
-  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseOrdersCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseOrdersUpdatedNestedInput
-  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
   paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPurchaseOrdersNestedInput
-  grns?: Prisma.GRNMasterUpdateManyWithoutPurchaseOrderNestedInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseOrdersUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -1893,8 +1893,8 @@ export type PurchaseOrderMasterUncheckedUpdateWithoutPaymentSchedulesInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -1911,15 +1911,15 @@ export type PurchaseOrderMasterCreateWithoutSupplierAdditionalCostsInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
-  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutPurchaseOrderInput
+  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPurchaseOrdersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersUpdatedInput
-  items?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
   paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPurchaseOrdersInput
-  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPurchaseOrderInput
-  grns?: Prisma.GRNMasterCreateNestedManyWithoutPurchaseOrderInput
+  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutPurchaseOrdersInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseOrdersUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseOrdersInput
 }
 
 export type PurchaseOrderMasterUncheckedCreateWithoutSupplierAdditionalCostsInput = {
@@ -1942,9 +1942,9 @@ export type PurchaseOrderMasterUncheckedCreateWithoutSupplierAdditionalCostsInpu
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: number | null
-  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutPurchaseOrderInput
   grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  items?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
 }
 
 export type PurchaseOrderMasterCreateOrConnectWithoutSupplierAdditionalCostsInput = {
@@ -1976,15 +1976,15 @@ export type PurchaseOrderMasterUpdateWithoutSupplierAdditionalCostsInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
-  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutPurchaseOrderNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseOrdersCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseOrdersUpdatedNestedInput
-  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
   paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPurchaseOrdersNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
-  grns?: Prisma.GRNMasterUpdateManyWithoutPurchaseOrderNestedInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseOrdersUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
 }
 
 export type PurchaseOrderMasterUncheckedUpdateWithoutSupplierAdditionalCostsInput = {
@@ -2007,9 +2007,9 @@ export type PurchaseOrderMasterUncheckedUpdateWithoutSupplierAdditionalCostsInpu
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
 }
 
 export type PurchaseOrderMasterCreateManyVendorInput = {
@@ -2046,14 +2046,14 @@ export type PurchaseOrderMasterUpdateWithoutVendorInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutPurchaseOrderNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseOrdersCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseOrdersUpdatedNestedInput
-  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
   paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPurchaseOrdersNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
-  grns?: Prisma.GRNMasterUpdateManyWithoutPurchaseOrderNestedInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseOrdersUpdatedNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -2076,9 +2076,9 @@ export type PurchaseOrderMasterUncheckedUpdateWithoutVendorInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -2158,14 +2158,14 @@ export type PurchaseOrderMasterUpdateWithoutCreatedByInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
-  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
-  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseOrdersUpdatedNestedInput
-  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
-  paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPurchaseOrdersNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
   grns?: Prisma.GRNMasterUpdateManyWithoutPurchaseOrderNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
+  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPurchaseOrdersNestedInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseOrdersUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -2188,9 +2188,9 @@ export type PurchaseOrderMasterUncheckedUpdateWithoutCreatedByInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -2228,14 +2228,14 @@ export type PurchaseOrderMasterUpdateWithoutUpdatedByInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
-  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutPurchaseOrderNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseOrdersCreatedNestedInput
-  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
   paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPurchaseOrdersNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
-  grns?: Prisma.GRNMasterUpdateManyWithoutPurchaseOrderNestedInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -2258,9 +2258,9 @@ export type PurchaseOrderMasterUncheckedUpdateWithoutUpdatedByInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -2319,14 +2319,14 @@ export type PurchaseOrderMasterUpdateWithoutCompanyVendorInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
-  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseOrdersCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseOrdersUpdatedNestedInput
-  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
-  paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPurchaseOrdersNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
   grns?: Prisma.GRNMasterUpdateManyWithoutPurchaseOrderNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseOrdersCreatedNestedInput
+  paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPurchaseOrdersNestedInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseOrdersUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -2349,9 +2349,9 @@ export type PurchaseOrderMasterUncheckedUpdateWithoutCompanyVendorInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -2410,14 +2410,14 @@ export type PurchaseOrderMasterUpdateWithoutPurchaseIntentInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutPurchaseOrderNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseOrdersCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseOrdersUpdatedNestedInput
-  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
   paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPurchaseOrdersNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
-  grns?: Prisma.GRNMasterUpdateManyWithoutPurchaseOrderNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseOrdersUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -2440,9 +2440,9 @@ export type PurchaseOrderMasterUncheckedUpdateWithoutPurchaseIntentInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -2501,14 +2501,14 @@ export type PurchaseOrderMasterUpdateWithoutPaymentTermInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
-  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutPurchaseOrderNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseOrdersCreatedNestedInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseOrdersUpdatedNestedInput
-  items?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPurchaseOrderNestedInput
-  grns?: Prisma.GRNMasterUpdateManyWithoutPurchaseOrderNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -2531,9 +2531,9 @@ export type PurchaseOrderMasterUncheckedUpdateWithoutPaymentTermInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  items?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   supplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -2564,16 +2564,16 @@ export type PurchaseOrderMasterUncheckedUpdateManyWithoutPaymentTermInput = {
  */
 
 export type PurchaseOrderMasterCountOutputType = {
-  items: number
-  paymentSchedules: number
   grns: number
+  paymentSchedules: number
+  items: number
   supplierAdditionalCosts: number
 }
 
 export type PurchaseOrderMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  items?: boolean | PurchaseOrderMasterCountOutputTypeCountItemsArgs
-  paymentSchedules?: boolean | PurchaseOrderMasterCountOutputTypeCountPaymentSchedulesArgs
   grns?: boolean | PurchaseOrderMasterCountOutputTypeCountGrnsArgs
+  paymentSchedules?: boolean | PurchaseOrderMasterCountOutputTypeCountPaymentSchedulesArgs
+  items?: boolean | PurchaseOrderMasterCountOutputTypeCountItemsArgs
   supplierAdditionalCosts?: boolean | PurchaseOrderMasterCountOutputTypeCountSupplierAdditionalCostsArgs
 }
 
@@ -2590,8 +2590,8 @@ export type PurchaseOrderMasterCountOutputTypeDefaultArgs<ExtArgs extends runtim
 /**
  * PurchaseOrderMasterCountOutputType without action
  */
-export type PurchaseOrderMasterCountOutputTypeCountItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PurchaseOrderItemWhereInput
+export type PurchaseOrderMasterCountOutputTypeCountGrnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GRNMasterWhereInput
 }
 
 /**
@@ -2604,8 +2604,8 @@ export type PurchaseOrderMasterCountOutputTypeCountPaymentSchedulesArgs<ExtArgs 
 /**
  * PurchaseOrderMasterCountOutputType without action
  */
-export type PurchaseOrderMasterCountOutputTypeCountGrnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.GRNMasterWhereInput
+export type PurchaseOrderMasterCountOutputTypeCountItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PurchaseOrderItemWhereInput
 }
 
 /**
@@ -2636,15 +2636,15 @@ export type PurchaseOrderMasterSelect<ExtArgs extends runtime.Types.Extensions.I
   tax_amount?: boolean
   total_amount?: boolean
   payment_term_id?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
+  grns?: boolean | Prisma.PurchaseOrderMaster$grnsArgs<ExtArgs>
+  paymentSchedules?: boolean | Prisma.PurchaseOrderMaster$paymentSchedulesArgs<ExtArgs>
+  items?: boolean | Prisma.PurchaseOrderMaster$itemsArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.PurchaseOrderMaster$updatedByArgs<ExtArgs>
-  items?: boolean | Prisma.PurchaseOrderMaster$itemsArgs<ExtArgs>
   paymentTerm?: boolean | Prisma.PurchaseOrderMaster$paymentTermArgs<ExtArgs>
-  paymentSchedules?: boolean | Prisma.PurchaseOrderMaster$paymentSchedulesArgs<ExtArgs>
-  grns?: boolean | Prisma.PurchaseOrderMaster$grnsArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.PurchaseOrderMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   supplierAdditionalCosts?: boolean | Prisma.PurchaseOrderMaster$supplierAdditionalCostsArgs<ExtArgs>
   _count?: boolean | Prisma.PurchaseOrderMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseOrderMaster"]>
@@ -2669,12 +2669,12 @@ export type PurchaseOrderMasterSelectCreateManyAndReturn<ExtArgs extends runtime
   tax_amount?: boolean
   total_amount?: boolean
   payment_term_id?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.PurchaseOrderMaster$updatedByArgs<ExtArgs>
   paymentTerm?: boolean | Prisma.PurchaseOrderMaster$paymentTermArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.PurchaseOrderMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseOrderMaster"]>
 
 export type PurchaseOrderMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2697,12 +2697,12 @@ export type PurchaseOrderMasterSelectUpdateManyAndReturn<ExtArgs extends runtime
   tax_amount?: boolean
   total_amount?: boolean
   payment_term_id?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.PurchaseOrderMaster$updatedByArgs<ExtArgs>
   paymentTerm?: boolean | Prisma.PurchaseOrderMaster$paymentTermArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.PurchaseOrderMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseOrderMaster"]>
 
 export type PurchaseOrderMasterSelectScalar = {
@@ -2729,47 +2729,47 @@ export type PurchaseOrderMasterSelectScalar = {
 
 export type PurchaseOrderMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "po_no" | "purchase_intent_id" | "company_vendor_id" | "status" | "remarks" | "expected_delivery_date" | "created_by" | "updated_by" | "is_deleted" | "deleted_at" | "deleted_by" | "created_at" | "updated_at" | "amount" | "tax_amount" | "total_amount" | "payment_term_id", ExtArgs["result"]["purchaseOrderMaster"]>
 export type PurchaseOrderMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
+  grns?: boolean | Prisma.PurchaseOrderMaster$grnsArgs<ExtArgs>
+  paymentSchedules?: boolean | Prisma.PurchaseOrderMaster$paymentSchedulesArgs<ExtArgs>
+  items?: boolean | Prisma.PurchaseOrderMaster$itemsArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.PurchaseOrderMaster$updatedByArgs<ExtArgs>
-  items?: boolean | Prisma.PurchaseOrderMaster$itemsArgs<ExtArgs>
   paymentTerm?: boolean | Prisma.PurchaseOrderMaster$paymentTermArgs<ExtArgs>
-  paymentSchedules?: boolean | Prisma.PurchaseOrderMaster$paymentSchedulesArgs<ExtArgs>
-  grns?: boolean | Prisma.PurchaseOrderMaster$grnsArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.PurchaseOrderMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   supplierAdditionalCosts?: boolean | Prisma.PurchaseOrderMaster$supplierAdditionalCostsArgs<ExtArgs>
   _count?: boolean | Prisma.PurchaseOrderMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PurchaseOrderMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.PurchaseOrderMaster$updatedByArgs<ExtArgs>
   paymentTerm?: boolean | Prisma.PurchaseOrderMaster$paymentTermArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.PurchaseOrderMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type PurchaseOrderMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.PurchaseOrderMaster$updatedByArgs<ExtArgs>
   paymentTerm?: boolean | Prisma.PurchaseOrderMaster$paymentTermArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.PurchaseOrderMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $PurchaseOrderMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PurchaseOrderMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    purchaseIntent: Prisma.$PurchaseIntentMasterPayload<ExtArgs>
+    grns: Prisma.$GRNMasterPayload<ExtArgs>[]
+    paymentSchedules: Prisma.$POPaymentSchedulePayload<ExtArgs>[]
+    items: Prisma.$PurchaseOrderItemPayload<ExtArgs>[]
     companyVendor: Prisma.$CompanyVendorsMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
-    updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
-    items: Prisma.$PurchaseOrderItemPayload<ExtArgs>[]
     paymentTerm: Prisma.$PaymentTermMasterPayload<ExtArgs> | null
-    paymentSchedules: Prisma.$POPaymentSchedulePayload<ExtArgs>[]
-    grns: Prisma.$GRNMasterPayload<ExtArgs>[]
+    purchaseIntent: Prisma.$PurchaseIntentMasterPayload<ExtArgs>
+    updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     supplierAdditionalCosts: Prisma.$PurchaseOrderSupplierAdditionalCostPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -3186,15 +3186,15 @@ readonly fields: PurchaseOrderMasterFieldRefs;
  */
 export interface Prisma__PurchaseOrderMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  purchaseIntent<T extends Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PurchaseIntentMasterClient<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  grns<T extends Prisma.PurchaseOrderMaster$grnsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderMaster$grnsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GRNMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  paymentSchedules<T extends Prisma.PurchaseOrderMaster$paymentSchedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderMaster$paymentSchedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$POPaymentSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  items<T extends Prisma.PurchaseOrderMaster$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderMaster$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   companyVendor<T extends Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__CompanyVendorsMasterClient<runtime.Types.Result.GetResult<Prisma.$CompanyVendorsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  updatedBy<T extends Prisma.PurchaseOrderMaster$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderMaster$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  items<T extends Prisma.PurchaseOrderMaster$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderMaster$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   paymentTerm<T extends Prisma.PurchaseOrderMaster$paymentTermArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderMaster$paymentTermArgs<ExtArgs>>): Prisma.Prisma__PaymentTermMasterClient<runtime.Types.Result.GetResult<Prisma.$PaymentTermMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  paymentSchedules<T extends Prisma.PurchaseOrderMaster$paymentSchedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderMaster$paymentSchedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$POPaymentSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  grns<T extends Prisma.PurchaseOrderMaster$grnsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderMaster$grnsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GRNMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  purchaseIntent<T extends Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PurchaseIntentMasterClient<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  updatedBy<T extends Prisma.PurchaseOrderMaster$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderMaster$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   supplierAdditionalCosts<T extends Prisma.PurchaseOrderMaster$supplierAdditionalCostsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderMaster$supplierAdditionalCostsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderSupplierAdditionalCostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3645,22 +3645,51 @@ export type PurchaseOrderMasterDeleteManyArgs<ExtArgs extends runtime.Types.Exte
 }
 
 /**
- * PurchaseOrderMaster.updatedBy
+ * PurchaseOrderMaster.grns
  */
-export type PurchaseOrderMaster$updatedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type PurchaseOrderMaster$grnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the UserMaster
+   * Select specific fields to fetch from the GRNMaster
    */
-  select?: Prisma.UserMasterSelect<ExtArgs> | null
+  select?: Prisma.GRNMasterSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the UserMaster
+   * Omit specific fields from the GRNMaster
    */
-  omit?: Prisma.UserMasterOmit<ExtArgs> | null
+  omit?: Prisma.GRNMasterOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.UserMasterInclude<ExtArgs> | null
-  where?: Prisma.UserMasterWhereInput
+  include?: Prisma.GRNMasterInclude<ExtArgs> | null
+  where?: Prisma.GRNMasterWhereInput
+  orderBy?: Prisma.GRNMasterOrderByWithRelationInput | Prisma.GRNMasterOrderByWithRelationInput[]
+  cursor?: Prisma.GRNMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GRNMasterScalarFieldEnum | Prisma.GRNMasterScalarFieldEnum[]
+}
+
+/**
+ * PurchaseOrderMaster.paymentSchedules
+ */
+export type PurchaseOrderMaster$paymentSchedulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the POPaymentSchedule
+   */
+  select?: Prisma.POPaymentScheduleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the POPaymentSchedule
+   */
+  omit?: Prisma.POPaymentScheduleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.POPaymentScheduleInclude<ExtArgs> | null
+  where?: Prisma.POPaymentScheduleWhereInput
+  orderBy?: Prisma.POPaymentScheduleOrderByWithRelationInput | Prisma.POPaymentScheduleOrderByWithRelationInput[]
+  cursor?: Prisma.POPaymentScheduleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.POPaymentScheduleScalarFieldEnum | Prisma.POPaymentScheduleScalarFieldEnum[]
 }
 
 /**
@@ -3707,51 +3736,22 @@ export type PurchaseOrderMaster$paymentTermArgs<ExtArgs extends runtime.Types.Ex
 }
 
 /**
- * PurchaseOrderMaster.paymentSchedules
+ * PurchaseOrderMaster.updatedBy
  */
-export type PurchaseOrderMaster$paymentSchedulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type PurchaseOrderMaster$updatedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the POPaymentSchedule
+   * Select specific fields to fetch from the UserMaster
    */
-  select?: Prisma.POPaymentScheduleSelect<ExtArgs> | null
+  select?: Prisma.UserMasterSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the POPaymentSchedule
+   * Omit specific fields from the UserMaster
    */
-  omit?: Prisma.POPaymentScheduleOmit<ExtArgs> | null
+  omit?: Prisma.UserMasterOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.POPaymentScheduleInclude<ExtArgs> | null
-  where?: Prisma.POPaymentScheduleWhereInput
-  orderBy?: Prisma.POPaymentScheduleOrderByWithRelationInput | Prisma.POPaymentScheduleOrderByWithRelationInput[]
-  cursor?: Prisma.POPaymentScheduleWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.POPaymentScheduleScalarFieldEnum | Prisma.POPaymentScheduleScalarFieldEnum[]
-}
-
-/**
- * PurchaseOrderMaster.grns
- */
-export type PurchaseOrderMaster$grnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the GRNMaster
-   */
-  select?: Prisma.GRNMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the GRNMaster
-   */
-  omit?: Prisma.GRNMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.GRNMasterInclude<ExtArgs> | null
-  where?: Prisma.GRNMasterWhereInput
-  orderBy?: Prisma.GRNMasterOrderByWithRelationInput | Prisma.GRNMasterOrderByWithRelationInput[]
-  cursor?: Prisma.GRNMasterWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.GRNMasterScalarFieldEnum | Prisma.GRNMasterScalarFieldEnum[]
+  include?: Prisma.UserMasterInclude<ExtArgs> | null
+  where?: Prisma.UserMasterWhereInput
 }
 
 /**

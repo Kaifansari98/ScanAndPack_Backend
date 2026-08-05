@@ -288,9 +288,9 @@ export type ProductStockHistoryWhereInput = {
   upload_batch_id?: Prisma.StringNullableFilter<"ProductStockHistory"> | string | null
   remarks?: Prisma.StringNullableFilter<"ProductStockHistory"> | string | null
   created_at?: Prisma.DateTimeFilter<"ProductStockHistory"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  product?: Prisma.XOR<Prisma.ProductMasterScalarRelationFilter, Prisma.ProductMasterWhereInput>
   changedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  product?: Prisma.XOR<Prisma.ProductMasterScalarRelationFilter, Prisma.ProductMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type ProductStockHistoryOrderByWithRelationInput = {
@@ -305,9 +305,9 @@ export type ProductStockHistoryOrderByWithRelationInput = {
   upload_batch_id?: Prisma.SortOrderInput | Prisma.SortOrder
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  product?: Prisma.ProductMasterOrderByWithRelationInput
   changedBy?: Prisma.UserMasterOrderByWithRelationInput
+  product?: Prisma.ProductMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type ProductStockHistoryWhereUniqueInput = Prisma.AtLeast<{
@@ -325,9 +325,9 @@ export type ProductStockHistoryWhereUniqueInput = Prisma.AtLeast<{
   upload_batch_id?: Prisma.StringNullableFilter<"ProductStockHistory"> | string | null
   remarks?: Prisma.StringNullableFilter<"ProductStockHistory"> | string | null
   created_at?: Prisma.DateTimeFilter<"ProductStockHistory"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  product?: Prisma.XOR<Prisma.ProductMasterScalarRelationFilter, Prisma.ProductMasterWhereInput>
   changedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  product?: Prisma.XOR<Prisma.ProductMasterScalarRelationFilter, Prisma.ProductMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type ProductStockHistoryOrderByWithAggregationInput = {
@@ -374,9 +374,9 @@ export type ProductStockHistoryCreateInput = {
   upload_batch_id?: string | null
   remarks?: string | null
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutStockHistoriesInput
-  product: Prisma.ProductMasterCreateNestedOneWithoutStockHistoriesInput
   changedBy?: Prisma.UserMasterCreateNestedOneWithoutStockHistoriesInput
+  product: Prisma.ProductMasterCreateNestedOneWithoutStockHistoriesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutStockHistoriesInput
 }
 
 export type ProductStockHistoryUncheckedCreateInput = {
@@ -401,9 +401,9 @@ export type ProductStockHistoryUpdateInput = {
   upload_batch_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutStockHistoriesNestedInput
-  product?: Prisma.ProductMasterUpdateOneRequiredWithoutStockHistoriesNestedInput
   changedBy?: Prisma.UserMasterUpdateOneWithoutStockHistoriesNestedInput
+  product?: Prisma.ProductMasterUpdateOneRequiredWithoutStockHistoriesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutStockHistoriesNestedInput
 }
 
 export type ProductStockHistoryUncheckedUpdateInput = {
@@ -668,8 +668,8 @@ export type ProductStockHistoryCreateWithoutVendorInput = {
   upload_batch_id?: string | null
   remarks?: string | null
   created_at?: Date | string
-  product: Prisma.ProductMasterCreateNestedOneWithoutStockHistoriesInput
   changedBy?: Prisma.UserMasterCreateNestedOneWithoutStockHistoriesInput
+  product: Prisma.ProductMasterCreateNestedOneWithoutStockHistoriesInput
 }
 
 export type ProductStockHistoryUncheckedCreateWithoutVendorInput = {
@@ -736,8 +736,8 @@ export type ProductStockHistoryCreateWithoutChangedByInput = {
   upload_batch_id?: string | null
   remarks?: string | null
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutStockHistoriesInput
   product: Prisma.ProductMasterCreateNestedOneWithoutStockHistoriesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutStockHistoriesInput
 }
 
 export type ProductStockHistoryUncheckedCreateWithoutChangedByInput = {
@@ -787,8 +787,8 @@ export type ProductStockHistoryCreateWithoutProductInput = {
   upload_batch_id?: string | null
   remarks?: string | null
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutStockHistoriesInput
   changedBy?: Prisma.UserMasterCreateNestedOneWithoutStockHistoriesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutStockHistoriesInput
 }
 
 export type ProductStockHistoryUncheckedCreateWithoutProductInput = {
@@ -851,8 +851,8 @@ export type ProductStockHistoryUpdateWithoutVendorInput = {
   upload_batch_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductMasterUpdateOneRequiredWithoutStockHistoriesNestedInput
   changedBy?: Prisma.UserMasterUpdateOneWithoutStockHistoriesNestedInput
+  product?: Prisma.ProductMasterUpdateOneRequiredWithoutStockHistoriesNestedInput
 }
 
 export type ProductStockHistoryUncheckedUpdateWithoutVendorInput = {
@@ -902,8 +902,8 @@ export type ProductStockHistoryUpdateWithoutChangedByInput = {
   upload_batch_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutStockHistoriesNestedInput
   product?: Prisma.ProductMasterUpdateOneRequiredWithoutStockHistoriesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutStockHistoriesNestedInput
 }
 
 export type ProductStockHistoryUncheckedUpdateWithoutChangedByInput = {
@@ -953,8 +953,8 @@ export type ProductStockHistoryUpdateWithoutProductInput = {
   upload_batch_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutStockHistoriesNestedInput
   changedBy?: Prisma.UserMasterUpdateOneWithoutStockHistoriesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutStockHistoriesNestedInput
 }
 
 export type ProductStockHistoryUncheckedUpdateWithoutProductInput = {
@@ -997,9 +997,9 @@ export type ProductStockHistorySelect<ExtArgs extends runtime.Types.Extensions.I
   upload_batch_id?: boolean
   remarks?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
   changedBy?: boolean | Prisma.ProductStockHistory$changedByArgs<ExtArgs>
+  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productStockHistory"]>
 
 export type ProductStockHistorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1014,9 +1014,9 @@ export type ProductStockHistorySelectCreateManyAndReturn<ExtArgs extends runtime
   upload_batch_id?: boolean
   remarks?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
   changedBy?: boolean | Prisma.ProductStockHistory$changedByArgs<ExtArgs>
+  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productStockHistory"]>
 
 export type ProductStockHistorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1031,9 +1031,9 @@ export type ProductStockHistorySelectUpdateManyAndReturn<ExtArgs extends runtime
   upload_batch_id?: boolean
   remarks?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
   changedBy?: boolean | Prisma.ProductStockHistory$changedByArgs<ExtArgs>
+  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productStockHistory"]>
 
 export type ProductStockHistorySelectScalar = {
@@ -1052,27 +1052,27 @@ export type ProductStockHistorySelectScalar = {
 
 export type ProductStockHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "product_id" | "old_stock" | "new_stock" | "change" | "source" | "changed_by" | "upload_batch_id" | "remarks" | "created_at", ExtArgs["result"]["productStockHistory"]>
 export type ProductStockHistoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
   changedBy?: boolean | Prisma.ProductStockHistory$changedByArgs<ExtArgs>
+  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type ProductStockHistoryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
   changedBy?: boolean | Prisma.ProductStockHistory$changedByArgs<ExtArgs>
+  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type ProductStockHistoryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
   changedBy?: boolean | Prisma.ProductStockHistory$changedByArgs<ExtArgs>
+  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $ProductStockHistoryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProductStockHistory"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    product: Prisma.$ProductMasterPayload<ExtArgs>
     changedBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    product: Prisma.$ProductMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1480,9 +1480,9 @@ readonly fields: ProductStockHistoryFieldRefs;
  */
 export interface Prisma__ProductStockHistoryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  product<T extends Prisma.ProductMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   changedBy<T extends Prisma.ProductStockHistory$changedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductStockHistory$changedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  product<T extends Prisma.ProductMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

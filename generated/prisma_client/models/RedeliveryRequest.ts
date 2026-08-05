@@ -292,10 +292,10 @@ export type RedeliveryRequestWhereInput = {
   created_by?: Prisma.IntFilter<"RedeliveryRequest"> | number
   created_at?: Prisma.DateTimeFilter<"RedeliveryRequest"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"RedeliveryRequest"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  grnItem?: Prisma.XOR<Prisma.GRNItemScalarRelationFilter, Prisma.GRNItemWhereInput>
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  grnItem?: Prisma.XOR<Prisma.GRNItemScalarRelationFilter, Prisma.GRNItemWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type RedeliveryRequestOrderByWithRelationInput = {
@@ -311,10 +311,10 @@ export type RedeliveryRequestOrderByWithRelationInput = {
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  grnItem?: Prisma.GRNItemOrderByWithRelationInput
   companyVendor?: Prisma.CompanyVendorsMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  grnItem?: Prisma.GRNItemOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type RedeliveryRequestWhereUniqueInput = Prisma.AtLeast<{
@@ -333,10 +333,10 @@ export type RedeliveryRequestWhereUniqueInput = Prisma.AtLeast<{
   created_by?: Prisma.IntFilter<"RedeliveryRequest"> | number
   created_at?: Prisma.DateTimeFilter<"RedeliveryRequest"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"RedeliveryRequest"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  grnItem?: Prisma.XOR<Prisma.GRNItemScalarRelationFilter, Prisma.GRNItemWhereInput>
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  grnItem?: Prisma.XOR<Prisma.GRNItemScalarRelationFilter, Prisma.GRNItemWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type RedeliveryRequestOrderByWithAggregationInput = {
@@ -385,10 +385,10 @@ export type RedeliveryRequestCreateInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutRedeliveryRequestsInput
-  grnItem: Prisma.GRNItemCreateNestedOneWithoutRedeliveryRequestsInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutRedeliveryRequestsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutRedeliveriesCreatedInput
+  grnItem: Prisma.GRNItemCreateNestedOneWithoutRedeliveryRequestsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutRedeliveryRequestsInput
 }
 
 export type RedeliveryRequestUncheckedCreateInput = {
@@ -414,10 +414,10 @@ export type RedeliveryRequestUpdateInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
-  grnItem?: Prisma.GRNItemUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutRedeliveriesCreatedNestedInput
+  grnItem?: Prisma.GRNItemUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
 }
 
 export type RedeliveryRequestUncheckedUpdateInput = {
@@ -728,9 +728,9 @@ export type RedeliveryRequestCreateWithoutVendorInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  grnItem: Prisma.GRNItemCreateNestedOneWithoutRedeliveryRequestsInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutRedeliveryRequestsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutRedeliveriesCreatedInput
+  grnItem: Prisma.GRNItemCreateNestedOneWithoutRedeliveryRequestsInput
 }
 
 export type RedeliveryRequestUncheckedCreateWithoutVendorInput = {
@@ -799,9 +799,9 @@ export type RedeliveryRequestCreateWithoutCreatedByInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutRedeliveryRequestsInput
-  grnItem: Prisma.GRNItemCreateNestedOneWithoutRedeliveryRequestsInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutRedeliveryRequestsInput
+  grnItem: Prisma.GRNItemCreateNestedOneWithoutRedeliveryRequestsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutRedeliveryRequestsInput
 }
 
 export type RedeliveryRequestUncheckedCreateWithoutCreatedByInput = {
@@ -852,9 +852,9 @@ export type RedeliveryRequestCreateWithoutCompanyVendorInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutRedeliveryRequestsInput
-  grnItem: Prisma.GRNItemCreateNestedOneWithoutRedeliveryRequestsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutRedeliveriesCreatedInput
+  grnItem: Prisma.GRNItemCreateNestedOneWithoutRedeliveryRequestsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutRedeliveryRequestsInput
 }
 
 export type RedeliveryRequestUncheckedCreateWithoutCompanyVendorInput = {
@@ -905,9 +905,9 @@ export type RedeliveryRequestCreateWithoutGrnItemInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutRedeliveryRequestsInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutRedeliveryRequestsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutRedeliveriesCreatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutRedeliveryRequestsInput
 }
 
 export type RedeliveryRequestUncheckedCreateWithoutGrnItemInput = {
@@ -972,9 +972,9 @@ export type RedeliveryRequestUpdateWithoutVendorInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  grnItem?: Prisma.GRNItemUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutRedeliveriesCreatedNestedInput
+  grnItem?: Prisma.GRNItemUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
 }
 
 export type RedeliveryRequestUncheckedUpdateWithoutVendorInput = {
@@ -1027,9 +1027,9 @@ export type RedeliveryRequestUpdateWithoutCreatedByInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
-  grnItem?: Prisma.GRNItemUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
+  grnItem?: Prisma.GRNItemUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
 }
 
 export type RedeliveryRequestUncheckedUpdateWithoutCreatedByInput = {
@@ -1082,9 +1082,9 @@ export type RedeliveryRequestUpdateWithoutCompanyVendorInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
-  grnItem?: Prisma.GRNItemUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutRedeliveriesCreatedNestedInput
+  grnItem?: Prisma.GRNItemUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
 }
 
 export type RedeliveryRequestUncheckedUpdateWithoutCompanyVendorInput = {
@@ -1137,9 +1137,9 @@ export type RedeliveryRequestUpdateWithoutGrnItemInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutRedeliveriesCreatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutRedeliveryRequestsNestedInput
 }
 
 export type RedeliveryRequestUncheckedUpdateWithoutGrnItemInput = {
@@ -1185,10 +1185,10 @@ export type RedeliveryRequestSelect<ExtArgs extends runtime.Types.Extensions.Int
   created_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  grnItem?: boolean | Prisma.GRNItemDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  grnItem?: boolean | Prisma.GRNItemDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["redeliveryRequest"]>
 
 export type RedeliveryRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1204,10 +1204,10 @@ export type RedeliveryRequestSelectCreateManyAndReturn<ExtArgs extends runtime.T
   created_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  grnItem?: boolean | Prisma.GRNItemDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  grnItem?: boolean | Prisma.GRNItemDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["redeliveryRequest"]>
 
 export type RedeliveryRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1223,10 +1223,10 @@ export type RedeliveryRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   created_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  grnItem?: boolean | Prisma.GRNItemDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  grnItem?: boolean | Prisma.GRNItemDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["redeliveryRequest"]>
 
 export type RedeliveryRequestSelectScalar = {
@@ -1246,31 +1246,31 @@ export type RedeliveryRequestSelectScalar = {
 
 export type RedeliveryRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "grn_item_id" | "company_vendor_id" | "requested_qty" | "expected_date" | "received_date" | "status" | "remarks" | "created_by" | "created_at" | "updated_at", ExtArgs["result"]["redeliveryRequest"]>
 export type RedeliveryRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  grnItem?: boolean | Prisma.GRNItemDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  grnItem?: boolean | Prisma.GRNItemDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type RedeliveryRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  grnItem?: boolean | Prisma.GRNItemDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  grnItem?: boolean | Prisma.GRNItemDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type RedeliveryRequestIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  grnItem?: boolean | Prisma.GRNItemDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  grnItem?: boolean | Prisma.GRNItemDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $RedeliveryRequestPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "RedeliveryRequest"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    grnItem: Prisma.$GRNItemPayload<ExtArgs>
     companyVendor: Prisma.$CompanyVendorsMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    grnItem: Prisma.$GRNItemPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1679,10 +1679,10 @@ readonly fields: RedeliveryRequestFieldRefs;
  */
 export interface Prisma__RedeliveryRequestClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  grnItem<T extends Prisma.GRNItemDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GRNItemDefaultArgs<ExtArgs>>): Prisma.Prisma__GRNItemClient<runtime.Types.Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   companyVendor<T extends Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__CompanyVendorsMasterClient<runtime.Types.Result.GetResult<Prisma.$CompanyVendorsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  grnItem<T extends Prisma.GRNItemDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GRNItemDefaultArgs<ExtArgs>>): Prisma.Prisma__GRNItemClient<runtime.Types.Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

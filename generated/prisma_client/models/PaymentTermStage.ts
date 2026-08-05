@@ -300,8 +300,8 @@ export type PaymentTermStageWhereInput = {
   remarks?: Prisma.StringNullableFilter<"PaymentTermStage"> | string | null
   created_at?: Prisma.DateTimeFilter<"PaymentTermStage"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"PaymentTermStage"> | Date | string
-  paymentTerm?: Prisma.XOR<Prisma.PaymentTermMasterScalarRelationFilter, Prisma.PaymentTermMasterWhereInput>
   paymentSchedules?: Prisma.POPaymentScheduleListRelationFilter
+  paymentTerm?: Prisma.XOR<Prisma.PaymentTermMasterScalarRelationFilter, Prisma.PaymentTermMasterWhereInput>
 }
 
 export type PaymentTermStageOrderByWithRelationInput = {
@@ -318,8 +318,8 @@ export type PaymentTermStageOrderByWithRelationInput = {
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  paymentTerm?: Prisma.PaymentTermMasterOrderByWithRelationInput
   paymentSchedules?: Prisma.POPaymentScheduleOrderByRelationAggregateInput
+  paymentTerm?: Prisma.PaymentTermMasterOrderByWithRelationInput
 }
 
 export type PaymentTermStageWhereUniqueInput = Prisma.AtLeast<{
@@ -339,8 +339,8 @@ export type PaymentTermStageWhereUniqueInput = Prisma.AtLeast<{
   remarks?: Prisma.StringNullableFilter<"PaymentTermStage"> | string | null
   created_at?: Prisma.DateTimeFilter<"PaymentTermStage"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"PaymentTermStage"> | Date | string
-  paymentTerm?: Prisma.XOR<Prisma.PaymentTermMasterScalarRelationFilter, Prisma.PaymentTermMasterWhereInput>
   paymentSchedules?: Prisma.POPaymentScheduleListRelationFilter
+  paymentTerm?: Prisma.XOR<Prisma.PaymentTermMasterScalarRelationFilter, Prisma.PaymentTermMasterWhereInput>
 }, "id">
 
 export type PaymentTermStageOrderByWithAggregationInput = {
@@ -395,8 +395,8 @@ export type PaymentTermStageCreateInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  paymentTerm: Prisma.PaymentTermMasterCreateNestedOneWithoutStagesInput
   paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutPaymentTermStageInput
+  paymentTerm: Prisma.PaymentTermMasterCreateNestedOneWithoutStagesInput
 }
 
 export type PaymentTermStageUncheckedCreateInput = {
@@ -428,8 +428,8 @@ export type PaymentTermStageUpdateInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  paymentTerm?: Prisma.PaymentTermMasterUpdateOneRequiredWithoutStagesNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutPaymentTermStageNestedInput
+  paymentTerm?: Prisma.PaymentTermMasterUpdateOneRequiredWithoutStagesNestedInput
 }
 
 export type PaymentTermStageUncheckedUpdateInput = {
@@ -898,8 +898,8 @@ export type PaymentTermStageSelect<ExtArgs extends runtime.Types.Extensions.Inte
   remarks?: boolean
   created_at?: boolean
   updated_at?: boolean
-  paymentTerm?: boolean | Prisma.PaymentTermMasterDefaultArgs<ExtArgs>
   paymentSchedules?: boolean | Prisma.PaymentTermStage$paymentSchedulesArgs<ExtArgs>
+  paymentTerm?: boolean | Prisma.PaymentTermMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.PaymentTermStageCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["paymentTermStage"]>
 
@@ -955,8 +955,8 @@ export type PaymentTermStageSelectScalar = {
 
 export type PaymentTermStageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "payment_term_id" | "stage_no" | "stage_name" | "trigger_type" | "percentage" | "fixed_amount" | "due_after_days" | "specific_date" | "requires_approval" | "remarks" | "created_at" | "updated_at", ExtArgs["result"]["paymentTermStage"]>
 export type PaymentTermStageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  paymentTerm?: boolean | Prisma.PaymentTermMasterDefaultArgs<ExtArgs>
   paymentSchedules?: boolean | Prisma.PaymentTermStage$paymentSchedulesArgs<ExtArgs>
+  paymentTerm?: boolean | Prisma.PaymentTermMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.PaymentTermStageCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PaymentTermStageIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -969,8 +969,8 @@ export type PaymentTermStageIncludeUpdateManyAndReturn<ExtArgs extends runtime.T
 export type $PaymentTermStagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PaymentTermStage"
   objects: {
-    paymentTerm: Prisma.$PaymentTermMasterPayload<ExtArgs>
     paymentSchedules: Prisma.$POPaymentSchedulePayload<ExtArgs>[]
+    paymentTerm: Prisma.$PaymentTermMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1380,8 +1380,8 @@ readonly fields: PaymentTermStageFieldRefs;
  */
 export interface Prisma__PaymentTermStageClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  paymentTerm<T extends Prisma.PaymentTermMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentTermMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PaymentTermMasterClient<runtime.Types.Result.GetResult<Prisma.$PaymentTermMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   paymentSchedules<T extends Prisma.PaymentTermStage$paymentSchedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentTermStage$paymentSchedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$POPaymentSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  paymentTerm<T extends Prisma.PaymentTermMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentTermMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PaymentTermMasterClient<runtime.Types.Result.GetResult<Prisma.$PaymentTermMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

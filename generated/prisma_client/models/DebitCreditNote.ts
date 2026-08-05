@@ -320,11 +320,11 @@ export type DebitCreditNoteWhereInput = {
   created_by?: Prisma.IntFilter<"DebitCreditNote"> | number
   created_at?: Prisma.DateTimeFilter<"DebitCreditNote"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"DebitCreditNote"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  grn?: Prisma.XOR<Prisma.GRNMasterScalarRelationFilter, Prisma.GRNMasterWhereInput>
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  grn?: Prisma.XOR<Prisma.GRNMasterScalarRelationFilter, Prisma.GRNMasterWhereInput>
   settledBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type DebitCreditNoteOrderByWithRelationInput = {
@@ -343,11 +343,11 @@ export type DebitCreditNoteOrderByWithRelationInput = {
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  grn?: Prisma.GRNMasterOrderByWithRelationInput
   companyVendor?: Prisma.CompanyVendorsMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  grn?: Prisma.GRNMasterOrderByWithRelationInput
   settledBy?: Prisma.UserMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type DebitCreditNoteWhereUniqueInput = Prisma.AtLeast<{
@@ -369,11 +369,11 @@ export type DebitCreditNoteWhereUniqueInput = Prisma.AtLeast<{
   created_by?: Prisma.IntFilter<"DebitCreditNote"> | number
   created_at?: Prisma.DateTimeFilter<"DebitCreditNote"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"DebitCreditNote"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  grn?: Prisma.XOR<Prisma.GRNMasterScalarRelationFilter, Prisma.GRNMasterWhereInput>
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  grn?: Prisma.XOR<Prisma.GRNMasterScalarRelationFilter, Prisma.GRNMasterWhereInput>
   settledBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id" | "note_no">
 
 export type DebitCreditNoteOrderByWithAggregationInput = {
@@ -430,11 +430,11 @@ export type DebitCreditNoteCreateInput = {
   settled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDebitCreditNotesInput
-  grn: Prisma.GRNMasterCreateNestedOneWithoutDebitCreditNotesInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutDebitCreditNotesInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDcnsCreatedInput
+  grn: Prisma.GRNMasterCreateNestedOneWithoutDebitCreditNotesInput
   settledBy?: Prisma.UserMasterCreateNestedOneWithoutDcnsSettledInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDebitCreditNotesInput
 }
 
 export type DebitCreditNoteUncheckedCreateInput = {
@@ -465,11 +465,11 @@ export type DebitCreditNoteUpdateInput = {
   settled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
-  grn?: Prisma.GRNMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDcnsCreatedNestedInput
+  grn?: Prisma.GRNMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
   settledBy?: Prisma.UserMasterUpdateOneWithoutDcnsSettledNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
 }
 
 export type DebitCreditNoteUncheckedUpdateInput = {
@@ -850,9 +850,9 @@ export type DebitCreditNoteCreateWithoutVendorInput = {
   settled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  grn: Prisma.GRNMasterCreateNestedOneWithoutDebitCreditNotesInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutDebitCreditNotesInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDcnsCreatedInput
+  grn: Prisma.GRNMasterCreateNestedOneWithoutDebitCreditNotesInput
   settledBy?: Prisma.UserMasterCreateNestedOneWithoutDcnsSettledInput
 }
 
@@ -930,10 +930,10 @@ export type DebitCreditNoteCreateWithoutCreatedByInput = {
   settled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDebitCreditNotesInput
-  grn: Prisma.GRNMasterCreateNestedOneWithoutDebitCreditNotesInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutDebitCreditNotesInput
+  grn: Prisma.GRNMasterCreateNestedOneWithoutDebitCreditNotesInput
   settledBy?: Prisma.UserMasterCreateNestedOneWithoutDcnsSettledInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDebitCreditNotesInput
 }
 
 export type DebitCreditNoteUncheckedCreateWithoutCreatedByInput = {
@@ -973,10 +973,10 @@ export type DebitCreditNoteCreateWithoutSettledByInput = {
   settled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDebitCreditNotesInput
-  grn: Prisma.GRNMasterCreateNestedOneWithoutDebitCreditNotesInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutDebitCreditNotesInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDcnsCreatedInput
+  grn: Prisma.GRNMasterCreateNestedOneWithoutDebitCreditNotesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDebitCreditNotesInput
 }
 
 export type DebitCreditNoteUncheckedCreateWithoutSettledByInput = {
@@ -1048,10 +1048,10 @@ export type DebitCreditNoteCreateWithoutCompanyVendorInput = {
   settled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDebitCreditNotesInput
-  grn: Prisma.GRNMasterCreateNestedOneWithoutDebitCreditNotesInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDcnsCreatedInput
+  grn: Prisma.GRNMasterCreateNestedOneWithoutDebitCreditNotesInput
   settledBy?: Prisma.UserMasterCreateNestedOneWithoutDcnsSettledInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDebitCreditNotesInput
 }
 
 export type DebitCreditNoteUncheckedCreateWithoutCompanyVendorInput = {
@@ -1107,10 +1107,10 @@ export type DebitCreditNoteCreateWithoutGrnInput = {
   settled_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutDebitCreditNotesInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutDebitCreditNotesInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDcnsCreatedInput
   settledBy?: Prisma.UserMasterCreateNestedOneWithoutDcnsSettledInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDebitCreditNotesInput
 }
 
 export type DebitCreditNoteUncheckedCreateWithoutGrnInput = {
@@ -1183,9 +1183,9 @@ export type DebitCreditNoteUpdateWithoutVendorInput = {
   settled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  grn?: Prisma.GRNMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDcnsCreatedNestedInput
+  grn?: Prisma.GRNMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
   settledBy?: Prisma.UserMasterUpdateOneWithoutDcnsSettledNestedInput
 }
 
@@ -1267,10 +1267,10 @@ export type DebitCreditNoteUpdateWithoutCreatedByInput = {
   settled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
-  grn?: Prisma.GRNMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
+  grn?: Prisma.GRNMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
   settledBy?: Prisma.UserMasterUpdateOneWithoutDcnsSettledNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
 }
 
 export type DebitCreditNoteUncheckedUpdateWithoutCreatedByInput = {
@@ -1317,10 +1317,10 @@ export type DebitCreditNoteUpdateWithoutSettledByInput = {
   settled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
-  grn?: Prisma.GRNMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDcnsCreatedNestedInput
+  grn?: Prisma.GRNMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
 }
 
 export type DebitCreditNoteUncheckedUpdateWithoutSettledByInput = {
@@ -1384,10 +1384,10 @@ export type DebitCreditNoteUpdateWithoutCompanyVendorInput = {
   settled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
-  grn?: Prisma.GRNMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDcnsCreatedNestedInput
+  grn?: Prisma.GRNMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
   settledBy?: Prisma.UserMasterUpdateOneWithoutDcnsSettledNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
 }
 
 export type DebitCreditNoteUncheckedUpdateWithoutCompanyVendorInput = {
@@ -1451,10 +1451,10 @@ export type DebitCreditNoteUpdateWithoutGrnInput = {
   settled_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDcnsCreatedNestedInput
   settledBy?: Prisma.UserMasterUpdateOneWithoutDcnsSettledNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput
 }
 
 export type DebitCreditNoteUncheckedUpdateWithoutGrnInput = {
@@ -1509,11 +1509,11 @@ export type DebitCreditNoteSelect<ExtArgs extends runtime.Types.Extensions.Inter
   created_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  grn?: boolean | Prisma.GRNMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  grn?: boolean | Prisma.GRNMasterDefaultArgs<ExtArgs>
   settledBy?: boolean | Prisma.DebitCreditNote$settledByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["debitCreditNote"]>
 
 export type DebitCreditNoteSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1532,11 +1532,11 @@ export type DebitCreditNoteSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   created_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  grn?: boolean | Prisma.GRNMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  grn?: boolean | Prisma.GRNMasterDefaultArgs<ExtArgs>
   settledBy?: boolean | Prisma.DebitCreditNote$settledByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["debitCreditNote"]>
 
 export type DebitCreditNoteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1555,11 +1555,11 @@ export type DebitCreditNoteSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   created_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  grn?: boolean | Prisma.GRNMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  grn?: boolean | Prisma.GRNMasterDefaultArgs<ExtArgs>
   settledBy?: boolean | Prisma.DebitCreditNote$settledByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["debitCreditNote"]>
 
 export type DebitCreditNoteSelectScalar = {
@@ -1582,35 +1582,35 @@ export type DebitCreditNoteSelectScalar = {
 
 export type DebitCreditNoteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "note_no" | "grn_id" | "company_vendor_id" | "type" | "status" | "amount" | "reason" | "remarks" | "settled_at" | "settled_by" | "created_by" | "created_at" | "updated_at", ExtArgs["result"]["debitCreditNote"]>
 export type DebitCreditNoteInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  grn?: boolean | Prisma.GRNMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  grn?: boolean | Prisma.GRNMasterDefaultArgs<ExtArgs>
   settledBy?: boolean | Prisma.DebitCreditNote$settledByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type DebitCreditNoteIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  grn?: boolean | Prisma.GRNMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  grn?: boolean | Prisma.GRNMasterDefaultArgs<ExtArgs>
   settledBy?: boolean | Prisma.DebitCreditNote$settledByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type DebitCreditNoteIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  grn?: boolean | Prisma.GRNMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  grn?: boolean | Prisma.GRNMasterDefaultArgs<ExtArgs>
   settledBy?: boolean | Prisma.DebitCreditNote$settledByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $DebitCreditNotePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "DebitCreditNote"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    grn: Prisma.$GRNMasterPayload<ExtArgs>
     companyVendor: Prisma.$CompanyVendorsMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    grn: Prisma.$GRNMasterPayload<ExtArgs>
     settledBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2022,11 +2022,11 @@ readonly fields: DebitCreditNoteFieldRefs;
  */
 export interface Prisma__DebitCreditNoteClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  grn<T extends Prisma.GRNMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GRNMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__GRNMasterClient<runtime.Types.Result.GetResult<Prisma.$GRNMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   companyVendor<T extends Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__CompanyVendorsMasterClient<runtime.Types.Result.GetResult<Prisma.$CompanyVendorsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  grn<T extends Prisma.GRNMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GRNMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__GRNMasterClient<runtime.Types.Result.GetResult<Prisma.$GRNMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   settledBy<T extends Prisma.DebitCreditNote$settledByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DebitCreditNote$settledByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

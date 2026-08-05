@@ -42,27 +42,27 @@ export type MiscellaneousTeamMasterMinAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   name: string | null
-  status: string | null
   created_by: number | null
   created_at: Date | null
+  status: string | null
 }
 
 export type MiscellaneousTeamMasterMaxAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   name: string | null
-  status: string | null
   created_by: number | null
   created_at: Date | null
+  status: string | null
 }
 
 export type MiscellaneousTeamMasterCountAggregateOutputType = {
   id: number
   vendor_id: number
   name: number
-  status: number
   created_by: number
   created_at: number
+  status: number
   _all: number
 }
 
@@ -83,27 +83,27 @@ export type MiscellaneousTeamMasterMinAggregateInputType = {
   id?: true
   vendor_id?: true
   name?: true
-  status?: true
   created_by?: true
   created_at?: true
+  status?: true
 }
 
 export type MiscellaneousTeamMasterMaxAggregateInputType = {
   id?: true
   vendor_id?: true
   name?: true
-  status?: true
   created_by?: true
   created_at?: true
+  status?: true
 }
 
 export type MiscellaneousTeamMasterCountAggregateInputType = {
   id?: true
   vendor_id?: true
   name?: true
-  status?: true
   created_by?: true
   created_at?: true
+  status?: true
   _all?: true
 }
 
@@ -197,9 +197,9 @@ export type MiscellaneousTeamMasterGroupByOutputType = {
   id: number
   vendor_id: number
   name: string
-  status: string
   created_by: number
   created_at: Date
+  status: string
   _count: MiscellaneousTeamMasterCountAggregateOutputType | null
   _avg: MiscellaneousTeamMasterAvgAggregateOutputType | null
   _sum: MiscellaneousTeamMasterSumAggregateOutputType | null
@@ -229,9 +229,9 @@ export type MiscellaneousTeamMasterWhereInput = {
   id?: Prisma.IntFilter<"MiscellaneousTeamMaster"> | number
   vendor_id?: Prisma.IntFilter<"MiscellaneousTeamMaster"> | number
   name?: Prisma.StringFilter<"MiscellaneousTeamMaster"> | string
-  status?: Prisma.StringFilter<"MiscellaneousTeamMaster"> | string
   created_by?: Prisma.IntFilter<"MiscellaneousTeamMaster"> | number
   created_at?: Prisma.DateTimeFilter<"MiscellaneousTeamMaster"> | Date | string
+  status?: Prisma.StringFilter<"MiscellaneousTeamMaster"> | string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingListRelationFilter
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -241,9 +241,9 @@ export type MiscellaneousTeamMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingOrderByRelationAggregateInput
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingOrderByRelationAggregateInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
@@ -256,9 +256,9 @@ export type MiscellaneousTeamMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.MiscellaneousTeamMasterWhereInput | Prisma.MiscellaneousTeamMasterWhereInput[]
   vendor_id?: Prisma.IntFilter<"MiscellaneousTeamMaster"> | number
   name?: Prisma.StringFilter<"MiscellaneousTeamMaster"> | string
-  status?: Prisma.StringFilter<"MiscellaneousTeamMaster"> | string
   created_by?: Prisma.IntFilter<"MiscellaneousTeamMaster"> | number
   created_at?: Prisma.DateTimeFilter<"MiscellaneousTeamMaster"> | Date | string
+  status?: Prisma.StringFilter<"MiscellaneousTeamMaster"> | string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingListRelationFilter
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -268,9 +268,9 @@ export type MiscellaneousTeamMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   _count?: Prisma.MiscellaneousTeamMasterCountOrderByAggregateInput
   _avg?: Prisma.MiscellaneousTeamMasterAvgOrderByAggregateInput
   _max?: Prisma.MiscellaneousTeamMasterMaxOrderByAggregateInput
@@ -285,16 +285,16 @@ export type MiscellaneousTeamMasterScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"MiscellaneousTeamMaster"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"MiscellaneousTeamMaster"> | number
   name?: Prisma.StringWithAggregatesFilter<"MiscellaneousTeamMaster"> | string
-  status?: Prisma.StringWithAggregatesFilter<"MiscellaneousTeamMaster"> | string
   created_by?: Prisma.IntWithAggregatesFilter<"MiscellaneousTeamMaster"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"MiscellaneousTeamMaster"> | Date | string
+  status?: Prisma.StringWithAggregatesFilter<"MiscellaneousTeamMaster"> | string
 }
 
 export type MiscellaneousTeamMasterCreateInput = {
   name: string
-  status?: string
   created_by: number
   created_at?: Date | string
+  status?: string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingCreateNestedManyWithoutTeamInput
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingCreateNestedManyWithoutTeamInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousTeamMasterInput
@@ -304,18 +304,18 @@ export type MiscellaneousTeamMasterUncheckedCreateInput = {
   id?: number
   vendor_id: number
   name: string
-  status?: string
   created_by: number
   created_at?: Date | string
+  status?: string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingUncheckedCreateNestedManyWithoutTeamInput
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type MiscellaneousTeamMasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingUpdateManyWithoutTeamNestedInput
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingUpdateManyWithoutTeamNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousTeamMasterNestedInput
@@ -325,9 +325,9 @@ export type MiscellaneousTeamMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingUncheckedUpdateManyWithoutTeamNestedInput
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutTeamNestedInput
 }
@@ -336,25 +336,25 @@ export type MiscellaneousTeamMasterCreateManyInput = {
   id?: number
   vendor_id: number
   name: string
-  status?: string
   created_by: number
   created_at?: Date | string
+  status?: string
 }
 
 export type MiscellaneousTeamMasterUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type MiscellaneousTeamMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type MiscellaneousTeamMasterListRelationFilter = {
@@ -371,9 +371,9 @@ export type MiscellaneousTeamMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type MiscellaneousTeamMasterAvgOrderByAggregateInput = {
@@ -386,18 +386,18 @@ export type MiscellaneousTeamMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type MiscellaneousTeamMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type MiscellaneousTeamMasterSumOrderByAggregateInput = {
@@ -483,9 +483,9 @@ export type MiscellaneousTeamMasterUpdateOneRequiredWithoutIssueLogResponsibleTe
 
 export type MiscellaneousTeamMasterCreateWithoutVendorInput = {
   name: string
-  status?: string
   created_by: number
   created_at?: Date | string
+  status?: string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingCreateNestedManyWithoutTeamInput
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingCreateNestedManyWithoutTeamInput
 }
@@ -493,9 +493,9 @@ export type MiscellaneousTeamMasterCreateWithoutVendorInput = {
 export type MiscellaneousTeamMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   name: string
-  status?: string
   created_by: number
   created_at?: Date | string
+  status?: string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingUncheckedCreateNestedManyWithoutTeamInput
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutTeamInput
 }
@@ -533,16 +533,16 @@ export type MiscellaneousTeamMasterScalarWhereInput = {
   id?: Prisma.IntFilter<"MiscellaneousTeamMaster"> | number
   vendor_id?: Prisma.IntFilter<"MiscellaneousTeamMaster"> | number
   name?: Prisma.StringFilter<"MiscellaneousTeamMaster"> | string
-  status?: Prisma.StringFilter<"MiscellaneousTeamMaster"> | string
   created_by?: Prisma.IntFilter<"MiscellaneousTeamMaster"> | number
   created_at?: Prisma.DateTimeFilter<"MiscellaneousTeamMaster"> | Date | string
+  status?: Prisma.StringFilter<"MiscellaneousTeamMaster"> | string
 }
 
 export type MiscellaneousTeamMasterCreateWithoutMiscTeamMappingInput = {
   name: string
-  status?: string
   created_by: number
   created_at?: Date | string
+  status?: string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingCreateNestedManyWithoutTeamInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousTeamMasterInput
 }
@@ -551,9 +551,9 @@ export type MiscellaneousTeamMasterUncheckedCreateWithoutMiscTeamMappingInput = 
   id?: number
   vendor_id: number
   name: string
-  status?: string
   created_by: number
   created_at?: Date | string
+  status?: string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingUncheckedCreateNestedManyWithoutTeamInput
 }
 
@@ -575,9 +575,9 @@ export type MiscellaneousTeamMasterUpdateToOneWithWhereWithoutMiscTeamMappingInp
 
 export type MiscellaneousTeamMasterUpdateWithoutMiscTeamMappingInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingUpdateManyWithoutTeamNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousTeamMasterNestedInput
 }
@@ -586,17 +586,17 @@ export type MiscellaneousTeamMasterUncheckedUpdateWithoutMiscTeamMappingInput = 
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type MiscellaneousTeamMasterCreateWithoutIssueLogResponsibleTeamMappingInput = {
   name: string
-  status?: string
   created_by: number
   created_at?: Date | string
+  status?: string
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingCreateNestedManyWithoutTeamInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousTeamMasterInput
 }
@@ -605,9 +605,9 @@ export type MiscellaneousTeamMasterUncheckedCreateWithoutIssueLogResponsibleTeam
   id?: number
   vendor_id: number
   name: string
-  status?: string
   created_by: number
   created_at?: Date | string
+  status?: string
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutTeamInput
 }
 
@@ -629,9 +629,9 @@ export type MiscellaneousTeamMasterUpdateToOneWithWhereWithoutIssueLogResponsibl
 
 export type MiscellaneousTeamMasterUpdateWithoutIssueLogResponsibleTeamMappingInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingUpdateManyWithoutTeamNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousTeamMasterNestedInput
 }
@@ -640,25 +640,25 @@ export type MiscellaneousTeamMasterUncheckedUpdateWithoutIssueLogResponsibleTeam
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type MiscellaneousTeamMasterCreateManyVendorInput = {
   id?: number
   name: string
-  status?: string
   created_by: number
   created_at?: Date | string
+  status?: string
 }
 
 export type MiscellaneousTeamMasterUpdateWithoutVendorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingUpdateManyWithoutTeamNestedInput
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingUpdateManyWithoutTeamNestedInput
 }
@@ -666,9 +666,9 @@ export type MiscellaneousTeamMasterUpdateWithoutVendorInput = {
 export type MiscellaneousTeamMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingUncheckedUpdateManyWithoutTeamNestedInput
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutTeamNestedInput
 }
@@ -676,9 +676,9 @@ export type MiscellaneousTeamMasterUncheckedUpdateWithoutVendorInput = {
 export type MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -725,9 +725,9 @@ export type MiscellaneousTeamMasterSelect<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   vendor_id?: boolean
   name?: boolean
-  status?: boolean
   created_by?: boolean
   created_at?: boolean
+  status?: boolean
   issueLogResponsibleTeamMapping?: boolean | Prisma.MiscellaneousTeamMaster$issueLogResponsibleTeamMappingArgs<ExtArgs>
   miscTeamMapping?: boolean | Prisma.MiscellaneousTeamMaster$miscTeamMappingArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -738,9 +738,9 @@ export type MiscellaneousTeamMasterSelectCreateManyAndReturn<ExtArgs extends run
   id?: boolean
   vendor_id?: boolean
   name?: boolean
-  status?: boolean
   created_by?: boolean
   created_at?: boolean
+  status?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["miscellaneousTeamMaster"]>
 
@@ -748,9 +748,9 @@ export type MiscellaneousTeamMasterSelectUpdateManyAndReturn<ExtArgs extends run
   id?: boolean
   vendor_id?: boolean
   name?: boolean
-  status?: boolean
   created_by?: boolean
   created_at?: boolean
+  status?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["miscellaneousTeamMaster"]>
 
@@ -758,12 +758,12 @@ export type MiscellaneousTeamMasterSelectScalar = {
   id?: boolean
   vendor_id?: boolean
   name?: boolean
-  status?: boolean
   created_by?: boolean
   created_at?: boolean
+  status?: boolean
 }
 
-export type MiscellaneousTeamMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "name" | "status" | "created_by" | "created_at", ExtArgs["result"]["miscellaneousTeamMaster"]>
+export type MiscellaneousTeamMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "name" | "created_by" | "created_at" | "status", ExtArgs["result"]["miscellaneousTeamMaster"]>
 export type MiscellaneousTeamMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   issueLogResponsibleTeamMapping?: boolean | Prisma.MiscellaneousTeamMaster$issueLogResponsibleTeamMappingArgs<ExtArgs>
   miscTeamMapping?: boolean | Prisma.MiscellaneousTeamMaster$miscTeamMappingArgs<ExtArgs>
@@ -788,9 +788,9 @@ export type $MiscellaneousTeamMasterPayload<ExtArgs extends runtime.Types.Extens
     id: number
     vendor_id: number
     name: string
-    status: string
     created_by: number
     created_at: Date
+    status: string
   }, ExtArgs["result"]["miscellaneousTeamMaster"]>
   composites: {}
 }
@@ -1220,9 +1220,9 @@ export interface MiscellaneousTeamMasterFieldRefs {
   readonly id: Prisma.FieldRef<"MiscellaneousTeamMaster", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"MiscellaneousTeamMaster", 'Int'>
   readonly name: Prisma.FieldRef<"MiscellaneousTeamMaster", 'String'>
-  readonly status: Prisma.FieldRef<"MiscellaneousTeamMaster", 'String'>
   readonly created_by: Prisma.FieldRef<"MiscellaneousTeamMaster", 'Int'>
   readonly created_at: Prisma.FieldRef<"MiscellaneousTeamMaster", 'DateTime'>
+  readonly status: Prisma.FieldRef<"MiscellaneousTeamMaster", 'String'>
 }
     
 

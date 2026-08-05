@@ -204,18 +204,18 @@ export type ShutterMaterialMasterWhereInput = {
   id?: Prisma.IntFilter<"ShutterMaterialMaster"> | number
   name?: Prisma.StringFilter<"ShutterMaterialMaster"> | string
   vendor_id?: Prisma.IntFilter<"ShutterMaterialMaster"> | number
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  finishes?: Prisma.ShutterMaterialFinishMasterListRelationFilter
   leadMappings?: Prisma.LeadShutterMaterialMappingListRelationFilter
+  finishes?: Prisma.ShutterMaterialFinishMasterListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type ShutterMaterialMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  finishes?: Prisma.ShutterMaterialFinishMasterOrderByRelationAggregateInput
   leadMappings?: Prisma.LeadShutterMaterialMappingOrderByRelationAggregateInput
+  finishes?: Prisma.ShutterMaterialFinishMasterOrderByRelationAggregateInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type ShutterMaterialMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -225,9 +225,9 @@ export type ShutterMaterialMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ShutterMaterialMasterWhereInput | Prisma.ShutterMaterialMasterWhereInput[]
   name?: Prisma.StringFilter<"ShutterMaterialMaster"> | string
   vendor_id?: Prisma.IntFilter<"ShutterMaterialMaster"> | number
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  finishes?: Prisma.ShutterMaterialFinishMasterListRelationFilter
   leadMappings?: Prisma.LeadShutterMaterialMappingListRelationFilter
+  finishes?: Prisma.ShutterMaterialFinishMasterListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type ShutterMaterialMasterOrderByWithAggregationInput = {
@@ -252,32 +252,32 @@ export type ShutterMaterialMasterScalarWhereWithAggregatesInput = {
 
 export type ShutterMaterialMasterCreateInput = {
   name: string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutShutterMaterialsInput
-  finishes?: Prisma.ShutterMaterialFinishMasterCreateNestedManyWithoutMaterialInput
   leadMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutShutterMaterialInput
+  finishes?: Prisma.ShutterMaterialFinishMasterCreateNestedManyWithoutMaterialInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutShutterMaterialsInput
 }
 
 export type ShutterMaterialMasterUncheckedCreateInput = {
   id?: number
   name: string
   vendor_id: number
-  finishes?: Prisma.ShutterMaterialFinishMasterUncheckedCreateNestedManyWithoutMaterialInput
   leadMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutShutterMaterialInput
+  finishes?: Prisma.ShutterMaterialFinishMasterUncheckedCreateNestedManyWithoutMaterialInput
 }
 
 export type ShutterMaterialMasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutShutterMaterialsNestedInput
-  finishes?: Prisma.ShutterMaterialFinishMasterUpdateManyWithoutMaterialNestedInput
   leadMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutShutterMaterialNestedInput
+  finishes?: Prisma.ShutterMaterialFinishMasterUpdateManyWithoutMaterialNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutShutterMaterialsNestedInput
 }
 
 export type ShutterMaterialMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  finishes?: Prisma.ShutterMaterialFinishMasterUncheckedUpdateManyWithoutMaterialNestedInput
   leadMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutShutterMaterialNestedInput
+  finishes?: Prisma.ShutterMaterialFinishMasterUncheckedUpdateManyWithoutMaterialNestedInput
 }
 
 export type ShutterMaterialMasterCreateManyInput = {
@@ -411,15 +411,15 @@ export type ShutterMaterialMasterUpdateOneRequiredWithoutFinishesNestedInput = {
 
 export type ShutterMaterialMasterCreateWithoutVendorInput = {
   name: string
-  finishes?: Prisma.ShutterMaterialFinishMasterCreateNestedManyWithoutMaterialInput
   leadMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutShutterMaterialInput
+  finishes?: Prisma.ShutterMaterialFinishMasterCreateNestedManyWithoutMaterialInput
 }
 
 export type ShutterMaterialMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   name: string
-  finishes?: Prisma.ShutterMaterialFinishMasterUncheckedCreateNestedManyWithoutMaterialInput
   leadMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutShutterMaterialInput
+  finishes?: Prisma.ShutterMaterialFinishMasterUncheckedCreateNestedManyWithoutMaterialInput
 }
 
 export type ShutterMaterialMasterCreateOrConnectWithoutVendorInput = {
@@ -459,8 +459,8 @@ export type ShutterMaterialMasterScalarWhereInput = {
 
 export type ShutterMaterialMasterCreateWithoutLeadMappingsInput = {
   name: string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutShutterMaterialsInput
   finishes?: Prisma.ShutterMaterialFinishMasterCreateNestedManyWithoutMaterialInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutShutterMaterialsInput
 }
 
 export type ShutterMaterialMasterUncheckedCreateWithoutLeadMappingsInput = {
@@ -488,8 +488,8 @@ export type ShutterMaterialMasterUpdateToOneWithWhereWithoutLeadMappingsInput = 
 
 export type ShutterMaterialMasterUpdateWithoutLeadMappingsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutShutterMaterialsNestedInput
   finishes?: Prisma.ShutterMaterialFinishMasterUpdateManyWithoutMaterialNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutShutterMaterialsNestedInput
 }
 
 export type ShutterMaterialMasterUncheckedUpdateWithoutLeadMappingsInput = {
@@ -501,8 +501,8 @@ export type ShutterMaterialMasterUncheckedUpdateWithoutLeadMappingsInput = {
 
 export type ShutterMaterialMasterCreateWithoutFinishesInput = {
   name: string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutShutterMaterialsInput
   leadMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutShutterMaterialInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutShutterMaterialsInput
 }
 
 export type ShutterMaterialMasterUncheckedCreateWithoutFinishesInput = {
@@ -530,8 +530,8 @@ export type ShutterMaterialMasterUpdateToOneWithWhereWithoutFinishesInput = {
 
 export type ShutterMaterialMasterUpdateWithoutFinishesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutShutterMaterialsNestedInput
   leadMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutShutterMaterialNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutShutterMaterialsNestedInput
 }
 
 export type ShutterMaterialMasterUncheckedUpdateWithoutFinishesInput = {
@@ -548,15 +548,15 @@ export type ShutterMaterialMasterCreateManyVendorInput = {
 
 export type ShutterMaterialMasterUpdateWithoutVendorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  finishes?: Prisma.ShutterMaterialFinishMasterUpdateManyWithoutMaterialNestedInput
   leadMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutShutterMaterialNestedInput
+  finishes?: Prisma.ShutterMaterialFinishMasterUpdateManyWithoutMaterialNestedInput
 }
 
 export type ShutterMaterialMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  finishes?: Prisma.ShutterMaterialFinishMasterUncheckedUpdateManyWithoutMaterialNestedInput
   leadMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutShutterMaterialNestedInput
+  finishes?: Prisma.ShutterMaterialFinishMasterUncheckedUpdateManyWithoutMaterialNestedInput
 }
 
 export type ShutterMaterialMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -570,13 +570,13 @@ export type ShutterMaterialMasterUncheckedUpdateManyWithoutVendorInput = {
  */
 
 export type ShutterMaterialMasterCountOutputType = {
-  finishes: number
   leadMappings: number
+  finishes: number
 }
 
 export type ShutterMaterialMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  finishes?: boolean | ShutterMaterialMasterCountOutputTypeCountFinishesArgs
   leadMappings?: boolean | ShutterMaterialMasterCountOutputTypeCountLeadMappingsArgs
+  finishes?: boolean | ShutterMaterialMasterCountOutputTypeCountFinishesArgs
 }
 
 /**
@@ -592,15 +592,15 @@ export type ShutterMaterialMasterCountOutputTypeDefaultArgs<ExtArgs extends runt
 /**
  * ShutterMaterialMasterCountOutputType without action
  */
-export type ShutterMaterialMasterCountOutputTypeCountFinishesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ShutterMaterialFinishMasterWhereInput
+export type ShutterMaterialMasterCountOutputTypeCountLeadMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadShutterMaterialMappingWhereInput
 }
 
 /**
  * ShutterMaterialMasterCountOutputType without action
  */
-export type ShutterMaterialMasterCountOutputTypeCountLeadMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadShutterMaterialMappingWhereInput
+export type ShutterMaterialMasterCountOutputTypeCountFinishesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ShutterMaterialFinishMasterWhereInput
 }
 
 
@@ -608,9 +608,9 @@ export type ShutterMaterialMasterSelect<ExtArgs extends runtime.Types.Extensions
   id?: boolean
   name?: boolean
   vendor_id?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  finishes?: boolean | Prisma.ShutterMaterialMaster$finishesArgs<ExtArgs>
   leadMappings?: boolean | Prisma.ShutterMaterialMaster$leadMappingsArgs<ExtArgs>
+  finishes?: boolean | Prisma.ShutterMaterialMaster$finishesArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ShutterMaterialMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["shutterMaterialMaster"]>
 
@@ -636,9 +636,9 @@ export type ShutterMaterialMasterSelectScalar = {
 
 export type ShutterMaterialMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "vendor_id", ExtArgs["result"]["shutterMaterialMaster"]>
 export type ShutterMaterialMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  finishes?: boolean | Prisma.ShutterMaterialMaster$finishesArgs<ExtArgs>
   leadMappings?: boolean | Prisma.ShutterMaterialMaster$leadMappingsArgs<ExtArgs>
+  finishes?: boolean | Prisma.ShutterMaterialMaster$finishesArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ShutterMaterialMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ShutterMaterialMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -651,9 +651,9 @@ export type ShutterMaterialMasterIncludeUpdateManyAndReturn<ExtArgs extends runt
 export type $ShutterMaterialMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ShutterMaterialMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    finishes: Prisma.$ShutterMaterialFinishMasterPayload<ExtArgs>[]
     leadMappings: Prisma.$LeadShutterMaterialMappingPayload<ExtArgs>[]
+    finishes: Prisma.$ShutterMaterialFinishMasterPayload<ExtArgs>[]
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1053,9 +1053,9 @@ readonly fields: ShutterMaterialMasterFieldRefs;
  */
 export interface Prisma__ShutterMaterialMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  finishes<T extends Prisma.ShutterMaterialMaster$finishesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ShutterMaterialMaster$finishesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShutterMaterialFinishMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadMappings<T extends Prisma.ShutterMaterialMaster$leadMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ShutterMaterialMaster$leadMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadShutterMaterialMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  finishes<T extends Prisma.ShutterMaterialMaster$finishesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ShutterMaterialMaster$finishesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShutterMaterialFinishMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1489,30 +1489,6 @@ export type ShutterMaterialMasterDeleteManyArgs<ExtArgs extends runtime.Types.Ex
 }
 
 /**
- * ShutterMaterialMaster.finishes
- */
-export type ShutterMaterialMaster$finishesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ShutterMaterialFinishMaster
-   */
-  select?: Prisma.ShutterMaterialFinishMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ShutterMaterialFinishMaster
-   */
-  omit?: Prisma.ShutterMaterialFinishMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ShutterMaterialFinishMasterInclude<ExtArgs> | null
-  where?: Prisma.ShutterMaterialFinishMasterWhereInput
-  orderBy?: Prisma.ShutterMaterialFinishMasterOrderByWithRelationInput | Prisma.ShutterMaterialFinishMasterOrderByWithRelationInput[]
-  cursor?: Prisma.ShutterMaterialFinishMasterWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ShutterMaterialFinishMasterScalarFieldEnum | Prisma.ShutterMaterialFinishMasterScalarFieldEnum[]
-}
-
-/**
  * ShutterMaterialMaster.leadMappings
  */
 export type ShutterMaterialMaster$leadMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1534,6 +1510,30 @@ export type ShutterMaterialMaster$leadMappingsArgs<ExtArgs extends runtime.Types
   take?: number
   skip?: number
   distinct?: Prisma.LeadShutterMaterialMappingScalarFieldEnum | Prisma.LeadShutterMaterialMappingScalarFieldEnum[]
+}
+
+/**
+ * ShutterMaterialMaster.finishes
+ */
+export type ShutterMaterialMaster$finishesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ShutterMaterialFinishMaster
+   */
+  select?: Prisma.ShutterMaterialFinishMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ShutterMaterialFinishMaster
+   */
+  omit?: Prisma.ShutterMaterialFinishMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ShutterMaterialFinishMasterInclude<ExtArgs> | null
+  where?: Prisma.ShutterMaterialFinishMasterWhereInput
+  orderBy?: Prisma.ShutterMaterialFinishMasterOrderByWithRelationInput | Prisma.ShutterMaterialFinishMasterOrderByWithRelationInput[]
+  cursor?: Prisma.ShutterMaterialFinishMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ShutterMaterialFinishMasterScalarFieldEnum | Prisma.ShutterMaterialFinishMasterScalarFieldEnum[]
 }
 
 /**

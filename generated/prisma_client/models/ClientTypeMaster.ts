@@ -220,8 +220,8 @@ export type ClientTypeMasterWhereInput = {
   type?: Prisma.StringFilter<"ClientTypeMaster"> | string
   is_active?: Prisma.BoolFilter<"ClientTypeMaster"> | boolean
   created_at?: Prisma.DateTimeFilter<"ClientTypeMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   clients?: Prisma.ClientMasterListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type ClientTypeMasterOrderByWithRelationInput = {
@@ -230,8 +230,8 @@ export type ClientTypeMasterOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   clients?: Prisma.ClientMasterOrderByRelationAggregateInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type ClientTypeMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -243,8 +243,8 @@ export type ClientTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.StringFilter<"ClientTypeMaster"> | string
   is_active?: Prisma.BoolFilter<"ClientTypeMaster"> | boolean
   created_at?: Prisma.DateTimeFilter<"ClientTypeMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   clients?: Prisma.ClientMasterListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type ClientTypeMasterOrderByWithAggregationInput = {
@@ -275,8 +275,8 @@ export type ClientTypeMasterCreateInput = {
   type: string
   is_active?: boolean
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutClientTypesInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutClientTypeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutClientTypesInput
 }
 
 export type ClientTypeMasterUncheckedCreateInput = {
@@ -292,8 +292,8 @@ export type ClientTypeMasterUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutClientTypesNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutClientTypeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutClientTypesNestedInput
 }
 
 export type ClientTypeMasterUncheckedUpdateInput = {
@@ -598,8 +598,8 @@ export type ClientTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.Inte
   type?: boolean
   is_active?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   clients?: boolean | Prisma.ClientTypeMaster$clientsArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ClientTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["clientTypeMaster"]>
 
@@ -631,8 +631,8 @@ export type ClientTypeMasterSelectScalar = {
 
 export type ClientTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "type" | "is_active" | "created_at", ExtArgs["result"]["clientTypeMaster"]>
 export type ClientTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   clients?: boolean | Prisma.ClientTypeMaster$clientsArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ClientTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ClientTypeMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -645,8 +645,8 @@ export type ClientTypeMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.T
 export type $ClientTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ClientTypeMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     clients: Prisma.$ClientMasterPayload<ExtArgs>[]
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1048,8 +1048,8 @@ readonly fields: ClientTypeMasterFieldRefs;
  */
 export interface Prisma__ClientTypeMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   clients<T extends Prisma.ClientTypeMaster$clientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientTypeMaster$clientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClientMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

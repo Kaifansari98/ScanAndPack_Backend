@@ -236,8 +236,8 @@ export type SmallOrderRequestTypeMasterWhereInput = {
   status?: Prisma.StringFilter<"SmallOrderRequestTypeMaster"> | string
   created_at?: Prisma.DateTimeFilter<"SmallOrderRequestTypeMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"SmallOrderRequestTypeMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   smallOrderRequests?: Prisma.SmallOrderRequestListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type SmallOrderRequestTypeMasterOrderByWithRelationInput = {
@@ -248,8 +248,8 @@ export type SmallOrderRequestTypeMasterOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   smallOrderRequests?: Prisma.SmallOrderRequestOrderByRelationAggregateInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type SmallOrderRequestTypeMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -264,8 +264,8 @@ export type SmallOrderRequestTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.StringFilter<"SmallOrderRequestTypeMaster"> | string
   created_at?: Prisma.DateTimeFilter<"SmallOrderRequestTypeMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"SmallOrderRequestTypeMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   smallOrderRequests?: Prisma.SmallOrderRequestListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id" | "uniq_vendor_small_order_request_type_key">
 
 export type SmallOrderRequestTypeMasterOrderByWithAggregationInput = {
@@ -302,8 +302,8 @@ export type SmallOrderRequestTypeMasterCreateInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutSmallOrderRequestTypeMastersInput
   smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutRequestTypeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutSmallOrderRequestTypeMastersInput
 }
 
 export type SmallOrderRequestTypeMasterUncheckedCreateInput = {
@@ -323,8 +323,8 @@ export type SmallOrderRequestTypeMasterUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSmallOrderRequestTypeMastersNestedInput
   smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutRequestTypeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSmallOrderRequestTypeMastersNestedInput
 }
 
 export type SmallOrderRequestTypeMasterUncheckedUpdateInput = {
@@ -674,8 +674,8 @@ export type SmallOrderRequestTypeMasterSelect<ExtArgs extends runtime.Types.Exte
   status?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   smallOrderRequests?: boolean | Prisma.SmallOrderRequestTypeMaster$smallOrderRequestsArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.SmallOrderRequestTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["smallOrderRequestTypeMaster"]>
 
@@ -713,8 +713,8 @@ export type SmallOrderRequestTypeMasterSelectScalar = {
 
 export type SmallOrderRequestTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "type" | "type_key" | "status" | "created_at" | "updated_at", ExtArgs["result"]["smallOrderRequestTypeMaster"]>
 export type SmallOrderRequestTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   smallOrderRequests?: boolean | Prisma.SmallOrderRequestTypeMaster$smallOrderRequestsArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.SmallOrderRequestTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SmallOrderRequestTypeMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -727,8 +727,8 @@ export type SmallOrderRequestTypeMasterIncludeUpdateManyAndReturn<ExtArgs extend
 export type $SmallOrderRequestTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SmallOrderRequestTypeMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     smallOrderRequests: Prisma.$SmallOrderRequestPayload<ExtArgs>[]
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1132,8 +1132,8 @@ readonly fields: SmallOrderRequestTypeMasterFieldRefs;
  */
 export interface Prisma__SmallOrderRequestTypeMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   smallOrderRequests<T extends Prisma.SmallOrderRequestTypeMaster$smallOrderRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SmallOrderRequestTypeMaster$smallOrderRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SmallOrderRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

@@ -204,16 +204,16 @@ export type ShutterSubTypeMasterWhereInput = {
   id?: Prisma.IntFilter<"ShutterSubTypeMaster"> | number
   name?: Prisma.StringFilter<"ShutterSubTypeMaster"> | string
   shutter_type_id?: Prisma.IntFilter<"ShutterSubTypeMaster"> | number
-  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
   shutter?: Prisma.XOR<Prisma.ShutterTypeMasterScalarRelationFilter, Prisma.ShutterTypeMasterWhereInput>
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
 }
 
 export type ShutterSubTypeMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   shutter_type_id?: Prisma.SortOrder
-  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingOrderByRelationAggregateInput
   shutter?: Prisma.ShutterTypeMasterOrderByWithRelationInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingOrderByRelationAggregateInput
 }
 
 export type ShutterSubTypeMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -223,8 +223,8 @@ export type ShutterSubTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ShutterSubTypeMasterWhereInput | Prisma.ShutterSubTypeMasterWhereInput[]
   name?: Prisma.StringFilter<"ShutterSubTypeMaster"> | string
   shutter_type_id?: Prisma.IntFilter<"ShutterSubTypeMaster"> | number
-  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
   shutter?: Prisma.XOR<Prisma.ShutterTypeMasterScalarRelationFilter, Prisma.ShutterTypeMasterWhereInput>
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
 }, "id">
 
 export type ShutterSubTypeMasterOrderByWithAggregationInput = {
@@ -249,8 +249,8 @@ export type ShutterSubTypeMasterScalarWhereWithAggregatesInput = {
 
 export type ShutterSubTypeMasterCreateInput = {
   name: string
-  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutShutterSubTypeInput
   shutter: Prisma.ShutterTypeMasterCreateNestedOneWithoutSubTypesInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutShutterSubTypeInput
 }
 
 export type ShutterSubTypeMasterUncheckedCreateInput = {
@@ -262,8 +262,8 @@ export type ShutterSubTypeMasterUncheckedCreateInput = {
 
 export type ShutterSubTypeMasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutShutterSubTypeNestedInput
   shutter?: Prisma.ShutterTypeMasterUpdateOneRequiredWithoutSubTypesNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutShutterSubTypeNestedInput
 }
 
 export type ShutterSubTypeMasterUncheckedUpdateInput = {
@@ -530,8 +530,8 @@ export type ShutterSubTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.
   id?: boolean
   name?: boolean
   shutter_type_id?: boolean
-  chsSelectionMappings?: boolean | Prisma.ShutterSubTypeMaster$chsSelectionMappingsArgs<ExtArgs>
   shutter?: boolean | Prisma.ShutterTypeMasterDefaultArgs<ExtArgs>
+  chsSelectionMappings?: boolean | Prisma.ShutterSubTypeMaster$chsSelectionMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.ShutterSubTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["shutterSubTypeMaster"]>
 
@@ -557,8 +557,8 @@ export type ShutterSubTypeMasterSelectScalar = {
 
 export type ShutterSubTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "shutter_type_id", ExtArgs["result"]["shutterSubTypeMaster"]>
 export type ShutterSubTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  chsSelectionMappings?: boolean | Prisma.ShutterSubTypeMaster$chsSelectionMappingsArgs<ExtArgs>
   shutter?: boolean | Prisma.ShutterTypeMasterDefaultArgs<ExtArgs>
+  chsSelectionMappings?: boolean | Prisma.ShutterSubTypeMaster$chsSelectionMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.ShutterSubTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ShutterSubTypeMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -571,8 +571,8 @@ export type ShutterSubTypeMasterIncludeUpdateManyAndReturn<ExtArgs extends runti
 export type $ShutterSubTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ShutterSubTypeMaster"
   objects: {
-    chsSelectionMappings: Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>[]
     shutter: Prisma.$ShutterTypeMasterPayload<ExtArgs>
+    chsSelectionMappings: Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -972,8 +972,8 @@ readonly fields: ShutterSubTypeMasterFieldRefs;
  */
 export interface Prisma__ShutterSubTypeMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  chsSelectionMappings<T extends Prisma.ShutterSubTypeMaster$chsSelectionMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ShutterSubTypeMaster$chsSelectionMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   shutter<T extends Prisma.ShutterTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ShutterTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ShutterTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$ShutterTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  chsSelectionMappings<T extends Prisma.ShutterSubTypeMaster$chsSelectionMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ShutterSubTypeMaster$chsSelectionMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

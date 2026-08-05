@@ -320,22 +320,24 @@ export type AccountMasterWhereInput = {
   franchise?: Prisma.XOR<Prisma.FranchiseMasterNullableScalarRelationFilter, Prisma.FranchiseMasterWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  fastProductionRequests?: Prisma.FastProductionRequestListRelationFilter
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchListRelationFilter
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterListRelationFilter
   installationUpdates?: Prisma.InstallationUpdateListRelationFilter
   installerMappings?: Prisma.InstallerUserMappingListRelationFilter
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogListRelationFilter
+  leadAmcContracts?: Prisma.LeadAmcContractListRelationFilter
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingListRelationFilter
   leadChatDocument?: Prisma.LeadChatDocumentListRelationFilter
-  designMeeting?: Prisma.LeadDesignMeetingListRelationFilter
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingListRelationFilter
   clientVisits?: Prisma.LeadClientVisitListRelationFilter
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingListRelationFilter
+  designMeeting?: Prisma.LeadDesignMeetingListRelationFilter
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingListRelationFilter
   designSelection?: Prisma.LeadDesignSelectionListRelationFilter
   leadDetailedLogs?: Prisma.LeadDetailedLogsListRelationFilter
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingListRelationFilter
   leadDocumentLogs?: Prisma.LeadDocumentLogsListRelationFilter
   documents?: Prisma.LeadDocumentsListRelationFilter
   leads?: Prisma.LeadMasterListRelationFilter
-  leadAmcContracts?: Prisma.LeadAmcContractListRelationFilter
   leadsMapping?: Prisma.LeadProductMappingListRelationFilter
   productStructureInstances?: Prisma.LeadProductStructureInstanceListRelationFilter
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingListRelationFilter
@@ -349,8 +351,6 @@ export type AccountMasterWhereInput = {
   payments?: Prisma.PaymentInfoListRelationFilter
   siteReadiness?: Prisma.SiteReadinessListRelationFilter
   tasks?: Prisma.UserLeadTaskListRelationFilter
-  fastProductionRequests?: Prisma.FastProductionRequestListRelationFilter
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchListRelationFilter
 }
 
 export type AccountMasterOrderByWithRelationInput = {
@@ -373,22 +373,24 @@ export type AccountMasterOrderByWithRelationInput = {
   franchise?: Prisma.FranchiseMasterOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  fastProductionRequests?: Prisma.FastProductionRequestOrderByRelationAggregateInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchOrderByRelationAggregateInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterOrderByRelationAggregateInput
   installationUpdates?: Prisma.InstallationUpdateOrderByRelationAggregateInput
   installerMappings?: Prisma.InstallerUserMappingOrderByRelationAggregateInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogOrderByRelationAggregateInput
+  leadAmcContracts?: Prisma.LeadAmcContractOrderByRelationAggregateInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingOrderByRelationAggregateInput
   leadChatDocument?: Prisma.LeadChatDocumentOrderByRelationAggregateInput
-  designMeeting?: Prisma.LeadDesignMeetingOrderByRelationAggregateInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingOrderByRelationAggregateInput
   clientVisits?: Prisma.LeadClientVisitOrderByRelationAggregateInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingOrderByRelationAggregateInput
+  designMeeting?: Prisma.LeadDesignMeetingOrderByRelationAggregateInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingOrderByRelationAggregateInput
   designSelection?: Prisma.LeadDesignSelectionOrderByRelationAggregateInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsOrderByRelationAggregateInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingOrderByRelationAggregateInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsOrderByRelationAggregateInput
   documents?: Prisma.LeadDocumentsOrderByRelationAggregateInput
   leads?: Prisma.LeadMasterOrderByRelationAggregateInput
-  leadAmcContracts?: Prisma.LeadAmcContractOrderByRelationAggregateInput
   leadsMapping?: Prisma.LeadProductMappingOrderByRelationAggregateInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceOrderByRelationAggregateInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingOrderByRelationAggregateInput
@@ -402,8 +404,6 @@ export type AccountMasterOrderByWithRelationInput = {
   payments?: Prisma.PaymentInfoOrderByRelationAggregateInput
   siteReadiness?: Prisma.SiteReadinessOrderByRelationAggregateInput
   tasks?: Prisma.UserLeadTaskOrderByRelationAggregateInput
-  fastProductionRequests?: Prisma.FastProductionRequestOrderByRelationAggregateInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchOrderByRelationAggregateInput
 }
 
 export type AccountMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -429,22 +429,24 @@ export type AccountMasterWhereUniqueInput = Prisma.AtLeast<{
   franchise?: Prisma.XOR<Prisma.FranchiseMasterNullableScalarRelationFilter, Prisma.FranchiseMasterWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  fastProductionRequests?: Prisma.FastProductionRequestListRelationFilter
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchListRelationFilter
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterListRelationFilter
   installationUpdates?: Prisma.InstallationUpdateListRelationFilter
   installerMappings?: Prisma.InstallerUserMappingListRelationFilter
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogListRelationFilter
+  leadAmcContracts?: Prisma.LeadAmcContractListRelationFilter
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingListRelationFilter
   leadChatDocument?: Prisma.LeadChatDocumentListRelationFilter
-  designMeeting?: Prisma.LeadDesignMeetingListRelationFilter
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingListRelationFilter
   clientVisits?: Prisma.LeadClientVisitListRelationFilter
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingListRelationFilter
+  designMeeting?: Prisma.LeadDesignMeetingListRelationFilter
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingListRelationFilter
   designSelection?: Prisma.LeadDesignSelectionListRelationFilter
   leadDetailedLogs?: Prisma.LeadDetailedLogsListRelationFilter
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingListRelationFilter
   leadDocumentLogs?: Prisma.LeadDocumentLogsListRelationFilter
   documents?: Prisma.LeadDocumentsListRelationFilter
   leads?: Prisma.LeadMasterListRelationFilter
-  leadAmcContracts?: Prisma.LeadAmcContractListRelationFilter
   leadsMapping?: Prisma.LeadProductMappingListRelationFilter
   productStructureInstances?: Prisma.LeadProductStructureInstanceListRelationFilter
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingListRelationFilter
@@ -458,8 +460,6 @@ export type AccountMasterWhereUniqueInput = Prisma.AtLeast<{
   payments?: Prisma.PaymentInfoListRelationFilter
   siteReadiness?: Prisma.SiteReadinessListRelationFilter
   tasks?: Prisma.UserLeadTaskListRelationFilter
-  fastProductionRequests?: Prisma.FastProductionRequestListRelationFilter
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchListRelationFilter
 }, "id">
 
 export type AccountMasterOrderByWithAggregationInput = {
@@ -521,22 +521,24 @@ export type AccountMasterCreateInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -550,8 +552,6 @@ export type AccountMasterCreateInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateInput = {
@@ -570,22 +570,24 @@ export type AccountMasterUncheckedCreateInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -599,8 +601,6 @@ export type AccountMasterUncheckedCreateInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUpdateInput = {
@@ -618,22 +618,24 @@ export type AccountMasterUpdateInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -647,8 +649,6 @@ export type AccountMasterUpdateInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateInput = {
@@ -667,22 +667,24 @@ export type AccountMasterUncheckedUpdateInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -696,8 +698,6 @@ export type AccountMasterUncheckedUpdateInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateManyInput = {
@@ -1463,22 +1463,24 @@ export type AccountMasterCreateWithoutVendorInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -1492,8 +1494,6 @@ export type AccountMasterCreateWithoutVendorInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutVendorInput = {
@@ -1511,22 +1511,24 @@ export type AccountMasterUncheckedCreateWithoutVendorInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -1540,8 +1542,6 @@ export type AccountMasterUncheckedCreateWithoutVendorInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutVendorInput = {
@@ -1605,22 +1605,24 @@ export type AccountMasterCreateWithoutCreatedByInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -1634,8 +1636,6 @@ export type AccountMasterCreateWithoutCreatedByInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutCreatedByInput = {
@@ -1653,22 +1653,24 @@ export type AccountMasterUncheckedCreateWithoutCreatedByInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -1682,8 +1684,6 @@ export type AccountMasterUncheckedCreateWithoutCreatedByInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutCreatedByInput = {
@@ -1710,22 +1710,24 @@ export type AccountMasterCreateWithoutUpdatedByInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -1739,8 +1741,6 @@ export type AccountMasterCreateWithoutUpdatedByInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutUpdatedByInput = {
@@ -1758,22 +1758,24 @@ export type AccountMasterUncheckedCreateWithoutUpdatedByInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -1787,8 +1789,6 @@ export type AccountMasterUncheckedCreateWithoutUpdatedByInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutUpdatedByInput = {
@@ -1848,21 +1848,23 @@ export type AccountMasterCreateWithoutLeadsInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -1876,8 +1878,6 @@ export type AccountMasterCreateWithoutLeadsInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadsInput = {
@@ -1896,21 +1896,23 @@ export type AccountMasterUncheckedCreateWithoutLeadsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -1924,8 +1926,6 @@ export type AccountMasterUncheckedCreateWithoutLeadsInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadsInput = {
@@ -1959,21 +1959,23 @@ export type AccountMasterUpdateWithoutLeadsInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -1987,8 +1989,6 @@ export type AccountMasterUpdateWithoutLeadsInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadsInput = {
@@ -2007,21 +2007,23 @@ export type AccountMasterUncheckedUpdateWithoutLeadsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -2035,8 +2037,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadsInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadUserMappingsInput = {
@@ -2054,22 +2054,24 @@ export type AccountMasterCreateWithoutLeadUserMappingsInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -2082,8 +2084,6 @@ export type AccountMasterCreateWithoutLeadUserMappingsInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadUserMappingsInput = {
@@ -2102,22 +2102,24 @@ export type AccountMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -2130,8 +2132,6 @@ export type AccountMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadUserMappingsInput = {
@@ -2165,22 +2165,24 @@ export type AccountMasterUpdateWithoutLeadUserMappingsInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -2193,8 +2195,6 @@ export type AccountMasterUpdateWithoutLeadUserMappingsInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
@@ -2213,22 +2213,24 @@ export type AccountMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -2241,8 +2243,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadActivityStatusLogInput = {
@@ -2260,21 +2260,23 @@ export type AccountMasterCreateWithoutLeadActivityStatusLogInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -2288,8 +2290,6 @@ export type AccountMasterCreateWithoutLeadActivityStatusLogInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
@@ -2308,21 +2308,23 @@ export type AccountMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -2336,8 +2338,6 @@ export type AccountMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadActivityStatusLogInput = {
@@ -2371,21 +2371,23 @@ export type AccountMasterUpdateWithoutLeadActivityStatusLogInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -2399,8 +2401,6 @@ export type AccountMasterUpdateWithoutLeadActivityStatusLogInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
@@ -2419,21 +2419,23 @@ export type AccountMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -2447,8 +2449,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadsMappingInput = {
@@ -2466,22 +2466,24 @@ export type AccountMasterCreateWithoutLeadsMappingInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
   leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutAccountInput
@@ -2494,8 +2496,6 @@ export type AccountMasterCreateWithoutLeadsMappingInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadsMappingInput = {
@@ -2514,22 +2514,24 @@ export type AccountMasterUncheckedCreateWithoutLeadsMappingInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
   leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutAccountInput
@@ -2542,8 +2544,6 @@ export type AccountMasterUncheckedCreateWithoutLeadsMappingInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadsMappingInput = {
@@ -2577,22 +2577,24 @@ export type AccountMasterUpdateWithoutLeadsMappingInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
   leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutAccountNestedInput
@@ -2605,8 +2607,6 @@ export type AccountMasterUpdateWithoutLeadsMappingInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadsMappingInput = {
@@ -2625,22 +2625,24 @@ export type AccountMasterUncheckedUpdateWithoutLeadsMappingInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutAccountNestedInput
@@ -2653,8 +2655,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadsMappingInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutDocumentsInput = {
@@ -2672,21 +2672,23 @@ export type AccountMasterCreateWithoutDocumentsInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -2700,8 +2702,6 @@ export type AccountMasterCreateWithoutDocumentsInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutDocumentsInput = {
@@ -2720,21 +2720,23 @@ export type AccountMasterUncheckedCreateWithoutDocumentsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -2748,8 +2750,6 @@ export type AccountMasterUncheckedCreateWithoutDocumentsInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutDocumentsInput = {
@@ -2783,21 +2783,23 @@ export type AccountMasterUpdateWithoutDocumentsInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -2811,8 +2813,6 @@ export type AccountMasterUpdateWithoutDocumentsInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutDocumentsInput = {
@@ -2831,21 +2831,23 @@ export type AccountMasterUncheckedUpdateWithoutDocumentsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -2859,8 +2861,6 @@ export type AccountMasterUncheckedUpdateWithoutDocumentsInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadChatDocumentInput = {
@@ -2878,21 +2878,23 @@ export type AccountMasterCreateWithoutLeadChatDocumentInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -2906,8 +2908,6 @@ export type AccountMasterCreateWithoutLeadChatDocumentInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadChatDocumentInput = {
@@ -2926,21 +2926,23 @@ export type AccountMasterUncheckedCreateWithoutLeadChatDocumentInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -2954,8 +2956,6 @@ export type AccountMasterUncheckedCreateWithoutLeadChatDocumentInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadChatDocumentInput = {
@@ -2989,21 +2989,23 @@ export type AccountMasterUpdateWithoutLeadChatDocumentInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -3017,8 +3019,6 @@ export type AccountMasterUpdateWithoutLeadChatDocumentInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadChatDocumentInput = {
@@ -3037,21 +3037,23 @@ export type AccountMasterUncheckedUpdateWithoutLeadChatDocumentInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -3065,8 +3067,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadChatDocumentInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadProductStructureMappingInput = {
@@ -3084,22 +3084,24 @@ export type AccountMasterCreateWithoutLeadProductStructureMappingInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutAccountInput
@@ -3112,8 +3114,6 @@ export type AccountMasterCreateWithoutLeadProductStructureMappingInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
@@ -3132,22 +3132,24 @@ export type AccountMasterUncheckedCreateWithoutLeadProductStructureMappingInput 
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutAccountInput
@@ -3160,8 +3162,6 @@ export type AccountMasterUncheckedCreateWithoutLeadProductStructureMappingInput 
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadProductStructureMappingInput = {
@@ -3195,22 +3195,24 @@ export type AccountMasterUpdateWithoutLeadProductStructureMappingInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutAccountNestedInput
@@ -3223,8 +3225,6 @@ export type AccountMasterUpdateWithoutLeadProductStructureMappingInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
@@ -3243,22 +3243,24 @@ export type AccountMasterUncheckedUpdateWithoutLeadProductStructureMappingInput 
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutAccountNestedInput
@@ -3271,8 +3273,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadProductStructureMappingInput 
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutProductStructureInstancesInput = {
@@ -3290,22 +3290,24 @@ export type AccountMasterCreateWithoutProductStructureInstancesInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
   leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutAccountInput
@@ -3318,8 +3320,6 @@ export type AccountMasterCreateWithoutProductStructureInstancesInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutProductStructureInstancesInput = {
@@ -3338,22 +3338,24 @@ export type AccountMasterUncheckedCreateWithoutProductStructureInstancesInput = 
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
   leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutAccountInput
@@ -3366,8 +3368,6 @@ export type AccountMasterUncheckedCreateWithoutProductStructureInstancesInput = 
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutProductStructureInstancesInput = {
@@ -3401,22 +3401,24 @@ export type AccountMasterUpdateWithoutProductStructureInstancesInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
   leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutAccountNestedInput
@@ -3429,8 +3431,6 @@ export type AccountMasterUpdateWithoutProductStructureInstancesInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
@@ -3449,22 +3449,24 @@ export type AccountMasterUncheckedUpdateWithoutProductStructureInstancesInput = 
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutAccountNestedInput
@@ -3477,8 +3479,6 @@ export type AccountMasterUncheckedUpdateWithoutProductStructureInstancesInput = 
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutPaymentsInput = {
@@ -3496,22 +3496,24 @@ export type AccountMasterCreateWithoutPaymentsInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -3524,8 +3526,6 @@ export type AccountMasterCreateWithoutPaymentsInput = {
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutPaymentsInput = {
@@ -3544,22 +3544,24 @@ export type AccountMasterUncheckedCreateWithoutPaymentsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -3572,8 +3574,6 @@ export type AccountMasterUncheckedCreateWithoutPaymentsInput = {
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutPaymentsInput = {
@@ -3607,22 +3607,24 @@ export type AccountMasterUpdateWithoutPaymentsInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -3635,8 +3637,6 @@ export type AccountMasterUpdateWithoutPaymentsInput = {
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutPaymentsInput = {
@@ -3655,22 +3655,24 @@ export type AccountMasterUncheckedUpdateWithoutPaymentsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -3683,8 +3685,6 @@ export type AccountMasterUncheckedUpdateWithoutPaymentsInput = {
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLedgersInput = {
@@ -3702,22 +3702,24 @@ export type AccountMasterCreateWithoutLedgersInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -3730,8 +3732,6 @@ export type AccountMasterCreateWithoutLedgersInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLedgersInput = {
@@ -3750,22 +3750,24 @@ export type AccountMasterUncheckedCreateWithoutLedgersInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -3778,8 +3780,6 @@ export type AccountMasterUncheckedCreateWithoutLedgersInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLedgersInput = {
@@ -3813,22 +3813,24 @@ export type AccountMasterUpdateWithoutLedgersInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -3841,8 +3843,6 @@ export type AccountMasterUpdateWithoutLedgersInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLedgersInput = {
@@ -3861,22 +3861,24 @@ export type AccountMasterUncheckedUpdateWithoutLedgersInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -3889,8 +3891,6 @@ export type AccountMasterUncheckedUpdateWithoutLedgersInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadAmcContractsInput = {
@@ -3908,18 +3908,20 @@ export type AccountMasterCreateWithoutLeadAmcContractsInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
@@ -3936,8 +3938,6 @@ export type AccountMasterCreateWithoutLeadAmcContractsInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadAmcContractsInput = {
@@ -3956,18 +3956,20 @@ export type AccountMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
@@ -3984,8 +3986,6 @@ export type AccountMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadAmcContractsInput = {
@@ -4019,18 +4019,20 @@ export type AccountMasterUpdateWithoutLeadAmcContractsInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
@@ -4047,8 +4049,6 @@ export type AccountMasterUpdateWithoutLeadAmcContractsInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
@@ -4067,18 +4067,20 @@ export type AccountMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
@@ -4095,8 +4097,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadServiceSchedulesInput = {
@@ -4114,22 +4114,24 @@ export type AccountMasterCreateWithoutLeadServiceSchedulesInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -4142,8 +4144,6 @@ export type AccountMasterCreateWithoutLeadServiceSchedulesInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
@@ -4162,22 +4162,24 @@ export type AccountMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -4190,8 +4192,6 @@ export type AccountMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadServiceSchedulesInput = {
@@ -4225,22 +4225,24 @@ export type AccountMasterUpdateWithoutLeadServiceSchedulesInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -4253,8 +4255,6 @@ export type AccountMasterUpdateWithoutLeadServiceSchedulesInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
@@ -4273,22 +4273,24 @@ export type AccountMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -4301,8 +4303,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadStatusLogsInput = {
@@ -4320,22 +4320,24 @@ export type AccountMasterCreateWithoutLeadStatusLogsInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -4348,8 +4350,6 @@ export type AccountMasterCreateWithoutLeadStatusLogsInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadStatusLogsInput = {
@@ -4368,22 +4368,24 @@ export type AccountMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -4396,8 +4398,6 @@ export type AccountMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadStatusLogsInput = {
@@ -4431,22 +4431,24 @@ export type AccountMasterUpdateWithoutLeadStatusLogsInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -4459,8 +4461,6 @@ export type AccountMasterUpdateWithoutLeadStatusLogsInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
@@ -4479,22 +4479,24 @@ export type AccountMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -4507,8 +4509,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutDesignMeetingInput = {
@@ -4526,21 +4526,23 @@ export type AccountMasterCreateWithoutDesignMeetingInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -4554,8 +4556,6 @@ export type AccountMasterCreateWithoutDesignMeetingInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutDesignMeetingInput = {
@@ -4574,21 +4574,23 @@ export type AccountMasterUncheckedCreateWithoutDesignMeetingInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -4602,8 +4604,6 @@ export type AccountMasterUncheckedCreateWithoutDesignMeetingInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutDesignMeetingInput = {
@@ -4637,21 +4637,23 @@ export type AccountMasterUpdateWithoutDesignMeetingInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -4665,8 +4667,6 @@ export type AccountMasterUpdateWithoutDesignMeetingInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutDesignMeetingInput = {
@@ -4685,21 +4685,23 @@ export type AccountMasterUncheckedUpdateWithoutDesignMeetingInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -4713,8 +4715,6 @@ export type AccountMasterUncheckedUpdateWithoutDesignMeetingInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutClientVisitsInput = {
@@ -4732,21 +4732,23 @@ export type AccountMasterCreateWithoutClientVisitsInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -4760,8 +4762,6 @@ export type AccountMasterCreateWithoutClientVisitsInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutClientVisitsInput = {
@@ -4780,21 +4780,23 @@ export type AccountMasterUncheckedCreateWithoutClientVisitsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -4808,8 +4810,6 @@ export type AccountMasterUncheckedCreateWithoutClientVisitsInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutClientVisitsInput = {
@@ -4843,21 +4843,23 @@ export type AccountMasterUpdateWithoutClientVisitsInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -4871,8 +4873,6 @@ export type AccountMasterUpdateWithoutClientVisitsInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutClientVisitsInput = {
@@ -4891,21 +4891,23 @@ export type AccountMasterUncheckedUpdateWithoutClientVisitsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -4919,8 +4921,6 @@ export type AccountMasterUncheckedUpdateWithoutClientVisitsInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutDesignMeetingDocsMappingInput = {
@@ -4938,21 +4938,23 @@ export type AccountMasterCreateWithoutDesignMeetingDocsMappingInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -4966,8 +4968,6 @@ export type AccountMasterCreateWithoutDesignMeetingDocsMappingInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
@@ -4986,21 +4986,23 @@ export type AccountMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -5014,8 +5016,6 @@ export type AccountMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutDesignMeetingDocsMappingInput = {
@@ -5049,21 +5049,23 @@ export type AccountMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -5077,8 +5079,6 @@ export type AccountMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
@@ -5097,21 +5097,23 @@ export type AccountMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -5125,8 +5127,6 @@ export type AccountMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutClientVisitDocumentMappingsInput = {
@@ -5144,21 +5144,23 @@ export type AccountMasterCreateWithoutClientVisitDocumentMappingsInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
-  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -5172,8 +5174,6 @@ export type AccountMasterCreateWithoutClientVisitDocumentMappingsInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
@@ -5192,21 +5192,23 @@ export type AccountMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput 
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
-  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -5220,8 +5222,6 @@ export type AccountMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput 
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutClientVisitDocumentMappingsInput = {
@@ -5255,21 +5255,23 @@ export type AccountMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
-  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -5283,8 +5285,6 @@ export type AccountMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
@@ -5303,21 +5303,23 @@ export type AccountMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput 
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
-  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -5331,8 +5333,6 @@ export type AccountMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput 
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutDesignSelectionInput = {
@@ -5350,21 +5350,23 @@ export type AccountMasterCreateWithoutDesignSelectionInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -5378,8 +5380,6 @@ export type AccountMasterCreateWithoutDesignSelectionInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutDesignSelectionInput = {
@@ -5398,21 +5398,23 @@ export type AccountMasterUncheckedCreateWithoutDesignSelectionInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -5426,8 +5428,6 @@ export type AccountMasterUncheckedCreateWithoutDesignSelectionInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutDesignSelectionInput = {
@@ -5461,21 +5461,23 @@ export type AccountMasterUpdateWithoutDesignSelectionInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -5489,8 +5491,6 @@ export type AccountMasterUpdateWithoutDesignSelectionInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutDesignSelectionInput = {
@@ -5509,21 +5509,23 @@ export type AccountMasterUncheckedUpdateWithoutDesignSelectionInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -5537,8 +5539,6 @@ export type AccountMasterUncheckedUpdateWithoutDesignSelectionInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutSiteSupervisorsInput = {
@@ -5556,22 +5556,24 @@ export type AccountMasterCreateWithoutSiteSupervisorsInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -5584,8 +5586,6 @@ export type AccountMasterCreateWithoutSiteSupervisorsInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutSiteSupervisorsInput = {
@@ -5604,22 +5604,24 @@ export type AccountMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -5632,8 +5634,6 @@ export type AccountMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutSiteSupervisorsInput = {
@@ -5667,22 +5667,24 @@ export type AccountMasterUpdateWithoutSiteSupervisorsInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -5695,8 +5697,6 @@ export type AccountMasterUpdateWithoutSiteSupervisorsInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
@@ -5715,22 +5715,24 @@ export type AccountMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -5743,8 +5745,6 @@ export type AccountMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutTasksInput = {
@@ -5762,22 +5762,24 @@ export type AccountMasterCreateWithoutTasksInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -5790,8 +5792,6 @@ export type AccountMasterCreateWithoutTasksInput = {
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutTasksInput = {
@@ -5810,22 +5810,24 @@ export type AccountMasterUncheckedCreateWithoutTasksInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -5838,8 +5840,6 @@ export type AccountMasterUncheckedCreateWithoutTasksInput = {
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutTasksInput = {
@@ -5873,22 +5873,24 @@ export type AccountMasterUpdateWithoutTasksInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -5901,8 +5903,6 @@ export type AccountMasterUpdateWithoutTasksInput = {
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutTasksInput = {
@@ -5921,22 +5921,24 @@ export type AccountMasterUncheckedUpdateWithoutTasksInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -5949,8 +5951,6 @@ export type AccountMasterUncheckedUpdateWithoutTasksInput = {
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutFastProductionRequestBatchesInput = {
@@ -5968,22 +5968,23 @@ export type AccountMasterCreateWithoutFastProductionRequestBatchesInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -5997,7 +5998,6 @@ export type AccountMasterCreateWithoutFastProductionRequestBatchesInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutFastProductionRequestBatchesInput = {
@@ -6016,22 +6016,23 @@ export type AccountMasterUncheckedCreateWithoutFastProductionRequestBatchesInput
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -6045,7 +6046,6 @@ export type AccountMasterUncheckedCreateWithoutFastProductionRequestBatchesInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutFastProductionRequestBatchesInput = {
@@ -6079,22 +6079,23 @@ export type AccountMasterUpdateWithoutFastProductionRequestBatchesInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -6108,7 +6109,6 @@ export type AccountMasterUpdateWithoutFastProductionRequestBatchesInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput = {
@@ -6127,22 +6127,23 @@ export type AccountMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -6156,7 +6157,6 @@ export type AccountMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutFastProductionRequestsInput = {
@@ -6174,22 +6174,23 @@ export type AccountMasterCreateWithoutFastProductionRequestsInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -6203,7 +6204,6 @@ export type AccountMasterCreateWithoutFastProductionRequestsInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutFastProductionRequestsInput = {
@@ -6222,22 +6222,23 @@ export type AccountMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -6251,7 +6252,6 @@ export type AccountMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutFastProductionRequestsInput = {
@@ -6285,22 +6285,23 @@ export type AccountMasterUpdateWithoutFastProductionRequestsInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -6314,7 +6315,6 @@ export type AccountMasterUpdateWithoutFastProductionRequestsInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
@@ -6333,22 +6333,23 @@ export type AccountMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -6362,7 +6363,6 @@ export type AccountMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadDetailedLogsInput = {
@@ -6380,21 +6380,23 @@ export type AccountMasterCreateWithoutLeadDetailedLogsInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -6408,8 +6410,6 @@ export type AccountMasterCreateWithoutLeadDetailedLogsInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
@@ -6428,21 +6428,23 @@ export type AccountMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -6456,8 +6458,6 @@ export type AccountMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadDetailedLogsInput = {
@@ -6491,21 +6491,23 @@ export type AccountMasterUpdateWithoutLeadDetailedLogsInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -6519,8 +6521,6 @@ export type AccountMasterUpdateWithoutLeadDetailedLogsInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
@@ -6539,21 +6539,23 @@ export type AccountMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -6567,8 +6569,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadDocumentLogsInput = {
@@ -6586,21 +6586,23 @@ export type AccountMasterCreateWithoutLeadDocumentLogsInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -6614,8 +6616,6 @@ export type AccountMasterCreateWithoutLeadDocumentLogsInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
@@ -6634,21 +6634,23 @@ export type AccountMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -6662,8 +6664,6 @@ export type AccountMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadDocumentLogsInput = {
@@ -6697,21 +6697,23 @@ export type AccountMasterUpdateWithoutLeadDocumentLogsInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -6725,8 +6727,6 @@ export type AccountMasterUpdateWithoutLeadDocumentLogsInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
@@ -6745,21 +6745,23 @@ export type AccountMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -6773,8 +6775,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -6792,21 +6792,23 @@ export type AccountMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput =
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -6820,8 +6822,6 @@ export type AccountMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput =
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -6840,21 +6840,23 @@ export type AccountMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappin
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -6868,8 +6870,6 @@ export type AccountMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappin
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -6903,21 +6903,23 @@ export type AccountMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput =
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -6931,8 +6933,6 @@ export type AccountMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput =
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -6951,21 +6951,23 @@ export type AccountMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappin
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -6979,8 +6981,6 @@ export type AccountMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappin
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutOrderLoginDetailsInput = {
@@ -6998,22 +6998,24 @@ export type AccountMasterCreateWithoutOrderLoginDetailsInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -7026,8 +7028,6 @@ export type AccountMasterCreateWithoutOrderLoginDetailsInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
@@ -7046,22 +7046,24 @@ export type AccountMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -7074,8 +7076,6 @@ export type AccountMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutOrderLoginDetailsInput = {
@@ -7109,22 +7109,24 @@ export type AccountMasterUpdateWithoutOrderLoginDetailsInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -7137,8 +7139,6 @@ export type AccountMasterUpdateWithoutOrderLoginDetailsInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
@@ -7157,22 +7157,24 @@ export type AccountMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -7185,8 +7187,6 @@ export type AccountMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutSiteReadinessInput = {
@@ -7204,22 +7204,24 @@ export type AccountMasterCreateWithoutSiteReadinessInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -7232,8 +7234,6 @@ export type AccountMasterCreateWithoutSiteReadinessInput = {
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutSiteReadinessInput = {
@@ -7252,22 +7252,24 @@ export type AccountMasterUncheckedCreateWithoutSiteReadinessInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -7280,8 +7282,6 @@ export type AccountMasterUncheckedCreateWithoutSiteReadinessInput = {
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutSiteReadinessInput = {
@@ -7315,22 +7315,24 @@ export type AccountMasterUpdateWithoutSiteReadinessInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -7343,8 +7345,6 @@ export type AccountMasterUpdateWithoutSiteReadinessInput = {
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutSiteReadinessInput = {
@@ -7363,22 +7363,24 @@ export type AccountMasterUncheckedUpdateWithoutSiteReadinessInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -7391,8 +7393,6 @@ export type AccountMasterUncheckedUpdateWithoutSiteReadinessInput = {
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutInstallerMappingsInput = {
@@ -7410,21 +7410,23 @@ export type AccountMasterCreateWithoutInstallerMappingsInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -7438,8 +7440,6 @@ export type AccountMasterCreateWithoutInstallerMappingsInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutInstallerMappingsInput = {
@@ -7458,21 +7458,23 @@ export type AccountMasterUncheckedCreateWithoutInstallerMappingsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -7486,8 +7488,6 @@ export type AccountMasterUncheckedCreateWithoutInstallerMappingsInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutInstallerMappingsInput = {
@@ -7521,21 +7521,23 @@ export type AccountMasterUpdateWithoutInstallerMappingsInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -7549,8 +7551,6 @@ export type AccountMasterUpdateWithoutInstallerMappingsInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutInstallerMappingsInput = {
@@ -7569,21 +7569,23 @@ export type AccountMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -7597,8 +7599,6 @@ export type AccountMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutInstallationUpdatesInput = {
@@ -7616,21 +7616,23 @@ export type AccountMasterCreateWithoutInstallationUpdatesInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -7644,8 +7646,6 @@ export type AccountMasterCreateWithoutInstallationUpdatesInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutInstallationUpdatesInput = {
@@ -7664,21 +7664,23 @@ export type AccountMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -7692,8 +7694,6 @@ export type AccountMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutInstallationUpdatesInput = {
@@ -7727,21 +7727,23 @@ export type AccountMasterUpdateWithoutInstallationUpdatesInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -7755,8 +7757,6 @@ export type AccountMasterUpdateWithoutInstallationUpdatesInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
@@ -7775,21 +7775,23 @@ export type AccountMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -7803,8 +7805,6 @@ export type AccountMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutMiscellaneousMasterInput = {
@@ -7822,22 +7822,24 @@ export type AccountMasterCreateWithoutMiscellaneousMasterInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -7850,8 +7852,6 @@ export type AccountMasterCreateWithoutMiscellaneousMasterInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
@@ -7870,22 +7870,24 @@ export type AccountMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -7898,8 +7900,6 @@ export type AccountMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutMiscellaneousMasterInput = {
@@ -7933,22 +7933,24 @@ export type AccountMasterUpdateWithoutMiscellaneousMasterInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -7961,8 +7963,6 @@ export type AccountMasterUpdateWithoutMiscellaneousMasterInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
@@ -7981,22 +7981,24 @@ export type AccountMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -8009,8 +8011,6 @@ export type AccountMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutInstallationIssueLogMasterInput = {
@@ -8028,21 +8028,23 @@ export type AccountMasterCreateWithoutInstallationIssueLogMasterInput = {
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -8056,8 +8058,6 @@ export type AccountMasterCreateWithoutInstallationIssueLogMasterInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
@@ -8076,21 +8076,23 @@ export type AccountMasterUncheckedCreateWithoutInstallationIssueLogMasterInput =
   deleted_by?: number | null
   is_deleted?: boolean
   franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -8104,8 +8106,6 @@ export type AccountMasterUncheckedCreateWithoutInstallationIssueLogMasterInput =
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutInstallationIssueLogMasterInput = {
@@ -8139,21 +8139,23 @@ export type AccountMasterUpdateWithoutInstallationIssueLogMasterInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -8167,8 +8169,6 @@ export type AccountMasterUpdateWithoutInstallationIssueLogMasterInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
@@ -8187,21 +8187,23 @@ export type AccountMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput =
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -8215,8 +8217,6 @@ export type AccountMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput =
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterCreateWithoutFranchiseInput = {
@@ -8233,22 +8233,24 @@ export type AccountMasterCreateWithoutFranchiseInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
@@ -8262,8 +8264,6 @@ export type AccountMasterCreateWithoutFranchiseInput = {
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterUncheckedCreateWithoutFranchiseInput = {
@@ -8281,22 +8281,24 @@ export type AccountMasterUncheckedCreateWithoutFranchiseInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
@@ -8310,8 +8312,6 @@ export type AccountMasterUncheckedCreateWithoutFranchiseInput = {
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
   siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
 }
 
 export type AccountMasterCreateOrConnectWithoutFranchiseInput = {
@@ -8371,22 +8371,24 @@ export type AccountMasterUpdateWithoutVendorInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -8400,8 +8402,6 @@ export type AccountMasterUpdateWithoutVendorInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutVendorInput = {
@@ -8419,22 +8419,24 @@ export type AccountMasterUncheckedUpdateWithoutVendorInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -8448,8 +8450,6 @@ export type AccountMasterUncheckedUpdateWithoutVendorInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -8517,22 +8517,24 @@ export type AccountMasterUpdateWithoutCreatedByInput = {
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -8546,8 +8548,6 @@ export type AccountMasterUpdateWithoutCreatedByInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutCreatedByInput = {
@@ -8565,22 +8565,24 @@ export type AccountMasterUncheckedUpdateWithoutCreatedByInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -8594,8 +8596,6 @@ export type AccountMasterUncheckedUpdateWithoutCreatedByInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateManyWithoutCreatedByInput = {
@@ -8629,22 +8629,24 @@ export type AccountMasterUpdateWithoutUpdatedByInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -8658,8 +8660,6 @@ export type AccountMasterUpdateWithoutUpdatedByInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutUpdatedByInput = {
@@ -8677,22 +8677,24 @@ export type AccountMasterUncheckedUpdateWithoutUpdatedByInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -8706,8 +8708,6 @@ export type AccountMasterUncheckedUpdateWithoutUpdatedByInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -8758,22 +8758,24 @@ export type AccountMasterUpdateWithoutFranchiseInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
@@ -8787,8 +8789,6 @@ export type AccountMasterUpdateWithoutFranchiseInput = {
   payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateWithoutFranchiseInput = {
@@ -8806,22 +8806,24 @@ export type AccountMasterUncheckedUpdateWithoutFranchiseInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
-  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
-  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
-  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
-  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
@@ -8835,8 +8837,6 @@ export type AccountMasterUncheckedUpdateWithoutFranchiseInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
   siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
-  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
 }
 
 export type AccountMasterUncheckedUpdateManyWithoutFranchiseInput = {
@@ -8862,22 +8862,24 @@ export type AccountMasterUncheckedUpdateManyWithoutFranchiseInput = {
  */
 
 export type AccountMasterCountOutputType = {
+  fastProductionRequests: number
+  fastProductionRequestBatches: number
   installationIssueLogMaster: number
   installationUpdates: number
   installerMappings: number
   leadActivityStatusLog: number
+  leadAmcContracts: number
+  leadApprovalRequestDocumentMappings: number
   leadChatDocument: number
-  designMeeting: number
-  designMeetingDocsMapping: number
   clientVisits: number
   clientVisitDocumentMappings: number
+  designMeeting: number
+  designMeetingDocsMapping: number
   designSelection: number
   leadDetailedLogs: number
-  leadApprovalRequestDocumentMappings: number
   leadDocumentLogs: number
   documents: number
   leads: number
-  leadAmcContracts: number
   leadsMapping: number
   productStructureInstances: number
   leadProductStructureMapping: number
@@ -8891,27 +8893,27 @@ export type AccountMasterCountOutputType = {
   payments: number
   siteReadiness: number
   tasks: number
-  fastProductionRequests: number
-  fastProductionRequestBatches: number
 }
 
 export type AccountMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  fastProductionRequests?: boolean | AccountMasterCountOutputTypeCountFastProductionRequestsArgs
+  fastProductionRequestBatches?: boolean | AccountMasterCountOutputTypeCountFastProductionRequestBatchesArgs
   installationIssueLogMaster?: boolean | AccountMasterCountOutputTypeCountInstallationIssueLogMasterArgs
   installationUpdates?: boolean | AccountMasterCountOutputTypeCountInstallationUpdatesArgs
   installerMappings?: boolean | AccountMasterCountOutputTypeCountInstallerMappingsArgs
   leadActivityStatusLog?: boolean | AccountMasterCountOutputTypeCountLeadActivityStatusLogArgs
+  leadAmcContracts?: boolean | AccountMasterCountOutputTypeCountLeadAmcContractsArgs
+  leadApprovalRequestDocumentMappings?: boolean | AccountMasterCountOutputTypeCountLeadApprovalRequestDocumentMappingsArgs
   leadChatDocument?: boolean | AccountMasterCountOutputTypeCountLeadChatDocumentArgs
-  designMeeting?: boolean | AccountMasterCountOutputTypeCountDesignMeetingArgs
-  designMeetingDocsMapping?: boolean | AccountMasterCountOutputTypeCountDesignMeetingDocsMappingArgs
   clientVisits?: boolean | AccountMasterCountOutputTypeCountClientVisitsArgs
   clientVisitDocumentMappings?: boolean | AccountMasterCountOutputTypeCountClientVisitDocumentMappingsArgs
+  designMeeting?: boolean | AccountMasterCountOutputTypeCountDesignMeetingArgs
+  designMeetingDocsMapping?: boolean | AccountMasterCountOutputTypeCountDesignMeetingDocsMappingArgs
   designSelection?: boolean | AccountMasterCountOutputTypeCountDesignSelectionArgs
   leadDetailedLogs?: boolean | AccountMasterCountOutputTypeCountLeadDetailedLogsArgs
-  leadApprovalRequestDocumentMappings?: boolean | AccountMasterCountOutputTypeCountLeadApprovalRequestDocumentMappingsArgs
   leadDocumentLogs?: boolean | AccountMasterCountOutputTypeCountLeadDocumentLogsArgs
   documents?: boolean | AccountMasterCountOutputTypeCountDocumentsArgs
   leads?: boolean | AccountMasterCountOutputTypeCountLeadsArgs
-  leadAmcContracts?: boolean | AccountMasterCountOutputTypeCountLeadAmcContractsArgs
   leadsMapping?: boolean | AccountMasterCountOutputTypeCountLeadsMappingArgs
   productStructureInstances?: boolean | AccountMasterCountOutputTypeCountProductStructureInstancesArgs
   leadProductStructureMapping?: boolean | AccountMasterCountOutputTypeCountLeadProductStructureMappingArgs
@@ -8925,8 +8927,6 @@ export type AccountMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Ext
   payments?: boolean | AccountMasterCountOutputTypeCountPaymentsArgs
   siteReadiness?: boolean | AccountMasterCountOutputTypeCountSiteReadinessArgs
   tasks?: boolean | AccountMasterCountOutputTypeCountTasksArgs
-  fastProductionRequests?: boolean | AccountMasterCountOutputTypeCountFastProductionRequestsArgs
-  fastProductionRequestBatches?: boolean | AccountMasterCountOutputTypeCountFastProductionRequestBatchesArgs
 }
 
 /**
@@ -8937,6 +8937,20 @@ export type AccountMasterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Type
    * Select specific fields to fetch from the AccountMasterCountOutputType
    */
   select?: Prisma.AccountMasterCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * AccountMasterCountOutputType without action
+ */
+export type AccountMasterCountOutputTypeCountFastProductionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FastProductionRequestWhereInput
+}
+
+/**
+ * AccountMasterCountOutputType without action
+ */
+export type AccountMasterCountOutputTypeCountFastProductionRequestBatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FastProductionRequestBatchWhereInput
 }
 
 /**
@@ -8970,22 +8984,22 @@ export type AccountMasterCountOutputTypeCountLeadActivityStatusLogArgs<ExtArgs e
 /**
  * AccountMasterCountOutputType without action
  */
+export type AccountMasterCountOutputTypeCountLeadAmcContractsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadAmcContractWhereInput
+}
+
+/**
+ * AccountMasterCountOutputType without action
+ */
+export type AccountMasterCountOutputTypeCountLeadApprovalRequestDocumentMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadApprovalRequestDocumentMappingWhereInput
+}
+
+/**
+ * AccountMasterCountOutputType without action
+ */
 export type AccountMasterCountOutputTypeCountLeadChatDocumentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LeadChatDocumentWhereInput
-}
-
-/**
- * AccountMasterCountOutputType without action
- */
-export type AccountMasterCountOutputTypeCountDesignMeetingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadDesignMeetingWhereInput
-}
-
-/**
- * AccountMasterCountOutputType without action
- */
-export type AccountMasterCountOutputTypeCountDesignMeetingDocsMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadDesignMeetingDocumentsMappingWhereInput
 }
 
 /**
@@ -9005,6 +9019,20 @@ export type AccountMasterCountOutputTypeCountClientVisitDocumentMappingsArgs<Ext
 /**
  * AccountMasterCountOutputType without action
  */
+export type AccountMasterCountOutputTypeCountDesignMeetingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadDesignMeetingWhereInput
+}
+
+/**
+ * AccountMasterCountOutputType without action
+ */
+export type AccountMasterCountOutputTypeCountDesignMeetingDocsMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadDesignMeetingDocumentsMappingWhereInput
+}
+
+/**
+ * AccountMasterCountOutputType without action
+ */
 export type AccountMasterCountOutputTypeCountDesignSelectionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LeadDesignSelectionWhereInput
 }
@@ -9014,13 +9042,6 @@ export type AccountMasterCountOutputTypeCountDesignSelectionArgs<ExtArgs extends
  */
 export type AccountMasterCountOutputTypeCountLeadDetailedLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LeadDetailedLogsWhereInput
-}
-
-/**
- * AccountMasterCountOutputType without action
- */
-export type AccountMasterCountOutputTypeCountLeadApprovalRequestDocumentMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadApprovalRequestDocumentMappingWhereInput
 }
 
 /**
@@ -9042,13 +9063,6 @@ export type AccountMasterCountOutputTypeCountDocumentsArgs<ExtArgs extends runti
  */
 export type AccountMasterCountOutputTypeCountLeadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LeadMasterWhereInput
-}
-
-/**
- * AccountMasterCountOutputType without action
- */
-export type AccountMasterCountOutputTypeCountLeadAmcContractsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadAmcContractWhereInput
 }
 
 /**
@@ -9142,20 +9156,6 @@ export type AccountMasterCountOutputTypeCountTasksArgs<ExtArgs extends runtime.T
   where?: Prisma.UserLeadTaskWhereInput
 }
 
-/**
- * AccountMasterCountOutputType without action
- */
-export type AccountMasterCountOutputTypeCountFastProductionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FastProductionRequestWhereInput
-}
-
-/**
- * AccountMasterCountOutputType without action
- */
-export type AccountMasterCountOutputTypeCountFastProductionRequestBatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FastProductionRequestBatchWhereInput
-}
-
 
 export type AccountMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -9177,22 +9177,24 @@ export type AccountMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   franchise?: boolean | Prisma.AccountMaster$franchiseArgs<ExtArgs>
   updatedBy?: boolean | Prisma.AccountMaster$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  fastProductionRequests?: boolean | Prisma.AccountMaster$fastProductionRequestsArgs<ExtArgs>
+  fastProductionRequestBatches?: boolean | Prisma.AccountMaster$fastProductionRequestBatchesArgs<ExtArgs>
   installationIssueLogMaster?: boolean | Prisma.AccountMaster$installationIssueLogMasterArgs<ExtArgs>
   installationUpdates?: boolean | Prisma.AccountMaster$installationUpdatesArgs<ExtArgs>
   installerMappings?: boolean | Prisma.AccountMaster$installerMappingsArgs<ExtArgs>
   leadActivityStatusLog?: boolean | Prisma.AccountMaster$leadActivityStatusLogArgs<ExtArgs>
+  leadAmcContracts?: boolean | Prisma.AccountMaster$leadAmcContractsArgs<ExtArgs>
+  leadApprovalRequestDocumentMappings?: boolean | Prisma.AccountMaster$leadApprovalRequestDocumentMappingsArgs<ExtArgs>
   leadChatDocument?: boolean | Prisma.AccountMaster$leadChatDocumentArgs<ExtArgs>
-  designMeeting?: boolean | Prisma.AccountMaster$designMeetingArgs<ExtArgs>
-  designMeetingDocsMapping?: boolean | Prisma.AccountMaster$designMeetingDocsMappingArgs<ExtArgs>
   clientVisits?: boolean | Prisma.AccountMaster$clientVisitsArgs<ExtArgs>
   clientVisitDocumentMappings?: boolean | Prisma.AccountMaster$clientVisitDocumentMappingsArgs<ExtArgs>
+  designMeeting?: boolean | Prisma.AccountMaster$designMeetingArgs<ExtArgs>
+  designMeetingDocsMapping?: boolean | Prisma.AccountMaster$designMeetingDocsMappingArgs<ExtArgs>
   designSelection?: boolean | Prisma.AccountMaster$designSelectionArgs<ExtArgs>
   leadDetailedLogs?: boolean | Prisma.AccountMaster$leadDetailedLogsArgs<ExtArgs>
-  leadApprovalRequestDocumentMappings?: boolean | Prisma.AccountMaster$leadApprovalRequestDocumentMappingsArgs<ExtArgs>
   leadDocumentLogs?: boolean | Prisma.AccountMaster$leadDocumentLogsArgs<ExtArgs>
   documents?: boolean | Prisma.AccountMaster$documentsArgs<ExtArgs>
   leads?: boolean | Prisma.AccountMaster$leadsArgs<ExtArgs>
-  leadAmcContracts?: boolean | Prisma.AccountMaster$leadAmcContractsArgs<ExtArgs>
   leadsMapping?: boolean | Prisma.AccountMaster$leadsMappingArgs<ExtArgs>
   productStructureInstances?: boolean | Prisma.AccountMaster$productStructureInstancesArgs<ExtArgs>
   leadProductStructureMapping?: boolean | Prisma.AccountMaster$leadProductStructureMappingArgs<ExtArgs>
@@ -9206,8 +9208,6 @@ export type AccountMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   payments?: boolean | Prisma.AccountMaster$paymentsArgs<ExtArgs>
   siteReadiness?: boolean | Prisma.AccountMaster$siteReadinessArgs<ExtArgs>
   tasks?: boolean | Prisma.AccountMaster$tasksArgs<ExtArgs>
-  fastProductionRequests?: boolean | Prisma.AccountMaster$fastProductionRequestsArgs<ExtArgs>
-  fastProductionRequestBatches?: boolean | Prisma.AccountMaster$fastProductionRequestBatchesArgs<ExtArgs>
   _count?: boolean | Prisma.AccountMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["accountMaster"]>
 
@@ -9279,22 +9279,24 @@ export type AccountMasterInclude<ExtArgs extends runtime.Types.Extensions.Intern
   franchise?: boolean | Prisma.AccountMaster$franchiseArgs<ExtArgs>
   updatedBy?: boolean | Prisma.AccountMaster$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  fastProductionRequests?: boolean | Prisma.AccountMaster$fastProductionRequestsArgs<ExtArgs>
+  fastProductionRequestBatches?: boolean | Prisma.AccountMaster$fastProductionRequestBatchesArgs<ExtArgs>
   installationIssueLogMaster?: boolean | Prisma.AccountMaster$installationIssueLogMasterArgs<ExtArgs>
   installationUpdates?: boolean | Prisma.AccountMaster$installationUpdatesArgs<ExtArgs>
   installerMappings?: boolean | Prisma.AccountMaster$installerMappingsArgs<ExtArgs>
   leadActivityStatusLog?: boolean | Prisma.AccountMaster$leadActivityStatusLogArgs<ExtArgs>
+  leadAmcContracts?: boolean | Prisma.AccountMaster$leadAmcContractsArgs<ExtArgs>
+  leadApprovalRequestDocumentMappings?: boolean | Prisma.AccountMaster$leadApprovalRequestDocumentMappingsArgs<ExtArgs>
   leadChatDocument?: boolean | Prisma.AccountMaster$leadChatDocumentArgs<ExtArgs>
-  designMeeting?: boolean | Prisma.AccountMaster$designMeetingArgs<ExtArgs>
-  designMeetingDocsMapping?: boolean | Prisma.AccountMaster$designMeetingDocsMappingArgs<ExtArgs>
   clientVisits?: boolean | Prisma.AccountMaster$clientVisitsArgs<ExtArgs>
   clientVisitDocumentMappings?: boolean | Prisma.AccountMaster$clientVisitDocumentMappingsArgs<ExtArgs>
+  designMeeting?: boolean | Prisma.AccountMaster$designMeetingArgs<ExtArgs>
+  designMeetingDocsMapping?: boolean | Prisma.AccountMaster$designMeetingDocsMappingArgs<ExtArgs>
   designSelection?: boolean | Prisma.AccountMaster$designSelectionArgs<ExtArgs>
   leadDetailedLogs?: boolean | Prisma.AccountMaster$leadDetailedLogsArgs<ExtArgs>
-  leadApprovalRequestDocumentMappings?: boolean | Prisma.AccountMaster$leadApprovalRequestDocumentMappingsArgs<ExtArgs>
   leadDocumentLogs?: boolean | Prisma.AccountMaster$leadDocumentLogsArgs<ExtArgs>
   documents?: boolean | Prisma.AccountMaster$documentsArgs<ExtArgs>
   leads?: boolean | Prisma.AccountMaster$leadsArgs<ExtArgs>
-  leadAmcContracts?: boolean | Prisma.AccountMaster$leadAmcContractsArgs<ExtArgs>
   leadsMapping?: boolean | Prisma.AccountMaster$leadsMappingArgs<ExtArgs>
   productStructureInstances?: boolean | Prisma.AccountMaster$productStructureInstancesArgs<ExtArgs>
   leadProductStructureMapping?: boolean | Prisma.AccountMaster$leadProductStructureMappingArgs<ExtArgs>
@@ -9308,8 +9310,6 @@ export type AccountMasterInclude<ExtArgs extends runtime.Types.Extensions.Intern
   payments?: boolean | Prisma.AccountMaster$paymentsArgs<ExtArgs>
   siteReadiness?: boolean | Prisma.AccountMaster$siteReadinessArgs<ExtArgs>
   tasks?: boolean | Prisma.AccountMaster$tasksArgs<ExtArgs>
-  fastProductionRequests?: boolean | Prisma.AccountMaster$fastProductionRequestsArgs<ExtArgs>
-  fastProductionRequestBatches?: boolean | Prisma.AccountMaster$fastProductionRequestBatchesArgs<ExtArgs>
   _count?: boolean | Prisma.AccountMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type AccountMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -9332,22 +9332,24 @@ export type $AccountMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     franchise: Prisma.$FranchiseMasterPayload<ExtArgs> | null
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
+    fastProductionRequests: Prisma.$FastProductionRequestPayload<ExtArgs>[]
+    fastProductionRequestBatches: Prisma.$FastProductionRequestBatchPayload<ExtArgs>[]
     installationIssueLogMaster: Prisma.$InstallationIssueLogMasterPayload<ExtArgs>[]
     installationUpdates: Prisma.$InstallationUpdatePayload<ExtArgs>[]
     installerMappings: Prisma.$InstallerUserMappingPayload<ExtArgs>[]
     leadActivityStatusLog: Prisma.$LeadActivityStatusLogPayload<ExtArgs>[]
+    leadAmcContracts: Prisma.$LeadAmcContractPayload<ExtArgs>[]
+    leadApprovalRequestDocumentMappings: Prisma.$LeadApprovalRequestDocumentMappingPayload<ExtArgs>[]
     leadChatDocument: Prisma.$LeadChatDocumentPayload<ExtArgs>[]
-    designMeeting: Prisma.$LeadDesignMeetingPayload<ExtArgs>[]
-    designMeetingDocsMapping: Prisma.$LeadDesignMeetingDocumentsMappingPayload<ExtArgs>[]
     clientVisits: Prisma.$LeadClientVisitPayload<ExtArgs>[]
     clientVisitDocumentMappings: Prisma.$LeadClientVisitDocumentMappingPayload<ExtArgs>[]
+    designMeeting: Prisma.$LeadDesignMeetingPayload<ExtArgs>[]
+    designMeetingDocsMapping: Prisma.$LeadDesignMeetingDocumentsMappingPayload<ExtArgs>[]
     designSelection: Prisma.$LeadDesignSelectionPayload<ExtArgs>[]
     leadDetailedLogs: Prisma.$LeadDetailedLogsPayload<ExtArgs>[]
-    leadApprovalRequestDocumentMappings: Prisma.$LeadApprovalRequestDocumentMappingPayload<ExtArgs>[]
     leadDocumentLogs: Prisma.$LeadDocumentLogsPayload<ExtArgs>[]
     documents: Prisma.$LeadDocumentsPayload<ExtArgs>[]
     leads: Prisma.$LeadMasterPayload<ExtArgs>[]
-    leadAmcContracts: Prisma.$LeadAmcContractPayload<ExtArgs>[]
     leadsMapping: Prisma.$LeadProductMappingPayload<ExtArgs>[]
     productStructureInstances: Prisma.$LeadProductStructureInstancePayload<ExtArgs>[]
     leadProductStructureMapping: Prisma.$LeadProductStructureMappingPayload<ExtArgs>[]
@@ -9361,8 +9363,6 @@ export type $AccountMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     payments: Prisma.$PaymentInfoPayload<ExtArgs>[]
     siteReadiness: Prisma.$SiteReadinessPayload<ExtArgs>[]
     tasks: Prisma.$UserLeadTaskPayload<ExtArgs>[]
-    fastProductionRequests: Prisma.$FastProductionRequestPayload<ExtArgs>[]
-    fastProductionRequestBatches: Prisma.$FastProductionRequestBatchPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -9778,22 +9778,24 @@ export interface Prisma__AccountMasterClient<T, Null = never, ExtArgs extends ru
   franchise<T extends Prisma.AccountMaster$franchiseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$franchiseArgs<ExtArgs>>): Prisma.Prisma__FranchiseMasterClient<runtime.Types.Result.GetResult<Prisma.$FranchiseMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.AccountMaster$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  fastProductionRequests<T extends Prisma.AccountMaster$fastProductionRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$fastProductionRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fastProductionRequestBatches<T extends Prisma.AccountMaster$fastProductionRequestBatchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$fastProductionRequestBatchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestBatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   installationIssueLogMaster<T extends Prisma.AccountMaster$installationIssueLogMasterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$installationIssueLogMasterArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallationIssueLogMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   installationUpdates<T extends Prisma.AccountMaster$installationUpdatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$installationUpdatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallationUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   installerMappings<T extends Prisma.AccountMaster$installerMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$installerMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallerUserMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadActivityStatusLog<T extends Prisma.AccountMaster$leadActivityStatusLogArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadActivityStatusLogArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadActivityStatusLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadAmcContracts<T extends Prisma.AccountMaster$leadAmcContractsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadAmcContractsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadAmcContractPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadApprovalRequestDocumentMappings<T extends Prisma.AccountMaster$leadApprovalRequestDocumentMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadApprovalRequestDocumentMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadApprovalRequestDocumentMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadChatDocument<T extends Prisma.AccountMaster$leadChatDocumentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadChatDocumentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadChatDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  designMeeting<T extends Prisma.AccountMaster$designMeetingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$designMeetingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignMeetingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  designMeetingDocsMapping<T extends Prisma.AccountMaster$designMeetingDocsMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$designMeetingDocsMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignMeetingDocumentsMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   clientVisits<T extends Prisma.AccountMaster$clientVisitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$clientVisitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadClientVisitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   clientVisitDocumentMappings<T extends Prisma.AccountMaster$clientVisitDocumentMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$clientVisitDocumentMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadClientVisitDocumentMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  designMeeting<T extends Prisma.AccountMaster$designMeetingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$designMeetingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignMeetingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  designMeetingDocsMapping<T extends Prisma.AccountMaster$designMeetingDocsMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$designMeetingDocsMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignMeetingDocumentsMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   designSelection<T extends Prisma.AccountMaster$designSelectionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$designSelectionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignSelectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadDetailedLogs<T extends Prisma.AccountMaster$leadDetailedLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadDetailedLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDetailedLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  leadApprovalRequestDocumentMappings<T extends Prisma.AccountMaster$leadApprovalRequestDocumentMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadApprovalRequestDocumentMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadApprovalRequestDocumentMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadDocumentLogs<T extends Prisma.AccountMaster$leadDocumentLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadDocumentLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documents<T extends Prisma.AccountMaster$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leads<T extends Prisma.AccountMaster$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  leadAmcContracts<T extends Prisma.AccountMaster$leadAmcContractsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadAmcContractsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadAmcContractPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadsMapping<T extends Prisma.AccountMaster$leadsMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadsMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   productStructureInstances<T extends Prisma.AccountMaster$productStructureInstancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$productStructureInstancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureInstancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadProductStructureMapping<T extends Prisma.AccountMaster$leadProductStructureMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadProductStructureMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -9807,8 +9809,6 @@ export interface Prisma__AccountMasterClient<T, Null = never, ExtArgs extends ru
   payments<T extends Prisma.AccountMaster$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentInfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   siteReadiness<T extends Prisma.AccountMaster$siteReadinessArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$siteReadinessArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiteReadinessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tasks<T extends Prisma.AccountMaster$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserLeadTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  fastProductionRequests<T extends Prisma.AccountMaster$fastProductionRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$fastProductionRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  fastProductionRequestBatches<T extends Prisma.AccountMaster$fastProductionRequestBatchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$fastProductionRequestBatchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestBatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10292,6 +10292,54 @@ export type AccountMaster$updatedByArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
+ * AccountMaster.fastProductionRequests
+ */
+export type AccountMaster$fastProductionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FastProductionRequest
+   */
+  select?: Prisma.FastProductionRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FastProductionRequest
+   */
+  omit?: Prisma.FastProductionRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FastProductionRequestInclude<ExtArgs> | null
+  where?: Prisma.FastProductionRequestWhereInput
+  orderBy?: Prisma.FastProductionRequestOrderByWithRelationInput | Prisma.FastProductionRequestOrderByWithRelationInput[]
+  cursor?: Prisma.FastProductionRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FastProductionRequestScalarFieldEnum | Prisma.FastProductionRequestScalarFieldEnum[]
+}
+
+/**
+ * AccountMaster.fastProductionRequestBatches
+ */
+export type AccountMaster$fastProductionRequestBatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FastProductionRequestBatch
+   */
+  select?: Prisma.FastProductionRequestBatchSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FastProductionRequestBatch
+   */
+  omit?: Prisma.FastProductionRequestBatchOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FastProductionRequestBatchInclude<ExtArgs> | null
+  where?: Prisma.FastProductionRequestBatchWhereInput
+  orderBy?: Prisma.FastProductionRequestBatchOrderByWithRelationInput | Prisma.FastProductionRequestBatchOrderByWithRelationInput[]
+  cursor?: Prisma.FastProductionRequestBatchWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FastProductionRequestBatchScalarFieldEnum | Prisma.FastProductionRequestBatchScalarFieldEnum[]
+}
+
+/**
  * AccountMaster.installationIssueLogMaster
  */
 export type AccountMaster$installationIssueLogMasterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -10388,6 +10436,54 @@ export type AccountMaster$leadActivityStatusLogArgs<ExtArgs extends runtime.Type
 }
 
 /**
+ * AccountMaster.leadAmcContracts
+ */
+export type AccountMaster$leadAmcContractsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadAmcContract
+   */
+  select?: Prisma.LeadAmcContractSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadAmcContract
+   */
+  omit?: Prisma.LeadAmcContractOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadAmcContractInclude<ExtArgs> | null
+  where?: Prisma.LeadAmcContractWhereInput
+  orderBy?: Prisma.LeadAmcContractOrderByWithRelationInput | Prisma.LeadAmcContractOrderByWithRelationInput[]
+  cursor?: Prisma.LeadAmcContractWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadAmcContractScalarFieldEnum | Prisma.LeadAmcContractScalarFieldEnum[]
+}
+
+/**
+ * AccountMaster.leadApprovalRequestDocumentMappings
+ */
+export type AccountMaster$leadApprovalRequestDocumentMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadApprovalRequestDocumentMapping
+   */
+  select?: Prisma.LeadApprovalRequestDocumentMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadApprovalRequestDocumentMapping
+   */
+  omit?: Prisma.LeadApprovalRequestDocumentMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadApprovalRequestDocumentMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadApprovalRequestDocumentMappingWhereInput
+  orderBy?: Prisma.LeadApprovalRequestDocumentMappingOrderByWithRelationInput | Prisma.LeadApprovalRequestDocumentMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadApprovalRequestDocumentMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadApprovalRequestDocumentMappingScalarFieldEnum | Prisma.LeadApprovalRequestDocumentMappingScalarFieldEnum[]
+}
+
+/**
  * AccountMaster.leadChatDocument
  */
 export type AccountMaster$leadChatDocumentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -10409,54 +10505,6 @@ export type AccountMaster$leadChatDocumentArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.LeadChatDocumentScalarFieldEnum | Prisma.LeadChatDocumentScalarFieldEnum[]
-}
-
-/**
- * AccountMaster.designMeeting
- */
-export type AccountMaster$designMeetingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the LeadDesignMeeting
-   */
-  select?: Prisma.LeadDesignMeetingSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the LeadDesignMeeting
-   */
-  omit?: Prisma.LeadDesignMeetingOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LeadDesignMeetingInclude<ExtArgs> | null
-  where?: Prisma.LeadDesignMeetingWhereInput
-  orderBy?: Prisma.LeadDesignMeetingOrderByWithRelationInput | Prisma.LeadDesignMeetingOrderByWithRelationInput[]
-  cursor?: Prisma.LeadDesignMeetingWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LeadDesignMeetingScalarFieldEnum | Prisma.LeadDesignMeetingScalarFieldEnum[]
-}
-
-/**
- * AccountMaster.designMeetingDocsMapping
- */
-export type AccountMaster$designMeetingDocsMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the LeadDesignMeetingDocumentsMapping
-   */
-  select?: Prisma.LeadDesignMeetingDocumentsMappingSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the LeadDesignMeetingDocumentsMapping
-   */
-  omit?: Prisma.LeadDesignMeetingDocumentsMappingOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LeadDesignMeetingDocumentsMappingInclude<ExtArgs> | null
-  where?: Prisma.LeadDesignMeetingDocumentsMappingWhereInput
-  orderBy?: Prisma.LeadDesignMeetingDocumentsMappingOrderByWithRelationInput | Prisma.LeadDesignMeetingDocumentsMappingOrderByWithRelationInput[]
-  cursor?: Prisma.LeadDesignMeetingDocumentsMappingWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LeadDesignMeetingDocumentsMappingScalarFieldEnum | Prisma.LeadDesignMeetingDocumentsMappingScalarFieldEnum[]
 }
 
 /**
@@ -10508,6 +10556,54 @@ export type AccountMaster$clientVisitDocumentMappingsArgs<ExtArgs extends runtim
 }
 
 /**
+ * AccountMaster.designMeeting
+ */
+export type AccountMaster$designMeetingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadDesignMeeting
+   */
+  select?: Prisma.LeadDesignMeetingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadDesignMeeting
+   */
+  omit?: Prisma.LeadDesignMeetingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadDesignMeetingInclude<ExtArgs> | null
+  where?: Prisma.LeadDesignMeetingWhereInput
+  orderBy?: Prisma.LeadDesignMeetingOrderByWithRelationInput | Prisma.LeadDesignMeetingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadDesignMeetingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadDesignMeetingScalarFieldEnum | Prisma.LeadDesignMeetingScalarFieldEnum[]
+}
+
+/**
+ * AccountMaster.designMeetingDocsMapping
+ */
+export type AccountMaster$designMeetingDocsMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadDesignMeetingDocumentsMapping
+   */
+  select?: Prisma.LeadDesignMeetingDocumentsMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadDesignMeetingDocumentsMapping
+   */
+  omit?: Prisma.LeadDesignMeetingDocumentsMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadDesignMeetingDocumentsMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadDesignMeetingDocumentsMappingWhereInput
+  orderBy?: Prisma.LeadDesignMeetingDocumentsMappingOrderByWithRelationInput | Prisma.LeadDesignMeetingDocumentsMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadDesignMeetingDocumentsMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadDesignMeetingDocumentsMappingScalarFieldEnum | Prisma.LeadDesignMeetingDocumentsMappingScalarFieldEnum[]
+}
+
+/**
  * AccountMaster.designSelection
  */
 export type AccountMaster$designSelectionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -10553,30 +10649,6 @@ export type AccountMaster$leadDetailedLogsArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.LeadDetailedLogsScalarFieldEnum | Prisma.LeadDetailedLogsScalarFieldEnum[]
-}
-
-/**
- * AccountMaster.leadApprovalRequestDocumentMappings
- */
-export type AccountMaster$leadApprovalRequestDocumentMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the LeadApprovalRequestDocumentMapping
-   */
-  select?: Prisma.LeadApprovalRequestDocumentMappingSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the LeadApprovalRequestDocumentMapping
-   */
-  omit?: Prisma.LeadApprovalRequestDocumentMappingOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LeadApprovalRequestDocumentMappingInclude<ExtArgs> | null
-  where?: Prisma.LeadApprovalRequestDocumentMappingWhereInput
-  orderBy?: Prisma.LeadApprovalRequestDocumentMappingOrderByWithRelationInput | Prisma.LeadApprovalRequestDocumentMappingOrderByWithRelationInput[]
-  cursor?: Prisma.LeadApprovalRequestDocumentMappingWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LeadApprovalRequestDocumentMappingScalarFieldEnum | Prisma.LeadApprovalRequestDocumentMappingScalarFieldEnum[]
 }
 
 /**
@@ -10649,30 +10721,6 @@ export type AccountMaster$leadsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.LeadMasterScalarFieldEnum | Prisma.LeadMasterScalarFieldEnum[]
-}
-
-/**
- * AccountMaster.leadAmcContracts
- */
-export type AccountMaster$leadAmcContractsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the LeadAmcContract
-   */
-  select?: Prisma.LeadAmcContractSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the LeadAmcContract
-   */
-  omit?: Prisma.LeadAmcContractOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LeadAmcContractInclude<ExtArgs> | null
-  where?: Prisma.LeadAmcContractWhereInput
-  orderBy?: Prisma.LeadAmcContractOrderByWithRelationInput | Prisma.LeadAmcContractOrderByWithRelationInput[]
-  cursor?: Prisma.LeadAmcContractWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LeadAmcContractScalarFieldEnum | Prisma.LeadAmcContractScalarFieldEnum[]
 }
 
 /**
@@ -10985,54 +11033,6 @@ export type AccountMaster$tasksArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.UserLeadTaskScalarFieldEnum | Prisma.UserLeadTaskScalarFieldEnum[]
-}
-
-/**
- * AccountMaster.fastProductionRequests
- */
-export type AccountMaster$fastProductionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the FastProductionRequest
-   */
-  select?: Prisma.FastProductionRequestSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the FastProductionRequest
-   */
-  omit?: Prisma.FastProductionRequestOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FastProductionRequestInclude<ExtArgs> | null
-  where?: Prisma.FastProductionRequestWhereInput
-  orderBy?: Prisma.FastProductionRequestOrderByWithRelationInput | Prisma.FastProductionRequestOrderByWithRelationInput[]
-  cursor?: Prisma.FastProductionRequestWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FastProductionRequestScalarFieldEnum | Prisma.FastProductionRequestScalarFieldEnum[]
-}
-
-/**
- * AccountMaster.fastProductionRequestBatches
- */
-export type AccountMaster$fastProductionRequestBatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the FastProductionRequestBatch
-   */
-  select?: Prisma.FastProductionRequestBatchSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the FastProductionRequestBatch
-   */
-  omit?: Prisma.FastProductionRequestBatchOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FastProductionRequestBatchInclude<ExtArgs> | null
-  where?: Prisma.FastProductionRequestBatchWhereInput
-  orderBy?: Prisma.FastProductionRequestBatchOrderByWithRelationInput | Prisma.FastProductionRequestBatchOrderByWithRelationInput[]
-  cursor?: Prisma.FastProductionRequestBatchWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FastProductionRequestBatchScalarFieldEnum | Prisma.FastProductionRequestBatchScalarFieldEnum[]
 }
 
 /**

@@ -30,27 +30,26 @@ export type ProjectDetailsAvgAggregateOutputType = {
   id: number | null
   project_id: number | null
   vendor_id: number | null
-  lead_id: number | null
   total_items: number | null
   total_packed: number | null
   total_unpacked: number | null
+  lead_id: number | null
 }
 
 export type ProjectDetailsSumAggregateOutputType = {
   id: number | null
   project_id: number | null
   vendor_id: number | null
-  lead_id: number | null
   total_items: number | null
   total_packed: number | null
   total_unpacked: number | null
+  lead_id: number | null
 }
 
 export type ProjectDetailsMinAggregateOutputType = {
   id: number | null
   project_id: number | null
   vendor_id: number | null
-  lead_id: number | null
   total_items: number | null
   total_packed: number | null
   total_unpacked: number | null
@@ -59,13 +58,13 @@ export type ProjectDetailsMinAggregateOutputType = {
   start_date: Date | null
   is_grouping: boolean | null
   room_name: string | null
+  lead_id: number | null
 }
 
 export type ProjectDetailsMaxAggregateOutputType = {
   id: number | null
   project_id: number | null
   vendor_id: number | null
-  lead_id: number | null
   total_items: number | null
   total_packed: number | null
   total_unpacked: number | null
@@ -74,13 +73,13 @@ export type ProjectDetailsMaxAggregateOutputType = {
   start_date: Date | null
   is_grouping: boolean | null
   room_name: string | null
+  lead_id: number | null
 }
 
 export type ProjectDetailsCountAggregateOutputType = {
   id: number
   project_id: number
   vendor_id: number
-  lead_id: number
   total_items: number
   total_packed: number
   total_unpacked: number
@@ -89,6 +88,7 @@ export type ProjectDetailsCountAggregateOutputType = {
   start_date: number
   is_grouping: number
   room_name: number
+  lead_id: number
   _all: number
 }
 
@@ -97,27 +97,26 @@ export type ProjectDetailsAvgAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  lead_id?: true
   total_items?: true
   total_packed?: true
   total_unpacked?: true
+  lead_id?: true
 }
 
 export type ProjectDetailsSumAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  lead_id?: true
   total_items?: true
   total_packed?: true
   total_unpacked?: true
+  lead_id?: true
 }
 
 export type ProjectDetailsMinAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  lead_id?: true
   total_items?: true
   total_packed?: true
   total_unpacked?: true
@@ -126,13 +125,13 @@ export type ProjectDetailsMinAggregateInputType = {
   start_date?: true
   is_grouping?: true
   room_name?: true
+  lead_id?: true
 }
 
 export type ProjectDetailsMaxAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  lead_id?: true
   total_items?: true
   total_packed?: true
   total_unpacked?: true
@@ -141,13 +140,13 @@ export type ProjectDetailsMaxAggregateInputType = {
   start_date?: true
   is_grouping?: true
   room_name?: true
+  lead_id?: true
 }
 
 export type ProjectDetailsCountAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  lead_id?: true
   total_items?: true
   total_packed?: true
   total_unpacked?: true
@@ -156,6 +155,7 @@ export type ProjectDetailsCountAggregateInputType = {
   start_date?: true
   is_grouping?: true
   room_name?: true
+  lead_id?: true
   _all?: true
 }
 
@@ -249,7 +249,6 @@ export type ProjectDetailsGroupByOutputType = {
   id: number
   project_id: number
   vendor_id: number
-  lead_id: number | null
   total_items: number
   total_packed: number
   total_unpacked: number
@@ -258,6 +257,7 @@ export type ProjectDetailsGroupByOutputType = {
   start_date: Date
   is_grouping: boolean
   room_name: string
+  lead_id: number | null
   _count: ProjectDetailsCountAggregateOutputType | null
   _avg: ProjectDetailsAvgAggregateOutputType | null
   _sum: ProjectDetailsSumAggregateOutputType | null
@@ -287,7 +287,6 @@ export type ProjectDetailsWhereInput = {
   id?: Prisma.IntFilter<"ProjectDetails"> | number
   project_id?: Prisma.IntFilter<"ProjectDetails"> | number
   vendor_id?: Prisma.IntFilter<"ProjectDetails"> | number
-  lead_id?: Prisma.IntNullableFilter<"ProjectDetails"> | number | null
   total_items?: Prisma.IntFilter<"ProjectDetails"> | number
   total_packed?: Prisma.IntFilter<"ProjectDetails"> | number
   total_unpacked?: Prisma.IntFilter<"ProjectDetails"> | number
@@ -296,6 +295,7 @@ export type ProjectDetailsWhereInput = {
   start_date?: Prisma.DateTimeFilter<"ProjectDetails"> | Date | string
   is_grouping?: Prisma.BoolFilter<"ProjectDetails"> | boolean
   room_name?: Prisma.StringFilter<"ProjectDetails"> | string
+  lead_id?: Prisma.IntNullableFilter<"ProjectDetails"> | number | null
   boxes?: Prisma.BoxMasterListRelationFilter
   leadMaster?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
@@ -308,7 +308,6 @@ export type ProjectDetailsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
   total_items?: Prisma.SortOrder
   total_packed?: Prisma.SortOrder
   total_unpacked?: Prisma.SortOrder
@@ -317,6 +316,7 @@ export type ProjectDetailsOrderByWithRelationInput = {
   start_date?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
   room_name?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
   boxes?: Prisma.BoxMasterOrderByRelationAggregateInput
   leadMaster?: Prisma.LeadMasterOrderByWithRelationInput
   project?: Prisma.ProjectMasterOrderByWithRelationInput
@@ -332,7 +332,6 @@ export type ProjectDetailsWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ProjectDetailsWhereInput | Prisma.ProjectDetailsWhereInput[]
   project_id?: Prisma.IntFilter<"ProjectDetails"> | number
   vendor_id?: Prisma.IntFilter<"ProjectDetails"> | number
-  lead_id?: Prisma.IntNullableFilter<"ProjectDetails"> | number | null
   total_items?: Prisma.IntFilter<"ProjectDetails"> | number
   total_packed?: Prisma.IntFilter<"ProjectDetails"> | number
   total_unpacked?: Prisma.IntFilter<"ProjectDetails"> | number
@@ -341,6 +340,7 @@ export type ProjectDetailsWhereUniqueInput = Prisma.AtLeast<{
   start_date?: Prisma.DateTimeFilter<"ProjectDetails"> | Date | string
   is_grouping?: Prisma.BoolFilter<"ProjectDetails"> | boolean
   room_name?: Prisma.StringFilter<"ProjectDetails"> | string
+  lead_id?: Prisma.IntNullableFilter<"ProjectDetails"> | number | null
   boxes?: Prisma.BoxMasterListRelationFilter
   leadMaster?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
@@ -353,7 +353,6 @@ export type ProjectDetailsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
   total_items?: Prisma.SortOrder
   total_packed?: Prisma.SortOrder
   total_unpacked?: Prisma.SortOrder
@@ -362,6 +361,7 @@ export type ProjectDetailsOrderByWithAggregationInput = {
   start_date?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
   room_name?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ProjectDetailsCountOrderByAggregateInput
   _avg?: Prisma.ProjectDetailsAvgOrderByAggregateInput
   _max?: Prisma.ProjectDetailsMaxOrderByAggregateInput
@@ -376,7 +376,6 @@ export type ProjectDetailsScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"ProjectDetails"> | number
   project_id?: Prisma.IntWithAggregatesFilter<"ProjectDetails"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"ProjectDetails"> | number
-  lead_id?: Prisma.IntNullableWithAggregatesFilter<"ProjectDetails"> | number | null
   total_items?: Prisma.IntWithAggregatesFilter<"ProjectDetails"> | number
   total_packed?: Prisma.IntWithAggregatesFilter<"ProjectDetails"> | number
   total_unpacked?: Prisma.IntWithAggregatesFilter<"ProjectDetails"> | number
@@ -385,6 +384,7 @@ export type ProjectDetailsScalarWhereWithAggregatesInput = {
   start_date?: Prisma.DateTimeWithAggregatesFilter<"ProjectDetails"> | Date | string
   is_grouping?: Prisma.BoolWithAggregatesFilter<"ProjectDetails"> | boolean
   room_name?: Prisma.StringWithAggregatesFilter<"ProjectDetails"> | string
+  lead_id?: Prisma.IntNullableWithAggregatesFilter<"ProjectDetails"> | number | null
 }
 
 export type ProjectDetailsCreateInput = {
@@ -408,7 +408,6 @@ export type ProjectDetailsUncheckedCreateInput = {
   id?: number
   project_id: number
   vendor_id: number
-  lead_id?: number | null
   total_items?: number
   total_packed?: number
   total_unpacked?: number
@@ -417,6 +416,7 @@ export type ProjectDetailsUncheckedCreateInput = {
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
+  lead_id?: number | null
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutDetailsInput
   items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutDetailsInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutDetailsInput
@@ -443,7 +443,6 @@ export type ProjectDetailsUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_items?: Prisma.IntFieldUpdateOperationsInput | number
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
@@ -452,6 +451,7 @@ export type ProjectDetailsUncheckedUpdateInput = {
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutDetailsNestedInput
   items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutDetailsNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutDetailsNestedInput
@@ -461,7 +461,6 @@ export type ProjectDetailsCreateManyInput = {
   id?: number
   project_id: number
   vendor_id: number
-  lead_id?: number | null
   total_items?: number
   total_packed?: number
   total_unpacked?: number
@@ -470,6 +469,7 @@ export type ProjectDetailsCreateManyInput = {
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
+  lead_id?: number | null
 }
 
 export type ProjectDetailsUpdateManyMutationInput = {
@@ -487,7 +487,6 @@ export type ProjectDetailsUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_items?: Prisma.IntFieldUpdateOperationsInput | number
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
@@ -496,6 +495,7 @@ export type ProjectDetailsUncheckedUpdateManyInput = {
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProjectDetailsListRelationFilter = {
@@ -512,7 +512,6 @@ export type ProjectDetailsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrder
   total_items?: Prisma.SortOrder
   total_packed?: Prisma.SortOrder
   total_unpacked?: Prisma.SortOrder
@@ -521,23 +520,23 @@ export type ProjectDetailsCountOrderByAggregateInput = {
   start_date?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
   room_name?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
 }
 
 export type ProjectDetailsAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrder
   total_items?: Prisma.SortOrder
   total_packed?: Prisma.SortOrder
   total_unpacked?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
 }
 
 export type ProjectDetailsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrder
   total_items?: Prisma.SortOrder
   total_packed?: Prisma.SortOrder
   total_unpacked?: Prisma.SortOrder
@@ -546,13 +545,13 @@ export type ProjectDetailsMaxOrderByAggregateInput = {
   start_date?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
   room_name?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
 }
 
 export type ProjectDetailsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrder
   total_items?: Prisma.SortOrder
   total_packed?: Prisma.SortOrder
   total_unpacked?: Prisma.SortOrder
@@ -561,16 +560,17 @@ export type ProjectDetailsMinOrderByAggregateInput = {
   start_date?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
   room_name?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
 }
 
 export type ProjectDetailsSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrder
   total_items?: Prisma.SortOrder
   total_packed?: Prisma.SortOrder
   total_unpacked?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
 }
 
 export type ProjectDetailsScalarRelationFilter = {
@@ -765,7 +765,6 @@ export type ProjectDetailsCreateWithoutVendorInput = {
 export type ProjectDetailsUncheckedCreateWithoutVendorInput = {
   id?: number
   project_id: number
-  lead_id?: number | null
   total_items?: number
   total_packed?: number
   total_unpacked?: number
@@ -774,6 +773,7 @@ export type ProjectDetailsUncheckedCreateWithoutVendorInput = {
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
+  lead_id?: number | null
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutDetailsInput
   items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutDetailsInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutDetailsInput
@@ -812,7 +812,6 @@ export type ProjectDetailsScalarWhereInput = {
   id?: Prisma.IntFilter<"ProjectDetails"> | number
   project_id?: Prisma.IntFilter<"ProjectDetails"> | number
   vendor_id?: Prisma.IntFilter<"ProjectDetails"> | number
-  lead_id?: Prisma.IntNullableFilter<"ProjectDetails"> | number | null
   total_items?: Prisma.IntFilter<"ProjectDetails"> | number
   total_packed?: Prisma.IntFilter<"ProjectDetails"> | number
   total_unpacked?: Prisma.IntFilter<"ProjectDetails"> | number
@@ -821,6 +820,7 @@ export type ProjectDetailsScalarWhereInput = {
   start_date?: Prisma.DateTimeFilter<"ProjectDetails"> | Date | string
   is_grouping?: Prisma.BoolFilter<"ProjectDetails"> | boolean
   room_name?: Prisma.StringFilter<"ProjectDetails"> | string
+  lead_id?: Prisma.IntNullableFilter<"ProjectDetails"> | number | null
 }
 
 export type ProjectDetailsCreateWithoutProjectInput = {
@@ -842,7 +842,6 @@ export type ProjectDetailsCreateWithoutProjectInput = {
 export type ProjectDetailsUncheckedCreateWithoutProjectInput = {
   id?: number
   vendor_id: number
-  lead_id?: number | null
   total_items?: number
   total_packed?: number
   total_unpacked?: number
@@ -851,6 +850,7 @@ export type ProjectDetailsUncheckedCreateWithoutProjectInput = {
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
+  lead_id?: number | null
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutDetailsInput
   items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutDetailsInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutDetailsInput
@@ -902,7 +902,6 @@ export type ProjectDetailsUncheckedCreateWithoutItemsInput = {
   id?: number
   project_id: number
   vendor_id: number
-  lead_id?: number | null
   total_items?: number
   total_packed?: number
   total_unpacked?: number
@@ -911,6 +910,7 @@ export type ProjectDetailsUncheckedCreateWithoutItemsInput = {
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
+  lead_id?: number | null
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutDetailsInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutDetailsInput
 }
@@ -951,7 +951,6 @@ export type ProjectDetailsUncheckedUpdateWithoutItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_items?: Prisma.IntFieldUpdateOperationsInput | number
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
@@ -960,6 +959,7 @@ export type ProjectDetailsUncheckedUpdateWithoutItemsInput = {
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutDetailsNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutDetailsNestedInput
 }
@@ -984,7 +984,6 @@ export type ProjectDetailsUncheckedCreateWithoutBoxesInput = {
   id?: number
   project_id: number
   vendor_id: number
-  lead_id?: number | null
   total_items?: number
   total_packed?: number
   total_unpacked?: number
@@ -993,6 +992,7 @@ export type ProjectDetailsUncheckedCreateWithoutBoxesInput = {
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
+  lead_id?: number | null
   items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutDetailsInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutDetailsInput
 }
@@ -1033,7 +1033,6 @@ export type ProjectDetailsUncheckedUpdateWithoutBoxesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_items?: Prisma.IntFieldUpdateOperationsInput | number
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1042,6 +1041,7 @@ export type ProjectDetailsUncheckedUpdateWithoutBoxesInput = {
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutDetailsNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutDetailsNestedInput
 }
@@ -1066,7 +1066,6 @@ export type ProjectDetailsUncheckedCreateWithoutScanItemsInput = {
   id?: number
   project_id: number
   vendor_id: number
-  lead_id?: number | null
   total_items?: number
   total_packed?: number
   total_unpacked?: number
@@ -1075,6 +1074,7 @@ export type ProjectDetailsUncheckedCreateWithoutScanItemsInput = {
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
+  lead_id?: number | null
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutDetailsInput
   items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutDetailsInput
 }
@@ -1115,7 +1115,6 @@ export type ProjectDetailsUncheckedUpdateWithoutScanItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_items?: Prisma.IntFieldUpdateOperationsInput | number
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1124,6 +1123,7 @@ export type ProjectDetailsUncheckedUpdateWithoutScanItemsInput = {
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutDetailsNestedInput
   items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutDetailsNestedInput
 }
@@ -1190,7 +1190,6 @@ export type ProjectDetailsUpdateManyWithWhereWithoutLeadMasterInput = {
 export type ProjectDetailsCreateManyVendorInput = {
   id?: number
   project_id: number
-  lead_id?: number | null
   total_items?: number
   total_packed?: number
   total_unpacked?: number
@@ -1199,6 +1198,7 @@ export type ProjectDetailsCreateManyVendorInput = {
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
+  lead_id?: number | null
 }
 
 export type ProjectDetailsUpdateWithoutVendorInput = {
@@ -1220,7 +1220,6 @@ export type ProjectDetailsUpdateWithoutVendorInput = {
 export type ProjectDetailsUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_items?: Prisma.IntFieldUpdateOperationsInput | number
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1229,6 +1228,7 @@ export type ProjectDetailsUncheckedUpdateWithoutVendorInput = {
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutDetailsNestedInput
   items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutDetailsNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutDetailsNestedInput
@@ -1237,7 +1237,6 @@ export type ProjectDetailsUncheckedUpdateWithoutVendorInput = {
 export type ProjectDetailsUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_items?: Prisma.IntFieldUpdateOperationsInput | number
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1246,12 +1245,12 @@ export type ProjectDetailsUncheckedUpdateManyWithoutVendorInput = {
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProjectDetailsCreateManyProjectInput = {
   id?: number
   vendor_id: number
-  lead_id?: number | null
   total_items?: number
   total_packed?: number
   total_unpacked?: number
@@ -1260,6 +1259,7 @@ export type ProjectDetailsCreateManyProjectInput = {
   start_date?: Date | string
   is_grouping?: boolean
   room_name: string
+  lead_id?: number | null
 }
 
 export type ProjectDetailsUpdateWithoutProjectInput = {
@@ -1281,7 +1281,6 @@ export type ProjectDetailsUpdateWithoutProjectInput = {
 export type ProjectDetailsUncheckedUpdateWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_items?: Prisma.IntFieldUpdateOperationsInput | number
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1290,6 +1289,7 @@ export type ProjectDetailsUncheckedUpdateWithoutProjectInput = {
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutDetailsNestedInput
   items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutDetailsNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutDetailsNestedInput
@@ -1298,7 +1298,6 @@ export type ProjectDetailsUncheckedUpdateWithoutProjectInput = {
 export type ProjectDetailsUncheckedUpdateManyWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_items?: Prisma.IntFieldUpdateOperationsInput | number
   total_packed?: Prisma.IntFieldUpdateOperationsInput | number
   total_unpacked?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1307,6 +1306,7 @@ export type ProjectDetailsUncheckedUpdateManyWithoutProjectInput = {
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
   room_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProjectDetailsCreateManyLeadMasterInput = {
@@ -1423,7 +1423,6 @@ export type ProjectDetailsSelect<ExtArgs extends runtime.Types.Extensions.Intern
   id?: boolean
   project_id?: boolean
   vendor_id?: boolean
-  lead_id?: boolean
   total_items?: boolean
   total_packed?: boolean
   total_unpacked?: boolean
@@ -1432,6 +1431,7 @@ export type ProjectDetailsSelect<ExtArgs extends runtime.Types.Extensions.Intern
   start_date?: boolean
   is_grouping?: boolean
   room_name?: boolean
+  lead_id?: boolean
   boxes?: boolean | Prisma.ProjectDetails$boxesArgs<ExtArgs>
   leadMaster?: boolean | Prisma.ProjectDetails$leadMasterArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
@@ -1445,7 +1445,6 @@ export type ProjectDetailsSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   id?: boolean
   project_id?: boolean
   vendor_id?: boolean
-  lead_id?: boolean
   total_items?: boolean
   total_packed?: boolean
   total_unpacked?: boolean
@@ -1454,6 +1453,7 @@ export type ProjectDetailsSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   start_date?: boolean
   is_grouping?: boolean
   room_name?: boolean
+  lead_id?: boolean
   leadMaster?: boolean | Prisma.ProjectDetails$leadMasterArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1463,7 +1463,6 @@ export type ProjectDetailsSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   id?: boolean
   project_id?: boolean
   vendor_id?: boolean
-  lead_id?: boolean
   total_items?: boolean
   total_packed?: boolean
   total_unpacked?: boolean
@@ -1472,6 +1471,7 @@ export type ProjectDetailsSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   start_date?: boolean
   is_grouping?: boolean
   room_name?: boolean
+  lead_id?: boolean
   leadMaster?: boolean | Prisma.ProjectDetails$leadMasterArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1481,7 +1481,6 @@ export type ProjectDetailsSelectScalar = {
   id?: boolean
   project_id?: boolean
   vendor_id?: boolean
-  lead_id?: boolean
   total_items?: boolean
   total_packed?: boolean
   total_unpacked?: boolean
@@ -1490,9 +1489,10 @@ export type ProjectDetailsSelectScalar = {
   start_date?: boolean
   is_grouping?: boolean
   room_name?: boolean
+  lead_id?: boolean
 }
 
-export type ProjectDetailsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "lead_id" | "total_items" | "total_packed" | "total_unpacked" | "actual_completion_date" | "estimated_completion_date" | "start_date" | "is_grouping" | "room_name", ExtArgs["result"]["projectDetails"]>
+export type ProjectDetailsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "total_items" | "total_packed" | "total_unpacked" | "actual_completion_date" | "estimated_completion_date" | "start_date" | "is_grouping" | "room_name" | "lead_id", ExtArgs["result"]["projectDetails"]>
 export type ProjectDetailsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   boxes?: boolean | Prisma.ProjectDetails$boxesArgs<ExtArgs>
   leadMaster?: boolean | Prisma.ProjectDetails$leadMasterArgs<ExtArgs>
@@ -1527,7 +1527,6 @@ export type $ProjectDetailsPayload<ExtArgs extends runtime.Types.Extensions.Inte
     id: number
     project_id: number
     vendor_id: number
-    lead_id: number | null
     total_items: number
     total_packed: number
     total_unpacked: number
@@ -1536,6 +1535,7 @@ export type $ProjectDetailsPayload<ExtArgs extends runtime.Types.Extensions.Inte
     start_date: Date
     is_grouping: boolean
     room_name: string
+    lead_id: number | null
   }, ExtArgs["result"]["projectDetails"]>
   composites: {}
 }
@@ -1968,7 +1968,6 @@ export interface ProjectDetailsFieldRefs {
   readonly id: Prisma.FieldRef<"ProjectDetails", 'Int'>
   readonly project_id: Prisma.FieldRef<"ProjectDetails", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"ProjectDetails", 'Int'>
-  readonly lead_id: Prisma.FieldRef<"ProjectDetails", 'Int'>
   readonly total_items: Prisma.FieldRef<"ProjectDetails", 'Int'>
   readonly total_packed: Prisma.FieldRef<"ProjectDetails", 'Int'>
   readonly total_unpacked: Prisma.FieldRef<"ProjectDetails", 'Int'>
@@ -1977,6 +1976,7 @@ export interface ProjectDetailsFieldRefs {
   readonly start_date: Prisma.FieldRef<"ProjectDetails", 'DateTime'>
   readonly is_grouping: Prisma.FieldRef<"ProjectDetails", 'Boolean'>
   readonly room_name: Prisma.FieldRef<"ProjectDetails", 'String'>
+  readonly lead_id: Prisma.FieldRef<"ProjectDetails", 'Int'>
 }
     
 

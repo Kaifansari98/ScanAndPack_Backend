@@ -29,23 +29,22 @@ export type AggregatePaymentTermMaster = {
 export type PaymentTermMasterAvgAggregateOutputType = {
   id: number | null
   vendor_id: number | null
-  company_vendor_id: number | null
   created_by: number | null
   updated_by: number | null
+  company_vendor_id: number | null
 }
 
 export type PaymentTermMasterSumAggregateOutputType = {
   id: number | null
   vendor_id: number | null
-  company_vendor_id: number | null
   created_by: number | null
   updated_by: number | null
+  company_vendor_id: number | null
 }
 
 export type PaymentTermMasterMinAggregateOutputType = {
   id: number | null
   vendor_id: number | null
-  company_vendor_id: number | null
   term_name: string | null
   description: string | null
   is_active: boolean | null
@@ -53,12 +52,12 @@ export type PaymentTermMasterMinAggregateOutputType = {
   updated_by: number | null
   created_at: Date | null
   updated_at: Date | null
+  company_vendor_id: number | null
 }
 
 export type PaymentTermMasterMaxAggregateOutputType = {
   id: number | null
   vendor_id: number | null
-  company_vendor_id: number | null
   term_name: string | null
   description: string | null
   is_active: boolean | null
@@ -66,12 +65,12 @@ export type PaymentTermMasterMaxAggregateOutputType = {
   updated_by: number | null
   created_at: Date | null
   updated_at: Date | null
+  company_vendor_id: number | null
 }
 
 export type PaymentTermMasterCountAggregateOutputType = {
   id: number
   vendor_id: number
-  company_vendor_id: number
   term_name: number
   description: number
   is_active: number
@@ -79,6 +78,7 @@ export type PaymentTermMasterCountAggregateOutputType = {
   updated_by: number
   created_at: number
   updated_at: number
+  company_vendor_id: number
   _all: number
 }
 
@@ -86,23 +86,22 @@ export type PaymentTermMasterCountAggregateOutputType = {
 export type PaymentTermMasterAvgAggregateInputType = {
   id?: true
   vendor_id?: true
-  company_vendor_id?: true
   created_by?: true
   updated_by?: true
+  company_vendor_id?: true
 }
 
 export type PaymentTermMasterSumAggregateInputType = {
   id?: true
   vendor_id?: true
-  company_vendor_id?: true
   created_by?: true
   updated_by?: true
+  company_vendor_id?: true
 }
 
 export type PaymentTermMasterMinAggregateInputType = {
   id?: true
   vendor_id?: true
-  company_vendor_id?: true
   term_name?: true
   description?: true
   is_active?: true
@@ -110,12 +109,12 @@ export type PaymentTermMasterMinAggregateInputType = {
   updated_by?: true
   created_at?: true
   updated_at?: true
+  company_vendor_id?: true
 }
 
 export type PaymentTermMasterMaxAggregateInputType = {
   id?: true
   vendor_id?: true
-  company_vendor_id?: true
   term_name?: true
   description?: true
   is_active?: true
@@ -123,12 +122,12 @@ export type PaymentTermMasterMaxAggregateInputType = {
   updated_by?: true
   created_at?: true
   updated_at?: true
+  company_vendor_id?: true
 }
 
 export type PaymentTermMasterCountAggregateInputType = {
   id?: true
   vendor_id?: true
-  company_vendor_id?: true
   term_name?: true
   description?: true
   is_active?: true
@@ -136,6 +135,7 @@ export type PaymentTermMasterCountAggregateInputType = {
   updated_by?: true
   created_at?: true
   updated_at?: true
+  company_vendor_id?: true
   _all?: true
 }
 
@@ -228,7 +228,6 @@ export type PaymentTermMasterGroupByArgs<ExtArgs extends runtime.Types.Extension
 export type PaymentTermMasterGroupByOutputType = {
   id: number
   vendor_id: number
-  company_vendor_id: number | null
   term_name: string
   description: string | null
   is_active: boolean
@@ -236,6 +235,7 @@ export type PaymentTermMasterGroupByOutputType = {
   updated_by: number | null
   created_at: Date
   updated_at: Date
+  company_vendor_id: number | null
   _count: PaymentTermMasterCountAggregateOutputType | null
   _avg: PaymentTermMasterAvgAggregateOutputType | null
   _sum: PaymentTermMasterSumAggregateOutputType | null
@@ -264,7 +264,6 @@ export type PaymentTermMasterWhereInput = {
   NOT?: Prisma.PaymentTermMasterWhereInput | Prisma.PaymentTermMasterWhereInput[]
   id?: Prisma.IntFilter<"PaymentTermMaster"> | number
   vendor_id?: Prisma.IntFilter<"PaymentTermMaster"> | number
-  company_vendor_id?: Prisma.IntNullableFilter<"PaymentTermMaster"> | number | null
   term_name?: Prisma.StringFilter<"PaymentTermMaster"> | string
   description?: Prisma.StringNullableFilter<"PaymentTermMaster"> | string | null
   is_active?: Prisma.BoolFilter<"PaymentTermMaster"> | boolean
@@ -272,18 +271,18 @@ export type PaymentTermMasterWhereInput = {
   updated_by?: Prisma.IntNullableFilter<"PaymentTermMaster"> | number | null
   created_at?: Prisma.DateTimeFilter<"PaymentTermMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"PaymentTermMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterNullableScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput> | null
+  company_vendor_id?: Prisma.IntNullableFilter<"PaymentTermMaster"> | number | null
   defaultForSuppliers?: Prisma.CompanyVendorsMasterListRelationFilter
+  companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterNullableScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   stages?: Prisma.PaymentTermStageListRelationFilter
-  purchaseOrders?: Prisma.PurchaseOrderMasterListRelationFilter
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingListRelationFilter
+  purchaseOrders?: Prisma.PurchaseOrderMasterListRelationFilter
 }
 
 export type PaymentTermMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  company_vendor_id?: Prisma.SortOrderInput | Prisma.SortOrder
   term_name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   is_active?: Prisma.SortOrder
@@ -291,12 +290,13 @@ export type PaymentTermMasterOrderByWithRelationInput = {
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  companyVendor?: Prisma.CompanyVendorsMasterOrderByWithRelationInput
+  company_vendor_id?: Prisma.SortOrderInput | Prisma.SortOrder
   defaultForSuppliers?: Prisma.CompanyVendorsMasterOrderByRelationAggregateInput
+  companyVendor?: Prisma.CompanyVendorsMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   stages?: Prisma.PaymentTermStageOrderByRelationAggregateInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterOrderByRelationAggregateInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingOrderByRelationAggregateInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterOrderByRelationAggregateInput
 }
 
 export type PaymentTermMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -305,7 +305,6 @@ export type PaymentTermMasterWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.PaymentTermMasterWhereInput[]
   NOT?: Prisma.PaymentTermMasterWhereInput | Prisma.PaymentTermMasterWhereInput[]
   vendor_id?: Prisma.IntFilter<"PaymentTermMaster"> | number
-  company_vendor_id?: Prisma.IntNullableFilter<"PaymentTermMaster"> | number | null
   term_name?: Prisma.StringFilter<"PaymentTermMaster"> | string
   description?: Prisma.StringNullableFilter<"PaymentTermMaster"> | string | null
   is_active?: Prisma.BoolFilter<"PaymentTermMaster"> | boolean
@@ -313,18 +312,18 @@ export type PaymentTermMasterWhereUniqueInput = Prisma.AtLeast<{
   updated_by?: Prisma.IntNullableFilter<"PaymentTermMaster"> | number | null
   created_at?: Prisma.DateTimeFilter<"PaymentTermMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"PaymentTermMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterNullableScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput> | null
+  company_vendor_id?: Prisma.IntNullableFilter<"PaymentTermMaster"> | number | null
   defaultForSuppliers?: Prisma.CompanyVendorsMasterListRelationFilter
+  companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterNullableScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   stages?: Prisma.PaymentTermStageListRelationFilter
-  purchaseOrders?: Prisma.PurchaseOrderMasterListRelationFilter
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingListRelationFilter
+  purchaseOrders?: Prisma.PurchaseOrderMasterListRelationFilter
 }, "id">
 
 export type PaymentTermMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  company_vendor_id?: Prisma.SortOrderInput | Prisma.SortOrder
   term_name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   is_active?: Prisma.SortOrder
@@ -332,6 +331,7 @@ export type PaymentTermMasterOrderByWithAggregationInput = {
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  company_vendor_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.PaymentTermMasterCountOrderByAggregateInput
   _avg?: Prisma.PaymentTermMasterAvgOrderByAggregateInput
   _max?: Prisma.PaymentTermMasterMaxOrderByAggregateInput
@@ -345,7 +345,6 @@ export type PaymentTermMasterScalarWhereWithAggregatesInput = {
   NOT?: Prisma.PaymentTermMasterScalarWhereWithAggregatesInput | Prisma.PaymentTermMasterScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"PaymentTermMaster"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"PaymentTermMaster"> | number
-  company_vendor_id?: Prisma.IntNullableWithAggregatesFilter<"PaymentTermMaster"> | number | null
   term_name?: Prisma.StringWithAggregatesFilter<"PaymentTermMaster"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"PaymentTermMaster"> | string | null
   is_active?: Prisma.BoolWithAggregatesFilter<"PaymentTermMaster"> | boolean
@@ -353,6 +352,7 @@ export type PaymentTermMasterScalarWhereWithAggregatesInput = {
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"PaymentTermMaster"> | number | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"PaymentTermMaster"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"PaymentTermMaster"> | Date | string
+  company_vendor_id?: Prisma.IntNullableWithAggregatesFilter<"PaymentTermMaster"> | number | null
 }
 
 export type PaymentTermMasterCreateInput = {
@@ -363,18 +363,17 @@ export type PaymentTermMasterCreateInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentTermsInput
-  companyVendor?: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPaymentTermsInput
   defaultForSuppliers?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDefaultPaymentTermInput
+  companyVendor?: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPaymentTermsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentTermsInput
   stages?: Prisma.PaymentTermStageCreateNestedManyWithoutPaymentTermInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPaymentTermInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutPaymentTermInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPaymentTermInput
 }
 
 export type PaymentTermMasterUncheckedCreateInput = {
   id?: number
   vendor_id: number
-  company_vendor_id?: number | null
   term_name: string
   description?: string | null
   is_active?: boolean
@@ -382,10 +381,11 @@ export type PaymentTermMasterUncheckedCreateInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  company_vendor_id?: number | null
   defaultForSuppliers?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDefaultPaymentTermInput
   stages?: Prisma.PaymentTermStageUncheckedCreateNestedManyWithoutPaymentTermInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPaymentTermInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedCreateNestedManyWithoutPaymentTermInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPaymentTermInput
 }
 
 export type PaymentTermMasterUpdateInput = {
@@ -396,18 +396,17 @@ export type PaymentTermMasterUpdateInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentTermsNestedInput
-  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneWithoutPaymentTermsNestedInput
   defaultForSuppliers?: Prisma.CompanyVendorsMasterUpdateManyWithoutDefaultPaymentTermNestedInput
+  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneWithoutPaymentTermsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentTermsNestedInput
   stages?: Prisma.PaymentTermStageUpdateManyWithoutPaymentTermNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPaymentTermNestedInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutPaymentTermNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPaymentTermNestedInput
 }
 
 export type PaymentTermMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  company_vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   term_name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -415,16 +414,16 @@ export type PaymentTermMasterUncheckedUpdateInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company_vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defaultForSuppliers?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDefaultPaymentTermNestedInput
   stages?: Prisma.PaymentTermStageUncheckedUpdateManyWithoutPaymentTermNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPaymentTermNestedInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutPaymentTermNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPaymentTermNestedInput
 }
 
 export type PaymentTermMasterCreateManyInput = {
   id?: number
   vendor_id: number
-  company_vendor_id?: number | null
   term_name: string
   description?: string | null
   is_active?: boolean
@@ -432,6 +431,7 @@ export type PaymentTermMasterCreateManyInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  company_vendor_id?: number | null
 }
 
 export type PaymentTermMasterUpdateManyMutationInput = {
@@ -447,7 +447,6 @@ export type PaymentTermMasterUpdateManyMutationInput = {
 export type PaymentTermMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  company_vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   term_name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -455,6 +454,7 @@ export type PaymentTermMasterUncheckedUpdateManyInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company_vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type PaymentTermMasterListRelationFilter = {
@@ -475,7 +475,6 @@ export type PaymentTermMasterNullableScalarRelationFilter = {
 export type PaymentTermMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  company_vendor_id?: Prisma.SortOrder
   term_name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
@@ -483,20 +482,20 @@ export type PaymentTermMasterCountOrderByAggregateInput = {
   updated_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  company_vendor_id?: Prisma.SortOrder
 }
 
 export type PaymentTermMasterAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  company_vendor_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  company_vendor_id?: Prisma.SortOrder
 }
 
 export type PaymentTermMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  company_vendor_id?: Prisma.SortOrder
   term_name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
@@ -504,12 +503,12 @@ export type PaymentTermMasterMaxOrderByAggregateInput = {
   updated_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  company_vendor_id?: Prisma.SortOrder
 }
 
 export type PaymentTermMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  company_vendor_id?: Prisma.SortOrder
   term_name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
@@ -517,14 +516,15 @@ export type PaymentTermMasterMinOrderByAggregateInput = {
   updated_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  company_vendor_id?: Prisma.SortOrder
 }
 
 export type PaymentTermMasterSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  company_vendor_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  company_vendor_id?: Prisma.SortOrder
 }
 
 export type PaymentTermMasterScalarRelationFilter = {
@@ -686,16 +686,15 @@ export type PaymentTermMasterCreateWithoutVendorInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  companyVendor?: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPaymentTermsInput
   defaultForSuppliers?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDefaultPaymentTermInput
+  companyVendor?: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPaymentTermsInput
   stages?: Prisma.PaymentTermStageCreateNestedManyWithoutPaymentTermInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPaymentTermInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutPaymentTermInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPaymentTermInput
 }
 
 export type PaymentTermMasterUncheckedCreateWithoutVendorInput = {
   id?: number
-  company_vendor_id?: number | null
   term_name: string
   description?: string | null
   is_active?: boolean
@@ -703,10 +702,11 @@ export type PaymentTermMasterUncheckedCreateWithoutVendorInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  company_vendor_id?: number | null
   defaultForSuppliers?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDefaultPaymentTermInput
   stages?: Prisma.PaymentTermStageUncheckedCreateNestedManyWithoutPaymentTermInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPaymentTermInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedCreateNestedManyWithoutPaymentTermInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPaymentTermInput
 }
 
 export type PaymentTermMasterCreateOrConnectWithoutVendorInput = {
@@ -741,7 +741,6 @@ export type PaymentTermMasterScalarWhereInput = {
   NOT?: Prisma.PaymentTermMasterScalarWhereInput | Prisma.PaymentTermMasterScalarWhereInput[]
   id?: Prisma.IntFilter<"PaymentTermMaster"> | number
   vendor_id?: Prisma.IntFilter<"PaymentTermMaster"> | number
-  company_vendor_id?: Prisma.IntNullableFilter<"PaymentTermMaster"> | number | null
   term_name?: Prisma.StringFilter<"PaymentTermMaster"> | string
   description?: Prisma.StringNullableFilter<"PaymentTermMaster"> | string | null
   is_active?: Prisma.BoolFilter<"PaymentTermMaster"> | boolean
@@ -749,6 +748,7 @@ export type PaymentTermMasterScalarWhereInput = {
   updated_by?: Prisma.IntNullableFilter<"PaymentTermMaster"> | number | null
   created_at?: Prisma.DateTimeFilter<"PaymentTermMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"PaymentTermMaster"> | Date | string
+  company_vendor_id?: Prisma.IntNullableFilter<"PaymentTermMaster"> | number | null
 }
 
 export type PaymentTermMasterCreateWithoutDefaultForSuppliersInput = {
@@ -759,17 +759,16 @@ export type PaymentTermMasterCreateWithoutDefaultForSuppliersInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentTermsInput
   companyVendor?: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPaymentTermsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentTermsInput
   stages?: Prisma.PaymentTermStageCreateNestedManyWithoutPaymentTermInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPaymentTermInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutPaymentTermInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPaymentTermInput
 }
 
 export type PaymentTermMasterUncheckedCreateWithoutDefaultForSuppliersInput = {
   id?: number
   vendor_id: number
-  company_vendor_id?: number | null
   term_name: string
   description?: string | null
   is_active?: boolean
@@ -777,9 +776,10 @@ export type PaymentTermMasterUncheckedCreateWithoutDefaultForSuppliersInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  company_vendor_id?: number | null
   stages?: Prisma.PaymentTermStageUncheckedCreateNestedManyWithoutPaymentTermInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPaymentTermInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedCreateNestedManyWithoutPaymentTermInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPaymentTermInput
 }
 
 export type PaymentTermMasterCreateOrConnectWithoutDefaultForSuppliersInput = {
@@ -795,11 +795,11 @@ export type PaymentTermMasterCreateWithoutCompanyVendorInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentTermsInput
   defaultForSuppliers?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDefaultPaymentTermInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentTermsInput
   stages?: Prisma.PaymentTermStageCreateNestedManyWithoutPaymentTermInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPaymentTermInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutPaymentTermInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPaymentTermInput
 }
 
 export type PaymentTermMasterUncheckedCreateWithoutCompanyVendorInput = {
@@ -814,8 +814,8 @@ export type PaymentTermMasterUncheckedCreateWithoutCompanyVendorInput = {
   updated_at?: Date | string
   defaultForSuppliers?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDefaultPaymentTermInput
   stages?: Prisma.PaymentTermStageUncheckedCreateNestedManyWithoutPaymentTermInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPaymentTermInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedCreateNestedManyWithoutPaymentTermInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPaymentTermInput
 }
 
 export type PaymentTermMasterCreateOrConnectWithoutCompanyVendorInput = {
@@ -847,17 +847,16 @@ export type PaymentTermMasterUpdateWithoutDefaultForSuppliersInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentTermsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneWithoutPaymentTermsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentTermsNestedInput
   stages?: Prisma.PaymentTermStageUpdateManyWithoutPaymentTermNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPaymentTermNestedInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutPaymentTermNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPaymentTermNestedInput
 }
 
 export type PaymentTermMasterUncheckedUpdateWithoutDefaultForSuppliersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  company_vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   term_name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -865,9 +864,10 @@ export type PaymentTermMasterUncheckedUpdateWithoutDefaultForSuppliersInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company_vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stages?: Prisma.PaymentTermStageUncheckedUpdateManyWithoutPaymentTermNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPaymentTermNestedInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutPaymentTermNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPaymentTermNestedInput
 }
 
 export type PaymentTermMasterUpsertWithWhereUniqueWithoutCompanyVendorInput = {
@@ -894,9 +894,9 @@ export type PaymentTermMasterCreateWithoutPiVendorMappingsInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentTermsInput
-  companyVendor?: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPaymentTermsInput
   defaultForSuppliers?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDefaultPaymentTermInput
+  companyVendor?: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPaymentTermsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentTermsInput
   stages?: Prisma.PaymentTermStageCreateNestedManyWithoutPaymentTermInput
   purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPaymentTermInput
 }
@@ -904,7 +904,6 @@ export type PaymentTermMasterCreateWithoutPiVendorMappingsInput = {
 export type PaymentTermMasterUncheckedCreateWithoutPiVendorMappingsInput = {
   id?: number
   vendor_id: number
-  company_vendor_id?: number | null
   term_name: string
   description?: string | null
   is_active?: boolean
@@ -912,6 +911,7 @@ export type PaymentTermMasterUncheckedCreateWithoutPiVendorMappingsInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  company_vendor_id?: number | null
   defaultForSuppliers?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDefaultPaymentTermInput
   stages?: Prisma.PaymentTermStageUncheckedCreateNestedManyWithoutPaymentTermInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPaymentTermInput
@@ -941,9 +941,9 @@ export type PaymentTermMasterUpdateWithoutPiVendorMappingsInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentTermsNestedInput
-  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneWithoutPaymentTermsNestedInput
   defaultForSuppliers?: Prisma.CompanyVendorsMasterUpdateManyWithoutDefaultPaymentTermNestedInput
+  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneWithoutPaymentTermsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentTermsNestedInput
   stages?: Prisma.PaymentTermStageUpdateManyWithoutPaymentTermNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPaymentTermNestedInput
 }
@@ -951,7 +951,6 @@ export type PaymentTermMasterUpdateWithoutPiVendorMappingsInput = {
 export type PaymentTermMasterUncheckedUpdateWithoutPiVendorMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  company_vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   term_name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -959,6 +958,7 @@ export type PaymentTermMasterUncheckedUpdateWithoutPiVendorMappingsInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company_vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defaultForSuppliers?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDefaultPaymentTermNestedInput
   stages?: Prisma.PaymentTermStageUncheckedUpdateManyWithoutPaymentTermNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPaymentTermNestedInput
@@ -972,9 +972,9 @@ export type PaymentTermMasterCreateWithoutPurchaseOrdersInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentTermsInput
-  companyVendor?: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPaymentTermsInput
   defaultForSuppliers?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDefaultPaymentTermInput
+  companyVendor?: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPaymentTermsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentTermsInput
   stages?: Prisma.PaymentTermStageCreateNestedManyWithoutPaymentTermInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutPaymentTermInput
 }
@@ -982,7 +982,6 @@ export type PaymentTermMasterCreateWithoutPurchaseOrdersInput = {
 export type PaymentTermMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   id?: number
   vendor_id: number
-  company_vendor_id?: number | null
   term_name: string
   description?: string | null
   is_active?: boolean
@@ -990,6 +989,7 @@ export type PaymentTermMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  company_vendor_id?: number | null
   defaultForSuppliers?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDefaultPaymentTermInput
   stages?: Prisma.PaymentTermStageUncheckedCreateNestedManyWithoutPaymentTermInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedCreateNestedManyWithoutPaymentTermInput
@@ -1019,9 +1019,9 @@ export type PaymentTermMasterUpdateWithoutPurchaseOrdersInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentTermsNestedInput
-  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneWithoutPaymentTermsNestedInput
   defaultForSuppliers?: Prisma.CompanyVendorsMasterUpdateManyWithoutDefaultPaymentTermNestedInput
+  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneWithoutPaymentTermsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentTermsNestedInput
   stages?: Prisma.PaymentTermStageUpdateManyWithoutPaymentTermNestedInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutPaymentTermNestedInput
 }
@@ -1029,7 +1029,6 @@ export type PaymentTermMasterUpdateWithoutPurchaseOrdersInput = {
 export type PaymentTermMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  company_vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   term_name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1037,6 +1036,7 @@ export type PaymentTermMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company_vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defaultForSuppliers?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDefaultPaymentTermNestedInput
   stages?: Prisma.PaymentTermStageUncheckedUpdateManyWithoutPaymentTermNestedInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutPaymentTermNestedInput
@@ -1050,17 +1050,16 @@ export type PaymentTermMasterCreateWithoutStagesInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentTermsInput
-  companyVendor?: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPaymentTermsInput
   defaultForSuppliers?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDefaultPaymentTermInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPaymentTermInput
+  companyVendor?: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPaymentTermsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPaymentTermsInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutPaymentTermInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPaymentTermInput
 }
 
 export type PaymentTermMasterUncheckedCreateWithoutStagesInput = {
   id?: number
   vendor_id: number
-  company_vendor_id?: number | null
   term_name: string
   description?: string | null
   is_active?: boolean
@@ -1068,9 +1067,10 @@ export type PaymentTermMasterUncheckedCreateWithoutStagesInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  company_vendor_id?: number | null
   defaultForSuppliers?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDefaultPaymentTermInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPaymentTermInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedCreateNestedManyWithoutPaymentTermInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPaymentTermInput
 }
 
 export type PaymentTermMasterCreateOrConnectWithoutStagesInput = {
@@ -1097,17 +1097,16 @@ export type PaymentTermMasterUpdateWithoutStagesInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentTermsNestedInput
-  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneWithoutPaymentTermsNestedInput
   defaultForSuppliers?: Prisma.CompanyVendorsMasterUpdateManyWithoutDefaultPaymentTermNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPaymentTermNestedInput
+  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneWithoutPaymentTermsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentTermsNestedInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutPaymentTermNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPaymentTermNestedInput
 }
 
 export type PaymentTermMasterUncheckedUpdateWithoutStagesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  company_vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   term_name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1115,14 +1114,14 @@ export type PaymentTermMasterUncheckedUpdateWithoutStagesInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company_vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defaultForSuppliers?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDefaultPaymentTermNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPaymentTermNestedInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutPaymentTermNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPaymentTermNestedInput
 }
 
 export type PaymentTermMasterCreateManyVendorInput = {
   id?: number
-  company_vendor_id?: number | null
   term_name: string
   description?: string | null
   is_active?: boolean
@@ -1130,6 +1129,7 @@ export type PaymentTermMasterCreateManyVendorInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  company_vendor_id?: number | null
 }
 
 export type PaymentTermMasterUpdateWithoutVendorInput = {
@@ -1140,16 +1140,15 @@ export type PaymentTermMasterUpdateWithoutVendorInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneWithoutPaymentTermsNestedInput
   defaultForSuppliers?: Prisma.CompanyVendorsMasterUpdateManyWithoutDefaultPaymentTermNestedInput
+  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneWithoutPaymentTermsNestedInput
   stages?: Prisma.PaymentTermStageUpdateManyWithoutPaymentTermNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPaymentTermNestedInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutPaymentTermNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPaymentTermNestedInput
 }
 
 export type PaymentTermMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  company_vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   term_name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1157,15 +1156,15 @@ export type PaymentTermMasterUncheckedUpdateWithoutVendorInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company_vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defaultForSuppliers?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDefaultPaymentTermNestedInput
   stages?: Prisma.PaymentTermStageUncheckedUpdateManyWithoutPaymentTermNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPaymentTermNestedInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutPaymentTermNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPaymentTermNestedInput
 }
 
 export type PaymentTermMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  company_vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   term_name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1173,6 +1172,7 @@ export type PaymentTermMasterUncheckedUpdateManyWithoutVendorInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company_vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type PaymentTermMasterCreateManyCompanyVendorInput = {
@@ -1195,11 +1195,11 @@ export type PaymentTermMasterUpdateWithoutCompanyVendorInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentTermsNestedInput
   defaultForSuppliers?: Prisma.CompanyVendorsMasterUpdateManyWithoutDefaultPaymentTermNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPaymentTermsNestedInput
   stages?: Prisma.PaymentTermStageUpdateManyWithoutPaymentTermNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPaymentTermNestedInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutPaymentTermNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPaymentTermNestedInput
 }
 
 export type PaymentTermMasterUncheckedUpdateWithoutCompanyVendorInput = {
@@ -1214,8 +1214,8 @@ export type PaymentTermMasterUncheckedUpdateWithoutCompanyVendorInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   defaultForSuppliers?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDefaultPaymentTermNestedInput
   stages?: Prisma.PaymentTermStageUncheckedUpdateManyWithoutPaymentTermNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPaymentTermNestedInput
   piVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutPaymentTermNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPaymentTermNestedInput
 }
 
 export type PaymentTermMasterUncheckedUpdateManyWithoutCompanyVendorInput = {
@@ -1238,15 +1238,15 @@ export type PaymentTermMasterUncheckedUpdateManyWithoutCompanyVendorInput = {
 export type PaymentTermMasterCountOutputType = {
   defaultForSuppliers: number
   stages: number
-  purchaseOrders: number
   piVendorMappings: number
+  purchaseOrders: number
 }
 
 export type PaymentTermMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   defaultForSuppliers?: boolean | PaymentTermMasterCountOutputTypeCountDefaultForSuppliersArgs
   stages?: boolean | PaymentTermMasterCountOutputTypeCountStagesArgs
-  purchaseOrders?: boolean | PaymentTermMasterCountOutputTypeCountPurchaseOrdersArgs
   piVendorMappings?: boolean | PaymentTermMasterCountOutputTypeCountPiVendorMappingsArgs
+  purchaseOrders?: boolean | PaymentTermMasterCountOutputTypeCountPurchaseOrdersArgs
 }
 
 /**
@@ -1276,22 +1276,21 @@ export type PaymentTermMasterCountOutputTypeCountStagesArgs<ExtArgs extends runt
 /**
  * PaymentTermMasterCountOutputType without action
  */
-export type PaymentTermMasterCountOutputTypeCountPurchaseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PurchaseOrderMasterWhereInput
+export type PaymentTermMasterCountOutputTypeCountPiVendorMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PurchaseIntentItemVendorMappingWhereInput
 }
 
 /**
  * PaymentTermMasterCountOutputType without action
  */
-export type PaymentTermMasterCountOutputTypeCountPiVendorMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PurchaseIntentItemVendorMappingWhereInput
+export type PaymentTermMasterCountOutputTypeCountPurchaseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PurchaseOrderMasterWhereInput
 }
 
 
 export type PaymentTermMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   vendor_id?: boolean
-  company_vendor_id?: boolean
   term_name?: boolean
   description?: boolean
   is_active?: boolean
@@ -1299,19 +1298,19 @@ export type PaymentTermMasterSelect<ExtArgs extends runtime.Types.Extensions.Int
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  companyVendor?: boolean | Prisma.PaymentTermMaster$companyVendorArgs<ExtArgs>
+  company_vendor_id?: boolean
   defaultForSuppliers?: boolean | Prisma.PaymentTermMaster$defaultForSuppliersArgs<ExtArgs>
+  companyVendor?: boolean | Prisma.PaymentTermMaster$companyVendorArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   stages?: boolean | Prisma.PaymentTermMaster$stagesArgs<ExtArgs>
-  purchaseOrders?: boolean | Prisma.PaymentTermMaster$purchaseOrdersArgs<ExtArgs>
   piVendorMappings?: boolean | Prisma.PaymentTermMaster$piVendorMappingsArgs<ExtArgs>
+  purchaseOrders?: boolean | Prisma.PaymentTermMaster$purchaseOrdersArgs<ExtArgs>
   _count?: boolean | Prisma.PaymentTermMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["paymentTermMaster"]>
 
 export type PaymentTermMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   vendor_id?: boolean
-  company_vendor_id?: boolean
   term_name?: boolean
   description?: boolean
   is_active?: boolean
@@ -1319,14 +1318,14 @@ export type PaymentTermMasterSelectCreateManyAndReturn<ExtArgs extends runtime.T
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  company_vendor_id?: boolean
   companyVendor?: boolean | Prisma.PaymentTermMaster$companyVendorArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["paymentTermMaster"]>
 
 export type PaymentTermMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   vendor_id?: boolean
-  company_vendor_id?: boolean
   term_name?: boolean
   description?: boolean
   is_active?: boolean
@@ -1334,14 +1333,14 @@ export type PaymentTermMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  company_vendor_id?: boolean
   companyVendor?: boolean | Prisma.PaymentTermMaster$companyVendorArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["paymentTermMaster"]>
 
 export type PaymentTermMasterSelectScalar = {
   id?: boolean
   vendor_id?: boolean
-  company_vendor_id?: boolean
   term_name?: boolean
   description?: boolean
   is_active?: boolean
@@ -1349,41 +1348,41 @@ export type PaymentTermMasterSelectScalar = {
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
+  company_vendor_id?: boolean
 }
 
-export type PaymentTermMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "company_vendor_id" | "term_name" | "description" | "is_active" | "created_by" | "updated_by" | "created_at" | "updated_at", ExtArgs["result"]["paymentTermMaster"]>
+export type PaymentTermMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "term_name" | "description" | "is_active" | "created_by" | "updated_by" | "created_at" | "updated_at" | "company_vendor_id", ExtArgs["result"]["paymentTermMaster"]>
 export type PaymentTermMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  companyVendor?: boolean | Prisma.PaymentTermMaster$companyVendorArgs<ExtArgs>
   defaultForSuppliers?: boolean | Prisma.PaymentTermMaster$defaultForSuppliersArgs<ExtArgs>
+  companyVendor?: boolean | Prisma.PaymentTermMaster$companyVendorArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   stages?: boolean | Prisma.PaymentTermMaster$stagesArgs<ExtArgs>
-  purchaseOrders?: boolean | Prisma.PaymentTermMaster$purchaseOrdersArgs<ExtArgs>
   piVendorMappings?: boolean | Prisma.PaymentTermMaster$piVendorMappingsArgs<ExtArgs>
+  purchaseOrders?: boolean | Prisma.PaymentTermMaster$purchaseOrdersArgs<ExtArgs>
   _count?: boolean | Prisma.PaymentTermMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PaymentTermMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.PaymentTermMaster$companyVendorArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type PaymentTermMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.PaymentTermMaster$companyVendorArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $PaymentTermMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PaymentTermMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    companyVendor: Prisma.$CompanyVendorsMasterPayload<ExtArgs> | null
     defaultForSuppliers: Prisma.$CompanyVendorsMasterPayload<ExtArgs>[]
+    companyVendor: Prisma.$CompanyVendorsMasterPayload<ExtArgs> | null
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     stages: Prisma.$PaymentTermStagePayload<ExtArgs>[]
-    purchaseOrders: Prisma.$PurchaseOrderMasterPayload<ExtArgs>[]
     piVendorMappings: Prisma.$PurchaseIntentItemVendorMappingPayload<ExtArgs>[]
+    purchaseOrders: Prisma.$PurchaseOrderMasterPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     vendor_id: number
-    company_vendor_id: number | null
     term_name: string
     description: string | null
     is_active: boolean
@@ -1391,6 +1390,7 @@ export type $PaymentTermMasterPayload<ExtArgs extends runtime.Types.Extensions.I
     updated_by: number | null
     created_at: Date
     updated_at: Date
+    company_vendor_id: number | null
   }, ExtArgs["result"]["paymentTermMaster"]>
   composites: {}
 }
@@ -1785,12 +1785,12 @@ readonly fields: PaymentTermMasterFieldRefs;
  */
 export interface Prisma__PaymentTermMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  companyVendor<T extends Prisma.PaymentTermMaster$companyVendorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentTermMaster$companyVendorArgs<ExtArgs>>): Prisma.Prisma__CompanyVendorsMasterClient<runtime.Types.Result.GetResult<Prisma.$CompanyVendorsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   defaultForSuppliers<T extends Prisma.PaymentTermMaster$defaultForSuppliersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentTermMaster$defaultForSuppliersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompanyVendorsMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  companyVendor<T extends Prisma.PaymentTermMaster$companyVendorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentTermMaster$companyVendorArgs<ExtArgs>>): Prisma.Prisma__CompanyVendorsMasterClient<runtime.Types.Result.GetResult<Prisma.$CompanyVendorsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   stages<T extends Prisma.PaymentTermMaster$stagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentTermMaster$stagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentTermStagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  purchaseOrders<T extends Prisma.PaymentTermMaster$purchaseOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentTermMaster$purchaseOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   piVendorMappings<T extends Prisma.PaymentTermMaster$piVendorMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentTermMaster$piVendorMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentItemVendorMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  purchaseOrders<T extends Prisma.PaymentTermMaster$purchaseOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentTermMaster$purchaseOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1822,7 +1822,6 @@ export interface Prisma__PaymentTermMasterClient<T, Null = never, ExtArgs extend
 export interface PaymentTermMasterFieldRefs {
   readonly id: Prisma.FieldRef<"PaymentTermMaster", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"PaymentTermMaster", 'Int'>
-  readonly company_vendor_id: Prisma.FieldRef<"PaymentTermMaster", 'Int'>
   readonly term_name: Prisma.FieldRef<"PaymentTermMaster", 'String'>
   readonly description: Prisma.FieldRef<"PaymentTermMaster", 'String'>
   readonly is_active: Prisma.FieldRef<"PaymentTermMaster", 'Boolean'>
@@ -1830,6 +1829,7 @@ export interface PaymentTermMasterFieldRefs {
   readonly updated_by: Prisma.FieldRef<"PaymentTermMaster", 'Int'>
   readonly created_at: Prisma.FieldRef<"PaymentTermMaster", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"PaymentTermMaster", 'DateTime'>
+  readonly company_vendor_id: Prisma.FieldRef<"PaymentTermMaster", 'Int'>
 }
     
 
@@ -2231,25 +2231,6 @@ export type PaymentTermMasterDeleteManyArgs<ExtArgs extends runtime.Types.Extens
 }
 
 /**
- * PaymentTermMaster.companyVendor
- */
-export type PaymentTermMaster$companyVendorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the CompanyVendorsMaster
-   */
-  select?: Prisma.CompanyVendorsMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the CompanyVendorsMaster
-   */
-  omit?: Prisma.CompanyVendorsMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CompanyVendorsMasterInclude<ExtArgs> | null
-  where?: Prisma.CompanyVendorsMasterWhereInput
-}
-
-/**
  * PaymentTermMaster.defaultForSuppliers
  */
 export type PaymentTermMaster$defaultForSuppliersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2271,6 +2252,25 @@ export type PaymentTermMaster$defaultForSuppliersArgs<ExtArgs extends runtime.Ty
   take?: number
   skip?: number
   distinct?: Prisma.CompanyVendorsMasterScalarFieldEnum | Prisma.CompanyVendorsMasterScalarFieldEnum[]
+}
+
+/**
+ * PaymentTermMaster.companyVendor
+ */
+export type PaymentTermMaster$companyVendorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CompanyVendorsMaster
+   */
+  select?: Prisma.CompanyVendorsMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CompanyVendorsMaster
+   */
+  omit?: Prisma.CompanyVendorsMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompanyVendorsMasterInclude<ExtArgs> | null
+  where?: Prisma.CompanyVendorsMasterWhereInput
 }
 
 /**
@@ -2298,30 +2298,6 @@ export type PaymentTermMaster$stagesArgs<ExtArgs extends runtime.Types.Extension
 }
 
 /**
- * PaymentTermMaster.purchaseOrders
- */
-export type PaymentTermMaster$purchaseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PurchaseOrderMaster
-   */
-  select?: Prisma.PurchaseOrderMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the PurchaseOrderMaster
-   */
-  omit?: Prisma.PurchaseOrderMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PurchaseOrderMasterInclude<ExtArgs> | null
-  where?: Prisma.PurchaseOrderMasterWhereInput
-  orderBy?: Prisma.PurchaseOrderMasterOrderByWithRelationInput | Prisma.PurchaseOrderMasterOrderByWithRelationInput[]
-  cursor?: Prisma.PurchaseOrderMasterWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.PurchaseOrderMasterScalarFieldEnum | Prisma.PurchaseOrderMasterScalarFieldEnum[]
-}
-
-/**
  * PaymentTermMaster.piVendorMappings
  */
 export type PaymentTermMaster$piVendorMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2343,6 +2319,30 @@ export type PaymentTermMaster$piVendorMappingsArgs<ExtArgs extends runtime.Types
   take?: number
   skip?: number
   distinct?: Prisma.PurchaseIntentItemVendorMappingScalarFieldEnum | Prisma.PurchaseIntentItemVendorMappingScalarFieldEnum[]
+}
+
+/**
+ * PaymentTermMaster.purchaseOrders
+ */
+export type PaymentTermMaster$purchaseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PurchaseOrderMaster
+   */
+  select?: Prisma.PurchaseOrderMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PurchaseOrderMaster
+   */
+  omit?: Prisma.PurchaseOrderMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PurchaseOrderMasterInclude<ExtArgs> | null
+  where?: Prisma.PurchaseOrderMasterWhereInput
+  orderBy?: Prisma.PurchaseOrderMasterOrderByWithRelationInput | Prisma.PurchaseOrderMasterOrderByWithRelationInput[]
+  cursor?: Prisma.PurchaseOrderMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PurchaseOrderMasterScalarFieldEnum | Prisma.PurchaseOrderMasterScalarFieldEnum[]
 }
 
 /**

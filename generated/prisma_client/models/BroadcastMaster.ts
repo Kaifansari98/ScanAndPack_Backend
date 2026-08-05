@@ -28,18 +28,18 @@ export type AggregateBroadcastMaster = {
 
 export type BroadcastMasterAvgAggregateOutputType = {
   id: number | null
-  category_id: number | null
   vendor_id: number | null
   created_by: number | null
   updated_by: number | null
+  category_id: number | null
 }
 
 export type BroadcastMasterSumAggregateOutputType = {
   id: number | null
-  category_id: number | null
   vendor_id: number | null
   created_by: number | null
   updated_by: number | null
+  category_id: number | null
 }
 
 export type BroadcastMasterMinAggregateOutputType = {
@@ -48,13 +48,13 @@ export type BroadcastMasterMinAggregateOutputType = {
   content: string | null
   status: $Enums.BroadcastStatus | null
   type: $Enums.BroadcastType | null
-  category_id: number | null
   publish_at: Date | null
   vendor_id: number | null
   created_by: number | null
   updated_by: number | null
   created_at: Date | null
   updated_at: Date | null
+  category_id: number | null
 }
 
 export type BroadcastMasterMaxAggregateOutputType = {
@@ -63,13 +63,13 @@ export type BroadcastMasterMaxAggregateOutputType = {
   content: string | null
   status: $Enums.BroadcastStatus | null
   type: $Enums.BroadcastType | null
-  category_id: number | null
   publish_at: Date | null
   vendor_id: number | null
   created_by: number | null
   updated_by: number | null
   created_at: Date | null
   updated_at: Date | null
+  category_id: number | null
 }
 
 export type BroadcastMasterCountAggregateOutputType = {
@@ -78,31 +78,31 @@ export type BroadcastMasterCountAggregateOutputType = {
   content: number
   status: number
   type: number
-  category_id: number
   publish_at: number
   vendor_id: number
   created_by: number
   updated_by: number
   created_at: number
   updated_at: number
+  category_id: number
   _all: number
 }
 
 
 export type BroadcastMasterAvgAggregateInputType = {
   id?: true
-  category_id?: true
   vendor_id?: true
   created_by?: true
   updated_by?: true
+  category_id?: true
 }
 
 export type BroadcastMasterSumAggregateInputType = {
   id?: true
-  category_id?: true
   vendor_id?: true
   created_by?: true
   updated_by?: true
+  category_id?: true
 }
 
 export type BroadcastMasterMinAggregateInputType = {
@@ -111,13 +111,13 @@ export type BroadcastMasterMinAggregateInputType = {
   content?: true
   status?: true
   type?: true
-  category_id?: true
   publish_at?: true
   vendor_id?: true
   created_by?: true
   updated_by?: true
   created_at?: true
   updated_at?: true
+  category_id?: true
 }
 
 export type BroadcastMasterMaxAggregateInputType = {
@@ -126,13 +126,13 @@ export type BroadcastMasterMaxAggregateInputType = {
   content?: true
   status?: true
   type?: true
-  category_id?: true
   publish_at?: true
   vendor_id?: true
   created_by?: true
   updated_by?: true
   created_at?: true
   updated_at?: true
+  category_id?: true
 }
 
 export type BroadcastMasterCountAggregateInputType = {
@@ -141,13 +141,13 @@ export type BroadcastMasterCountAggregateInputType = {
   content?: true
   status?: true
   type?: true
-  category_id?: true
   publish_at?: true
   vendor_id?: true
   created_by?: true
   updated_by?: true
   created_at?: true
   updated_at?: true
+  category_id?: true
   _all?: true
 }
 
@@ -243,13 +243,13 @@ export type BroadcastMasterGroupByOutputType = {
   content: string
   status: $Enums.BroadcastStatus
   type: $Enums.BroadcastType
-  category_id: number | null
   publish_at: Date | null
   vendor_id: number | null
   created_by: number
   updated_by: number | null
   created_at: Date
   updated_at: Date
+  category_id: number | null
   _count: BroadcastMasterCountAggregateOutputType | null
   _avg: BroadcastMasterAvgAggregateOutputType | null
   _sum: BroadcastMasterSumAggregateOutputType | null
@@ -281,19 +281,19 @@ export type BroadcastMasterWhereInput = {
   content?: Prisma.StringFilter<"BroadcastMaster"> | string
   status?: Prisma.EnumBroadcastStatusFilter<"BroadcastMaster"> | $Enums.BroadcastStatus
   type?: Prisma.EnumBroadcastTypeFilter<"BroadcastMaster"> | $Enums.BroadcastType
-  category_id?: Prisma.IntNullableFilter<"BroadcastMaster"> | number | null
   publish_at?: Prisma.DateTimeNullableFilter<"BroadcastMaster"> | Date | string | null
   vendor_id?: Prisma.IntNullableFilter<"BroadcastMaster"> | number | null
   created_by?: Prisma.IntFilter<"BroadcastMaster"> | number
   updated_by?: Prisma.IntNullableFilter<"BroadcastMaster"> | number | null
   created_at?: Prisma.DateTimeFilter<"BroadcastMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"BroadcastMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterNullableScalarRelationFilter, Prisma.VendorMasterWhereInput> | null
+  category_id?: Prisma.IntNullableFilter<"BroadcastMaster"> | number | null
+  attachments?: Prisma.BroadcastAttachmentListRelationFilter
+  audiences?: Prisma.BroadcastAudienceMappingListRelationFilter
   category?: Prisma.XOR<Prisma.BroadcastCategoryMasterNullableScalarRelationFilter, Prisma.BroadcastCategoryMasterWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
-  audiences?: Prisma.BroadcastAudienceMappingListRelationFilter
-  attachments?: Prisma.BroadcastAttachmentListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterNullableScalarRelationFilter, Prisma.VendorMasterWhereInput> | null
   readLogs?: Prisma.BroadcastReadListRelationFilter
 }
 
@@ -303,19 +303,19 @@ export type BroadcastMasterOrderByWithRelationInput = {
   content?: Prisma.SortOrder
   status?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  category_id?: Prisma.SortOrderInput | Prisma.SortOrder
   publish_at?: Prisma.SortOrderInput | Prisma.SortOrder
   vendor_id?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  category_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  attachments?: Prisma.BroadcastAttachmentOrderByRelationAggregateInput
+  audiences?: Prisma.BroadcastAudienceMappingOrderByRelationAggregateInput
   category?: Prisma.BroadcastCategoryMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
-  audiences?: Prisma.BroadcastAudienceMappingOrderByRelationAggregateInput
-  attachments?: Prisma.BroadcastAttachmentOrderByRelationAggregateInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   readLogs?: Prisma.BroadcastReadOrderByRelationAggregateInput
 }
 
@@ -328,19 +328,19 @@ export type BroadcastMasterWhereUniqueInput = Prisma.AtLeast<{
   content?: Prisma.StringFilter<"BroadcastMaster"> | string
   status?: Prisma.EnumBroadcastStatusFilter<"BroadcastMaster"> | $Enums.BroadcastStatus
   type?: Prisma.EnumBroadcastTypeFilter<"BroadcastMaster"> | $Enums.BroadcastType
-  category_id?: Prisma.IntNullableFilter<"BroadcastMaster"> | number | null
   publish_at?: Prisma.DateTimeNullableFilter<"BroadcastMaster"> | Date | string | null
   vendor_id?: Prisma.IntNullableFilter<"BroadcastMaster"> | number | null
   created_by?: Prisma.IntFilter<"BroadcastMaster"> | number
   updated_by?: Prisma.IntNullableFilter<"BroadcastMaster"> | number | null
   created_at?: Prisma.DateTimeFilter<"BroadcastMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"BroadcastMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterNullableScalarRelationFilter, Prisma.VendorMasterWhereInput> | null
+  category_id?: Prisma.IntNullableFilter<"BroadcastMaster"> | number | null
+  attachments?: Prisma.BroadcastAttachmentListRelationFilter
+  audiences?: Prisma.BroadcastAudienceMappingListRelationFilter
   category?: Prisma.XOR<Prisma.BroadcastCategoryMasterNullableScalarRelationFilter, Prisma.BroadcastCategoryMasterWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
-  audiences?: Prisma.BroadcastAudienceMappingListRelationFilter
-  attachments?: Prisma.BroadcastAttachmentListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterNullableScalarRelationFilter, Prisma.VendorMasterWhereInput> | null
   readLogs?: Prisma.BroadcastReadListRelationFilter
 }, "id">
 
@@ -350,13 +350,13 @@ export type BroadcastMasterOrderByWithAggregationInput = {
   content?: Prisma.SortOrder
   status?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  category_id?: Prisma.SortOrderInput | Prisma.SortOrder
   publish_at?: Prisma.SortOrderInput | Prisma.SortOrder
   vendor_id?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  category_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.BroadcastMasterCountOrderByAggregateInput
   _avg?: Prisma.BroadcastMasterAvgOrderByAggregateInput
   _max?: Prisma.BroadcastMasterMaxOrderByAggregateInput
@@ -373,13 +373,13 @@ export type BroadcastMasterScalarWhereWithAggregatesInput = {
   content?: Prisma.StringWithAggregatesFilter<"BroadcastMaster"> | string
   status?: Prisma.EnumBroadcastStatusWithAggregatesFilter<"BroadcastMaster"> | $Enums.BroadcastStatus
   type?: Prisma.EnumBroadcastTypeWithAggregatesFilter<"BroadcastMaster"> | $Enums.BroadcastType
-  category_id?: Prisma.IntNullableWithAggregatesFilter<"BroadcastMaster"> | number | null
   publish_at?: Prisma.DateTimeNullableWithAggregatesFilter<"BroadcastMaster"> | Date | string | null
   vendor_id?: Prisma.IntNullableWithAggregatesFilter<"BroadcastMaster"> | number | null
   created_by?: Prisma.IntWithAggregatesFilter<"BroadcastMaster"> | number
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"BroadcastMaster"> | number | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"BroadcastMaster"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"BroadcastMaster"> | Date | string
+  category_id?: Prisma.IntNullableWithAggregatesFilter<"BroadcastMaster"> | number | null
 }
 
 export type BroadcastMasterCreateInput = {
@@ -390,12 +390,12 @@ export type BroadcastMasterCreateInput = {
   publish_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor?: Prisma.VendorMasterCreateNestedOneWithoutBroadcastsInput
+  attachments?: Prisma.BroadcastAttachmentCreateNestedManyWithoutBroadcastInput
+  audiences?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutBroadcastInput
   category?: Prisma.BroadcastCategoryMasterCreateNestedOneWithoutBroadcastsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutBroadcastsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutBroadcastsUpdatedInput
-  audiences?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutBroadcastInput
-  attachments?: Prisma.BroadcastAttachmentCreateNestedManyWithoutBroadcastInput
+  vendor?: Prisma.VendorMasterCreateNestedOneWithoutBroadcastsInput
   readLogs?: Prisma.BroadcastReadCreateNestedManyWithoutBroadcastInput
 }
 
@@ -405,15 +405,15 @@ export type BroadcastMasterUncheckedCreateInput = {
   content: string
   status?: $Enums.BroadcastStatus
   type: $Enums.BroadcastType
-  category_id?: number | null
   publish_at?: Date | string | null
   vendor_id?: number | null
   created_by: number
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  audiences?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutBroadcastInput
+  category_id?: number | null
   attachments?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutBroadcastInput
+  audiences?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutBroadcastInput
   readLogs?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutBroadcastInput
 }
 
@@ -425,12 +425,12 @@ export type BroadcastMasterUpdateInput = {
   publish_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneWithoutBroadcastsNestedInput
+  attachments?: Prisma.BroadcastAttachmentUpdateManyWithoutBroadcastNestedInput
+  audiences?: Prisma.BroadcastAudienceMappingUpdateManyWithoutBroadcastNestedInput
   category?: Prisma.BroadcastCategoryMasterUpdateOneWithoutBroadcastsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutBroadcastsUpdatedNestedInput
-  audiences?: Prisma.BroadcastAudienceMappingUpdateManyWithoutBroadcastNestedInput
-  attachments?: Prisma.BroadcastAttachmentUpdateManyWithoutBroadcastNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneWithoutBroadcastsNestedInput
   readLogs?: Prisma.BroadcastReadUpdateManyWithoutBroadcastNestedInput
 }
 
@@ -440,15 +440,15 @@ export type BroadcastMasterUncheckedUpdateInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   type?: Prisma.EnumBroadcastTypeFieldUpdateOperationsInput | $Enums.BroadcastType
-  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   publish_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  audiences?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutBroadcastNestedInput
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutBroadcastNestedInput
+  audiences?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutBroadcastNestedInput
   readLogs?: Prisma.BroadcastReadUncheckedUpdateManyWithoutBroadcastNestedInput
 }
 
@@ -458,13 +458,13 @@ export type BroadcastMasterCreateManyInput = {
   content: string
   status?: $Enums.BroadcastStatus
   type: $Enums.BroadcastType
-  category_id?: number | null
   publish_at?: Date | string | null
   vendor_id?: number | null
   created_by: number
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  category_id?: number | null
 }
 
 export type BroadcastMasterUpdateManyMutationInput = {
@@ -483,13 +483,13 @@ export type BroadcastMasterUncheckedUpdateManyInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   type?: Prisma.EnumBroadcastTypeFieldUpdateOperationsInput | $Enums.BroadcastType
-  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   publish_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type BroadcastMasterListRelationFilter = {
@@ -508,21 +508,21 @@ export type BroadcastMasterCountOrderByAggregateInput = {
   content?: Prisma.SortOrder
   status?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  category_id?: Prisma.SortOrder
   publish_at?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  category_id?: Prisma.SortOrder
 }
 
 export type BroadcastMasterAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  category_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  category_id?: Prisma.SortOrder
 }
 
 export type BroadcastMasterMaxOrderByAggregateInput = {
@@ -531,13 +531,13 @@ export type BroadcastMasterMaxOrderByAggregateInput = {
   content?: Prisma.SortOrder
   status?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  category_id?: Prisma.SortOrder
   publish_at?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  category_id?: Prisma.SortOrder
 }
 
 export type BroadcastMasterMinOrderByAggregateInput = {
@@ -546,21 +546,21 @@ export type BroadcastMasterMinOrderByAggregateInput = {
   content?: Prisma.SortOrder
   status?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  category_id?: Prisma.SortOrder
   publish_at?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  category_id?: Prisma.SortOrder
 }
 
 export type BroadcastMasterSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  category_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  category_id?: Prisma.SortOrder
 }
 
 export type BroadcastMasterScalarRelationFilter = {
@@ -794,11 +794,11 @@ export type BroadcastMasterCreateWithoutVendorInput = {
   publish_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
+  attachments?: Prisma.BroadcastAttachmentCreateNestedManyWithoutBroadcastInput
+  audiences?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutBroadcastInput
   category?: Prisma.BroadcastCategoryMasterCreateNestedOneWithoutBroadcastsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutBroadcastsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutBroadcastsUpdatedInput
-  audiences?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutBroadcastInput
-  attachments?: Prisma.BroadcastAttachmentCreateNestedManyWithoutBroadcastInput
   readLogs?: Prisma.BroadcastReadCreateNestedManyWithoutBroadcastInput
 }
 
@@ -808,14 +808,14 @@ export type BroadcastMasterUncheckedCreateWithoutVendorInput = {
   content: string
   status?: $Enums.BroadcastStatus
   type: $Enums.BroadcastType
-  category_id?: number | null
   publish_at?: Date | string | null
   created_by: number
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  audiences?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutBroadcastInput
+  category_id?: number | null
   attachments?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutBroadcastInput
+  audiences?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutBroadcastInput
   readLogs?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutBroadcastInput
 }
 
@@ -854,13 +854,13 @@ export type BroadcastMasterScalarWhereInput = {
   content?: Prisma.StringFilter<"BroadcastMaster"> | string
   status?: Prisma.EnumBroadcastStatusFilter<"BroadcastMaster"> | $Enums.BroadcastStatus
   type?: Prisma.EnumBroadcastTypeFilter<"BroadcastMaster"> | $Enums.BroadcastType
-  category_id?: Prisma.IntNullableFilter<"BroadcastMaster"> | number | null
   publish_at?: Prisma.DateTimeNullableFilter<"BroadcastMaster"> | Date | string | null
   vendor_id?: Prisma.IntNullableFilter<"BroadcastMaster"> | number | null
   created_by?: Prisma.IntFilter<"BroadcastMaster"> | number
   updated_by?: Prisma.IntNullableFilter<"BroadcastMaster"> | number | null
   created_at?: Prisma.DateTimeFilter<"BroadcastMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"BroadcastMaster"> | Date | string
+  category_id?: Prisma.IntNullableFilter<"BroadcastMaster"> | number | null
 }
 
 export type BroadcastMasterCreateWithoutCreatedByInput = {
@@ -871,11 +871,11 @@ export type BroadcastMasterCreateWithoutCreatedByInput = {
   publish_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor?: Prisma.VendorMasterCreateNestedOneWithoutBroadcastsInput
+  attachments?: Prisma.BroadcastAttachmentCreateNestedManyWithoutBroadcastInput
+  audiences?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutBroadcastInput
   category?: Prisma.BroadcastCategoryMasterCreateNestedOneWithoutBroadcastsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutBroadcastsUpdatedInput
-  audiences?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutBroadcastInput
-  attachments?: Prisma.BroadcastAttachmentCreateNestedManyWithoutBroadcastInput
+  vendor?: Prisma.VendorMasterCreateNestedOneWithoutBroadcastsInput
   readLogs?: Prisma.BroadcastReadCreateNestedManyWithoutBroadcastInput
 }
 
@@ -885,14 +885,14 @@ export type BroadcastMasterUncheckedCreateWithoutCreatedByInput = {
   content: string
   status?: $Enums.BroadcastStatus
   type: $Enums.BroadcastType
-  category_id?: number | null
   publish_at?: Date | string | null
   vendor_id?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  audiences?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutBroadcastInput
+  category_id?: number | null
   attachments?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutBroadcastInput
+  audiences?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutBroadcastInput
   readLogs?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutBroadcastInput
 }
 
@@ -914,11 +914,11 @@ export type BroadcastMasterCreateWithoutUpdatedByInput = {
   publish_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor?: Prisma.VendorMasterCreateNestedOneWithoutBroadcastsInput
+  attachments?: Prisma.BroadcastAttachmentCreateNestedManyWithoutBroadcastInput
+  audiences?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutBroadcastInput
   category?: Prisma.BroadcastCategoryMasterCreateNestedOneWithoutBroadcastsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutBroadcastsCreatedInput
-  audiences?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutBroadcastInput
-  attachments?: Prisma.BroadcastAttachmentCreateNestedManyWithoutBroadcastInput
+  vendor?: Prisma.VendorMasterCreateNestedOneWithoutBroadcastsInput
   readLogs?: Prisma.BroadcastReadCreateNestedManyWithoutBroadcastInput
 }
 
@@ -928,14 +928,14 @@ export type BroadcastMasterUncheckedCreateWithoutUpdatedByInput = {
   content: string
   status?: $Enums.BroadcastStatus
   type: $Enums.BroadcastType
-  category_id?: number | null
   publish_at?: Date | string | null
   vendor_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  audiences?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutBroadcastInput
+  category_id?: number | null
   attachments?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutBroadcastInput
+  audiences?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutBroadcastInput
   readLogs?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutBroadcastInput
 }
 
@@ -989,11 +989,11 @@ export type BroadcastMasterCreateWithoutCategoryInput = {
   publish_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor?: Prisma.VendorMasterCreateNestedOneWithoutBroadcastsInput
+  attachments?: Prisma.BroadcastAttachmentCreateNestedManyWithoutBroadcastInput
+  audiences?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutBroadcastInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutBroadcastsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutBroadcastsUpdatedInput
-  audiences?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutBroadcastInput
-  attachments?: Prisma.BroadcastAttachmentCreateNestedManyWithoutBroadcastInput
+  vendor?: Prisma.VendorMasterCreateNestedOneWithoutBroadcastsInput
   readLogs?: Prisma.BroadcastReadCreateNestedManyWithoutBroadcastInput
 }
 
@@ -1009,8 +1009,8 @@ export type BroadcastMasterUncheckedCreateWithoutCategoryInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  audiences?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutBroadcastInput
   attachments?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutBroadcastInput
+  audiences?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutBroadcastInput
   readLogs?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutBroadcastInput
 }
 
@@ -1048,11 +1048,11 @@ export type BroadcastMasterCreateWithoutAudiencesInput = {
   publish_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor?: Prisma.VendorMasterCreateNestedOneWithoutBroadcastsInput
+  attachments?: Prisma.BroadcastAttachmentCreateNestedManyWithoutBroadcastInput
   category?: Prisma.BroadcastCategoryMasterCreateNestedOneWithoutBroadcastsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutBroadcastsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutBroadcastsUpdatedInput
-  attachments?: Prisma.BroadcastAttachmentCreateNestedManyWithoutBroadcastInput
+  vendor?: Prisma.VendorMasterCreateNestedOneWithoutBroadcastsInput
   readLogs?: Prisma.BroadcastReadCreateNestedManyWithoutBroadcastInput
 }
 
@@ -1062,13 +1062,13 @@ export type BroadcastMasterUncheckedCreateWithoutAudiencesInput = {
   content: string
   status?: $Enums.BroadcastStatus
   type: $Enums.BroadcastType
-  category_id?: number | null
   publish_at?: Date | string | null
   vendor_id?: number | null
   created_by: number
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  category_id?: number | null
   attachments?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutBroadcastInput
   readLogs?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutBroadcastInput
 }
@@ -1097,11 +1097,11 @@ export type BroadcastMasterUpdateWithoutAudiencesInput = {
   publish_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneWithoutBroadcastsNestedInput
+  attachments?: Prisma.BroadcastAttachmentUpdateManyWithoutBroadcastNestedInput
   category?: Prisma.BroadcastCategoryMasterUpdateOneWithoutBroadcastsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutBroadcastsUpdatedNestedInput
-  attachments?: Prisma.BroadcastAttachmentUpdateManyWithoutBroadcastNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneWithoutBroadcastsNestedInput
   readLogs?: Prisma.BroadcastReadUpdateManyWithoutBroadcastNestedInput
 }
 
@@ -1111,13 +1111,13 @@ export type BroadcastMasterUncheckedUpdateWithoutAudiencesInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   type?: Prisma.EnumBroadcastTypeFieldUpdateOperationsInput | $Enums.BroadcastType
-  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   publish_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutBroadcastNestedInput
   readLogs?: Prisma.BroadcastReadUncheckedUpdateManyWithoutBroadcastNestedInput
 }
@@ -1130,11 +1130,11 @@ export type BroadcastMasterCreateWithoutAttachmentsInput = {
   publish_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor?: Prisma.VendorMasterCreateNestedOneWithoutBroadcastsInput
+  audiences?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutBroadcastInput
   category?: Prisma.BroadcastCategoryMasterCreateNestedOneWithoutBroadcastsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutBroadcastsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutBroadcastsUpdatedInput
-  audiences?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutBroadcastInput
+  vendor?: Prisma.VendorMasterCreateNestedOneWithoutBroadcastsInput
   readLogs?: Prisma.BroadcastReadCreateNestedManyWithoutBroadcastInput
 }
 
@@ -1144,13 +1144,13 @@ export type BroadcastMasterUncheckedCreateWithoutAttachmentsInput = {
   content: string
   status?: $Enums.BroadcastStatus
   type: $Enums.BroadcastType
-  category_id?: number | null
   publish_at?: Date | string | null
   vendor_id?: number | null
   created_by: number
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  category_id?: number | null
   audiences?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutBroadcastInput
   readLogs?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutBroadcastInput
 }
@@ -1179,11 +1179,11 @@ export type BroadcastMasterUpdateWithoutAttachmentsInput = {
   publish_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneWithoutBroadcastsNestedInput
+  audiences?: Prisma.BroadcastAudienceMappingUpdateManyWithoutBroadcastNestedInput
   category?: Prisma.BroadcastCategoryMasterUpdateOneWithoutBroadcastsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutBroadcastsUpdatedNestedInput
-  audiences?: Prisma.BroadcastAudienceMappingUpdateManyWithoutBroadcastNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneWithoutBroadcastsNestedInput
   readLogs?: Prisma.BroadcastReadUpdateManyWithoutBroadcastNestedInput
 }
 
@@ -1193,13 +1193,13 @@ export type BroadcastMasterUncheckedUpdateWithoutAttachmentsInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   type?: Prisma.EnumBroadcastTypeFieldUpdateOperationsInput | $Enums.BroadcastType
-  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   publish_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   audiences?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutBroadcastNestedInput
   readLogs?: Prisma.BroadcastReadUncheckedUpdateManyWithoutBroadcastNestedInput
 }
@@ -1212,12 +1212,12 @@ export type BroadcastMasterCreateWithoutReadLogsInput = {
   publish_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor?: Prisma.VendorMasterCreateNestedOneWithoutBroadcastsInput
+  attachments?: Prisma.BroadcastAttachmentCreateNestedManyWithoutBroadcastInput
+  audiences?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutBroadcastInput
   category?: Prisma.BroadcastCategoryMasterCreateNestedOneWithoutBroadcastsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutBroadcastsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutBroadcastsUpdatedInput
-  audiences?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutBroadcastInput
-  attachments?: Prisma.BroadcastAttachmentCreateNestedManyWithoutBroadcastInput
+  vendor?: Prisma.VendorMasterCreateNestedOneWithoutBroadcastsInput
 }
 
 export type BroadcastMasterUncheckedCreateWithoutReadLogsInput = {
@@ -1226,15 +1226,15 @@ export type BroadcastMasterUncheckedCreateWithoutReadLogsInput = {
   content: string
   status?: $Enums.BroadcastStatus
   type: $Enums.BroadcastType
-  category_id?: number | null
   publish_at?: Date | string | null
   vendor_id?: number | null
   created_by: number
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  audiences?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutBroadcastInput
+  category_id?: number | null
   attachments?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutBroadcastInput
+  audiences?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutBroadcastInput
 }
 
 export type BroadcastMasterCreateOrConnectWithoutReadLogsInput = {
@@ -1261,12 +1261,12 @@ export type BroadcastMasterUpdateWithoutReadLogsInput = {
   publish_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneWithoutBroadcastsNestedInput
+  attachments?: Prisma.BroadcastAttachmentUpdateManyWithoutBroadcastNestedInput
+  audiences?: Prisma.BroadcastAudienceMappingUpdateManyWithoutBroadcastNestedInput
   category?: Prisma.BroadcastCategoryMasterUpdateOneWithoutBroadcastsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutBroadcastsUpdatedNestedInput
-  audiences?: Prisma.BroadcastAudienceMappingUpdateManyWithoutBroadcastNestedInput
-  attachments?: Prisma.BroadcastAttachmentUpdateManyWithoutBroadcastNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneWithoutBroadcastsNestedInput
 }
 
 export type BroadcastMasterUncheckedUpdateWithoutReadLogsInput = {
@@ -1275,15 +1275,15 @@ export type BroadcastMasterUncheckedUpdateWithoutReadLogsInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   type?: Prisma.EnumBroadcastTypeFieldUpdateOperationsInput | $Enums.BroadcastType
-  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   publish_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  audiences?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutBroadcastNestedInput
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutBroadcastNestedInput
+  audiences?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutBroadcastNestedInput
 }
 
 export type BroadcastMasterCreateManyVendorInput = {
@@ -1292,12 +1292,12 @@ export type BroadcastMasterCreateManyVendorInput = {
   content: string
   status?: $Enums.BroadcastStatus
   type: $Enums.BroadcastType
-  category_id?: number | null
   publish_at?: Date | string | null
   created_by: number
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  category_id?: number | null
 }
 
 export type BroadcastMasterUpdateWithoutVendorInput = {
@@ -1308,11 +1308,11 @@ export type BroadcastMasterUpdateWithoutVendorInput = {
   publish_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.BroadcastAttachmentUpdateManyWithoutBroadcastNestedInput
+  audiences?: Prisma.BroadcastAudienceMappingUpdateManyWithoutBroadcastNestedInput
   category?: Prisma.BroadcastCategoryMasterUpdateOneWithoutBroadcastsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutBroadcastsUpdatedNestedInput
-  audiences?: Prisma.BroadcastAudienceMappingUpdateManyWithoutBroadcastNestedInput
-  attachments?: Prisma.BroadcastAttachmentUpdateManyWithoutBroadcastNestedInput
   readLogs?: Prisma.BroadcastReadUpdateManyWithoutBroadcastNestedInput
 }
 
@@ -1322,14 +1322,14 @@ export type BroadcastMasterUncheckedUpdateWithoutVendorInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   type?: Prisma.EnumBroadcastTypeFieldUpdateOperationsInput | $Enums.BroadcastType
-  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   publish_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  audiences?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutBroadcastNestedInput
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutBroadcastNestedInput
+  audiences?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutBroadcastNestedInput
   readLogs?: Prisma.BroadcastReadUncheckedUpdateManyWithoutBroadcastNestedInput
 }
 
@@ -1339,12 +1339,12 @@ export type BroadcastMasterUncheckedUpdateManyWithoutVendorInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   type?: Prisma.EnumBroadcastTypeFieldUpdateOperationsInput | $Enums.BroadcastType
-  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   publish_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type BroadcastMasterCreateManyCreatedByInput = {
@@ -1353,12 +1353,12 @@ export type BroadcastMasterCreateManyCreatedByInput = {
   content: string
   status?: $Enums.BroadcastStatus
   type: $Enums.BroadcastType
-  category_id?: number | null
   publish_at?: Date | string | null
   vendor_id?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  category_id?: number | null
 }
 
 export type BroadcastMasterCreateManyUpdatedByInput = {
@@ -1367,12 +1367,12 @@ export type BroadcastMasterCreateManyUpdatedByInput = {
   content: string
   status?: $Enums.BroadcastStatus
   type: $Enums.BroadcastType
-  category_id?: number | null
   publish_at?: Date | string | null
   vendor_id?: number | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
+  category_id?: number | null
 }
 
 export type BroadcastMasterUpdateWithoutCreatedByInput = {
@@ -1383,11 +1383,11 @@ export type BroadcastMasterUpdateWithoutCreatedByInput = {
   publish_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneWithoutBroadcastsNestedInput
+  attachments?: Prisma.BroadcastAttachmentUpdateManyWithoutBroadcastNestedInput
+  audiences?: Prisma.BroadcastAudienceMappingUpdateManyWithoutBroadcastNestedInput
   category?: Prisma.BroadcastCategoryMasterUpdateOneWithoutBroadcastsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutBroadcastsUpdatedNestedInput
-  audiences?: Prisma.BroadcastAudienceMappingUpdateManyWithoutBroadcastNestedInput
-  attachments?: Prisma.BroadcastAttachmentUpdateManyWithoutBroadcastNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneWithoutBroadcastsNestedInput
   readLogs?: Prisma.BroadcastReadUpdateManyWithoutBroadcastNestedInput
 }
 
@@ -1397,14 +1397,14 @@ export type BroadcastMasterUncheckedUpdateWithoutCreatedByInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   type?: Prisma.EnumBroadcastTypeFieldUpdateOperationsInput | $Enums.BroadcastType
-  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   publish_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  audiences?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutBroadcastNestedInput
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutBroadcastNestedInput
+  audiences?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutBroadcastNestedInput
   readLogs?: Prisma.BroadcastReadUncheckedUpdateManyWithoutBroadcastNestedInput
 }
 
@@ -1414,12 +1414,12 @@ export type BroadcastMasterUncheckedUpdateManyWithoutCreatedByInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   type?: Prisma.EnumBroadcastTypeFieldUpdateOperationsInput | $Enums.BroadcastType
-  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   publish_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type BroadcastMasterUpdateWithoutUpdatedByInput = {
@@ -1430,11 +1430,11 @@ export type BroadcastMasterUpdateWithoutUpdatedByInput = {
   publish_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneWithoutBroadcastsNestedInput
+  attachments?: Prisma.BroadcastAttachmentUpdateManyWithoutBroadcastNestedInput
+  audiences?: Prisma.BroadcastAudienceMappingUpdateManyWithoutBroadcastNestedInput
   category?: Prisma.BroadcastCategoryMasterUpdateOneWithoutBroadcastsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastsCreatedNestedInput
-  audiences?: Prisma.BroadcastAudienceMappingUpdateManyWithoutBroadcastNestedInput
-  attachments?: Prisma.BroadcastAttachmentUpdateManyWithoutBroadcastNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneWithoutBroadcastsNestedInput
   readLogs?: Prisma.BroadcastReadUpdateManyWithoutBroadcastNestedInput
 }
 
@@ -1444,14 +1444,14 @@ export type BroadcastMasterUncheckedUpdateWithoutUpdatedByInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   type?: Prisma.EnumBroadcastTypeFieldUpdateOperationsInput | $Enums.BroadcastType
-  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   publish_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  audiences?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutBroadcastNestedInput
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutBroadcastNestedInput
+  audiences?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutBroadcastNestedInput
   readLogs?: Prisma.BroadcastReadUncheckedUpdateManyWithoutBroadcastNestedInput
 }
 
@@ -1461,12 +1461,12 @@ export type BroadcastMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumBroadcastStatusFieldUpdateOperationsInput | $Enums.BroadcastStatus
   type?: Prisma.EnumBroadcastTypeFieldUpdateOperationsInput | $Enums.BroadcastType
-  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   publish_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type BroadcastMasterCreateManyCategoryInput = {
@@ -1491,11 +1491,11 @@ export type BroadcastMasterUpdateWithoutCategoryInput = {
   publish_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneWithoutBroadcastsNestedInput
+  attachments?: Prisma.BroadcastAttachmentUpdateManyWithoutBroadcastNestedInput
+  audiences?: Prisma.BroadcastAudienceMappingUpdateManyWithoutBroadcastNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutBroadcastsUpdatedNestedInput
-  audiences?: Prisma.BroadcastAudienceMappingUpdateManyWithoutBroadcastNestedInput
-  attachments?: Prisma.BroadcastAttachmentUpdateManyWithoutBroadcastNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneWithoutBroadcastsNestedInput
   readLogs?: Prisma.BroadcastReadUpdateManyWithoutBroadcastNestedInput
 }
 
@@ -1511,8 +1511,8 @@ export type BroadcastMasterUncheckedUpdateWithoutCategoryInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  audiences?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutBroadcastNestedInput
   attachments?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutBroadcastNestedInput
+  audiences?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutBroadcastNestedInput
   readLogs?: Prisma.BroadcastReadUncheckedUpdateManyWithoutBroadcastNestedInput
 }
 
@@ -1536,14 +1536,14 @@ export type BroadcastMasterUncheckedUpdateManyWithoutCategoryInput = {
  */
 
 export type BroadcastMasterCountOutputType = {
-  audiences: number
   attachments: number
+  audiences: number
   readLogs: number
 }
 
 export type BroadcastMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  audiences?: boolean | BroadcastMasterCountOutputTypeCountAudiencesArgs
   attachments?: boolean | BroadcastMasterCountOutputTypeCountAttachmentsArgs
+  audiences?: boolean | BroadcastMasterCountOutputTypeCountAudiencesArgs
   readLogs?: boolean | BroadcastMasterCountOutputTypeCountReadLogsArgs
 }
 
@@ -1560,15 +1560,15 @@ export type BroadcastMasterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Ty
 /**
  * BroadcastMasterCountOutputType without action
  */
-export type BroadcastMasterCountOutputTypeCountAudiencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BroadcastAudienceMappingWhereInput
+export type BroadcastMasterCountOutputTypeCountAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BroadcastAttachmentWhereInput
 }
 
 /**
  * BroadcastMasterCountOutputType without action
  */
-export type BroadcastMasterCountOutputTypeCountAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BroadcastAttachmentWhereInput
+export type BroadcastMasterCountOutputTypeCountAudiencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BroadcastAudienceMappingWhereInput
 }
 
 /**
@@ -1585,19 +1585,19 @@ export type BroadcastMasterSelect<ExtArgs extends runtime.Types.Extensions.Inter
   content?: boolean
   status?: boolean
   type?: boolean
-  category_id?: boolean
   publish_at?: boolean
   vendor_id?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.BroadcastMaster$vendorArgs<ExtArgs>
+  category_id?: boolean
+  attachments?: boolean | Prisma.BroadcastMaster$attachmentsArgs<ExtArgs>
+  audiences?: boolean | Prisma.BroadcastMaster$audiencesArgs<ExtArgs>
   category?: boolean | Prisma.BroadcastMaster$categoryArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.BroadcastMaster$updatedByArgs<ExtArgs>
-  audiences?: boolean | Prisma.BroadcastMaster$audiencesArgs<ExtArgs>
-  attachments?: boolean | Prisma.BroadcastMaster$attachmentsArgs<ExtArgs>
+  vendor?: boolean | Prisma.BroadcastMaster$vendorArgs<ExtArgs>
   readLogs?: boolean | Prisma.BroadcastMaster$readLogsArgs<ExtArgs>
   _count?: boolean | Prisma.BroadcastMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["broadcastMaster"]>
@@ -1608,17 +1608,17 @@ export type BroadcastMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   content?: boolean
   status?: boolean
   type?: boolean
-  category_id?: boolean
   publish_at?: boolean
   vendor_id?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.BroadcastMaster$vendorArgs<ExtArgs>
+  category_id?: boolean
   category?: boolean | Prisma.BroadcastMaster$categoryArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.BroadcastMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.BroadcastMaster$vendorArgs<ExtArgs>
 }, ExtArgs["result"]["broadcastMaster"]>
 
 export type BroadcastMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1627,17 +1627,17 @@ export type BroadcastMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   content?: boolean
   status?: boolean
   type?: boolean
-  category_id?: boolean
   publish_at?: boolean
   vendor_id?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.BroadcastMaster$vendorArgs<ExtArgs>
+  category_id?: boolean
   category?: boolean | Prisma.BroadcastMaster$categoryArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.BroadcastMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.BroadcastMaster$vendorArgs<ExtArgs>
 }, ExtArgs["result"]["broadcastMaster"]>
 
 export type BroadcastMasterSelectScalar = {
@@ -1646,48 +1646,48 @@ export type BroadcastMasterSelectScalar = {
   content?: boolean
   status?: boolean
   type?: boolean
-  category_id?: boolean
   publish_at?: boolean
   vendor_id?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
+  category_id?: boolean
 }
 
-export type BroadcastMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "content" | "status" | "type" | "category_id" | "publish_at" | "vendor_id" | "created_by" | "updated_by" | "created_at" | "updated_at", ExtArgs["result"]["broadcastMaster"]>
+export type BroadcastMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "content" | "status" | "type" | "publish_at" | "vendor_id" | "created_by" | "updated_by" | "created_at" | "updated_at" | "category_id", ExtArgs["result"]["broadcastMaster"]>
 export type BroadcastMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.BroadcastMaster$vendorArgs<ExtArgs>
+  attachments?: boolean | Prisma.BroadcastMaster$attachmentsArgs<ExtArgs>
+  audiences?: boolean | Prisma.BroadcastMaster$audiencesArgs<ExtArgs>
   category?: boolean | Prisma.BroadcastMaster$categoryArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.BroadcastMaster$updatedByArgs<ExtArgs>
-  audiences?: boolean | Prisma.BroadcastMaster$audiencesArgs<ExtArgs>
-  attachments?: boolean | Prisma.BroadcastMaster$attachmentsArgs<ExtArgs>
+  vendor?: boolean | Prisma.BroadcastMaster$vendorArgs<ExtArgs>
   readLogs?: boolean | Prisma.BroadcastMaster$readLogsArgs<ExtArgs>
   _count?: boolean | Prisma.BroadcastMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BroadcastMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.BroadcastMaster$vendorArgs<ExtArgs>
   category?: boolean | Prisma.BroadcastMaster$categoryArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.BroadcastMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.BroadcastMaster$vendorArgs<ExtArgs>
 }
 export type BroadcastMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.BroadcastMaster$vendorArgs<ExtArgs>
   category?: boolean | Prisma.BroadcastMaster$categoryArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.BroadcastMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.BroadcastMaster$vendorArgs<ExtArgs>
 }
 
 export type $BroadcastMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "BroadcastMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs> | null
+    attachments: Prisma.$BroadcastAttachmentPayload<ExtArgs>[]
+    audiences: Prisma.$BroadcastAudienceMappingPayload<ExtArgs>[]
     category: Prisma.$BroadcastCategoryMasterPayload<ExtArgs> | null
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
-    audiences: Prisma.$BroadcastAudienceMappingPayload<ExtArgs>[]
-    attachments: Prisma.$BroadcastAttachmentPayload<ExtArgs>[]
+    vendor: Prisma.$VendorMasterPayload<ExtArgs> | null
     readLogs: Prisma.$BroadcastReadPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1696,13 +1696,13 @@ export type $BroadcastMasterPayload<ExtArgs extends runtime.Types.Extensions.Int
     content: string
     status: $Enums.BroadcastStatus
     type: $Enums.BroadcastType
-    category_id: number | null
     publish_at: Date | null
     vendor_id: number | null
     created_by: number
     updated_by: number | null
     created_at: Date
     updated_at: Date
+    category_id: number | null
   }, ExtArgs["result"]["broadcastMaster"]>
   composites: {}
 }
@@ -2097,12 +2097,12 @@ readonly fields: BroadcastMasterFieldRefs;
  */
 export interface Prisma__BroadcastMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.BroadcastMaster$vendorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BroadcastMaster$vendorArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  attachments<T extends Prisma.BroadcastMaster$attachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BroadcastMaster$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  audiences<T extends Prisma.BroadcastMaster$audiencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BroadcastMaster$audiencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastAudienceMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   category<T extends Prisma.BroadcastMaster$categoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BroadcastMaster$categoryArgs<ExtArgs>>): Prisma.Prisma__BroadcastCategoryMasterClient<runtime.Types.Result.GetResult<Prisma.$BroadcastCategoryMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.BroadcastMaster$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BroadcastMaster$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  audiences<T extends Prisma.BroadcastMaster$audiencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BroadcastMaster$audiencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastAudienceMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  attachments<T extends Prisma.BroadcastMaster$attachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BroadcastMaster$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vendor<T extends Prisma.BroadcastMaster$vendorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BroadcastMaster$vendorArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   readLogs<T extends Prisma.BroadcastMaster$readLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BroadcastMaster$readLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastReadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2138,13 +2138,13 @@ export interface BroadcastMasterFieldRefs {
   readonly content: Prisma.FieldRef<"BroadcastMaster", 'String'>
   readonly status: Prisma.FieldRef<"BroadcastMaster", 'BroadcastStatus'>
   readonly type: Prisma.FieldRef<"BroadcastMaster", 'BroadcastType'>
-  readonly category_id: Prisma.FieldRef<"BroadcastMaster", 'Int'>
   readonly publish_at: Prisma.FieldRef<"BroadcastMaster", 'DateTime'>
   readonly vendor_id: Prisma.FieldRef<"BroadcastMaster", 'Int'>
   readonly created_by: Prisma.FieldRef<"BroadcastMaster", 'Int'>
   readonly updated_by: Prisma.FieldRef<"BroadcastMaster", 'Int'>
   readonly created_at: Prisma.FieldRef<"BroadcastMaster", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"BroadcastMaster", 'DateTime'>
+  readonly category_id: Prisma.FieldRef<"BroadcastMaster", 'Int'>
 }
     
 
@@ -2546,22 +2546,51 @@ export type BroadcastMasterDeleteManyArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
- * BroadcastMaster.vendor
+ * BroadcastMaster.attachments
  */
-export type BroadcastMaster$vendorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type BroadcastMaster$attachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the VendorMaster
+   * Select specific fields to fetch from the BroadcastAttachment
    */
-  select?: Prisma.VendorMasterSelect<ExtArgs> | null
+  select?: Prisma.BroadcastAttachmentSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the VendorMaster
+   * Omit specific fields from the BroadcastAttachment
    */
-  omit?: Prisma.VendorMasterOmit<ExtArgs> | null
+  omit?: Prisma.BroadcastAttachmentOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.VendorMasterInclude<ExtArgs> | null
-  where?: Prisma.VendorMasterWhereInput
+  include?: Prisma.BroadcastAttachmentInclude<ExtArgs> | null
+  where?: Prisma.BroadcastAttachmentWhereInput
+  orderBy?: Prisma.BroadcastAttachmentOrderByWithRelationInput | Prisma.BroadcastAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.BroadcastAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BroadcastAttachmentScalarFieldEnum | Prisma.BroadcastAttachmentScalarFieldEnum[]
+}
+
+/**
+ * BroadcastMaster.audiences
+ */
+export type BroadcastMaster$audiencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BroadcastAudienceMapping
+   */
+  select?: Prisma.BroadcastAudienceMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BroadcastAudienceMapping
+   */
+  omit?: Prisma.BroadcastAudienceMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BroadcastAudienceMappingInclude<ExtArgs> | null
+  where?: Prisma.BroadcastAudienceMappingWhereInput
+  orderBy?: Prisma.BroadcastAudienceMappingOrderByWithRelationInput | Prisma.BroadcastAudienceMappingOrderByWithRelationInput[]
+  cursor?: Prisma.BroadcastAudienceMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BroadcastAudienceMappingScalarFieldEnum | Prisma.BroadcastAudienceMappingScalarFieldEnum[]
 }
 
 /**
@@ -2603,51 +2632,22 @@ export type BroadcastMaster$updatedByArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
- * BroadcastMaster.audiences
+ * BroadcastMaster.vendor
  */
-export type BroadcastMaster$audiencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type BroadcastMaster$vendorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the BroadcastAudienceMapping
+   * Select specific fields to fetch from the VendorMaster
    */
-  select?: Prisma.BroadcastAudienceMappingSelect<ExtArgs> | null
+  select?: Prisma.VendorMasterSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the BroadcastAudienceMapping
+   * Omit specific fields from the VendorMaster
    */
-  omit?: Prisma.BroadcastAudienceMappingOmit<ExtArgs> | null
+  omit?: Prisma.VendorMasterOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.BroadcastAudienceMappingInclude<ExtArgs> | null
-  where?: Prisma.BroadcastAudienceMappingWhereInput
-  orderBy?: Prisma.BroadcastAudienceMappingOrderByWithRelationInput | Prisma.BroadcastAudienceMappingOrderByWithRelationInput[]
-  cursor?: Prisma.BroadcastAudienceMappingWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.BroadcastAudienceMappingScalarFieldEnum | Prisma.BroadcastAudienceMappingScalarFieldEnum[]
-}
-
-/**
- * BroadcastMaster.attachments
- */
-export type BroadcastMaster$attachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the BroadcastAttachment
-   */
-  select?: Prisma.BroadcastAttachmentSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the BroadcastAttachment
-   */
-  omit?: Prisma.BroadcastAttachmentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.BroadcastAttachmentInclude<ExtArgs> | null
-  where?: Prisma.BroadcastAttachmentWhereInput
-  orderBy?: Prisma.BroadcastAttachmentOrderByWithRelationInput | Prisma.BroadcastAttachmentOrderByWithRelationInput[]
-  cursor?: Prisma.BroadcastAttachmentWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.BroadcastAttachmentScalarFieldEnum | Prisma.BroadcastAttachmentScalarFieldEnum[]
+  include?: Prisma.VendorMasterInclude<ExtArgs> | null
+  where?: Prisma.VendorMasterWhereInput
 }
 
 /**

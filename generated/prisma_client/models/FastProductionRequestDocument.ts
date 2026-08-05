@@ -228,9 +228,9 @@ export type FastProductionRequestDocumentWhereInput = {
   document_id?: Prisma.IntFilter<"FastProductionRequestDocument"> | number
   created_by?: Prisma.IntFilter<"FastProductionRequestDocument"> | number
   created_at?: Prisma.DateTimeFilter<"FastProductionRequestDocument"> | Date | string
-  request?: Prisma.XOR<Prisma.FastProductionRequestScalarRelationFilter, Prisma.FastProductionRequestWhereInput>
-  document?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  document?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
+  request?: Prisma.XOR<Prisma.FastProductionRequestScalarRelationFilter, Prisma.FastProductionRequestWhereInput>
 }
 
 export type FastProductionRequestDocumentOrderByWithRelationInput = {
@@ -239,9 +239,9 @@ export type FastProductionRequestDocumentOrderByWithRelationInput = {
   document_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  request?: Prisma.FastProductionRequestOrderByWithRelationInput
-  document?: Prisma.LeadDocumentsOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  document?: Prisma.LeadDocumentsOrderByWithRelationInput
+  request?: Prisma.FastProductionRequestOrderByWithRelationInput
 }
 
 export type FastProductionRequestDocumentWhereUniqueInput = Prisma.AtLeast<{
@@ -253,9 +253,9 @@ export type FastProductionRequestDocumentWhereUniqueInput = Prisma.AtLeast<{
   document_id?: Prisma.IntFilter<"FastProductionRequestDocument"> | number
   created_by?: Prisma.IntFilter<"FastProductionRequestDocument"> | number
   created_at?: Prisma.DateTimeFilter<"FastProductionRequestDocument"> | Date | string
-  request?: Prisma.XOR<Prisma.FastProductionRequestScalarRelationFilter, Prisma.FastProductionRequestWhereInput>
-  document?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  document?: Prisma.XOR<Prisma.LeadDocumentsScalarRelationFilter, Prisma.LeadDocumentsWhereInput>
+  request?: Prisma.XOR<Prisma.FastProductionRequestScalarRelationFilter, Prisma.FastProductionRequestWhereInput>
 }, "id">
 
 export type FastProductionRequestDocumentOrderByWithAggregationInput = {
@@ -284,9 +284,9 @@ export type FastProductionRequestDocumentScalarWhereWithAggregatesInput = {
 
 export type FastProductionRequestDocumentCreateInput = {
   created_at?: Date | string
-  request: Prisma.FastProductionRequestCreateNestedOneWithoutDocumentsInput
-  document: Prisma.LeadDocumentsCreateNestedOneWithoutFastProductionRequestDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestDocumentsCreatedInput
+  document: Prisma.LeadDocumentsCreateNestedOneWithoutFastProductionRequestDocumentsInput
+  request: Prisma.FastProductionRequestCreateNestedOneWithoutDocumentsInput
 }
 
 export type FastProductionRequestDocumentUncheckedCreateInput = {
@@ -299,9 +299,9 @@ export type FastProductionRequestDocumentUncheckedCreateInput = {
 
 export type FastProductionRequestDocumentUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  request?: Prisma.FastProductionRequestUpdateOneRequiredWithoutDocumentsNestedInput
-  document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutFastProductionRequestDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestDocumentsCreatedNestedInput
+  document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutFastProductionRequestDocumentsNestedInput
+  request?: Prisma.FastProductionRequestUpdateOneRequiredWithoutDocumentsNestedInput
 }
 
 export type FastProductionRequestDocumentUncheckedUpdateInput = {
@@ -508,8 +508,8 @@ export type FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNested
 
 export type FastProductionRequestDocumentCreateWithoutCreatedByInput = {
   created_at?: Date | string
-  request: Prisma.FastProductionRequestCreateNestedOneWithoutDocumentsInput
   document: Prisma.LeadDocumentsCreateNestedOneWithoutFastProductionRequestDocumentsInput
+  request: Prisma.FastProductionRequestCreateNestedOneWithoutDocumentsInput
 }
 
 export type FastProductionRequestDocumentUncheckedCreateWithoutCreatedByInput = {
@@ -558,8 +558,8 @@ export type FastProductionRequestDocumentScalarWhereInput = {
 
 export type FastProductionRequestDocumentCreateWithoutDocumentInput = {
   created_at?: Date | string
-  request: Prisma.FastProductionRequestCreateNestedOneWithoutDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestDocumentsCreatedInput
+  request: Prisma.FastProductionRequestCreateNestedOneWithoutDocumentsInput
 }
 
 export type FastProductionRequestDocumentUncheckedCreateWithoutDocumentInput = {
@@ -597,8 +597,8 @@ export type FastProductionRequestDocumentUpdateManyWithWhereWithoutDocumentInput
 
 export type FastProductionRequestDocumentCreateWithoutRequestInput = {
   created_at?: Date | string
-  document: Prisma.LeadDocumentsCreateNestedOneWithoutFastProductionRequestDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestDocumentsCreatedInput
+  document: Prisma.LeadDocumentsCreateNestedOneWithoutFastProductionRequestDocumentsInput
 }
 
 export type FastProductionRequestDocumentUncheckedCreateWithoutRequestInput = {
@@ -643,8 +643,8 @@ export type FastProductionRequestDocumentCreateManyCreatedByInput = {
 
 export type FastProductionRequestDocumentUpdateWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  request?: Prisma.FastProductionRequestUpdateOneRequiredWithoutDocumentsNestedInput
   document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutFastProductionRequestDocumentsNestedInput
+  request?: Prisma.FastProductionRequestUpdateOneRequiredWithoutDocumentsNestedInput
 }
 
 export type FastProductionRequestDocumentUncheckedUpdateWithoutCreatedByInput = {
@@ -670,8 +670,8 @@ export type FastProductionRequestDocumentCreateManyDocumentInput = {
 
 export type FastProductionRequestDocumentUpdateWithoutDocumentInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  request?: Prisma.FastProductionRequestUpdateOneRequiredWithoutDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestDocumentsCreatedNestedInput
+  request?: Prisma.FastProductionRequestUpdateOneRequiredWithoutDocumentsNestedInput
 }
 
 export type FastProductionRequestDocumentUncheckedUpdateWithoutDocumentInput = {
@@ -697,8 +697,8 @@ export type FastProductionRequestDocumentCreateManyRequestInput = {
 
 export type FastProductionRequestDocumentUpdateWithoutRequestInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutFastProductionRequestDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestDocumentsCreatedNestedInput
+  document?: Prisma.LeadDocumentsUpdateOneRequiredWithoutFastProductionRequestDocumentsNestedInput
 }
 
 export type FastProductionRequestDocumentUncheckedUpdateWithoutRequestInput = {
@@ -723,9 +723,9 @@ export type FastProductionRequestDocumentSelect<ExtArgs extends runtime.Types.Ex
   document_id?: boolean
   created_by?: boolean
   created_at?: boolean
-  request?: boolean | Prisma.FastProductionRequestDefaultArgs<ExtArgs>
-  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.FastProductionRequestDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fastProductionRequestDocument"]>
 
 export type FastProductionRequestDocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -734,9 +734,9 @@ export type FastProductionRequestDocumentSelectCreateManyAndReturn<ExtArgs exten
   document_id?: boolean
   created_by?: boolean
   created_at?: boolean
-  request?: boolean | Prisma.FastProductionRequestDefaultArgs<ExtArgs>
-  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.FastProductionRequestDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fastProductionRequestDocument"]>
 
 export type FastProductionRequestDocumentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -745,9 +745,9 @@ export type FastProductionRequestDocumentSelectUpdateManyAndReturn<ExtArgs exten
   document_id?: boolean
   created_by?: boolean
   created_at?: boolean
-  request?: boolean | Prisma.FastProductionRequestDefaultArgs<ExtArgs>
-  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.FastProductionRequestDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fastProductionRequestDocument"]>
 
 export type FastProductionRequestDocumentSelectScalar = {
@@ -760,27 +760,27 @@ export type FastProductionRequestDocumentSelectScalar = {
 
 export type FastProductionRequestDocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "request_id" | "document_id" | "created_by" | "created_at", ExtArgs["result"]["fastProductionRequestDocument"]>
 export type FastProductionRequestDocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  request?: boolean | Prisma.FastProductionRequestDefaultArgs<ExtArgs>
-  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.FastProductionRequestDefaultArgs<ExtArgs>
 }
 export type FastProductionRequestDocumentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  request?: boolean | Prisma.FastProductionRequestDefaultArgs<ExtArgs>
-  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.FastProductionRequestDefaultArgs<ExtArgs>
 }
 export type FastProductionRequestDocumentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  request?: boolean | Prisma.FastProductionRequestDefaultArgs<ExtArgs>
-  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  document?: boolean | Prisma.LeadDocumentsDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.FastProductionRequestDefaultArgs<ExtArgs>
 }
 
 export type $FastProductionRequestDocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "FastProductionRequestDocument"
   objects: {
-    request: Prisma.$FastProductionRequestPayload<ExtArgs>
-    document: Prisma.$LeadDocumentsPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    document: Prisma.$LeadDocumentsPayload<ExtArgs>
+    request: Prisma.$FastProductionRequestPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1182,9 +1182,9 @@ readonly fields: FastProductionRequestDocumentFieldRefs;
  */
 export interface Prisma__FastProductionRequestDocumentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  request<T extends Prisma.FastProductionRequestDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FastProductionRequestDefaultArgs<ExtArgs>>): Prisma.Prisma__FastProductionRequestClient<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  document<T extends Prisma.LeadDocumentsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocumentsDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadDocumentsClient<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  document<T extends Prisma.LeadDocumentsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocumentsDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadDocumentsClient<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  request<T extends Prisma.FastProductionRequestDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FastProductionRequestDefaultArgs<ExtArgs>>): Prisma.Prisma__FastProductionRequestClient<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

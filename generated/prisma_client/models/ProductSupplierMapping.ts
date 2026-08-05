@@ -32,11 +32,11 @@ export type ProductSupplierMappingAvgAggregateOutputType = {
   product_id: number | null
   company_vendor_id: number | null
   amount: runtime.Decimal | null
+  created_by: number | null
+  updated_by: number | null
   procurement_expense_amount: runtime.Decimal | null
   procurement_expense_pct: runtime.Decimal | null
   procurement_expense_total: runtime.Decimal | null
-  created_by: number | null
-  updated_by: number | null
 }
 
 export type ProductSupplierMappingSumAggregateOutputType = {
@@ -45,11 +45,11 @@ export type ProductSupplierMappingSumAggregateOutputType = {
   product_id: number | null
   company_vendor_id: number | null
   amount: runtime.Decimal | null
+  created_by: number | null
+  updated_by: number | null
   procurement_expense_amount: runtime.Decimal | null
   procurement_expense_pct: runtime.Decimal | null
   procurement_expense_total: runtime.Decimal | null
-  created_by: number | null
-  updated_by: number | null
 }
 
 export type ProductSupplierMappingMinAggregateOutputType = {
@@ -59,14 +59,14 @@ export type ProductSupplierMappingMinAggregateOutputType = {
   company_vendor_id: number | null
   supplier_item_code: string | null
   amount: runtime.Decimal | null
-  procurement_expense_amount: runtime.Decimal | null
-  procurement_expense_pct: runtime.Decimal | null
-  procurement_expense_total: runtime.Decimal | null
   is_active: boolean | null
   created_by: number | null
   updated_by: number | null
   created_at: Date | null
   updated_at: Date | null
+  procurement_expense_amount: runtime.Decimal | null
+  procurement_expense_pct: runtime.Decimal | null
+  procurement_expense_total: runtime.Decimal | null
 }
 
 export type ProductSupplierMappingMaxAggregateOutputType = {
@@ -76,14 +76,14 @@ export type ProductSupplierMappingMaxAggregateOutputType = {
   company_vendor_id: number | null
   supplier_item_code: string | null
   amount: runtime.Decimal | null
-  procurement_expense_amount: runtime.Decimal | null
-  procurement_expense_pct: runtime.Decimal | null
-  procurement_expense_total: runtime.Decimal | null
   is_active: boolean | null
   created_by: number | null
   updated_by: number | null
   created_at: Date | null
   updated_at: Date | null
+  procurement_expense_amount: runtime.Decimal | null
+  procurement_expense_pct: runtime.Decimal | null
+  procurement_expense_total: runtime.Decimal | null
 }
 
 export type ProductSupplierMappingCountAggregateOutputType = {
@@ -93,14 +93,14 @@ export type ProductSupplierMappingCountAggregateOutputType = {
   company_vendor_id: number
   supplier_item_code: number
   amount: number
-  procurement_expense_amount: number
-  procurement_expense_pct: number
-  procurement_expense_total: number
   is_active: number
   created_by: number
   updated_by: number
   created_at: number
   updated_at: number
+  procurement_expense_amount: number
+  procurement_expense_pct: number
+  procurement_expense_total: number
   _all: number
 }
 
@@ -111,11 +111,11 @@ export type ProductSupplierMappingAvgAggregateInputType = {
   product_id?: true
   company_vendor_id?: true
   amount?: true
+  created_by?: true
+  updated_by?: true
   procurement_expense_amount?: true
   procurement_expense_pct?: true
   procurement_expense_total?: true
-  created_by?: true
-  updated_by?: true
 }
 
 export type ProductSupplierMappingSumAggregateInputType = {
@@ -124,11 +124,11 @@ export type ProductSupplierMappingSumAggregateInputType = {
   product_id?: true
   company_vendor_id?: true
   amount?: true
+  created_by?: true
+  updated_by?: true
   procurement_expense_amount?: true
   procurement_expense_pct?: true
   procurement_expense_total?: true
-  created_by?: true
-  updated_by?: true
 }
 
 export type ProductSupplierMappingMinAggregateInputType = {
@@ -138,14 +138,14 @@ export type ProductSupplierMappingMinAggregateInputType = {
   company_vendor_id?: true
   supplier_item_code?: true
   amount?: true
-  procurement_expense_amount?: true
-  procurement_expense_pct?: true
-  procurement_expense_total?: true
   is_active?: true
   created_by?: true
   updated_by?: true
   created_at?: true
   updated_at?: true
+  procurement_expense_amount?: true
+  procurement_expense_pct?: true
+  procurement_expense_total?: true
 }
 
 export type ProductSupplierMappingMaxAggregateInputType = {
@@ -155,14 +155,14 @@ export type ProductSupplierMappingMaxAggregateInputType = {
   company_vendor_id?: true
   supplier_item_code?: true
   amount?: true
-  procurement_expense_amount?: true
-  procurement_expense_pct?: true
-  procurement_expense_total?: true
   is_active?: true
   created_by?: true
   updated_by?: true
   created_at?: true
   updated_at?: true
+  procurement_expense_amount?: true
+  procurement_expense_pct?: true
+  procurement_expense_total?: true
 }
 
 export type ProductSupplierMappingCountAggregateInputType = {
@@ -172,14 +172,14 @@ export type ProductSupplierMappingCountAggregateInputType = {
   company_vendor_id?: true
   supplier_item_code?: true
   amount?: true
-  procurement_expense_amount?: true
-  procurement_expense_pct?: true
-  procurement_expense_total?: true
   is_active?: true
   created_by?: true
   updated_by?: true
   created_at?: true
   updated_at?: true
+  procurement_expense_amount?: true
+  procurement_expense_pct?: true
+  procurement_expense_total?: true
   _all?: true
 }
 
@@ -276,14 +276,14 @@ export type ProductSupplierMappingGroupByOutputType = {
   company_vendor_id: number
   supplier_item_code: string | null
   amount: runtime.Decimal | null
-  procurement_expense_amount: runtime.Decimal | null
-  procurement_expense_pct: runtime.Decimal | null
-  procurement_expense_total: runtime.Decimal | null
   is_active: boolean
   created_by: number | null
   updated_by: number | null
   created_at: Date
   updated_at: Date
+  procurement_expense_amount: runtime.Decimal | null
+  procurement_expense_pct: runtime.Decimal | null
+  procurement_expense_total: runtime.Decimal | null
   _count: ProductSupplierMappingCountAggregateOutputType | null
   _avg: ProductSupplierMappingAvgAggregateOutputType | null
   _sum: ProductSupplierMappingSumAggregateOutputType | null
@@ -316,17 +316,17 @@ export type ProductSupplierMappingWhereInput = {
   company_vendor_id?: Prisma.IntFilter<"ProductSupplierMapping"> | number
   supplier_item_code?: Prisma.StringNullableFilter<"ProductSupplierMapping"> | string | null
   amount?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: Prisma.BoolFilter<"ProductSupplierMapping"> | boolean
   created_by?: Prisma.IntNullableFilter<"ProductSupplierMapping"> | number | null
   updated_by?: Prisma.IntNullableFilter<"ProductSupplierMapping"> | number | null
   created_at?: Prisma.DateTimeFilter<"ProductSupplierMapping"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ProductSupplierMapping"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  product?: Prisma.XOR<Prisma.ProductMasterScalarRelationFilter, Prisma.ProductMasterWhereInput>
+  procurement_expense_amount?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
+  product?: Prisma.XOR<Prisma.ProductMasterScalarRelationFilter, Prisma.ProductMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type ProductSupplierMappingOrderByWithRelationInput = {
@@ -336,17 +336,17 @@ export type ProductSupplierMappingOrderByWithRelationInput = {
   company_vendor_id?: Prisma.SortOrder
   supplier_item_code?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  procurement_expense_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  procurement_expense_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  procurement_expense_total?: Prisma.SortOrderInput | Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  product?: Prisma.ProductMasterOrderByWithRelationInput
+  procurement_expense_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  procurement_expense_pct?: Prisma.SortOrderInput | Prisma.SortOrder
+  procurement_expense_total?: Prisma.SortOrderInput | Prisma.SortOrder
   companyVendor?: Prisma.CompanyVendorsMasterOrderByWithRelationInput
+  product?: Prisma.ProductMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type ProductSupplierMappingWhereUniqueInput = Prisma.AtLeast<{
@@ -360,17 +360,17 @@ export type ProductSupplierMappingWhereUniqueInput = Prisma.AtLeast<{
   company_vendor_id?: Prisma.IntFilter<"ProductSupplierMapping"> | number
   supplier_item_code?: Prisma.StringNullableFilter<"ProductSupplierMapping"> | string | null
   amount?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: Prisma.BoolFilter<"ProductSupplierMapping"> | boolean
   created_by?: Prisma.IntNullableFilter<"ProductSupplierMapping"> | number | null
   updated_by?: Prisma.IntNullableFilter<"ProductSupplierMapping"> | number | null
   created_at?: Prisma.DateTimeFilter<"ProductSupplierMapping"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ProductSupplierMapping"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  product?: Prisma.XOR<Prisma.ProductMasterScalarRelationFilter, Prisma.ProductMasterWhereInput>
+  procurement_expense_amount?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
+  product?: Prisma.XOR<Prisma.ProductMasterScalarRelationFilter, Prisma.ProductMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id" | "vendor_id_product_id_company_vendor_id">
 
 export type ProductSupplierMappingOrderByWithAggregationInput = {
@@ -380,14 +380,14 @@ export type ProductSupplierMappingOrderByWithAggregationInput = {
   company_vendor_id?: Prisma.SortOrder
   supplier_item_code?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  procurement_expense_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  procurement_expense_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  procurement_expense_total?: Prisma.SortOrderInput | Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  procurement_expense_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  procurement_expense_pct?: Prisma.SortOrderInput | Prisma.SortOrder
+  procurement_expense_total?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ProductSupplierMappingCountOrderByAggregateInput
   _avg?: Prisma.ProductSupplierMappingAvgOrderByAggregateInput
   _max?: Prisma.ProductSupplierMappingMaxOrderByAggregateInput
@@ -405,30 +405,30 @@ export type ProductSupplierMappingScalarWhereWithAggregatesInput = {
   company_vendor_id?: Prisma.IntWithAggregatesFilter<"ProductSupplierMapping"> | number
   supplier_item_code?: Prisma.StringNullableWithAggregatesFilter<"ProductSupplierMapping"> | string | null
   amount?: Prisma.DecimalNullableWithAggregatesFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: Prisma.DecimalNullableWithAggregatesFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: Prisma.DecimalNullableWithAggregatesFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: Prisma.DecimalNullableWithAggregatesFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: Prisma.BoolWithAggregatesFilter<"ProductSupplierMapping"> | boolean
   created_by?: Prisma.IntNullableWithAggregatesFilter<"ProductSupplierMapping"> | number | null
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"ProductSupplierMapping"> | number | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"ProductSupplierMapping"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"ProductSupplierMapping"> | Date | string
+  procurement_expense_amount?: Prisma.DecimalNullableWithAggregatesFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: Prisma.DecimalNullableWithAggregatesFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: Prisma.DecimalNullableWithAggregatesFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductSupplierMappingCreateInput = {
   supplier_item_code?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductSupplierMappingsInput
-  product: Prisma.ProductMasterCreateNestedOneWithoutSupplierMappingsInput
+  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutProductSupplierMappingsInput
+  product: Prisma.ProductMasterCreateNestedOneWithoutSupplierMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductSupplierMappingsInput
 }
 
 export type ProductSupplierMappingUncheckedCreateInput = {
@@ -438,30 +438,30 @@ export type ProductSupplierMappingUncheckedCreateInput = {
   company_vendor_id: number
   supplier_item_code?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductSupplierMappingUpdateInput = {
   supplier_item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductSupplierMappingsNestedInput
-  product?: Prisma.ProductMasterUpdateOneRequiredWithoutSupplierMappingsNestedInput
+  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutProductSupplierMappingsNestedInput
+  product?: Prisma.ProductMasterUpdateOneRequiredWithoutSupplierMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductSupplierMappingsNestedInput
 }
 
 export type ProductSupplierMappingUncheckedUpdateInput = {
@@ -471,14 +471,14 @@ export type ProductSupplierMappingUncheckedUpdateInput = {
   company_vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   supplier_item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductSupplierMappingCreateManyInput = {
@@ -488,27 +488,27 @@ export type ProductSupplierMappingCreateManyInput = {
   company_vendor_id: number
   supplier_item_code?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductSupplierMappingUpdateManyMutationInput = {
   supplier_item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductSupplierMappingUncheckedUpdateManyInput = {
@@ -518,14 +518,14 @@ export type ProductSupplierMappingUncheckedUpdateManyInput = {
   company_vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   supplier_item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductSupplierMappingListRelationFilter = {
@@ -551,14 +551,14 @@ export type ProductSupplierMappingCountOrderByAggregateInput = {
   company_vendor_id?: Prisma.SortOrder
   supplier_item_code?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  procurement_expense_amount?: Prisma.SortOrder
-  procurement_expense_pct?: Prisma.SortOrder
-  procurement_expense_total?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  procurement_expense_amount?: Prisma.SortOrder
+  procurement_expense_pct?: Prisma.SortOrder
+  procurement_expense_total?: Prisma.SortOrder
 }
 
 export type ProductSupplierMappingAvgOrderByAggregateInput = {
@@ -567,11 +567,11 @@ export type ProductSupplierMappingAvgOrderByAggregateInput = {
   product_id?: Prisma.SortOrder
   company_vendor_id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  created_by?: Prisma.SortOrder
+  updated_by?: Prisma.SortOrder
   procurement_expense_amount?: Prisma.SortOrder
   procurement_expense_pct?: Prisma.SortOrder
   procurement_expense_total?: Prisma.SortOrder
-  created_by?: Prisma.SortOrder
-  updated_by?: Prisma.SortOrder
 }
 
 export type ProductSupplierMappingMaxOrderByAggregateInput = {
@@ -581,14 +581,14 @@ export type ProductSupplierMappingMaxOrderByAggregateInput = {
   company_vendor_id?: Prisma.SortOrder
   supplier_item_code?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  procurement_expense_amount?: Prisma.SortOrder
-  procurement_expense_pct?: Prisma.SortOrder
-  procurement_expense_total?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  procurement_expense_amount?: Prisma.SortOrder
+  procurement_expense_pct?: Prisma.SortOrder
+  procurement_expense_total?: Prisma.SortOrder
 }
 
 export type ProductSupplierMappingMinOrderByAggregateInput = {
@@ -598,14 +598,14 @@ export type ProductSupplierMappingMinOrderByAggregateInput = {
   company_vendor_id?: Prisma.SortOrder
   supplier_item_code?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  procurement_expense_amount?: Prisma.SortOrder
-  procurement_expense_pct?: Prisma.SortOrder
-  procurement_expense_total?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  procurement_expense_amount?: Prisma.SortOrder
+  procurement_expense_pct?: Prisma.SortOrder
+  procurement_expense_total?: Prisma.SortOrder
 }
 
 export type ProductSupplierMappingSumOrderByAggregateInput = {
@@ -614,11 +614,11 @@ export type ProductSupplierMappingSumOrderByAggregateInput = {
   product_id?: Prisma.SortOrder
   company_vendor_id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  created_by?: Prisma.SortOrder
+  updated_by?: Prisma.SortOrder
   procurement_expense_amount?: Prisma.SortOrder
   procurement_expense_pct?: Prisma.SortOrder
   procurement_expense_total?: Prisma.SortOrder
-  created_by?: Prisma.SortOrder
-  updated_by?: Prisma.SortOrder
 }
 
 export type ProductSupplierMappingCreateNestedManyWithoutVendorInput = {
@@ -750,16 +750,16 @@ export type ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput =
 export type ProductSupplierMappingCreateWithoutVendorInput = {
   supplier_item_code?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  product: Prisma.ProductMasterCreateNestedOneWithoutSupplierMappingsInput
+  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutProductSupplierMappingsInput
+  product: Prisma.ProductMasterCreateNestedOneWithoutSupplierMappingsInput
 }
 
 export type ProductSupplierMappingUncheckedCreateWithoutVendorInput = {
@@ -768,14 +768,14 @@ export type ProductSupplierMappingUncheckedCreateWithoutVendorInput = {
   company_vendor_id: number
   supplier_item_code?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductSupplierMappingCreateOrConnectWithoutVendorInput = {
@@ -814,29 +814,29 @@ export type ProductSupplierMappingScalarWhereInput = {
   company_vendor_id?: Prisma.IntFilter<"ProductSupplierMapping"> | number
   supplier_item_code?: Prisma.StringNullableFilter<"ProductSupplierMapping"> | string | null
   amount?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: Prisma.BoolFilter<"ProductSupplierMapping"> | boolean
   created_by?: Prisma.IntNullableFilter<"ProductSupplierMapping"> | number | null
   updated_by?: Prisma.IntNullableFilter<"ProductSupplierMapping"> | number | null
   created_at?: Prisma.DateTimeFilter<"ProductSupplierMapping"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ProductSupplierMapping"> | Date | string
+  procurement_expense_amount?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: Prisma.DecimalNullableFilter<"ProductSupplierMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductSupplierMappingCreateWithoutCompanyVendorInput = {
   supplier_item_code?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductSupplierMappingsInput
+  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   product: Prisma.ProductMasterCreateNestedOneWithoutSupplierMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductSupplierMappingsInput
 }
 
 export type ProductSupplierMappingUncheckedCreateWithoutCompanyVendorInput = {
@@ -845,14 +845,14 @@ export type ProductSupplierMappingUncheckedCreateWithoutCompanyVendorInput = {
   product_id: number
   supplier_item_code?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductSupplierMappingCreateOrConnectWithoutCompanyVendorInput = {
@@ -884,16 +884,16 @@ export type ProductSupplierMappingUpdateManyWithWhereWithoutCompanyVendorInput =
 export type ProductSupplierMappingCreateWithoutProductInput = {
   supplier_item_code?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductSupplierMappingsInput
+  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutProductSupplierMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductSupplierMappingsInput
 }
 
 export type ProductSupplierMappingUncheckedCreateWithoutProductInput = {
@@ -902,14 +902,14 @@ export type ProductSupplierMappingUncheckedCreateWithoutProductInput = {
   company_vendor_id: number
   supplier_item_code?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductSupplierMappingCreateOrConnectWithoutProductInput = {
@@ -944,29 +944,29 @@ export type ProductSupplierMappingCreateManyVendorInput = {
   company_vendor_id: number
   supplier_item_code?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductSupplierMappingUpdateWithoutVendorInput = {
   supplier_item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductMasterUpdateOneRequiredWithoutSupplierMappingsNestedInput
+  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutProductSupplierMappingsNestedInput
+  product?: Prisma.ProductMasterUpdateOneRequiredWithoutSupplierMappingsNestedInput
 }
 
 export type ProductSupplierMappingUncheckedUpdateWithoutVendorInput = {
@@ -975,14 +975,14 @@ export type ProductSupplierMappingUncheckedUpdateWithoutVendorInput = {
   company_vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   supplier_item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductSupplierMappingUncheckedUpdateManyWithoutVendorInput = {
@@ -991,14 +991,14 @@ export type ProductSupplierMappingUncheckedUpdateManyWithoutVendorInput = {
   company_vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   supplier_item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductSupplierMappingCreateManyCompanyVendorInput = {
@@ -1007,29 +1007,29 @@ export type ProductSupplierMappingCreateManyCompanyVendorInput = {
   product_id: number
   supplier_item_code?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductSupplierMappingUpdateWithoutCompanyVendorInput = {
   supplier_item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductSupplierMappingsNestedInput
+  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   product?: Prisma.ProductMasterUpdateOneRequiredWithoutSupplierMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductSupplierMappingsNestedInput
 }
 
 export type ProductSupplierMappingUncheckedUpdateWithoutCompanyVendorInput = {
@@ -1038,14 +1038,14 @@ export type ProductSupplierMappingUncheckedUpdateWithoutCompanyVendorInput = {
   product_id?: Prisma.IntFieldUpdateOperationsInput | number
   supplier_item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductSupplierMappingUncheckedUpdateManyWithoutCompanyVendorInput = {
@@ -1054,14 +1054,14 @@ export type ProductSupplierMappingUncheckedUpdateManyWithoutCompanyVendorInput =
   product_id?: Prisma.IntFieldUpdateOperationsInput | number
   supplier_item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductSupplierMappingCreateManyProductInput = {
@@ -1070,29 +1070,29 @@ export type ProductSupplierMappingCreateManyProductInput = {
   company_vendor_id: number
   supplier_item_code?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  procurement_expense_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductSupplierMappingUpdateWithoutProductInput = {
   supplier_item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductSupplierMappingsNestedInput
+  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutProductSupplierMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductSupplierMappingsNestedInput
 }
 
 export type ProductSupplierMappingUncheckedUpdateWithoutProductInput = {
@@ -1101,14 +1101,14 @@ export type ProductSupplierMappingUncheckedUpdateWithoutProductInput = {
   company_vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   supplier_item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductSupplierMappingUncheckedUpdateManyWithoutProductInput = {
@@ -1117,14 +1117,14 @@ export type ProductSupplierMappingUncheckedUpdateManyWithoutProductInput = {
   company_vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   supplier_item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  procurement_expense_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  procurement_expense_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 
@@ -1136,17 +1136,17 @@ export type ProductSupplierMappingSelect<ExtArgs extends runtime.Types.Extension
   company_vendor_id?: boolean
   supplier_item_code?: boolean
   amount?: boolean
-  procurement_expense_amount?: boolean
-  procurement_expense_pct?: boolean
-  procurement_expense_total?: boolean
   is_active?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  procurement_expense_amount?: boolean
+  procurement_expense_pct?: boolean
+  procurement_expense_total?: boolean
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
+  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productSupplierMapping"]>
 
 export type ProductSupplierMappingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1156,17 +1156,17 @@ export type ProductSupplierMappingSelectCreateManyAndReturn<ExtArgs extends runt
   company_vendor_id?: boolean
   supplier_item_code?: boolean
   amount?: boolean
-  procurement_expense_amount?: boolean
-  procurement_expense_pct?: boolean
-  procurement_expense_total?: boolean
   is_active?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  procurement_expense_amount?: boolean
+  procurement_expense_pct?: boolean
+  procurement_expense_total?: boolean
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
+  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productSupplierMapping"]>
 
 export type ProductSupplierMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1176,17 +1176,17 @@ export type ProductSupplierMappingSelectUpdateManyAndReturn<ExtArgs extends runt
   company_vendor_id?: boolean
   supplier_item_code?: boolean
   amount?: boolean
-  procurement_expense_amount?: boolean
-  procurement_expense_pct?: boolean
-  procurement_expense_total?: boolean
   is_active?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  procurement_expense_amount?: boolean
+  procurement_expense_pct?: boolean
+  procurement_expense_total?: boolean
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
+  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productSupplierMapping"]>
 
 export type ProductSupplierMappingSelectScalar = {
@@ -1196,39 +1196,39 @@ export type ProductSupplierMappingSelectScalar = {
   company_vendor_id?: boolean
   supplier_item_code?: boolean
   amount?: boolean
-  procurement_expense_amount?: boolean
-  procurement_expense_pct?: boolean
-  procurement_expense_total?: boolean
   is_active?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
+  procurement_expense_amount?: boolean
+  procurement_expense_pct?: boolean
+  procurement_expense_total?: boolean
 }
 
-export type ProductSupplierMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "product_id" | "company_vendor_id" | "supplier_item_code" | "amount" | "procurement_expense_amount" | "procurement_expense_pct" | "procurement_expense_total" | "is_active" | "created_by" | "updated_by" | "created_at" | "updated_at", ExtArgs["result"]["productSupplierMapping"]>
+export type ProductSupplierMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "product_id" | "company_vendor_id" | "supplier_item_code" | "amount" | "is_active" | "created_by" | "updated_by" | "created_at" | "updated_at" | "procurement_expense_amount" | "procurement_expense_pct" | "procurement_expense_total", ExtArgs["result"]["productSupplierMapping"]>
 export type ProductSupplierMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
+  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type ProductSupplierMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
+  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type ProductSupplierMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
+  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $ProductSupplierMappingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProductSupplierMapping"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    product: Prisma.$ProductMasterPayload<ExtArgs>
     companyVendor: Prisma.$CompanyVendorsMasterPayload<ExtArgs>
+    product: Prisma.$ProductMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1237,14 +1237,14 @@ export type $ProductSupplierMappingPayload<ExtArgs extends runtime.Types.Extensi
     company_vendor_id: number
     supplier_item_code: string | null
     amount: runtime.Decimal | null
-    procurement_expense_amount: runtime.Decimal | null
-    procurement_expense_pct: runtime.Decimal | null
-    procurement_expense_total: runtime.Decimal | null
     is_active: boolean
     created_by: number | null
     updated_by: number | null
     created_at: Date
     updated_at: Date
+    procurement_expense_amount: runtime.Decimal | null
+    procurement_expense_pct: runtime.Decimal | null
+    procurement_expense_total: runtime.Decimal | null
   }, ExtArgs["result"]["productSupplierMapping"]>
   composites: {}
 }
@@ -1639,9 +1639,9 @@ readonly fields: ProductSupplierMappingFieldRefs;
  */
 export interface Prisma__ProductSupplierMappingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  product<T extends Prisma.ProductMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   companyVendor<T extends Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__CompanyVendorsMasterClient<runtime.Types.Result.GetResult<Prisma.$CompanyVendorsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  product<T extends Prisma.ProductMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1677,14 +1677,14 @@ export interface ProductSupplierMappingFieldRefs {
   readonly company_vendor_id: Prisma.FieldRef<"ProductSupplierMapping", 'Int'>
   readonly supplier_item_code: Prisma.FieldRef<"ProductSupplierMapping", 'String'>
   readonly amount: Prisma.FieldRef<"ProductSupplierMapping", 'Decimal'>
-  readonly procurement_expense_amount: Prisma.FieldRef<"ProductSupplierMapping", 'Decimal'>
-  readonly procurement_expense_pct: Prisma.FieldRef<"ProductSupplierMapping", 'Decimal'>
-  readonly procurement_expense_total: Prisma.FieldRef<"ProductSupplierMapping", 'Decimal'>
   readonly is_active: Prisma.FieldRef<"ProductSupplierMapping", 'Boolean'>
   readonly created_by: Prisma.FieldRef<"ProductSupplierMapping", 'Int'>
   readonly updated_by: Prisma.FieldRef<"ProductSupplierMapping", 'Int'>
   readonly created_at: Prisma.FieldRef<"ProductSupplierMapping", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"ProductSupplierMapping", 'DateTime'>
+  readonly procurement_expense_amount: Prisma.FieldRef<"ProductSupplierMapping", 'Decimal'>
+  readonly procurement_expense_pct: Prisma.FieldRef<"ProductSupplierMapping", 'Decimal'>
+  readonly procurement_expense_total: Prisma.FieldRef<"ProductSupplierMapping", 'Decimal'>
 }
     
 
