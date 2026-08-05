@@ -910,6 +910,12 @@ export class DashboardService {
   // Admin Dashboard : Total Revenue (sum total_project_amount)
   // ----------------------------------------------------------------
   public async getTotalRevenue(vendor_id: number, franchise_id?: number) {
+    const vendor = await prisma.vendorMaster.findUnique({
+      where: { id: vendor_id },
+      select: { handlesLargeScaleProjects: true },
+    });
+    const usesBasicCollected = vendor?.handlesLargeScaleProjects === true;
+
     const baseWhere = {
       vendor_id,
       is_deleted: false,
@@ -967,6 +973,79 @@ export class DashboardService {
     }
     const lastSixMonthsAvg = sixMonthsTotal / 6;
 
+    let basicThisWeekArray: number[] = [];
+    let basicThisMonthArray: number[] = [];
+    let basicThisYearArray: number[] = [];
+    let basicThisWeekTotal = 0;
+    let basicThisMonthTotal = 0;
+    let basicThisYearTotal = 0;
+    let basicLastSixMonthsAvg = 0;
+    let basicOverall = 0;
+    let gstOverall = 0;
+
+    if (usesBasicCollected) {
+      const paymentBaseWhere = {
+        vendor_id,
+        basic_amount: { not: null as null | number },
+        lead: {
+          is_deleted: false,
+          activity_status: {
+            notIn: [
+              ActivityStatus.lostApproval,
+              ActivityStatus.lost,
+              ActivityStatus.onHold,
+            ],
+          },
+          ...(franchise_id ? { franchise_id } : {}),
+        },
+      };
+
+      const sumBookingByRange = (range?: { start: Date; end: Date }) =>
+        prisma.paymentInfo.aggregate({
+          where: {
+            ...paymentBaseWhere,
+            ...(range && { created_at: { gte: range.start, lte: range.end } }),
+          },
+          _sum: {
+            basic_amount: true,
+            gst_amount: true,
+          },
+        });
+
+      for (const r of weekRanges) {
+        const res = await sumBookingByRange(r);
+        basicThisWeekArray.push(Number(res._sum?.basic_amount ?? 0));
+      }
+
+      for (const r of monthRanges) {
+        const res = await sumBookingByRange(r);
+        basicThisMonthArray.push(Number(res._sum?.basic_amount ?? 0));
+      }
+
+      for (const r of yearRanges) {
+        const res = await sumBookingByRange(r);
+        basicThisYearArray.push(Number(res._sum?.basic_amount ?? 0));
+      }
+
+      basicThisWeekTotal = sum(basicThisWeekArray);
+      basicThisMonthTotal = sum(basicThisMonthArray);
+      basicThisYearTotal = sum(basicThisYearArray);
+
+      const overallBooking = await sumBookingByRange();
+      basicOverall = Number(overallBooking._sum?.basic_amount ?? 0);
+      gstOverall = Number(overallBooking._sum?.gst_amount ?? 0);
+
+      let sixMonthsBasicTotal = 0;
+      for (let i = 1; i <= 6; i++) {
+        const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+        const start = new Date(d.getFullYear(), d.getMonth(), 1, 0, 0, 0);
+        const end   = new Date(d.getFullYear(), d.getMonth() + 1, 0, 23, 59, 59, 999);
+        const res = await sumBookingByRange({ start, end });
+        sixMonthsBasicTotal += Number(res._sum?.basic_amount ?? 0);
+      }
+      basicLastSixMonthsAvg = sixMonthsBasicTotal / 6;
+    }
+
     return {
       thisWeekArray,
       thisMonthArray,
@@ -976,6 +1055,16 @@ export class DashboardService {
       thisYearTotal: sum(thisYearArray),
       lastSixMonthsAvg,
       overall,
+      usesBasicCollected,
+      basicThisWeekArray,
+      basicThisMonthArray,
+      basicThisYearArray,
+      basicThisWeekTotal,
+      basicThisMonthTotal,
+      basicThisYearTotal,
+      basicLastSixMonthsAvg,
+      basicOverall,
+      gstOverall,
     };
   }
 
