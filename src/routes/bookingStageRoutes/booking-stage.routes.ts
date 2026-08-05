@@ -94,6 +94,21 @@ bookingStageRouter.put(
   bookingStageController.updateBookingAmount,
 );
 
+bookingStageRouter.put(
+  "/update-basic-amount/vendor/:vendorId/lead/:leadId",
+  bookingStageController.updateBasicAmount,
+);
+
+bookingStageRouter.put(
+  "/update-gst-percentage/vendor/:vendorId/lead/:leadId",
+  bookingStageController.updateGstPercentage,
+);
+
+bookingStageRouter.put(
+  "/update-payment-amount/vendor/:vendorId/lead/:leadId/payment/:paymentId",
+  bookingStageController.updatePaymentAmount,
+);
+
 bookingStageRouter.post(
   "/add-additional-payment",
   handleMulterUpload(
@@ -105,6 +120,16 @@ bookingStageRouter.post(
 bookingStageRouter.get(
   "/payment-records/leadId/:leadId/payments",
   bookingStageController.getPayments,
+);
+
+bookingStageRouter.get(
+  "/billing-information/vendor/:vendorId/lead/:leadId",
+  bookingStageController.getLeadBillingAddresses,
+);
+
+bookingStageRouter.put(
+  "/billing-information/vendor/:vendorId/lead/:leadId",
+  bookingStageController.upsertLeadBillingAddresses,
 );
 
 const uploadFinalMeasurement = uploadCSPBookingFiles.fields([

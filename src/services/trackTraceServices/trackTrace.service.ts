@@ -3532,28 +3532,45 @@ export const getReworkMachines = async (vendor_id: number, machine_id: number) =
 // service: getUserModules
 export const getUserModules = async (vendor_id: number, user_id: number) => {
   try {
-    // Get all machine type IDs assigned to this user
-    const mappings = await prisma.userMachineMapping.findMany({
-      where: {
-        user_id,
-        vendor_id,
-        status: "ACTIVE",
-      },
-      select: {
-        machine: {
-          select: {
-            machine_type_id: true,
+    const [vendor, mappings] = await Promise.all([
+      prisma.vendorMaster.findUnique({
+        where: {
+          id: vendor_id,
+        },
+        select: {
+          id: true,
+          is_tracktrace_enabled: true,
+          is_scanpack_enabled: true,
+        },
+      }),
+
+      prisma.userMachineMapping.findMany({
+        where: {
+          user_id,
+          vendor_id,
+          status: "ACTIVE",
+        },
+        select: {
+          machine: {
+            select: {
+              machine_type_id: true,
+            },
           },
         },
-      },
-    });
+      }),
+    ]);
 
-    // Collect unique machine_type_ids
-    const typeIds = [...new Set(
-      mappings
-        .map(m => m.machine.machine_type_id)
-        .filter((id): id is number => id !== null)
-    )];
+    if (!vendor) {
+      return validationResponse(0, "Vendor not found");
+    }
+
+    const typeIds = [
+      ...new Set(
+        mappings
+          .map((m) => m.machine?.machine_type_id)
+          .filter((id): id is number => id !== null && id !== undefined)
+      ),
+    ];
 
     const modules = {
       track_and_trace: false,
@@ -3562,16 +3579,33 @@ export const getUserModules = async (vendor_id: number, user_id: number) => {
     };
 
     for (const typeId of typeIds) {
-      if (typeId === 17) {
+      if (typeId === 17 && vendor.is_scanpack_enabled === true) {
         modules.quality_check = true;
-      } else if (typeId === 18) {
+      } else if (typeId === 18 && vendor.is_scanpack_enabled === true) {
         modules.scan_and_pack = true;
-      } else {
+      } else if(vendor.is_tracktrace_enabled === true) {
         modules.track_and_trace = true;
       }
     }
 
-    return validationResponse(1, "", { modules });
+    /*
+    |--------------------------------------------------------------------------
+    | Vendor-level module override
+    |--------------------------------------------------------------------------
+    */
+
+    // if (vendor.is_tracktrace_enabled === true) {
+    //   modules.track_and_trace = true;
+    // }
+
+    // if (vendor.is_scanpack_enabled === true) {
+    //   modules.quality_check = true;
+    //   modules.scan_and_pack = true;
+    // }
+
+    return validationResponse(1, "", {
+      modules,
+    });
   } catch (error) {
     console.log("Error in getUserModules", error);
     return validationResponse(0, "Something went wrong");

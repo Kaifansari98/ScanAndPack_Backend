@@ -37,21 +37,36 @@ export const getScanAndPackItemsByFields = async (req: Request, res: Response) =
 };
 
 export const deleteScanAndPackItem = async (req: Request, res: Response) => {
-  console.log("req.params",req.params);
-  const { id } = req.params;
-
-  if (!id || isNaN(Number(id))) {
-    return res.status(400).json({ error: 'Invalid or missing ID' });
-  }
-
   try {
-    const result = await deleteScanAndPackItemById(Number(id));
-    res.status(200).json({
-      message: 'Scan item deleted successfully',
+    
+    const id = Number(req.params.id);
+    const vendor_id = Number(req.body.vendor_id);
+    const project_id = Number(req.body.project_id);
+    const box_id = Number(req.body.box_id);
+
+    if (!id || !vendor_id || !project_id || !box_id) {
+      return res.status(400).json({
+        success: false,
+        message: "id, vendor_id, project_id and box_id are required",
+      });
+    }
+
+    const result = await deleteScanAndPackItemById(
+      id,
+      vendor_id,
+      project_id,
+      box_id
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Item removed from box successfully",
       data: result,
     });
   } catch (error: any) {
-    console.error('[Delete ScanPack Item]', error);
-    res.status(500).json({ error: error.message || 'Failed to delete scan item' });
+    return res.status(400).json({
+      success: false,
+      message: error.message || "Failed to remove item from box",
+    });
   }
 };

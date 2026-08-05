@@ -15,6 +15,11 @@ finalMeasurementRouter.post(
     finalMeasurementController.createFinalMeasurementStage
 );
 
+finalMeasurementRouter.post(
+    "/skip",
+    finalMeasurementController.skipFinalMeasurementStage
+);
+
 // GET /api/leads/final-measurement/all/:vendorId?userId=123&page=1&limit=10
 finalMeasurementRouter.get(
     "/all/:vendorId",

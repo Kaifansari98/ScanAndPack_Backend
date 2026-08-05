@@ -470,7 +470,10 @@ export class DesigingStage {
         }),
         tx.vendorMaster.findUnique({
           where: { id: data.vendorId },
-          select: { is_this_vendor_is_custom_usertype_only: true },
+          select: {
+            is_this_vendor_is_custom_usertype_only: true,
+            handlesLargeScaleProjects: true,
+          },
         }),
       ]);
 
@@ -510,6 +513,8 @@ export class DesigingStage {
               select: {
                 id: true,
                 doc_og_name: true,
+                product_type_id: true,
+                product_structure_instance_id: true,
               },
             })
           : null;
@@ -519,6 +524,14 @@ export class DesigingStage {
       }
 
       const accountId = lead.account_id; // ✅ backend-owned
+      const inheritedProductTypeId =
+        vendor?.handlesLargeScaleProjects === true
+          ? selectedDesignDocument?.product_type_id ?? null
+          : null;
+      const inheritedInstanceId =
+        vendor?.handlesLargeScaleProjects === true
+          ? selectedDesignDocument?.product_structure_instance_id ?? null
+          : null;
       const uploadedDocs: any[] = [];
 
       // 3️⃣ Upload + LeadDocuments
@@ -549,6 +562,8 @@ export class DesigingStage {
             account_id: accountId,
             doc_type_id: quotationDocType.id,
             created_by: data.userId,
+            product_type_id: inheritedProductTypeId,
+            product_structure_instance_id: inheritedInstanceId,
           },
         });
 

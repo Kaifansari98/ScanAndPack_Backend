@@ -61,6 +61,7 @@ export type VendorMasterMinAggregateOutputType = {
   is_custom_doc_nomenclature_enabled: boolean | null
   is_inventory_enabled: boolean | null
   is_tracktrace_enabled: boolean | null
+  is_scanpack_enabled: boolean | null
   is_approval_task_enabled: boolean | null
   is_client_visit_enabled: boolean | null
   is_this_vendor_is_custom_usertype_only: boolean | null
@@ -104,6 +105,7 @@ export type VendorMasterMaxAggregateOutputType = {
   is_custom_doc_nomenclature_enabled: boolean | null
   is_inventory_enabled: boolean | null
   is_tracktrace_enabled: boolean | null
+  is_scanpack_enabled: boolean | null
   is_approval_task_enabled: boolean | null
   is_client_visit_enabled: boolean | null
   is_this_vendor_is_custom_usertype_only: boolean | null
@@ -147,6 +149,7 @@ export type VendorMasterCountAggregateOutputType = {
   is_custom_doc_nomenclature_enabled: number
   is_inventory_enabled: number
   is_tracktrace_enabled: number
+  is_scanpack_enabled: number
   is_approval_task_enabled: number
   is_client_visit_enabled: number
   is_this_vendor_is_custom_usertype_only: number
@@ -206,6 +209,7 @@ export type VendorMasterMinAggregateInputType = {
   is_custom_doc_nomenclature_enabled?: true
   is_inventory_enabled?: true
   is_tracktrace_enabled?: true
+  is_scanpack_enabled?: true
   is_approval_task_enabled?: true
   is_client_visit_enabled?: true
   is_this_vendor_is_custom_usertype_only?: true
@@ -249,6 +253,7 @@ export type VendorMasterMaxAggregateInputType = {
   is_custom_doc_nomenclature_enabled?: true
   is_inventory_enabled?: true
   is_tracktrace_enabled?: true
+  is_scanpack_enabled?: true
   is_approval_task_enabled?: true
   is_client_visit_enabled?: true
   is_this_vendor_is_custom_usertype_only?: true
@@ -292,6 +297,7 @@ export type VendorMasterCountAggregateInputType = {
   is_custom_doc_nomenclature_enabled?: true
   is_inventory_enabled?: true
   is_tracktrace_enabled?: true
+  is_scanpack_enabled?: true
   is_approval_task_enabled?: true
   is_client_visit_enabled?: true
   is_this_vendor_is_custom_usertype_only?: true
@@ -422,6 +428,7 @@ export type VendorMasterGroupByOutputType = {
   is_custom_doc_nomenclature_enabled: boolean
   is_inventory_enabled: boolean
   is_tracktrace_enabled: boolean
+  is_scanpack_enabled: boolean
   is_approval_task_enabled: boolean
   is_client_visit_enabled: boolean
   is_this_vendor_is_custom_usertype_only: boolean | null
@@ -488,6 +495,7 @@ export type VendorMasterWhereInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_scanpack_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_client_visit_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
@@ -626,6 +634,7 @@ export type VendorMasterWhereInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostListRelationFilter
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostListRelationFilter
   paymentTerms?: Prisma.PaymentTermMasterListRelationFilter
+  leadBillingAddresses?: Prisma.LeadBillingAddressListRelationFilter
   poPaymentSchedules?: Prisma.POPaymentScheduleListRelationFilter
   poPayments?: Prisma.POPaymentListRelationFilter
   architechuremasters?: Prisma.ArchitechuremasterListRelationFilter
@@ -667,6 +676,7 @@ export type VendorMasterOrderByWithRelationInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  is_scanpack_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   is_client_visit_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -805,6 +815,7 @@ export type VendorMasterOrderByWithRelationInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostOrderByRelationAggregateInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostOrderByRelationAggregateInput
   paymentTerms?: Prisma.PaymentTermMasterOrderByRelationAggregateInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressOrderByRelationAggregateInput
   poPaymentSchedules?: Prisma.POPaymentScheduleOrderByRelationAggregateInput
   poPayments?: Prisma.POPaymentOrderByRelationAggregateInput
   architechuremasters?: Prisma.ArchitechuremasterOrderByRelationAggregateInput
@@ -849,6 +860,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_scanpack_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_client_visit_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
@@ -987,6 +999,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostListRelationFilter
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostListRelationFilter
   paymentTerms?: Prisma.PaymentTermMasterListRelationFilter
+  leadBillingAddresses?: Prisma.LeadBillingAddressListRelationFilter
   poPaymentSchedules?: Prisma.POPaymentScheduleListRelationFilter
   poPayments?: Prisma.POPaymentListRelationFilter
   architechuremasters?: Prisma.ArchitechuremasterListRelationFilter
@@ -1028,6 +1041,7 @@ export type VendorMasterOrderByWithAggregationInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  is_scanpack_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   is_client_visit_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1079,6 +1093,7 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_inventory_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
+  is_scanpack_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_client_visit_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableWithAggregatesFilter<"VendorMaster"> | boolean | null
@@ -1121,6 +1136,7 @@ export type VendorMasterCreateInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -1258,6 +1274,7 @@ export type VendorMasterCreateInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -1299,6 +1316,7 @@ export type VendorMasterUncheckedCreateInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -1436,6 +1454,7 @@ export type VendorMasterUncheckedCreateInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -1476,6 +1495,7 @@ export type VendorMasterUpdateInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1613,6 +1633,7 @@ export type VendorMasterUpdateInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -1654,6 +1675,7 @@ export type VendorMasterUncheckedUpdateInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1791,6 +1813,7 @@ export type VendorMasterUncheckedUpdateInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -1832,6 +1855,7 @@ export type VendorMasterCreateManyInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -1874,6 +1898,7 @@ export type VendorMasterUpdateManyMutationInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1916,6 +1941,7 @@ export type VendorMasterUncheckedUpdateManyInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1959,6 +1985,7 @@ export type VendorMasterCountOrderByAggregateInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  is_scanpack_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   is_client_visit_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrder
@@ -2009,6 +2036,7 @@ export type VendorMasterMaxOrderByAggregateInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  is_scanpack_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   is_client_visit_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrder
@@ -2052,6 +2080,7 @@ export type VendorMasterMinOrderByAggregateInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  is_scanpack_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   is_client_visit_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrder
@@ -2345,6 +2374,20 @@ export type VendorMasterUpdateOneRequiredWithoutLeadsNestedInput = {
   upsert?: Prisma.VendorMasterUpsertWithoutLeadsInput
   connect?: Prisma.VendorMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutLeadsInput, Prisma.VendorMasterUpdateWithoutLeadsInput>, Prisma.VendorMasterUncheckedUpdateWithoutLeadsInput>
+}
+
+export type VendorMasterCreateNestedOneWithoutLeadBillingAddressesInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutLeadBillingAddressesInput, Prisma.VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutLeadBillingAddressesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutLeadBillingAddressesNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutLeadBillingAddressesInput, Prisma.VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutLeadBillingAddressesInput
+  upsert?: Prisma.VendorMasterUpsertWithoutLeadBillingAddressesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutLeadBillingAddressesInput, Prisma.VendorMasterUpdateWithoutLeadBillingAddressesInput>, Prisma.VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput>
 }
 
 export type VendorMasterCreateNestedOneWithoutLeadSpecificationsInput = {
@@ -4093,6 +4136,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -4229,6 +4273,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -4270,6 +4315,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -4406,6 +4452,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -4462,6 +4509,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -4598,6 +4646,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -4639,6 +4688,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -4775,6 +4825,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -4815,6 +4866,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -4951,6 +5003,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -4992,6 +5045,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -5128,6 +5182,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -5184,6 +5239,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -5320,6 +5376,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -5361,6 +5418,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -5497,6 +5555,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -5537,6 +5596,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -5673,6 +5733,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -5714,6 +5775,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -5850,6 +5912,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -5906,6 +5969,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6042,6 +6106,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -6083,6 +6148,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6219,6 +6285,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -6259,6 +6326,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -6395,6 +6463,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -6436,6 +6505,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -6572,6 +6642,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -6628,6 +6699,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6764,6 +6836,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -6805,6 +6878,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -6941,6 +7015,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -6981,6 +7056,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -7117,6 +7193,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -7158,6 +7235,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -7294,6 +7372,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -7350,6 +7429,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -7486,6 +7566,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -7527,6 +7608,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -7663,6 +7745,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -7703,6 +7786,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -7839,6 +7923,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -7880,6 +7965,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -8016,6 +8102,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -8072,6 +8159,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8208,6 +8296,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -8249,6 +8338,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8385,6 +8475,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -8425,6 +8516,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -8561,6 +8653,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -8602,6 +8695,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -8738,6 +8832,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -8794,6 +8889,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -8930,6 +9026,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -8971,6 +9068,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -9107,6 +9205,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -9147,6 +9246,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -9283,6 +9383,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -9324,6 +9425,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -9460,6 +9562,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -9516,6 +9619,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -9652,6 +9756,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -9693,6 +9798,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -9829,6 +9935,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -9869,6 +9976,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -10005,6 +10113,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -10046,6 +10155,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -10182,6 +10292,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -10238,6 +10349,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -10374,6 +10486,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -10415,6 +10528,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -10551,6 +10665,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -10591,6 +10706,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -10727,6 +10843,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -10768,6 +10885,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -10904,6 +11022,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -10960,6 +11079,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -11096,6 +11216,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -11137,6 +11258,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -11273,6 +11395,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -11313,6 +11436,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -11449,6 +11573,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -11490,6 +11615,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -11626,6 +11752,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -11682,6 +11809,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -11818,6 +11946,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -11859,6 +11988,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -11995,6 +12125,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -12035,6 +12166,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -12171,6 +12303,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -12212,6 +12345,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -12348,6 +12482,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -12404,6 +12539,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12540,6 +12676,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -12581,6 +12718,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -12717,6 +12855,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -12757,6 +12896,7 @@ export type VendorMasterCreateWithoutClientsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -12894,6 +13034,7 @@ export type VendorMasterCreateWithoutClientsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -12934,6 +13075,7 @@ export type VendorMasterUncheckedCreateWithoutClientsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -13071,6 +13213,7 @@ export type VendorMasterUncheckedCreateWithoutClientsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -13126,6 +13269,7 @@ export type VendorMasterUpdateWithoutClientsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -13263,6 +13407,7 @@ export type VendorMasterUpdateWithoutClientsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -13303,6 +13448,7 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -13440,6 +13586,7 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -13479,6 +13626,7 @@ export type VendorMasterCreateWithoutClientTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -13616,6 +13764,7 @@ export type VendorMasterCreateWithoutClientTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -13656,6 +13805,7 @@ export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -13793,6 +13943,7 @@ export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -13848,6 +13999,7 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -13985,6 +14137,7 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -14025,6 +14178,7 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -14162,6 +14316,7 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -14201,6 +14356,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -14337,6 +14493,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -14378,6 +14535,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -14514,6 +14672,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -14570,6 +14729,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -14706,6 +14866,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -14747,6 +14908,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -14815,6 +14977,717 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutLeadBillingAddressesInput = {
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  icon?: string | null
+  login_image?: string | null
+  time_zone: string
+  subdomain_url?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  icon?: string | null
+  login_image?: string | null
+  time_zone: string
+  subdomain_url?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  is_broadcast_enabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  state_id?: number | null
+  gst_no?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  tag_line?: string | null
+  address?: string | null
+  pincode?: string | null
+  city?: string | null
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutLeadBillingAddressesInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutLeadBillingAddressesInput, Prisma.VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput>
+}
+
+export type VendorMasterUpsertWithoutLeadBillingAddressesInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutLeadBillingAddressesInput, Prisma.VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutLeadBillingAddressesInput, Prisma.VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutLeadBillingAddressesInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutLeadBillingAddressesInput, Prisma.VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput>
+}
+
+export type VendorMasterUpdateWithoutLeadBillingAddressesInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
   leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
@@ -14923,6 +15796,7 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -15059,6 +15933,7 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -15100,6 +15975,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -15236,6 +16112,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -15292,6 +16169,7 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -15428,6 +16306,7 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -15469,6 +16348,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -15605,6 +16485,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -15645,6 +16526,7 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -15781,6 +16663,7 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -15822,6 +16705,7 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -15958,6 +16842,7 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -16014,6 +16899,7 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -16150,6 +17036,7 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -16191,6 +17078,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -16327,6 +17215,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -16367,6 +17256,7 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -16503,6 +17393,7 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -16544,6 +17435,7 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -16680,6 +17572,7 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -16736,6 +17629,7 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -16872,6 +17766,7 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -16913,6 +17808,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17049,6 +17945,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -17089,6 +17986,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -17225,6 +18123,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -17266,6 +18165,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -17402,6 +18302,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -17458,6 +18359,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17594,6 +18496,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -17635,6 +18538,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -17771,6 +18675,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -17811,6 +18716,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -17947,6 +18853,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -17988,6 +18895,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -18124,6 +19032,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -18180,6 +19089,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18316,6 +19226,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -18357,6 +19268,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -18493,6 +19405,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -18533,6 +19446,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -18669,6 +19583,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -18710,6 +19625,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -18846,6 +19762,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -18902,6 +19819,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -19038,6 +19956,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -19079,6 +19998,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -19215,6 +20135,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -19255,6 +20176,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -19391,6 +20313,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -19432,6 +20355,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -19568,6 +20492,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -19624,6 +20549,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -19760,6 +20686,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -19801,6 +20728,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -19937,6 +20865,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -19977,6 +20906,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -20113,6 +21043,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -20154,6 +21085,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -20290,6 +21222,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -20346,6 +21279,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -20482,6 +21416,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -20523,6 +21458,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -20659,6 +21595,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -20699,6 +21636,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -20835,6 +21773,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -20876,6 +21815,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -21012,6 +21952,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -21068,6 +22009,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -21204,6 +22146,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -21245,6 +22188,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -21381,6 +22325,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -21421,6 +22366,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -21557,6 +22503,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -21598,6 +22545,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -21734,6 +22682,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -21790,6 +22739,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -21926,6 +22876,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -21967,6 +22918,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -22103,6 +23055,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -22143,6 +23096,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -22279,6 +23233,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -22320,6 +23275,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -22456,6 +23412,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -22512,6 +23469,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -22648,6 +23606,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -22689,6 +23648,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -22825,6 +23785,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -22865,6 +23826,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -23001,6 +23963,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -23042,6 +24005,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -23178,6 +24142,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -23234,6 +24199,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -23370,6 +24336,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -23411,6 +24378,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -23547,6 +24515,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -23587,6 +24556,7 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -23723,6 +24693,7 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -23764,6 +24735,7 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -23900,6 +24872,7 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -23956,6 +24929,7 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -24092,6 +25066,7 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -24133,6 +25108,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -24269,6 +25245,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -24309,6 +25286,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -24445,6 +25423,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -24486,6 +25465,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -24622,6 +25602,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -24678,6 +25659,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -24814,6 +25796,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -24855,6 +25838,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -24991,6 +25975,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -25031,6 +26016,7 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -25167,6 +26153,7 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -25208,6 +26195,7 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -25344,6 +26332,7 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -25400,6 +26389,7 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -25536,6 +26526,7 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -25577,6 +26568,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -25713,6 +26705,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -25753,6 +26746,7 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -25889,6 +26883,7 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -25930,6 +26925,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -26066,6 +27062,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -26122,6 +27119,7 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -26258,6 +27256,7 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -26299,6 +27298,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -26435,6 +27435,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -26475,6 +27476,7 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -26611,6 +27613,7 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -26652,6 +27655,7 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -26788,6 +27792,7 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -26844,6 +27849,7 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -26980,6 +27986,7 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -27021,6 +28028,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -27157,6 +28165,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -27197,6 +28206,7 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -27333,6 +28343,7 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -27374,6 +28385,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -27510,6 +28522,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -27566,6 +28579,7 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -27702,6 +28716,7 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -27743,6 +28758,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -27879,6 +28895,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -27919,6 +28936,7 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -28055,6 +29073,7 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -28096,6 +29115,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -28232,6 +29252,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -28288,6 +29309,7 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -28424,6 +29446,7 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -28465,6 +29488,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -28601,6 +29625,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -28641,6 +29666,7 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -28777,6 +29803,7 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -28818,6 +29845,7 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -28954,6 +29982,7 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -29010,6 +30039,7 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -29146,6 +30176,7 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -29187,6 +30218,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -29323,6 +30355,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -29363,6 +30396,7 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -29499,6 +30533,7 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -29540,6 +30575,7 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -29676,6 +30712,7 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -29732,6 +30769,7 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -29868,6 +30906,7 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -29909,6 +30948,7 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -30045,6 +31085,7 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -30085,6 +31126,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -30221,6 +31263,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -30262,6 +31305,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -30398,6 +31442,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -30454,6 +31499,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -30590,6 +31636,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -30631,6 +31678,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -30767,6 +31815,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -30807,6 +31856,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -30943,6 +31993,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -30984,6 +32035,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -31120,6 +32172,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -31176,6 +32229,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -31312,6 +32366,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -31353,6 +32408,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -31489,6 +32545,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -31529,6 +32586,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -31665,6 +32723,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -31706,6 +32765,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -31842,6 +32902,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -31898,6 +32959,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -32034,6 +33096,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -32075,6 +33138,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -32211,6 +33275,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -32251,6 +33316,7 @@ export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -32387,6 +33453,7 @@ export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -32428,6 +33495,7 @@ export type VendorMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -32564,6 +33632,7 @@ export type VendorMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -32620,6 +33689,7 @@ export type VendorMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -32756,6 +33826,7 @@ export type VendorMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -32797,6 +33868,7 @@ export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -32933,6 +34005,7 @@ export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -32973,6 +34046,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -33109,6 +34183,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -33150,6 +34225,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -33286,6 +34362,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -33342,6 +34419,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -33478,6 +34556,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -33519,6 +34598,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -33655,6 +34735,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -33695,6 +34776,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -33831,6 +34913,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -33872,6 +34955,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -34008,6 +35092,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -34064,6 +35149,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -34200,6 +35286,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -34241,6 +35328,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -34377,6 +35465,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -34417,6 +35506,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -34553,6 +35643,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -34594,6 +35685,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -34730,6 +35822,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -34786,6 +35879,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -34922,6 +36016,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -34963,6 +36058,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -35099,6 +36195,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -35139,6 +36236,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -35275,6 +36373,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -35316,6 +36415,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -35452,6 +36552,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -35508,6 +36609,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -35644,6 +36746,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -35685,6 +36788,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -35821,6 +36925,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -35861,6 +36966,7 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -35997,6 +37103,7 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -36038,6 +37145,7 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -36174,6 +37282,7 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -36230,6 +37339,7 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -36366,6 +37476,7 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -36407,6 +37518,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -36543,6 +37655,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -36583,6 +37696,7 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -36719,6 +37833,7 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -36760,6 +37875,7 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -36896,6 +38012,7 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -36952,6 +38069,7 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -37088,6 +38206,7 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -37129,6 +38248,7 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -37265,6 +38385,7 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -37305,6 +38426,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -37441,6 +38563,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -37482,6 +38605,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -37618,6 +38742,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -37674,6 +38799,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -37810,6 +38936,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -37851,6 +38978,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -37987,6 +39115,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -38027,6 +39156,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -38163,6 +39293,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -38204,6 +39335,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -38340,6 +39472,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -38396,6 +39529,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -38532,6 +39666,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -38573,6 +39708,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -38709,6 +39845,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -38749,6 +39886,7 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -38885,6 +40023,7 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -38926,6 +40065,7 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -39062,6 +40202,7 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -39118,6 +40259,7 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -39254,6 +40396,7 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -39295,6 +40438,7 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -39431,6 +40575,7 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -39471,6 +40616,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -39607,6 +40753,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -39648,6 +40795,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -39784,6 +40932,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -39840,6 +40989,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -39976,6 +41126,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -40017,6 +41168,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -40153,6 +41305,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -40193,6 +41346,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -40329,6 +41483,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -40370,6 +41525,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -40506,6 +41662,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -40562,6 +41719,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -40698,6 +41856,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -40739,6 +41898,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -40875,6 +42035,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -40915,6 +42076,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -41051,6 +42213,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -41092,6 +42255,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -41228,6 +42392,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -41284,6 +42449,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -41420,6 +42586,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -41461,6 +42628,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -41597,6 +42765,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -41637,6 +42806,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -41773,6 +42943,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -41814,6 +42985,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -41950,6 +43122,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -42006,6 +43179,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -42142,6 +43316,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -42183,6 +43358,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -42319,6 +43495,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -42359,6 +43536,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -42495,6 +43673,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -42536,6 +43715,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -42672,6 +43852,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -42728,6 +43909,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -42864,6 +44046,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -42905,6 +44088,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -43041,6 +44225,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -43081,6 +44266,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -43217,6 +44403,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -43258,6 +44445,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -43394,6 +44582,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -43450,6 +44639,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -43586,6 +44776,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -43627,6 +44818,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -43763,6 +44955,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -43803,6 +44996,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -43939,6 +45133,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -43980,6 +45175,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -44116,6 +45312,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -44172,6 +45369,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -44308,6 +45506,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -44349,6 +45548,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -44485,6 +45685,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -44525,6 +45726,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -44661,6 +45863,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -44702,6 +45905,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -44838,6 +46042,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -44894,6 +46099,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -45030,6 +46236,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -45071,6 +46278,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -45207,6 +46415,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -45247,6 +46456,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -45383,6 +46593,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -45424,6 +46635,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -45560,6 +46772,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -45616,6 +46829,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -45752,6 +46966,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -45793,6 +47008,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -45929,6 +47145,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -45969,6 +47186,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -46105,6 +47323,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -46146,6 +47365,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -46282,6 +47502,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -46338,6 +47559,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -46474,6 +47696,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -46515,6 +47738,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -46651,6 +47875,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -46691,6 +47916,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -46827,6 +48053,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -46868,6 +48095,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -47004,6 +48232,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -47060,6 +48289,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -47196,6 +48426,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -47237,6 +48468,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -47373,6 +48605,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -47413,6 +48646,7 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -47549,6 +48783,7 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -47590,6 +48825,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -47726,6 +48962,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -47782,6 +49019,7 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -47918,6 +49156,7 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -47959,6 +49198,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -48095,6 +49335,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -48135,6 +49376,7 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -48271,6 +49513,7 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -48312,6 +49555,7 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -48448,6 +49692,7 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -48504,6 +49749,7 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -48640,6 +49886,7 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -48681,6 +49928,7 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -48817,6 +50065,7 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -48857,6 +50106,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -48993,6 +50243,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -49034,6 +50285,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -49170,6 +50422,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -49226,6 +50479,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -49362,6 +50616,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -49403,6 +50658,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -49539,6 +50795,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -49579,6 +50836,7 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -49715,6 +50973,7 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -49756,6 +51015,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -49892,6 +51152,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -49948,6 +51209,7 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -50084,6 +51346,7 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -50125,6 +51388,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -50261,6 +51525,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -50301,6 +51566,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -50437,6 +51703,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -50478,6 +51745,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -50614,6 +51882,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -50670,6 +51939,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -50806,6 +52076,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -50847,6 +52118,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -50983,6 +52255,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -51023,6 +52296,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -51159,6 +52433,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -51200,6 +52475,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -51336,6 +52612,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -51392,6 +52669,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -51528,6 +52806,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -51569,6 +52848,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -51705,6 +52985,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -51745,6 +53026,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -51881,6 +53163,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -51922,6 +53205,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -52058,6 +53342,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -52114,6 +53399,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -52250,6 +53536,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -52291,6 +53578,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -52427,6 +53715,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -52467,6 +53756,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -52603,6 +53893,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -52644,6 +53935,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -52780,6 +54072,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -52836,6 +54129,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -52972,6 +54266,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -53013,6 +54308,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -53149,6 +54445,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -53189,6 +54486,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -53325,6 +54623,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -53366,6 +54665,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -53502,6 +54802,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -53558,6 +54859,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -53694,6 +54996,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -53735,6 +55038,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -53871,6 +55175,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -53911,6 +55216,7 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -54047,6 +55353,7 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -54088,6 +55395,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -54224,6 +55532,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -54280,6 +55589,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -54416,6 +55726,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -54457,6 +55768,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -54593,6 +55905,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -54633,6 +55946,7 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -54769,6 +56083,7 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -54810,6 +56125,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -54946,6 +56262,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -55002,6 +56319,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -55138,6 +56456,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -55179,6 +56498,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -55315,6 +56635,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -55355,6 +56676,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -55491,6 +56813,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -55532,6 +56855,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -55668,6 +56992,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -55724,6 +57049,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -55860,6 +57186,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -55901,6 +57228,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -56037,6 +57365,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -56077,6 +57406,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -56213,6 +57543,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -56254,6 +57585,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -56390,6 +57722,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -56446,6 +57779,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -56582,6 +57916,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -56623,6 +57958,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -56759,6 +58095,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -56799,6 +58136,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -56935,6 +58273,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -56976,6 +58315,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -57112,6 +58452,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -57168,6 +58509,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -57304,6 +58646,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -57345,6 +58688,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -57481,6 +58825,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -57521,6 +58866,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -57657,6 +59003,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -57698,6 +59045,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -57834,6 +59182,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -57890,6 +59239,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -58026,6 +59376,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -58067,6 +59418,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -58203,6 +59555,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -58243,6 +59596,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -58379,6 +59733,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -58420,6 +59775,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -58556,6 +59912,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -58612,6 +59969,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -58748,6 +60106,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -58789,6 +60148,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -58925,6 +60285,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -58965,6 +60326,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -59101,6 +60463,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -59142,6 +60505,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -59278,6 +60642,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -59334,6 +60699,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -59470,6 +60836,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -59511,6 +60878,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -59647,6 +61015,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -59687,6 +61056,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -59823,6 +61193,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -59864,6 +61235,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -60000,6 +61372,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -60056,6 +61429,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -60192,6 +61566,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -60233,6 +61608,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -60369,6 +61745,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -60409,6 +61786,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -60545,6 +61923,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -60586,6 +61965,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -60722,6 +62102,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -60778,6 +62159,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -60914,6 +62296,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -60955,6 +62338,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -61091,6 +62475,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -61131,6 +62516,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -61267,6 +62653,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -61308,6 +62695,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -61444,6 +62832,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -61500,6 +62889,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -61636,6 +63026,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -61677,6 +63068,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -61813,6 +63205,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -61853,6 +63246,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -61989,6 +63383,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -62030,6 +63425,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -62166,6 +63562,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -62222,6 +63619,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -62358,6 +63756,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -62399,6 +63798,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -62535,6 +63935,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -62575,6 +63976,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -62711,6 +64113,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -62752,6 +64155,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -62888,6 +64292,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -62944,6 +64349,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -63080,6 +64486,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -63121,6 +64528,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -63257,6 +64665,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -63297,6 +64706,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -63433,6 +64843,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -63474,6 +64885,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -63610,6 +65022,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -63666,6 +65079,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -63802,6 +65216,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -63843,6 +65258,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -63979,6 +65395,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -64019,6 +65436,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -64155,6 +65573,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -64196,6 +65615,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -64332,6 +65752,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -64388,6 +65809,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -64524,6 +65946,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -64565,6 +65988,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -64701,6 +66125,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -64741,6 +66166,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -64877,6 +66303,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -64918,6 +66345,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -65054,6 +66482,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -65110,6 +66539,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -65246,6 +66676,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -65287,6 +66718,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -65423,6 +66855,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -65463,6 +66896,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -65599,6 +67033,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -65640,6 +67075,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -65776,6 +67212,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -65832,6 +67269,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -65968,6 +67406,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -66009,6 +67448,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -66145,6 +67585,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -66185,6 +67626,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -66321,6 +67763,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -66362,6 +67805,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -66498,6 +67942,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -66554,6 +67999,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -66690,6 +68136,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -66731,6 +68178,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -66867,6 +68315,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -66907,6 +68356,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -67043,6 +68493,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -67084,6 +68535,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -67220,6 +68672,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -67276,6 +68729,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -67412,6 +68866,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -67453,6 +68908,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -67589,6 +69045,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -67629,6 +69086,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -67765,6 +69223,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -67806,6 +69265,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -67942,6 +69402,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -67998,6 +69459,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -68134,6 +69596,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -68175,6 +69638,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -68311,6 +69775,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -68351,6 +69816,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -68487,6 +69953,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -68528,6 +69995,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -68664,6 +70132,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -68720,6 +70189,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -68856,6 +70326,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -68897,6 +70368,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -69033,6 +70505,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -69073,6 +70546,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -69209,6 +70683,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -69250,6 +70725,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -69386,6 +70862,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -69442,6 +70919,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -69578,6 +71056,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -69619,6 +71098,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -69755,6 +71235,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -69795,6 +71276,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -69931,6 +71413,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -69972,6 +71455,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -70108,6 +71592,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -70164,6 +71649,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -70300,6 +71786,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -70341,6 +71828,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -70477,6 +71965,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -70517,6 +72006,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -70653,6 +72143,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -70694,6 +72185,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -70830,6 +72322,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -70886,6 +72379,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -71022,6 +72516,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -71063,6 +72558,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -71199,6 +72695,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -71239,6 +72736,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -71375,6 +72873,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -71416,6 +72915,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -71552,6 +73052,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -71608,6 +73109,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -71744,6 +73246,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -71785,6 +73288,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -71921,6 +73425,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -71961,6 +73466,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -72097,6 +73603,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -72138,6 +73645,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -72274,6 +73782,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -72330,6 +73839,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -72466,6 +73976,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -72507,6 +74018,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -72643,6 +74155,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -72683,6 +74196,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -72819,6 +74333,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -72860,6 +74375,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -72996,6 +74512,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -73052,6 +74569,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -73188,6 +74706,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -73229,6 +74748,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -73365,6 +74885,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -73405,6 +74926,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -73541,6 +75063,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -73582,6 +75105,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -73718,6 +75242,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -73774,6 +75299,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -73910,6 +75436,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -73951,6 +75478,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -74087,6 +75615,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -74127,6 +75656,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -74263,6 +75793,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -74304,6 +75835,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -74440,6 +75972,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -74496,6 +76029,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -74632,6 +76166,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -74673,6 +76208,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -74809,6 +76345,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -74849,6 +76386,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -74985,6 +76523,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -75026,6 +76565,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -75162,6 +76702,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -75218,6 +76759,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -75354,6 +76896,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -75395,6 +76938,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -75531,6 +77075,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -75571,6 +77116,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -75707,6 +77253,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -75748,6 +77295,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -75884,6 +77432,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -75940,6 +77489,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -76076,6 +77626,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -76117,6 +77668,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -76253,6 +77805,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -76293,6 +77846,7 @@ export type VendorMasterCreateWithoutStateInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -76429,6 +77983,7 @@ export type VendorMasterCreateWithoutStateInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -76470,6 +78025,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -76606,6 +78162,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -76676,6 +78233,7 @@ export type VendorMasterScalarWhereInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_scanpack_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_client_visit_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
@@ -76718,6 +78276,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -76854,6 +78413,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -76895,6 +78455,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -77031,6 +78592,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -77087,6 +78649,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -77223,6 +78786,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -77264,6 +78828,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -77400,6 +78965,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -77440,6 +79006,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -77576,6 +79143,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -77617,6 +79185,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -77753,6 +79322,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -77809,6 +79379,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -77945,6 +79516,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -77986,6 +79558,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -78122,6 +79695,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -78162,6 +79736,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -78298,6 +79873,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -78339,6 +79915,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -78475,6 +80052,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -78531,6 +80109,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -78667,6 +80246,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -78708,6 +80288,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -78844,6 +80425,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -78884,6 +80466,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -79020,6 +80603,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -79061,6 +80645,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -79197,6 +80782,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -79253,6 +80839,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -79389,6 +80976,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -79430,6 +81018,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -79566,6 +81155,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -79606,6 +81196,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -79742,6 +81333,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -79783,6 +81375,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -79919,6 +81512,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -79975,6 +81569,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -80111,6 +81706,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -80152,6 +81748,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -80288,6 +81885,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -80328,6 +81926,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -80464,6 +82063,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -80505,6 +82105,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -80641,6 +82242,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -80697,6 +82299,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -80833,6 +82436,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -80874,6 +82478,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -81010,6 +82615,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -81050,6 +82656,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -81186,6 +82793,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -81227,6 +82835,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -81363,6 +82972,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -81419,6 +83029,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -81555,6 +83166,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -81596,6 +83208,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -81732,6 +83345,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -81772,6 +83386,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -81908,6 +83523,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -81949,6 +83565,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -82085,6 +83702,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -82141,6 +83759,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -82277,6 +83896,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -82318,6 +83938,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -82454,6 +84075,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -86104,6 +87726,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -86240,6 +87863,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -86281,6 +87905,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -86417,6 +88042,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -86473,6 +88099,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -86609,6 +88236,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -86650,6 +88278,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -86786,6 +88415,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -86826,6 +88456,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -86962,6 +88593,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -87003,6 +88635,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -87139,6 +88772,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -87195,6 +88829,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -87331,6 +88966,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -87372,6 +89008,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -87508,6 +89145,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -87548,6 +89186,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -87684,6 +89323,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -87725,6 +89365,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -87861,6 +89502,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -87917,6 +89559,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -88053,6 +89696,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -88094,6 +89738,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -88230,6 +89875,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -88270,6 +89916,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -88406,6 +90053,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -88447,6 +90095,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -88583,6 +90232,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -88639,6 +90289,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -88775,6 +90426,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -88816,6 +90468,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -88952,6 +90605,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -88992,6 +90646,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -89128,6 +90783,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -89169,6 +90825,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -89305,6 +90962,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -89361,6 +91019,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -89497,6 +91156,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -89538,6 +91198,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -89674,6 +91335,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -89714,6 +91376,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -89850,6 +91513,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -89891,6 +91555,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -90027,6 +91692,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -90083,6 +91749,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -90219,6 +91886,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -90260,6 +91928,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -90396,6 +92065,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -90436,6 +92106,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -90572,6 +92243,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -90613,6 +92285,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -90749,6 +92422,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -90805,6 +92479,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -90941,6 +92616,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -90982,6 +92658,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -91118,6 +92795,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -91158,6 +92836,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -91294,6 +92973,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -91335,6 +93015,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -91471,6 +93152,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -91527,6 +93209,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -91663,6 +93346,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -91704,6 +93388,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -91840,6 +93525,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -91880,6 +93566,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -92017,6 +93704,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
@@ -92057,6 +93745,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -92194,6 +93883,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -92249,6 +93939,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -92386,6 +94077,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
@@ -92426,6 +94118,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -92563,6 +94256,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -92602,6 +94296,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -92739,6 +94434,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
@@ -92779,6 +94475,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -92916,6 +94613,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -92971,6 +94669,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -93108,6 +94807,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
@@ -93148,6 +94848,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -93285,6 +94986,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -93324,6 +95026,7 @@ export type VendorMasterCreateWithoutUnitsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -93461,6 +95164,7 @@ export type VendorMasterCreateWithoutUnitsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -93501,6 +95205,7 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -93638,6 +95343,7 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -93693,6 +95399,7 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -93830,6 +95537,7 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -93870,6 +95578,7 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -94007,6 +95716,7 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -94046,6 +95756,7 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -94183,6 +95894,7 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -94223,6 +95935,7 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -94360,6 +96073,7 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -94415,6 +96129,7 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -94552,6 +96267,7 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -94592,6 +96308,7 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -94729,6 +96446,7 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -94768,6 +96486,7 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -94905,6 +96624,7 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -94945,6 +96665,7 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -95082,6 +96803,7 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -95137,6 +96859,7 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -95274,6 +96997,7 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -95314,6 +97038,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -95451,6 +97176,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -95490,6 +97216,7 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -95627,6 +97354,7 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -95667,6 +97395,7 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -95804,6 +97533,7 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -95859,6 +97589,7 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -95996,6 +97727,7 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -96036,6 +97768,7 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -96173,6 +97906,7 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -96212,6 +97946,7 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -96349,6 +98084,7 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
@@ -96389,6 +98125,7 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -96526,6 +98263,7 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -96581,6 +98319,7 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -96718,6 +98457,7 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
@@ -96758,6 +98498,7 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -96895,6 +98636,7 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -96934,6 +98676,7 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -97070,6 +98813,7 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -97111,6 +98855,7 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -97247,6 +98992,7 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -97303,6 +99049,7 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -97439,6 +99186,7 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -97480,6 +99228,7 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -97616,6 +99365,7 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -97656,6 +99406,7 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -97792,6 +99543,7 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -97833,6 +99585,7 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -97969,6 +99722,7 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -98025,6 +99779,7 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -98161,6 +99916,7 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -98202,6 +99958,7 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -98338,6 +100095,7 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -98378,6 +100136,7 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -98514,6 +100273,7 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -98555,6 +100315,7 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -98691,6 +100452,7 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -98747,6 +100509,7 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -98883,6 +100646,7 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -98924,6 +100688,7 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -99060,6 +100825,7 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -99100,6 +100866,7 @@ export type VendorMasterCreateWithoutBox_info_fieldsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -99237,6 +101004,7 @@ export type VendorMasterCreateWithoutBox_info_fieldsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -99277,6 +101045,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -99414,6 +101183,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -99469,6 +101239,7 @@ export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -99606,6 +101377,7 @@ export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -99646,6 +101418,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -99783,6 +101556,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -99822,6 +101596,7 @@ export type VendorMasterCreateWithoutBox_info_valuesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -99959,6 +101734,7 @@ export type VendorMasterCreateWithoutBox_info_valuesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -99999,6 +101775,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -100136,6 +101913,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -100191,6 +101969,7 @@ export type VendorMasterUpdateWithoutBox_info_valuesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -100328,6 +102107,7 @@ export type VendorMasterUpdateWithoutBox_info_valuesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -100368,6 +102148,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -100505,6 +102286,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -100544,6 +102326,7 @@ export type VendorMasterCreateWithoutBroadcastsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -100681,6 +102464,7 @@ export type VendorMasterCreateWithoutBroadcastsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -100721,6 +102505,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -100858,6 +102643,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -100913,6 +102699,7 @@ export type VendorMasterUpdateWithoutBroadcastsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -101050,6 +102837,7 @@ export type VendorMasterUpdateWithoutBroadcastsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -101090,6 +102878,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -101227,6 +103016,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -101266,6 +103056,7 @@ export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -101403,6 +103194,7 @@ export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -101443,6 +103235,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastCategoriesInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -101580,6 +103373,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastCategoriesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -101635,6 +103429,7 @@ export type VendorMasterUpdateWithoutBroadcastCategoriesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -101772,6 +103567,7 @@ export type VendorMasterUpdateWithoutBroadcastCategoriesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -101812,6 +103608,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -101949,6 +103746,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -101989,6 +103787,7 @@ export type VendorMasterCreateManyStateInput = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
@@ -102030,6 +103829,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -102166,6 +103966,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -102207,6 +104008,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -102343,6 +104145,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
   paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -102384,6 +104187,7 @@ export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -102528,6 +104332,7 @@ export type VendorMasterCountOutputType = {
   piSupplierAdditionalCosts: number
   poSupplierAdditionalCosts: number
   paymentTerms: number
+  leadBillingAddresses: number
   poPaymentSchedules: number
   poPayments: number
   architechuremasters: number
@@ -102666,6 +104471,7 @@ export type VendorMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   piSupplierAdditionalCosts?: boolean | VendorMasterCountOutputTypeCountPiSupplierAdditionalCostsArgs
   poSupplierAdditionalCosts?: boolean | VendorMasterCountOutputTypeCountPoSupplierAdditionalCostsArgs
   paymentTerms?: boolean | VendorMasterCountOutputTypeCountPaymentTermsArgs
+  leadBillingAddresses?: boolean | VendorMasterCountOutputTypeCountLeadBillingAddressesArgs
   poPaymentSchedules?: boolean | VendorMasterCountOutputTypeCountPoPaymentSchedulesArgs
   poPayments?: boolean | VendorMasterCountOutputTypeCountPoPaymentsArgs
   architechuremasters?: boolean | VendorMasterCountOutputTypeCountArchitechuremastersArgs
@@ -103518,6 +105324,13 @@ export type VendorMasterCountOutputTypeCountPaymentTermsArgs<ExtArgs extends run
 /**
  * VendorMasterCountOutputType without action
  */
+export type VendorMasterCountOutputTypeCountLeadBillingAddressesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadBillingAddressWhereInput
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
 export type VendorMasterCountOutputTypeCountPoPaymentSchedulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.POPaymentScheduleWhereInput
 }
@@ -103663,6 +105476,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
@@ -103801,6 +105615,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   piSupplierAdditionalCosts?: boolean | Prisma.VendorMaster$piSupplierAdditionalCostsArgs<ExtArgs>
   poSupplierAdditionalCosts?: boolean | Prisma.VendorMaster$poSupplierAdditionalCostsArgs<ExtArgs>
   paymentTerms?: boolean | Prisma.VendorMaster$paymentTermsArgs<ExtArgs>
+  leadBillingAddresses?: boolean | Prisma.VendorMaster$leadBillingAddressesArgs<ExtArgs>
   poPaymentSchedules?: boolean | Prisma.VendorMaster$poPaymentSchedulesArgs<ExtArgs>
   poPayments?: boolean | Prisma.VendorMaster$poPaymentsArgs<ExtArgs>
   architechuremasters?: boolean | Prisma.VendorMaster$architechuremastersArgs<ExtArgs>
@@ -103843,6 +105658,7 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
@@ -103887,6 +105703,7 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
@@ -103931,6 +105748,7 @@ export type VendorMasterSelectScalar = {
   is_custom_doc_nomenclature_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  is_scanpack_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
@@ -103953,7 +105771,7 @@ export type VendorMasterSelectScalar = {
   city?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "icon" | "login_image" | "time_zone" | "subdomain_url" | "IsAccountLocInEnabled" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "is_client_visit_enabled" | "is_this_vendor_is_custom_usertype_only" | "is_year_wise_lead_code_enabled" | "handlesLargeScaleProjects" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "is_broadcast_enabled" | "createdAt" | "updatedAt" | "state_id" | "gst_no" | "toll_free_no" | "website_link" | "tag_line" | "address" | "pincode" | "city", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "icon" | "login_image" | "time_zone" | "subdomain_url" | "IsAccountLocInEnabled" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_scanpack_enabled" | "is_approval_task_enabled" | "is_client_visit_enabled" | "is_this_vendor_is_custom_usertype_only" | "is_year_wise_lead_code_enabled" | "handlesLargeScaleProjects" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "is_broadcast_enabled" | "createdAt" | "updatedAt" | "state_id" | "gst_no" | "toll_free_no" | "website_link" | "tag_line" | "address" | "pincode" | "city", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
   boxes?: boolean | Prisma.VendorMaster$boxesArgs<ExtArgs>
@@ -104073,6 +105891,7 @@ export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.Interna
   piSupplierAdditionalCosts?: boolean | Prisma.VendorMaster$piSupplierAdditionalCostsArgs<ExtArgs>
   poSupplierAdditionalCosts?: boolean | Prisma.VendorMaster$poSupplierAdditionalCostsArgs<ExtArgs>
   paymentTerms?: boolean | Prisma.VendorMaster$paymentTermsArgs<ExtArgs>
+  leadBillingAddresses?: boolean | Prisma.VendorMaster$leadBillingAddressesArgs<ExtArgs>
   poPaymentSchedules?: boolean | Prisma.VendorMaster$poPaymentSchedulesArgs<ExtArgs>
   poPayments?: boolean | Prisma.VendorMaster$poPaymentsArgs<ExtArgs>
   architechuremasters?: boolean | Prisma.VendorMaster$architechuremastersArgs<ExtArgs>
@@ -104221,6 +106040,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     piSupplierAdditionalCosts: Prisma.$PurchaseIntentSupplierAdditionalCostPayload<ExtArgs>[]
     poSupplierAdditionalCosts: Prisma.$PurchaseOrderSupplierAdditionalCostPayload<ExtArgs>[]
     paymentTerms: Prisma.$PaymentTermMasterPayload<ExtArgs>[]
+    leadBillingAddresses: Prisma.$LeadBillingAddressPayload<ExtArgs>[]
     poPaymentSchedules: Prisma.$POPaymentSchedulePayload<ExtArgs>[]
     poPayments: Prisma.$POPaymentPayload<ExtArgs>[]
     architechuremasters: Prisma.$ArchitechuremasterPayload<ExtArgs>[]
@@ -104261,6 +106081,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     is_custom_doc_nomenclature_enabled: boolean
     is_inventory_enabled: boolean
     is_tracktrace_enabled: boolean
+    is_scanpack_enabled: boolean
     is_approval_task_enabled: boolean
     is_client_visit_enabled: boolean
     is_this_vendor_is_custom_usertype_only: boolean | null
@@ -104793,6 +106614,7 @@ export interface Prisma__VendorMasterClient<T, Null = never, ExtArgs extends run
   piSupplierAdditionalCosts<T extends Prisma.VendorMaster$piSupplierAdditionalCostsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$piSupplierAdditionalCostsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentSupplierAdditionalCostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   poSupplierAdditionalCosts<T extends Prisma.VendorMaster$poSupplierAdditionalCostsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$poSupplierAdditionalCostsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderSupplierAdditionalCostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   paymentTerms<T extends Prisma.VendorMaster$paymentTermsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$paymentTermsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentTermMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadBillingAddresses<T extends Prisma.VendorMaster$leadBillingAddressesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$leadBillingAddressesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadBillingAddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   poPaymentSchedules<T extends Prisma.VendorMaster$poPaymentSchedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$poPaymentSchedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$POPaymentSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   poPayments<T extends Prisma.VendorMaster$poPaymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$poPaymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$POPaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   architechuremasters<T extends Prisma.VendorMaster$architechuremastersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$architechuremastersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArchitechuremasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -104860,6 +106682,7 @@ export interface VendorMasterFieldRefs {
   readonly is_custom_doc_nomenclature_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_inventory_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_tracktrace_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
+  readonly is_scanpack_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_approval_task_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_client_visit_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_this_vendor_is_custom_usertype_only: Prisma.FieldRef<"VendorMaster", 'Boolean'>
@@ -108105,6 +109928,30 @@ export type VendorMaster$paymentTermsArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.PaymentTermMasterScalarFieldEnum | Prisma.PaymentTermMasterScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.leadBillingAddresses
+ */
+export type VendorMaster$leadBillingAddressesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadBillingAddress
+   */
+  select?: Prisma.LeadBillingAddressSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadBillingAddress
+   */
+  omit?: Prisma.LeadBillingAddressOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadBillingAddressInclude<ExtArgs> | null
+  where?: Prisma.LeadBillingAddressWhereInput
+  orderBy?: Prisma.LeadBillingAddressOrderByWithRelationInput | Prisma.LeadBillingAddressOrderByWithRelationInput[]
+  cursor?: Prisma.LeadBillingAddressWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadBillingAddressScalarFieldEnum | Prisma.LeadBillingAddressScalarFieldEnum[]
 }
 
 /**

@@ -69,6 +69,7 @@ export const ModelName = {
   ClientMaster: 'ClientMaster',
   ClientTypeMaster: 'ClientTypeMaster',
   LeadMaster: 'LeadMaster',
+  LeadBillingAddress: 'LeadBillingAddress',
   LeadSpecificationsMaster: 'LeadSpecificationsMaster',
   LeadCarcassMaterialMapping: 'LeadCarcassMaterialMapping',
   LeadShutterMaterialMapping: 'LeadShutterMaterialMapping',
@@ -96,6 +97,7 @@ export const ModelName = {
   LeadLightCarcasUnitMapping: 'LeadLightCarcasUnitMapping',
   OtherAppliancesMaster: 'OtherAppliancesMaster',
   LeadOtherAppliancesMapping: 'LeadOtherAppliancesMapping',
+  LeadOtherAppliancesRemarkMapping: 'LeadOtherAppliancesRemarkMapping',
   HandleTypeMaster: 'HandleTypeMaster',
   TimelineRule: 'TimelineRule',
   specificationDocumentMapping: 'specificationDocumentMapping',
@@ -281,6 +283,7 @@ export const VendorMasterScalarFieldEnum = {
   is_custom_doc_nomenclature_enabled: 'is_custom_doc_nomenclature_enabled',
   is_inventory_enabled: 'is_inventory_enabled',
   is_tracktrace_enabled: 'is_tracktrace_enabled',
+  is_scanpack_enabled: 'is_scanpack_enabled',
   is_approval_task_enabled: 'is_approval_task_enabled',
   is_client_visit_enabled: 'is_client_visit_enabled',
   is_this_vendor_is_custom_usertype_only: 'is_this_vendor_is_custom_usertype_only',
@@ -675,6 +678,24 @@ export const LeadMasterScalarFieldEnum = {
 export type LeadMasterScalarFieldEnum = (typeof LeadMasterScalarFieldEnum)[keyof typeof LeadMasterScalarFieldEnum]
 
 
+export const LeadBillingAddressScalarFieldEnum = {
+  id: 'id',
+  lead_id: 'lead_id',
+  vendor_id: 'vendor_id',
+  address_type: 'address_type',
+  name: 'name',
+  address: 'address',
+  map_link: 'map_link',
+  gst_number: 'gst_number',
+  state_name: 'state_name',
+  place_of_supply: 'place_of_supply',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type LeadBillingAddressScalarFieldEnum = (typeof LeadBillingAddressScalarFieldEnum)[keyof typeof LeadBillingAddressScalarFieldEnum]
+
+
 export const LeadSpecificationsMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
@@ -693,6 +714,7 @@ export const LeadCarcassMaterialMappingScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
+  specs_id: 'specs_id',
   carcass_type_id: 'carcass_type_id',
   carcas_material_id: 'carcas_material_id',
   carcass_material_finish_id: 'carcass_material_finish_id',
@@ -707,6 +729,7 @@ export const LeadShutterMaterialMappingScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
+  specs_id: 'specs_id',
   shutter_type_id: 'shutter_type_id',
   shutter_material_id: 'shutter_material_id',
   shutter_material_finish_id: 'shutter_material_finish_id',
@@ -927,6 +950,7 @@ export const LeadHardwareMappingScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
+  specs_id: 'specs_id',
   carcass_legs_id: 'carcass_legs_id',
   skirting_carcass_legs_id: 'skirting_carcass_legs_id',
   skirting_carcass_legs_color_id: 'skirting_carcass_legs_color_id',
@@ -967,6 +991,7 @@ export const LeadLightCarcasUnitMappingScalarFieldEnum = {
   lead_id: 'lead_id',
   specs_id: 'specs_id',
   light_carcas_unit_master_id: 'light_carcas_unit_master_id',
+  custom_remark: 'custom_remark',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -991,12 +1016,28 @@ export const LeadOtherAppliancesMappingScalarFieldEnum = {
   lead_id: 'lead_id',
   vendor_id: 'vendor_id',
   specs_id: 'specs_id',
+  other_appliance_type: 'other_appliance_type',
   other_appliances_master_id: 'other_appliances_master_id',
+  custom_remark: 'custom_remark',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
 
 export type LeadOtherAppliancesMappingScalarFieldEnum = (typeof LeadOtherAppliancesMappingScalarFieldEnum)[keyof typeof LeadOtherAppliancesMappingScalarFieldEnum]
+
+
+export const LeadOtherAppliancesRemarkMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  specs_id: 'specs_id',
+  other_appliance_type: 'other_appliance_type',
+  remark: 'remark',
+  created_at: 'created_at',
+  created_by: 'created_by'
+} as const
+
+export type LeadOtherAppliancesRemarkMappingScalarFieldEnum = (typeof LeadOtherAppliancesRemarkMappingScalarFieldEnum)[keyof typeof LeadOtherAppliancesRemarkMappingScalarFieldEnum]
 
 
 export const HandleTypeMasterScalarFieldEnum = {
@@ -1050,6 +1091,7 @@ export const LeadDocumentsScalarFieldEnum = {
   doc_type_id: 'doc_type_id',
   is_deleted: 'is_deleted',
   tech_check_status: 'tech_check_status',
+  product_type_id: 'product_type_id',
   product_structure_instance_id: 'product_structure_instance_id'
 } as const
 
@@ -1240,13 +1282,19 @@ export const PaymentInfoScalarFieldEnum = {
   account_id: 'account_id',
   status_id: 'status_id',
   amount: 'amount',
+  is_booking_received_amt: 'is_booking_received_amt',
+  basic_amount: 'basic_amount',
+  gst_percentage: 'gst_percentage',
+  gst_amount: 'gst_amount',
+  total_amount: 'total_amount',
   payment_date: 'payment_date',
   payment_text: 'payment_text',
   payment_file_id: 'payment_file_id',
   created_at: 'created_at',
   created_by: 'created_by',
   vendor_id: 'vendor_id',
-  payment_type_id: 'payment_type_id'
+  payment_type_id: 'payment_type_id',
+  product_type_id: 'product_type_id'
 } as const
 
 export type PaymentInfoScalarFieldEnum = (typeof PaymentInfoScalarFieldEnum)[keyof typeof PaymentInfoScalarFieldEnum]
@@ -1262,7 +1310,8 @@ export const LedgerScalarFieldEnum = {
   payment_date: 'payment_date',
   type: 'type',
   created_by: 'created_by',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  product_type_id: 'product_type_id'
 } as const
 
 export type LedgerScalarFieldEnum = (typeof LedgerScalarFieldEnum)[keyof typeof LedgerScalarFieldEnum]
@@ -1683,6 +1732,7 @@ export const LeadDetailedLogsScalarFieldEnum = {
   lead_id: 'lead_id',
   account_id: 'account_id',
   task_id: 'task_id',
+  product_type_id: 'product_type_id',
   action: 'action',
   action_type: 'action_type',
   history_type: 'history_type',
@@ -2157,7 +2207,8 @@ export const CutListMachineMappingScalarFieldEnum = {
   created_at: 'created_at',
   box_id: 'box_id',
   site_in_at: 'site_in_at',
-  site_in_by: 'site_in_by'
+  site_in_by: 'site_in_by',
+  weight: 'weight'
 } as const
 
 export type CutListMachineMappingScalarFieldEnum = (typeof CutListMachineMappingScalarFieldEnum)[keyof typeof CutListMachineMappingScalarFieldEnum]

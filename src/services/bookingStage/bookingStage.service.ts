@@ -11,6 +11,8 @@ import {
 import {
   AddPaymentDto,
   CreateBookingStageDto,
+  LeadBillingAddressInput,
+  UpsertLeadBillingAddressesDto,
 } from "../../types/booking-stage.dto";
 import { GetObjectCommand } from "@aws-sdk/client-s3";
 import wasabi, { generateSignedUrl } from "../../utils/wasabiClient";
@@ -350,6 +352,7 @@ export class BookingStageService {
               account_id: data.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
+              product_type_id: data.product_type_id ?? null,
               ...(singleScopedInstanceId
                 ? { product_structure_instance_id: singleScopedInstanceId }
                 : {}),
@@ -385,6 +388,7 @@ export class BookingStageService {
             amount: data.bookingAmount,
             payment_date: new Date(),
             type: "credit",
+            product_type_id: data.product_type_id ?? null,
           },
         });
 
@@ -400,6 +404,7 @@ export class BookingStageService {
               account_id: data.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
+              product_type_id: data.product_type_id ?? null,
               ...(singleScopedInstanceId
                 ? { product_structure_instance_id: singleScopedInstanceId }
                 : {}),
@@ -416,10 +421,16 @@ export class BookingStageService {
             vendor_id: data.vendor_id,
             created_by: data.created_by,
             amount: data.bookingAmount,
+            is_booking_received_amt: true,
+            basic_amount: data.basic_amount ?? null,
+            gst_percentage: data.gst_percentage ?? null,
+            gst_amount: data.gst_amount ?? null,
+            total_amount: data.total_amount ?? null,
             payment_text: data.bookingAmountPaymentDetailsText || null,
             payment_file_id: paymentFileId, // may be null if no file
             payment_date: new Date(),
             payment_type_id: bookingPaymentType.id,
+            product_type_id: data.product_type_id ?? null,
           },
         });
         response.paymentInfo = bookingPayment;
@@ -587,6 +598,7 @@ export class BookingStageService {
             vendor_id: data.vendor_id,
             lead_id: data.lead_id,
             account_id: data.account_id,
+            product_type_id: data.product_type_id ?? null,
             action: actionMessage,
             action_type: "CREATE",
             created_by: data.created_by,
@@ -978,6 +990,8 @@ export class BookingStageService {
           originalName: doc.doc_og_name,
           s3Key: doc.doc_sys_name,
           type: doc.documentType?.tag,
+          product_type_id: doc.product_type_id,
+          product_structure_instance_id: doc.product_structure_instance_id,
           created_at: doc.created_at,
           signedUrl,
         };
@@ -1011,6 +1025,11 @@ export class BookingStageService {
           return {
             id: p.id,
             amount: p.amount,
+            basic_amount: p.basic_amount,
+            gst_percentage: p.gst_percentage,
+            gst_amount: p.gst_amount,
+            total_amount: p.total_amount,
+            product_type_id: p.product_type_id,
             date: p.payment_date,
             text: p.payment_text,
             type: p.paymentType?.tag,
@@ -1432,7 +1451,8 @@ export class BookingStageService {
   // post filter service
   public static async getVendorLeadsByTag2(
     vendorId: number,
-    franchiseId: number,
+    franchiseId: number | undefined,
+    franchiseIds: number[] | undefined,
     tag: string,
     userId: number | null,
     page: number = 1,
@@ -1459,11 +1479,14 @@ export class BookingStageService {
       date_range?: { from: string; to: string };
       production_status?: string;
       pending_services?: boolean;
+      franchise_ids?: number[];
+      franchises?: Array<number | string>;
     },
   ): Promise<{ leads: any[]; count: number }> {
     logger.info("[BookingStageService] getVendorLeadsByTag2 called", {
       vendorId,
       franchiseId,
+      franchiseIds,
       tag,
       userId,
       page,
@@ -1472,11 +1495,14 @@ export class BookingStageService {
     console.log("[Service] getVendorLeadsByTag2 ids", {
       vendorId,
       franchiseId,
+      franchiseIds,
       tag,
       userId,
       page,
       limit,
     });
+    const normalizedFranchises =
+      filters.franchises ?? filters.franchise_ids;
 
     const skip = (page - 1) * limit;
 
@@ -1543,7 +1569,7 @@ export class BookingStageService {
       const taskLeads = await prisma.userLeadTask.findMany({
         where: {
           vendor_id: vendorId,
-          franchise_id: franchiseId,
+          ...(franchiseId ? { franchise_id: franchiseId } : {}),
           OR: [{ created_by: userId }, { user_id: userId }],
         },
         select: { lead_id: true },
@@ -1589,6 +1615,8 @@ export class BookingStageService {
         return { numbers, strings };
       };
 
+
+
       // ---------- GLOBAL SEARCH ----------
 
       const globalSearch = toString(filters.global_search);
@@ -1626,10 +1654,7 @@ export class BookingStageService {
         }
       }
 
-      const leadCode = toString(filters.filter_lead_code);
-      if (leadCode) {
-        addAnd({ lead_code: { contains: leadCode, mode: "insensitive" } });
-      }
+
 
       const nameFilter = toString(filters.filter_name);
       if (nameFilter) {
@@ -1781,6 +1806,20 @@ export class BookingStageService {
       // ASSIGN TO (MULTI SELECT)
       // --------------------
 
+      if (Array.isArray(normalizedFranchises) && normalizedFranchises.length > 0) {
+        const franchiseIds = normalizedFranchises
+          .map(Number)
+          .filter((id) => !Number.isNaN(id));
+
+        if (franchiseIds.length > 0) {
+          addAnd({
+            franchise_id: {
+              in: franchiseIds,
+            },
+          });
+        }
+      }
+
       if (Array.isArray(filters.assign_to) && filters.assign_to.length > 0) {
         const assignIds = filters.assign_to
           .map(Number)
@@ -1895,9 +1934,14 @@ export class BookingStageService {
     // FINAL QUERY
     // ============================
 
+      const hasExplicitFranchiseFilter =
+      Array.isArray(normalizedFranchises) && normalizedFranchises.length > 0;
+
     const whereClause = addFilterConditions({
       vendor_id: vendorId,
-      franchise_id: franchiseId,
+      ...(!hasExplicitFranchiseFilter && franchiseId && !Number.isNaN(franchiseId)
+        ? { franchise_id: franchiseId }
+        : {}),
       is_deleted: false,
       ...(statusIds !== null && { status_id: { in: statusIds } }),
       ...(shouldExcludeLaterStageTags && {
@@ -2189,6 +2233,7 @@ export class BookingStageService {
             where: { id: existingPayment.id },
             data: {
               amount: data.bookingAmount,
+              is_booking_received_amt: true,
               payment_text:
                 data.bookingAmountPaymentDetailsText ||
                 existingPayment.payment_text, // ✅ added
@@ -2208,6 +2253,7 @@ export class BookingStageService {
               created_by: data.created_by!,
               status_id: leadForPayment?.status_id ?? null,
               amount: data.bookingAmount,
+              is_booking_received_amt: true,
               payment_date: new Date(),
               payment_type_id: bookingPaymentType.id,
               payment_text: data.bookingAmountPaymentDetailsText || null, // ✅ added
@@ -2334,6 +2380,7 @@ export class BookingStageService {
             account_id: data.account_id,
             lead_id: data.lead_id,
             vendor_id: data.vendor_id,
+            product_type_id: data.product_type_id ?? null,
           },
         });
 
@@ -2359,6 +2406,7 @@ export class BookingStageService {
           payment_file_id: paymentFileId,
           payment_date: new Date(data.payment_date),
           payment_type_id: paymentType.id,
+          product_type_id: data.product_type_id ?? null,
         },
       });
       response.payment = payment;
@@ -2374,6 +2422,7 @@ export class BookingStageService {
           amount: data.amount,
           payment_date: new Date(data.payment_date),
           type: "credit",
+          product_type_id: data.product_type_id ?? null,
         },
       });
       response.ledger = ledger;
@@ -2578,8 +2627,11 @@ export class BookingStageService {
         paymentLogs.push({
           id: p.id,
           amount: p.amount,
+          total_amount: p.total_amount,
           status_id: p.status_id,
           status_type: p.statusType?.type ?? null,
+          product_type_id: p.product_type_id,
+          is_booking_received_amt: p.is_booking_received_amt,
           payment_text: p.payment_text,
           payment_date: p.payment_date,
           entry_date: p.created_at,
@@ -2605,6 +2657,113 @@ export class BookingStageService {
       });
       throw error;
     }
+  }
+
+  private normalizeBillingAddress(
+    address?: LeadBillingAddressInput | null,
+  ): LeadBillingAddressInput | null {
+    if (!address) return null;
+
+    const normalized = {
+      name: address.name?.trim() || null,
+      address: address.address?.trim() || null,
+      map_link: address.map_link?.trim() || null,
+      gst_number: address.gst_number?.trim() || null,
+      state_name: address.state_name?.trim() || null,
+      place_of_supply: address.place_of_supply?.trim() || null,
+    };
+
+    const hasAnyValue = Object.values(normalized).some(Boolean);
+    return hasAnyValue ? normalized : null;
+  }
+
+  public async getLeadBillingAddresses(leadId: number, vendorId: number) {
+    const billingAddressDelegate = (prisma as any).leadBillingAddress;
+    const addresses = await billingAddressDelegate.findMany({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+      },
+    });
+
+    const billingAddress =
+      addresses.find((address: any) => address.address_type === "BILL_TO") ??
+      null;
+    const shippingAddress =
+      addresses.find((address: any) => address.address_type === "SHIP_TO") ??
+      null;
+
+    return {
+      billingAddress,
+      shippingAddress,
+    };
+  }
+
+  public async upsertLeadBillingAddresses(
+    data: UpsertLeadBillingAddressesDto,
+  ) {
+    const billingAddress = this.normalizeBillingAddress(data.billingAddress);
+    const shippingAddress = this.normalizeBillingAddress(data.shippingAddress);
+
+    return prisma.$transaction(async (tx) => {
+      const billingAddressDelegate = (tx as any).leadBillingAddress;
+      const lead = await tx.leadMaster.findFirst({
+        where: {
+          id: data.lead_id,
+          vendor_id: data.vendor_id,
+        },
+        select: { id: true },
+      });
+
+      if (!lead) {
+        throw new Error("Lead not found for the given vendor");
+      }
+
+      const upsertAddress = async (
+        addressType: "BILL_TO" | "SHIP_TO",
+        address: LeadBillingAddressInput | null,
+      ) => {
+        if (!address) {
+          await billingAddressDelegate.deleteMany({
+            where: {
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+              address_type: addressType,
+            },
+          });
+          return null;
+        }
+
+        return billingAddressDelegate.upsert({
+          where: {
+            lead_id_vendor_id_address_type: {
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+              address_type: addressType,
+            },
+          },
+          create: {
+            lead_id: data.lead_id,
+            vendor_id: data.vendor_id,
+            address_type: addressType,
+            ...address,
+          },
+          update: {
+            ...address,
+          },
+        });
+      };
+
+      const [savedBillingAddress, savedShippingAddress] = await Promise.all([
+        upsertAddress("BILL_TO", billingAddress),
+        upsertAddress("SHIP_TO", shippingAddress),
+      ]);
+
+      return {
+        billingAddress: savedBillingAddress,
+        shippingAddress: savedShippingAddress,
+      };
+    });
   }
 
   public async uploadCSPBookingService(data: {
@@ -3065,61 +3224,699 @@ export class BookingStageService {
     vendor_id: number;
     booking_amount: number;
     updated_by: number;
+    product_type_id?: number;
   }) {
-    const lead = await prisma.leadMaster.findFirst({
-      where: {
-        id: data.lead_id,
-        vendor_id: data.vendor_id,
-        is_deleted: false,
-      },
-      select: {
-        id: true,
-        booking_amount: true,
-        pending_amount: true,
-      },
-    });
-
-    if (!lead) {
-      throw Object.assign(
-        new Error(
-          `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`,
-        ),
-        { statusCode: 404 },
-      );
-    }
-
-    const currentBooking = Number(lead.booking_amount ?? 0);
-    const currentPending = Number(lead.pending_amount ?? 0);
-    const bookingDelta = data.booking_amount - currentBooking;
-    const updatedPending = currentPending - bookingDelta;
-
-    if (updatedPending < 0) {
-      throw Object.assign(new Error("Pending amount cannot be negative"), {
-        statusCode: 400,
+    return await prisma.$transaction(async (tx) => {
+      const lead = await tx.leadMaster.findFirst({
+        where: {
+          id: data.lead_id,
+          vendor_id: data.vendor_id,
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+          account_id: true,
+          booking_amount: true,
+          pending_amount: true,
+          total_project_amount: true,
+        },
       });
-    }
 
-    if (data.booking_amount > updatedPending) {
-      throw Object.assign(
-        new Error("Booking amount cannot be greater than pending amount"),
-        { statusCode: 400 },
+      if (!lead) {
+        throw Object.assign(
+          new Error(
+            `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`,
+          ),
+          { statusCode: 404 },
+        );
+      }
+
+      if (lead.account_id == null) {
+        throw Object.assign(
+          new Error(`Lead ${data.lead_id} does not have a valid account`),
+          { statusCode: 400 },
+        );
+      }
+
+      if (data.booking_amount < 0) {
+        throw Object.assign(new Error("Booking amount cannot be negative"), {
+          statusCode: 400,
+        });
+      }
+
+      const bookingPaymentType = await tx.paymentTypeMaster.findFirst({
+        where: {
+          vendor_id: data.vendor_id,
+          tag: "Type 2",
+        },
+        select: { id: true },
+      });
+
+      if (!bookingPaymentType) {
+        throw Object.assign(
+          new Error("Payment type (Booking Amount) not found for this vendor"),
+          { statusCode: 404 },
+        );
+      }
+
+      const bookingPaymentWhere = {
+        lead_id: data.lead_id,
+        vendor_id: data.vendor_id,
+        payment_type_id: bookingPaymentType.id,
+        is_booking_received_amt: true,
+        ...(data.product_type_id != null
+          ? { product_type_id: data.product_type_id }
+          : {}),
+      };
+
+      const existingPayment = await tx.paymentInfo.findFirst({
+        where: bookingPaymentWhere,
+        orderBy: { created_at: "desc" },
+        select: {
+          id: true,
+          amount: true,
+          product_type_id: true,
+        },
+      });
+
+      if (!existingPayment) {
+        throw Object.assign(
+          new Error(
+            data.product_type_id != null
+              ? "Booking amount entry not found for the selected product type"
+              : "Booking amount entry not found for this lead",
+          ),
+          { statusCode: 404 },
+        );
+      }
+
+      const currentBooking = Number(existingPayment.amount ?? 0);
+      const currentPending = Number(lead.pending_amount ?? 0);
+      const totalProjectAmount = Number(
+        lead.total_project_amount ?? Number(lead.booking_amount ?? 0) + currentPending,
       );
-    }
+      const bookingDelta = data.booking_amount - currentBooking;
+      const updatedPending = currentPending - bookingDelta;
 
-    return await prisma.leadMaster.update({
-      where: { id: lead.id },
-      data: {
-        booking_amount: data.booking_amount,
-        pending_amount: updatedPending,
-        updated_by: data.updated_by,
-        updated_at: new Date(),
-      },
-      select: {
-        id: true,
-        booking_amount: true,
-        pending_amount: true,
-        updated_at: true,
-      },
+      if (updatedPending < 0) {
+        throw Object.assign(
+          new Error(
+            `Booking amount increase cannot be greater than pending amount (₹${currentPending.toLocaleString("en-IN")})`,
+          ),
+          { statusCode: 400 },
+        );
+      }
+
+      if (data.booking_amount > totalProjectAmount) {
+        throw Object.assign(
+          new Error("Booking amount cannot exceed total project amount"),
+          { statusCode: 400 },
+        );
+      }
+
+      await tx.paymentInfo.update({
+        where: { id: existingPayment.id },
+        data: {
+          amount: data.booking_amount,
+          product_type_id: data.product_type_id ?? existingPayment.product_type_id ?? null,
+        },
+      });
+
+      const bookingPaymentAggregate = await tx.paymentInfo.aggregate({
+        where: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          payment_type_id: bookingPaymentType.id,
+          is_booking_received_amt: true,
+        },
+        _sum: {
+          amount: true,
+        },
+      });
+
+      const updatedLead = await tx.leadMaster.update({
+        where: { id: lead.id },
+        data: {
+          booking_amount: Number(bookingPaymentAggregate._sum.amount ?? 0),
+          pending_amount: updatedPending,
+          updated_by: data.updated_by,
+          updated_at: new Date(),
+        },
+        select: {
+          id: true,
+          booking_amount: true,
+          pending_amount: true,
+          updated_at: true,
+        },
+      });
+
+      await createLeadLog(tx as any, {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        account_id: lead.account_id,
+        product_type_id: data.product_type_id,
+        action:
+          data.product_type_id != null
+            ? `Booking amount updated to ₹${data.booking_amount.toLocaleString("en-IN")} for product type ${data.product_type_id}.`
+            : `Booking amount updated to ₹${data.booking_amount.toLocaleString("en-IN")}.`,
+        action_type: "UPDATE",
+        created_by: data.updated_by,
+        created_at: new Date(),
+      });
+
+      return updatedLead;
+    });
+  }
+
+  public async updateBasicAmount(data: {
+    lead_id: number;
+    vendor_id: number;
+    basic_amount: number;
+    updated_by: number;
+    product_type_id: number;
+  }) {
+    return await prisma.$transaction(async (tx) => {
+      const lead = await tx.leadMaster.findFirst({
+        where: {
+          id: data.lead_id,
+          vendor_id: data.vendor_id,
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+          account_id: true,
+          total_project_amount: true,
+          pending_amount: true,
+        },
+      });
+
+      if (!lead) {
+        throw Object.assign(
+          new Error(
+            `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`,
+          ),
+          { statusCode: 404 },
+        );
+      }
+
+      if (lead.account_id == null) {
+        throw Object.assign(
+          new Error(`Lead ${data.lead_id} does not have a valid account`),
+          { statusCode: 400 },
+        );
+      }
+
+      if (data.basic_amount < 0) {
+        throw Object.assign(new Error("Basic amount cannot be negative"), {
+          statusCode: 400,
+        });
+      }
+
+      const bookingPaymentType = await tx.paymentTypeMaster.findFirst({
+        where: {
+          vendor_id: data.vendor_id,
+          tag: "Type 2",
+        },
+        select: { id: true },
+      });
+
+      if (!bookingPaymentType) {
+        throw Object.assign(
+          new Error("Payment type (Booking Amount) not found for this vendor"),
+          { statusCode: 404 },
+        );
+      }
+
+      const existingPayment = await tx.paymentInfo.findFirst({
+        where: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          payment_type_id: bookingPaymentType.id,
+          is_booking_received_amt: true,
+          product_type_id: data.product_type_id,
+        },
+        orderBy: { created_at: "desc" },
+        select: {
+          id: true,
+          basic_amount: true,
+          gst_percentage: true,
+          gst_amount: true,
+          total_amount: true,
+        },
+      });
+
+      if (!existingPayment) {
+        throw Object.assign(
+          new Error("Booking amount entry not found for the selected product type"),
+          { statusCode: 404 },
+        );
+      }
+
+      const currentTotalProject = Number(lead.total_project_amount ?? 0);
+      const currentPending = Number(lead.pending_amount ?? 0);
+      const overallReceivedAmount = Math.max(
+        currentTotalProject - currentPending,
+        0,
+      );
+
+      const productPayments = await tx.paymentInfo.aggregate({
+        where: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          product_type_id: data.product_type_id,
+        },
+        _sum: {
+          amount: true,
+        },
+      });
+
+      const productReceivedAmount = Number(productPayments._sum.amount ?? 0);
+
+      if (data.basic_amount < productReceivedAmount) {
+        throw Object.assign(
+          new Error(
+            `Basic amount cannot be less than received amount (₹${productReceivedAmount.toLocaleString("en-IN")})`,
+          ),
+          { statusCode: 400 },
+        );
+      }
+
+      const gstPercentage = Number(existingPayment.gst_percentage ?? 0);
+      const updatedGstAmount =
+        gstPercentage > 0 ? (data.basic_amount * gstPercentage) / 100 : 0;
+      const updatedTotalAmount = data.basic_amount + updatedGstAmount;
+
+      await tx.paymentInfo.update({
+        where: { id: existingPayment.id },
+        data: {
+          basic_amount: data.basic_amount,
+          gst_amount: updatedGstAmount,
+          total_amount: updatedTotalAmount,
+        },
+      });
+
+      const totalAggregate = await tx.paymentInfo.aggregate({
+        where: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          payment_type_id: bookingPaymentType.id,
+          is_booking_received_amt: true,
+        },
+        _sum: {
+          total_amount: true,
+        },
+      });
+
+      const updatedLeadTotalProject = Number(
+        totalAggregate._sum.total_amount ?? 0,
+      );
+      const updatedLeadPending = updatedLeadTotalProject - overallReceivedAmount;
+
+      if (updatedLeadPending < 0) {
+        throw Object.assign(
+          new Error(
+            "Basic amount cannot be reduced below the amount already received",
+          ),
+          { statusCode: 400 },
+        );
+      }
+
+      const updatedLead = await tx.leadMaster.update({
+        where: { id: lead.id },
+        data: {
+          total_project_amount: updatedLeadTotalProject,
+          pending_amount: updatedLeadPending,
+          updated_by: data.updated_by,
+          updated_at: new Date(),
+        },
+        select: {
+          id: true,
+          total_project_amount: true,
+          pending_amount: true,
+          updated_at: true,
+        },
+      });
+
+      await createLeadLog(tx as any, {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        account_id: lead.account_id,
+        product_type_id: data.product_type_id,
+        action: `Basic amount updated to ₹${data.basic_amount.toLocaleString("en-IN")} for product type ${data.product_type_id}.`,
+        action_type: "UPDATE",
+        created_by: data.updated_by,
+        created_at: new Date(),
+      });
+
+      return {
+        ...updatedLead,
+        gst_percentage: gstPercentage,
+        gst_amount: updatedGstAmount,
+        product_received_amount: productReceivedAmount,
+        total_amount: updatedTotalAmount,
+      };
+    });
+  }
+
+  public async updateGstPercentage(data: {
+    lead_id: number;
+    vendor_id: number;
+    gst_percentage: number;
+    updated_by: number;
+    product_type_id: number;
+  }) {
+    return await prisma.$transaction(async (tx) => {
+      const lead = await tx.leadMaster.findFirst({
+        where: {
+          id: data.lead_id,
+          vendor_id: data.vendor_id,
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+          account_id: true,
+          total_project_amount: true,
+          pending_amount: true,
+        },
+      });
+
+      if (!lead) {
+        throw Object.assign(
+          new Error(
+            `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`,
+          ),
+          { statusCode: 404 },
+        );
+      }
+
+      if (lead.account_id == null) {
+        throw Object.assign(
+          new Error(`Lead ${data.lead_id} does not have a valid account`),
+          { statusCode: 400 },
+        );
+      }
+
+      if (![0, 5, 12, 18, 28].includes(data.gst_percentage)) {
+        throw Object.assign(new Error("Invalid GST percentage selected"), {
+          statusCode: 400,
+        });
+      }
+
+      const bookingPaymentType = await tx.paymentTypeMaster.findFirst({
+        where: {
+          vendor_id: data.vendor_id,
+          tag: "Type 2",
+        },
+        select: { id: true },
+      });
+
+      if (!bookingPaymentType) {
+        throw Object.assign(
+          new Error("Payment type (Booking Amount) not found for this vendor"),
+          { statusCode: 404 },
+        );
+      }
+
+      const existingPayment = await tx.paymentInfo.findFirst({
+        where: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          payment_type_id: bookingPaymentType.id,
+          is_booking_received_amt: true,
+          product_type_id: data.product_type_id,
+        },
+        orderBy: { created_at: "desc" },
+        select: {
+          id: true,
+          basic_amount: true,
+        },
+      });
+
+      if (!existingPayment) {
+        throw Object.assign(
+          new Error("Booking amount entry not found for the selected product type"),
+          { statusCode: 404 },
+        );
+      }
+
+      const currentTotalProject = Number(lead.total_project_amount ?? 0);
+      const currentPending = Number(lead.pending_amount ?? 0);
+      const overallReceivedAmount = Math.max(
+        currentTotalProject - currentPending,
+        0,
+      );
+
+      const basicAmount = Number(existingPayment.basic_amount ?? 0);
+      const updatedGstAmount =
+        data.gst_percentage > 0 ? (basicAmount * data.gst_percentage) / 100 : 0;
+      const updatedTotalAmount = basicAmount + updatedGstAmount;
+
+      await tx.paymentInfo.update({
+        where: { id: existingPayment.id },
+        data: {
+          gst_percentage: data.gst_percentage,
+          gst_amount: updatedGstAmount,
+          total_amount: updatedTotalAmount,
+        },
+      });
+
+      const totalAggregate = await tx.paymentInfo.aggregate({
+        where: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          payment_type_id: bookingPaymentType.id,
+          is_booking_received_amt: true,
+        },
+        _sum: {
+          total_amount: true,
+        },
+      });
+
+      const updatedLeadTotalProject = Number(
+        totalAggregate._sum.total_amount ?? 0,
+      );
+      const updatedLeadPending = updatedLeadTotalProject - overallReceivedAmount;
+
+      if (updatedLeadPending < 0) {
+        throw Object.assign(
+          new Error(
+            "GST update cannot reduce total project amount below the amount already received",
+          ),
+          { statusCode: 400 },
+        );
+      }
+
+      const updatedLead = await tx.leadMaster.update({
+        where: { id: lead.id },
+        data: {
+          total_project_amount: updatedLeadTotalProject,
+          pending_amount: updatedLeadPending,
+          updated_by: data.updated_by,
+          updated_at: new Date(),
+        },
+        select: {
+          id: true,
+          total_project_amount: true,
+          pending_amount: true,
+          updated_at: true,
+        },
+      });
+
+      await createLeadLog(tx as any, {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        account_id: lead.account_id,
+        product_type_id: data.product_type_id,
+        action: `GST percentage updated to ${data.gst_percentage}% for product type ${data.product_type_id}.`,
+        action_type: "UPDATE",
+        created_by: data.updated_by,
+        created_at: new Date(),
+      });
+
+      return {
+        ...updatedLead,
+        basic_amount: basicAmount,
+        gst_percentage: data.gst_percentage,
+        gst_amount: updatedGstAmount,
+        total_amount: updatedTotalAmount,
+      };
+    });
+  }
+
+  public async updatePaymentAmount(data: {
+    lead_id: number;
+    vendor_id: number;
+    payment_id: number;
+    amount: number;
+    updated_by: number;
+    product_type_id: number;
+  }) {
+    return await prisma.$transaction(async (tx) => {
+      const lead = await tx.leadMaster.findFirst({
+        where: {
+          id: data.lead_id,
+          vendor_id: data.vendor_id,
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+          account_id: true,
+          booking_amount: true,
+          total_project_amount: true,
+          pending_amount: true,
+        },
+      });
+
+      if (!lead) {
+        throw Object.assign(
+          new Error(
+            `Lead ${data.lead_id} not found for vendor ${data.vendor_id}`,
+          ),
+          { statusCode: 404 },
+        );
+      }
+
+      if (lead.account_id == null) {
+        throw Object.assign(
+          new Error(`Lead ${data.lead_id} does not have a valid account`),
+          { statusCode: 400 },
+        );
+      }
+
+      if (data.amount < 1) {
+        throw Object.assign(
+          new Error("Amount received must be at least ₹1"),
+          { statusCode: 400 },
+        );
+      }
+
+      const payment = await tx.paymentInfo.findFirst({
+        where: {
+          id: data.payment_id,
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          product_type_id: data.product_type_id,
+        },
+        select: {
+          id: true,
+          amount: true,
+          is_booking_received_amt: true,
+          product_type_id: true,
+        },
+      });
+
+      if (!payment) {
+        throw Object.assign(
+          new Error("Payment record not found for the selected product type"),
+          { statusCode: 404 },
+        );
+      }
+
+      const bookingPayment = await tx.paymentInfo.findFirst({
+        where: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          product_type_id: data.product_type_id,
+          is_booking_received_amt: true,
+        },
+        orderBy: { created_at: "desc" },
+        select: {
+          total_amount: true,
+        },
+      });
+
+      const productTotalAmount = Number(bookingPayment?.total_amount ?? 0);
+      if (productTotalAmount <= 0) {
+        throw Object.assign(
+          new Error("Total project amount is not available for this product type"),
+          { statusCode: 400 },
+        );
+      }
+
+      const paymentTotals = await tx.paymentInfo.aggregate({
+        where: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          product_type_id: data.product_type_id,
+        },
+        _sum: {
+          amount: true,
+        },
+      });
+
+      const currentProductReceived = Number(paymentTotals._sum.amount ?? 0);
+      const currentPaymentAmount = Number(payment.amount ?? 0);
+      const currentProductPending = Math.max(
+        productTotalAmount - currentProductReceived,
+        0,
+      );
+      const maxEditableAmount = currentPaymentAmount + currentProductPending;
+
+      if (data.amount > maxEditableAmount) {
+        throw Object.assign(
+          new Error(
+            `Amount cannot exceed ₹${maxEditableAmount.toLocaleString("en-IN")} for this product type`,
+          ),
+          { statusCode: 400 },
+        );
+      }
+
+      const paymentDelta = data.amount - currentPaymentAmount;
+      const updatedLeadPending = Number(lead.pending_amount ?? 0) - paymentDelta;
+
+      if (updatedLeadPending < 0) {
+        throw Object.assign(
+          new Error("Amount cannot exceed the remaining pending amount"),
+          { statusCode: 400 },
+        );
+      }
+
+      await tx.paymentInfo.update({
+        where: { id: payment.id },
+        data: {
+          amount: data.amount,
+        },
+      });
+
+      const bookingAmountAggregate = await tx.paymentInfo.aggregate({
+        where: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          is_booking_received_amt: true,
+        },
+        _sum: {
+          amount: true,
+        },
+      });
+
+      const updatedLead = await tx.leadMaster.update({
+        where: { id: lead.id },
+        data: {
+          booking_amount: Number(bookingAmountAggregate._sum.amount ?? 0),
+          pending_amount: updatedLeadPending,
+          updated_by: data.updated_by,
+          updated_at: new Date(),
+        },
+        select: {
+          id: true,
+          booking_amount: true,
+          pending_amount: true,
+          updated_at: true,
+        },
+      });
+
+      await createLeadLog(tx as any, {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        account_id: lead.account_id,
+        product_type_id: data.product_type_id,
+        action: `Amount received updated to ₹${data.amount.toLocaleString("en-IN")} for product type ${data.product_type_id}.`,
+        action_type: "UPDATE",
+        created_by: data.updated_by,
+        created_at: new Date(),
+      });
+
+      return updatedLead;
     });
   }
 
@@ -3128,6 +3925,7 @@ export class BookingStageService {
     vendorId: number,
     userId: number,
     franchiseId: number | undefined,
+    franchiseIds: number[] | undefined,
     tag?: string,
     page: number = 1,
     limit: number = 10,
@@ -3153,6 +3951,8 @@ export class BookingStageService {
       date_range?: { from: string; to: string };
       production_status?: string;
       pending_services?: boolean;
+      franchise_ids?: number[];
+      franchises?: number[];
     } = {},
     options: {
       requireMiscellaneous?: boolean;
@@ -3163,6 +3963,7 @@ export class BookingStageService {
       vendorId,
       userId,
       franchiseId,
+      franchiseIds,
       tag,
       page,
       limit,
@@ -3171,10 +3972,13 @@ export class BookingStageService {
       vendorId,
       userId,
       franchiseId,
+      franchiseIds,
       tag,
       page,
       limit,
     });
+    const normalizedFranchises =
+      filters.franchises ?? filters.franchise_ids;
 
     if (!tag) {
       throw new Error("Status tag is required to fetch universal table data");
@@ -3282,12 +4086,12 @@ export class BookingStageService {
       normalizedUserType === "auditor" ||
       normalizedUserType === "sales-executive";
     const skip = (page - 1) * limit;
-    const orderBy = {
-      created_at:
-        filters.created_at === "asc"
-          ? Prisma.SortOrder.asc
-          : Prisma.SortOrder.desc,
-    };
+    const sortDir = filters.created_at === "asc" ? Prisma.SortOrder.asc : Prisma.SortOrder.desc;
+    const orderBy: Prisma.LeadMasterOrderByWithRelationInput[] = [
+      { updated_at: sortDir },
+      { created_at: sortDir },
+      { id: sortDir },
+    ];
     const normalizedStageTag = String(tag || "").trim();
     const includeConfig = BookingStageService.leadIncludes(normalizedStageTag);
     const shouldApplyStageSort =
@@ -3327,10 +4131,7 @@ export class BookingStageService {
         return { numbers, strings };
       };
 
-      const leadCode = toString(filters.filter_lead_code);
-      if (leadCode) {
-        addAnd({ lead_code: { contains: leadCode, mode: "insensitive" } });
-      }
+
 
       const nameFilter = toString(filters.filter_name);
       if (nameFilter) {
@@ -3541,6 +4342,20 @@ export class BookingStageService {
           addAnd({
             assign_to: {
               in: assignIds,
+            },
+          });
+        }
+      }
+
+      if (Array.isArray(normalizedFranchises) && normalizedFranchises.length > 0) {
+        const franchiseIds = normalizedFranchises
+          .map(Number)
+          .filter((id) => !Number.isNaN(id));
+
+        if (franchiseIds.length > 0) {
+          addAnd({
+            franchise_id: {
+              in: franchiseIds,
             },
           });
         }
@@ -3762,7 +4577,11 @@ export class BookingStageService {
           ? "onGoing"
           : { in: ["onGoing", "lostApproval"] },
       };
+      const hasExplicitFranchiseFilter =
+        Array.isArray(normalizedFranchises) && normalizedFranchises.length > 0;
+
       const includeFranchise =
+        !hasExplicitFranchiseFilter &&
         (isType4To16 ? shouldIncludeFranchiseByRole : shouldIncludeFranchise) &&
         franchiseId &&
         !ignoreFranchiseForStage;
@@ -4111,10 +4930,7 @@ export class BookingStageService {
         return { numbers, strings };
       };
 
-      const leadCode = toString(filters.filter_lead_code);
-      if (leadCode) {
-        addAnd({ lead_code: { contains: leadCode, mode: "insensitive" } });
-      }
+
 
       const nameFilter = toString(filters.filter_name);
       if (nameFilter) {

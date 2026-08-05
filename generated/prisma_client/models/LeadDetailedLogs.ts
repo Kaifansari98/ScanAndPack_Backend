@@ -32,6 +32,7 @@ export type LeadDetailedLogsAvgAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   task_id: number | null
+  product_type_id: number | null
   stage_id: number | null
   created_by: number | null
 }
@@ -42,6 +43,7 @@ export type LeadDetailedLogsSumAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   task_id: number | null
+  product_type_id: number | null
   stage_id: number | null
   created_by: number | null
 }
@@ -52,6 +54,7 @@ export type LeadDetailedLogsMinAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   task_id: number | null
+  product_type_id: number | null
   action: string | null
   action_type: $Enums.ActionType | null
   history_type: $Enums.HistoryType | null
@@ -66,6 +69,7 @@ export type LeadDetailedLogsMaxAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   task_id: number | null
+  product_type_id: number | null
   action: string | null
   action_type: $Enums.ActionType | null
   history_type: $Enums.HistoryType | null
@@ -80,6 +84,7 @@ export type LeadDetailedLogsCountAggregateOutputType = {
   lead_id: number
   account_id: number
   task_id: number
+  product_type_id: number
   action: number
   action_type: number
   history_type: number
@@ -96,6 +101,7 @@ export type LeadDetailedLogsAvgAggregateInputType = {
   lead_id?: true
   account_id?: true
   task_id?: true
+  product_type_id?: true
   stage_id?: true
   created_by?: true
 }
@@ -106,6 +112,7 @@ export type LeadDetailedLogsSumAggregateInputType = {
   lead_id?: true
   account_id?: true
   task_id?: true
+  product_type_id?: true
   stage_id?: true
   created_by?: true
 }
@@ -116,6 +123,7 @@ export type LeadDetailedLogsMinAggregateInputType = {
   lead_id?: true
   account_id?: true
   task_id?: true
+  product_type_id?: true
   action?: true
   action_type?: true
   history_type?: true
@@ -130,6 +138,7 @@ export type LeadDetailedLogsMaxAggregateInputType = {
   lead_id?: true
   account_id?: true
   task_id?: true
+  product_type_id?: true
   action?: true
   action_type?: true
   history_type?: true
@@ -144,6 +153,7 @@ export type LeadDetailedLogsCountAggregateInputType = {
   lead_id?: true
   account_id?: true
   task_id?: true
+  product_type_id?: true
   action?: true
   action_type?: true
   history_type?: true
@@ -245,6 +255,7 @@ export type LeadDetailedLogsGroupByOutputType = {
   lead_id: number
   account_id: number
   task_id: number | null
+  product_type_id: number | null
   action: string
   action_type: $Enums.ActionType
   history_type: $Enums.HistoryType
@@ -282,6 +293,7 @@ export type LeadDetailedLogsWhereInput = {
   lead_id?: Prisma.IntFilter<"LeadDetailedLogs"> | number
   account_id?: Prisma.IntFilter<"LeadDetailedLogs"> | number
   task_id?: Prisma.IntNullableFilter<"LeadDetailedLogs"> | number | null
+  product_type_id?: Prisma.IntNullableFilter<"LeadDetailedLogs"> | number | null
   action?: Prisma.StringFilter<"LeadDetailedLogs"> | string
   action_type?: Prisma.EnumActionTypeFilter<"LeadDetailedLogs"> | $Enums.ActionType
   history_type?: Prisma.EnumHistoryTypeFilter<"LeadDetailedLogs"> | $Enums.HistoryType
@@ -291,6 +303,7 @@ export type LeadDetailedLogsWhereInput = {
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  productType?: Prisma.XOR<Prisma.ProductTypeMasterNullableScalarRelationFilter, Prisma.ProductTypeMasterWhereInput> | null
   stage?: Prisma.XOR<Prisma.StatusTypeMasterNullableScalarRelationFilter, Prisma.StatusTypeMasterWhereInput> | null
   task?: Prisma.XOR<Prisma.UserLeadTaskNullableScalarRelationFilter, Prisma.UserLeadTaskWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -303,6 +316,7 @@ export type LeadDetailedLogsOrderByWithRelationInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   task_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  product_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
   action?: Prisma.SortOrder
   action_type?: Prisma.SortOrder
   history_type?: Prisma.SortOrder
@@ -312,6 +326,7 @@ export type LeadDetailedLogsOrderByWithRelationInput = {
   account?: Prisma.AccountMasterOrderByWithRelationInput
   user?: Prisma.UserMasterOrderByWithRelationInput
   lead?: Prisma.LeadMasterOrderByWithRelationInput
+  productType?: Prisma.ProductTypeMasterOrderByWithRelationInput
   stage?: Prisma.StatusTypeMasterOrderByWithRelationInput
   task?: Prisma.UserLeadTaskOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
@@ -327,6 +342,7 @@ export type LeadDetailedLogsWhereUniqueInput = Prisma.AtLeast<{
   lead_id?: Prisma.IntFilter<"LeadDetailedLogs"> | number
   account_id?: Prisma.IntFilter<"LeadDetailedLogs"> | number
   task_id?: Prisma.IntNullableFilter<"LeadDetailedLogs"> | number | null
+  product_type_id?: Prisma.IntNullableFilter<"LeadDetailedLogs"> | number | null
   action?: Prisma.StringFilter<"LeadDetailedLogs"> | string
   action_type?: Prisma.EnumActionTypeFilter<"LeadDetailedLogs"> | $Enums.ActionType
   history_type?: Prisma.EnumHistoryTypeFilter<"LeadDetailedLogs"> | $Enums.HistoryType
@@ -336,6 +352,7 @@ export type LeadDetailedLogsWhereUniqueInput = Prisma.AtLeast<{
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  productType?: Prisma.XOR<Prisma.ProductTypeMasterNullableScalarRelationFilter, Prisma.ProductTypeMasterWhereInput> | null
   stage?: Prisma.XOR<Prisma.StatusTypeMasterNullableScalarRelationFilter, Prisma.StatusTypeMasterWhereInput> | null
   task?: Prisma.XOR<Prisma.UserLeadTaskNullableScalarRelationFilter, Prisma.UserLeadTaskWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -348,6 +365,7 @@ export type LeadDetailedLogsOrderByWithAggregationInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   task_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  product_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
   action?: Prisma.SortOrder
   action_type?: Prisma.SortOrder
   history_type?: Prisma.SortOrder
@@ -370,6 +388,7 @@ export type LeadDetailedLogsScalarWhereWithAggregatesInput = {
   lead_id?: Prisma.IntWithAggregatesFilter<"LeadDetailedLogs"> | number
   account_id?: Prisma.IntWithAggregatesFilter<"LeadDetailedLogs"> | number
   task_id?: Prisma.IntNullableWithAggregatesFilter<"LeadDetailedLogs"> | number | null
+  product_type_id?: Prisma.IntNullableWithAggregatesFilter<"LeadDetailedLogs"> | number | null
   action?: Prisma.StringWithAggregatesFilter<"LeadDetailedLogs"> | string
   action_type?: Prisma.EnumActionTypeWithAggregatesFilter<"LeadDetailedLogs"> | $Enums.ActionType
   history_type?: Prisma.EnumHistoryTypeWithAggregatesFilter<"LeadDetailedLogs"> | $Enums.HistoryType
@@ -386,6 +405,7 @@ export type LeadDetailedLogsCreateInput = {
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadDetailedLogsInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadDetailedLogsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDetailedLogsInput
+  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDetailedLogsInput
   stage?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadDetailedLogsInput
   task?: Prisma.UserLeadTaskCreateNestedOneWithoutDetailedLogsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDetailedLogsInput
@@ -398,6 +418,7 @@ export type LeadDetailedLogsUncheckedCreateInput = {
   lead_id: number
   account_id: number
   task_id?: number | null
+  product_type_id?: number | null
   action: string
   action_type: $Enums.ActionType
   history_type?: $Enums.HistoryType
@@ -415,6 +436,7 @@ export type LeadDetailedLogsUpdateInput = {
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneWithoutDetailedLogsNestedInput
   stage?: Prisma.StatusTypeMasterUpdateOneWithoutLeadDetailedLogsNestedInput
   task?: Prisma.UserLeadTaskUpdateOneWithoutDetailedLogsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
@@ -427,6 +449,7 @@ export type LeadDetailedLogsUncheckedUpdateInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.StringFieldUpdateOperationsInput | string
   action_type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
   history_type?: Prisma.EnumHistoryTypeFieldUpdateOperationsInput | $Enums.HistoryType
@@ -442,6 +465,7 @@ export type LeadDetailedLogsCreateManyInput = {
   lead_id: number
   account_id: number
   task_id?: number | null
+  product_type_id?: number | null
   action: string
   action_type: $Enums.ActionType
   history_type?: $Enums.HistoryType
@@ -463,6 +487,7 @@ export type LeadDetailedLogsUncheckedUpdateManyInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.StringFieldUpdateOperationsInput | string
   action_type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
   history_type?: Prisma.EnumHistoryTypeFieldUpdateOperationsInput | $Enums.HistoryType
@@ -487,6 +512,7 @@ export type LeadDetailedLogsCountOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   task_id?: Prisma.SortOrder
+  product_type_id?: Prisma.SortOrder
   action?: Prisma.SortOrder
   action_type?: Prisma.SortOrder
   history_type?: Prisma.SortOrder
@@ -501,6 +527,7 @@ export type LeadDetailedLogsAvgOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   task_id?: Prisma.SortOrder
+  product_type_id?: Prisma.SortOrder
   stage_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -511,6 +538,7 @@ export type LeadDetailedLogsMaxOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   task_id?: Prisma.SortOrder
+  product_type_id?: Prisma.SortOrder
   action?: Prisma.SortOrder
   action_type?: Prisma.SortOrder
   history_type?: Prisma.SortOrder
@@ -525,6 +553,7 @@ export type LeadDetailedLogsMinOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   task_id?: Prisma.SortOrder
+  product_type_id?: Prisma.SortOrder
   action?: Prisma.SortOrder
   action_type?: Prisma.SortOrder
   history_type?: Prisma.SortOrder
@@ -539,6 +568,7 @@ export type LeadDetailedLogsSumOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   task_id?: Prisma.SortOrder
+  product_type_id?: Prisma.SortOrder
   stage_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -716,6 +746,48 @@ export type LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput = {
   deleteMany?: Prisma.LeadDetailedLogsScalarWhereInput | Prisma.LeadDetailedLogsScalarWhereInput[]
 }
 
+export type LeadDetailedLogsCreateNestedManyWithoutProductTypeInput = {
+  create?: Prisma.XOR<Prisma.LeadDetailedLogsCreateWithoutProductTypeInput, Prisma.LeadDetailedLogsUncheckedCreateWithoutProductTypeInput> | Prisma.LeadDetailedLogsCreateWithoutProductTypeInput[] | Prisma.LeadDetailedLogsUncheckedCreateWithoutProductTypeInput[]
+  connectOrCreate?: Prisma.LeadDetailedLogsCreateOrConnectWithoutProductTypeInput | Prisma.LeadDetailedLogsCreateOrConnectWithoutProductTypeInput[]
+  createMany?: Prisma.LeadDetailedLogsCreateManyProductTypeInputEnvelope
+  connect?: Prisma.LeadDetailedLogsWhereUniqueInput | Prisma.LeadDetailedLogsWhereUniqueInput[]
+}
+
+export type LeadDetailedLogsUncheckedCreateNestedManyWithoutProductTypeInput = {
+  create?: Prisma.XOR<Prisma.LeadDetailedLogsCreateWithoutProductTypeInput, Prisma.LeadDetailedLogsUncheckedCreateWithoutProductTypeInput> | Prisma.LeadDetailedLogsCreateWithoutProductTypeInput[] | Prisma.LeadDetailedLogsUncheckedCreateWithoutProductTypeInput[]
+  connectOrCreate?: Prisma.LeadDetailedLogsCreateOrConnectWithoutProductTypeInput | Prisma.LeadDetailedLogsCreateOrConnectWithoutProductTypeInput[]
+  createMany?: Prisma.LeadDetailedLogsCreateManyProductTypeInputEnvelope
+  connect?: Prisma.LeadDetailedLogsWhereUniqueInput | Prisma.LeadDetailedLogsWhereUniqueInput[]
+}
+
+export type LeadDetailedLogsUpdateManyWithoutProductTypeNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadDetailedLogsCreateWithoutProductTypeInput, Prisma.LeadDetailedLogsUncheckedCreateWithoutProductTypeInput> | Prisma.LeadDetailedLogsCreateWithoutProductTypeInput[] | Prisma.LeadDetailedLogsUncheckedCreateWithoutProductTypeInput[]
+  connectOrCreate?: Prisma.LeadDetailedLogsCreateOrConnectWithoutProductTypeInput | Prisma.LeadDetailedLogsCreateOrConnectWithoutProductTypeInput[]
+  upsert?: Prisma.LeadDetailedLogsUpsertWithWhereUniqueWithoutProductTypeInput | Prisma.LeadDetailedLogsUpsertWithWhereUniqueWithoutProductTypeInput[]
+  createMany?: Prisma.LeadDetailedLogsCreateManyProductTypeInputEnvelope
+  set?: Prisma.LeadDetailedLogsWhereUniqueInput | Prisma.LeadDetailedLogsWhereUniqueInput[]
+  disconnect?: Prisma.LeadDetailedLogsWhereUniqueInput | Prisma.LeadDetailedLogsWhereUniqueInput[]
+  delete?: Prisma.LeadDetailedLogsWhereUniqueInput | Prisma.LeadDetailedLogsWhereUniqueInput[]
+  connect?: Prisma.LeadDetailedLogsWhereUniqueInput | Prisma.LeadDetailedLogsWhereUniqueInput[]
+  update?: Prisma.LeadDetailedLogsUpdateWithWhereUniqueWithoutProductTypeInput | Prisma.LeadDetailedLogsUpdateWithWhereUniqueWithoutProductTypeInput[]
+  updateMany?: Prisma.LeadDetailedLogsUpdateManyWithWhereWithoutProductTypeInput | Prisma.LeadDetailedLogsUpdateManyWithWhereWithoutProductTypeInput[]
+  deleteMany?: Prisma.LeadDetailedLogsScalarWhereInput | Prisma.LeadDetailedLogsScalarWhereInput[]
+}
+
+export type LeadDetailedLogsUncheckedUpdateManyWithoutProductTypeNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadDetailedLogsCreateWithoutProductTypeInput, Prisma.LeadDetailedLogsUncheckedCreateWithoutProductTypeInput> | Prisma.LeadDetailedLogsCreateWithoutProductTypeInput[] | Prisma.LeadDetailedLogsUncheckedCreateWithoutProductTypeInput[]
+  connectOrCreate?: Prisma.LeadDetailedLogsCreateOrConnectWithoutProductTypeInput | Prisma.LeadDetailedLogsCreateOrConnectWithoutProductTypeInput[]
+  upsert?: Prisma.LeadDetailedLogsUpsertWithWhereUniqueWithoutProductTypeInput | Prisma.LeadDetailedLogsUpsertWithWhereUniqueWithoutProductTypeInput[]
+  createMany?: Prisma.LeadDetailedLogsCreateManyProductTypeInputEnvelope
+  set?: Prisma.LeadDetailedLogsWhereUniqueInput | Prisma.LeadDetailedLogsWhereUniqueInput[]
+  disconnect?: Prisma.LeadDetailedLogsWhereUniqueInput | Prisma.LeadDetailedLogsWhereUniqueInput[]
+  delete?: Prisma.LeadDetailedLogsWhereUniqueInput | Prisma.LeadDetailedLogsWhereUniqueInput[]
+  connect?: Prisma.LeadDetailedLogsWhereUniqueInput | Prisma.LeadDetailedLogsWhereUniqueInput[]
+  update?: Prisma.LeadDetailedLogsUpdateWithWhereUniqueWithoutProductTypeInput | Prisma.LeadDetailedLogsUpdateWithWhereUniqueWithoutProductTypeInput[]
+  updateMany?: Prisma.LeadDetailedLogsUpdateManyWithWhereWithoutProductTypeInput | Prisma.LeadDetailedLogsUpdateManyWithWhereWithoutProductTypeInput[]
+  deleteMany?: Prisma.LeadDetailedLogsScalarWhereInput | Prisma.LeadDetailedLogsScalarWhereInput[]
+}
+
 export type LeadDetailedLogsCreateNestedManyWithoutStageInput = {
   create?: Prisma.XOR<Prisma.LeadDetailedLogsCreateWithoutStageInput, Prisma.LeadDetailedLogsUncheckedCreateWithoutStageInput> | Prisma.LeadDetailedLogsCreateWithoutStageInput[] | Prisma.LeadDetailedLogsUncheckedCreateWithoutStageInput[]
   connectOrCreate?: Prisma.LeadDetailedLogsCreateOrConnectWithoutStageInput | Prisma.LeadDetailedLogsCreateOrConnectWithoutStageInput[]
@@ -830,6 +902,7 @@ export type LeadDetailedLogsCreateWithoutVendorInput = {
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadDetailedLogsInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadDetailedLogsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDetailedLogsInput
+  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDetailedLogsInput
   stage?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadDetailedLogsInput
   task?: Prisma.UserLeadTaskCreateNestedOneWithoutDetailedLogsInput
   docLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDetailed_logInput
@@ -840,6 +913,7 @@ export type LeadDetailedLogsUncheckedCreateWithoutVendorInput = {
   lead_id: number
   account_id: number
   task_id?: number | null
+  product_type_id?: number | null
   action: string
   action_type: $Enums.ActionType
   history_type?: $Enums.HistoryType
@@ -884,6 +958,7 @@ export type LeadDetailedLogsScalarWhereInput = {
   lead_id?: Prisma.IntFilter<"LeadDetailedLogs"> | number
   account_id?: Prisma.IntFilter<"LeadDetailedLogs"> | number
   task_id?: Prisma.IntNullableFilter<"LeadDetailedLogs"> | number | null
+  product_type_id?: Prisma.IntNullableFilter<"LeadDetailedLogs"> | number | null
   action?: Prisma.StringFilter<"LeadDetailedLogs"> | string
   action_type?: Prisma.EnumActionTypeFilter<"LeadDetailedLogs"> | $Enums.ActionType
   history_type?: Prisma.EnumHistoryTypeFilter<"LeadDetailedLogs"> | $Enums.HistoryType
@@ -899,6 +974,7 @@ export type LeadDetailedLogsCreateWithoutUserInput = {
   created_at?: Date | string
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadDetailedLogsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDetailedLogsInput
+  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDetailedLogsInput
   stage?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadDetailedLogsInput
   task?: Prisma.UserLeadTaskCreateNestedOneWithoutDetailedLogsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDetailedLogsInput
@@ -911,6 +987,7 @@ export type LeadDetailedLogsUncheckedCreateWithoutUserInput = {
   lead_id: number
   account_id: number
   task_id?: number | null
+  product_type_id?: number | null
   action: string
   action_type: $Enums.ActionType
   history_type?: $Enums.HistoryType
@@ -952,6 +1029,7 @@ export type LeadDetailedLogsCreateWithoutLeadInput = {
   created_at?: Date | string
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadDetailedLogsInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadDetailedLogsInput
+  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDetailedLogsInput
   stage?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadDetailedLogsInput
   task?: Prisma.UserLeadTaskCreateNestedOneWithoutDetailedLogsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDetailedLogsInput
@@ -963,6 +1041,7 @@ export type LeadDetailedLogsUncheckedCreateWithoutLeadInput = {
   vendor_id: number
   account_id: number
   task_id?: number | null
+  product_type_id?: number | null
   action: string
   action_type: $Enums.ActionType
   history_type?: $Enums.HistoryType
@@ -1005,6 +1084,7 @@ export type LeadDetailedLogsCreateWithoutAccountInput = {
   created_at?: Date | string
   user: Prisma.UserMasterCreateNestedOneWithoutLeadDetailedLogsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDetailedLogsInput
+  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDetailedLogsInput
   stage?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadDetailedLogsInput
   task?: Prisma.UserLeadTaskCreateNestedOneWithoutDetailedLogsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDetailedLogsInput
@@ -1016,6 +1096,7 @@ export type LeadDetailedLogsUncheckedCreateWithoutAccountInput = {
   vendor_id: number
   lead_id: number
   task_id?: number | null
+  product_type_id?: number | null
   action: string
   action_type: $Enums.ActionType
   history_type?: $Enums.HistoryType
@@ -1051,6 +1132,61 @@ export type LeadDetailedLogsUpdateManyWithWhereWithoutAccountInput = {
   data: Prisma.XOR<Prisma.LeadDetailedLogsUpdateManyMutationInput, Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountInput>
 }
 
+export type LeadDetailedLogsCreateWithoutProductTypeInput = {
+  action: string
+  action_type: $Enums.ActionType
+  history_type?: $Enums.HistoryType
+  created_at?: Date | string
+  account: Prisma.AccountMasterCreateNestedOneWithoutLeadDetailedLogsInput
+  user: Prisma.UserMasterCreateNestedOneWithoutLeadDetailedLogsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDetailedLogsInput
+  stage?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadDetailedLogsInput
+  task?: Prisma.UserLeadTaskCreateNestedOneWithoutDetailedLogsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDetailedLogsInput
+  docLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDetailed_logInput
+}
+
+export type LeadDetailedLogsUncheckedCreateWithoutProductTypeInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  task_id?: number | null
+  action: string
+  action_type: $Enums.ActionType
+  history_type?: $Enums.HistoryType
+  stage_id?: number | null
+  created_at?: Date | string
+  created_by: number
+  docLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDetailed_logInput
+}
+
+export type LeadDetailedLogsCreateOrConnectWithoutProductTypeInput = {
+  where: Prisma.LeadDetailedLogsWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadDetailedLogsCreateWithoutProductTypeInput, Prisma.LeadDetailedLogsUncheckedCreateWithoutProductTypeInput>
+}
+
+export type LeadDetailedLogsCreateManyProductTypeInputEnvelope = {
+  data: Prisma.LeadDetailedLogsCreateManyProductTypeInput | Prisma.LeadDetailedLogsCreateManyProductTypeInput[]
+  skipDuplicates?: boolean
+}
+
+export type LeadDetailedLogsUpsertWithWhereUniqueWithoutProductTypeInput = {
+  where: Prisma.LeadDetailedLogsWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeadDetailedLogsUpdateWithoutProductTypeInput, Prisma.LeadDetailedLogsUncheckedUpdateWithoutProductTypeInput>
+  create: Prisma.XOR<Prisma.LeadDetailedLogsCreateWithoutProductTypeInput, Prisma.LeadDetailedLogsUncheckedCreateWithoutProductTypeInput>
+}
+
+export type LeadDetailedLogsUpdateWithWhereUniqueWithoutProductTypeInput = {
+  where: Prisma.LeadDetailedLogsWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeadDetailedLogsUpdateWithoutProductTypeInput, Prisma.LeadDetailedLogsUncheckedUpdateWithoutProductTypeInput>
+}
+
+export type LeadDetailedLogsUpdateManyWithWhereWithoutProductTypeInput = {
+  where: Prisma.LeadDetailedLogsScalarWhereInput
+  data: Prisma.XOR<Prisma.LeadDetailedLogsUpdateManyMutationInput, Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutProductTypeInput>
+}
+
 export type LeadDetailedLogsCreateWithoutStageInput = {
   action: string
   action_type: $Enums.ActionType
@@ -1059,6 +1195,7 @@ export type LeadDetailedLogsCreateWithoutStageInput = {
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadDetailedLogsInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadDetailedLogsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDetailedLogsInput
+  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDetailedLogsInput
   task?: Prisma.UserLeadTaskCreateNestedOneWithoutDetailedLogsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDetailedLogsInput
   docLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDetailed_logInput
@@ -1070,6 +1207,7 @@ export type LeadDetailedLogsUncheckedCreateWithoutStageInput = {
   lead_id: number
   account_id: number
   task_id?: number | null
+  product_type_id?: number | null
   action: string
   action_type: $Enums.ActionType
   history_type?: $Enums.HistoryType
@@ -1112,6 +1250,7 @@ export type LeadDetailedLogsCreateWithoutTaskInput = {
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadDetailedLogsInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadDetailedLogsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDetailedLogsInput
+  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDetailedLogsInput
   stage?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadDetailedLogsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDetailedLogsInput
   docLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDetailed_logInput
@@ -1122,6 +1261,7 @@ export type LeadDetailedLogsUncheckedCreateWithoutTaskInput = {
   vendor_id: number
   lead_id: number
   account_id: number
+  product_type_id?: number | null
   action: string
   action_type: $Enums.ActionType
   history_type?: $Enums.HistoryType
@@ -1165,6 +1305,7 @@ export type LeadDetailedLogsCreateWithoutDocLogsInput = {
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadDetailedLogsInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadDetailedLogsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLeadDetailedLogsInput
+  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDetailedLogsInput
   stage?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadDetailedLogsInput
   task?: Prisma.UserLeadTaskCreateNestedOneWithoutDetailedLogsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadDetailedLogsInput
@@ -1176,6 +1317,7 @@ export type LeadDetailedLogsUncheckedCreateWithoutDocLogsInput = {
   lead_id: number
   account_id: number
   task_id?: number | null
+  product_type_id?: number | null
   action: string
   action_type: $Enums.ActionType
   history_type?: $Enums.HistoryType
@@ -1208,6 +1350,7 @@ export type LeadDetailedLogsUpdateWithoutDocLogsInput = {
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneWithoutDetailedLogsNestedInput
   stage?: Prisma.StatusTypeMasterUpdateOneWithoutLeadDetailedLogsNestedInput
   task?: Prisma.UserLeadTaskUpdateOneWithoutDetailedLogsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
@@ -1219,6 +1362,7 @@ export type LeadDetailedLogsUncheckedUpdateWithoutDocLogsInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.StringFieldUpdateOperationsInput | string
   action_type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
   history_type?: Prisma.EnumHistoryTypeFieldUpdateOperationsInput | $Enums.HistoryType
@@ -1232,6 +1376,7 @@ export type LeadDetailedLogsCreateManyVendorInput = {
   lead_id: number
   account_id: number
   task_id?: number | null
+  product_type_id?: number | null
   action: string
   action_type: $Enums.ActionType
   history_type?: $Enums.HistoryType
@@ -1248,6 +1393,7 @@ export type LeadDetailedLogsUpdateWithoutVendorInput = {
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneWithoutDetailedLogsNestedInput
   stage?: Prisma.StatusTypeMasterUpdateOneWithoutLeadDetailedLogsNestedInput
   task?: Prisma.UserLeadTaskUpdateOneWithoutDetailedLogsNestedInput
   docLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDetailed_logNestedInput
@@ -1258,6 +1404,7 @@ export type LeadDetailedLogsUncheckedUpdateWithoutVendorInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.StringFieldUpdateOperationsInput | string
   action_type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
   history_type?: Prisma.EnumHistoryTypeFieldUpdateOperationsInput | $Enums.HistoryType
@@ -1272,6 +1419,7 @@ export type LeadDetailedLogsUncheckedUpdateManyWithoutVendorInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.StringFieldUpdateOperationsInput | string
   action_type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
   history_type?: Prisma.EnumHistoryTypeFieldUpdateOperationsInput | $Enums.HistoryType
@@ -1286,6 +1434,7 @@ export type LeadDetailedLogsCreateManyUserInput = {
   lead_id: number
   account_id: number
   task_id?: number | null
+  product_type_id?: number | null
   action: string
   action_type: $Enums.ActionType
   history_type?: $Enums.HistoryType
@@ -1300,6 +1449,7 @@ export type LeadDetailedLogsUpdateWithoutUserInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneWithoutDetailedLogsNestedInput
   stage?: Prisma.StatusTypeMasterUpdateOneWithoutLeadDetailedLogsNestedInput
   task?: Prisma.UserLeadTaskUpdateOneWithoutDetailedLogsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
@@ -1312,6 +1462,7 @@ export type LeadDetailedLogsUncheckedUpdateWithoutUserInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.StringFieldUpdateOperationsInput | string
   action_type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
   history_type?: Prisma.EnumHistoryTypeFieldUpdateOperationsInput | $Enums.HistoryType
@@ -1326,6 +1477,7 @@ export type LeadDetailedLogsUncheckedUpdateManyWithoutUserInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.StringFieldUpdateOperationsInput | string
   action_type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
   history_type?: Prisma.EnumHistoryTypeFieldUpdateOperationsInput | $Enums.HistoryType
@@ -1338,6 +1490,7 @@ export type LeadDetailedLogsCreateManyLeadInput = {
   vendor_id: number
   account_id: number
   task_id?: number | null
+  product_type_id?: number | null
   action: string
   action_type: $Enums.ActionType
   history_type?: $Enums.HistoryType
@@ -1353,6 +1506,7 @@ export type LeadDetailedLogsUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneWithoutDetailedLogsNestedInput
   stage?: Prisma.StatusTypeMasterUpdateOneWithoutLeadDetailedLogsNestedInput
   task?: Prisma.UserLeadTaskUpdateOneWithoutDetailedLogsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
@@ -1364,6 +1518,7 @@ export type LeadDetailedLogsUncheckedUpdateWithoutLeadInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.StringFieldUpdateOperationsInput | string
   action_type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
   history_type?: Prisma.EnumHistoryTypeFieldUpdateOperationsInput | $Enums.HistoryType
@@ -1378,6 +1533,7 @@ export type LeadDetailedLogsUncheckedUpdateManyWithoutLeadInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.StringFieldUpdateOperationsInput | string
   action_type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
   history_type?: Prisma.EnumHistoryTypeFieldUpdateOperationsInput | $Enums.HistoryType
@@ -1391,6 +1547,7 @@ export type LeadDetailedLogsCreateManyAccountInput = {
   vendor_id: number
   lead_id: number
   task_id?: number | null
+  product_type_id?: number | null
   action: string
   action_type: $Enums.ActionType
   history_type?: $Enums.HistoryType
@@ -1406,6 +1563,7 @@ export type LeadDetailedLogsUpdateWithoutAccountInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneWithoutDetailedLogsNestedInput
   stage?: Prisma.StatusTypeMasterUpdateOneWithoutLeadDetailedLogsNestedInput
   task?: Prisma.UserLeadTaskUpdateOneWithoutDetailedLogsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
@@ -1417,6 +1575,7 @@ export type LeadDetailedLogsUncheckedUpdateWithoutAccountInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.StringFieldUpdateOperationsInput | string
   action_type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
   history_type?: Prisma.EnumHistoryTypeFieldUpdateOperationsInput | $Enums.HistoryType
@@ -1430,6 +1589,64 @@ export type LeadDetailedLogsUncheckedUpdateManyWithoutAccountInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  action?: Prisma.StringFieldUpdateOperationsInput | string
+  action_type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
+  history_type?: Prisma.EnumHistoryTypeFieldUpdateOperationsInput | $Enums.HistoryType
+  stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type LeadDetailedLogsCreateManyProductTypeInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  task_id?: number | null
+  action: string
+  action_type: $Enums.ActionType
+  history_type?: $Enums.HistoryType
+  stage_id?: number | null
+  created_at?: Date | string
+  created_by: number
+}
+
+export type LeadDetailedLogsUpdateWithoutProductTypeInput = {
+  action?: Prisma.StringFieldUpdateOperationsInput | string
+  action_type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
+  history_type?: Prisma.EnumHistoryTypeFieldUpdateOperationsInput | $Enums.HistoryType
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
+  stage?: Prisma.StatusTypeMasterUpdateOneWithoutLeadDetailedLogsNestedInput
+  task?: Prisma.UserLeadTaskUpdateOneWithoutDetailedLogsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
+  docLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDetailed_logNestedInput
+}
+
+export type LeadDetailedLogsUncheckedUpdateWithoutProductTypeInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  action?: Prisma.StringFieldUpdateOperationsInput | string
+  action_type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
+  history_type?: Prisma.EnumHistoryTypeFieldUpdateOperationsInput | $Enums.HistoryType
+  stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  docLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDetailed_logNestedInput
+}
+
+export type LeadDetailedLogsUncheckedUpdateManyWithoutProductTypeInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.StringFieldUpdateOperationsInput | string
   action_type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
@@ -1445,6 +1662,7 @@ export type LeadDetailedLogsCreateManyStageInput = {
   lead_id: number
   account_id: number
   task_id?: number | null
+  product_type_id?: number | null
   action: string
   action_type: $Enums.ActionType
   history_type?: $Enums.HistoryType
@@ -1460,6 +1678,7 @@ export type LeadDetailedLogsUpdateWithoutStageInput = {
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneWithoutDetailedLogsNestedInput
   task?: Prisma.UserLeadTaskUpdateOneWithoutDetailedLogsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
   docLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDetailed_logNestedInput
@@ -1471,6 +1690,7 @@ export type LeadDetailedLogsUncheckedUpdateWithoutStageInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.StringFieldUpdateOperationsInput | string
   action_type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
   history_type?: Prisma.EnumHistoryTypeFieldUpdateOperationsInput | $Enums.HistoryType
@@ -1485,6 +1705,7 @@ export type LeadDetailedLogsUncheckedUpdateManyWithoutStageInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.StringFieldUpdateOperationsInput | string
   action_type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
   history_type?: Prisma.EnumHistoryTypeFieldUpdateOperationsInput | $Enums.HistoryType
@@ -1497,6 +1718,7 @@ export type LeadDetailedLogsCreateManyTaskInput = {
   vendor_id: number
   lead_id: number
   account_id: number
+  product_type_id?: number | null
   action: string
   action_type: $Enums.ActionType
   history_type?: $Enums.HistoryType
@@ -1513,6 +1735,7 @@ export type LeadDetailedLogsUpdateWithoutTaskInput = {
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneWithoutDetailedLogsNestedInput
   stage?: Prisma.StatusTypeMasterUpdateOneWithoutLeadDetailedLogsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadDetailedLogsNestedInput
   docLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDetailed_logNestedInput
@@ -1523,6 +1746,7 @@ export type LeadDetailedLogsUncheckedUpdateWithoutTaskInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.StringFieldUpdateOperationsInput | string
   action_type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
   history_type?: Prisma.EnumHistoryTypeFieldUpdateOperationsInput | $Enums.HistoryType
@@ -1537,6 +1761,7 @@ export type LeadDetailedLogsUncheckedUpdateManyWithoutTaskInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.StringFieldUpdateOperationsInput | string
   action_type?: Prisma.EnumActionTypeFieldUpdateOperationsInput | $Enums.ActionType
   history_type?: Prisma.EnumHistoryTypeFieldUpdateOperationsInput | $Enums.HistoryType
@@ -1582,6 +1807,7 @@ export type LeadDetailedLogsSelect<ExtArgs extends runtime.Types.Extensions.Inte
   lead_id?: boolean
   account_id?: boolean
   task_id?: boolean
+  product_type_id?: boolean
   action?: boolean
   action_type?: boolean
   history_type?: boolean
@@ -1591,6 +1817,7 @@ export type LeadDetailedLogsSelect<ExtArgs extends runtime.Types.Extensions.Inte
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  productType?: boolean | Prisma.LeadDetailedLogs$productTypeArgs<ExtArgs>
   stage?: boolean | Prisma.LeadDetailedLogs$stageArgs<ExtArgs>
   task?: boolean | Prisma.LeadDetailedLogs$taskArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1604,6 +1831,7 @@ export type LeadDetailedLogsSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   lead_id?: boolean
   account_id?: boolean
   task_id?: boolean
+  product_type_id?: boolean
   action?: boolean
   action_type?: boolean
   history_type?: boolean
@@ -1613,6 +1841,7 @@ export type LeadDetailedLogsSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  productType?: boolean | Prisma.LeadDetailedLogs$productTypeArgs<ExtArgs>
   stage?: boolean | Prisma.LeadDetailedLogs$stageArgs<ExtArgs>
   task?: boolean | Prisma.LeadDetailedLogs$taskArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1624,6 +1853,7 @@ export type LeadDetailedLogsSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   lead_id?: boolean
   account_id?: boolean
   task_id?: boolean
+  product_type_id?: boolean
   action?: boolean
   action_type?: boolean
   history_type?: boolean
@@ -1633,6 +1863,7 @@ export type LeadDetailedLogsSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  productType?: boolean | Prisma.LeadDetailedLogs$productTypeArgs<ExtArgs>
   stage?: boolean | Prisma.LeadDetailedLogs$stageArgs<ExtArgs>
   task?: boolean | Prisma.LeadDetailedLogs$taskArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1644,6 +1875,7 @@ export type LeadDetailedLogsSelectScalar = {
   lead_id?: boolean
   account_id?: boolean
   task_id?: boolean
+  product_type_id?: boolean
   action?: boolean
   action_type?: boolean
   history_type?: boolean
@@ -1652,11 +1884,12 @@ export type LeadDetailedLogsSelectScalar = {
   created_by?: boolean
 }
 
-export type LeadDetailedLogsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "task_id" | "action" | "action_type" | "history_type" | "stage_id" | "created_at" | "created_by", ExtArgs["result"]["leadDetailedLogs"]>
+export type LeadDetailedLogsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "task_id" | "product_type_id" | "action" | "action_type" | "history_type" | "stage_id" | "created_at" | "created_by", ExtArgs["result"]["leadDetailedLogs"]>
 export type LeadDetailedLogsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  productType?: boolean | Prisma.LeadDetailedLogs$productTypeArgs<ExtArgs>
   stage?: boolean | Prisma.LeadDetailedLogs$stageArgs<ExtArgs>
   task?: boolean | Prisma.LeadDetailedLogs$taskArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1667,6 +1900,7 @@ export type LeadDetailedLogsIncludeCreateManyAndReturn<ExtArgs extends runtime.T
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  productType?: boolean | Prisma.LeadDetailedLogs$productTypeArgs<ExtArgs>
   stage?: boolean | Prisma.LeadDetailedLogs$stageArgs<ExtArgs>
   task?: boolean | Prisma.LeadDetailedLogs$taskArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1675,6 +1909,7 @@ export type LeadDetailedLogsIncludeUpdateManyAndReturn<ExtArgs extends runtime.T
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  productType?: boolean | Prisma.LeadDetailedLogs$productTypeArgs<ExtArgs>
   stage?: boolean | Prisma.LeadDetailedLogs$stageArgs<ExtArgs>
   task?: boolean | Prisma.LeadDetailedLogs$taskArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1686,6 +1921,7 @@ export type $LeadDetailedLogsPayload<ExtArgs extends runtime.Types.Extensions.In
     account: Prisma.$AccountMasterPayload<ExtArgs>
     user: Prisma.$UserMasterPayload<ExtArgs>
     lead: Prisma.$LeadMasterPayload<ExtArgs>
+    productType: Prisma.$ProductTypeMasterPayload<ExtArgs> | null
     stage: Prisma.$StatusTypeMasterPayload<ExtArgs> | null
     task: Prisma.$UserLeadTaskPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
@@ -1697,6 +1933,7 @@ export type $LeadDetailedLogsPayload<ExtArgs extends runtime.Types.Extensions.In
     lead_id: number
     account_id: number
     task_id: number | null
+    product_type_id: number | null
     action: string
     action_type: $Enums.ActionType
     history_type: $Enums.HistoryType
@@ -2100,6 +2337,7 @@ export interface Prisma__LeadDetailedLogsClient<T, Null = never, ExtArgs extends
   account<T extends Prisma.AccountMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  productType<T extends Prisma.LeadDetailedLogs$productTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDetailedLogs$productTypeArgs<ExtArgs>>): Prisma.Prisma__ProductTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   stage<T extends Prisma.LeadDetailedLogs$stageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDetailedLogs$stageArgs<ExtArgs>>): Prisma.Prisma__StatusTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$StatusTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   task<T extends Prisma.LeadDetailedLogs$taskArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDetailedLogs$taskArgs<ExtArgs>>): Prisma.Prisma__UserLeadTaskClient<runtime.Types.Result.GetResult<Prisma.$UserLeadTaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
@@ -2138,6 +2376,7 @@ export interface LeadDetailedLogsFieldRefs {
   readonly lead_id: Prisma.FieldRef<"LeadDetailedLogs", 'Int'>
   readonly account_id: Prisma.FieldRef<"LeadDetailedLogs", 'Int'>
   readonly task_id: Prisma.FieldRef<"LeadDetailedLogs", 'Int'>
+  readonly product_type_id: Prisma.FieldRef<"LeadDetailedLogs", 'Int'>
   readonly action: Prisma.FieldRef<"LeadDetailedLogs", 'String'>
   readonly action_type: Prisma.FieldRef<"LeadDetailedLogs", 'ActionType'>
   readonly history_type: Prisma.FieldRef<"LeadDetailedLogs", 'HistoryType'>
@@ -2542,6 +2781,25 @@ export type LeadDetailedLogsDeleteManyArgs<ExtArgs extends runtime.Types.Extensi
    * Limit how many LeadDetailedLogs to delete.
    */
   limit?: number
+}
+
+/**
+ * LeadDetailedLogs.productType
+ */
+export type LeadDetailedLogs$productTypeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProductTypeMaster
+   */
+  select?: Prisma.ProductTypeMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProductTypeMaster
+   */
+  omit?: Prisma.ProductTypeMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductTypeMasterInclude<ExtArgs> | null
+  where?: Prisma.ProductTypeMasterWhereInput
 }
 
 /**
