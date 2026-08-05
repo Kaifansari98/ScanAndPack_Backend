@@ -1612,6 +1612,7 @@ model PaymentInfo {
   lead_id         Int
   account_id      Int
   amount          Float?
+  is_booking_received_amt Boolean    @default(false)
   payment_date    DateTime?
   payment_text    String?            @db.VarChar(2000)
   payment_file_id Int?
