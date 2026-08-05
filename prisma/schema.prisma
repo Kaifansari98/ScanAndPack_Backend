@@ -1267,20 +1267,39 @@ model LeadOtherAppliancesMapping {
   lead_id                    Int
   vendor_id                  Int
   specs_id                   Int
-  other_appliances_master_id Int
+  other_appliance_type       OtherApplianceType?
+  other_appliances_master_id Int?
+  custom_remark              String?
   created_at                 DateTime @default(now())
   created_by                 Int
 
   lead            LeadMaster               @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   vendor          VendorMaster             @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   specification   LeadSpecificationsMaster @relation(fields: [specs_id], references: [id], onDelete: Cascade)
-  otherAppliances OtherAppliancesMaster    @relation(fields: [other_appliances_master_id], references: [id], onDelete: Cascade)
+  otherAppliances OtherAppliancesMaster?   @relation(fields: [other_appliances_master_id], references: [id], onDelete: Cascade)
   createdBy       UserMaster               @relation("LeadOtherAppliancesMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
 
   @@index([lead_id])
   @@index([vendor_id])
   @@index([specs_id])
   @@index([other_appliances_master_id])
+  @@index([created_by])
+}
+
+model LeadOtherAppliancesRemarkMapping {
+  id                   Int      @id @default(autoincrement())
+  vendor_id            Int
+  lead_id              Int
+  specs_id             Int
+  other_appliance_type OtherApplianceType
+  remark               String
+  created_at           DateTime @default(now())
+  created_by           Int
+
+  @@unique([specs_id, other_appliance_type])
+  @@index([vendor_id])
+  @@index([lead_id])
+  @@index([specs_id])
   @@index([created_by])
 }
 
