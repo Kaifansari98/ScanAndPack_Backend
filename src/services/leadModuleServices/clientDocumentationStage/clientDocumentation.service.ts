@@ -220,7 +220,14 @@ export class ClientDocumentationService {
         throw new Error("Lead account is missing");
       }
 
-      const [clientApprovalStatus, pptType, pythaType, instances, selections] =
+      const [
+        clientApprovalStatus,
+        pptType,
+        pythaType,
+        instances,
+        selections,
+        fastProductionRequests,
+      ] =
         await Promise.all([
           tx.statusTypeMaster.findFirst({
             where: { vendor_id: data.vendor_id, tag: "Type 7" },
@@ -242,6 +249,8 @@ export class ClientDocumentationService {
               { quantity_index: "asc" },
             ],
           }),
+
+          
           tx.leadDesignSelection.findMany({
             where: {
               lead_id: data.lead_id,
@@ -252,6 +261,19 @@ export class ClientDocumentationService {
               type: true,
               desc: true,
               product_structure_instance_id: true,
+            },
+          }),
+          tx.fastProductionRequest.findMany({
+            where: {
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+            },
+            select: {
+              instance_id: true,
+              finishes: {
+                where: { component: "CARCASS" },
+                select: { finish_description: true },
+              },
             },
           }),
         ]);
@@ -270,11 +292,31 @@ export class ClientDocumentationService {
 
       const isFastProduction = lead.is_fast_production === true;
 
+      // Fast-production finish remarks are submitted with the fast-production
+      // request, not with the client-documentation design selections.
+      const hasFastProductionCarcassByInstance = new Map(
+        fastProductionRequests.map((request) => [
+          request.instance_id,
+          request.finishes.some((finish) =>
+            hasFilledValue(finish.finish_description),
+          ),
+        ]),
+      );
+
       if (instances.length > 1) {
+        const leadLevelSelections = selections.filter(
+          (row) => row.product_structure_instance_id === null,
+        );
+
         for (const instance of instances) {
-          const rows = selections.filter(
+          let rows = selections.filter(
             (row) => row.product_structure_instance_id === instance.id,
           );
+
+          // Fall back to lead-level selections if no instance-specific rows exist
+          if (rows.length === 0) {
+            rows = leadLevelSelections;
+          }
 
           const hasValueByType = {
             Carcas: rows.some(
@@ -286,7 +328,7 @@ export class ClientDocumentationService {
           };
 
           if (isFastProduction) {
-            if (!hasValueByType.Carcas) {
+            if (!hasFastProductionCarcassByInstance.get(instance.id)) {
               throw new Error(
                 `Carcas must be filled for ${instance.title}`,
               );
@@ -309,7 +351,11 @@ export class ClientDocumentationService {
           ),
         };
         if (isFastProduction) {
-          if (!hasValueByType.Carcas) {
+          const instanceId = instances[0]?.id;
+          if (
+            !instanceId ||
+            !hasFastProductionCarcassByInstance.get(instanceId)
+          ) {
             throw new Error("Carcas must be filled");
           }
         } else {
