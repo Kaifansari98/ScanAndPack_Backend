@@ -243,6 +243,11 @@ export type OtherAppliancesMaster = Prisma.OtherAppliancesMasterModel
  */
 export type LeadOtherAppliancesMapping = Prisma.LeadOtherAppliancesMappingModel
 /**
+ * Model LeadOtherAppliancesRemarkMapping
+ * 
+ */
+export type LeadOtherAppliancesRemarkMapping = Prisma.LeadOtherAppliancesRemarkMappingModel
+/**
  * Model HandleTypeMaster
  * 
  */
