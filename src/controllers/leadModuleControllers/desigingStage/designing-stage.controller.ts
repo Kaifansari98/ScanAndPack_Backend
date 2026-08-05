@@ -49,6 +49,30 @@ export class DesigingStageController {
     return value ?? -1;
   }
 
+  private static buildReviewStateData(body: any) {
+    const hasApprove = typeof body.is_approved === "boolean";
+    const hasAmend = typeof body.is_amended === "boolean";
+    const hasDelete = typeof body.is_deleted_item === "boolean";
+
+    if (!hasApprove && !hasAmend && !hasDelete) {
+      return {};
+    }
+
+    const isApproved = body.is_approved === true;
+    const isAmended = body.is_amended === true;
+    const isDeleted = body.is_deleted_item === true;
+    const now = new Date();
+
+    return {
+      is_approved: isApproved,
+      approved_at: isApproved ? now : null,
+      is_amended: isAmended,
+      amended_at: isAmended ? now : null,
+      is_deleted_item: isDeleted,
+      deleted_item_at: isDeleted ? now : null,
+    };
+  }
+
   private static async getActorRole(
     req: Request,
     fallbackUserId?: number | null,
@@ -4038,6 +4062,8 @@ export class DesigingStageController {
       const carcasMaterialId = Number(req.body.carcas_material_id);
       const carcassMaterialFinishId = Number(req.body.carcass_material_finish_id);
       const createdBy = Number(req.body.created_by);
+      const reviewStateData =
+        DesigingStageController.buildReviewStateData(req.body);
 
       if (
         !vendorId ||
@@ -4069,6 +4095,7 @@ export class DesigingStageController {
         carcas_material_id: carcasMaterialId,
         carcass_material_finish_id: carcassMaterialFinishId,
         created_by: createdBy,
+        ...reviewStateData,
       };
 
       const existingDuplicate = await prisma.leadCarcassMaterialMapping.findFirst({
@@ -4186,6 +4213,8 @@ export class DesigingStageController {
       const shutterMaterialId = Number(req.body.shutter_material_id);
       const shutterMaterialFinishId = Number(req.body.shutter_material_finish_id);
       const createdBy = Number(req.body.created_by);
+      const reviewStateData =
+        DesigingStageController.buildReviewStateData(req.body);
 
       if (
         !vendorId ||
@@ -4217,6 +4246,7 @@ export class DesigingStageController {
         shutter_material_id: shutterMaterialId,
         shutter_material_finish_id: shutterMaterialFinishId,
         created_by: createdBy,
+        ...reviewStateData,
       };
 
       const existingDuplicate = await prisma.leadShutterMaterialMapping.findFirst({
@@ -4336,6 +4366,8 @@ export class DesigingStageController {
           ? req.body.note
           : null;
       const createdBy = Number(req.body.created_by);
+      const reviewStateData =
+        DesigingStageController.buildReviewStateData(req.body);
 
       if (
         !vendorId ||
@@ -4367,6 +4399,7 @@ export class DesigingStageController {
         skirting_carcass_legs_color_id: skirtingCarcassLegsColorId,
         note,
         created_by: createdBy,
+        ...reviewStateData,
       };
 
       const existingDuplicate = await prisma.leadHardwareMapping.findFirst({
@@ -4488,6 +4521,8 @@ export class DesigingStageController {
           ? req.body.custom_remark.trim()
           : "";
       const createdBy = Number(req.body.created_by);
+      const reviewStateData =
+        DesigingStageController.buildReviewStateData(req.body);
 
       if (
         !vendorId ||
@@ -4526,6 +4561,7 @@ export class DesigingStageController {
         light_carcas_unit_master_id: lightCarcasUnitMasterId ?? null,
         custom_remark: customRemark || null,
         created_by: createdBy,
+        ...reviewStateData,
       };
 
       const existingDuplicate = await prisma.leadLightCarcasUnitMapping.findFirst({
@@ -4660,6 +4696,8 @@ export class DesigingStageController {
           ? req.body.custom_remark.trim()
           : "";
       const createdBy = Number(req.body.created_by);
+      const reviewStateData =
+        DesigingStageController.buildReviewStateData(req.body);
 
       if (
         !vendorId ||
@@ -4699,6 +4737,7 @@ export class DesigingStageController {
         other_appliances_master_id: otherAppliancesMasterId ?? null,
         custom_remark: customRemark || null,
         created_by: createdBy,
+        ...reviewStateData,
       };
 
       const existingDuplicate = await prisma.leadOtherAppliancesMapping.findFirst({

@@ -56,6 +56,12 @@ export type LeadShutterMaterialMappingMinAggregateOutputType = {
   shutter_type_id: number | null
   shutter_material_id: number | null
   shutter_material_finish_id: number | null
+  is_approved: boolean | null
+  approved_at: Date | null
+  is_amended: boolean | null
+  amended_at: Date | null
+  is_deleted_item: boolean | null
+  deleted_item_at: Date | null
   created_at: Date | null
   created_by: number | null
 }
@@ -68,6 +74,12 @@ export type LeadShutterMaterialMappingMaxAggregateOutputType = {
   shutter_type_id: number | null
   shutter_material_id: number | null
   shutter_material_finish_id: number | null
+  is_approved: boolean | null
+  approved_at: Date | null
+  is_amended: boolean | null
+  amended_at: Date | null
+  is_deleted_item: boolean | null
+  deleted_item_at: Date | null
   created_at: Date | null
   created_by: number | null
 }
@@ -80,6 +92,12 @@ export type LeadShutterMaterialMappingCountAggregateOutputType = {
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
+  is_approved: number
+  approved_at: number
+  is_amended: number
+  amended_at: number
+  is_deleted_item: number
+  deleted_item_at: number
   created_at: number
   created_by: number
   _all: number
@@ -116,6 +134,12 @@ export type LeadShutterMaterialMappingMinAggregateInputType = {
   shutter_type_id?: true
   shutter_material_id?: true
   shutter_material_finish_id?: true
+  is_approved?: true
+  approved_at?: true
+  is_amended?: true
+  amended_at?: true
+  is_deleted_item?: true
+  deleted_item_at?: true
   created_at?: true
   created_by?: true
 }
@@ -128,6 +152,12 @@ export type LeadShutterMaterialMappingMaxAggregateInputType = {
   shutter_type_id?: true
   shutter_material_id?: true
   shutter_material_finish_id?: true
+  is_approved?: true
+  approved_at?: true
+  is_amended?: true
+  amended_at?: true
+  is_deleted_item?: true
+  deleted_item_at?: true
   created_at?: true
   created_by?: true
 }
@@ -140,6 +170,12 @@ export type LeadShutterMaterialMappingCountAggregateInputType = {
   shutter_type_id?: true
   shutter_material_id?: true
   shutter_material_finish_id?: true
+  is_approved?: true
+  approved_at?: true
+  is_amended?: true
+  amended_at?: true
+  is_deleted_item?: true
+  deleted_item_at?: true
   created_at?: true
   created_by?: true
   _all?: true
@@ -239,6 +275,12 @@ export type LeadShutterMaterialMappingGroupByOutputType = {
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
+  is_approved: boolean
+  approved_at: Date | null
+  is_amended: boolean
+  amended_at: Date | null
+  is_deleted_item: boolean
+  deleted_item_at: Date | null
   created_at: Date
   created_by: number
   _count: LeadShutterMaterialMappingCountAggregateOutputType | null
@@ -274,6 +316,12 @@ export type LeadShutterMaterialMappingWhereInput = {
   shutter_type_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   shutter_material_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   shutter_material_finish_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
+  is_approved?: Prisma.BoolFilter<"LeadShutterMaterialMapping"> | boolean
+  approved_at?: Prisma.DateTimeNullableFilter<"LeadShutterMaterialMapping"> | Date | string | null
+  is_amended?: Prisma.BoolFilter<"LeadShutterMaterialMapping"> | boolean
+  amended_at?: Prisma.DateTimeNullableFilter<"LeadShutterMaterialMapping"> | Date | string | null
+  is_deleted_item?: Prisma.BoolFilter<"LeadShutterMaterialMapping"> | boolean
+  deleted_item_at?: Prisma.DateTimeNullableFilter<"LeadShutterMaterialMapping"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"LeadShutterMaterialMapping"> | Date | string
   created_by?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
@@ -293,6 +341,12 @@ export type LeadShutterMaterialMappingOrderByWithRelationInput = {
   shutter_type_id?: Prisma.SortOrder
   shutter_material_id?: Prisma.SortOrder
   shutter_material_finish_id?: Prisma.SortOrder
+  is_approved?: Prisma.SortOrder
+  approved_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_amended?: Prisma.SortOrder
+  amended_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_deleted_item?: Prisma.SortOrder
+  deleted_item_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
@@ -315,6 +369,12 @@ export type LeadShutterMaterialMappingWhereUniqueInput = Prisma.AtLeast<{
   shutter_type_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   shutter_material_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   shutter_material_finish_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
+  is_approved?: Prisma.BoolFilter<"LeadShutterMaterialMapping"> | boolean
+  approved_at?: Prisma.DateTimeNullableFilter<"LeadShutterMaterialMapping"> | Date | string | null
+  is_amended?: Prisma.BoolFilter<"LeadShutterMaterialMapping"> | boolean
+  amended_at?: Prisma.DateTimeNullableFilter<"LeadShutterMaterialMapping"> | Date | string | null
+  is_deleted_item?: Prisma.BoolFilter<"LeadShutterMaterialMapping"> | boolean
+  deleted_item_at?: Prisma.DateTimeNullableFilter<"LeadShutterMaterialMapping"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"LeadShutterMaterialMapping"> | Date | string
   created_by?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
@@ -334,6 +394,12 @@ export type LeadShutterMaterialMappingOrderByWithAggregationInput = {
   shutter_type_id?: Prisma.SortOrder
   shutter_material_id?: Prisma.SortOrder
   shutter_material_finish_id?: Prisma.SortOrder
+  is_approved?: Prisma.SortOrder
+  approved_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_amended?: Prisma.SortOrder
+  amended_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_deleted_item?: Prisma.SortOrder
+  deleted_item_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   _count?: Prisma.LeadShutterMaterialMappingCountOrderByAggregateInput
@@ -354,11 +420,23 @@ export type LeadShutterMaterialMappingScalarWhereWithAggregatesInput = {
   shutter_type_id?: Prisma.IntWithAggregatesFilter<"LeadShutterMaterialMapping"> | number
   shutter_material_id?: Prisma.IntWithAggregatesFilter<"LeadShutterMaterialMapping"> | number
   shutter_material_finish_id?: Prisma.IntWithAggregatesFilter<"LeadShutterMaterialMapping"> | number
+  is_approved?: Prisma.BoolWithAggregatesFilter<"LeadShutterMaterialMapping"> | boolean
+  approved_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadShutterMaterialMapping"> | Date | string | null
+  is_amended?: Prisma.BoolWithAggregatesFilter<"LeadShutterMaterialMapping"> | boolean
+  amended_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadShutterMaterialMapping"> | Date | string | null
+  is_deleted_item?: Prisma.BoolWithAggregatesFilter<"LeadShutterMaterialMapping"> | boolean
+  deleted_item_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadShutterMaterialMapping"> | Date | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"LeadShutterMaterialMapping"> | Date | string
   created_by?: Prisma.IntWithAggregatesFilter<"LeadShutterMaterialMapping"> | number
 }
 
 export type LeadShutterMaterialMappingCreateInput = {
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadShutterMaterialMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutShutterMaterialMappingsInput
@@ -377,11 +455,23 @@ export type LeadShutterMaterialMappingUncheckedCreateInput = {
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadShutterMaterialMappingUpdateInput = {
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadShutterMaterialMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
@@ -400,6 +490,12 @@ export type LeadShutterMaterialMappingUncheckedUpdateInput = {
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -412,11 +508,23 @@ export type LeadShutterMaterialMappingCreateManyInput = {
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadShutterMaterialMappingUpdateManyMutationInput = {
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -428,6 +536,12 @@ export type LeadShutterMaterialMappingUncheckedUpdateManyInput = {
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -450,6 +564,12 @@ export type LeadShutterMaterialMappingCountOrderByAggregateInput = {
   shutter_type_id?: Prisma.SortOrder
   shutter_material_id?: Prisma.SortOrder
   shutter_material_finish_id?: Prisma.SortOrder
+  is_approved?: Prisma.SortOrder
+  approved_at?: Prisma.SortOrder
+  is_amended?: Prisma.SortOrder
+  amended_at?: Prisma.SortOrder
+  is_deleted_item?: Prisma.SortOrder
+  deleted_item_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -473,6 +593,12 @@ export type LeadShutterMaterialMappingMaxOrderByAggregateInput = {
   shutter_type_id?: Prisma.SortOrder
   shutter_material_id?: Prisma.SortOrder
   shutter_material_finish_id?: Prisma.SortOrder
+  is_approved?: Prisma.SortOrder
+  approved_at?: Prisma.SortOrder
+  is_amended?: Prisma.SortOrder
+  amended_at?: Prisma.SortOrder
+  is_deleted_item?: Prisma.SortOrder
+  deleted_item_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -485,6 +611,12 @@ export type LeadShutterMaterialMappingMinOrderByAggregateInput = {
   shutter_type_id?: Prisma.SortOrder
   shutter_material_id?: Prisma.SortOrder
   shutter_material_finish_id?: Prisma.SortOrder
+  is_approved?: Prisma.SortOrder
+  approved_at?: Prisma.SortOrder
+  is_amended?: Prisma.SortOrder
+  amended_at?: Prisma.SortOrder
+  is_deleted_item?: Prisma.SortOrder
+  deleted_item_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -795,6 +927,12 @@ export type LeadShutterMaterialMappingUncheckedUpdateManyWithoutShutterMaterialF
 }
 
 export type LeadShutterMaterialMappingCreateWithoutVendorInput = {
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadShutterMaterialMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutShutterMaterialMappingsInput
@@ -811,6 +949,12 @@ export type LeadShutterMaterialMappingUncheckedCreateWithoutVendorInput = {
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
@@ -852,11 +996,23 @@ export type LeadShutterMaterialMappingScalarWhereInput = {
   shutter_type_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   shutter_material_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   shutter_material_finish_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
+  is_approved?: Prisma.BoolFilter<"LeadShutterMaterialMapping"> | boolean
+  approved_at?: Prisma.DateTimeNullableFilter<"LeadShutterMaterialMapping"> | Date | string | null
+  is_amended?: Prisma.BoolFilter<"LeadShutterMaterialMapping"> | boolean
+  amended_at?: Prisma.DateTimeNullableFilter<"LeadShutterMaterialMapping"> | Date | string | null
+  is_deleted_item?: Prisma.BoolFilter<"LeadShutterMaterialMapping"> | boolean
+  deleted_item_at?: Prisma.DateTimeNullableFilter<"LeadShutterMaterialMapping"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"LeadShutterMaterialMapping"> | Date | string
   created_by?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
 }
 
 export type LeadShutterMaterialMappingCreateWithoutCreatedByInput = {
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   lead: Prisma.LeadMasterCreateNestedOneWithoutShutterMaterialMappingsInput
   specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutShutterMaterialMappingsInput
@@ -874,6 +1030,12 @@ export type LeadShutterMaterialMappingUncheckedCreateWithoutCreatedByInput = {
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
 }
 
@@ -904,6 +1066,12 @@ export type LeadShutterMaterialMappingUpdateManyWithWhereWithoutCreatedByInput =
 }
 
 export type LeadShutterMaterialMappingCreateWithoutLeadInput = {
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadShutterMaterialMappingsCreatedInput
   specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutShutterMaterialMappingsInput
@@ -920,6 +1088,12 @@ export type LeadShutterMaterialMappingUncheckedCreateWithoutLeadInput = {
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
@@ -951,6 +1125,12 @@ export type LeadShutterMaterialMappingUpdateManyWithWhereWithoutLeadInput = {
 }
 
 export type LeadShutterMaterialMappingCreateWithoutSpecificationInput = {
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadShutterMaterialMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutShutterMaterialMappingsInput
@@ -967,6 +1147,12 @@ export type LeadShutterMaterialMappingUncheckedCreateWithoutSpecificationInput =
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
@@ -998,6 +1184,12 @@ export type LeadShutterMaterialMappingUpdateManyWithWhereWithoutSpecificationInp
 }
 
 export type LeadShutterMaterialMappingCreateWithoutShutterTypeInput = {
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadShutterMaterialMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutShutterMaterialMappingsInput
@@ -1014,6 +1206,12 @@ export type LeadShutterMaterialMappingUncheckedCreateWithoutShutterTypeInput = {
   specs_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1045,6 +1243,12 @@ export type LeadShutterMaterialMappingUpdateManyWithWhereWithoutShutterTypeInput
 }
 
 export type LeadShutterMaterialMappingCreateWithoutShutterMaterialInput = {
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadShutterMaterialMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutShutterMaterialMappingsInput
@@ -1061,6 +1265,12 @@ export type LeadShutterMaterialMappingUncheckedCreateWithoutShutterMaterialInput
   specs_id: number
   shutter_type_id: number
   shutter_material_finish_id: number
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1092,6 +1302,12 @@ export type LeadShutterMaterialMappingUpdateManyWithWhereWithoutShutterMaterialI
 }
 
 export type LeadShutterMaterialMappingCreateWithoutShutterMaterialFinishInput = {
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadShutterMaterialMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutShutterMaterialMappingsInput
@@ -1108,6 +1324,12 @@ export type LeadShutterMaterialMappingUncheckedCreateWithoutShutterMaterialFinis
   specs_id: number
   shutter_type_id: number
   shutter_material_id: number
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1145,11 +1367,23 @@ export type LeadShutterMaterialMappingCreateManyVendorInput = {
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadShutterMaterialMappingUpdateWithoutVendorInput = {
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadShutterMaterialMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
@@ -1166,6 +1400,12 @@ export type LeadShutterMaterialMappingUncheckedUpdateWithoutVendorInput = {
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1177,6 +1417,12 @@ export type LeadShutterMaterialMappingUncheckedUpdateManyWithoutVendorInput = {
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1189,10 +1435,22 @@ export type LeadShutterMaterialMappingCreateManyCreatedByInput = {
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
 }
 
 export type LeadShutterMaterialMappingUpdateWithoutCreatedByInput = {
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
   specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
@@ -1210,6 +1468,12 @@ export type LeadShutterMaterialMappingUncheckedUpdateWithoutCreatedByInput = {
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1221,6 +1485,12 @@ export type LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByInput =
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1231,11 +1501,23 @@ export type LeadShutterMaterialMappingCreateManyLeadInput = {
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadShutterMaterialMappingUpdateWithoutLeadInput = {
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadShutterMaterialMappingsCreatedNestedInput
   specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
@@ -1252,6 +1534,12 @@ export type LeadShutterMaterialMappingUncheckedUpdateWithoutLeadInput = {
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1263,6 +1551,12 @@ export type LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadInput = {
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1274,11 +1568,23 @@ export type LeadShutterMaterialMappingCreateManySpecificationInput = {
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadShutterMaterialMappingUpdateWithoutSpecificationInput = {
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadShutterMaterialMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
@@ -1295,6 +1601,12 @@ export type LeadShutterMaterialMappingUncheckedUpdateWithoutSpecificationInput =
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1306,6 +1618,12 @@ export type LeadShutterMaterialMappingUncheckedUpdateManyWithoutSpecificationInp
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1317,11 +1635,23 @@ export type LeadShutterMaterialMappingCreateManyShutterTypeInput = {
   specs_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadShutterMaterialMappingUpdateWithoutShutterTypeInput = {
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadShutterMaterialMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
@@ -1338,6 +1668,12 @@ export type LeadShutterMaterialMappingUncheckedUpdateWithoutShutterTypeInput = {
   specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1349,6 +1685,12 @@ export type LeadShutterMaterialMappingUncheckedUpdateManyWithoutShutterTypeInput
   specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1360,11 +1702,23 @@ export type LeadShutterMaterialMappingCreateManyShutterMaterialInput = {
   specs_id: number
   shutter_type_id: number
   shutter_material_finish_id: number
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadShutterMaterialMappingUpdateWithoutShutterMaterialInput = {
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadShutterMaterialMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
@@ -1381,6 +1735,12 @@ export type LeadShutterMaterialMappingUncheckedUpdateWithoutShutterMaterialInput
   specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1392,6 +1752,12 @@ export type LeadShutterMaterialMappingUncheckedUpdateManyWithoutShutterMaterialI
   specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1403,11 +1769,23 @@ export type LeadShutterMaterialMappingCreateManyShutterMaterialFinishInput = {
   specs_id: number
   shutter_type_id: number
   shutter_material_id: number
+  is_approved?: boolean
+  approved_at?: Date | string | null
+  is_amended?: boolean
+  amended_at?: Date | string | null
+  is_deleted_item?: boolean
+  deleted_item_at?: Date | string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadShutterMaterialMappingUpdateWithoutShutterMaterialFinishInput = {
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadShutterMaterialMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
@@ -1424,6 +1802,12 @@ export type LeadShutterMaterialMappingUncheckedUpdateWithoutShutterMaterialFinis
   specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1435,6 +1819,12 @@ export type LeadShutterMaterialMappingUncheckedUpdateManyWithoutShutterMaterialF
   specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1449,6 +1839,12 @@ export type LeadShutterMaterialMappingSelect<ExtArgs extends runtime.Types.Exten
   shutter_type_id?: boolean
   shutter_material_id?: boolean
   shutter_material_finish_id?: boolean
+  is_approved?: boolean
+  approved_at?: boolean
+  is_amended?: boolean
+  amended_at?: boolean
+  is_deleted_item?: boolean
+  deleted_item_at?: boolean
   created_at?: boolean
   created_by?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -1468,6 +1864,12 @@ export type LeadShutterMaterialMappingSelectCreateManyAndReturn<ExtArgs extends 
   shutter_type_id?: boolean
   shutter_material_id?: boolean
   shutter_material_finish_id?: boolean
+  is_approved?: boolean
+  approved_at?: boolean
+  is_amended?: boolean
+  amended_at?: boolean
+  is_deleted_item?: boolean
+  deleted_item_at?: boolean
   created_at?: boolean
   created_by?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -1487,6 +1889,12 @@ export type LeadShutterMaterialMappingSelectUpdateManyAndReturn<ExtArgs extends 
   shutter_type_id?: boolean
   shutter_material_id?: boolean
   shutter_material_finish_id?: boolean
+  is_approved?: boolean
+  approved_at?: boolean
+  is_amended?: boolean
+  amended_at?: boolean
+  is_deleted_item?: boolean
+  deleted_item_at?: boolean
   created_at?: boolean
   created_by?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -1506,11 +1914,17 @@ export type LeadShutterMaterialMappingSelectScalar = {
   shutter_type_id?: boolean
   shutter_material_id?: boolean
   shutter_material_finish_id?: boolean
+  is_approved?: boolean
+  approved_at?: boolean
+  is_amended?: boolean
+  amended_at?: boolean
+  is_deleted_item?: boolean
+  deleted_item_at?: boolean
   created_at?: boolean
   created_by?: boolean
 }
 
-export type LeadShutterMaterialMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "specs_id" | "shutter_type_id" | "shutter_material_id" | "shutter_material_finish_id" | "created_at" | "created_by", ExtArgs["result"]["leadShutterMaterialMapping"]>
+export type LeadShutterMaterialMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "specs_id" | "shutter_type_id" | "shutter_material_id" | "shutter_material_finish_id" | "is_approved" | "approved_at" | "is_amended" | "amended_at" | "is_deleted_item" | "deleted_item_at" | "created_at" | "created_by", ExtArgs["result"]["leadShutterMaterialMapping"]>
 export type LeadShutterMaterialMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -1558,6 +1972,12 @@ export type $LeadShutterMaterialMappingPayload<ExtArgs extends runtime.Types.Ext
     shutter_type_id: number
     shutter_material_id: number
     shutter_material_finish_id: number
+    is_approved: boolean
+    approved_at: Date | null
+    is_amended: boolean
+    amended_at: Date | null
+    is_deleted_item: boolean
+    deleted_item_at: Date | null
     created_at: Date
     created_by: number
   }, ExtArgs["result"]["leadShutterMaterialMapping"]>
@@ -1997,6 +2417,12 @@ export interface LeadShutterMaterialMappingFieldRefs {
   readonly shutter_type_id: Prisma.FieldRef<"LeadShutterMaterialMapping", 'Int'>
   readonly shutter_material_id: Prisma.FieldRef<"LeadShutterMaterialMapping", 'Int'>
   readonly shutter_material_finish_id: Prisma.FieldRef<"LeadShutterMaterialMapping", 'Int'>
+  readonly is_approved: Prisma.FieldRef<"LeadShutterMaterialMapping", 'Boolean'>
+  readonly approved_at: Prisma.FieldRef<"LeadShutterMaterialMapping", 'DateTime'>
+  readonly is_amended: Prisma.FieldRef<"LeadShutterMaterialMapping", 'Boolean'>
+  readonly amended_at: Prisma.FieldRef<"LeadShutterMaterialMapping", 'DateTime'>
+  readonly is_deleted_item: Prisma.FieldRef<"LeadShutterMaterialMapping", 'Boolean'>
+  readonly deleted_item_at: Prisma.FieldRef<"LeadShutterMaterialMapping", 'DateTime'>
   readonly created_at: Prisma.FieldRef<"LeadShutterMaterialMapping", 'DateTime'>
   readonly created_by: Prisma.FieldRef<"LeadShutterMaterialMapping", 'Int'>
 }

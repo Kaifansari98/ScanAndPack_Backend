@@ -828,6 +828,12 @@ model LeadCarcassMaterialMapping {
   carcass_type_id            Int
   carcas_material_id         Int
   carcass_material_finish_id Int
+  is_approved                Boolean                     @default(false)
+  approved_at                DateTime?
+  is_amended                 Boolean                     @default(false)
+  amended_at                 DateTime?
+  is_deleted_item            Boolean                     @default(false)
+  deleted_item_at            DateTime?
   created_at                 DateTime                    @default(now())
   created_by                 Int
   carcasMaterial             CarcasMaterialMaster        @relation(fields: [carcas_material_id], references: [id], onDelete: Cascade)
@@ -855,6 +861,12 @@ model LeadShutterMaterialMapping {
   shutter_type_id            Int
   shutter_material_id        Int
   shutter_material_finish_id Int
+  is_approved                Boolean                     @default(false)
+  approved_at                DateTime?
+  is_amended                 Boolean                     @default(false)
+  amended_at                 DateTime?
+  is_deleted_item            Boolean                     @default(false)
+  deleted_item_at            DateTime?
   created_at                 DateTime                    @default(now())
   created_by                 Int
   createdBy                  UserMaster                  @relation("LeadShutterMaterialMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
@@ -1140,6 +1152,12 @@ model LeadHardwareMapping {
   skirting_carcass_legs_id       Int
   skirting_carcass_legs_color_id Int?
   note                           String?
+  is_approved                    Boolean                         @default(false)
+  approved_at                    DateTime?
+  is_amended                     Boolean                         @default(false)
+  amended_at                     DateTime?
+  is_deleted_item                Boolean                         @default(false)
+  deleted_item_at                DateTime?
   created_at                     DateTime                        @default(now())
   created_by                     Int
   carcassLegs                    CarcassLegsMaster               @relation(fields: [carcass_legs_id], references: [id], onDelete: Cascade)
@@ -1193,6 +1211,12 @@ model LeadLightCarcasUnitMapping {
   specs_id                    Int
   light_carcas_unit_master_id Int
   custom_remark               String?
+  is_approved                 Boolean                  @default(false)
+  approved_at                 DateTime?
+  is_amended                  Boolean                  @default(false)
+  amended_at                  DateTime?
+  is_deleted_item             Boolean                  @default(false)
+  deleted_item_at             DateTime?
   created_at                  DateTime                 @default(now())
   created_by                  Int
   createdBy                   UserMaster               @relation("LeadLightCarcasUnitMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
@@ -1229,6 +1253,12 @@ model LeadOtherAppliancesMapping {
   other_appliance_type       OtherApplianceType?
   other_appliances_master_id Int?
   custom_remark              String?
+  is_approved                Boolean                  @default(false)
+  approved_at                DateTime?
+  is_amended                 Boolean                  @default(false)
+  amended_at                 DateTime?
+  is_deleted_item            Boolean                  @default(false)
+  deleted_item_at            DateTime?
   created_at                 DateTime                 @default(now())
   created_by                 Int
   createdBy                  UserMaster               @relation("LeadOtherAppliancesMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
