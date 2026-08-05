@@ -401,9 +401,9 @@ export type LightCarcasUnitMasterSumOrderByAggregateInput = {
   light_carcas_type_id?: Prisma.SortOrder
 }
 
-export type LightCarcasUnitMasterScalarRelationFilter = {
-  is?: Prisma.LightCarcasUnitMasterWhereInput
-  isNot?: Prisma.LightCarcasUnitMasterWhereInput
+export type LightCarcasUnitMasterNullableScalarRelationFilter = {
+  is?: Prisma.LightCarcasUnitMasterWhereInput | null
+  isNot?: Prisma.LightCarcasUnitMasterWhereInput | null
 }
 
 export type LightCarcasUnitMasterCreateNestedManyWithoutVendorInput = {
@@ -496,10 +496,12 @@ export type LightCarcasUnitMasterCreateNestedOneWithoutLeadMappingsInput = {
   connect?: Prisma.LightCarcasUnitMasterWhereUniqueInput
 }
 
-export type LightCarcasUnitMasterUpdateOneRequiredWithoutLeadMappingsNestedInput = {
+export type LightCarcasUnitMasterUpdateOneWithoutLeadMappingsNestedInput = {
   create?: Prisma.XOR<Prisma.LightCarcasUnitMasterCreateWithoutLeadMappingsInput, Prisma.LightCarcasUnitMasterUncheckedCreateWithoutLeadMappingsInput>
   connectOrCreate?: Prisma.LightCarcasUnitMasterCreateOrConnectWithoutLeadMappingsInput
   upsert?: Prisma.LightCarcasUnitMasterUpsertWithoutLeadMappingsInput
+  disconnect?: Prisma.LightCarcasUnitMasterWhereInput | boolean
+  delete?: Prisma.LightCarcasUnitMasterWhereInput | boolean
   connect?: Prisma.LightCarcasUnitMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.LightCarcasUnitMasterUpdateToOneWithWhereWithoutLeadMappingsInput, Prisma.LightCarcasUnitMasterUpdateWithoutLeadMappingsInput>, Prisma.LightCarcasUnitMasterUncheckedUpdateWithoutLeadMappingsInput>
 }

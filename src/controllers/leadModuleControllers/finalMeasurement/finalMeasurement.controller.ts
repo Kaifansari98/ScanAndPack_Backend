@@ -2,6 +2,9 @@ import { Request, Response } from "express";
 import { FinalMeasurementService } from "../../../services/leadModuleServices/finalMeasurementStage/finalMeasurement.service";
 import logger from "../../../utils/logger";
 import { prisma } from "../../../prisma/client";
+import { sanitizeFilename } from "../../../utils/fileUtils";
+import path from "path";
+
 import { NotificationService } from "../../../services/notification/notification.service";
 import { getFranchiseAdminRecipients } from "../../../services/notification/adminRecipients.service";
 import { NotificationType } from "../../../prisma/generated";
@@ -165,10 +168,15 @@ export class FinalMeasurementController {
 
       const vendor = await prisma.vendorMaster.findUnique({
         where: { id: Number(vendor_id) },
-        select: { is_this_vendor_is_custom_usertype_only: true },
+        select: {
+          is_this_vendor_is_custom_usertype_only: true,
+          handlesLargeScaleProjects: true,
+        },
       });
       const isCustomVendorFlow =
         vendor?.is_this_vendor_is_custom_usertype_only === true;
+      const handlesLargeScaleProjects =
+        vendor?.handlesLargeScaleProjects === true;
 
       const instances = await prisma.leadProductStructureInstance.findMany({
         where: {
@@ -178,12 +186,11 @@ export class FinalMeasurementController {
         select: { id: true },
       });
 
-      const isMultiInstanceFlow = instances.length > 1;
+      const isMultiInstanceFlow = handlesLargeScaleProjects && instances.length >= 1;
       let canUseExistingInstanceFilesOnly = false;
 
       if (
         isCustomVendorFlow &&
-        isMultiInstanceFlow &&
         finalMeasurementDocs.length === 0 &&
         sitePhotos.length === 0
       ) {
@@ -206,46 +213,37 @@ export class FinalMeasurementController {
           return;
         }
 
-        const existingDocs = await prisma.leadDocuments.findMany({
-          where: {
-            lead_id: Number(lead_id),
-            vendor_id: Number(vendor_id),
-            is_deleted: false,
-            doc_type_id: { in: [measurementDocType.id, sitePhotoType.id] },
-            product_structure_instance_id: {
-              in: instances.map((instance) => instance.id),
+        if (isMultiInstanceFlow) {
+          const existingDocs = await prisma.leadDocuments.findMany({
+            where: {
+              lead_id: Number(lead_id),
+              vendor_id: Number(vendor_id),
+              is_deleted: false,
+              doc_type_id: { in: [measurementDocType.id, sitePhotoType.id] },
+              product_structure_instance_id: {
+                in: instances.map((instance) => instance.id),
+              },
             },
-          },
-          select: {
-            doc_type_id: true,
-            product_structure_instance_id: true,
-          },
-        });
-
-        const hasAllRequiredInstanceDocs = instances.every((instance) => {
-          const hasMeasurementDoc = existingDocs.some(
-            (doc) =>
-              doc.product_structure_instance_id === instance.id &&
-              doc.doc_type_id === measurementDocType.id,
-          );
-          const hasSitePhoto = existingDocs.some(
-            (doc) =>
-              doc.product_structure_instance_id === instance.id &&
-              doc.doc_type_id === sitePhotoType.id,
-          );
-
-          return hasMeasurementDoc && hasSitePhoto;
-        });
-
-        if (!hasAllRequiredInstanceDocs) {
-          res.status(400).json({
-            success: false,
-            message: "At least one Final Measurement document is required",
+            select: {
+              doc_type_id: true,
+              product_structure_instance_id: true,
+            },
           });
-          return;
-        }
 
-        canUseExistingInstanceFilesOnly = true;
+          const hasAtLeastOneDoc = existingDocs.some(
+            (doc) => doc.doc_type_id === measurementDocType.id,
+          );
+
+          if (!hasAtLeastOneDoc) {
+            res.status(400).json({
+              success: false,
+              message: "At least one Final Measurement document is required",
+            });
+            return;
+          }
+
+          canUseExistingInstanceFilesOnly = true;
+        }
       }
 
       if (
@@ -351,6 +349,67 @@ export class FinalMeasurementController {
         });
         return;
       }
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public skipFinalMeasurementStage = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const {
+        lead_id,
+        account_id,
+        vendor_id,
+        created_by,
+        critical_discussion_notes,
+      } = req.body;
+
+      if (!lead_id || !account_id || !vendor_id || !created_by) {
+        res
+          .status(400)
+          .json({ success: false, message: "Missing required fields" });
+        return;
+      }
+
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: Number(vendor_id) },
+        select: {
+          is_this_vendor_is_custom_usertype_only: true,
+          handlesLargeScaleProjects: true,
+        },
+      });
+
+      if (
+        vendor?.is_this_vendor_is_custom_usertype_only !== true ||
+        vendor?.handlesLargeScaleProjects !== true
+      ) {
+        res.status(400).json({
+          success: false,
+          message: "Vendor does not support skipping Final Measurement",
+        });
+        return;
+      }
+
+      const result = await finalMeasurementService.skipFinalMeasurementStage({
+        lead_id: Number(lead_id),
+        account_id: Number(account_id),
+        vendor_id: Number(vendor_id),
+        created_by: Number(created_by),
+        critical_discussion_notes,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Final measurement stage skipped successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error("[FinalMeasurementController] Error:", error);
       res.status(500).json({
         success: false,
         message: error.message || "Internal server error",
@@ -574,20 +633,90 @@ export class FinalMeasurementController {
         sysName: string;
       }[] = [];
 
+      // Custom renaming logic
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: parseInt(vendor_id) },
+        select: { is_custom_doc_nomenclature_enabled: true },
+      });
+      const useCustomVendorFlow = vendor?.is_custom_doc_nomenclature_enabled === true;
+
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: parseInt(lead_id) },
+        select: { firstname: true, lastname: true, account_id: true },
+      });
+
+      const sitePhotoDocType = await prisma.documentTypeMaster.findFirst({
+        where: { vendor_id: parseInt(vendor_id), tag: "Type 10" },
+      });
+
+      let clientNameSegment = "";
+      let dateSegment = "";
+      let structureSegment = "General";
+      let currentRev = -1;
+
+      if (useCustomVendorFlow && lead && sitePhotoDocType) {
+        clientNameSegment = sanitizeFilename(`${lead.firstname ?? ""}${lead.lastname ?? ""}` || "Client")
+          .replace(/_+/g, "_").slice(0, 50);
+
+        const now = new Date();
+        dateSegment = [
+          now.getFullYear(),
+          String(now.getMonth() + 1).padStart(2, "0"),
+          String(now.getDate()).padStart(2, "0"),
+        ].join("-");
+
+        if (product_structure_instance_id) {
+          const inst = await prisma.leadProductStructureInstance.findUnique({
+            where: { id: Number(product_structure_instance_id) },
+            select: { productType: { select: { type: true } } }
+          });
+          if (inst && inst.productType?.type) {
+            structureSegment = sanitizeFilename(inst.productType.type).replace(/_+/g, "_").slice(0, 80);
+          }
+        }
+
+        const existingDocs = await prisma.leadDocuments.findMany({
+          where: {
+            vendor_id: parseInt(vendor_id),
+            lead_id: parseInt(lead_id),
+            doc_type_id: sitePhotoDocType.id,
+            product_structure_instance_id: product_structure_instance_id ? Number(product_structure_instance_id) : null,
+            is_deleted: false,
+          },
+          select: { doc_og_name: true },
+        });
+
+        for (const doc of existingDocs) {
+          const match = doc.doc_og_name?.match(/^FM(\d+)-CSP-/i);
+          if (match) {
+            const rev = Number(match[1]);
+            currentRev = Math.max(currentRev, rev);
+          }
+        }
+      }
+
       for (const photo of sitePhotos) {
         await ensureTempFileExists(photo);
+
+        let finalOriginalName = photo.originalname;
+        if (useCustomVendorFlow) {
+          currentRev += 1;
+          const extension = path.extname(photo.originalname || "");
+          finalOriginalName = `FM${currentRev}-CSP-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+        }
+
         const sysName = await uploadToWasabiFinalMeasurementSitePhotoFile(
           photo.path,
           Number(vendor_id),
           Number(lead_id),
-          photo.originalname,
+          finalOriginalName,
           photo.mimetype
         );
 
         await safeUnlink(photo.path);
 
         uploadedSitePhotos.push({
-          originalName: photo.originalname,
+          originalName: finalOriginalName,
           sysName,
         });
       }
@@ -647,20 +776,90 @@ export class FinalMeasurementController {
         sysName: string;
       }[] = [];
 
+      // Custom renaming logic
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: parseInt(vendor_id) },
+        select: { is_custom_doc_nomenclature_enabled: true },
+      });
+      const useCustomVendorFlow = vendor?.is_custom_doc_nomenclature_enabled === true;
+
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: parseInt(lead_id) },
+        select: { firstname: true, lastname: true, account_id: true },
+      });
+
+      const fmDocType = await prisma.documentTypeMaster.findFirst({
+        where: { vendor_id: parseInt(vendor_id), tag: "Type 9" },
+      });
+
+      let clientNameSegment = "";
+      let dateSegment = "";
+      let structureSegment = "General";
+      let currentRev = -1;
+
+      if (useCustomVendorFlow && lead && fmDocType) {
+        clientNameSegment = sanitizeFilename(`${lead.firstname ?? ""}${lead.lastname ?? ""}` || "Client")
+          .replace(/_+/g, "_").slice(0, 50);
+
+        const now = new Date();
+        dateSegment = [
+          now.getFullYear(),
+          String(now.getMonth() + 1).padStart(2, "0"),
+          String(now.getDate()).padStart(2, "0"),
+        ].join("-");
+
+        if (product_structure_instance_id) {
+          const inst = await prisma.leadProductStructureInstance.findUnique({
+            where: { id: Number(product_structure_instance_id) },
+            select: { productType: { select: { type: true } } }
+          });
+          if (inst && inst.productType?.type) {
+            structureSegment = sanitizeFilename(inst.productType.type).replace(/_+/g, "_").slice(0, 80);
+          }
+        }
+
+        const existingDocs = await prisma.leadDocuments.findMany({
+          where: {
+            vendor_id: parseInt(vendor_id),
+            lead_id: parseInt(lead_id),
+            doc_type_id: fmDocType.id,
+            product_structure_instance_id: product_structure_instance_id ? Number(product_structure_instance_id) : null,
+            is_deleted: false,
+          },
+          select: { doc_og_name: true },
+        });
+
+        for (const doc of existingDocs) {
+          const match = doc.doc_og_name?.match(/^FM(\d+)-FMD-/i);
+          if (match) {
+            const rev = Number(match[1]);
+            currentRev = Math.max(currentRev, rev);
+          }
+        }
+      }
+
       for (const doc of finalMeasurementDocs) {
         await ensureTempFileExists(doc);
+        
+        let finalOriginalName = doc.originalname;
+        if (useCustomVendorFlow) {
+          currentRev += 1;
+          const extension = path.extname(doc.originalname || "");
+          finalOriginalName = `FM${currentRev}-FMD-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+        }
+
         const sysName = await uploadToWasabiFinalMeasurementDocFile(
           doc.path,
           Number(vendor_id),
           Number(lead_id),
-          doc.originalname,
+          finalOriginalName,
           doc.mimetype
         );
 
         await safeUnlink(doc.path);
 
         uploadedFinalMeasurementDocs.push({
-          originalName: doc.originalname,
+          originalName: finalOriginalName,
           sysName,
         });
       }

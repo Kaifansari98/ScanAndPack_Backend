@@ -232,6 +232,7 @@ export class UnderInstallationStageController {
         vendorId,
         userId,
         franchiseId,
+        undefined,
         "Type 15",
         page,
         limit,

@@ -66,6 +66,7 @@ export type PaymentInfoMinAggregateOutputType = {
   account_id: number | null
   status_id: number | null
   amount: number | null
+  is_booking_received_amt: boolean | null
   basic_amount: number | null
   gst_percentage: number | null
   gst_amount: number | null
@@ -86,6 +87,7 @@ export type PaymentInfoMaxAggregateOutputType = {
   account_id: number | null
   status_id: number | null
   amount: number | null
+  is_booking_received_amt: boolean | null
   basic_amount: number | null
   gst_percentage: number | null
   gst_amount: number | null
@@ -106,6 +108,7 @@ export type PaymentInfoCountAggregateOutputType = {
   account_id: number
   status_id: number
   amount: number
+  is_booking_received_amt: number
   basic_amount: number
   gst_percentage: number
   gst_amount: number
@@ -162,6 +165,7 @@ export type PaymentInfoMinAggregateInputType = {
   account_id?: true
   status_id?: true
   amount?: true
+  is_booking_received_amt?: true
   basic_amount?: true
   gst_percentage?: true
   gst_amount?: true
@@ -182,6 +186,7 @@ export type PaymentInfoMaxAggregateInputType = {
   account_id?: true
   status_id?: true
   amount?: true
+  is_booking_received_amt?: true
   basic_amount?: true
   gst_percentage?: true
   gst_amount?: true
@@ -202,6 +207,7 @@ export type PaymentInfoCountAggregateInputType = {
   account_id?: true
   status_id?: true
   amount?: true
+  is_booking_received_amt?: true
   basic_amount?: true
   gst_percentage?: true
   gst_amount?: true
@@ -309,6 +315,7 @@ export type PaymentInfoGroupByOutputType = {
   account_id: number
   status_id: number | null
   amount: number | null
+  is_booking_received_amt: boolean
   basic_amount: number | null
   gst_percentage: number | null
   gst_amount: number | null
@@ -352,6 +359,7 @@ export type PaymentInfoWhereInput = {
   account_id?: Prisma.IntFilter<"PaymentInfo"> | number
   status_id?: Prisma.IntNullableFilter<"PaymentInfo"> | number | null
   amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
+  is_booking_received_amt?: Prisma.BoolFilter<"PaymentInfo"> | boolean
   basic_amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
   gst_percentage?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
   gst_amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
@@ -380,6 +388,7 @@ export type PaymentInfoOrderByWithRelationInput = {
   account_id?: Prisma.SortOrder
   status_id?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_booking_received_amt?: Prisma.SortOrder
   basic_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   gst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
   gst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -411,6 +420,7 @@ export type PaymentInfoWhereUniqueInput = Prisma.AtLeast<{
   account_id?: Prisma.IntFilter<"PaymentInfo"> | number
   status_id?: Prisma.IntNullableFilter<"PaymentInfo"> | number | null
   amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
+  is_booking_received_amt?: Prisma.BoolFilter<"PaymentInfo"> | boolean
   basic_amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
   gst_percentage?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
   gst_amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
@@ -439,6 +449,7 @@ export type PaymentInfoOrderByWithAggregationInput = {
   account_id?: Prisma.SortOrder
   status_id?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_booking_received_amt?: Prisma.SortOrder
   basic_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   gst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
   gst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -467,6 +478,7 @@ export type PaymentInfoScalarWhereWithAggregatesInput = {
   account_id?: Prisma.IntWithAggregatesFilter<"PaymentInfo"> | number
   status_id?: Prisma.IntNullableWithAggregatesFilter<"PaymentInfo"> | number | null
   amount?: Prisma.FloatNullableWithAggregatesFilter<"PaymentInfo"> | number | null
+  is_booking_received_amt?: Prisma.BoolWithAggregatesFilter<"PaymentInfo"> | boolean
   basic_amount?: Prisma.FloatNullableWithAggregatesFilter<"PaymentInfo"> | number | null
   gst_percentage?: Prisma.FloatNullableWithAggregatesFilter<"PaymentInfo"> | number | null
   gst_amount?: Prisma.FloatNullableWithAggregatesFilter<"PaymentInfo"> | number | null
@@ -483,6 +495,7 @@ export type PaymentInfoScalarWhereWithAggregatesInput = {
 
 export type PaymentInfoCreateInput = {
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -506,6 +519,7 @@ export type PaymentInfoUncheckedCreateInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -522,6 +536,7 @@ export type PaymentInfoUncheckedCreateInput = {
 
 export type PaymentInfoUpdateInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -545,6 +560,7 @@ export type PaymentInfoUncheckedUpdateInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -565,6 +581,7 @@ export type PaymentInfoCreateManyInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -581,6 +598,7 @@ export type PaymentInfoCreateManyInput = {
 
 export type PaymentInfoUpdateManyMutationInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -596,6 +614,7 @@ export type PaymentInfoUncheckedUpdateManyInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -626,6 +645,7 @@ export type PaymentInfoCountOrderByAggregateInput = {
   account_id?: Prisma.SortOrder
   status_id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  is_booking_received_amt?: Prisma.SortOrder
   basic_amount?: Prisma.SortOrder
   gst_percentage?: Prisma.SortOrder
   gst_amount?: Prisma.SortOrder
@@ -663,6 +683,7 @@ export type PaymentInfoMaxOrderByAggregateInput = {
   account_id?: Prisma.SortOrder
   status_id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  is_booking_received_amt?: Prisma.SortOrder
   basic_amount?: Prisma.SortOrder
   gst_percentage?: Prisma.SortOrder
   gst_amount?: Prisma.SortOrder
@@ -683,6 +704,7 @@ export type PaymentInfoMinOrderByAggregateInput = {
   account_id?: Prisma.SortOrder
   status_id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  is_booking_received_amt?: Prisma.SortOrder
   basic_amount?: Prisma.SortOrder
   gst_percentage?: Prisma.SortOrder
   gst_amount?: Prisma.SortOrder
@@ -1052,6 +1074,7 @@ export type PaymentInfoUncheckedUpdateManyWithoutPaymentTypeNestedInput = {
 
 export type PaymentInfoCreateWithoutVendorInput = {
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1074,6 +1097,7 @@ export type PaymentInfoUncheckedCreateWithoutVendorInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1122,6 +1146,7 @@ export type PaymentInfoScalarWhereInput = {
   account_id?: Prisma.IntFilter<"PaymentInfo"> | number
   status_id?: Prisma.IntNullableFilter<"PaymentInfo"> | number | null
   amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
+  is_booking_received_amt?: Prisma.BoolFilter<"PaymentInfo"> | boolean
   basic_amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
   gst_percentage?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
   gst_amount?: Prisma.FloatNullableFilter<"PaymentInfo"> | number | null
@@ -1138,6 +1163,7 @@ export type PaymentInfoScalarWhereInput = {
 
 export type PaymentInfoCreateWithoutCreatedByInput = {
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1160,6 +1186,7 @@ export type PaymentInfoUncheckedCreateWithoutCreatedByInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1201,6 +1228,7 @@ export type PaymentInfoUpdateManyWithWhereWithoutCreatedByInput = {
 
 export type PaymentInfoCreateWithoutLeadInput = {
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1222,6 +1250,7 @@ export type PaymentInfoUncheckedCreateWithoutLeadInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1264,6 +1293,7 @@ export type PaymentInfoUpdateManyWithWhereWithoutLeadInput = {
 
 export type PaymentInfoCreateWithoutAccountInput = {
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1285,6 +1315,7 @@ export type PaymentInfoUncheckedCreateWithoutAccountInput = {
   lead_id: number
   status_id?: number | null
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1327,6 +1358,7 @@ export type PaymentInfoUpdateManyWithWhereWithoutAccountInput = {
 
 export type PaymentInfoCreateWithoutProductTypeInput = {
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1349,6 +1381,7 @@ export type PaymentInfoUncheckedCreateWithoutProductTypeInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1390,6 +1423,7 @@ export type PaymentInfoUpdateManyWithWhereWithoutProductTypeInput = {
 
 export type PaymentInfoCreateWithoutDocumentInput = {
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1412,6 +1446,7 @@ export type PaymentInfoUncheckedCreateWithoutDocumentInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1453,6 +1488,7 @@ export type PaymentInfoUpdateManyWithWhereWithoutDocumentInput = {
 
 export type PaymentInfoCreateWithoutStatusTypeInput = {
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1474,6 +1510,7 @@ export type PaymentInfoUncheckedCreateWithoutStatusTypeInput = {
   lead_id: number
   account_id: number
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1516,6 +1553,7 @@ export type PaymentInfoUpdateManyWithWhereWithoutStatusTypeInput = {
 
 export type PaymentInfoCreateWithoutPaymentTypeInput = {
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1538,6 +1576,7 @@ export type PaymentInfoUncheckedCreateWithoutPaymentTypeInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1583,6 +1622,7 @@ export type PaymentInfoCreateManyVendorInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1598,6 +1638,7 @@ export type PaymentInfoCreateManyVendorInput = {
 
 export type PaymentInfoUpdateWithoutVendorInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1620,6 +1661,7 @@ export type PaymentInfoUncheckedUpdateWithoutVendorInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1639,6 +1681,7 @@ export type PaymentInfoUncheckedUpdateManyWithoutVendorInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1658,6 +1701,7 @@ export type PaymentInfoCreateManyCreatedByInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1673,6 +1717,7 @@ export type PaymentInfoCreateManyCreatedByInput = {
 
 export type PaymentInfoUpdateWithoutCreatedByInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1695,6 +1740,7 @@ export type PaymentInfoUncheckedUpdateWithoutCreatedByInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1714,6 +1760,7 @@ export type PaymentInfoUncheckedUpdateManyWithoutCreatedByInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1732,6 +1779,7 @@ export type PaymentInfoCreateManyLeadInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1748,6 +1796,7 @@ export type PaymentInfoCreateManyLeadInput = {
 
 export type PaymentInfoUpdateWithoutLeadInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1769,6 +1818,7 @@ export type PaymentInfoUncheckedUpdateWithoutLeadInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1788,6 +1838,7 @@ export type PaymentInfoUncheckedUpdateManyWithoutLeadInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1807,6 +1858,7 @@ export type PaymentInfoCreateManyAccountInput = {
   lead_id: number
   status_id?: number | null
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1823,6 +1875,7 @@ export type PaymentInfoCreateManyAccountInput = {
 
 export type PaymentInfoUpdateWithoutAccountInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1844,6 +1897,7 @@ export type PaymentInfoUncheckedUpdateWithoutAccountInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1863,6 +1917,7 @@ export type PaymentInfoUncheckedUpdateManyWithoutAccountInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1883,6 +1938,7 @@ export type PaymentInfoCreateManyProductTypeInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1898,6 +1954,7 @@ export type PaymentInfoCreateManyProductTypeInput = {
 
 export type PaymentInfoUpdateWithoutProductTypeInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1920,6 +1977,7 @@ export type PaymentInfoUncheckedUpdateWithoutProductTypeInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1939,6 +1997,7 @@ export type PaymentInfoUncheckedUpdateManyWithoutProductTypeInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1958,6 +2017,7 @@ export type PaymentInfoCreateManyDocumentInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -1973,6 +2033,7 @@ export type PaymentInfoCreateManyDocumentInput = {
 
 export type PaymentInfoUpdateWithoutDocumentInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1995,6 +2056,7 @@ export type PaymentInfoUncheckedUpdateWithoutDocumentInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2014,6 +2076,7 @@ export type PaymentInfoUncheckedUpdateManyWithoutDocumentInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2032,6 +2095,7 @@ export type PaymentInfoCreateManyStatusTypeInput = {
   lead_id: number
   account_id: number
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -2048,6 +2112,7 @@ export type PaymentInfoCreateManyStatusTypeInput = {
 
 export type PaymentInfoUpdateWithoutStatusTypeInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2069,6 +2134,7 @@ export type PaymentInfoUncheckedUpdateWithoutStatusTypeInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2088,6 +2154,7 @@ export type PaymentInfoUncheckedUpdateManyWithoutStatusTypeInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2108,6 +2175,7 @@ export type PaymentInfoCreateManyPaymentTypeInput = {
   account_id: number
   status_id?: number | null
   amount?: number | null
+  is_booking_received_amt?: boolean
   basic_amount?: number | null
   gst_percentage?: number | null
   gst_amount?: number | null
@@ -2123,6 +2191,7 @@ export type PaymentInfoCreateManyPaymentTypeInput = {
 
 export type PaymentInfoUpdateWithoutPaymentTypeInput = {
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2145,6 +2214,7 @@ export type PaymentInfoUncheckedUpdateWithoutPaymentTypeInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2164,6 +2234,7 @@ export type PaymentInfoUncheckedUpdateManyWithoutPaymentTypeInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_booking_received_amt?: Prisma.BoolFieldUpdateOperationsInput | boolean
   basic_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_percentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   gst_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2185,6 +2256,7 @@ export type PaymentInfoSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   account_id?: boolean
   status_id?: boolean
   amount?: boolean
+  is_booking_received_amt?: boolean
   basic_amount?: boolean
   gst_percentage?: boolean
   gst_amount?: boolean
@@ -2213,6 +2285,7 @@ export type PaymentInfoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   account_id?: boolean
   status_id?: boolean
   amount?: boolean
+  is_booking_received_amt?: boolean
   basic_amount?: boolean
   gst_percentage?: boolean
   gst_amount?: boolean
@@ -2241,6 +2314,7 @@ export type PaymentInfoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   account_id?: boolean
   status_id?: boolean
   amount?: boolean
+  is_booking_received_amt?: boolean
   basic_amount?: boolean
   gst_percentage?: boolean
   gst_amount?: boolean
@@ -2269,6 +2343,7 @@ export type PaymentInfoSelectScalar = {
   account_id?: boolean
   status_id?: boolean
   amount?: boolean
+  is_booking_received_amt?: boolean
   basic_amount?: boolean
   gst_percentage?: boolean
   gst_amount?: boolean
@@ -2283,7 +2358,7 @@ export type PaymentInfoSelectScalar = {
   product_type_id?: boolean
 }
 
-export type PaymentInfoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "status_id" | "amount" | "basic_amount" | "gst_percentage" | "gst_amount" | "total_amount" | "payment_date" | "payment_text" | "payment_file_id" | "created_at" | "created_by" | "vendor_id" | "payment_type_id" | "product_type_id", ExtArgs["result"]["paymentInfo"]>
+export type PaymentInfoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "status_id" | "amount" | "is_booking_received_amt" | "basic_amount" | "gst_percentage" | "gst_amount" | "total_amount" | "payment_date" | "payment_text" | "payment_file_id" | "created_at" | "created_by" | "vendor_id" | "payment_type_id" | "product_type_id", ExtArgs["result"]["paymentInfo"]>
 export type PaymentInfoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -2333,6 +2408,7 @@ export type $PaymentInfoPayload<ExtArgs extends runtime.Types.Extensions.Interna
     account_id: number
     status_id: number | null
     amount: number | null
+    is_booking_received_amt: boolean
     basic_amount: number | null
     gst_percentage: number | null
     gst_amount: number | null
@@ -2781,6 +2857,7 @@ export interface PaymentInfoFieldRefs {
   readonly account_id: Prisma.FieldRef<"PaymentInfo", 'Int'>
   readonly status_id: Prisma.FieldRef<"PaymentInfo", 'Int'>
   readonly amount: Prisma.FieldRef<"PaymentInfo", 'Float'>
+  readonly is_booking_received_amt: Prisma.FieldRef<"PaymentInfo", 'Boolean'>
   readonly basic_amount: Prisma.FieldRef<"PaymentInfo", 'Float'>
   readonly gst_percentage: Prisma.FieldRef<"PaymentInfo", 'Float'>
   readonly gst_amount: Prisma.FieldRef<"PaymentInfo", 'Float'>

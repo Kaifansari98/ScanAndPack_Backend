@@ -3,6 +3,7 @@ import { BookingStageService } from "../../../services/bookingStage/bookingStage
 import {
   AddPaymentDto,
   CreateBookingStageDto,
+  LeadBillingAddressInput,
   UploadedFileRef,
 } from "../../../types/booking-stage.dto";
 import logger, { log } from "../../../utils/logger";
@@ -57,6 +58,24 @@ const normalizeStringArray = (value: unknown): string[] | undefined => {
   }
 
   return undefined;
+};
+
+const normalizeNumberArray = (value: unknown): number[] | undefined => {
+  if (Array.isArray(value)) {
+    const normalized = value
+      .map((item) => Number(item))
+      .filter((item) => Number.isFinite(item) && item > 0);
+    return normalized.length > 0 ? normalized : undefined;
+  }
+
+  if (value === undefined || value === null || value === "") {
+    return undefined;
+  }
+
+  const normalized = Number(value);
+  return Number.isFinite(normalized) && normalized > 0
+    ? [normalized]
+    : undefined;
 };
 
 export class BookingStageController {
@@ -610,7 +629,14 @@ export class BookingStageController {
     try {
       const vendorId = Number(getParam(req.params.vendorId));
       const userId = req.body.userId ? Number(req.body.userId) : null;
-      const franchiseId = Number(req.body.franchise_id);
+      const franchiseIdRaw = req.body.franchise_id;
+      const franchiseId =
+        franchiseIdRaw !== undefined &&
+        franchiseIdRaw !== null &&
+        franchiseIdRaw !== ""
+          ? Number(franchiseIdRaw)
+          : undefined;
+      const franchiseIds = normalizeNumberArray(req.body.franchise_ids);
       const tag = req.body.tag as string;
 
       const page = parseInt((req.body.page as string) || "1");
@@ -658,7 +684,6 @@ export class BookingStageController {
 
       const filters = {
         global_search: req.body.global_search,
-        filter_lead_code: req.body.filter_lead_code,
         filter_name: req.body.filter_name,
         contact: req.body.contact,
         furniture_type: req.body.furniture_type,
@@ -678,27 +703,37 @@ export class BookingStageController {
         date_range: dateRange,
         production_status: req.body.production_status,
         pending_services: req.body.pending_services,
+        franchises: req.body.franchises,
       };
 
       // ============================
       // VALIDATION GATE
       // ============================
-      if (!vendorId || !tag || !franchiseId) {
-        logger.warn("[BookingStageController] Missing vendorId, tag, or franchiseId", {
+      if (!vendorId || !tag) {
+        logger.warn("[BookingStageController] Missing vendorId or tag", {
           vendorId,
           tag,
           franchiseId,
+          franchiseIds,
         });
 
         return res.status(400).json({
           success: false,
-          message: "Vendor ID, franchise ID, and tag are required",
+          message: "Vendor ID and tag are required",
+        });
+      }
+
+      if (franchiseId !== undefined && (isNaN(franchiseId) || franchiseId <= 0)) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid Franchise ID provided",
         });
       }
 
       logger.info("[BookingStageController] getVendorLeadsByTag2 called", {
         vendorId,
         franchiseId,
+        franchiseIds,
         tag,
         page,
         limit,
@@ -707,6 +742,7 @@ export class BookingStageController {
       console.log("[getVendorLeadsByTag2] payload", {
         vendorId,
         franchiseId,
+        franchiseIds,
         userId,
         tag,
         page,
@@ -717,6 +753,7 @@ export class BookingStageController {
       const { leads, count } = await BookingStageService.getVendorLeadsByTag2(
         vendorId,
         franchiseId,
+        franchiseIds,
         tag,
         userId,
         page,
@@ -760,6 +797,7 @@ export class BookingStageController {
         franchiseIdRaw !== undefined && franchiseIdRaw !== null && franchiseIdRaw !== ""
           ? Number(franchiseIdRaw)
           : undefined;
+      const franchiseIds = normalizeNumberArray(req.body.franchise_ids);
       const tag = req.body.tag as string;
       const page = parseInt((req.body.page as string) || "1");
       const limit = parseInt((req.body.limit as string) || "10");
@@ -806,7 +844,6 @@ export class BookingStageController {
 
       const filters = {
         global_search: req.body.global_search,
-        filter_lead_code: req.body.filter_lead_code,
         filter_name: req.body.filter_name,
         contact: req.body.contact,
         furniture_type: req.body.furniture_type,
@@ -826,6 +863,7 @@ export class BookingStageController {
         date_range: dateRange,
         production_status: req.body.production_status,
         pending_services: req.body.pending_services,
+        franchises: req.body.franchises,
       };
 
       if (!vendorId || !userId) {
@@ -833,6 +871,7 @@ export class BookingStageController {
           vendorId,
           userId,
           franchiseId,
+          franchiseIds,
           tag,
         });
         return res.status(400).json({
@@ -857,6 +896,7 @@ export class BookingStageController {
         vendorId,
         userId,
         franchiseId,
+        franchiseIds,
         tag,
         dateRange,
       });
@@ -864,6 +904,7 @@ export class BookingStageController {
         vendorId,
         userId,
         franchiseId,
+        franchiseIds,
         tag,
         page,
         limit,
@@ -874,6 +915,7 @@ export class BookingStageController {
         vendorId,
         userId,
         franchiseId,
+        franchiseIds,
         tag,
         page,
         limit,
@@ -954,7 +996,6 @@ export class BookingStageController {
 
       const filters = {
         global_search: req.body.global_search,
-        filter_lead_code: req.body.filter_lead_code,
         filter_name: req.body.filter_name,
         contact: req.body.contact,
         furniture_type: req.body.furniture_type,
@@ -1089,6 +1130,7 @@ export class BookingStageController {
         vendorId,
         userId,
         franchiseId,
+        undefined,
         tag,
         page,
         limit,
@@ -1171,6 +1213,7 @@ export class BookingStageController {
         lead_id,
         account_id,
         vendor_id,
+        product_type_id,
         client_id,
         created_by,
         amount,
@@ -1221,6 +1264,10 @@ export class BookingStageController {
         lead_id: parseInt(lead_id),
         account_id: parseInt(account_id),
         vendor_id: parseInt(vendor_id),
+        product_type_id:
+          product_type_id && Number(product_type_id) > 0
+            ? parseInt(product_type_id)
+            : undefined,
         client_id: client_id ? parseInt(client_id) : undefined,
         created_by: parseInt(created_by),
         amount: parseFloat(amount),
@@ -1481,6 +1528,13 @@ export class BookingStageController {
       const vendorId = Number(getParam(req.params.vendorId));
       const bookingAmount = Number(req.body.booking_amount);
       const updatedBy = parseInt(req.body.updated_by);
+      const rawProductTypeId = req.body.product_type_id;
+      const productTypeId =
+        rawProductTypeId !== undefined &&
+        rawProductTypeId !== null &&
+        String(rawProductTypeId).trim() !== ""
+          ? Number(rawProductTypeId)
+          : undefined;
 
       if (!leadId || !vendorId || Number.isNaN(bookingAmount) || !updatedBy) {
         res.status(400).json({
@@ -1496,6 +1550,10 @@ export class BookingStageController {
         vendor_id: vendorId,
         booking_amount: bookingAmount,
         updated_by: updatedBy,
+        product_type_id:
+          productTypeId != null && !Number.isNaN(productTypeId)
+            ? productTypeId
+            : undefined,
       });
 
       res.status(200).json({
@@ -1506,6 +1564,165 @@ export class BookingStageController {
     } catch (error: any) {
       console.error(
         "[BookingStageController] updateBookingAmount Error:",
+        error,
+      );
+      res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public updateBasicAmount = async (
+    req: Request,
+    res: Response,
+  ): Promise<void> => {
+    try {
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
+      const basicAmount = Number(req.body.basic_amount);
+      const updatedBy = parseInt(req.body.updated_by);
+      const productTypeId = Number(req.body.product_type_id);
+
+      if (
+        !leadId ||
+        !vendorId ||
+        Number.isNaN(basicAmount) ||
+        !updatedBy ||
+        !productTypeId ||
+        Number.isNaN(productTypeId)
+      ) {
+        res.status(400).json({
+          success: false,
+          message:
+            "leadId, vendorId, basic_amount, updated_by, and product_type_id are required",
+        });
+        return;
+      }
+
+      const result = await this.bookingStageService.updateBasicAmount({
+        lead_id: leadId,
+        vendor_id: vendorId,
+        basic_amount: basicAmount,
+        updated_by: updatedBy,
+        product_type_id: productTypeId,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Basic amount updated successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[BookingStageController] updateBasicAmount Error:",
+        error,
+      );
+      res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public updateGstPercentage = async (
+    req: Request,
+    res: Response,
+  ): Promise<void> => {
+    try {
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
+      const gstPercentage = Number(req.body.gst_percentage);
+      const updatedBy = parseInt(req.body.updated_by);
+      const productTypeId = Number(req.body.product_type_id);
+
+      if (
+        !leadId ||
+        !vendorId ||
+        Number.isNaN(gstPercentage) ||
+        !updatedBy ||
+        !productTypeId ||
+        Number.isNaN(productTypeId)
+      ) {
+        res.status(400).json({
+          success: false,
+          message:
+            "leadId, vendorId, gst_percentage, updated_by, and product_type_id are required",
+        });
+        return;
+      }
+
+      const result = await this.bookingStageService.updateGstPercentage({
+        lead_id: leadId,
+        vendor_id: vendorId,
+        gst_percentage: gstPercentage,
+        updated_by: updatedBy,
+        product_type_id: productTypeId,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "GST percentage updated successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[BookingStageController] updateGstPercentage Error:",
+        error,
+      );
+      res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public updatePaymentAmount = async (
+    req: Request,
+    res: Response,
+  ): Promise<void> => {
+    try {
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
+      const paymentId = Number(getParam(req.params.paymentId));
+      const amount = Number(req.body.amount);
+      const updatedBy = parseInt(req.body.updated_by);
+      const productTypeId = Number(req.body.product_type_id);
+
+      if (
+        !leadId ||
+        !vendorId ||
+        !paymentId ||
+        Number.isNaN(amount) ||
+        !updatedBy ||
+        !productTypeId ||
+        Number.isNaN(productTypeId)
+      ) {
+        res.status(400).json({
+          success: false,
+          message:
+            "leadId, vendorId, paymentId, amount, updated_by, and product_type_id are required",
+        });
+        return;
+      }
+
+      const result = await this.bookingStageService.updatePaymentAmount({
+        lead_id: leadId,
+        vendor_id: vendorId,
+        payment_id: paymentId,
+        amount,
+        updated_by: updatedBy,
+        product_type_id: productTypeId,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Payment amount updated successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[BookingStageController] updatePaymentAmount Error:",
         error,
       );
       res.status(error.statusCode || 500).json({
@@ -1536,6 +1753,97 @@ export class BookingStageController {
     } catch (error: any) {
       logger.error("[PaymentController] Error", { error: error.message });
       res.status(500).json({ success: false, message: error.message });
+    }
+  };
+
+  public getLeadBillingAddresses = async (req: Request, res: Response) => {
+    try {
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
+
+      if (!leadId || !vendorId) {
+        res.status(400).json({
+          success: false,
+          message: "leadId and vendorId are required",
+        });
+        return;
+      }
+
+      const result = await this.bookingStageService.getLeadBillingAddresses(
+        leadId,
+        vendorId,
+      );
+
+      res.status(200).json({
+        success: true,
+        data: result,
+      });
+    } catch (error: any) {
+      logger.error("[BookingStageController] getLeadBillingAddresses Error", {
+        error: error.message,
+      });
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public upsertLeadBillingAddresses = async (req: Request, res: Response) => {
+    try {
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
+
+      if (!leadId || !vendorId) {
+        res.status(400).json({
+          success: false,
+          message: "leadId and vendorId are required",
+        });
+        return;
+      }
+
+      const normalizeAddress = (
+        value: any,
+      ): LeadBillingAddressInput | null => {
+        if (!value || typeof value !== "object") return null;
+
+        return {
+          name: typeof value.name === "string" ? value.name : null,
+          address: typeof value.address === "string" ? value.address : null,
+          map_link: typeof value.map_link === "string" ? value.map_link : null,
+          gst_number:
+            typeof value.gst_number === "string" ? value.gst_number : null,
+          state_name:
+            typeof value.state_name === "string" ? value.state_name : null,
+          place_of_supply:
+            typeof value.place_of_supply === "string"
+              ? value.place_of_supply
+              : null,
+        };
+      };
+
+      const result = await this.bookingStageService.upsertLeadBillingAddresses({
+        lead_id: leadId,
+        vendor_id: vendorId,
+        billingAddress: normalizeAddress(req.body.billingAddress),
+        shippingAddress: normalizeAddress(req.body.shippingAddress),
+      });
+
+      res.status(200).json({
+        success: true,
+        data: result,
+      });
+    } catch (error: any) {
+      logger.error(
+        "[BookingStageController] upsertLeadBillingAddresses Error",
+        {
+          error: error.message,
+        },
+      );
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
     }
   };
 
