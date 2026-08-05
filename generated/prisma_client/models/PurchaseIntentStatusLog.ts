@@ -240,8 +240,8 @@ export type PurchaseIntentStatusLogWhereInput = {
   changed_by?: Prisma.IntFilter<"PurchaseIntentStatusLog"> | number
   remarks?: Prisma.StringNullableFilter<"PurchaseIntentStatusLog"> | string | null
   created_at?: Prisma.DateTimeFilter<"PurchaseIntentStatusLog"> | Date | string
-  purchaseIntent?: Prisma.XOR<Prisma.PurchaseIntentMasterScalarRelationFilter, Prisma.PurchaseIntentMasterWhereInput>
   changedBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  purchaseIntent?: Prisma.XOR<Prisma.PurchaseIntentMasterScalarRelationFilter, Prisma.PurchaseIntentMasterWhereInput>
 }
 
 export type PurchaseIntentStatusLogOrderByWithRelationInput = {
@@ -252,8 +252,8 @@ export type PurchaseIntentStatusLogOrderByWithRelationInput = {
   changed_by?: Prisma.SortOrder
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  purchaseIntent?: Prisma.PurchaseIntentMasterOrderByWithRelationInput
   changedBy?: Prisma.UserMasterOrderByWithRelationInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterOrderByWithRelationInput
 }
 
 export type PurchaseIntentStatusLogWhereUniqueInput = Prisma.AtLeast<{
@@ -267,8 +267,8 @@ export type PurchaseIntentStatusLogWhereUniqueInput = Prisma.AtLeast<{
   changed_by?: Prisma.IntFilter<"PurchaseIntentStatusLog"> | number
   remarks?: Prisma.StringNullableFilter<"PurchaseIntentStatusLog"> | string | null
   created_at?: Prisma.DateTimeFilter<"PurchaseIntentStatusLog"> | Date | string
-  purchaseIntent?: Prisma.XOR<Prisma.PurchaseIntentMasterScalarRelationFilter, Prisma.PurchaseIntentMasterWhereInput>
   changedBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  purchaseIntent?: Prisma.XOR<Prisma.PurchaseIntentMasterScalarRelationFilter, Prisma.PurchaseIntentMasterWhereInput>
 }, "id">
 
 export type PurchaseIntentStatusLogOrderByWithAggregationInput = {
@@ -304,8 +304,8 @@ export type PurchaseIntentStatusLogCreateInput = {
   to_status: $Enums.PurchaseIntentStatus
   remarks?: string | null
   created_at?: Date | string
-  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutStatusLogsInput
   changedBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentStatusLogsInput
+  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutStatusLogsInput
 }
 
 export type PurchaseIntentStatusLogUncheckedCreateInput = {
@@ -323,8 +323,8 @@ export type PurchaseIntentStatusLogUpdateInput = {
   to_status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutStatusLogsNestedInput
   changedBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseIntentStatusLogsNestedInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutStatusLogsNestedInput
 }
 
 export type PurchaseIntentStatusLogUncheckedUpdateInput = {
@@ -683,8 +683,8 @@ export type PurchaseIntentStatusLogSelect<ExtArgs extends runtime.Types.Extensio
   changed_by?: boolean
   remarks?: boolean
   created_at?: boolean
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   changedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseIntentStatusLog"]>
 
 export type PurchaseIntentStatusLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -695,8 +695,8 @@ export type PurchaseIntentStatusLogSelectCreateManyAndReturn<ExtArgs extends run
   changed_by?: boolean
   remarks?: boolean
   created_at?: boolean
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   changedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseIntentStatusLog"]>
 
 export type PurchaseIntentStatusLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -707,8 +707,8 @@ export type PurchaseIntentStatusLogSelectUpdateManyAndReturn<ExtArgs extends run
   changed_by?: boolean
   remarks?: boolean
   created_at?: boolean
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   changedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseIntentStatusLog"]>
 
 export type PurchaseIntentStatusLogSelectScalar = {
@@ -723,23 +723,23 @@ export type PurchaseIntentStatusLogSelectScalar = {
 
 export type PurchaseIntentStatusLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "purchase_intent_id" | "from_status" | "to_status" | "changed_by" | "remarks" | "created_at", ExtArgs["result"]["purchaseIntentStatusLog"]>
 export type PurchaseIntentStatusLogInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   changedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
 }
 export type PurchaseIntentStatusLogIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   changedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
 }
 export type PurchaseIntentStatusLogIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   changedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
 }
 
 export type $PurchaseIntentStatusLogPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PurchaseIntentStatusLog"
   objects: {
-    purchaseIntent: Prisma.$PurchaseIntentMasterPayload<ExtArgs>
     changedBy: Prisma.$UserMasterPayload<ExtArgs>
+    purchaseIntent: Prisma.$PurchaseIntentMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1143,8 +1143,8 @@ readonly fields: PurchaseIntentStatusLogFieldRefs;
  */
 export interface Prisma__PurchaseIntentStatusLogClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  purchaseIntent<T extends Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PurchaseIntentMasterClient<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   changedBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  purchaseIntent<T extends Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PurchaseIntentMasterClient<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

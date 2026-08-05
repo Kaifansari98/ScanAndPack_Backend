@@ -244,9 +244,9 @@ export type UserPrivilegeMappingWhereInput = {
   is_allowed?: Prisma.BoolFilter<"UserPrivilegeMapping"> | boolean
   created_at?: Prisma.DateTimeFilter<"UserPrivilegeMapping"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UserPrivilegeMapping"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   privilege?: Prisma.XOR<Prisma.PrivilegeMasterScalarRelationFilter, Prisma.PrivilegeMasterWhereInput>
+  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type UserPrivilegeMappingOrderByWithRelationInput = {
@@ -257,9 +257,9 @@ export type UserPrivilegeMappingOrderByWithRelationInput = {
   is_allowed?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  user?: Prisma.UserMasterOrderByWithRelationInput
   privilege?: Prisma.PrivilegeMasterOrderByWithRelationInput
+  user?: Prisma.UserMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type UserPrivilegeMappingWhereUniqueInput = Prisma.AtLeast<{
@@ -274,9 +274,9 @@ export type UserPrivilegeMappingWhereUniqueInput = Prisma.AtLeast<{
   is_allowed?: Prisma.BoolFilter<"UserPrivilegeMapping"> | boolean
   created_at?: Prisma.DateTimeFilter<"UserPrivilegeMapping"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UserPrivilegeMapping"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   privilege?: Prisma.XOR<Prisma.PrivilegeMasterScalarRelationFilter, Prisma.PrivilegeMasterWhereInput>
+  user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id" | "vendor_id_user_id_privilege_id">
 
 export type UserPrivilegeMappingOrderByWithAggregationInput = {
@@ -311,9 +311,9 @@ export type UserPrivilegeMappingCreateInput = {
   is_allowed?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
-  user: Prisma.UserMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
   privilege: Prisma.PrivilegeMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
+  user: Prisma.UserMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
 }
 
 export type UserPrivilegeMappingUncheckedCreateInput = {
@@ -330,9 +330,9 @@ export type UserPrivilegeMappingUpdateInput = {
   is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
   privilege?: Prisma.PrivilegeMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
 }
 
 export type UserPrivilegeMappingUncheckedUpdateInput = {
@@ -561,8 +561,8 @@ export type UserPrivilegeMappingCreateWithoutVendorInput = {
   is_allowed?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  user: Prisma.UserMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
   privilege: Prisma.PrivilegeMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
+  user: Prisma.UserMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
 }
 
 export type UserPrivilegeMappingUncheckedCreateWithoutVendorInput = {
@@ -617,8 +617,8 @@ export type UserPrivilegeMappingCreateWithoutPrivilegeInput = {
   is_allowed?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
   user: Prisma.UserMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
 }
 
 export type UserPrivilegeMappingUncheckedCreateWithoutPrivilegeInput = {
@@ -660,8 +660,8 @@ export type UserPrivilegeMappingCreateWithoutUserInput = {
   is_allowed?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
   privilege: Prisma.PrivilegeMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
 }
 
 export type UserPrivilegeMappingUncheckedCreateWithoutUserInput = {
@@ -712,8 +712,8 @@ export type UserPrivilegeMappingUpdateWithoutVendorInput = {
   is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
   privilege?: Prisma.PrivilegeMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
 }
 
 export type UserPrivilegeMappingUncheckedUpdateWithoutVendorInput = {
@@ -747,8 +747,8 @@ export type UserPrivilegeMappingUpdateWithoutPrivilegeInput = {
   is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
 }
 
 export type UserPrivilegeMappingUncheckedUpdateWithoutPrivilegeInput = {
@@ -782,8 +782,8 @@ export type UserPrivilegeMappingUpdateWithoutUserInput = {
   is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
   privilege?: Prisma.PrivilegeMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
 }
 
 export type UserPrivilegeMappingUncheckedUpdateWithoutUserInput = {
@@ -814,9 +814,9 @@ export type UserPrivilegeMappingSelect<ExtArgs extends runtime.Types.Extensions.
   is_allowed?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   privilege?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userPrivilegeMapping"]>
 
 export type UserPrivilegeMappingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -827,9 +827,9 @@ export type UserPrivilegeMappingSelectCreateManyAndReturn<ExtArgs extends runtim
   is_allowed?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   privilege?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userPrivilegeMapping"]>
 
 export type UserPrivilegeMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -840,9 +840,9 @@ export type UserPrivilegeMappingSelectUpdateManyAndReturn<ExtArgs extends runtim
   is_allowed?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   privilege?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userPrivilegeMapping"]>
 
 export type UserPrivilegeMappingSelectScalar = {
@@ -857,27 +857,27 @@ export type UserPrivilegeMappingSelectScalar = {
 
 export type UserPrivilegeMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "user_id" | "privilege_id" | "is_allowed" | "created_at" | "updated_at", ExtArgs["result"]["userPrivilegeMapping"]>
 export type UserPrivilegeMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   privilege?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type UserPrivilegeMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   privilege?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type UserPrivilegeMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   privilege?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $UserPrivilegeMappingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "UserPrivilegeMapping"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    user: Prisma.$UserMasterPayload<ExtArgs>
     privilege: Prisma.$PrivilegeMasterPayload<ExtArgs>
+    user: Prisma.$UserMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1281,9 +1281,9 @@ readonly fields: UserPrivilegeMappingFieldRefs;
  */
 export interface Prisma__UserPrivilegeMappingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   privilege<T extends Prisma.PrivilegeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PrivilegeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PrivilegeMasterClient<runtime.Types.Result.GetResult<Prisma.$PrivilegeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

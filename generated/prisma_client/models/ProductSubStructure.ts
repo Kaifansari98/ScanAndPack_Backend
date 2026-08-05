@@ -241,8 +241,8 @@ export type ProductSubStructureWhereInput = {
   created_at?: Prisma.DateTimeFilter<"ProductSubStructure"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ProductSubStructure"> | Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceListRelationFilter
-  productStructure?: Prisma.XOR<Prisma.ProductStructureScalarRelationFilter, Prisma.ProductStructureWhereInput>
   productItemCodes?: Prisma.ProductItemCodeListRelationFilter
+  productStructure?: Prisma.XOR<Prisma.ProductStructureScalarRelationFilter, Prisma.ProductStructureWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
@@ -255,8 +255,8 @@ export type ProductSubStructureOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceOrderByRelationAggregateInput
-  productStructure?: Prisma.ProductStructureOrderByWithRelationInput
   productItemCodes?: Prisma.ProductItemCodeOrderByRelationAggregateInput
+  productStructure?: Prisma.ProductStructureOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
@@ -272,8 +272,8 @@ export type ProductSubStructureWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"ProductSubStructure"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ProductSubStructure"> | Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceListRelationFilter
-  productStructure?: Prisma.XOR<Prisma.ProductStructureScalarRelationFilter, Prisma.ProductStructureWhereInput>
   productItemCodes?: Prisma.ProductItemCodeListRelationFilter
+  productStructure?: Prisma.XOR<Prisma.ProductStructureScalarRelationFilter, Prisma.ProductStructureWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
@@ -311,8 +311,8 @@ export type ProductSubStructureCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutSubProductStructureInput
-  productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductSubStructuresInput
   productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutSubProductStructureInput
+  productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductSubStructuresInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductSubStructuresInput
 }
 
@@ -334,8 +334,8 @@ export type ProductSubStructureUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutSubProductStructureNestedInput
-  productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductSubStructuresNestedInput
   productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutSubProductStructureNestedInput
+  productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductSubStructuresNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductSubStructuresNestedInput
 }
 
@@ -557,8 +557,8 @@ export type ProductSubStructureCreateWithoutVendorInput = {
   created_at?: Date | string
   updated_at?: Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutSubProductStructureInput
-  productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductSubStructuresInput
   productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutSubProductStructureInput
+  productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductSubStructuresInput
 }
 
 export type ProductSubStructureUncheckedCreateWithoutVendorInput = {
@@ -721,8 +721,8 @@ export type ProductSubStructureCreateWithoutLeadProductStructureInstancesInput =
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
-  productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductSubStructuresInput
   productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutSubProductStructureInput
+  productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductSubStructuresInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductSubStructuresInput
 }
 
@@ -758,8 +758,8 @@ export type ProductSubStructureUpdateWithoutLeadProductStructureInstancesInput =
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductSubStructuresNestedInput
   productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutSubProductStructureNestedInput
+  productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductSubStructuresNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductSubStructuresNestedInput
 }
 
@@ -789,8 +789,8 @@ export type ProductSubStructureUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutSubProductStructureNestedInput
-  productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductSubStructuresNestedInput
   productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutSubProductStructureNestedInput
+  productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductSubStructuresNestedInput
 }
 
 export type ProductSubStructureUncheckedUpdateWithoutVendorInput = {
@@ -901,8 +901,8 @@ export type ProductSubStructureSelect<ExtArgs extends runtime.Types.Extensions.I
   created_at?: boolean
   updated_at?: boolean
   leadProductStructureInstances?: boolean | Prisma.ProductSubStructure$leadProductStructureInstancesArgs<ExtArgs>
-  productStructure?: boolean | Prisma.ProductStructureDefaultArgs<ExtArgs>
   productItemCodes?: boolean | Prisma.ProductSubStructure$productItemCodesArgs<ExtArgs>
+  productStructure?: boolean | Prisma.ProductStructureDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProductSubStructureCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productSubStructure"]>
@@ -944,8 +944,8 @@ export type ProductSubStructureSelectScalar = {
 export type ProductSubStructureOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id" | "product_structure_id" | "status" | "created_at" | "updated_at", ExtArgs["result"]["productSubStructure"]>
 export type ProductSubStructureInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   leadProductStructureInstances?: boolean | Prisma.ProductSubStructure$leadProductStructureInstancesArgs<ExtArgs>
-  productStructure?: boolean | Prisma.ProductStructureDefaultArgs<ExtArgs>
   productItemCodes?: boolean | Prisma.ProductSubStructure$productItemCodesArgs<ExtArgs>
+  productStructure?: boolean | Prisma.ProductStructureDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProductSubStructureCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -962,8 +962,8 @@ export type $ProductSubStructurePayload<ExtArgs extends runtime.Types.Extensions
   name: "ProductSubStructure"
   objects: {
     leadProductStructureInstances: Prisma.$LeadProductStructureInstancePayload<ExtArgs>[]
-    productStructure: Prisma.$ProductStructurePayload<ExtArgs>
     productItemCodes: Prisma.$ProductItemCodePayload<ExtArgs>[]
+    productStructure: Prisma.$ProductStructurePayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1369,8 +1369,8 @@ readonly fields: ProductSubStructureFieldRefs;
 export interface Prisma__ProductSubStructureClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   leadProductStructureInstances<T extends Prisma.ProductSubStructure$leadProductStructureInstancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductSubStructure$leadProductStructureInstancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureInstancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  productStructure<T extends Prisma.ProductStructureDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductStructureDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductStructureClient<runtime.Types.Result.GetResult<Prisma.$ProductStructurePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   productItemCodes<T extends Prisma.ProductSubStructure$productItemCodesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductSubStructure$productItemCodesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductItemCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  productStructure<T extends Prisma.ProductStructureDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductStructureDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductStructureClient<runtime.Types.Result.GetResult<Prisma.$ProductStructurePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.

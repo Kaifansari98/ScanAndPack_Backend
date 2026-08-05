@@ -240,8 +240,8 @@ export type FastProductionStatusLogWhereInput = {
   actor_user_id?: Prisma.IntFilter<"FastProductionStatusLog"> | number
   remark?: Prisma.StringNullableFilter<"FastProductionStatusLog"> | string | null
   created_at?: Prisma.DateTimeFilter<"FastProductionStatusLog"> | Date | string
-  batch?: Prisma.XOR<Prisma.FastProductionRequestBatchScalarRelationFilter, Prisma.FastProductionRequestBatchWhereInput>
   actor?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  batch?: Prisma.XOR<Prisma.FastProductionRequestBatchScalarRelationFilter, Prisma.FastProductionRequestBatchWhereInput>
 }
 
 export type FastProductionStatusLogOrderByWithRelationInput = {
@@ -252,8 +252,8 @@ export type FastProductionStatusLogOrderByWithRelationInput = {
   actor_user_id?: Prisma.SortOrder
   remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  batch?: Prisma.FastProductionRequestBatchOrderByWithRelationInput
   actor?: Prisma.UserMasterOrderByWithRelationInput
+  batch?: Prisma.FastProductionRequestBatchOrderByWithRelationInput
 }
 
 export type FastProductionStatusLogWhereUniqueInput = Prisma.AtLeast<{
@@ -267,8 +267,8 @@ export type FastProductionStatusLogWhereUniqueInput = Prisma.AtLeast<{
   actor_user_id?: Prisma.IntFilter<"FastProductionStatusLog"> | number
   remark?: Prisma.StringNullableFilter<"FastProductionStatusLog"> | string | null
   created_at?: Prisma.DateTimeFilter<"FastProductionStatusLog"> | Date | string
-  batch?: Prisma.XOR<Prisma.FastProductionRequestBatchScalarRelationFilter, Prisma.FastProductionRequestBatchWhereInput>
   actor?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  batch?: Prisma.XOR<Prisma.FastProductionRequestBatchScalarRelationFilter, Prisma.FastProductionRequestBatchWhereInput>
 }, "id">
 
 export type FastProductionStatusLogOrderByWithAggregationInput = {
@@ -304,8 +304,8 @@ export type FastProductionStatusLogCreateInput = {
   to_status: $Enums.FastProductionRequestStatus
   remark?: string | null
   created_at?: Date | string
-  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutStatus_logsInput
   actor: Prisma.UserMasterCreateNestedOneWithoutFastProductionStatusLogsInput
+  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutStatus_logsInput
 }
 
 export type FastProductionStatusLogUncheckedCreateInput = {
@@ -323,8 +323,8 @@ export type FastProductionStatusLogUpdateInput = {
   to_status?: Prisma.EnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutStatus_logsNestedInput
   actor?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionStatusLogsNestedInput
+  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutStatus_logsNestedInput
 }
 
 export type FastProductionStatusLogUncheckedUpdateInput = {
@@ -679,8 +679,8 @@ export type FastProductionStatusLogSelect<ExtArgs extends runtime.Types.Extensio
   actor_user_id?: boolean
   remark?: boolean
   created_at?: boolean
-  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
   actor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fastProductionStatusLog"]>
 
 export type FastProductionStatusLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -691,8 +691,8 @@ export type FastProductionStatusLogSelectCreateManyAndReturn<ExtArgs extends run
   actor_user_id?: boolean
   remark?: boolean
   created_at?: boolean
-  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
   actor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fastProductionStatusLog"]>
 
 export type FastProductionStatusLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -703,8 +703,8 @@ export type FastProductionStatusLogSelectUpdateManyAndReturn<ExtArgs extends run
   actor_user_id?: boolean
   remark?: boolean
   created_at?: boolean
-  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
   actor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fastProductionStatusLog"]>
 
 export type FastProductionStatusLogSelectScalar = {
@@ -719,23 +719,23 @@ export type FastProductionStatusLogSelectScalar = {
 
 export type FastProductionStatusLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "batch_id" | "from_status" | "to_status" | "actor_user_id" | "remark" | "created_at", ExtArgs["result"]["fastProductionStatusLog"]>
 export type FastProductionStatusLogInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
   actor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
 }
 export type FastProductionStatusLogIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
   actor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
 }
 export type FastProductionStatusLogIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
   actor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
 }
 
 export type $FastProductionStatusLogPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "FastProductionStatusLog"
   objects: {
-    batch: Prisma.$FastProductionRequestBatchPayload<ExtArgs>
     actor: Prisma.$UserMasterPayload<ExtArgs>
+    batch: Prisma.$FastProductionRequestBatchPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1139,8 +1139,8 @@ readonly fields: FastProductionStatusLogFieldRefs;
  */
 export interface Prisma__FastProductionStatusLogClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  batch<T extends Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>>): Prisma.Prisma__FastProductionRequestBatchClient<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestBatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   actor<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  batch<T extends Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>>): Prisma.Prisma__FastProductionRequestBatchClient<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestBatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

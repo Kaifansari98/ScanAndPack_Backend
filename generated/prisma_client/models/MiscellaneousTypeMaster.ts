@@ -42,27 +42,27 @@ export type MiscellaneousTypeMasterMinAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   name: string | null
-  status: string | null
   created_by: number | null
   created_at: Date | null
+  status: string | null
 }
 
 export type MiscellaneousTypeMasterMaxAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   name: string | null
-  status: string | null
   created_by: number | null
   created_at: Date | null
+  status: string | null
 }
 
 export type MiscellaneousTypeMasterCountAggregateOutputType = {
   id: number
   vendor_id: number
   name: number
-  status: number
   created_by: number
   created_at: number
+  status: number
   _all: number
 }
 
@@ -83,27 +83,27 @@ export type MiscellaneousTypeMasterMinAggregateInputType = {
   id?: true
   vendor_id?: true
   name?: true
-  status?: true
   created_by?: true
   created_at?: true
+  status?: true
 }
 
 export type MiscellaneousTypeMasterMaxAggregateInputType = {
   id?: true
   vendor_id?: true
   name?: true
-  status?: true
   created_by?: true
   created_at?: true
+  status?: true
 }
 
 export type MiscellaneousTypeMasterCountAggregateInputType = {
   id?: true
   vendor_id?: true
   name?: true
-  status?: true
   created_by?: true
   created_at?: true
+  status?: true
   _all?: true
 }
 
@@ -197,9 +197,9 @@ export type MiscellaneousTypeMasterGroupByOutputType = {
   id: number
   vendor_id: number
   name: string
-  status: string
   created_by: number
   created_at: Date
+  status: string
   _count: MiscellaneousTypeMasterCountAggregateOutputType | null
   _avg: MiscellaneousTypeMasterAvgAggregateOutputType | null
   _sum: MiscellaneousTypeMasterSumAggregateOutputType | null
@@ -229,9 +229,9 @@ export type MiscellaneousTypeMasterWhereInput = {
   id?: Prisma.IntFilter<"MiscellaneousTypeMaster"> | number
   vendor_id?: Prisma.IntFilter<"MiscellaneousTypeMaster"> | number
   name?: Prisma.StringFilter<"MiscellaneousTypeMaster"> | string
-  status?: Prisma.StringFilter<"MiscellaneousTypeMaster"> | string
   created_by?: Prisma.IntFilter<"MiscellaneousTypeMaster"> | number
   created_at?: Prisma.DateTimeFilter<"MiscellaneousTypeMaster"> | Date | string
+  status?: Prisma.StringFilter<"MiscellaneousTypeMaster"> | string
   misc?: Prisma.MiscellaneousMasterListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
@@ -240,9 +240,9 @@ export type MiscellaneousTypeMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   misc?: Prisma.MiscellaneousMasterOrderByRelationAggregateInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
@@ -254,9 +254,9 @@ export type MiscellaneousTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.MiscellaneousTypeMasterWhereInput | Prisma.MiscellaneousTypeMasterWhereInput[]
   vendor_id?: Prisma.IntFilter<"MiscellaneousTypeMaster"> | number
   name?: Prisma.StringFilter<"MiscellaneousTypeMaster"> | string
-  status?: Prisma.StringFilter<"MiscellaneousTypeMaster"> | string
   created_by?: Prisma.IntFilter<"MiscellaneousTypeMaster"> | number
   created_at?: Prisma.DateTimeFilter<"MiscellaneousTypeMaster"> | Date | string
+  status?: Prisma.StringFilter<"MiscellaneousTypeMaster"> | string
   misc?: Prisma.MiscellaneousMasterListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
@@ -265,9 +265,9 @@ export type MiscellaneousTypeMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   _count?: Prisma.MiscellaneousTypeMasterCountOrderByAggregateInput
   _avg?: Prisma.MiscellaneousTypeMasterAvgOrderByAggregateInput
   _max?: Prisma.MiscellaneousTypeMasterMaxOrderByAggregateInput
@@ -282,16 +282,16 @@ export type MiscellaneousTypeMasterScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"MiscellaneousTypeMaster"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"MiscellaneousTypeMaster"> | number
   name?: Prisma.StringWithAggregatesFilter<"MiscellaneousTypeMaster"> | string
-  status?: Prisma.StringWithAggregatesFilter<"MiscellaneousTypeMaster"> | string
   created_by?: Prisma.IntWithAggregatesFilter<"MiscellaneousTypeMaster"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"MiscellaneousTypeMaster"> | Date | string
+  status?: Prisma.StringWithAggregatesFilter<"MiscellaneousTypeMaster"> | string
 }
 
 export type MiscellaneousTypeMasterCreateInput = {
   name: string
-  status?: string
   created_by: number
   created_at?: Date | string
+  status?: string
   misc?: Prisma.MiscellaneousMasterCreateNestedManyWithoutTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousTypeMasterInput
 }
@@ -300,17 +300,17 @@ export type MiscellaneousTypeMasterUncheckedCreateInput = {
   id?: number
   vendor_id: number
   name: string
-  status?: string
   created_by: number
   created_at?: Date | string
+  status?: string
   misc?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutTypeInput
 }
 
 export type MiscellaneousTypeMasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   misc?: Prisma.MiscellaneousMasterUpdateManyWithoutTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousTypeMasterNestedInput
 }
@@ -319,9 +319,9 @@ export type MiscellaneousTypeMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   misc?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutTypeNestedInput
 }
 
@@ -329,25 +329,25 @@ export type MiscellaneousTypeMasterCreateManyInput = {
   id?: number
   vendor_id: number
   name: string
-  status?: string
   created_by: number
   created_at?: Date | string
+  status?: string
 }
 
 export type MiscellaneousTypeMasterUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type MiscellaneousTypeMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type MiscellaneousTypeMasterListRelationFilter = {
@@ -369,9 +369,9 @@ export type MiscellaneousTypeMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type MiscellaneousTypeMasterAvgOrderByAggregateInput = {
@@ -384,18 +384,18 @@ export type MiscellaneousTypeMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type MiscellaneousTypeMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type MiscellaneousTypeMasterSumOrderByAggregateInput = {
@@ -462,18 +462,18 @@ export type MiscellaneousTypeMasterUpdateOneRequiredWithoutMiscNestedInput = {
 
 export type MiscellaneousTypeMasterCreateWithoutVendorInput = {
   name: string
-  status?: string
   created_by: number
   created_at?: Date | string
+  status?: string
   misc?: Prisma.MiscellaneousMasterCreateNestedManyWithoutTypeInput
 }
 
 export type MiscellaneousTypeMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   name: string
-  status?: string
   created_by: number
   created_at?: Date | string
+  status?: string
   misc?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutTypeInput
 }
 
@@ -510,16 +510,16 @@ export type MiscellaneousTypeMasterScalarWhereInput = {
   id?: Prisma.IntFilter<"MiscellaneousTypeMaster"> | number
   vendor_id?: Prisma.IntFilter<"MiscellaneousTypeMaster"> | number
   name?: Prisma.StringFilter<"MiscellaneousTypeMaster"> | string
-  status?: Prisma.StringFilter<"MiscellaneousTypeMaster"> | string
   created_by?: Prisma.IntFilter<"MiscellaneousTypeMaster"> | number
   created_at?: Prisma.DateTimeFilter<"MiscellaneousTypeMaster"> | Date | string
+  status?: Prisma.StringFilter<"MiscellaneousTypeMaster"> | string
 }
 
 export type MiscellaneousTypeMasterCreateWithoutMiscInput = {
   name: string
-  status?: string
   created_by: number
   created_at?: Date | string
+  status?: string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousTypeMasterInput
 }
 
@@ -527,9 +527,9 @@ export type MiscellaneousTypeMasterUncheckedCreateWithoutMiscInput = {
   id?: number
   vendor_id: number
   name: string
-  status?: string
   created_by: number
   created_at?: Date | string
+  status?: string
 }
 
 export type MiscellaneousTypeMasterCreateOrConnectWithoutMiscInput = {
@@ -550,9 +550,9 @@ export type MiscellaneousTypeMasterUpdateToOneWithWhereWithoutMiscInput = {
 
 export type MiscellaneousTypeMasterUpdateWithoutMiscInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousTypeMasterNestedInput
 }
 
@@ -560,42 +560,42 @@ export type MiscellaneousTypeMasterUncheckedUpdateWithoutMiscInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type MiscellaneousTypeMasterCreateManyVendorInput = {
   id?: number
   name: string
-  status?: string
   created_by: number
   created_at?: Date | string
+  status?: string
 }
 
 export type MiscellaneousTypeMasterUpdateWithoutVendorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   misc?: Prisma.MiscellaneousMasterUpdateManyWithoutTypeNestedInput
 }
 
 export type MiscellaneousTypeMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   misc?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutTypeNestedInput
 }
 
 export type MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -633,9 +633,9 @@ export type MiscellaneousTypeMasterSelect<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   vendor_id?: boolean
   name?: boolean
-  status?: boolean
   created_by?: boolean
   created_at?: boolean
+  status?: boolean
   misc?: boolean | Prisma.MiscellaneousTypeMaster$miscArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.MiscellaneousTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
@@ -645,9 +645,9 @@ export type MiscellaneousTypeMasterSelectCreateManyAndReturn<ExtArgs extends run
   id?: boolean
   vendor_id?: boolean
   name?: boolean
-  status?: boolean
   created_by?: boolean
   created_at?: boolean
+  status?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["miscellaneousTypeMaster"]>
 
@@ -655,9 +655,9 @@ export type MiscellaneousTypeMasterSelectUpdateManyAndReturn<ExtArgs extends run
   id?: boolean
   vendor_id?: boolean
   name?: boolean
-  status?: boolean
   created_by?: boolean
   created_at?: boolean
+  status?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["miscellaneousTypeMaster"]>
 
@@ -665,12 +665,12 @@ export type MiscellaneousTypeMasterSelectScalar = {
   id?: boolean
   vendor_id?: boolean
   name?: boolean
-  status?: boolean
   created_by?: boolean
   created_at?: boolean
+  status?: boolean
 }
 
-export type MiscellaneousTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "name" | "status" | "created_by" | "created_at", ExtArgs["result"]["miscellaneousTypeMaster"]>
+export type MiscellaneousTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "name" | "created_by" | "created_at" | "status", ExtArgs["result"]["miscellaneousTypeMaster"]>
 export type MiscellaneousTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   misc?: boolean | Prisma.MiscellaneousTypeMaster$miscArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -693,9 +693,9 @@ export type $MiscellaneousTypeMasterPayload<ExtArgs extends runtime.Types.Extens
     id: number
     vendor_id: number
     name: string
-    status: string
     created_by: number
     created_at: Date
+    status: string
   }, ExtArgs["result"]["miscellaneousTypeMaster"]>
   composites: {}
 }
@@ -1124,9 +1124,9 @@ export interface MiscellaneousTypeMasterFieldRefs {
   readonly id: Prisma.FieldRef<"MiscellaneousTypeMaster", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"MiscellaneousTypeMaster", 'Int'>
   readonly name: Prisma.FieldRef<"MiscellaneousTypeMaster", 'String'>
-  readonly status: Prisma.FieldRef<"MiscellaneousTypeMaster", 'String'>
   readonly created_by: Prisma.FieldRef<"MiscellaneousTypeMaster", 'Int'>
   readonly created_at: Prisma.FieldRef<"MiscellaneousTypeMaster", 'DateTime'>
+  readonly status: Prisma.FieldRef<"MiscellaneousTypeMaster", 'String'>
 }
     
 

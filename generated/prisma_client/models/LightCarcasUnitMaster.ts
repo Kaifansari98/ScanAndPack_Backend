@@ -232,9 +232,9 @@ export type LightCarcasUnitMasterWhereInput = {
   light_carcas_type_id?: Prisma.IntFilter<"LightCarcasUnitMaster"> | number
   is_active?: Prisma.BoolFilter<"LightCarcasUnitMaster"> | boolean
   created_at?: Prisma.DateTimeFilter<"LightCarcasUnitMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lightCarcasType?: Prisma.XOR<Prisma.LightCarcasTypeMasterScalarRelationFilter, Prisma.LightCarcasTypeMasterWhereInput>
   leadMappings?: Prisma.LeadLightCarcasUnitMappingListRelationFilter
+  lightCarcasType?: Prisma.XOR<Prisma.LightCarcasTypeMasterScalarRelationFilter, Prisma.LightCarcasTypeMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type LightCarcasUnitMasterOrderByWithRelationInput = {
@@ -244,9 +244,9 @@ export type LightCarcasUnitMasterOrderByWithRelationInput = {
   light_carcas_type_id?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  lightCarcasType?: Prisma.LightCarcasTypeMasterOrderByWithRelationInput
   leadMappings?: Prisma.LeadLightCarcasUnitMappingOrderByRelationAggregateInput
+  lightCarcasType?: Prisma.LightCarcasTypeMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type LightCarcasUnitMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -259,9 +259,9 @@ export type LightCarcasUnitMasterWhereUniqueInput = Prisma.AtLeast<{
   light_carcas_type_id?: Prisma.IntFilter<"LightCarcasUnitMaster"> | number
   is_active?: Prisma.BoolFilter<"LightCarcasUnitMaster"> | boolean
   created_at?: Prisma.DateTimeFilter<"LightCarcasUnitMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lightCarcasType?: Prisma.XOR<Prisma.LightCarcasTypeMasterScalarRelationFilter, Prisma.LightCarcasTypeMasterWhereInput>
   leadMappings?: Prisma.LeadLightCarcasUnitMappingListRelationFilter
+  lightCarcasType?: Prisma.XOR<Prisma.LightCarcasTypeMasterScalarRelationFilter, Prisma.LightCarcasTypeMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type LightCarcasUnitMasterOrderByWithAggregationInput = {
@@ -294,9 +294,9 @@ export type LightCarcasUnitMasterCreateInput = {
   type: string
   is_active?: boolean
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLightCarcasUnitsInput
-  lightCarcasType: Prisma.LightCarcasTypeMasterCreateNestedOneWithoutUnitsInput
   leadMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLightCarcasUnitInput
+  lightCarcasType: Prisma.LightCarcasTypeMasterCreateNestedOneWithoutUnitsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLightCarcasUnitsInput
 }
 
 export type LightCarcasUnitMasterUncheckedCreateInput = {
@@ -313,9 +313,9 @@ export type LightCarcasUnitMasterUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLightCarcasUnitsNestedInput
-  lightCarcasType?: Prisma.LightCarcasTypeMasterUpdateOneRequiredWithoutUnitsNestedInput
   leadMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLightCarcasUnitNestedInput
+  lightCarcasType?: Prisma.LightCarcasTypeMasterUpdateOneRequiredWithoutUnitsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLightCarcasUnitsNestedInput
 }
 
 export type LightCarcasUnitMasterUncheckedUpdateInput = {
@@ -401,9 +401,9 @@ export type LightCarcasUnitMasterSumOrderByAggregateInput = {
   light_carcas_type_id?: Prisma.SortOrder
 }
 
-export type LightCarcasUnitMasterNullableScalarRelationFilter = {
-  is?: Prisma.LightCarcasUnitMasterWhereInput | null
-  isNot?: Prisma.LightCarcasUnitMasterWhereInput | null
+export type LightCarcasUnitMasterScalarRelationFilter = {
+  is?: Prisma.LightCarcasUnitMasterWhereInput
+  isNot?: Prisma.LightCarcasUnitMasterWhereInput
 }
 
 export type LightCarcasUnitMasterCreateNestedManyWithoutVendorInput = {
@@ -496,12 +496,10 @@ export type LightCarcasUnitMasterCreateNestedOneWithoutLeadMappingsInput = {
   connect?: Prisma.LightCarcasUnitMasterWhereUniqueInput
 }
 
-export type LightCarcasUnitMasterUpdateOneWithoutLeadMappingsNestedInput = {
+export type LightCarcasUnitMasterUpdateOneRequiredWithoutLeadMappingsNestedInput = {
   create?: Prisma.XOR<Prisma.LightCarcasUnitMasterCreateWithoutLeadMappingsInput, Prisma.LightCarcasUnitMasterUncheckedCreateWithoutLeadMappingsInput>
   connectOrCreate?: Prisma.LightCarcasUnitMasterCreateOrConnectWithoutLeadMappingsInput
   upsert?: Prisma.LightCarcasUnitMasterUpsertWithoutLeadMappingsInput
-  disconnect?: Prisma.LightCarcasUnitMasterWhereInput | boolean
-  delete?: Prisma.LightCarcasUnitMasterWhereInput | boolean
   connect?: Prisma.LightCarcasUnitMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.LightCarcasUnitMasterUpdateToOneWithWhereWithoutLeadMappingsInput, Prisma.LightCarcasUnitMasterUpdateWithoutLeadMappingsInput>, Prisma.LightCarcasUnitMasterUncheckedUpdateWithoutLeadMappingsInput>
 }
@@ -510,8 +508,8 @@ export type LightCarcasUnitMasterCreateWithoutVendorInput = {
   type: string
   is_active?: boolean
   created_at?: Date | string
-  lightCarcasType: Prisma.LightCarcasTypeMasterCreateNestedOneWithoutUnitsInput
   leadMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLightCarcasUnitInput
+  lightCarcasType: Prisma.LightCarcasTypeMasterCreateNestedOneWithoutUnitsInput
 }
 
 export type LightCarcasUnitMasterUncheckedCreateWithoutVendorInput = {
@@ -565,8 +563,8 @@ export type LightCarcasUnitMasterCreateWithoutLightCarcasTypeInput = {
   type: string
   is_active?: boolean
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLightCarcasUnitsInput
   leadMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLightCarcasUnitInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLightCarcasUnitsInput
 }
 
 export type LightCarcasUnitMasterUncheckedCreateWithoutLightCarcasTypeInput = {
@@ -608,8 +606,8 @@ export type LightCarcasUnitMasterCreateWithoutLeadMappingsInput = {
   type: string
   is_active?: boolean
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLightCarcasUnitsInput
   lightCarcasType: Prisma.LightCarcasTypeMasterCreateNestedOneWithoutUnitsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLightCarcasUnitsInput
 }
 
 export type LightCarcasUnitMasterUncheckedCreateWithoutLeadMappingsInput = {
@@ -641,8 +639,8 @@ export type LightCarcasUnitMasterUpdateWithoutLeadMappingsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLightCarcasUnitsNestedInput
   lightCarcasType?: Prisma.LightCarcasTypeMasterUpdateOneRequiredWithoutUnitsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLightCarcasUnitsNestedInput
 }
 
 export type LightCarcasUnitMasterUncheckedUpdateWithoutLeadMappingsInput = {
@@ -666,8 +664,8 @@ export type LightCarcasUnitMasterUpdateWithoutVendorInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lightCarcasType?: Prisma.LightCarcasTypeMasterUpdateOneRequiredWithoutUnitsNestedInput
   leadMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLightCarcasUnitNestedInput
+  lightCarcasType?: Prisma.LightCarcasTypeMasterUpdateOneRequiredWithoutUnitsNestedInput
 }
 
 export type LightCarcasUnitMasterUncheckedUpdateWithoutVendorInput = {
@@ -699,8 +697,8 @@ export type LightCarcasUnitMasterUpdateWithoutLightCarcasTypeInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLightCarcasUnitsNestedInput
   leadMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLightCarcasUnitNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLightCarcasUnitsNestedInput
 }
 
 export type LightCarcasUnitMasterUncheckedUpdateWithoutLightCarcasTypeInput = {
@@ -758,9 +756,9 @@ export type LightCarcasUnitMasterSelect<ExtArgs extends runtime.Types.Extensions
   light_carcas_type_id?: boolean
   is_active?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lightCarcasType?: boolean | Prisma.LightCarcasTypeMasterDefaultArgs<ExtArgs>
   leadMappings?: boolean | Prisma.LightCarcasUnitMaster$leadMappingsArgs<ExtArgs>
+  lightCarcasType?: boolean | Prisma.LightCarcasTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.LightCarcasUnitMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lightCarcasUnitMaster"]>
 
@@ -771,8 +769,8 @@ export type LightCarcasUnitMasterSelectCreateManyAndReturn<ExtArgs extends runti
   light_carcas_type_id?: boolean
   is_active?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   lightCarcasType?: boolean | Prisma.LightCarcasTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lightCarcasUnitMaster"]>
 
 export type LightCarcasUnitMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -782,8 +780,8 @@ export type LightCarcasUnitMasterSelectUpdateManyAndReturn<ExtArgs extends runti
   light_carcas_type_id?: boolean
   is_active?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   lightCarcasType?: boolean | Prisma.LightCarcasTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lightCarcasUnitMaster"]>
 
 export type LightCarcasUnitMasterSelectScalar = {
@@ -797,26 +795,26 @@ export type LightCarcasUnitMasterSelectScalar = {
 
 export type LightCarcasUnitMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "type" | "light_carcas_type_id" | "is_active" | "created_at", ExtArgs["result"]["lightCarcasUnitMaster"]>
 export type LightCarcasUnitMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lightCarcasType?: boolean | Prisma.LightCarcasTypeMasterDefaultArgs<ExtArgs>
   leadMappings?: boolean | Prisma.LightCarcasUnitMaster$leadMappingsArgs<ExtArgs>
+  lightCarcasType?: boolean | Prisma.LightCarcasTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.LightCarcasUnitMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LightCarcasUnitMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   lightCarcasType?: boolean | Prisma.LightCarcasTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LightCarcasUnitMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   lightCarcasType?: boolean | Prisma.LightCarcasTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $LightCarcasUnitMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LightCarcasUnitMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    lightCarcasType: Prisma.$LightCarcasTypeMasterPayload<ExtArgs>
     leadMappings: Prisma.$LeadLightCarcasUnitMappingPayload<ExtArgs>[]
+    lightCarcasType: Prisma.$LightCarcasTypeMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1219,9 +1217,9 @@ readonly fields: LightCarcasUnitMasterFieldRefs;
  */
 export interface Prisma__LightCarcasUnitMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  lightCarcasType<T extends Prisma.LightCarcasTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LightCarcasTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LightCarcasTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$LightCarcasTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   leadMappings<T extends Prisma.LightCarcasUnitMaster$leadMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LightCarcasUnitMaster$leadMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadLightCarcasUnitMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  lightCarcasType<T extends Prisma.LightCarcasTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LightCarcasTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LightCarcasTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$LightCarcasTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

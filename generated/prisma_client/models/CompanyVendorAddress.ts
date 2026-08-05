@@ -328,9 +328,9 @@ export type CompanyVendorAddressWhereInput = {
   deleted_at?: Prisma.DateTimeNullableFilter<"CompanyVendorAddress"> | Date | string | null
   deleted_by?: Prisma.IntNullableFilter<"CompanyVendorAddress"> | number | null
   is_deleted?: Prisma.BoolFilter<"CompanyVendorAddress"> | boolean
+  city?: Prisma.XOR<Prisma.CityMasterScalarRelationFilter, Prisma.CityMasterWhereInput>
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
   state?: Prisma.XOR<Prisma.StateMasterScalarRelationFilter, Prisma.StateMasterWhereInput>
-  city?: Prisma.XOR<Prisma.CityMasterScalarRelationFilter, Prisma.CityMasterWhereInput>
 }
 
 export type CompanyVendorAddressOrderByWithRelationInput = {
@@ -350,9 +350,9 @@ export type CompanyVendorAddressOrderByWithRelationInput = {
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
+  city?: Prisma.CityMasterOrderByWithRelationInput
   companyVendor?: Prisma.CompanyVendorsMasterOrderByWithRelationInput
   state?: Prisma.StateMasterOrderByWithRelationInput
-  city?: Prisma.CityMasterOrderByWithRelationInput
 }
 
 export type CompanyVendorAddressWhereUniqueInput = Prisma.AtLeast<{
@@ -375,9 +375,9 @@ export type CompanyVendorAddressWhereUniqueInput = Prisma.AtLeast<{
   deleted_at?: Prisma.DateTimeNullableFilter<"CompanyVendorAddress"> | Date | string | null
   deleted_by?: Prisma.IntNullableFilter<"CompanyVendorAddress"> | number | null
   is_deleted?: Prisma.BoolFilter<"CompanyVendorAddress"> | boolean
+  city?: Prisma.XOR<Prisma.CityMasterScalarRelationFilter, Prisma.CityMasterWhereInput>
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
   state?: Prisma.XOR<Prisma.StateMasterScalarRelationFilter, Prisma.StateMasterWhereInput>
-  city?: Prisma.XOR<Prisma.CityMasterScalarRelationFilter, Prisma.CityMasterWhereInput>
 }, "id">
 
 export type CompanyVendorAddressOrderByWithAggregationInput = {
@@ -439,9 +439,9 @@ export type CompanyVendorAddressCreateInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  city: Prisma.CityMasterCreateNestedOneWithoutCompanyVendorAddressesInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutAddressesInput
   state: Prisma.StateMasterCreateNestedOneWithoutCompanyVendorAddressesInput
-  city: Prisma.CityMasterCreateNestedOneWithoutCompanyVendorAddressesInput
 }
 
 export type CompanyVendorAddressUncheckedCreateInput = {
@@ -476,9 +476,9 @@ export type CompanyVendorAddressUpdateInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  city?: Prisma.CityMasterUpdateOneRequiredWithoutCompanyVendorAddressesNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutAddressesNestedInput
   state?: Prisma.StateMasterUpdateOneRequiredWithoutCompanyVendorAddressesNestedInput
-  city?: Prisma.CityMasterUpdateOneRequiredWithoutCompanyVendorAddressesNestedInput
 }
 
 export type CompanyVendorAddressUncheckedUpdateInput = {
@@ -779,8 +779,8 @@ export type CompanyVendorAddressCreateWithoutCompanyVendorInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  state: Prisma.StateMasterCreateNestedOneWithoutCompanyVendorAddressesInput
   city: Prisma.CityMasterCreateNestedOneWithoutCompanyVendorAddressesInput
+  state: Prisma.StateMasterCreateNestedOneWithoutCompanyVendorAddressesInput
 }
 
 export type CompanyVendorAddressUncheckedCreateWithoutCompanyVendorInput = {
@@ -862,8 +862,8 @@ export type CompanyVendorAddressCreateWithoutStateInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutAddressesInput
   city: Prisma.CityMasterCreateNestedOneWithoutCompanyVendorAddressesInput
+  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutAddressesInput
 }
 
 export type CompanyVendorAddressUncheckedCreateWithoutStateInput = {
@@ -1002,8 +1002,8 @@ export type CompanyVendorAddressUpdateWithoutCompanyVendorInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state?: Prisma.StateMasterUpdateOneRequiredWithoutCompanyVendorAddressesNestedInput
   city?: Prisma.CityMasterUpdateOneRequiredWithoutCompanyVendorAddressesNestedInput
+  state?: Prisma.StateMasterUpdateOneRequiredWithoutCompanyVendorAddressesNestedInput
 }
 
 export type CompanyVendorAddressUncheckedUpdateWithoutCompanyVendorInput = {
@@ -1073,8 +1073,8 @@ export type CompanyVendorAddressUpdateWithoutStateInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutAddressesNestedInput
   city?: Prisma.CityMasterUpdateOneRequiredWithoutCompanyVendorAddressesNestedInput
+  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutAddressesNestedInput
 }
 
 export type CompanyVendorAddressUncheckedUpdateWithoutStateInput = {
@@ -1203,9 +1203,9 @@ export type CompanyVendorAddressSelect<ExtArgs extends runtime.Types.Extensions.
   deleted_at?: boolean
   deleted_by?: boolean
   is_deleted?: boolean
+  city?: boolean | Prisma.CityMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   state?: boolean | Prisma.StateMasterDefaultArgs<ExtArgs>
-  city?: boolean | Prisma.CityMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["companyVendorAddress"]>
 
 export type CompanyVendorAddressSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1225,9 +1225,9 @@ export type CompanyVendorAddressSelectCreateManyAndReturn<ExtArgs extends runtim
   deleted_at?: boolean
   deleted_by?: boolean
   is_deleted?: boolean
+  city?: boolean | Prisma.CityMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   state?: boolean | Prisma.StateMasterDefaultArgs<ExtArgs>
-  city?: boolean | Prisma.CityMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["companyVendorAddress"]>
 
 export type CompanyVendorAddressSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1247,9 +1247,9 @@ export type CompanyVendorAddressSelectUpdateManyAndReturn<ExtArgs extends runtim
   deleted_at?: boolean
   deleted_by?: boolean
   is_deleted?: boolean
+  city?: boolean | Prisma.CityMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   state?: boolean | Prisma.StateMasterDefaultArgs<ExtArgs>
-  city?: boolean | Prisma.CityMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["companyVendorAddress"]>
 
 export type CompanyVendorAddressSelectScalar = {
@@ -1273,27 +1273,27 @@ export type CompanyVendorAddressSelectScalar = {
 
 export type CompanyVendorAddressOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "company_vendor_id" | "address_line_1" | "address_line_2" | "landmark" | "pincode" | "state_id" | "city_id" | "is_primary" | "created_at" | "created_by" | "updated_at" | "updated_by" | "deleted_at" | "deleted_by" | "is_deleted", ExtArgs["result"]["companyVendorAddress"]>
 export type CompanyVendorAddressInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  city?: boolean | Prisma.CityMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   state?: boolean | Prisma.StateMasterDefaultArgs<ExtArgs>
-  city?: boolean | Prisma.CityMasterDefaultArgs<ExtArgs>
 }
 export type CompanyVendorAddressIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  city?: boolean | Prisma.CityMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   state?: boolean | Prisma.StateMasterDefaultArgs<ExtArgs>
-  city?: boolean | Prisma.CityMasterDefaultArgs<ExtArgs>
 }
 export type CompanyVendorAddressIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  city?: boolean | Prisma.CityMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   state?: boolean | Prisma.StateMasterDefaultArgs<ExtArgs>
-  city?: boolean | Prisma.CityMasterDefaultArgs<ExtArgs>
 }
 
 export type $CompanyVendorAddressPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CompanyVendorAddress"
   objects: {
+    city: Prisma.$CityMasterPayload<ExtArgs>
     companyVendor: Prisma.$CompanyVendorsMasterPayload<ExtArgs>
     state: Prisma.$StateMasterPayload<ExtArgs>
-    city: Prisma.$CityMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1706,9 +1706,9 @@ readonly fields: CompanyVendorAddressFieldRefs;
  */
 export interface Prisma__CompanyVendorAddressClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  city<T extends Prisma.CityMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CityMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__CityMasterClient<runtime.Types.Result.GetResult<Prisma.$CityMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   companyVendor<T extends Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__CompanyVendorsMasterClient<runtime.Types.Result.GetResult<Prisma.$CompanyVendorsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   state<T extends Prisma.StateMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StateMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__StateMasterClient<runtime.Types.Result.GetResult<Prisma.$StateMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  city<T extends Prisma.CityMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CityMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__CityMasterClient<runtime.Types.Result.GetResult<Prisma.$CityMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

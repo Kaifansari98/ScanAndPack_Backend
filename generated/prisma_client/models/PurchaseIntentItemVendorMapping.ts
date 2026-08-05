@@ -30,17 +30,17 @@ export type PurchaseIntentItemVendorMappingAvgAggregateOutputType = {
   id: number | null
   purchase_intent_item_id: number | null
   company_vendor_id: number | null
-  required_qty: runtime.Decimal | null
   estimated_price: runtime.Decimal | null
-  mrp: runtime.Decimal | null
-  discount_pct: runtime.Decimal | null
-  rate: runtime.Decimal | null
-  tax_pct: runtime.Decimal | null
-  cgst_pct: runtime.Decimal | null
-  sgst_pct: runtime.Decimal | null
-  igst_pct: runtime.Decimal | null
-  tax_amount: runtime.Decimal | null
+  required_qty: runtime.Decimal | null
   amount: runtime.Decimal | null
+  cgst_pct: runtime.Decimal | null
+  discount_pct: runtime.Decimal | null
+  igst_pct: runtime.Decimal | null
+  mrp: runtime.Decimal | null
+  rate: runtime.Decimal | null
+  sgst_pct: runtime.Decimal | null
+  tax_amount: runtime.Decimal | null
+  tax_pct: runtime.Decimal | null
   total_amount: runtime.Decimal | null
   payment_term_id: number | null
 }
@@ -49,17 +49,17 @@ export type PurchaseIntentItemVendorMappingSumAggregateOutputType = {
   id: number | null
   purchase_intent_item_id: number | null
   company_vendor_id: number | null
-  required_qty: runtime.Decimal | null
   estimated_price: runtime.Decimal | null
-  mrp: runtime.Decimal | null
-  discount_pct: runtime.Decimal | null
-  rate: runtime.Decimal | null
-  tax_pct: runtime.Decimal | null
-  cgst_pct: runtime.Decimal | null
-  sgst_pct: runtime.Decimal | null
-  igst_pct: runtime.Decimal | null
-  tax_amount: runtime.Decimal | null
+  required_qty: runtime.Decimal | null
   amount: runtime.Decimal | null
+  cgst_pct: runtime.Decimal | null
+  discount_pct: runtime.Decimal | null
+  igst_pct: runtime.Decimal | null
+  mrp: runtime.Decimal | null
+  rate: runtime.Decimal | null
+  sgst_pct: runtime.Decimal | null
+  tax_amount: runtime.Decimal | null
+  tax_pct: runtime.Decimal | null
   total_amount: runtime.Decimal | null
   payment_term_id: number | null
 }
@@ -68,22 +68,22 @@ export type PurchaseIntentItemVendorMappingMinAggregateOutputType = {
   id: number | null
   purchase_intent_item_id: number | null
   company_vendor_id: number | null
-  required_qty: runtime.Decimal | null
-  required_by_date: Date | null
   estimated_price: runtime.Decimal | null
   remarks: string | null
   is_selected: boolean | null
   created_at: Date | null
   updated_at: Date | null
-  mrp: runtime.Decimal | null
-  discount_pct: runtime.Decimal | null
-  rate: runtime.Decimal | null
-  tax_pct: runtime.Decimal | null
-  cgst_pct: runtime.Decimal | null
-  sgst_pct: runtime.Decimal | null
-  igst_pct: runtime.Decimal | null
-  tax_amount: runtime.Decimal | null
+  required_by_date: Date | null
+  required_qty: runtime.Decimal | null
   amount: runtime.Decimal | null
+  cgst_pct: runtime.Decimal | null
+  discount_pct: runtime.Decimal | null
+  igst_pct: runtime.Decimal | null
+  mrp: runtime.Decimal | null
+  rate: runtime.Decimal | null
+  sgst_pct: runtime.Decimal | null
+  tax_amount: runtime.Decimal | null
+  tax_pct: runtime.Decimal | null
   total_amount: runtime.Decimal | null
   payment_term_id: number | null
 }
@@ -92,22 +92,22 @@ export type PurchaseIntentItemVendorMappingMaxAggregateOutputType = {
   id: number | null
   purchase_intent_item_id: number | null
   company_vendor_id: number | null
-  required_qty: runtime.Decimal | null
-  required_by_date: Date | null
   estimated_price: runtime.Decimal | null
   remarks: string | null
   is_selected: boolean | null
   created_at: Date | null
   updated_at: Date | null
-  mrp: runtime.Decimal | null
-  discount_pct: runtime.Decimal | null
-  rate: runtime.Decimal | null
-  tax_pct: runtime.Decimal | null
-  cgst_pct: runtime.Decimal | null
-  sgst_pct: runtime.Decimal | null
-  igst_pct: runtime.Decimal | null
-  tax_amount: runtime.Decimal | null
+  required_by_date: Date | null
+  required_qty: runtime.Decimal | null
   amount: runtime.Decimal | null
+  cgst_pct: runtime.Decimal | null
+  discount_pct: runtime.Decimal | null
+  igst_pct: runtime.Decimal | null
+  mrp: runtime.Decimal | null
+  rate: runtime.Decimal | null
+  sgst_pct: runtime.Decimal | null
+  tax_amount: runtime.Decimal | null
+  tax_pct: runtime.Decimal | null
   total_amount: runtime.Decimal | null
   payment_term_id: number | null
 }
@@ -116,22 +116,22 @@ export type PurchaseIntentItemVendorMappingCountAggregateOutputType = {
   id: number
   purchase_intent_item_id: number
   company_vendor_id: number
-  required_qty: number
-  required_by_date: number
   estimated_price: number
   remarks: number
   is_selected: number
   created_at: number
   updated_at: number
-  mrp: number
-  discount_pct: number
-  rate: number
-  tax_pct: number
-  cgst_pct: number
-  sgst_pct: number
-  igst_pct: number
-  tax_amount: number
+  required_by_date: number
+  required_qty: number
   amount: number
+  cgst_pct: number
+  discount_pct: number
+  igst_pct: number
+  mrp: number
+  rate: number
+  sgst_pct: number
+  tax_amount: number
+  tax_pct: number
   total_amount: number
   payment_term_id: number
   _all: number
@@ -142,17 +142,17 @@ export type PurchaseIntentItemVendorMappingAvgAggregateInputType = {
   id?: true
   purchase_intent_item_id?: true
   company_vendor_id?: true
-  required_qty?: true
   estimated_price?: true
-  mrp?: true
-  discount_pct?: true
-  rate?: true
-  tax_pct?: true
-  cgst_pct?: true
-  sgst_pct?: true
-  igst_pct?: true
-  tax_amount?: true
+  required_qty?: true
   amount?: true
+  cgst_pct?: true
+  discount_pct?: true
+  igst_pct?: true
+  mrp?: true
+  rate?: true
+  sgst_pct?: true
+  tax_amount?: true
+  tax_pct?: true
   total_amount?: true
   payment_term_id?: true
 }
@@ -161,17 +161,17 @@ export type PurchaseIntentItemVendorMappingSumAggregateInputType = {
   id?: true
   purchase_intent_item_id?: true
   company_vendor_id?: true
-  required_qty?: true
   estimated_price?: true
-  mrp?: true
-  discount_pct?: true
-  rate?: true
-  tax_pct?: true
-  cgst_pct?: true
-  sgst_pct?: true
-  igst_pct?: true
-  tax_amount?: true
+  required_qty?: true
   amount?: true
+  cgst_pct?: true
+  discount_pct?: true
+  igst_pct?: true
+  mrp?: true
+  rate?: true
+  sgst_pct?: true
+  tax_amount?: true
+  tax_pct?: true
   total_amount?: true
   payment_term_id?: true
 }
@@ -180,22 +180,22 @@ export type PurchaseIntentItemVendorMappingMinAggregateInputType = {
   id?: true
   purchase_intent_item_id?: true
   company_vendor_id?: true
-  required_qty?: true
-  required_by_date?: true
   estimated_price?: true
   remarks?: true
   is_selected?: true
   created_at?: true
   updated_at?: true
-  mrp?: true
-  discount_pct?: true
-  rate?: true
-  tax_pct?: true
-  cgst_pct?: true
-  sgst_pct?: true
-  igst_pct?: true
-  tax_amount?: true
+  required_by_date?: true
+  required_qty?: true
   amount?: true
+  cgst_pct?: true
+  discount_pct?: true
+  igst_pct?: true
+  mrp?: true
+  rate?: true
+  sgst_pct?: true
+  tax_amount?: true
+  tax_pct?: true
   total_amount?: true
   payment_term_id?: true
 }
@@ -204,22 +204,22 @@ export type PurchaseIntentItemVendorMappingMaxAggregateInputType = {
   id?: true
   purchase_intent_item_id?: true
   company_vendor_id?: true
-  required_qty?: true
-  required_by_date?: true
   estimated_price?: true
   remarks?: true
   is_selected?: true
   created_at?: true
   updated_at?: true
-  mrp?: true
-  discount_pct?: true
-  rate?: true
-  tax_pct?: true
-  cgst_pct?: true
-  sgst_pct?: true
-  igst_pct?: true
-  tax_amount?: true
+  required_by_date?: true
+  required_qty?: true
   amount?: true
+  cgst_pct?: true
+  discount_pct?: true
+  igst_pct?: true
+  mrp?: true
+  rate?: true
+  sgst_pct?: true
+  tax_amount?: true
+  tax_pct?: true
   total_amount?: true
   payment_term_id?: true
 }
@@ -228,22 +228,22 @@ export type PurchaseIntentItemVendorMappingCountAggregateInputType = {
   id?: true
   purchase_intent_item_id?: true
   company_vendor_id?: true
-  required_qty?: true
-  required_by_date?: true
   estimated_price?: true
   remarks?: true
   is_selected?: true
   created_at?: true
   updated_at?: true
-  mrp?: true
-  discount_pct?: true
-  rate?: true
-  tax_pct?: true
-  cgst_pct?: true
-  sgst_pct?: true
-  igst_pct?: true
-  tax_amount?: true
+  required_by_date?: true
+  required_qty?: true
   amount?: true
+  cgst_pct?: true
+  discount_pct?: true
+  igst_pct?: true
+  mrp?: true
+  rate?: true
+  sgst_pct?: true
+  tax_amount?: true
+  tax_pct?: true
   total_amount?: true
   payment_term_id?: true
   _all?: true
@@ -339,22 +339,22 @@ export type PurchaseIntentItemVendorMappingGroupByOutputType = {
   id: number
   purchase_intent_item_id: number
   company_vendor_id: number
-  required_qty: runtime.Decimal
-  required_by_date: Date | null
   estimated_price: runtime.Decimal | null
   remarks: string | null
   is_selected: boolean
   created_at: Date
   updated_at: Date
-  mrp: runtime.Decimal | null
-  discount_pct: runtime.Decimal | null
-  rate: runtime.Decimal | null
-  tax_pct: runtime.Decimal | null
-  cgst_pct: runtime.Decimal | null
-  sgst_pct: runtime.Decimal | null
-  igst_pct: runtime.Decimal | null
-  tax_amount: runtime.Decimal | null
+  required_by_date: Date | null
+  required_qty: runtime.Decimal
   amount: runtime.Decimal | null
+  cgst_pct: runtime.Decimal | null
+  discount_pct: runtime.Decimal | null
+  igst_pct: runtime.Decimal | null
+  mrp: runtime.Decimal | null
+  rate: runtime.Decimal | null
+  sgst_pct: runtime.Decimal | null
+  tax_amount: runtime.Decimal | null
+  tax_pct: runtime.Decimal | null
   total_amount: runtime.Decimal | null
   payment_term_id: number | null
   _count: PurchaseIntentItemVendorMappingCountAggregateOutputType | null
@@ -386,56 +386,56 @@ export type PurchaseIntentItemVendorMappingWhereInput = {
   id?: Prisma.IntFilter<"PurchaseIntentItemVendorMapping"> | number
   purchase_intent_item_id?: Prisma.IntFilter<"PurchaseIntentItemVendorMapping"> | number
   company_vendor_id?: Prisma.IntFilter<"PurchaseIntentItemVendorMapping"> | number
-  required_qty?: Prisma.DecimalFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Prisma.DateTimeNullableFilter<"PurchaseIntentItemVendorMapping"> | Date | string | null
   estimated_price?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: Prisma.StringNullableFilter<"PurchaseIntentItemVendorMapping"> | string | null
   is_selected?: Prisma.BoolFilter<"PurchaseIntentItemVendorMapping"> | boolean
   created_at?: Prisma.DateTimeFilter<"PurchaseIntentItemVendorMapping"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"PurchaseIntentItemVendorMapping"> | Date | string
-  mrp?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Prisma.DateTimeNullableFilter<"PurchaseIntentItemVendorMapping"> | Date | string | null
+  required_qty?: Prisma.DecimalFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.IntNullableFilter<"PurchaseIntentItemVendorMapping"> | number | null
-  purchaseIntentItem?: Prisma.XOR<Prisma.PurchaseIntentItemScalarRelationFilter, Prisma.PurchaseIntentItemWhereInput>
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
-  purchaseOrderItems?: Prisma.PurchaseOrderItemListRelationFilter
   paymentTerm?: Prisma.XOR<Prisma.PaymentTermMasterNullableScalarRelationFilter, Prisma.PaymentTermMasterWhereInput> | null
+  purchaseIntentItem?: Prisma.XOR<Prisma.PurchaseIntentItemScalarRelationFilter, Prisma.PurchaseIntentItemWhereInput>
+  purchaseOrderItems?: Prisma.PurchaseOrderItemListRelationFilter
 }
 
 export type PurchaseIntentItemVendorMappingOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   purchase_intent_item_id?: Prisma.SortOrder
   company_vendor_id?: Prisma.SortOrder
-  required_qty?: Prisma.SortOrder
-  required_by_date?: Prisma.SortOrderInput | Prisma.SortOrder
   estimated_price?: Prisma.SortOrderInput | Prisma.SortOrder
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   is_selected?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  mrp?: Prisma.SortOrderInput | Prisma.SortOrder
-  discount_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  rate?: Prisma.SortOrderInput | Prisma.SortOrder
-  tax_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  cgst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  sgst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  igst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  tax_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  required_by_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  required_qty?: Prisma.SortOrder
   amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  cgst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
+  discount_pct?: Prisma.SortOrderInput | Prisma.SortOrder
+  igst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
+  mrp?: Prisma.SortOrderInput | Prisma.SortOrder
+  rate?: Prisma.SortOrderInput | Prisma.SortOrder
+  sgst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
+  tax_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  tax_pct?: Prisma.SortOrderInput | Prisma.SortOrder
   total_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   payment_term_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  purchaseIntentItem?: Prisma.PurchaseIntentItemOrderByWithRelationInput
   companyVendor?: Prisma.CompanyVendorsMasterOrderByWithRelationInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemOrderByRelationAggregateInput
   paymentTerm?: Prisma.PaymentTermMasterOrderByWithRelationInput
+  purchaseIntentItem?: Prisma.PurchaseIntentItemOrderByWithRelationInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemOrderByRelationAggregateInput
 }
 
 export type PurchaseIntentItemVendorMappingWhereUniqueInput = Prisma.AtLeast<{
@@ -445,50 +445,50 @@ export type PurchaseIntentItemVendorMappingWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.PurchaseIntentItemVendorMappingWhereInput | Prisma.PurchaseIntentItemVendorMappingWhereInput[]
   purchase_intent_item_id?: Prisma.IntFilter<"PurchaseIntentItemVendorMapping"> | number
   company_vendor_id?: Prisma.IntFilter<"PurchaseIntentItemVendorMapping"> | number
-  required_qty?: Prisma.DecimalFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Prisma.DateTimeNullableFilter<"PurchaseIntentItemVendorMapping"> | Date | string | null
   estimated_price?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: Prisma.StringNullableFilter<"PurchaseIntentItemVendorMapping"> | string | null
   is_selected?: Prisma.BoolFilter<"PurchaseIntentItemVendorMapping"> | boolean
   created_at?: Prisma.DateTimeFilter<"PurchaseIntentItemVendorMapping"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"PurchaseIntentItemVendorMapping"> | Date | string
-  mrp?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Prisma.DateTimeNullableFilter<"PurchaseIntentItemVendorMapping"> | Date | string | null
+  required_qty?: Prisma.DecimalFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.IntNullableFilter<"PurchaseIntentItemVendorMapping"> | number | null
-  purchaseIntentItem?: Prisma.XOR<Prisma.PurchaseIntentItemScalarRelationFilter, Prisma.PurchaseIntentItemWhereInput>
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
-  purchaseOrderItems?: Prisma.PurchaseOrderItemListRelationFilter
   paymentTerm?: Prisma.XOR<Prisma.PaymentTermMasterNullableScalarRelationFilter, Prisma.PaymentTermMasterWhereInput> | null
+  purchaseIntentItem?: Prisma.XOR<Prisma.PurchaseIntentItemScalarRelationFilter, Prisma.PurchaseIntentItemWhereInput>
+  purchaseOrderItems?: Prisma.PurchaseOrderItemListRelationFilter
 }, "id">
 
 export type PurchaseIntentItemVendorMappingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   purchase_intent_item_id?: Prisma.SortOrder
   company_vendor_id?: Prisma.SortOrder
-  required_qty?: Prisma.SortOrder
-  required_by_date?: Prisma.SortOrderInput | Prisma.SortOrder
   estimated_price?: Prisma.SortOrderInput | Prisma.SortOrder
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   is_selected?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  mrp?: Prisma.SortOrderInput | Prisma.SortOrder
-  discount_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  rate?: Prisma.SortOrderInput | Prisma.SortOrder
-  tax_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  cgst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  sgst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  igst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  tax_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  required_by_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  required_qty?: Prisma.SortOrder
   amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  cgst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
+  discount_pct?: Prisma.SortOrderInput | Prisma.SortOrder
+  igst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
+  mrp?: Prisma.SortOrderInput | Prisma.SortOrder
+  rate?: Prisma.SortOrderInput | Prisma.SortOrder
+  sgst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
+  tax_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  tax_pct?: Prisma.SortOrderInput | Prisma.SortOrder
   total_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   payment_term_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.PurchaseIntentItemVendorMappingCountOrderByAggregateInput
@@ -505,119 +505,119 @@ export type PurchaseIntentItemVendorMappingScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | number
   purchase_intent_item_id?: Prisma.IntWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | number
   company_vendor_id?: Prisma.IntWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | number
-  required_qty?: Prisma.DecimalWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Prisma.DateTimeNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | Date | string | null
   estimated_price?: Prisma.DecimalNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: Prisma.StringNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | string | null
   is_selected?: Prisma.BoolWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | boolean
   created_at?: Prisma.DateTimeWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | Date | string
-  mrp?: Prisma.DecimalNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.DecimalNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.DecimalNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.DecimalNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.DecimalNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.DecimalNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.DecimalNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.DecimalNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Prisma.DateTimeNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | Date | string | null
+  required_qty?: Prisma.DecimalWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: Prisma.DecimalNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.DecimalNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.DecimalNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.DecimalNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.DecimalNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.DecimalNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.DecimalNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.DecimalNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.DecimalNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.DecimalNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.IntNullableWithAggregatesFilter<"PurchaseIntentItemVendorMapping"> | number | null
 }
 
 export type PurchaseIntentItemVendorMappingCreateInput = {
-  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Date | string | null
   estimated_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: string | null
   is_selected?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Date | string | null
+  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  purchaseIntentItem: Prisma.PurchaseIntentItemCreateNestedOneWithoutVendorMappingsInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPurchaseIntentVendorMappingsInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPiVendorMappingInput
   paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPiVendorMappingsInput
+  purchaseIntentItem: Prisma.PurchaseIntentItemCreateNestedOneWithoutVendorMappingsInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPiVendorMappingInput
 }
 
 export type PurchaseIntentItemVendorMappingUncheckedCreateInput = {
   id?: number
   purchase_intent_item_id: number
   company_vendor_id: number
-  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Date | string | null
   estimated_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: string | null
   is_selected?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Date | string | null
+  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: number | null
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPiVendorMappingInput
 }
 
 export type PurchaseIntentItemVendorMappingUpdateInput = {
-  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   estimated_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  purchaseIntentItem?: Prisma.PurchaseIntentItemUpdateOneRequiredWithoutVendorMappingsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseIntentVendorMappingsNestedInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutPiVendorMappingNestedInput
   paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPiVendorMappingsNestedInput
+  purchaseIntentItem?: Prisma.PurchaseIntentItemUpdateOneRequiredWithoutVendorMappingsNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutPiVendorMappingNestedInput
 }
 
 export type PurchaseIntentItemVendorMappingUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   purchase_intent_item_id?: Prisma.IntFieldUpdateOperationsInput | number
   company_vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   estimated_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPiVendorMappingNestedInput
@@ -627,43 +627,43 @@ export type PurchaseIntentItemVendorMappingCreateManyInput = {
   id?: number
   purchase_intent_item_id: number
   company_vendor_id: number
-  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Date | string | null
   estimated_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: string | null
   is_selected?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Date | string | null
+  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: number | null
 }
 
 export type PurchaseIntentItemVendorMappingUpdateManyMutationInput = {
-  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   estimated_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
@@ -671,22 +671,22 @@ export type PurchaseIntentItemVendorMappingUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   purchase_intent_item_id?: Prisma.IntFieldUpdateOperationsInput | number
   company_vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   estimated_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -705,22 +705,22 @@ export type PurchaseIntentItemVendorMappingCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   purchase_intent_item_id?: Prisma.SortOrder
   company_vendor_id?: Prisma.SortOrder
-  required_qty?: Prisma.SortOrder
-  required_by_date?: Prisma.SortOrder
   estimated_price?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
   is_selected?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  mrp?: Prisma.SortOrder
-  discount_pct?: Prisma.SortOrder
-  rate?: Prisma.SortOrder
-  tax_pct?: Prisma.SortOrder
-  cgst_pct?: Prisma.SortOrder
-  sgst_pct?: Prisma.SortOrder
-  igst_pct?: Prisma.SortOrder
-  tax_amount?: Prisma.SortOrder
+  required_by_date?: Prisma.SortOrder
+  required_qty?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  cgst_pct?: Prisma.SortOrder
+  discount_pct?: Prisma.SortOrder
+  igst_pct?: Prisma.SortOrder
+  mrp?: Prisma.SortOrder
+  rate?: Prisma.SortOrder
+  sgst_pct?: Prisma.SortOrder
+  tax_amount?: Prisma.SortOrder
+  tax_pct?: Prisma.SortOrder
   total_amount?: Prisma.SortOrder
   payment_term_id?: Prisma.SortOrder
 }
@@ -729,17 +729,17 @@ export type PurchaseIntentItemVendorMappingAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   purchase_intent_item_id?: Prisma.SortOrder
   company_vendor_id?: Prisma.SortOrder
-  required_qty?: Prisma.SortOrder
   estimated_price?: Prisma.SortOrder
-  mrp?: Prisma.SortOrder
-  discount_pct?: Prisma.SortOrder
-  rate?: Prisma.SortOrder
-  tax_pct?: Prisma.SortOrder
-  cgst_pct?: Prisma.SortOrder
-  sgst_pct?: Prisma.SortOrder
-  igst_pct?: Prisma.SortOrder
-  tax_amount?: Prisma.SortOrder
+  required_qty?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  cgst_pct?: Prisma.SortOrder
+  discount_pct?: Prisma.SortOrder
+  igst_pct?: Prisma.SortOrder
+  mrp?: Prisma.SortOrder
+  rate?: Prisma.SortOrder
+  sgst_pct?: Prisma.SortOrder
+  tax_amount?: Prisma.SortOrder
+  tax_pct?: Prisma.SortOrder
   total_amount?: Prisma.SortOrder
   payment_term_id?: Prisma.SortOrder
 }
@@ -748,22 +748,22 @@ export type PurchaseIntentItemVendorMappingMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   purchase_intent_item_id?: Prisma.SortOrder
   company_vendor_id?: Prisma.SortOrder
-  required_qty?: Prisma.SortOrder
-  required_by_date?: Prisma.SortOrder
   estimated_price?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
   is_selected?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  mrp?: Prisma.SortOrder
-  discount_pct?: Prisma.SortOrder
-  rate?: Prisma.SortOrder
-  tax_pct?: Prisma.SortOrder
-  cgst_pct?: Prisma.SortOrder
-  sgst_pct?: Prisma.SortOrder
-  igst_pct?: Prisma.SortOrder
-  tax_amount?: Prisma.SortOrder
+  required_by_date?: Prisma.SortOrder
+  required_qty?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  cgst_pct?: Prisma.SortOrder
+  discount_pct?: Prisma.SortOrder
+  igst_pct?: Prisma.SortOrder
+  mrp?: Prisma.SortOrder
+  rate?: Prisma.SortOrder
+  sgst_pct?: Prisma.SortOrder
+  tax_amount?: Prisma.SortOrder
+  tax_pct?: Prisma.SortOrder
   total_amount?: Prisma.SortOrder
   payment_term_id?: Prisma.SortOrder
 }
@@ -772,22 +772,22 @@ export type PurchaseIntentItemVendorMappingMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   purchase_intent_item_id?: Prisma.SortOrder
   company_vendor_id?: Prisma.SortOrder
-  required_qty?: Prisma.SortOrder
-  required_by_date?: Prisma.SortOrder
   estimated_price?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
   is_selected?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  mrp?: Prisma.SortOrder
-  discount_pct?: Prisma.SortOrder
-  rate?: Prisma.SortOrder
-  tax_pct?: Prisma.SortOrder
-  cgst_pct?: Prisma.SortOrder
-  sgst_pct?: Prisma.SortOrder
-  igst_pct?: Prisma.SortOrder
-  tax_amount?: Prisma.SortOrder
+  required_by_date?: Prisma.SortOrder
+  required_qty?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  cgst_pct?: Prisma.SortOrder
+  discount_pct?: Prisma.SortOrder
+  igst_pct?: Prisma.SortOrder
+  mrp?: Prisma.SortOrder
+  rate?: Prisma.SortOrder
+  sgst_pct?: Prisma.SortOrder
+  tax_amount?: Prisma.SortOrder
+  tax_pct?: Prisma.SortOrder
   total_amount?: Prisma.SortOrder
   payment_term_id?: Prisma.SortOrder
 }
@@ -796,17 +796,17 @@ export type PurchaseIntentItemVendorMappingSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   purchase_intent_item_id?: Prisma.SortOrder
   company_vendor_id?: Prisma.SortOrder
-  required_qty?: Prisma.SortOrder
   estimated_price?: Prisma.SortOrder
-  mrp?: Prisma.SortOrder
-  discount_pct?: Prisma.SortOrder
-  rate?: Prisma.SortOrder
-  tax_pct?: Prisma.SortOrder
-  cgst_pct?: Prisma.SortOrder
-  sgst_pct?: Prisma.SortOrder
-  igst_pct?: Prisma.SortOrder
-  tax_amount?: Prisma.SortOrder
+  required_qty?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  cgst_pct?: Prisma.SortOrder
+  discount_pct?: Prisma.SortOrder
+  igst_pct?: Prisma.SortOrder
+  mrp?: Prisma.SortOrder
+  rate?: Prisma.SortOrder
+  sgst_pct?: Prisma.SortOrder
+  tax_amount?: Prisma.SortOrder
+  tax_pct?: Prisma.SortOrder
   total_amount?: Prisma.SortOrder
   payment_term_id?: Prisma.SortOrder
 }
@@ -959,47 +959,47 @@ export type PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutPaymentTerm
 }
 
 export type PurchaseIntentItemVendorMappingCreateWithoutCompanyVendorInput = {
-  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Date | string | null
   estimated_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: string | null
   is_selected?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Date | string | null
+  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPiVendorMappingsInput
   purchaseIntentItem: Prisma.PurchaseIntentItemCreateNestedOneWithoutVendorMappingsInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPiVendorMappingInput
-  paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPiVendorMappingsInput
 }
 
 export type PurchaseIntentItemVendorMappingUncheckedCreateWithoutCompanyVendorInput = {
   id?: number
   purchase_intent_item_id: number
-  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Date | string | null
   estimated_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: string | null
   is_selected?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Date | string | null
+  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: number | null
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPiVendorMappingInput
@@ -1038,68 +1038,68 @@ export type PurchaseIntentItemVendorMappingScalarWhereInput = {
   id?: Prisma.IntFilter<"PurchaseIntentItemVendorMapping"> | number
   purchase_intent_item_id?: Prisma.IntFilter<"PurchaseIntentItemVendorMapping"> | number
   company_vendor_id?: Prisma.IntFilter<"PurchaseIntentItemVendorMapping"> | number
-  required_qty?: Prisma.DecimalFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Prisma.DateTimeNullableFilter<"PurchaseIntentItemVendorMapping"> | Date | string | null
   estimated_price?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: Prisma.StringNullableFilter<"PurchaseIntentItemVendorMapping"> | string | null
   is_selected?: Prisma.BoolFilter<"PurchaseIntentItemVendorMapping"> | boolean
   created_at?: Prisma.DateTimeFilter<"PurchaseIntentItemVendorMapping"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"PurchaseIntentItemVendorMapping"> | Date | string
-  mrp?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Prisma.DateTimeNullableFilter<"PurchaseIntentItemVendorMapping"> | Date | string | null
+  required_qty?: Prisma.DecimalFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.IntNullableFilter<"PurchaseIntentItemVendorMapping"> | number | null
 }
 
 export type PurchaseIntentItemVendorMappingCreateWithoutPurchaseIntentItemInput = {
-  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Date | string | null
   estimated_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: string | null
   is_selected?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Date | string | null
+  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPurchaseIntentVendorMappingsInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPiVendorMappingInput
   paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPiVendorMappingsInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPiVendorMappingInput
 }
 
 export type PurchaseIntentItemVendorMappingUncheckedCreateWithoutPurchaseIntentItemInput = {
   id?: number
   company_vendor_id: number
-  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Date | string | null
   estimated_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: string | null
   is_selected?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Date | string | null
+  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: number | null
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPiVendorMappingInput
@@ -1132,48 +1132,48 @@ export type PurchaseIntentItemVendorMappingUpdateManyWithWhereWithoutPurchaseInt
 }
 
 export type PurchaseIntentItemVendorMappingCreateWithoutPurchaseOrderItemsInput = {
-  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Date | string | null
   estimated_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: string | null
   is_selected?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Date | string | null
+  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  purchaseIntentItem: Prisma.PurchaseIntentItemCreateNestedOneWithoutVendorMappingsInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPurchaseIntentVendorMappingsInput
   paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPiVendorMappingsInput
+  purchaseIntentItem: Prisma.PurchaseIntentItemCreateNestedOneWithoutVendorMappingsInput
 }
 
 export type PurchaseIntentItemVendorMappingUncheckedCreateWithoutPurchaseOrderItemsInput = {
   id?: number
   purchase_intent_item_id: number
   company_vendor_id: number
-  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Date | string | null
   estimated_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: string | null
   is_selected?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Date | string | null
+  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: number | null
 }
@@ -1195,72 +1195,72 @@ export type PurchaseIntentItemVendorMappingUpdateToOneWithWhereWithoutPurchaseOr
 }
 
 export type PurchaseIntentItemVendorMappingUpdateWithoutPurchaseOrderItemsInput = {
-  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   estimated_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  purchaseIntentItem?: Prisma.PurchaseIntentItemUpdateOneRequiredWithoutVendorMappingsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseIntentVendorMappingsNestedInput
   paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPiVendorMappingsNestedInput
+  purchaseIntentItem?: Prisma.PurchaseIntentItemUpdateOneRequiredWithoutVendorMappingsNestedInput
 }
 
 export type PurchaseIntentItemVendorMappingUncheckedUpdateWithoutPurchaseOrderItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   purchase_intent_item_id?: Prisma.IntFieldUpdateOperationsInput | number
   company_vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   estimated_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type PurchaseIntentItemVendorMappingCreateWithoutPaymentTermInput = {
-  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Date | string | null
   estimated_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: string | null
   is_selected?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Date | string | null
+  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  purchaseIntentItem: Prisma.PurchaseIntentItemCreateNestedOneWithoutVendorMappingsInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPurchaseIntentVendorMappingsInput
+  purchaseIntentItem: Prisma.PurchaseIntentItemCreateNestedOneWithoutVendorMappingsInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPiVendorMappingInput
 }
 
@@ -1268,22 +1268,22 @@ export type PurchaseIntentItemVendorMappingUncheckedCreateWithoutPaymentTermInpu
   id?: number
   purchase_intent_item_id: number
   company_vendor_id: number
-  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Date | string | null
   estimated_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: string | null
   is_selected?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Date | string | null
+  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPiVendorMappingInput
 }
@@ -1317,68 +1317,68 @@ export type PurchaseIntentItemVendorMappingUpdateManyWithWhereWithoutPaymentTerm
 export type PurchaseIntentItemVendorMappingCreateManyCompanyVendorInput = {
   id?: number
   purchase_intent_item_id: number
-  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Date | string | null
   estimated_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: string | null
   is_selected?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Date | string | null
+  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: number | null
 }
 
 export type PurchaseIntentItemVendorMappingUpdateWithoutCompanyVendorInput = {
-  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   estimated_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPiVendorMappingsNestedInput
   purchaseIntentItem?: Prisma.PurchaseIntentItemUpdateOneRequiredWithoutVendorMappingsNestedInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutPiVendorMappingNestedInput
-  paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPiVendorMappingsNestedInput
 }
 
 export type PurchaseIntentItemVendorMappingUncheckedUpdateWithoutCompanyVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   purchase_intent_item_id?: Prisma.IntFieldUpdateOperationsInput | number
-  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   estimated_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPiVendorMappingNestedInput
@@ -1387,22 +1387,22 @@ export type PurchaseIntentItemVendorMappingUncheckedUpdateWithoutCompanyVendorIn
 export type PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutCompanyVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   purchase_intent_item_id?: Prisma.IntFieldUpdateOperationsInput | number
-  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   estimated_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -1410,68 +1410,68 @@ export type PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutCompanyVend
 export type PurchaseIntentItemVendorMappingCreateManyPurchaseIntentItemInput = {
   id?: number
   company_vendor_id: number
-  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Date | string | null
   estimated_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: string | null
   is_selected?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Date | string | null
+  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: number | null
 }
 
 export type PurchaseIntentItemVendorMappingUpdateWithoutPurchaseIntentItemInput = {
-  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   estimated_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseIntentVendorMappingsNestedInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutPiVendorMappingNestedInput
   paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPiVendorMappingsNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutPiVendorMappingNestedInput
 }
 
 export type PurchaseIntentItemVendorMappingUncheckedUpdateWithoutPurchaseIntentItemInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   company_vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   estimated_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPiVendorMappingNestedInput
@@ -1480,22 +1480,22 @@ export type PurchaseIntentItemVendorMappingUncheckedUpdateWithoutPurchaseIntentI
 export type PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutPurchaseIntentItemInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   company_vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   estimated_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -1504,45 +1504,45 @@ export type PurchaseIntentItemVendorMappingCreateManyPaymentTermInput = {
   id?: number
   purchase_intent_item_id: number
   company_vendor_id: number
-  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Date | string | null
   estimated_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: string | null
   is_selected?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Date | string | null
+  required_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type PurchaseIntentItemVendorMappingUpdateWithoutPaymentTermInput = {
-  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   estimated_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  purchaseIntentItem?: Prisma.PurchaseIntentItemUpdateOneRequiredWithoutVendorMappingsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseIntentVendorMappingsNestedInput
+  purchaseIntentItem?: Prisma.PurchaseIntentItemUpdateOneRequiredWithoutVendorMappingsNestedInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutPiVendorMappingNestedInput
 }
 
@@ -1550,22 +1550,22 @@ export type PurchaseIntentItemVendorMappingUncheckedUpdateWithoutPaymentTermInpu
   id?: Prisma.IntFieldUpdateOperationsInput | number
   purchase_intent_item_id?: Prisma.IntFieldUpdateOperationsInput | number
   company_vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   estimated_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPiVendorMappingNestedInput
 }
@@ -1574,22 +1574,22 @@ export type PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutPaymentTerm
   id?: Prisma.IntFieldUpdateOperationsInput | number
   purchase_intent_item_id?: Prisma.IntFieldUpdateOperationsInput | number
   company_vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   estimated_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_selected?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  required_by_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  required_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
@@ -1628,28 +1628,28 @@ export type PurchaseIntentItemVendorMappingSelect<ExtArgs extends runtime.Types.
   id?: boolean
   purchase_intent_item_id?: boolean
   company_vendor_id?: boolean
-  required_qty?: boolean
-  required_by_date?: boolean
   estimated_price?: boolean
   remarks?: boolean
   is_selected?: boolean
   created_at?: boolean
   updated_at?: boolean
-  mrp?: boolean
-  discount_pct?: boolean
-  rate?: boolean
-  tax_pct?: boolean
-  cgst_pct?: boolean
-  sgst_pct?: boolean
-  igst_pct?: boolean
-  tax_amount?: boolean
+  required_by_date?: boolean
+  required_qty?: boolean
   amount?: boolean
+  cgst_pct?: boolean
+  discount_pct?: boolean
+  igst_pct?: boolean
+  mrp?: boolean
+  rate?: boolean
+  sgst_pct?: boolean
+  tax_amount?: boolean
+  tax_pct?: boolean
   total_amount?: boolean
   payment_term_id?: boolean
-  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
-  purchaseOrderItems?: boolean | Prisma.PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs>
   paymentTerm?: boolean | Prisma.PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs>
+  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
+  purchaseOrderItems?: boolean | Prisma.PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs>
   _count?: boolean | Prisma.PurchaseIntentItemVendorMappingCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseIntentItemVendorMapping"]>
 
@@ -1657,127 +1657,127 @@ export type PurchaseIntentItemVendorMappingSelectCreateManyAndReturn<ExtArgs ext
   id?: boolean
   purchase_intent_item_id?: boolean
   company_vendor_id?: boolean
-  required_qty?: boolean
-  required_by_date?: boolean
   estimated_price?: boolean
   remarks?: boolean
   is_selected?: boolean
   created_at?: boolean
   updated_at?: boolean
-  mrp?: boolean
-  discount_pct?: boolean
-  rate?: boolean
-  tax_pct?: boolean
-  cgst_pct?: boolean
-  sgst_pct?: boolean
-  igst_pct?: boolean
-  tax_amount?: boolean
+  required_by_date?: boolean
+  required_qty?: boolean
   amount?: boolean
+  cgst_pct?: boolean
+  discount_pct?: boolean
+  igst_pct?: boolean
+  mrp?: boolean
+  rate?: boolean
+  sgst_pct?: boolean
+  tax_amount?: boolean
+  tax_pct?: boolean
   total_amount?: boolean
   payment_term_id?: boolean
-  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   paymentTerm?: boolean | Prisma.PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs>
+  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseIntentItemVendorMapping"]>
 
 export type PurchaseIntentItemVendorMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   purchase_intent_item_id?: boolean
   company_vendor_id?: boolean
-  required_qty?: boolean
-  required_by_date?: boolean
   estimated_price?: boolean
   remarks?: boolean
   is_selected?: boolean
   created_at?: boolean
   updated_at?: boolean
-  mrp?: boolean
-  discount_pct?: boolean
-  rate?: boolean
-  tax_pct?: boolean
-  cgst_pct?: boolean
-  sgst_pct?: boolean
-  igst_pct?: boolean
-  tax_amount?: boolean
+  required_by_date?: boolean
+  required_qty?: boolean
   amount?: boolean
+  cgst_pct?: boolean
+  discount_pct?: boolean
+  igst_pct?: boolean
+  mrp?: boolean
+  rate?: boolean
+  sgst_pct?: boolean
+  tax_amount?: boolean
+  tax_pct?: boolean
   total_amount?: boolean
   payment_term_id?: boolean
-  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   paymentTerm?: boolean | Prisma.PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs>
+  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseIntentItemVendorMapping"]>
 
 export type PurchaseIntentItemVendorMappingSelectScalar = {
   id?: boolean
   purchase_intent_item_id?: boolean
   company_vendor_id?: boolean
-  required_qty?: boolean
-  required_by_date?: boolean
   estimated_price?: boolean
   remarks?: boolean
   is_selected?: boolean
   created_at?: boolean
   updated_at?: boolean
-  mrp?: boolean
-  discount_pct?: boolean
-  rate?: boolean
-  tax_pct?: boolean
-  cgst_pct?: boolean
-  sgst_pct?: boolean
-  igst_pct?: boolean
-  tax_amount?: boolean
+  required_by_date?: boolean
+  required_qty?: boolean
   amount?: boolean
+  cgst_pct?: boolean
+  discount_pct?: boolean
+  igst_pct?: boolean
+  mrp?: boolean
+  rate?: boolean
+  sgst_pct?: boolean
+  tax_amount?: boolean
+  tax_pct?: boolean
   total_amount?: boolean
   payment_term_id?: boolean
 }
 
-export type PurchaseIntentItemVendorMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "purchase_intent_item_id" | "company_vendor_id" | "required_qty" | "required_by_date" | "estimated_price" | "remarks" | "is_selected" | "created_at" | "updated_at" | "mrp" | "discount_pct" | "rate" | "tax_pct" | "cgst_pct" | "sgst_pct" | "igst_pct" | "tax_amount" | "amount" | "total_amount" | "payment_term_id", ExtArgs["result"]["purchaseIntentItemVendorMapping"]>
+export type PurchaseIntentItemVendorMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "purchase_intent_item_id" | "company_vendor_id" | "estimated_price" | "remarks" | "is_selected" | "created_at" | "updated_at" | "required_by_date" | "required_qty" | "amount" | "cgst_pct" | "discount_pct" | "igst_pct" | "mrp" | "rate" | "sgst_pct" | "tax_amount" | "tax_pct" | "total_amount" | "payment_term_id", ExtArgs["result"]["purchaseIntentItemVendorMapping"]>
 export type PurchaseIntentItemVendorMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
-  purchaseOrderItems?: boolean | Prisma.PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs>
   paymentTerm?: boolean | Prisma.PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs>
+  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
+  purchaseOrderItems?: boolean | Prisma.PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs>
   _count?: boolean | Prisma.PurchaseIntentItemVendorMappingCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PurchaseIntentItemVendorMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   paymentTerm?: boolean | Prisma.PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs>
+  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
 }
 export type PurchaseIntentItemVendorMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   paymentTerm?: boolean | Prisma.PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs>
+  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
 }
 
 export type $PurchaseIntentItemVendorMappingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PurchaseIntentItemVendorMapping"
   objects: {
-    purchaseIntentItem: Prisma.$PurchaseIntentItemPayload<ExtArgs>
     companyVendor: Prisma.$CompanyVendorsMasterPayload<ExtArgs>
-    purchaseOrderItems: Prisma.$PurchaseOrderItemPayload<ExtArgs>[]
     paymentTerm: Prisma.$PaymentTermMasterPayload<ExtArgs> | null
+    purchaseIntentItem: Prisma.$PurchaseIntentItemPayload<ExtArgs>
+    purchaseOrderItems: Prisma.$PurchaseOrderItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     purchase_intent_item_id: number
     company_vendor_id: number
-    required_qty: runtime.Decimal
-    required_by_date: Date | null
     estimated_price: runtime.Decimal | null
     remarks: string | null
     is_selected: boolean
     created_at: Date
     updated_at: Date
-    mrp: runtime.Decimal | null
-    discount_pct: runtime.Decimal | null
-    rate: runtime.Decimal | null
-    tax_pct: runtime.Decimal | null
-    cgst_pct: runtime.Decimal | null
-    sgst_pct: runtime.Decimal | null
-    igst_pct: runtime.Decimal | null
-    tax_amount: runtime.Decimal | null
+    required_by_date: Date | null
+    required_qty: runtime.Decimal
     amount: runtime.Decimal | null
+    cgst_pct: runtime.Decimal | null
+    discount_pct: runtime.Decimal | null
+    igst_pct: runtime.Decimal | null
+    mrp: runtime.Decimal | null
+    rate: runtime.Decimal | null
+    sgst_pct: runtime.Decimal | null
+    tax_amount: runtime.Decimal | null
+    tax_pct: runtime.Decimal | null
     total_amount: runtime.Decimal | null
     payment_term_id: number | null
   }, ExtArgs["result"]["purchaseIntentItemVendorMapping"]>
@@ -2174,10 +2174,10 @@ readonly fields: PurchaseIntentItemVendorMappingFieldRefs;
  */
 export interface Prisma__PurchaseIntentItemVendorMappingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  purchaseIntentItem<T extends Prisma.PurchaseIntentItemDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>>): Prisma.Prisma__PurchaseIntentItemClient<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   companyVendor<T extends Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__CompanyVendorsMasterClient<runtime.Types.Result.GetResult<Prisma.$CompanyVendorsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  purchaseOrderItems<T extends Prisma.PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   paymentTerm<T extends Prisma.PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs>>): Prisma.Prisma__PaymentTermMasterClient<runtime.Types.Result.GetResult<Prisma.$PaymentTermMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  purchaseIntentItem<T extends Prisma.PurchaseIntentItemDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>>): Prisma.Prisma__PurchaseIntentItemClient<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  purchaseOrderItems<T extends Prisma.PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2210,22 +2210,22 @@ export interface PurchaseIntentItemVendorMappingFieldRefs {
   readonly id: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Int'>
   readonly purchase_intent_item_id: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Int'>
   readonly company_vendor_id: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Int'>
-  readonly required_qty: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
-  readonly required_by_date: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'DateTime'>
   readonly estimated_price: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
   readonly remarks: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'String'>
   readonly is_selected: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Boolean'>
   readonly created_at: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'DateTime'>
-  readonly mrp: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
-  readonly discount_pct: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
-  readonly rate: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
-  readonly tax_pct: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
-  readonly cgst_pct: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
-  readonly sgst_pct: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
-  readonly igst_pct: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
-  readonly tax_amount: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
+  readonly required_by_date: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'DateTime'>
+  readonly required_qty: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
   readonly amount: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
+  readonly cgst_pct: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
+  readonly discount_pct: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
+  readonly igst_pct: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
+  readonly mrp: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
+  readonly rate: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
+  readonly sgst_pct: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
+  readonly tax_amount: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
+  readonly tax_pct: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
   readonly total_amount: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Decimal'>
   readonly payment_term_id: Prisma.FieldRef<"PurchaseIntentItemVendorMapping", 'Int'>
 }
@@ -2629,6 +2629,25 @@ export type PurchaseIntentItemVendorMappingDeleteManyArgs<ExtArgs extends runtim
 }
 
 /**
+ * PurchaseIntentItemVendorMapping.paymentTerm
+ */
+export type PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PaymentTermMaster
+   */
+  select?: Prisma.PaymentTermMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PaymentTermMaster
+   */
+  omit?: Prisma.PaymentTermMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentTermMasterInclude<ExtArgs> | null
+  where?: Prisma.PaymentTermMasterWhereInput
+}
+
+/**
  * PurchaseIntentItemVendorMapping.purchaseOrderItems
  */
 export type PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2650,25 +2669,6 @@ export type PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs exten
   take?: number
   skip?: number
   distinct?: Prisma.PurchaseOrderItemScalarFieldEnum | Prisma.PurchaseOrderItemScalarFieldEnum[]
-}
-
-/**
- * PurchaseIntentItemVendorMapping.paymentTerm
- */
-export type PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PaymentTermMaster
-   */
-  select?: Prisma.PaymentTermMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the PaymentTermMaster
-   */
-  omit?: Prisma.PaymentTermMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PaymentTermMasterInclude<ExtArgs> | null
-  where?: Prisma.PaymentTermMasterWhereInput
 }
 
 /**

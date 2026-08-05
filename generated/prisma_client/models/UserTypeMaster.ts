@@ -192,15 +192,15 @@ export type UserTypeMasterWhereInput = {
   NOT?: Prisma.UserTypeMasterWhereInput | Prisma.UserTypeMasterWhereInput[]
   id?: Prisma.IntFilter<"UserTypeMaster"> | number
   user_type?: Prisma.StringFilter<"UserTypeMaster"> | string
-  users?: Prisma.UserMasterListRelationFilter
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterListRelationFilter
+  users?: Prisma.UserMasterListRelationFilter
 }
 
 export type UserTypeMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   user_type?: Prisma.SortOrder
-  users?: Prisma.UserMasterOrderByRelationAggregateInput
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterOrderByRelationAggregateInput
+  users?: Prisma.UserMasterOrderByRelationAggregateInput
 }
 
 export type UserTypeMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -209,8 +209,8 @@ export type UserTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UserTypeMasterWhereInput[]
   NOT?: Prisma.UserTypeMasterWhereInput | Prisma.UserTypeMasterWhereInput[]
   user_type?: Prisma.StringFilter<"UserTypeMaster"> | string
-  users?: Prisma.UserMasterListRelationFilter
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterListRelationFilter
+  users?: Prisma.UserMasterListRelationFilter
 }, "id">
 
 export type UserTypeMasterOrderByWithAggregationInput = {
@@ -233,28 +233,28 @@ export type UserTypeMasterScalarWhereWithAggregatesInput = {
 
 export type UserTypeMasterCreateInput = {
   user_type: string
-  users?: Prisma.UserMasterCreateNestedManyWithoutUser_typeInput
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutUserTypeInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutUser_typeInput
 }
 
 export type UserTypeMasterUncheckedCreateInput = {
   id?: number
   user_type: string
-  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutUser_typeInput
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutUserTypeInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutUser_typeInput
 }
 
 export type UserTypeMasterUpdateInput = {
   user_type?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserMasterUpdateManyWithoutUser_typeNestedInput
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutUserTypeNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutUser_typeNestedInput
 }
 
 export type UserTypeMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   user_type?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserMasterUncheckedUpdateManyWithoutUser_typeNestedInput
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutUserTypeNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutUser_typeNestedInput
 }
 
 export type UserTypeMasterCreateManyInput = {
@@ -409,13 +409,13 @@ export type UserTypeMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput =
  */
 
 export type UserTypeMasterCountOutputType = {
-  users: number
   selfAssignTaskTypeMasters: number
+  users: number
 }
 
 export type UserTypeMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  users?: boolean | UserTypeMasterCountOutputTypeCountUsersArgs
   selfAssignTaskTypeMasters?: boolean | UserTypeMasterCountOutputTypeCountSelfAssignTaskTypeMastersArgs
+  users?: boolean | UserTypeMasterCountOutputTypeCountUsersArgs
 }
 
 /**
@@ -431,23 +431,23 @@ export type UserTypeMasterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Typ
 /**
  * UserTypeMasterCountOutputType without action
  */
-export type UserTypeMasterCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserMasterWhereInput
+export type UserTypeMasterCountOutputTypeCountSelfAssignTaskTypeMastersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SelfAssignTaskTypeMasterWhereInput
 }
 
 /**
  * UserTypeMasterCountOutputType without action
  */
-export type UserTypeMasterCountOutputTypeCountSelfAssignTaskTypeMastersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SelfAssignTaskTypeMasterWhereInput
+export type UserTypeMasterCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserMasterWhereInput
 }
 
 
 export type UserTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   user_type?: boolean
-  users?: boolean | Prisma.UserTypeMaster$usersArgs<ExtArgs>
   selfAssignTaskTypeMasters?: boolean | Prisma.UserTypeMaster$selfAssignTaskTypeMastersArgs<ExtArgs>
+  users?: boolean | Prisma.UserTypeMaster$usersArgs<ExtArgs>
   _count?: boolean | Prisma.UserTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userTypeMaster"]>
 
@@ -468,8 +468,8 @@ export type UserTypeMasterSelectScalar = {
 
 export type UserTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_type", ExtArgs["result"]["userTypeMaster"]>
 export type UserTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  users?: boolean | Prisma.UserTypeMaster$usersArgs<ExtArgs>
   selfAssignTaskTypeMasters?: boolean | Prisma.UserTypeMaster$selfAssignTaskTypeMastersArgs<ExtArgs>
+  users?: boolean | Prisma.UserTypeMaster$usersArgs<ExtArgs>
   _count?: boolean | Prisma.UserTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserTypeMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -478,8 +478,8 @@ export type UserTypeMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Typ
 export type $UserTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "UserTypeMaster"
   objects: {
-    users: Prisma.$UserMasterPayload<ExtArgs>[]
     selfAssignTaskTypeMasters: Prisma.$SelfAssignTaskTypeMasterPayload<ExtArgs>[]
+    users: Prisma.$UserMasterPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -878,8 +878,8 @@ readonly fields: UserTypeMasterFieldRefs;
  */
 export interface Prisma__UserTypeMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  users<T extends Prisma.UserTypeMaster$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserTypeMaster$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   selfAssignTaskTypeMasters<T extends Prisma.UserTypeMaster$selfAssignTaskTypeMastersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserTypeMaster$selfAssignTaskTypeMastersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SelfAssignTaskTypeMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  users<T extends Prisma.UserTypeMaster$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserTypeMaster$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1304,30 +1304,6 @@ export type UserTypeMasterDeleteManyArgs<ExtArgs extends runtime.Types.Extension
 }
 
 /**
- * UserTypeMaster.users
- */
-export type UserTypeMaster$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UserMaster
-   */
-  select?: Prisma.UserMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the UserMaster
-   */
-  omit?: Prisma.UserMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserMasterInclude<ExtArgs> | null
-  where?: Prisma.UserMasterWhereInput
-  orderBy?: Prisma.UserMasterOrderByWithRelationInput | Prisma.UserMasterOrderByWithRelationInput[]
-  cursor?: Prisma.UserMasterWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.UserMasterScalarFieldEnum | Prisma.UserMasterScalarFieldEnum[]
-}
-
-/**
  * UserTypeMaster.selfAssignTaskTypeMasters
  */
 export type UserTypeMaster$selfAssignTaskTypeMastersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1349,6 +1325,30 @@ export type UserTypeMaster$selfAssignTaskTypeMastersArgs<ExtArgs extends runtime
   take?: number
   skip?: number
   distinct?: Prisma.SelfAssignTaskTypeMasterScalarFieldEnum | Prisma.SelfAssignTaskTypeMasterScalarFieldEnum[]
+}
+
+/**
+ * UserTypeMaster.users
+ */
+export type UserTypeMaster$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserMaster
+   */
+  select?: Prisma.UserMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserMaster
+   */
+  omit?: Prisma.UserMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserMasterInclude<ExtArgs> | null
+  where?: Prisma.UserMasterWhereInput
+  orderBy?: Prisma.UserMasterOrderByWithRelationInput | Prisma.UserMasterOrderByWithRelationInput[]
+  cursor?: Prisma.UserMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserMasterScalarFieldEnum | Prisma.UserMasterScalarFieldEnum[]
 }
 
 /**

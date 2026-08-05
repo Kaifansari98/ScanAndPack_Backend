@@ -224,8 +224,8 @@ export type SelfAssignTaskTypeMasterWhereInput = {
   user_type_id?: Prisma.IntFilter<"SelfAssignTaskTypeMaster"> | number
   type?: Prisma.StringFilter<"SelfAssignTaskTypeMaster"> | string
   created_at?: Prisma.DateTimeFilter<"SelfAssignTaskTypeMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   userType?: Prisma.XOR<Prisma.UserTypeMasterScalarRelationFilter, Prisma.UserTypeMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type SelfAssignTaskTypeMasterOrderByWithRelationInput = {
@@ -234,8 +234,8 @@ export type SelfAssignTaskTypeMasterOrderByWithRelationInput = {
   user_type_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   userType?: Prisma.UserTypeMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type SelfAssignTaskTypeMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -247,8 +247,8 @@ export type SelfAssignTaskTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   user_type_id?: Prisma.IntFilter<"SelfAssignTaskTypeMaster"> | number
   type?: Prisma.StringFilter<"SelfAssignTaskTypeMaster"> | string
   created_at?: Prisma.DateTimeFilter<"SelfAssignTaskTypeMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   userType?: Prisma.XOR<Prisma.UserTypeMasterScalarRelationFilter, Prisma.UserTypeMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type SelfAssignTaskTypeMasterOrderByWithAggregationInput = {
@@ -278,8 +278,8 @@ export type SelfAssignTaskTypeMasterScalarWhereWithAggregatesInput = {
 export type SelfAssignTaskTypeMasterCreateInput = {
   type: string
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutSelfAssignTaskTypeMastersInput
   userType: Prisma.UserTypeMasterCreateNestedOneWithoutSelfAssignTaskTypeMastersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutSelfAssignTaskTypeMastersInput
 }
 
 export type SelfAssignTaskTypeMasterUncheckedCreateInput = {
@@ -293,8 +293,8 @@ export type SelfAssignTaskTypeMasterUncheckedCreateInput = {
 export type SelfAssignTaskTypeMasterUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSelfAssignTaskTypeMastersNestedInput
   userType?: Prisma.UserTypeMasterUpdateOneRequiredWithoutSelfAssignTaskTypeMastersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSelfAssignTaskTypeMastersNestedInput
 }
 
 export type SelfAssignTaskTypeMasterUncheckedUpdateInput = {
@@ -607,8 +607,8 @@ export type SelfAssignTaskTypeMasterSelect<ExtArgs extends runtime.Types.Extensi
   user_type_id?: boolean
   type?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   userType?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["selfAssignTaskTypeMaster"]>
 
 export type SelfAssignTaskTypeMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -617,8 +617,8 @@ export type SelfAssignTaskTypeMasterSelectCreateManyAndReturn<ExtArgs extends ru
   user_type_id?: boolean
   type?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   userType?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["selfAssignTaskTypeMaster"]>
 
 export type SelfAssignTaskTypeMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -627,8 +627,8 @@ export type SelfAssignTaskTypeMasterSelectUpdateManyAndReturn<ExtArgs extends ru
   user_type_id?: boolean
   type?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   userType?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["selfAssignTaskTypeMaster"]>
 
 export type SelfAssignTaskTypeMasterSelectScalar = {
@@ -641,23 +641,23 @@ export type SelfAssignTaskTypeMasterSelectScalar = {
 
 export type SelfAssignTaskTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "user_type_id" | "type" | "created_at", ExtArgs["result"]["selfAssignTaskTypeMaster"]>
 export type SelfAssignTaskTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   userType?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type SelfAssignTaskTypeMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   userType?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type SelfAssignTaskTypeMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   userType?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $SelfAssignTaskTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SelfAssignTaskTypeMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     userType: Prisma.$UserTypeMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1059,8 +1059,8 @@ readonly fields: SelfAssignTaskTypeMasterFieldRefs;
  */
 export interface Prisma__SelfAssignTaskTypeMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   userType<T extends Prisma.UserTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$UserTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

@@ -260,11 +260,11 @@ export type ProjectCategoriesMasterVendorMappingWhereInput = {
   updated_at?: Prisma.DateTimeFilter<"ProjectCategoriesMasterVendorMapping"> | Date | string
   created_by?: Prisma.IntFilter<"ProjectCategoriesMasterVendorMapping"> | number
   updated_by?: Prisma.IntFilter<"ProjectCategoriesMasterVendorMapping"> | number
+  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   projectCategoriesMaster?: Prisma.XOR<Prisma.ProjectCategoriesMasterScalarRelationFilter, Prisma.ProjectCategoriesMasterWhereInput>
   projectCategoriesTypeMaster?: Prisma.XOR<Prisma.ProjectCategoriesTypeMasterScalarRelationFilter, Prisma.ProjectCategoriesTypeMasterWhereInput>
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type ProjectCategoriesMasterVendorMappingOrderByWithRelationInput = {
@@ -276,11 +276,11 @@ export type ProjectCategoriesMasterVendorMappingOrderByWithRelationInput = {
   updated_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  createdBy?: Prisma.UserMasterOrderByWithRelationInput
   projectCategoriesMaster?: Prisma.ProjectCategoriesMasterOrderByWithRelationInput
   projectCategoriesTypeMaster?: Prisma.ProjectCategoriesTypeMasterOrderByWithRelationInput
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  createdBy?: Prisma.UserMasterOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type ProjectCategoriesMasterVendorMappingWhereUniqueInput = Prisma.AtLeast<{
@@ -295,11 +295,11 @@ export type ProjectCategoriesMasterVendorMappingWhereUniqueInput = Prisma.AtLeas
   updated_at?: Prisma.DateTimeFilter<"ProjectCategoriesMasterVendorMapping"> | Date | string
   created_by?: Prisma.IntFilter<"ProjectCategoriesMasterVendorMapping"> | number
   updated_by?: Prisma.IntFilter<"ProjectCategoriesMasterVendorMapping"> | number
+  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   projectCategoriesMaster?: Prisma.XOR<Prisma.ProjectCategoriesMasterScalarRelationFilter, Prisma.ProjectCategoriesMasterWhereInput>
   projectCategoriesTypeMaster?: Prisma.XOR<Prisma.ProjectCategoriesTypeMasterScalarRelationFilter, Prisma.ProjectCategoriesTypeMasterWhereInput>
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type ProjectCategoriesMasterVendorMappingOrderByWithAggregationInput = {
@@ -335,11 +335,11 @@ export type ProjectCategoriesMasterVendorMappingScalarWhereWithAggregatesInput =
 export type ProjectCategoriesMasterVendorMappingCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsCreatedInput
   projectCategoriesMaster: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutProjectCategoriesMasterVendorMappingInput
   projectCategoriesTypeMaster: Prisma.ProjectCategoriesTypeMasterCreateNestedOneWithoutProjectCategoriesMasterVendorMappingInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsCreatedInput
   updatedBy: Prisma.UserMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsInput
 }
 
 export type ProjectCategoriesMasterVendorMappingUncheckedCreateInput = {
@@ -356,11 +356,11 @@ export type ProjectCategoriesMasterVendorMappingUncheckedCreateInput = {
 export type ProjectCategoriesMasterVendorMappingUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsCreatedNestedInput
   projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutProjectCategoriesMasterVendorMappingNestedInput
   projectCategoriesTypeMaster?: Prisma.ProjectCategoriesTypeMasterUpdateOneRequiredWithoutProjectCategoriesMasterVendorMappingNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsNestedInput
 }
 
 export type ProjectCategoriesMasterVendorMappingUncheckedUpdateInput = {
@@ -675,9 +675,9 @@ export type ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutProjec
 export type ProjectCategoriesMasterVendorMappingCreateWithoutVendorInput = {
   created_at?: Date | string
   updated_at?: Date | string
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsCreatedInput
   projectCategoriesMaster: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutProjectCategoriesMasterVendorMappingInput
   projectCategoriesTypeMaster: Prisma.ProjectCategoriesTypeMasterCreateNestedOneWithoutProjectCategoriesMasterVendorMappingInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsCreatedInput
   updatedBy: Prisma.UserMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsUpdatedInput
 }
 
@@ -736,8 +736,8 @@ export type ProjectCategoriesMasterVendorMappingCreateWithoutCreatedByInput = {
   updated_at?: Date | string
   projectCategoriesMaster: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutProjectCategoriesMasterVendorMappingInput
   projectCategoriesTypeMaster: Prisma.ProjectCategoriesTypeMasterCreateNestedOneWithoutProjectCategoriesMasterVendorMappingInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsInput
   updatedBy: Prisma.UserMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsInput
 }
 
 export type ProjectCategoriesMasterVendorMappingUncheckedCreateWithoutCreatedByInput = {
@@ -763,10 +763,10 @@ export type ProjectCategoriesMasterVendorMappingCreateManyCreatedByInputEnvelope
 export type ProjectCategoriesMasterVendorMappingCreateWithoutUpdatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsCreatedInput
   projectCategoriesMaster: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutProjectCategoriesMasterVendorMappingInput
   projectCategoriesTypeMaster: Prisma.ProjectCategoriesTypeMasterCreateNestedOneWithoutProjectCategoriesMasterVendorMappingInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsCreatedInput
 }
 
 export type ProjectCategoriesMasterVendorMappingUncheckedCreateWithoutUpdatedByInput = {
@@ -824,10 +824,10 @@ export type ProjectCategoriesMasterVendorMappingUpdateManyWithWhereWithoutUpdate
 export type ProjectCategoriesMasterVendorMappingCreateWithoutProjectCategoriesTypeMasterInput = {
   created_at?: Date | string
   updated_at?: Date | string
-  projectCategoriesMaster: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutProjectCategoriesMasterVendorMappingInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsCreatedInput
+  projectCategoriesMaster: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutProjectCategoriesMasterVendorMappingInput
   updatedBy: Prisma.UserMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsInput
 }
 
 export type ProjectCategoriesMasterVendorMappingUncheckedCreateWithoutProjectCategoriesTypeMasterInput = {
@@ -869,10 +869,10 @@ export type ProjectCategoriesMasterVendorMappingUpdateManyWithWhereWithoutProjec
 export type ProjectCategoriesMasterVendorMappingCreateWithoutProjectCategoriesMasterInput = {
   created_at?: Date | string
   updated_at?: Date | string
-  projectCategoriesTypeMaster: Prisma.ProjectCategoriesTypeMasterCreateNestedOneWithoutProjectCategoriesMasterVendorMappingInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsCreatedInput
+  projectCategoriesTypeMaster: Prisma.ProjectCategoriesTypeMasterCreateNestedOneWithoutProjectCategoriesMasterVendorMappingInput
   updatedBy: Prisma.UserMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectCategoriesVendorMappingsInput
 }
 
 export type ProjectCategoriesMasterVendorMappingUncheckedCreateWithoutProjectCategoriesMasterInput = {
@@ -924,9 +924,9 @@ export type ProjectCategoriesMasterVendorMappingCreateManyVendorInput = {
 export type ProjectCategoriesMasterVendorMappingUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsCreatedNestedInput
   projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutProjectCategoriesMasterVendorMappingNestedInput
   projectCategoriesTypeMaster?: Prisma.ProjectCategoriesTypeMasterUpdateOneRequiredWithoutProjectCategoriesMasterVendorMappingNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsUpdatedNestedInput
 }
 
@@ -975,8 +975,8 @@ export type ProjectCategoriesMasterVendorMappingUpdateWithoutCreatedByInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutProjectCategoriesMasterVendorMappingNestedInput
   projectCategoriesTypeMaster?: Prisma.ProjectCategoriesTypeMasterUpdateOneRequiredWithoutProjectCategoriesMasterVendorMappingNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsNestedInput
 }
 
 export type ProjectCategoriesMasterVendorMappingUncheckedUpdateWithoutCreatedByInput = {
@@ -1002,10 +1002,10 @@ export type ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutCreate
 export type ProjectCategoriesMasterVendorMappingUpdateWithoutUpdatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsCreatedNestedInput
   projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutProjectCategoriesMasterVendorMappingNestedInput
   projectCategoriesTypeMaster?: Prisma.ProjectCategoriesTypeMasterUpdateOneRequiredWithoutProjectCategoriesMasterVendorMappingNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsCreatedNestedInput
 }
 
 export type ProjectCategoriesMasterVendorMappingUncheckedUpdateWithoutUpdatedByInput = {
@@ -1041,10 +1041,10 @@ export type ProjectCategoriesMasterVendorMappingCreateManyProjectCategoriesTypeM
 export type ProjectCategoriesMasterVendorMappingUpdateWithoutProjectCategoriesTypeMasterInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutProjectCategoriesMasterVendorMappingNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsCreatedNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutProjectCategoriesMasterVendorMappingNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsNestedInput
 }
 
 export type ProjectCategoriesMasterVendorMappingUncheckedUpdateWithoutProjectCategoriesTypeMasterInput = {
@@ -1080,10 +1080,10 @@ export type ProjectCategoriesMasterVendorMappingCreateManyProjectCategoriesMaste
 export type ProjectCategoriesMasterVendorMappingUpdateWithoutProjectCategoriesMasterInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  projectCategoriesTypeMaster?: Prisma.ProjectCategoriesTypeMasterUpdateOneRequiredWithoutProjectCategoriesMasterVendorMappingNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsCreatedNestedInput
+  projectCategoriesTypeMaster?: Prisma.ProjectCategoriesTypeMasterUpdateOneRequiredWithoutProjectCategoriesMasterVendorMappingNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectCategoriesVendorMappingsNestedInput
 }
 
 export type ProjectCategoriesMasterVendorMappingUncheckedUpdateWithoutProjectCategoriesMasterInput = {
@@ -1117,11 +1117,11 @@ export type ProjectCategoriesMasterVendorMappingSelect<ExtArgs extends runtime.T
   updated_at?: boolean
   created_by?: boolean
   updated_by?: boolean
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   projectCategoriesMaster?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
   projectCategoriesTypeMaster?: boolean | Prisma.ProjectCategoriesTypeMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectCategoriesMasterVendorMapping"]>
 
 export type ProjectCategoriesMasterVendorMappingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1133,11 +1133,11 @@ export type ProjectCategoriesMasterVendorMappingSelectCreateManyAndReturn<ExtArg
   updated_at?: boolean
   created_by?: boolean
   updated_by?: boolean
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   projectCategoriesMaster?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
   projectCategoriesTypeMaster?: boolean | Prisma.ProjectCategoriesTypeMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectCategoriesMasterVendorMapping"]>
 
 export type ProjectCategoriesMasterVendorMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1149,11 +1149,11 @@ export type ProjectCategoriesMasterVendorMappingSelectUpdateManyAndReturn<ExtArg
   updated_at?: boolean
   created_by?: boolean
   updated_by?: boolean
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   projectCategoriesMaster?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
   projectCategoriesTypeMaster?: boolean | Prisma.ProjectCategoriesTypeMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectCategoriesMasterVendorMapping"]>
 
 export type ProjectCategoriesMasterVendorMappingSelectScalar = {
@@ -1169,35 +1169,35 @@ export type ProjectCategoriesMasterVendorMappingSelectScalar = {
 
 export type ProjectCategoriesMasterVendorMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_categories_master_id" | "project_categories_type_master_id" | "vendor_id" | "created_at" | "updated_at" | "created_by" | "updated_by", ExtArgs["result"]["projectCategoriesMasterVendorMapping"]>
 export type ProjectCategoriesMasterVendorMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   projectCategoriesMaster?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
   projectCategoriesTypeMaster?: boolean | Prisma.ProjectCategoriesTypeMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type ProjectCategoriesMasterVendorMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   projectCategoriesMaster?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
   projectCategoriesTypeMaster?: boolean | Prisma.ProjectCategoriesTypeMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type ProjectCategoriesMasterVendorMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   projectCategoriesMaster?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
   projectCategoriesTypeMaster?: boolean | Prisma.ProjectCategoriesTypeMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $ProjectCategoriesMasterVendorMappingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProjectCategoriesMasterVendorMapping"
   objects: {
+    createdBy: Prisma.$UserMasterPayload<ExtArgs>
     projectCategoriesMaster: Prisma.$ProjectCategoriesMasterPayload<ExtArgs>
     projectCategoriesTypeMaster: Prisma.$ProjectCategoriesTypeMasterPayload<ExtArgs>
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    createdBy: Prisma.$UserMasterPayload<ExtArgs>
     updatedBy: Prisma.$UserMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1602,11 +1602,11 @@ readonly fields: ProjectCategoriesMasterVendorMappingFieldRefs;
  */
 export interface Prisma__ProjectCategoriesMasterVendorMappingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   projectCategoriesMaster<T extends Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectCategoriesMasterClient<runtime.Types.Result.GetResult<Prisma.$ProjectCategoriesMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   projectCategoriesTypeMaster<T extends Prisma.ProjectCategoriesTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectCategoriesTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectCategoriesTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$ProjectCategoriesTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
