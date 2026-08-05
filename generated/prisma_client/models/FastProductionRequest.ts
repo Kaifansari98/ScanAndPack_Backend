@@ -71,7 +71,6 @@ export type FastProductionRequestMinAggregateOutputType = {
   hardware_selection: string | null
   accessory_selection: string | null
   special_requirements: string | null
-  tentative_order_login_date: Date | null
   client_required_delivery_date: Date | null
   remarks: string | null
   terms_accepted_at: Date | null
@@ -85,6 +84,7 @@ export type FastProductionRequestMinAggregateOutputType = {
   created_at: Date | null
   updated_by: number | null
   updated_at: Date | null
+  tentative_order_login_date: Date | null
 }
 
 export type FastProductionRequestMaxAggregateOutputType = {
@@ -102,7 +102,6 @@ export type FastProductionRequestMaxAggregateOutputType = {
   hardware_selection: string | null
   accessory_selection: string | null
   special_requirements: string | null
-  tentative_order_login_date: Date | null
   client_required_delivery_date: Date | null
   remarks: string | null
   terms_accepted_at: Date | null
@@ -116,6 +115,7 @@ export type FastProductionRequestMaxAggregateOutputType = {
   created_at: Date | null
   updated_by: number | null
   updated_at: Date | null
+  tentative_order_login_date: Date | null
 }
 
 export type FastProductionRequestCountAggregateOutputType = {
@@ -133,7 +133,6 @@ export type FastProductionRequestCountAggregateOutputType = {
   hardware_selection: number
   accessory_selection: number
   special_requirements: number
-  tentative_order_login_date: number
   client_required_delivery_date: number
   remarks: number
   terms_accepted_at: number
@@ -147,6 +146,7 @@ export type FastProductionRequestCountAggregateOutputType = {
   created_at: number
   updated_by: number
   updated_at: number
+  tentative_order_login_date: number
   _all: number
 }
 
@@ -196,7 +196,6 @@ export type FastProductionRequestMinAggregateInputType = {
   hardware_selection?: true
   accessory_selection?: true
   special_requirements?: true
-  tentative_order_login_date?: true
   client_required_delivery_date?: true
   remarks?: true
   terms_accepted_at?: true
@@ -210,6 +209,7 @@ export type FastProductionRequestMinAggregateInputType = {
   created_at?: true
   updated_by?: true
   updated_at?: true
+  tentative_order_login_date?: true
 }
 
 export type FastProductionRequestMaxAggregateInputType = {
@@ -227,7 +227,6 @@ export type FastProductionRequestMaxAggregateInputType = {
   hardware_selection?: true
   accessory_selection?: true
   special_requirements?: true
-  tentative_order_login_date?: true
   client_required_delivery_date?: true
   remarks?: true
   terms_accepted_at?: true
@@ -241,6 +240,7 @@ export type FastProductionRequestMaxAggregateInputType = {
   created_at?: true
   updated_by?: true
   updated_at?: true
+  tentative_order_login_date?: true
 }
 
 export type FastProductionRequestCountAggregateInputType = {
@@ -258,7 +258,6 @@ export type FastProductionRequestCountAggregateInputType = {
   hardware_selection?: true
   accessory_selection?: true
   special_requirements?: true
-  tentative_order_login_date?: true
   client_required_delivery_date?: true
   remarks?: true
   terms_accepted_at?: true
@@ -272,6 +271,7 @@ export type FastProductionRequestCountAggregateInputType = {
   created_at?: true
   updated_by?: true
   updated_at?: true
+  tentative_order_login_date?: true
   _all?: true
 }
 
@@ -376,7 +376,6 @@ export type FastProductionRequestGroupByOutputType = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date: Date | null
   client_required_delivery_date: Date
   remarks: string | null
   terms_accepted_at: Date
@@ -390,6 +389,7 @@ export type FastProductionRequestGroupByOutputType = {
   created_at: Date
   updated_by: number | null
   updated_at: Date
+  tentative_order_login_date: Date | null
   _count: FastProductionRequestCountAggregateOutputType | null
   _avg: FastProductionRequestAvgAggregateOutputType | null
   _sum: FastProductionRequestSumAggregateOutputType | null
@@ -430,7 +430,6 @@ export type FastProductionRequestWhereInput = {
   hardware_selection?: Prisma.StringFilter<"FastProductionRequest"> | string
   accessory_selection?: Prisma.StringFilter<"FastProductionRequest"> | string
   special_requirements?: Prisma.StringFilter<"FastProductionRequest"> | string
-  tentative_order_login_date?: Prisma.DateTimeNullableFilter<"FastProductionRequest"> | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFilter<"FastProductionRequest"> | Date | string
   remarks?: Prisma.StringNullableFilter<"FastProductionRequest"> | string | null
   terms_accepted_at?: Prisma.DateTimeFilter<"FastProductionRequest"> | Date | string
@@ -444,18 +443,19 @@ export type FastProductionRequestWhereInput = {
   created_at?: Prisma.DateTimeFilter<"FastProductionRequest"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"FastProductionRequest"> | number | null
   updated_at?: Prisma.DateTimeFilter<"FastProductionRequest"> | Date | string
-  batch?: Prisma.XOR<Prisma.FastProductionRequestBatchScalarRelationFilter, Prisma.FastProductionRequestBatchWhereInput>
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  tentative_order_login_date?: Prisma.DateTimeNullableFilter<"FastProductionRequest"> | Date | string | null
+  finishes?: Prisma.FastProductionFinishListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
-  instance?: Prisma.XOR<Prisma.LeadProductStructureInstanceScalarRelationFilter, Prisma.LeadProductStructureInstanceWhereInput>
-  franchise?: Prisma.XOR<Prisma.FranchiseMasterNullableScalarRelationFilter, Prisma.FranchiseMasterWhereInput> | null
-  requester?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  batch?: Prisma.XOR<Prisma.FastProductionRequestBatchScalarRelationFilter, Prisma.FastProductionRequestBatchWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  franchise?: Prisma.XOR<Prisma.FranchiseMasterNullableScalarRelationFilter, Prisma.FranchiseMasterWhereInput> | null
+  instance?: Prisma.XOR<Prisma.LeadProductStructureInstanceScalarRelationFilter, Prisma.LeadProductStructureInstanceWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  requester?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   revokedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   task?: Prisma.XOR<Prisma.UserLeadTaskNullableScalarRelationFilter, Prisma.UserLeadTaskWhereInput> | null
-  finishes?: Prisma.FastProductionFinishListRelationFilter
+  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   documents?: Prisma.FastProductionRequestDocumentListRelationFilter
 }
 
@@ -474,7 +474,6 @@ export type FastProductionRequestOrderByWithRelationInput = {
   hardware_selection?: Prisma.SortOrder
   accessory_selection?: Prisma.SortOrder
   special_requirements?: Prisma.SortOrder
-  tentative_order_login_date?: Prisma.SortOrderInput | Prisma.SortOrder
   client_required_delivery_date?: Prisma.SortOrder
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   terms_accepted_at?: Prisma.SortOrder
@@ -488,18 +487,19 @@ export type FastProductionRequestOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  batch?: Prisma.FastProductionRequestBatchOrderByWithRelationInput
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  lead?: Prisma.LeadMasterOrderByWithRelationInput
+  tentative_order_login_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  finishes?: Prisma.FastProductionFinishOrderByRelationAggregateInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
-  instance?: Prisma.LeadProductStructureInstanceOrderByWithRelationInput
-  franchise?: Prisma.FranchiseMasterOrderByWithRelationInput
-  requester?: Prisma.UserMasterOrderByWithRelationInput
+  batch?: Prisma.FastProductionRequestBatchOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
-  updatedBy?: Prisma.UserMasterOrderByWithRelationInput
+  franchise?: Prisma.FranchiseMasterOrderByWithRelationInput
+  instance?: Prisma.LeadProductStructureInstanceOrderByWithRelationInput
+  lead?: Prisma.LeadMasterOrderByWithRelationInput
+  requester?: Prisma.UserMasterOrderByWithRelationInput
   revokedBy?: Prisma.UserMasterOrderByWithRelationInput
   task?: Prisma.UserLeadTaskOrderByWithRelationInput
-  finishes?: Prisma.FastProductionFinishOrderByRelationAggregateInput
+  updatedBy?: Prisma.UserMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   documents?: Prisma.FastProductionRequestDocumentOrderByRelationAggregateInput
 }
 
@@ -522,7 +522,6 @@ export type FastProductionRequestWhereUniqueInput = Prisma.AtLeast<{
   hardware_selection?: Prisma.StringFilter<"FastProductionRequest"> | string
   accessory_selection?: Prisma.StringFilter<"FastProductionRequest"> | string
   special_requirements?: Prisma.StringFilter<"FastProductionRequest"> | string
-  tentative_order_login_date?: Prisma.DateTimeNullableFilter<"FastProductionRequest"> | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFilter<"FastProductionRequest"> | Date | string
   remarks?: Prisma.StringNullableFilter<"FastProductionRequest"> | string | null
   terms_accepted_at?: Prisma.DateTimeFilter<"FastProductionRequest"> | Date | string
@@ -536,18 +535,19 @@ export type FastProductionRequestWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"FastProductionRequest"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"FastProductionRequest"> | number | null
   updated_at?: Prisma.DateTimeFilter<"FastProductionRequest"> | Date | string
-  batch?: Prisma.XOR<Prisma.FastProductionRequestBatchScalarRelationFilter, Prisma.FastProductionRequestBatchWhereInput>
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  tentative_order_login_date?: Prisma.DateTimeNullableFilter<"FastProductionRequest"> | Date | string | null
+  finishes?: Prisma.FastProductionFinishListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
-  instance?: Prisma.XOR<Prisma.LeadProductStructureInstanceScalarRelationFilter, Prisma.LeadProductStructureInstanceWhereInput>
-  franchise?: Prisma.XOR<Prisma.FranchiseMasterNullableScalarRelationFilter, Prisma.FranchiseMasterWhereInput> | null
-  requester?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  batch?: Prisma.XOR<Prisma.FastProductionRequestBatchScalarRelationFilter, Prisma.FastProductionRequestBatchWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  franchise?: Prisma.XOR<Prisma.FranchiseMasterNullableScalarRelationFilter, Prisma.FranchiseMasterWhereInput> | null
+  instance?: Prisma.XOR<Prisma.LeadProductStructureInstanceScalarRelationFilter, Prisma.LeadProductStructureInstanceWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  requester?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   revokedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   task?: Prisma.XOR<Prisma.UserLeadTaskNullableScalarRelationFilter, Prisma.UserLeadTaskWhereInput> | null
-  finishes?: Prisma.FastProductionFinishListRelationFilter
+  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   documents?: Prisma.FastProductionRequestDocumentListRelationFilter
 }, "id" | "task_id" | "batch_id_instance_id">
 
@@ -566,7 +566,6 @@ export type FastProductionRequestOrderByWithAggregationInput = {
   hardware_selection?: Prisma.SortOrder
   accessory_selection?: Prisma.SortOrder
   special_requirements?: Prisma.SortOrder
-  tentative_order_login_date?: Prisma.SortOrderInput | Prisma.SortOrder
   client_required_delivery_date?: Prisma.SortOrder
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   terms_accepted_at?: Prisma.SortOrder
@@ -580,6 +579,7 @@ export type FastProductionRequestOrderByWithAggregationInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  tentative_order_login_date?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.FastProductionRequestCountOrderByAggregateInput
   _avg?: Prisma.FastProductionRequestAvgOrderByAggregateInput
   _max?: Prisma.FastProductionRequestMaxOrderByAggregateInput
@@ -605,7 +605,6 @@ export type FastProductionRequestScalarWhereWithAggregatesInput = {
   hardware_selection?: Prisma.StringWithAggregatesFilter<"FastProductionRequest"> | string
   accessory_selection?: Prisma.StringWithAggregatesFilter<"FastProductionRequest"> | string
   special_requirements?: Prisma.StringWithAggregatesFilter<"FastProductionRequest"> | string
-  tentative_order_login_date?: Prisma.DateTimeNullableWithAggregatesFilter<"FastProductionRequest"> | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeWithAggregatesFilter<"FastProductionRequest"> | Date | string
   remarks?: Prisma.StringNullableWithAggregatesFilter<"FastProductionRequest"> | string | null
   terms_accepted_at?: Prisma.DateTimeWithAggregatesFilter<"FastProductionRequest"> | Date | string
@@ -619,6 +618,7 @@ export type FastProductionRequestScalarWhereWithAggregatesInput = {
   created_at?: Prisma.DateTimeWithAggregatesFilter<"FastProductionRequest"> | Date | string
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"FastProductionRequest"> | number | null
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"FastProductionRequest"> | Date | string
+  tentative_order_login_date?: Prisma.DateTimeNullableWithAggregatesFilter<"FastProductionRequest"> | Date | string | null
 }
 
 export type FastProductionRequestCreateInput = {
@@ -627,7 +627,6 @@ export type FastProductionRequestCreateInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -638,18 +637,19 @@ export type FastProductionRequestCreateInput = {
   revocation_remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  tentative_order_login_date?: Date | string | null
+  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
   account: Prisma.AccountMasterCreateNestedOneWithoutFastProductionRequestsInput
-  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
-  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
+  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
+  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
   revokedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsRevokedInput
   task?: Prisma.UserLeadTaskCreateNestedOneWithoutFastProductionRequestInput
-  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
   documents?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutRequestInput
 }
 
@@ -668,7 +668,6 @@ export type FastProductionRequestUncheckedCreateInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -682,6 +681,7 @@ export type FastProductionRequestUncheckedCreateInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
 }
@@ -692,7 +692,6 @@ export type FastProductionRequestUpdateInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -703,18 +702,19 @@ export type FastProductionRequestUpdateInput = {
   revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
-  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
+  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
   revokedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsRevokedNestedInput
   task?: Prisma.UserLeadTaskUpdateOneWithoutFastProductionRequestNestedInput
-  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
   documents?: Prisma.FastProductionRequestDocumentUpdateManyWithoutRequestNestedInput
 }
 
@@ -733,7 +733,6 @@ export type FastProductionRequestUncheckedUpdateInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -747,6 +746,7 @@ export type FastProductionRequestUncheckedUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
 }
@@ -766,7 +766,6 @@ export type FastProductionRequestCreateManyInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -780,6 +779,7 @@ export type FastProductionRequestCreateManyInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
 }
 
 export type FastProductionRequestUpdateManyMutationInput = {
@@ -788,7 +788,6 @@ export type FastProductionRequestUpdateManyMutationInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -799,6 +798,7 @@ export type FastProductionRequestUpdateManyMutationInput = {
   revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FastProductionRequestUncheckedUpdateManyInput = {
@@ -816,7 +816,6 @@ export type FastProductionRequestUncheckedUpdateManyInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -830,6 +829,7 @@ export type FastProductionRequestUncheckedUpdateManyInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FastProductionRequestListRelationFilter = {
@@ -867,7 +867,6 @@ export type FastProductionRequestCountOrderByAggregateInput = {
   hardware_selection?: Prisma.SortOrder
   accessory_selection?: Prisma.SortOrder
   special_requirements?: Prisma.SortOrder
-  tentative_order_login_date?: Prisma.SortOrder
   client_required_delivery_date?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
   terms_accepted_at?: Prisma.SortOrder
@@ -881,6 +880,7 @@ export type FastProductionRequestCountOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  tentative_order_login_date?: Prisma.SortOrder
 }
 
 export type FastProductionRequestAvgOrderByAggregateInput = {
@@ -913,7 +913,6 @@ export type FastProductionRequestMaxOrderByAggregateInput = {
   hardware_selection?: Prisma.SortOrder
   accessory_selection?: Prisma.SortOrder
   special_requirements?: Prisma.SortOrder
-  tentative_order_login_date?: Prisma.SortOrder
   client_required_delivery_date?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
   terms_accepted_at?: Prisma.SortOrder
@@ -927,6 +926,7 @@ export type FastProductionRequestMaxOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  tentative_order_login_date?: Prisma.SortOrder
 }
 
 export type FastProductionRequestMinOrderByAggregateInput = {
@@ -944,7 +944,6 @@ export type FastProductionRequestMinOrderByAggregateInput = {
   hardware_selection?: Prisma.SortOrder
   accessory_selection?: Prisma.SortOrder
   special_requirements?: Prisma.SortOrder
-  tentative_order_login_date?: Prisma.SortOrder
   client_required_delivery_date?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
   terms_accepted_at?: Prisma.SortOrder
@@ -958,6 +957,7 @@ export type FastProductionRequestMinOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  tentative_order_login_date?: Prisma.SortOrder
 }
 
 export type FastProductionRequestSumOrderByAggregateInput = {
@@ -1022,13 +1022,6 @@ export type FastProductionRequestUncheckedUpdateManyWithoutVendorNestedInput = {
   deleteMany?: Prisma.FastProductionRequestScalarWhereInput | Prisma.FastProductionRequestScalarWhereInput[]
 }
 
-export type FastProductionRequestCreateNestedManyWithoutRequesterInput = {
-  create?: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutRequesterInput, Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput> | Prisma.FastProductionRequestCreateWithoutRequesterInput[] | Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput[]
-  connectOrCreate?: Prisma.FastProductionRequestCreateOrConnectWithoutRequesterInput | Prisma.FastProductionRequestCreateOrConnectWithoutRequesterInput[]
-  createMany?: Prisma.FastProductionRequestCreateManyRequesterInputEnvelope
-  connect?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
-}
-
 export type FastProductionRequestCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutCreatedByInput, Prisma.FastProductionRequestUncheckedCreateWithoutCreatedByInput> | Prisma.FastProductionRequestCreateWithoutCreatedByInput[] | Prisma.FastProductionRequestUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.FastProductionRequestCreateOrConnectWithoutCreatedByInput | Prisma.FastProductionRequestCreateOrConnectWithoutCreatedByInput[]
@@ -1036,10 +1029,10 @@ export type FastProductionRequestCreateNestedManyWithoutCreatedByInput = {
   connect?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
 }
 
-export type FastProductionRequestCreateNestedManyWithoutUpdatedByInput = {
-  create?: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutUpdatedByInput, Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput> | Prisma.FastProductionRequestCreateWithoutUpdatedByInput[] | Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.FastProductionRequestCreateOrConnectWithoutUpdatedByInput | Prisma.FastProductionRequestCreateOrConnectWithoutUpdatedByInput[]
-  createMany?: Prisma.FastProductionRequestCreateManyUpdatedByInputEnvelope
+export type FastProductionRequestCreateNestedManyWithoutRequesterInput = {
+  create?: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutRequesterInput, Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput> | Prisma.FastProductionRequestCreateWithoutRequesterInput[] | Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput[]
+  connectOrCreate?: Prisma.FastProductionRequestCreateOrConnectWithoutRequesterInput | Prisma.FastProductionRequestCreateOrConnectWithoutRequesterInput[]
+  createMany?: Prisma.FastProductionRequestCreateManyRequesterInputEnvelope
   connect?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
 }
 
@@ -1050,10 +1043,10 @@ export type FastProductionRequestCreateNestedManyWithoutRevokedByInput = {
   connect?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
 }
 
-export type FastProductionRequestUncheckedCreateNestedManyWithoutRequesterInput = {
-  create?: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutRequesterInput, Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput> | Prisma.FastProductionRequestCreateWithoutRequesterInput[] | Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput[]
-  connectOrCreate?: Prisma.FastProductionRequestCreateOrConnectWithoutRequesterInput | Prisma.FastProductionRequestCreateOrConnectWithoutRequesterInput[]
-  createMany?: Prisma.FastProductionRequestCreateManyRequesterInputEnvelope
+export type FastProductionRequestCreateNestedManyWithoutUpdatedByInput = {
+  create?: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutUpdatedByInput, Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput> | Prisma.FastProductionRequestCreateWithoutUpdatedByInput[] | Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput[]
+  connectOrCreate?: Prisma.FastProductionRequestCreateOrConnectWithoutUpdatedByInput | Prisma.FastProductionRequestCreateOrConnectWithoutUpdatedByInput[]
+  createMany?: Prisma.FastProductionRequestCreateManyUpdatedByInputEnvelope
   connect?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
 }
 
@@ -1064,10 +1057,10 @@ export type FastProductionRequestUncheckedCreateNestedManyWithoutCreatedByInput 
   connect?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
 }
 
-export type FastProductionRequestUncheckedCreateNestedManyWithoutUpdatedByInput = {
-  create?: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutUpdatedByInput, Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput> | Prisma.FastProductionRequestCreateWithoutUpdatedByInput[] | Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.FastProductionRequestCreateOrConnectWithoutUpdatedByInput | Prisma.FastProductionRequestCreateOrConnectWithoutUpdatedByInput[]
-  createMany?: Prisma.FastProductionRequestCreateManyUpdatedByInputEnvelope
+export type FastProductionRequestUncheckedCreateNestedManyWithoutRequesterInput = {
+  create?: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutRequesterInput, Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput> | Prisma.FastProductionRequestCreateWithoutRequesterInput[] | Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput[]
+  connectOrCreate?: Prisma.FastProductionRequestCreateOrConnectWithoutRequesterInput | Prisma.FastProductionRequestCreateOrConnectWithoutRequesterInput[]
+  createMany?: Prisma.FastProductionRequestCreateManyRequesterInputEnvelope
   connect?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
 }
 
@@ -1078,18 +1071,11 @@ export type FastProductionRequestUncheckedCreateNestedManyWithoutRevokedByInput 
   connect?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
 }
 
-export type FastProductionRequestUpdateManyWithoutRequesterNestedInput = {
-  create?: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutRequesterInput, Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput> | Prisma.FastProductionRequestCreateWithoutRequesterInput[] | Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput[]
-  connectOrCreate?: Prisma.FastProductionRequestCreateOrConnectWithoutRequesterInput | Prisma.FastProductionRequestCreateOrConnectWithoutRequesterInput[]
-  upsert?: Prisma.FastProductionRequestUpsertWithWhereUniqueWithoutRequesterInput | Prisma.FastProductionRequestUpsertWithWhereUniqueWithoutRequesterInput[]
-  createMany?: Prisma.FastProductionRequestCreateManyRequesterInputEnvelope
-  set?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
-  disconnect?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
-  delete?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
+export type FastProductionRequestUncheckedCreateNestedManyWithoutUpdatedByInput = {
+  create?: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutUpdatedByInput, Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput> | Prisma.FastProductionRequestCreateWithoutUpdatedByInput[] | Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput[]
+  connectOrCreate?: Prisma.FastProductionRequestCreateOrConnectWithoutUpdatedByInput | Prisma.FastProductionRequestCreateOrConnectWithoutUpdatedByInput[]
+  createMany?: Prisma.FastProductionRequestCreateManyUpdatedByInputEnvelope
   connect?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
-  update?: Prisma.FastProductionRequestUpdateWithWhereUniqueWithoutRequesterInput | Prisma.FastProductionRequestUpdateWithWhereUniqueWithoutRequesterInput[]
-  updateMany?: Prisma.FastProductionRequestUpdateManyWithWhereWithoutRequesterInput | Prisma.FastProductionRequestUpdateManyWithWhereWithoutRequesterInput[]
-  deleteMany?: Prisma.FastProductionRequestScalarWhereInput | Prisma.FastProductionRequestScalarWhereInput[]
 }
 
 export type FastProductionRequestUpdateManyWithoutCreatedByNestedInput = {
@@ -1106,17 +1092,17 @@ export type FastProductionRequestUpdateManyWithoutCreatedByNestedInput = {
   deleteMany?: Prisma.FastProductionRequestScalarWhereInput | Prisma.FastProductionRequestScalarWhereInput[]
 }
 
-export type FastProductionRequestUpdateManyWithoutUpdatedByNestedInput = {
-  create?: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutUpdatedByInput, Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput> | Prisma.FastProductionRequestCreateWithoutUpdatedByInput[] | Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.FastProductionRequestCreateOrConnectWithoutUpdatedByInput | Prisma.FastProductionRequestCreateOrConnectWithoutUpdatedByInput[]
-  upsert?: Prisma.FastProductionRequestUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.FastProductionRequestUpsertWithWhereUniqueWithoutUpdatedByInput[]
-  createMany?: Prisma.FastProductionRequestCreateManyUpdatedByInputEnvelope
+export type FastProductionRequestUpdateManyWithoutRequesterNestedInput = {
+  create?: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutRequesterInput, Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput> | Prisma.FastProductionRequestCreateWithoutRequesterInput[] | Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput[]
+  connectOrCreate?: Prisma.FastProductionRequestCreateOrConnectWithoutRequesterInput | Prisma.FastProductionRequestCreateOrConnectWithoutRequesterInput[]
+  upsert?: Prisma.FastProductionRequestUpsertWithWhereUniqueWithoutRequesterInput | Prisma.FastProductionRequestUpsertWithWhereUniqueWithoutRequesterInput[]
+  createMany?: Prisma.FastProductionRequestCreateManyRequesterInputEnvelope
   set?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
   disconnect?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
   delete?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
   connect?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
-  update?: Prisma.FastProductionRequestUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.FastProductionRequestUpdateWithWhereUniqueWithoutUpdatedByInput[]
-  updateMany?: Prisma.FastProductionRequestUpdateManyWithWhereWithoutUpdatedByInput | Prisma.FastProductionRequestUpdateManyWithWhereWithoutUpdatedByInput[]
+  update?: Prisma.FastProductionRequestUpdateWithWhereUniqueWithoutRequesterInput | Prisma.FastProductionRequestUpdateWithWhereUniqueWithoutRequesterInput[]
+  updateMany?: Prisma.FastProductionRequestUpdateManyWithWhereWithoutRequesterInput | Prisma.FastProductionRequestUpdateManyWithWhereWithoutRequesterInput[]
   deleteMany?: Prisma.FastProductionRequestScalarWhereInput | Prisma.FastProductionRequestScalarWhereInput[]
 }
 
@@ -1134,17 +1120,17 @@ export type FastProductionRequestUpdateManyWithoutRevokedByNestedInput = {
   deleteMany?: Prisma.FastProductionRequestScalarWhereInput | Prisma.FastProductionRequestScalarWhereInput[]
 }
 
-export type FastProductionRequestUncheckedUpdateManyWithoutRequesterNestedInput = {
-  create?: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutRequesterInput, Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput> | Prisma.FastProductionRequestCreateWithoutRequesterInput[] | Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput[]
-  connectOrCreate?: Prisma.FastProductionRequestCreateOrConnectWithoutRequesterInput | Prisma.FastProductionRequestCreateOrConnectWithoutRequesterInput[]
-  upsert?: Prisma.FastProductionRequestUpsertWithWhereUniqueWithoutRequesterInput | Prisma.FastProductionRequestUpsertWithWhereUniqueWithoutRequesterInput[]
-  createMany?: Prisma.FastProductionRequestCreateManyRequesterInputEnvelope
+export type FastProductionRequestUpdateManyWithoutUpdatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutUpdatedByInput, Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput> | Prisma.FastProductionRequestCreateWithoutUpdatedByInput[] | Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput[]
+  connectOrCreate?: Prisma.FastProductionRequestCreateOrConnectWithoutUpdatedByInput | Prisma.FastProductionRequestCreateOrConnectWithoutUpdatedByInput[]
+  upsert?: Prisma.FastProductionRequestUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.FastProductionRequestUpsertWithWhereUniqueWithoutUpdatedByInput[]
+  createMany?: Prisma.FastProductionRequestCreateManyUpdatedByInputEnvelope
   set?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
   disconnect?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
   delete?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
   connect?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
-  update?: Prisma.FastProductionRequestUpdateWithWhereUniqueWithoutRequesterInput | Prisma.FastProductionRequestUpdateWithWhereUniqueWithoutRequesterInput[]
-  updateMany?: Prisma.FastProductionRequestUpdateManyWithWhereWithoutRequesterInput | Prisma.FastProductionRequestUpdateManyWithWhereWithoutRequesterInput[]
+  update?: Prisma.FastProductionRequestUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.FastProductionRequestUpdateWithWhereUniqueWithoutUpdatedByInput[]
+  updateMany?: Prisma.FastProductionRequestUpdateManyWithWhereWithoutUpdatedByInput | Prisma.FastProductionRequestUpdateManyWithWhereWithoutUpdatedByInput[]
   deleteMany?: Prisma.FastProductionRequestScalarWhereInput | Prisma.FastProductionRequestScalarWhereInput[]
 }
 
@@ -1162,17 +1148,17 @@ export type FastProductionRequestUncheckedUpdateManyWithoutCreatedByNestedInput 
   deleteMany?: Prisma.FastProductionRequestScalarWhereInput | Prisma.FastProductionRequestScalarWhereInput[]
 }
 
-export type FastProductionRequestUncheckedUpdateManyWithoutUpdatedByNestedInput = {
-  create?: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutUpdatedByInput, Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput> | Prisma.FastProductionRequestCreateWithoutUpdatedByInput[] | Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.FastProductionRequestCreateOrConnectWithoutUpdatedByInput | Prisma.FastProductionRequestCreateOrConnectWithoutUpdatedByInput[]
-  upsert?: Prisma.FastProductionRequestUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.FastProductionRequestUpsertWithWhereUniqueWithoutUpdatedByInput[]
-  createMany?: Prisma.FastProductionRequestCreateManyUpdatedByInputEnvelope
+export type FastProductionRequestUncheckedUpdateManyWithoutRequesterNestedInput = {
+  create?: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutRequesterInput, Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput> | Prisma.FastProductionRequestCreateWithoutRequesterInput[] | Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput[]
+  connectOrCreate?: Prisma.FastProductionRequestCreateOrConnectWithoutRequesterInput | Prisma.FastProductionRequestCreateOrConnectWithoutRequesterInput[]
+  upsert?: Prisma.FastProductionRequestUpsertWithWhereUniqueWithoutRequesterInput | Prisma.FastProductionRequestUpsertWithWhereUniqueWithoutRequesterInput[]
+  createMany?: Prisma.FastProductionRequestCreateManyRequesterInputEnvelope
   set?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
   disconnect?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
   delete?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
   connect?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
-  update?: Prisma.FastProductionRequestUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.FastProductionRequestUpdateWithWhereUniqueWithoutUpdatedByInput[]
-  updateMany?: Prisma.FastProductionRequestUpdateManyWithWhereWithoutUpdatedByInput | Prisma.FastProductionRequestUpdateManyWithWhereWithoutUpdatedByInput[]
+  update?: Prisma.FastProductionRequestUpdateWithWhereUniqueWithoutRequesterInput | Prisma.FastProductionRequestUpdateWithWhereUniqueWithoutRequesterInput[]
+  updateMany?: Prisma.FastProductionRequestUpdateManyWithWhereWithoutRequesterInput | Prisma.FastProductionRequestUpdateManyWithWhereWithoutRequesterInput[]
   deleteMany?: Prisma.FastProductionRequestScalarWhereInput | Prisma.FastProductionRequestScalarWhereInput[]
 }
 
@@ -1187,6 +1173,20 @@ export type FastProductionRequestUncheckedUpdateManyWithoutRevokedByNestedInput 
   connect?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
   update?: Prisma.FastProductionRequestUpdateWithWhereUniqueWithoutRevokedByInput | Prisma.FastProductionRequestUpdateWithWhereUniqueWithoutRevokedByInput[]
   updateMany?: Prisma.FastProductionRequestUpdateManyWithWhereWithoutRevokedByInput | Prisma.FastProductionRequestUpdateManyWithWhereWithoutRevokedByInput[]
+  deleteMany?: Prisma.FastProductionRequestScalarWhereInput | Prisma.FastProductionRequestScalarWhereInput[]
+}
+
+export type FastProductionRequestUncheckedUpdateManyWithoutUpdatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutUpdatedByInput, Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput> | Prisma.FastProductionRequestCreateWithoutUpdatedByInput[] | Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput[]
+  connectOrCreate?: Prisma.FastProductionRequestCreateOrConnectWithoutUpdatedByInput | Prisma.FastProductionRequestCreateOrConnectWithoutUpdatedByInput[]
+  upsert?: Prisma.FastProductionRequestUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.FastProductionRequestUpsertWithWhereUniqueWithoutUpdatedByInput[]
+  createMany?: Prisma.FastProductionRequestCreateManyUpdatedByInputEnvelope
+  set?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
+  disconnect?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
+  delete?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
+  connect?: Prisma.FastProductionRequestWhereUniqueInput | Prisma.FastProductionRequestWhereUniqueInput[]
+  update?: Prisma.FastProductionRequestUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.FastProductionRequestUpdateWithWhereUniqueWithoutUpdatedByInput[]
+  updateMany?: Prisma.FastProductionRequestUpdateManyWithWhereWithoutUpdatedByInput | Prisma.FastProductionRequestUpdateManyWithWhereWithoutUpdatedByInput[]
   deleteMany?: Prisma.FastProductionRequestScalarWhereInput | Prisma.FastProductionRequestScalarWhereInput[]
 }
 
@@ -1466,7 +1466,6 @@ export type FastProductionRequestCreateWithoutVendorInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -1477,17 +1476,18 @@ export type FastProductionRequestCreateWithoutVendorInput = {
   revocation_remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  tentative_order_login_date?: Date | string | null
+  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
   account: Prisma.AccountMasterCreateNestedOneWithoutFastProductionRequestsInput
-  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
-  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
+  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
+  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
   revokedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsRevokedInput
   task?: Prisma.UserLeadTaskCreateNestedOneWithoutFastProductionRequestInput
-  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
   documents?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutRequestInput
 }
 
@@ -1505,7 +1505,6 @@ export type FastProductionRequestUncheckedCreateWithoutVendorInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -1519,6 +1518,7 @@ export type FastProductionRequestUncheckedCreateWithoutVendorInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
 }
@@ -1567,7 +1567,6 @@ export type FastProductionRequestScalarWhereInput = {
   hardware_selection?: Prisma.StringFilter<"FastProductionRequest"> | string
   accessory_selection?: Prisma.StringFilter<"FastProductionRequest"> | string
   special_requirements?: Prisma.StringFilter<"FastProductionRequest"> | string
-  tentative_order_login_date?: Prisma.DateTimeNullableFilter<"FastProductionRequest"> | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFilter<"FastProductionRequest"> | Date | string
   remarks?: Prisma.StringNullableFilter<"FastProductionRequest"> | string | null
   terms_accepted_at?: Prisma.DateTimeFilter<"FastProductionRequest"> | Date | string
@@ -1581,79 +1580,7 @@ export type FastProductionRequestScalarWhereInput = {
   created_at?: Prisma.DateTimeFilter<"FastProductionRequest"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"FastProductionRequest"> | number | null
   updated_at?: Prisma.DateTimeFilter<"FastProductionRequest"> | Date | string
-}
-
-export type FastProductionRequestCreateWithoutRequesterInput = {
-  month_bucket: Date | string
-  status?: $Enums.FastProductionRequestStatus
-  hardware_selection: string
-  accessory_selection: string
-  special_requirements: string
-  tentative_order_login_date?: Date | string | null
-  client_required_delivery_date: Date | string
-  remarks?: string | null
-  terms_accepted_at: Date | string
-  terms_version?: string | null
-  approved_at?: Date | string | null
-  rejected_at?: Date | string | null
-  revoked_at?: Date | string | null
-  revocation_remark?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
-  account: Prisma.AccountMasterCreateNestedOneWithoutFastProductionRequestsInput
-  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
-  revokedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsRevokedInput
-  task?: Prisma.UserLeadTaskCreateNestedOneWithoutFastProductionRequestInput
-  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
-  documents?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutRequestInput
-}
-
-export type FastProductionRequestUncheckedCreateWithoutRequesterInput = {
-  id?: number
-  batch_id: number
-  vendor_id: number
-  lead_id: number
-  account_id: number
-  instance_id: number
-  franchise_id?: number | null
-  task_id?: number | null
-  month_bucket: Date | string
-  status?: $Enums.FastProductionRequestStatus
-  hardware_selection: string
-  accessory_selection: string
-  special_requirements: string
-  tentative_order_login_date?: Date | string | null
-  client_required_delivery_date: Date | string
-  remarks?: string | null
-  terms_accepted_at: Date | string
-  terms_version?: string | null
-  approved_at?: Date | string | null
-  rejected_at?: Date | string | null
-  revoked_at?: Date | string | null
-  revoked_by?: number | null
-  revocation_remark?: string | null
-  created_by: number
-  created_at?: Date | string
-  updated_by?: number | null
-  updated_at?: Date | string
-  finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
-  documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
-}
-
-export type FastProductionRequestCreateOrConnectWithoutRequesterInput = {
-  where: Prisma.FastProductionRequestWhereUniqueInput
-  create: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutRequesterInput, Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput>
-}
-
-export type FastProductionRequestCreateManyRequesterInputEnvelope = {
-  data: Prisma.FastProductionRequestCreateManyRequesterInput | Prisma.FastProductionRequestCreateManyRequesterInput[]
-  skipDuplicates?: boolean
+  tentative_order_login_date?: Prisma.DateTimeNullableFilter<"FastProductionRequest"> | Date | string | null
 }
 
 export type FastProductionRequestCreateWithoutCreatedByInput = {
@@ -1662,7 +1589,6 @@ export type FastProductionRequestCreateWithoutCreatedByInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -1673,17 +1599,18 @@ export type FastProductionRequestCreateWithoutCreatedByInput = {
   revocation_remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  tentative_order_login_date?: Date | string | null
+  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
   account: Prisma.AccountMasterCreateNestedOneWithoutFastProductionRequestsInput
-  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
+  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
+  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
   requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
   revokedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsRevokedInput
   task?: Prisma.UserLeadTaskCreateNestedOneWithoutFastProductionRequestInput
-  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
   documents?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutRequestInput
 }
 
@@ -1702,7 +1629,6 @@ export type FastProductionRequestUncheckedCreateWithoutCreatedByInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -1715,6 +1641,7 @@ export type FastProductionRequestUncheckedCreateWithoutCreatedByInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
 }
@@ -1729,13 +1656,12 @@ export type FastProductionRequestCreateManyCreatedByInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type FastProductionRequestCreateWithoutUpdatedByInput = {
+export type FastProductionRequestCreateWithoutRequesterInput = {
   month_bucket: Date | string
   status?: $Enums.FastProductionRequestStatus
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -1746,21 +1672,22 @@ export type FastProductionRequestCreateWithoutUpdatedByInput = {
   revocation_remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  tentative_order_login_date?: Date | string | null
+  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
   account: Prisma.AccountMasterCreateNestedOneWithoutFastProductionRequestsInput
-  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
-  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
+  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
+  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
   revokedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsRevokedInput
   task?: Prisma.UserLeadTaskCreateNestedOneWithoutFastProductionRequestInput
-  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
   documents?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutRequestInput
 }
 
-export type FastProductionRequestUncheckedCreateWithoutUpdatedByInput = {
+export type FastProductionRequestUncheckedCreateWithoutRequesterInput = {
   id?: number
   batch_id: number
   vendor_id: number
@@ -1769,13 +1696,11 @@ export type FastProductionRequestUncheckedCreateWithoutUpdatedByInput = {
   instance_id: number
   franchise_id?: number | null
   task_id?: number | null
-  requester_user_id: number
   month_bucket: Date | string
   status?: $Enums.FastProductionRequestStatus
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -1787,18 +1712,20 @@ export type FastProductionRequestUncheckedCreateWithoutUpdatedByInput = {
   revocation_remark?: string | null
   created_by: number
   created_at?: Date | string
+  updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
 }
 
-export type FastProductionRequestCreateOrConnectWithoutUpdatedByInput = {
+export type FastProductionRequestCreateOrConnectWithoutRequesterInput = {
   where: Prisma.FastProductionRequestWhereUniqueInput
-  create: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutUpdatedByInput, Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput>
+  create: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutRequesterInput, Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput>
 }
 
-export type FastProductionRequestCreateManyUpdatedByInputEnvelope = {
-  data: Prisma.FastProductionRequestCreateManyUpdatedByInput | Prisma.FastProductionRequestCreateManyUpdatedByInput[]
+export type FastProductionRequestCreateManyRequesterInputEnvelope = {
+  data: Prisma.FastProductionRequestCreateManyRequesterInput | Prisma.FastProductionRequestCreateManyRequesterInput[]
   skipDuplicates?: boolean
 }
 
@@ -1808,7 +1735,6 @@ export type FastProductionRequestCreateWithoutRevokedByInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -1819,17 +1745,18 @@ export type FastProductionRequestCreateWithoutRevokedByInput = {
   revocation_remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
-  account: Prisma.AccountMasterCreateNestedOneWithoutFastProductionRequestsInput
-  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
-  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
-  task?: Prisma.UserLeadTaskCreateNestedOneWithoutFastProductionRequestInput
+  tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
+  account: Prisma.AccountMasterCreateNestedOneWithoutFastProductionRequestsInput
+  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
+  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
+  task?: Prisma.UserLeadTaskCreateNestedOneWithoutFastProductionRequestInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
   documents?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutRequestInput
 }
 
@@ -1848,7 +1775,6 @@ export type FastProductionRequestUncheckedCreateWithoutRevokedByInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -1861,6 +1787,7 @@ export type FastProductionRequestUncheckedCreateWithoutRevokedByInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
 }
@@ -1875,20 +1802,77 @@ export type FastProductionRequestCreateManyRevokedByInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type FastProductionRequestUpsertWithWhereUniqueWithoutRequesterInput = {
-  where: Prisma.FastProductionRequestWhereUniqueInput
-  update: Prisma.XOR<Prisma.FastProductionRequestUpdateWithoutRequesterInput, Prisma.FastProductionRequestUncheckedUpdateWithoutRequesterInput>
-  create: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutRequesterInput, Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput>
+export type FastProductionRequestCreateWithoutUpdatedByInput = {
+  month_bucket: Date | string
+  status?: $Enums.FastProductionRequestStatus
+  hardware_selection: string
+  accessory_selection: string
+  special_requirements: string
+  client_required_delivery_date: Date | string
+  remarks?: string | null
+  terms_accepted_at: Date | string
+  terms_version?: string | null
+  approved_at?: Date | string | null
+  rejected_at?: Date | string | null
+  revoked_at?: Date | string | null
+  revocation_remark?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
+  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
+  account: Prisma.AccountMasterCreateNestedOneWithoutFastProductionRequestsInput
+  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
+  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
+  revokedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsRevokedInput
+  task?: Prisma.UserLeadTaskCreateNestedOneWithoutFastProductionRequestInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
+  documents?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutRequestInput
 }
 
-export type FastProductionRequestUpdateWithWhereUniqueWithoutRequesterInput = {
-  where: Prisma.FastProductionRequestWhereUniqueInput
-  data: Prisma.XOR<Prisma.FastProductionRequestUpdateWithoutRequesterInput, Prisma.FastProductionRequestUncheckedUpdateWithoutRequesterInput>
+export type FastProductionRequestUncheckedCreateWithoutUpdatedByInput = {
+  id?: number
+  batch_id: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  instance_id: number
+  franchise_id?: number | null
+  task_id?: number | null
+  requester_user_id: number
+  month_bucket: Date | string
+  status?: $Enums.FastProductionRequestStatus
+  hardware_selection: string
+  accessory_selection: string
+  special_requirements: string
+  client_required_delivery_date: Date | string
+  remarks?: string | null
+  terms_accepted_at: Date | string
+  terms_version?: string | null
+  approved_at?: Date | string | null
+  rejected_at?: Date | string | null
+  revoked_at?: Date | string | null
+  revoked_by?: number | null
+  revocation_remark?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
+  finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
+  documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
 }
 
-export type FastProductionRequestUpdateManyWithWhereWithoutRequesterInput = {
-  where: Prisma.FastProductionRequestScalarWhereInput
-  data: Prisma.XOR<Prisma.FastProductionRequestUpdateManyMutationInput, Prisma.FastProductionRequestUncheckedUpdateManyWithoutRequesterInput>
+export type FastProductionRequestCreateOrConnectWithoutUpdatedByInput = {
+  where: Prisma.FastProductionRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutUpdatedByInput, Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput>
+}
+
+export type FastProductionRequestCreateManyUpdatedByInputEnvelope = {
+  data: Prisma.FastProductionRequestCreateManyUpdatedByInput | Prisma.FastProductionRequestCreateManyUpdatedByInput[]
+  skipDuplicates?: boolean
 }
 
 export type FastProductionRequestUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -1907,20 +1891,20 @@ export type FastProductionRequestUpdateManyWithWhereWithoutCreatedByInput = {
   data: Prisma.XOR<Prisma.FastProductionRequestUpdateManyMutationInput, Prisma.FastProductionRequestUncheckedUpdateManyWithoutCreatedByInput>
 }
 
-export type FastProductionRequestUpsertWithWhereUniqueWithoutUpdatedByInput = {
+export type FastProductionRequestUpsertWithWhereUniqueWithoutRequesterInput = {
   where: Prisma.FastProductionRequestWhereUniqueInput
-  update: Prisma.XOR<Prisma.FastProductionRequestUpdateWithoutUpdatedByInput, Prisma.FastProductionRequestUncheckedUpdateWithoutUpdatedByInput>
-  create: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutUpdatedByInput, Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput>
+  update: Prisma.XOR<Prisma.FastProductionRequestUpdateWithoutRequesterInput, Prisma.FastProductionRequestUncheckedUpdateWithoutRequesterInput>
+  create: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutRequesterInput, Prisma.FastProductionRequestUncheckedCreateWithoutRequesterInput>
 }
 
-export type FastProductionRequestUpdateWithWhereUniqueWithoutUpdatedByInput = {
+export type FastProductionRequestUpdateWithWhereUniqueWithoutRequesterInput = {
   where: Prisma.FastProductionRequestWhereUniqueInput
-  data: Prisma.XOR<Prisma.FastProductionRequestUpdateWithoutUpdatedByInput, Prisma.FastProductionRequestUncheckedUpdateWithoutUpdatedByInput>
+  data: Prisma.XOR<Prisma.FastProductionRequestUpdateWithoutRequesterInput, Prisma.FastProductionRequestUncheckedUpdateWithoutRequesterInput>
 }
 
-export type FastProductionRequestUpdateManyWithWhereWithoutUpdatedByInput = {
+export type FastProductionRequestUpdateManyWithWhereWithoutRequesterInput = {
   where: Prisma.FastProductionRequestScalarWhereInput
-  data: Prisma.XOR<Prisma.FastProductionRequestUpdateManyMutationInput, Prisma.FastProductionRequestUncheckedUpdateManyWithoutUpdatedByInput>
+  data: Prisma.XOR<Prisma.FastProductionRequestUpdateManyMutationInput, Prisma.FastProductionRequestUncheckedUpdateManyWithoutRequesterInput>
 }
 
 export type FastProductionRequestUpsertWithWhereUniqueWithoutRevokedByInput = {
@@ -1939,13 +1923,28 @@ export type FastProductionRequestUpdateManyWithWhereWithoutRevokedByInput = {
   data: Prisma.XOR<Prisma.FastProductionRequestUpdateManyMutationInput, Prisma.FastProductionRequestUncheckedUpdateManyWithoutRevokedByInput>
 }
 
+export type FastProductionRequestUpsertWithWhereUniqueWithoutUpdatedByInput = {
+  where: Prisma.FastProductionRequestWhereUniqueInput
+  update: Prisma.XOR<Prisma.FastProductionRequestUpdateWithoutUpdatedByInput, Prisma.FastProductionRequestUncheckedUpdateWithoutUpdatedByInput>
+  create: Prisma.XOR<Prisma.FastProductionRequestCreateWithoutUpdatedByInput, Prisma.FastProductionRequestUncheckedCreateWithoutUpdatedByInput>
+}
+
+export type FastProductionRequestUpdateWithWhereUniqueWithoutUpdatedByInput = {
+  where: Prisma.FastProductionRequestWhereUniqueInput
+  data: Prisma.XOR<Prisma.FastProductionRequestUpdateWithoutUpdatedByInput, Prisma.FastProductionRequestUncheckedUpdateWithoutUpdatedByInput>
+}
+
+export type FastProductionRequestUpdateManyWithWhereWithoutUpdatedByInput = {
+  where: Prisma.FastProductionRequestScalarWhereInput
+  data: Prisma.XOR<Prisma.FastProductionRequestUpdateManyMutationInput, Prisma.FastProductionRequestUncheckedUpdateManyWithoutUpdatedByInput>
+}
+
 export type FastProductionRequestCreateWithoutLeadInput = {
   month_bucket: Date | string
   status?: $Enums.FastProductionRequestStatus
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -1956,17 +1955,18 @@ export type FastProductionRequestCreateWithoutLeadInput = {
   revocation_remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
+  tentative_order_login_date?: Date | string | null
+  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
   account: Prisma.AccountMasterCreateNestedOneWithoutFastProductionRequestsInput
-  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
-  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
+  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
+  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
+  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
   revokedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsRevokedInput
   task?: Prisma.UserLeadTaskCreateNestedOneWithoutFastProductionRequestInput
-  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
   documents?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutRequestInput
 }
 
@@ -1984,7 +1984,6 @@ export type FastProductionRequestUncheckedCreateWithoutLeadInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -1998,6 +1997,7 @@ export type FastProductionRequestUncheckedCreateWithoutLeadInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
 }
@@ -2034,7 +2034,6 @@ export type FastProductionRequestCreateWithoutAccountInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -2045,17 +2044,18 @@ export type FastProductionRequestCreateWithoutAccountInput = {
   revocation_remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
+  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
   batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
-  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
-  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
+  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
   revokedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsRevokedInput
   task?: Prisma.UserLeadTaskCreateNestedOneWithoutFastProductionRequestInput
-  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
   documents?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutRequestInput
 }
 
@@ -2073,7 +2073,6 @@ export type FastProductionRequestUncheckedCreateWithoutAccountInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -2087,6 +2086,7 @@ export type FastProductionRequestUncheckedCreateWithoutAccountInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
 }
@@ -2123,7 +2123,6 @@ export type FastProductionRequestCreateWithoutInstanceInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -2134,17 +2133,18 @@ export type FastProductionRequestCreateWithoutInstanceInput = {
   revocation_remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  tentative_order_login_date?: Date | string | null
+  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
   account: Prisma.AccountMasterCreateNestedOneWithoutFastProductionRequestsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
-  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
+  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
   revokedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsRevokedInput
   task?: Prisma.UserLeadTaskCreateNestedOneWithoutFastProductionRequestInput
-  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
   documents?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutRequestInput
 }
 
@@ -2162,7 +2162,6 @@ export type FastProductionRequestUncheckedCreateWithoutInstanceInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -2176,6 +2175,7 @@ export type FastProductionRequestUncheckedCreateWithoutInstanceInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
 }
@@ -2212,7 +2212,6 @@ export type FastProductionRequestCreateWithoutTaskInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -2223,17 +2222,18 @@ export type FastProductionRequestCreateWithoutTaskInput = {
   revocation_remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
-  account: Prisma.AccountMasterCreateNestedOneWithoutFastProductionRequestsInput
-  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
-  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
-  revokedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsRevokedInput
+  tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
+  account: Prisma.AccountMasterCreateNestedOneWithoutFastProductionRequestsInput
+  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
+  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
+  revokedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsRevokedInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
   documents?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutRequestInput
 }
 
@@ -2251,7 +2251,6 @@ export type FastProductionRequestUncheckedCreateWithoutTaskInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -2265,6 +2264,7 @@ export type FastProductionRequestUncheckedCreateWithoutTaskInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
 }
@@ -2291,7 +2291,6 @@ export type FastProductionRequestUpdateWithoutTaskInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2302,17 +2301,18 @@ export type FastProductionRequestUpdateWithoutTaskInput = {
   revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  account?: Prisma.AccountMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
-  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
-  revokedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsRevokedNestedInput
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
+  revokedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsRevokedNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
   documents?: Prisma.FastProductionRequestDocumentUpdateManyWithoutRequestNestedInput
 }
 
@@ -2330,7 +2330,6 @@ export type FastProductionRequestUncheckedUpdateWithoutTaskInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2344,6 +2343,7 @@ export type FastProductionRequestUncheckedUpdateWithoutTaskInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
 }
@@ -2354,7 +2354,6 @@ export type FastProductionRequestCreateWithoutBatchInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -2365,17 +2364,18 @@ export type FastProductionRequestCreateWithoutBatchInput = {
   revocation_remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  tentative_order_login_date?: Date | string | null
+  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
   account: Prisma.AccountMasterCreateNestedOneWithoutFastProductionRequestsInput
-  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
-  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
+  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
   revokedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsRevokedInput
   task?: Prisma.UserLeadTaskCreateNestedOneWithoutFastProductionRequestInput
-  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
   documents?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutRequestInput
 }
 
@@ -2393,7 +2393,6 @@ export type FastProductionRequestUncheckedCreateWithoutBatchInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -2407,6 +2406,7 @@ export type FastProductionRequestUncheckedCreateWithoutBatchInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
 }
@@ -2443,7 +2443,6 @@ export type FastProductionRequestCreateWithoutFinishesInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -2454,17 +2453,18 @@ export type FastProductionRequestCreateWithoutFinishesInput = {
   revocation_remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  tentative_order_login_date?: Date | string | null
   account: Prisma.AccountMasterCreateNestedOneWithoutFastProductionRequestsInput
-  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
-  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
+  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
+  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
   revokedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsRevokedInput
   task?: Prisma.UserLeadTaskCreateNestedOneWithoutFastProductionRequestInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
   documents?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutRequestInput
 }
 
@@ -2483,7 +2483,6 @@ export type FastProductionRequestUncheckedCreateWithoutFinishesInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -2497,6 +2496,7 @@ export type FastProductionRequestUncheckedCreateWithoutFinishesInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
 }
 
@@ -2522,7 +2522,6 @@ export type FastProductionRequestUpdateWithoutFinishesInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2533,17 +2532,18 @@ export type FastProductionRequestUpdateWithoutFinishesInput = {
   revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
-  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
+  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
   revokedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsRevokedNestedInput
   task?: Prisma.UserLeadTaskUpdateOneWithoutFastProductionRequestNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
   documents?: Prisma.FastProductionRequestDocumentUpdateManyWithoutRequestNestedInput
 }
 
@@ -2562,7 +2562,6 @@ export type FastProductionRequestUncheckedUpdateWithoutFinishesInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2576,6 +2575,7 @@ export type FastProductionRequestUncheckedUpdateWithoutFinishesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
 }
 
@@ -2585,7 +2585,6 @@ export type FastProductionRequestCreateWithoutDocumentsInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -2596,18 +2595,19 @@ export type FastProductionRequestCreateWithoutDocumentsInput = {
   revocation_remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  tentative_order_login_date?: Date | string | null
+  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
   account: Prisma.AccountMasterCreateNestedOneWithoutFastProductionRequestsInput
-  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
-  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
+  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutFastProductionRequestsInput
+  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
   revokedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsRevokedInput
   task?: Prisma.UserLeadTaskCreateNestedOneWithoutFastProductionRequestInput
-  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
 }
 
 export type FastProductionRequestUncheckedCreateWithoutDocumentsInput = {
@@ -2625,7 +2625,6 @@ export type FastProductionRequestUncheckedCreateWithoutDocumentsInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -2639,6 +2638,7 @@ export type FastProductionRequestUncheckedCreateWithoutDocumentsInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
 }
 
@@ -2664,7 +2664,6 @@ export type FastProductionRequestUpdateWithoutDocumentsInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2675,18 +2674,19 @@ export type FastProductionRequestUpdateWithoutDocumentsInput = {
   revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
-  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
+  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
   revokedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsRevokedNestedInput
   task?: Prisma.UserLeadTaskUpdateOneWithoutFastProductionRequestNestedInput
-  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
 }
 
 export type FastProductionRequestUncheckedUpdateWithoutDocumentsInput = {
@@ -2704,7 +2704,6 @@ export type FastProductionRequestUncheckedUpdateWithoutDocumentsInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2718,6 +2717,7 @@ export type FastProductionRequestUncheckedUpdateWithoutDocumentsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
 }
 
@@ -2727,7 +2727,6 @@ export type FastProductionRequestCreateWithoutFranchiseInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -2738,17 +2737,18 @@ export type FastProductionRequestCreateWithoutFranchiseInput = {
   revocation_remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  tentative_order_login_date?: Date | string | null
+  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
   account: Prisma.AccountMasterCreateNestedOneWithoutFastProductionRequestsInput
-  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
-  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
+  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutRequestsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  instance: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutFastProductionRequestsInput
+  requester: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsAsRequesterInput
   revokedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsRevokedInput
   task?: Prisma.UserLeadTaskCreateNestedOneWithoutFastProductionRequestInput
-  finishes?: Prisma.FastProductionFinishCreateNestedManyWithoutRequestInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutFastProductionRequestsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFastProductionRequestsInput
   documents?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutRequestInput
 }
 
@@ -2766,7 +2766,6 @@ export type FastProductionRequestUncheckedCreateWithoutFranchiseInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -2780,6 +2779,7 @@ export type FastProductionRequestUncheckedCreateWithoutFranchiseInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
 }
@@ -2824,7 +2824,6 @@ export type FastProductionRequestCreateManyVendorInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -2838,6 +2837,7 @@ export type FastProductionRequestCreateManyVendorInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
 }
 
 export type FastProductionRequestUpdateWithoutVendorInput = {
@@ -2846,7 +2846,6 @@ export type FastProductionRequestUpdateWithoutVendorInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2857,17 +2856,18 @@ export type FastProductionRequestUpdateWithoutVendorInput = {
   revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
-  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
+  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
   revokedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsRevokedNestedInput
   task?: Prisma.UserLeadTaskUpdateOneWithoutFastProductionRequestNestedInput
-  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
   documents?: Prisma.FastProductionRequestDocumentUpdateManyWithoutRequestNestedInput
 }
 
@@ -2885,7 +2885,6 @@ export type FastProductionRequestUncheckedUpdateWithoutVendorInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2899,6 +2898,7 @@ export type FastProductionRequestUncheckedUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
 }
@@ -2917,7 +2917,6 @@ export type FastProductionRequestUncheckedUpdateManyWithoutVendorInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2931,36 +2930,7 @@ export type FastProductionRequestUncheckedUpdateManyWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type FastProductionRequestCreateManyRequesterInput = {
-  id?: number
-  batch_id: number
-  vendor_id: number
-  lead_id: number
-  account_id: number
-  instance_id: number
-  franchise_id?: number | null
-  task_id?: number | null
-  month_bucket: Date | string
-  status?: $Enums.FastProductionRequestStatus
-  hardware_selection: string
-  accessory_selection: string
-  special_requirements: string
-  tentative_order_login_date?: Date | string | null
-  client_required_delivery_date: Date | string
-  remarks?: string | null
-  terms_accepted_at: Date | string
-  terms_version?: string | null
-  approved_at?: Date | string | null
-  rejected_at?: Date | string | null
-  revoked_at?: Date | string | null
-  revoked_by?: number | null
-  revocation_remark?: string | null
-  created_by: number
-  created_at?: Date | string
-  updated_by?: number | null
-  updated_at?: Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FastProductionRequestCreateManyCreatedByInput = {
@@ -2978,7 +2948,6 @@ export type FastProductionRequestCreateManyCreatedByInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -2991,9 +2960,10 @@ export type FastProductionRequestCreateManyCreatedByInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
 }
 
-export type FastProductionRequestCreateManyUpdatedByInput = {
+export type FastProductionRequestCreateManyRequesterInput = {
   id?: number
   batch_id: number
   vendor_id: number
@@ -3002,13 +2972,11 @@ export type FastProductionRequestCreateManyUpdatedByInput = {
   instance_id: number
   franchise_id?: number | null
   task_id?: number | null
-  requester_user_id: number
   month_bucket: Date | string
   status?: $Enums.FastProductionRequestStatus
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -3020,7 +2988,9 @@ export type FastProductionRequestCreateManyUpdatedByInput = {
   revocation_remark?: string | null
   created_by: number
   created_at?: Date | string
+  updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
 }
 
 export type FastProductionRequestCreateManyRevokedByInput = {
@@ -3038,7 +3008,6 @@ export type FastProductionRequestCreateManyRevokedByInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -3051,99 +3020,37 @@ export type FastProductionRequestCreateManyRevokedByInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
 }
 
-export type FastProductionRequestUpdateWithoutRequesterInput = {
-  month_bucket?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus
-  hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
-  accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
-  special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  terms_version?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  revoked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  account?: Prisma.AccountMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
-  revokedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsRevokedNestedInput
-  task?: Prisma.UserLeadTaskUpdateOneWithoutFastProductionRequestNestedInput
-  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
-  documents?: Prisma.FastProductionRequestDocumentUpdateManyWithoutRequestNestedInput
-}
-
-export type FastProductionRequestUncheckedUpdateWithoutRequesterInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  month_bucket?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus
-  hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
-  accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
-  special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  terms_version?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  revoked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  revoked_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
-  documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
-}
-
-export type FastProductionRequestUncheckedUpdateManyWithoutRequesterInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
-  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  month_bucket?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus
-  hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
-  accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
-  special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  terms_version?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  revoked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  revoked_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type FastProductionRequestCreateManyUpdatedByInput = {
+  id?: number
+  batch_id: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  instance_id: number
+  franchise_id?: number | null
+  task_id?: number | null
+  requester_user_id: number
+  month_bucket: Date | string
+  status?: $Enums.FastProductionRequestStatus
+  hardware_selection: string
+  accessory_selection: string
+  special_requirements: string
+  client_required_delivery_date: Date | string
+  remarks?: string | null
+  terms_accepted_at: Date | string
+  terms_version?: string | null
+  approved_at?: Date | string | null
+  rejected_at?: Date | string | null
+  revoked_at?: Date | string | null
+  revoked_by?: number | null
+  revocation_remark?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
 }
 
 export type FastProductionRequestUpdateWithoutCreatedByInput = {
@@ -3152,7 +3059,6 @@ export type FastProductionRequestUpdateWithoutCreatedByInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3163,17 +3069,18 @@ export type FastProductionRequestUpdateWithoutCreatedByInput = {
   revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
   requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
   revokedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsRevokedNestedInput
   task?: Prisma.UserLeadTaskUpdateOneWithoutFastProductionRequestNestedInput
-  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
   documents?: Prisma.FastProductionRequestDocumentUpdateManyWithoutRequestNestedInput
 }
 
@@ -3192,7 +3099,6 @@ export type FastProductionRequestUncheckedUpdateWithoutCreatedByInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3205,6 +3111,7 @@ export type FastProductionRequestUncheckedUpdateWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
 }
@@ -3224,7 +3131,6 @@ export type FastProductionRequestUncheckedUpdateManyWithoutCreatedByInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3237,15 +3143,15 @@ export type FastProductionRequestUncheckedUpdateManyWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type FastProductionRequestUpdateWithoutUpdatedByInput = {
+export type FastProductionRequestUpdateWithoutRequesterInput = {
   month_bucket?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3256,21 +3162,22 @@ export type FastProductionRequestUpdateWithoutUpdatedByInput = {
   revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
-  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
+  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
   revokedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsRevokedNestedInput
   task?: Prisma.UserLeadTaskUpdateOneWithoutFastProductionRequestNestedInput
-  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
   documents?: Prisma.FastProductionRequestDocumentUpdateManyWithoutRequestNestedInput
 }
 
-export type FastProductionRequestUncheckedUpdateWithoutUpdatedByInput = {
+export type FastProductionRequestUncheckedUpdateWithoutRequesterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3279,13 +3186,11 @@ export type FastProductionRequestUncheckedUpdateWithoutUpdatedByInput = {
   instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
   month_bucket?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3297,12 +3202,14 @@ export type FastProductionRequestUncheckedUpdateWithoutUpdatedByInput = {
   revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
 }
 
-export type FastProductionRequestUncheckedUpdateManyWithoutUpdatedByInput = {
+export type FastProductionRequestUncheckedUpdateManyWithoutRequesterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3311,13 +3218,11 @@ export type FastProductionRequestUncheckedUpdateManyWithoutUpdatedByInput = {
   instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
   month_bucket?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3329,7 +3234,9 @@ export type FastProductionRequestUncheckedUpdateManyWithoutUpdatedByInput = {
   revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FastProductionRequestUpdateWithoutRevokedByInput = {
@@ -3338,7 +3245,6 @@ export type FastProductionRequestUpdateWithoutRevokedByInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3349,17 +3255,18 @@ export type FastProductionRequestUpdateWithoutRevokedByInput = {
   revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  account?: Prisma.AccountMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
-  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
-  task?: Prisma.UserLeadTaskUpdateOneWithoutFastProductionRequestNestedInput
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
+  task?: Prisma.UserLeadTaskUpdateOneWithoutFastProductionRequestNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
   documents?: Prisma.FastProductionRequestDocumentUpdateManyWithoutRequestNestedInput
 }
 
@@ -3378,7 +3285,6 @@ export type FastProductionRequestUncheckedUpdateWithoutRevokedByInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3391,6 +3297,7 @@ export type FastProductionRequestUncheckedUpdateWithoutRevokedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
 }
@@ -3410,7 +3317,6 @@ export type FastProductionRequestUncheckedUpdateManyWithoutRevokedByInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3423,6 +3329,100 @@ export type FastProductionRequestUncheckedUpdateManyWithoutRevokedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type FastProductionRequestUpdateWithoutUpdatedByInput = {
+  month_bucket?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus
+  hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
+  accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
+  special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
+  client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  terms_version?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revoked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
+  revokedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsRevokedNestedInput
+  task?: Prisma.UserLeadTaskUpdateOneWithoutFastProductionRequestNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  documents?: Prisma.FastProductionRequestDocumentUpdateManyWithoutRequestNestedInput
+}
+
+export type FastProductionRequestUncheckedUpdateWithoutUpdatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  month_bucket?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus
+  hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
+  accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
+  special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
+  client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  terms_version?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revoked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revoked_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
+  documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
+}
+
+export type FastProductionRequestUncheckedUpdateManyWithoutUpdatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  month_bucket?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus
+  hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
+  accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
+  special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
+  client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  terms_version?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revoked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revoked_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FastProductionRequestCreateManyLeadInput = {
@@ -3439,7 +3439,6 @@ export type FastProductionRequestCreateManyLeadInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -3453,6 +3452,7 @@ export type FastProductionRequestCreateManyLeadInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
 }
 
 export type FastProductionRequestUpdateWithoutLeadInput = {
@@ -3461,7 +3461,6 @@ export type FastProductionRequestUpdateWithoutLeadInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3472,17 +3471,18 @@ export type FastProductionRequestUpdateWithoutLeadInput = {
   revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
-  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
+  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
   revokedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsRevokedNestedInput
   task?: Prisma.UserLeadTaskUpdateOneWithoutFastProductionRequestNestedInput
-  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
   documents?: Prisma.FastProductionRequestDocumentUpdateManyWithoutRequestNestedInput
 }
 
@@ -3500,7 +3500,6 @@ export type FastProductionRequestUncheckedUpdateWithoutLeadInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3514,6 +3513,7 @@ export type FastProductionRequestUncheckedUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
 }
@@ -3532,7 +3532,6 @@ export type FastProductionRequestUncheckedUpdateManyWithoutLeadInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3546,6 +3545,7 @@ export type FastProductionRequestUncheckedUpdateManyWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FastProductionRequestCreateManyAccountInput = {
@@ -3562,7 +3562,6 @@ export type FastProductionRequestCreateManyAccountInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -3576,6 +3575,7 @@ export type FastProductionRequestCreateManyAccountInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
 }
 
 export type FastProductionRequestUpdateWithoutAccountInput = {
@@ -3584,7 +3584,6 @@ export type FastProductionRequestUpdateWithoutAccountInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3595,17 +3594,18 @@ export type FastProductionRequestUpdateWithoutAccountInput = {
   revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
   batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
-  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
   revokedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsRevokedNestedInput
   task?: Prisma.UserLeadTaskUpdateOneWithoutFastProductionRequestNestedInput
-  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
   documents?: Prisma.FastProductionRequestDocumentUpdateManyWithoutRequestNestedInput
 }
 
@@ -3623,7 +3623,6 @@ export type FastProductionRequestUncheckedUpdateWithoutAccountInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3637,6 +3636,7 @@ export type FastProductionRequestUncheckedUpdateWithoutAccountInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
 }
@@ -3655,7 +3655,6 @@ export type FastProductionRequestUncheckedUpdateManyWithoutAccountInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3669,6 +3668,7 @@ export type FastProductionRequestUncheckedUpdateManyWithoutAccountInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FastProductionRequestCreateManyInstanceInput = {
@@ -3685,7 +3685,6 @@ export type FastProductionRequestCreateManyInstanceInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -3699,6 +3698,7 @@ export type FastProductionRequestCreateManyInstanceInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
 }
 
 export type FastProductionRequestUpdateWithoutInstanceInput = {
@@ -3707,7 +3707,6 @@ export type FastProductionRequestUpdateWithoutInstanceInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3718,17 +3717,18 @@ export type FastProductionRequestUpdateWithoutInstanceInput = {
   revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
-  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
+  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
   revokedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsRevokedNestedInput
   task?: Prisma.UserLeadTaskUpdateOneWithoutFastProductionRequestNestedInput
-  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
   documents?: Prisma.FastProductionRequestDocumentUpdateManyWithoutRequestNestedInput
 }
 
@@ -3746,7 +3746,6 @@ export type FastProductionRequestUncheckedUpdateWithoutInstanceInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3760,6 +3759,7 @@ export type FastProductionRequestUncheckedUpdateWithoutInstanceInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
 }
@@ -3778,7 +3778,6 @@ export type FastProductionRequestUncheckedUpdateManyWithoutInstanceInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3792,6 +3791,7 @@ export type FastProductionRequestUncheckedUpdateManyWithoutInstanceInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FastProductionRequestCreateManyBatchInput = {
@@ -3808,7 +3808,6 @@ export type FastProductionRequestCreateManyBatchInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -3822,6 +3821,7 @@ export type FastProductionRequestCreateManyBatchInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
 }
 
 export type FastProductionRequestUpdateWithoutBatchInput = {
@@ -3830,7 +3830,6 @@ export type FastProductionRequestUpdateWithoutBatchInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3841,17 +3840,18 @@ export type FastProductionRequestUpdateWithoutBatchInput = {
   revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
-  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutFastProductionRequestsNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
   revokedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsRevokedNestedInput
   task?: Prisma.UserLeadTaskUpdateOneWithoutFastProductionRequestNestedInput
-  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
   documents?: Prisma.FastProductionRequestDocumentUpdateManyWithoutRequestNestedInput
 }
 
@@ -3869,7 +3869,6 @@ export type FastProductionRequestUncheckedUpdateWithoutBatchInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3883,6 +3882,7 @@ export type FastProductionRequestUncheckedUpdateWithoutBatchInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
 }
@@ -3901,7 +3901,6 @@ export type FastProductionRequestUncheckedUpdateManyWithoutBatchInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3915,6 +3914,7 @@ export type FastProductionRequestUncheckedUpdateManyWithoutBatchInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FastProductionRequestCreateManyFranchiseInput = {
@@ -3931,7 +3931,6 @@ export type FastProductionRequestCreateManyFranchiseInput = {
   hardware_selection: string
   accessory_selection: string
   special_requirements: string
-  tentative_order_login_date?: Date | string | null
   client_required_delivery_date: Date | string
   remarks?: string | null
   terms_accepted_at: Date | string
@@ -3945,6 +3944,7 @@ export type FastProductionRequestCreateManyFranchiseInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  tentative_order_login_date?: Date | string | null
 }
 
 export type FastProductionRequestUpdateWithoutFranchiseInput = {
@@ -3953,7 +3953,6 @@ export type FastProductionRequestUpdateWithoutFranchiseInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3964,17 +3963,18 @@ export type FastProductionRequestUpdateWithoutFranchiseInput = {
   revocation_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
-  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
+  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutRequestsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
+  requester?: Prisma.UserMasterUpdateOneRequiredWithoutFastProductionRequestsAsRequesterNestedInput
   revokedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsRevokedNestedInput
   task?: Prisma.UserLeadTaskUpdateOneWithoutFastProductionRequestNestedInput
-  finishes?: Prisma.FastProductionFinishUpdateManyWithoutRequestNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutFastProductionRequestsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput
   documents?: Prisma.FastProductionRequestDocumentUpdateManyWithoutRequestNestedInput
 }
 
@@ -3992,7 +3992,6 @@ export type FastProductionRequestUncheckedUpdateWithoutFranchiseInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4006,6 +4005,7 @@ export type FastProductionRequestUncheckedUpdateWithoutFranchiseInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
 }
@@ -4024,7 +4024,6 @@ export type FastProductionRequestUncheckedUpdateManyWithoutFranchiseInput = {
   hardware_selection?: Prisma.StringFieldUpdateOperationsInput | string
   accessory_selection?: Prisma.StringFieldUpdateOperationsInput | string
   special_requirements?: Prisma.StringFieldUpdateOperationsInput | string
-  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_required_delivery_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms_accepted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4038,6 +4037,7 @@ export type FastProductionRequestUncheckedUpdateManyWithoutFranchiseInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -4095,7 +4095,6 @@ export type FastProductionRequestSelect<ExtArgs extends runtime.Types.Extensions
   hardware_selection?: boolean
   accessory_selection?: boolean
   special_requirements?: boolean
-  tentative_order_login_date?: boolean
   client_required_delivery_date?: boolean
   remarks?: boolean
   terms_accepted_at?: boolean
@@ -4109,18 +4108,19 @@ export type FastProductionRequestSelect<ExtArgs extends runtime.Types.Extensions
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
-  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  tentative_order_login_date?: boolean
+  finishes?: boolean | Prisma.FastProductionRequest$finishesArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  instance?: boolean | Prisma.LeadProductStructureInstanceDefaultArgs<ExtArgs>
-  franchise?: boolean | Prisma.FastProductionRequest$franchiseArgs<ExtArgs>
-  requester?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.FastProductionRequest$updatedByArgs<ExtArgs>
+  franchise?: boolean | Prisma.FastProductionRequest$franchiseArgs<ExtArgs>
+  instance?: boolean | Prisma.LeadProductStructureInstanceDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  requester?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   revokedBy?: boolean | Prisma.FastProductionRequest$revokedByArgs<ExtArgs>
   task?: boolean | Prisma.FastProductionRequest$taskArgs<ExtArgs>
-  finishes?: boolean | Prisma.FastProductionRequest$finishesArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.FastProductionRequest$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   documents?: boolean | Prisma.FastProductionRequest$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.FastProductionRequestCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fastProductionRequest"]>
@@ -4140,7 +4140,6 @@ export type FastProductionRequestSelectCreateManyAndReturn<ExtArgs extends runti
   hardware_selection?: boolean
   accessory_selection?: boolean
   special_requirements?: boolean
-  tentative_order_login_date?: boolean
   client_required_delivery_date?: boolean
   remarks?: boolean
   terms_accepted_at?: boolean
@@ -4154,17 +4153,18 @@ export type FastProductionRequestSelectCreateManyAndReturn<ExtArgs extends runti
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
-  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  tentative_order_login_date?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  instance?: boolean | Prisma.LeadProductStructureInstanceDefaultArgs<ExtArgs>
-  franchise?: boolean | Prisma.FastProductionRequest$franchiseArgs<ExtArgs>
-  requester?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.FastProductionRequest$updatedByArgs<ExtArgs>
+  franchise?: boolean | Prisma.FastProductionRequest$franchiseArgs<ExtArgs>
+  instance?: boolean | Prisma.LeadProductStructureInstanceDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  requester?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   revokedBy?: boolean | Prisma.FastProductionRequest$revokedByArgs<ExtArgs>
   task?: boolean | Prisma.FastProductionRequest$taskArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.FastProductionRequest$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fastProductionRequest"]>
 
 export type FastProductionRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -4182,7 +4182,6 @@ export type FastProductionRequestSelectUpdateManyAndReturn<ExtArgs extends runti
   hardware_selection?: boolean
   accessory_selection?: boolean
   special_requirements?: boolean
-  tentative_order_login_date?: boolean
   client_required_delivery_date?: boolean
   remarks?: boolean
   terms_accepted_at?: boolean
@@ -4196,17 +4195,18 @@ export type FastProductionRequestSelectUpdateManyAndReturn<ExtArgs extends runti
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
-  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  tentative_order_login_date?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  instance?: boolean | Prisma.LeadProductStructureInstanceDefaultArgs<ExtArgs>
-  franchise?: boolean | Prisma.FastProductionRequest$franchiseArgs<ExtArgs>
-  requester?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.FastProductionRequest$updatedByArgs<ExtArgs>
+  franchise?: boolean | Prisma.FastProductionRequest$franchiseArgs<ExtArgs>
+  instance?: boolean | Prisma.LeadProductStructureInstanceDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  requester?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   revokedBy?: boolean | Prisma.FastProductionRequest$revokedByArgs<ExtArgs>
   task?: boolean | Prisma.FastProductionRequest$taskArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.FastProductionRequest$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fastProductionRequest"]>
 
 export type FastProductionRequestSelectScalar = {
@@ -4224,7 +4224,6 @@ export type FastProductionRequestSelectScalar = {
   hardware_selection?: boolean
   accessory_selection?: boolean
   special_requirements?: boolean
-  tentative_order_login_date?: boolean
   client_required_delivery_date?: boolean
   remarks?: boolean
   terms_accepted_at?: boolean
@@ -4238,67 +4237,68 @@ export type FastProductionRequestSelectScalar = {
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
+  tentative_order_login_date?: boolean
 }
 
-export type FastProductionRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "batch_id" | "vendor_id" | "lead_id" | "account_id" | "instance_id" | "franchise_id" | "task_id" | "requester_user_id" | "month_bucket" | "status" | "hardware_selection" | "accessory_selection" | "special_requirements" | "tentative_order_login_date" | "client_required_delivery_date" | "remarks" | "terms_accepted_at" | "terms_version" | "approved_at" | "rejected_at" | "revoked_at" | "revoked_by" | "revocation_remark" | "created_by" | "created_at" | "updated_by" | "updated_at", ExtArgs["result"]["fastProductionRequest"]>
+export type FastProductionRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "batch_id" | "vendor_id" | "lead_id" | "account_id" | "instance_id" | "franchise_id" | "task_id" | "requester_user_id" | "month_bucket" | "status" | "hardware_selection" | "accessory_selection" | "special_requirements" | "client_required_delivery_date" | "remarks" | "terms_accepted_at" | "terms_version" | "approved_at" | "rejected_at" | "revoked_at" | "revoked_by" | "revocation_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "tentative_order_login_date", ExtArgs["result"]["fastProductionRequest"]>
 export type FastProductionRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  finishes?: boolean | Prisma.FastProductionRequest$finishesArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  instance?: boolean | Prisma.LeadProductStructureInstanceDefaultArgs<ExtArgs>
-  franchise?: boolean | Prisma.FastProductionRequest$franchiseArgs<ExtArgs>
-  requester?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.FastProductionRequest$updatedByArgs<ExtArgs>
+  franchise?: boolean | Prisma.FastProductionRequest$franchiseArgs<ExtArgs>
+  instance?: boolean | Prisma.LeadProductStructureInstanceDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  requester?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   revokedBy?: boolean | Prisma.FastProductionRequest$revokedByArgs<ExtArgs>
   task?: boolean | Prisma.FastProductionRequest$taskArgs<ExtArgs>
-  finishes?: boolean | Prisma.FastProductionRequest$finishesArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.FastProductionRequest$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   documents?: boolean | Prisma.FastProductionRequest$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.FastProductionRequestCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FastProductionRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  instance?: boolean | Prisma.LeadProductStructureInstanceDefaultArgs<ExtArgs>
-  franchise?: boolean | Prisma.FastProductionRequest$franchiseArgs<ExtArgs>
-  requester?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.FastProductionRequest$updatedByArgs<ExtArgs>
+  franchise?: boolean | Prisma.FastProductionRequest$franchiseArgs<ExtArgs>
+  instance?: boolean | Prisma.LeadProductStructureInstanceDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  requester?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   revokedBy?: boolean | Prisma.FastProductionRequest$revokedByArgs<ExtArgs>
   task?: boolean | Prisma.FastProductionRequest$taskArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.FastProductionRequest$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type FastProductionRequestIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  instance?: boolean | Prisma.LeadProductStructureInstanceDefaultArgs<ExtArgs>
-  franchise?: boolean | Prisma.FastProductionRequest$franchiseArgs<ExtArgs>
-  requester?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.FastProductionRequest$updatedByArgs<ExtArgs>
+  franchise?: boolean | Prisma.FastProductionRequest$franchiseArgs<ExtArgs>
+  instance?: boolean | Prisma.LeadProductStructureInstanceDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  requester?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   revokedBy?: boolean | Prisma.FastProductionRequest$revokedByArgs<ExtArgs>
   task?: boolean | Prisma.FastProductionRequest$taskArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.FastProductionRequest$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $FastProductionRequestPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "FastProductionRequest"
   objects: {
-    batch: Prisma.$FastProductionRequestBatchPayload<ExtArgs>
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    lead: Prisma.$LeadMasterPayload<ExtArgs>
+    finishes: Prisma.$FastProductionFinishPayload<ExtArgs>[]
     account: Prisma.$AccountMasterPayload<ExtArgs>
-    instance: Prisma.$LeadProductStructureInstancePayload<ExtArgs>
-    franchise: Prisma.$FranchiseMasterPayload<ExtArgs> | null
-    requester: Prisma.$UserMasterPayload<ExtArgs>
+    batch: Prisma.$FastProductionRequestBatchPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
-    updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    franchise: Prisma.$FranchiseMasterPayload<ExtArgs> | null
+    instance: Prisma.$LeadProductStructureInstancePayload<ExtArgs>
+    lead: Prisma.$LeadMasterPayload<ExtArgs>
+    requester: Prisma.$UserMasterPayload<ExtArgs>
     revokedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     task: Prisma.$UserLeadTaskPayload<ExtArgs> | null
-    finishes: Prisma.$FastProductionFinishPayload<ExtArgs>[]
+    updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     documents: Prisma.$FastProductionRequestDocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -4316,7 +4316,6 @@ export type $FastProductionRequestPayload<ExtArgs extends runtime.Types.Extensio
     hardware_selection: string
     accessory_selection: string
     special_requirements: string
-    tentative_order_login_date: Date | null
     client_required_delivery_date: Date
     remarks: string | null
     terms_accepted_at: Date
@@ -4330,6 +4329,7 @@ export type $FastProductionRequestPayload<ExtArgs extends runtime.Types.Extensio
     created_at: Date
     updated_by: number | null
     updated_at: Date
+    tentative_order_login_date: Date | null
   }, ExtArgs["result"]["fastProductionRequest"]>
   composites: {}
 }
@@ -4724,18 +4724,18 @@ readonly fields: FastProductionRequestFieldRefs;
  */
 export interface Prisma__FastProductionRequestClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  batch<T extends Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>>): Prisma.Prisma__FastProductionRequestBatchClient<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestBatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  finishes<T extends Prisma.FastProductionRequest$finishesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FastProductionRequest$finishesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FastProductionFinishPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   account<T extends Prisma.AccountMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  instance<T extends Prisma.LeadProductStructureInstanceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstanceDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadProductStructureInstanceClient<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureInstancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  franchise<T extends Prisma.FastProductionRequest$franchiseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FastProductionRequest$franchiseArgs<ExtArgs>>): Prisma.Prisma__FranchiseMasterClient<runtime.Types.Result.GetResult<Prisma.$FranchiseMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  requester<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  batch<T extends Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>>): Prisma.Prisma__FastProductionRequestBatchClient<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestBatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  updatedBy<T extends Prisma.FastProductionRequest$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FastProductionRequest$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  franchise<T extends Prisma.FastProductionRequest$franchiseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FastProductionRequest$franchiseArgs<ExtArgs>>): Prisma.Prisma__FranchiseMasterClient<runtime.Types.Result.GetResult<Prisma.$FranchiseMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  instance<T extends Prisma.LeadProductStructureInstanceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstanceDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadProductStructureInstanceClient<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureInstancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  requester<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   revokedBy<T extends Prisma.FastProductionRequest$revokedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FastProductionRequest$revokedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   task<T extends Prisma.FastProductionRequest$taskArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FastProductionRequest$taskArgs<ExtArgs>>): Prisma.Prisma__UserLeadTaskClient<runtime.Types.Result.GetResult<Prisma.$UserLeadTaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  finishes<T extends Prisma.FastProductionRequest$finishesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FastProductionRequest$finishesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FastProductionFinishPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedBy<T extends Prisma.FastProductionRequest$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FastProductionRequest$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   documents<T extends Prisma.FastProductionRequest$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FastProductionRequest$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4780,7 +4780,6 @@ export interface FastProductionRequestFieldRefs {
   readonly hardware_selection: Prisma.FieldRef<"FastProductionRequest", 'String'>
   readonly accessory_selection: Prisma.FieldRef<"FastProductionRequest", 'String'>
   readonly special_requirements: Prisma.FieldRef<"FastProductionRequest", 'String'>
-  readonly tentative_order_login_date: Prisma.FieldRef<"FastProductionRequest", 'DateTime'>
   readonly client_required_delivery_date: Prisma.FieldRef<"FastProductionRequest", 'DateTime'>
   readonly remarks: Prisma.FieldRef<"FastProductionRequest", 'String'>
   readonly terms_accepted_at: Prisma.FieldRef<"FastProductionRequest", 'DateTime'>
@@ -4794,6 +4793,7 @@ export interface FastProductionRequestFieldRefs {
   readonly created_at: Prisma.FieldRef<"FastProductionRequest", 'DateTime'>
   readonly updated_by: Prisma.FieldRef<"FastProductionRequest", 'Int'>
   readonly updated_at: Prisma.FieldRef<"FastProductionRequest", 'DateTime'>
+  readonly tentative_order_login_date: Prisma.FieldRef<"FastProductionRequest", 'DateTime'>
 }
     
 
@@ -5195,6 +5195,30 @@ export type FastProductionRequestDeleteManyArgs<ExtArgs extends runtime.Types.Ex
 }
 
 /**
+ * FastProductionRequest.finishes
+ */
+export type FastProductionRequest$finishesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FastProductionFinish
+   */
+  select?: Prisma.FastProductionFinishSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FastProductionFinish
+   */
+  omit?: Prisma.FastProductionFinishOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FastProductionFinishInclude<ExtArgs> | null
+  where?: Prisma.FastProductionFinishWhereInput
+  orderBy?: Prisma.FastProductionFinishOrderByWithRelationInput | Prisma.FastProductionFinishOrderByWithRelationInput[]
+  cursor?: Prisma.FastProductionFinishWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FastProductionFinishScalarFieldEnum | Prisma.FastProductionFinishScalarFieldEnum[]
+}
+
+/**
  * FastProductionRequest.franchise
  */
 export type FastProductionRequest$franchiseArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5211,25 +5235,6 @@ export type FastProductionRequest$franchiseArgs<ExtArgs extends runtime.Types.Ex
    */
   include?: Prisma.FranchiseMasterInclude<ExtArgs> | null
   where?: Prisma.FranchiseMasterWhereInput
-}
-
-/**
- * FastProductionRequest.updatedBy
- */
-export type FastProductionRequest$updatedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UserMaster
-   */
-  select?: Prisma.UserMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the UserMaster
-   */
-  omit?: Prisma.UserMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserMasterInclude<ExtArgs> | null
-  where?: Prisma.UserMasterWhereInput
 }
 
 /**
@@ -5271,27 +5276,22 @@ export type FastProductionRequest$taskArgs<ExtArgs extends runtime.Types.Extensi
 }
 
 /**
- * FastProductionRequest.finishes
+ * FastProductionRequest.updatedBy
  */
-export type FastProductionRequest$finishesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type FastProductionRequest$updatedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the FastProductionFinish
+   * Select specific fields to fetch from the UserMaster
    */
-  select?: Prisma.FastProductionFinishSelect<ExtArgs> | null
+  select?: Prisma.UserMasterSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the FastProductionFinish
+   * Omit specific fields from the UserMaster
    */
-  omit?: Prisma.FastProductionFinishOmit<ExtArgs> | null
+  omit?: Prisma.UserMasterOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.FastProductionFinishInclude<ExtArgs> | null
-  where?: Prisma.FastProductionFinishWhereInput
-  orderBy?: Prisma.FastProductionFinishOrderByWithRelationInput | Prisma.FastProductionFinishOrderByWithRelationInput[]
-  cursor?: Prisma.FastProductionFinishWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FastProductionFinishScalarFieldEnum | Prisma.FastProductionFinishScalarFieldEnum[]
+  include?: Prisma.UserMasterInclude<ExtArgs> | null
+  where?: Prisma.UserMasterWhereInput
 }
 
 /**

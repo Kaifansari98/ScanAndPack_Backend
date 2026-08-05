@@ -468,13 +468,13 @@ export type PurchaseOrderItemWhereInput = {
   is_deleted?: Prisma.BoolFilter<"PurchaseOrderItem"> | boolean
   deleted_at?: Prisma.DateTimeNullableFilter<"PurchaseOrderItem"> | Date | string | null
   deleted_by?: Prisma.IntNullableFilter<"PurchaseOrderItem"> | number | null
-  purchaseOrder?: Prisma.XOR<Prisma.PurchaseOrderMasterScalarRelationFilter, Prisma.PurchaseOrderMasterWhereInput>
-  product?: Prisma.XOR<Prisma.ProductMasterScalarRelationFilter, Prisma.ProductMasterWhereInput>
-  piVendorMapping?: Prisma.XOR<Prisma.PurchaseIntentItemVendorMappingNullableScalarRelationFilter, Prisma.PurchaseIntentItemVendorMappingWhereInput> | null
-  createdBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
-  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
-  deletedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   grnItems?: Prisma.GRNItemListRelationFilter
+  createdBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  deletedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  piVendorMapping?: Prisma.XOR<Prisma.PurchaseIntentItemVendorMappingNullableScalarRelationFilter, Prisma.PurchaseIntentItemVendorMappingWhereInput> | null
+  product?: Prisma.XOR<Prisma.ProductMasterScalarRelationFilter, Prisma.ProductMasterWhereInput>
+  purchaseOrder?: Prisma.XOR<Prisma.PurchaseOrderMasterScalarRelationFilter, Prisma.PurchaseOrderMasterWhereInput>
+  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
 }
 
 export type PurchaseOrderItemOrderByWithRelationInput = {
@@ -505,13 +505,13 @@ export type PurchaseOrderItemOrderByWithRelationInput = {
   is_deleted?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
-  purchaseOrder?: Prisma.PurchaseOrderMasterOrderByWithRelationInput
-  product?: Prisma.ProductMasterOrderByWithRelationInput
-  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingOrderByWithRelationInput
-  createdBy?: Prisma.UserMasterOrderByWithRelationInput
-  updatedBy?: Prisma.UserMasterOrderByWithRelationInput
-  deletedBy?: Prisma.UserMasterOrderByWithRelationInput
   grnItems?: Prisma.GRNItemOrderByRelationAggregateInput
+  createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  deletedBy?: Prisma.UserMasterOrderByWithRelationInput
+  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingOrderByWithRelationInput
+  product?: Prisma.ProductMasterOrderByWithRelationInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterOrderByWithRelationInput
+  updatedBy?: Prisma.UserMasterOrderByWithRelationInput
 }
 
 export type PurchaseOrderItemWhereUniqueInput = Prisma.AtLeast<{
@@ -545,13 +545,13 @@ export type PurchaseOrderItemWhereUniqueInput = Prisma.AtLeast<{
   is_deleted?: Prisma.BoolFilter<"PurchaseOrderItem"> | boolean
   deleted_at?: Prisma.DateTimeNullableFilter<"PurchaseOrderItem"> | Date | string | null
   deleted_by?: Prisma.IntNullableFilter<"PurchaseOrderItem"> | number | null
-  purchaseOrder?: Prisma.XOR<Prisma.PurchaseOrderMasterScalarRelationFilter, Prisma.PurchaseOrderMasterWhereInput>
-  product?: Prisma.XOR<Prisma.ProductMasterScalarRelationFilter, Prisma.ProductMasterWhereInput>
-  piVendorMapping?: Prisma.XOR<Prisma.PurchaseIntentItemVendorMappingNullableScalarRelationFilter, Prisma.PurchaseIntentItemVendorMappingWhereInput> | null
-  createdBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
-  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
-  deletedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   grnItems?: Prisma.GRNItemListRelationFilter
+  createdBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  deletedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  piVendorMapping?: Prisma.XOR<Prisma.PurchaseIntentItemVendorMappingNullableScalarRelationFilter, Prisma.PurchaseIntentItemVendorMappingWhereInput> | null
+  product?: Prisma.XOR<Prisma.ProductMasterScalarRelationFilter, Prisma.ProductMasterWhereInput>
+  purchaseOrder?: Prisma.XOR<Prisma.PurchaseOrderMasterScalarRelationFilter, Prisma.PurchaseOrderMasterWhereInput>
+  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
 }, "id">
 
 export type PurchaseOrderItemOrderByWithAggregationInput = {
@@ -643,13 +643,13 @@ export type PurchaseOrderItemCreateInput = {
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_deleted?: boolean
   deleted_at?: Date | string | null
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutItemsInput
-  product: Prisma.ProductMasterCreateNestedOneWithoutPurchaseOrderItemsInput
-  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingCreateNestedOneWithoutPurchaseOrderItemsInput
-  createdBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsUpdatedInput
-  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsDeletedInput
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutPoItemInput
+  createdBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsCreatedInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsDeletedInput
+  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingCreateNestedOneWithoutPurchaseOrderItemsInput
+  product: Prisma.ProductMasterCreateNestedOneWithoutPurchaseOrderItemsInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutItemsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsUpdatedInput
 }
 
 export type PurchaseOrderItemUncheckedCreateInput = {
@@ -704,13 +704,13 @@ export type PurchaseOrderItemUpdateInput = {
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutItemsNestedInput
-  product?: Prisma.ProductMasterUpdateOneRequiredWithoutPurchaseOrderItemsNestedInput
-  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingUpdateOneWithoutPurchaseOrderItemsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneWithoutPoItemsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsUpdatedNestedInput
-  deletedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsDeletedNestedInput
   grnItems?: Prisma.GRNItemUpdateManyWithoutPoItemNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneWithoutPoItemsCreatedNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsDeletedNestedInput
+  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingUpdateOneWithoutPurchaseOrderItemsNestedInput
+  product?: Prisma.ProductMasterUpdateOneRequiredWithoutPurchaseOrderItemsNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutItemsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsUpdatedNestedInput
 }
 
 export type PurchaseOrderItemUncheckedUpdateInput = {
@@ -985,17 +985,17 @@ export type PurchaseOrderItemCreateNestedManyWithoutCreatedByInput = {
   connect?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
 }
 
-export type PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput = {
-  create?: Prisma.XOR<Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput, Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput> | Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput[] | Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.PurchaseOrderItemCreateOrConnectWithoutUpdatedByInput | Prisma.PurchaseOrderItemCreateOrConnectWithoutUpdatedByInput[]
-  createMany?: Prisma.PurchaseOrderItemCreateManyUpdatedByInputEnvelope
-  connect?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
-}
-
 export type PurchaseOrderItemCreateNestedManyWithoutDeletedByInput = {
   create?: Prisma.XOR<Prisma.PurchaseOrderItemCreateWithoutDeletedByInput, Prisma.PurchaseOrderItemUncheckedCreateWithoutDeletedByInput> | Prisma.PurchaseOrderItemCreateWithoutDeletedByInput[] | Prisma.PurchaseOrderItemUncheckedCreateWithoutDeletedByInput[]
   connectOrCreate?: Prisma.PurchaseOrderItemCreateOrConnectWithoutDeletedByInput | Prisma.PurchaseOrderItemCreateOrConnectWithoutDeletedByInput[]
   createMany?: Prisma.PurchaseOrderItemCreateManyDeletedByInputEnvelope
+  connect?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
+}
+
+export type PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput = {
+  create?: Prisma.XOR<Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput, Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput> | Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput[] | Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput[]
+  connectOrCreate?: Prisma.PurchaseOrderItemCreateOrConnectWithoutUpdatedByInput | Prisma.PurchaseOrderItemCreateOrConnectWithoutUpdatedByInput[]
+  createMany?: Prisma.PurchaseOrderItemCreateManyUpdatedByInputEnvelope
   connect?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
 }
 
@@ -1006,17 +1006,17 @@ export type PurchaseOrderItemUncheckedCreateNestedManyWithoutCreatedByInput = {
   connect?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
 }
 
-export type PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput = {
-  create?: Prisma.XOR<Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput, Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput> | Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput[] | Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.PurchaseOrderItemCreateOrConnectWithoutUpdatedByInput | Prisma.PurchaseOrderItemCreateOrConnectWithoutUpdatedByInput[]
-  createMany?: Prisma.PurchaseOrderItemCreateManyUpdatedByInputEnvelope
-  connect?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
-}
-
 export type PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput = {
   create?: Prisma.XOR<Prisma.PurchaseOrderItemCreateWithoutDeletedByInput, Prisma.PurchaseOrderItemUncheckedCreateWithoutDeletedByInput> | Prisma.PurchaseOrderItemCreateWithoutDeletedByInput[] | Prisma.PurchaseOrderItemUncheckedCreateWithoutDeletedByInput[]
   connectOrCreate?: Prisma.PurchaseOrderItemCreateOrConnectWithoutDeletedByInput | Prisma.PurchaseOrderItemCreateOrConnectWithoutDeletedByInput[]
   createMany?: Prisma.PurchaseOrderItemCreateManyDeletedByInputEnvelope
+  connect?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
+}
+
+export type PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput = {
+  create?: Prisma.XOR<Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput, Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput> | Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput[] | Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput[]
+  connectOrCreate?: Prisma.PurchaseOrderItemCreateOrConnectWithoutUpdatedByInput | Prisma.PurchaseOrderItemCreateOrConnectWithoutUpdatedByInput[]
+  createMany?: Prisma.PurchaseOrderItemCreateManyUpdatedByInputEnvelope
   connect?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
 }
 
@@ -1034,20 +1034,6 @@ export type PurchaseOrderItemUpdateManyWithoutCreatedByNestedInput = {
   deleteMany?: Prisma.PurchaseOrderItemScalarWhereInput | Prisma.PurchaseOrderItemScalarWhereInput[]
 }
 
-export type PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput = {
-  create?: Prisma.XOR<Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput, Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput> | Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput[] | Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.PurchaseOrderItemCreateOrConnectWithoutUpdatedByInput | Prisma.PurchaseOrderItemCreateOrConnectWithoutUpdatedByInput[]
-  upsert?: Prisma.PurchaseOrderItemUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.PurchaseOrderItemUpsertWithWhereUniqueWithoutUpdatedByInput[]
-  createMany?: Prisma.PurchaseOrderItemCreateManyUpdatedByInputEnvelope
-  set?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
-  disconnect?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
-  delete?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
-  connect?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
-  update?: Prisma.PurchaseOrderItemUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.PurchaseOrderItemUpdateWithWhereUniqueWithoutUpdatedByInput[]
-  updateMany?: Prisma.PurchaseOrderItemUpdateManyWithWhereWithoutUpdatedByInput | Prisma.PurchaseOrderItemUpdateManyWithWhereWithoutUpdatedByInput[]
-  deleteMany?: Prisma.PurchaseOrderItemScalarWhereInput | Prisma.PurchaseOrderItemScalarWhereInput[]
-}
-
 export type PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput = {
   create?: Prisma.XOR<Prisma.PurchaseOrderItemCreateWithoutDeletedByInput, Prisma.PurchaseOrderItemUncheckedCreateWithoutDeletedByInput> | Prisma.PurchaseOrderItemCreateWithoutDeletedByInput[] | Prisma.PurchaseOrderItemUncheckedCreateWithoutDeletedByInput[]
   connectOrCreate?: Prisma.PurchaseOrderItemCreateOrConnectWithoutDeletedByInput | Prisma.PurchaseOrderItemCreateOrConnectWithoutDeletedByInput[]
@@ -1059,6 +1045,20 @@ export type PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput = {
   connect?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
   update?: Prisma.PurchaseOrderItemUpdateWithWhereUniqueWithoutDeletedByInput | Prisma.PurchaseOrderItemUpdateWithWhereUniqueWithoutDeletedByInput[]
   updateMany?: Prisma.PurchaseOrderItemUpdateManyWithWhereWithoutDeletedByInput | Prisma.PurchaseOrderItemUpdateManyWithWhereWithoutDeletedByInput[]
+  deleteMany?: Prisma.PurchaseOrderItemScalarWhereInput | Prisma.PurchaseOrderItemScalarWhereInput[]
+}
+
+export type PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput, Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput> | Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput[] | Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput[]
+  connectOrCreate?: Prisma.PurchaseOrderItemCreateOrConnectWithoutUpdatedByInput | Prisma.PurchaseOrderItemCreateOrConnectWithoutUpdatedByInput[]
+  upsert?: Prisma.PurchaseOrderItemUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.PurchaseOrderItemUpsertWithWhereUniqueWithoutUpdatedByInput[]
+  createMany?: Prisma.PurchaseOrderItemCreateManyUpdatedByInputEnvelope
+  set?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
+  disconnect?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
+  delete?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
+  connect?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
+  update?: Prisma.PurchaseOrderItemUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.PurchaseOrderItemUpdateWithWhereUniqueWithoutUpdatedByInput[]
+  updateMany?: Prisma.PurchaseOrderItemUpdateManyWithWhereWithoutUpdatedByInput | Prisma.PurchaseOrderItemUpdateManyWithWhereWithoutUpdatedByInput[]
   deleteMany?: Prisma.PurchaseOrderItemScalarWhereInput | Prisma.PurchaseOrderItemScalarWhereInput[]
 }
 
@@ -1076,20 +1076,6 @@ export type PurchaseOrderItemUncheckedUpdateManyWithoutCreatedByNestedInput = {
   deleteMany?: Prisma.PurchaseOrderItemScalarWhereInput | Prisma.PurchaseOrderItemScalarWhereInput[]
 }
 
-export type PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput = {
-  create?: Prisma.XOR<Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput, Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput> | Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput[] | Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.PurchaseOrderItemCreateOrConnectWithoutUpdatedByInput | Prisma.PurchaseOrderItemCreateOrConnectWithoutUpdatedByInput[]
-  upsert?: Prisma.PurchaseOrderItemUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.PurchaseOrderItemUpsertWithWhereUniqueWithoutUpdatedByInput[]
-  createMany?: Prisma.PurchaseOrderItemCreateManyUpdatedByInputEnvelope
-  set?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
-  disconnect?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
-  delete?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
-  connect?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
-  update?: Prisma.PurchaseOrderItemUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.PurchaseOrderItemUpdateWithWhereUniqueWithoutUpdatedByInput[]
-  updateMany?: Prisma.PurchaseOrderItemUpdateManyWithWhereWithoutUpdatedByInput | Prisma.PurchaseOrderItemUpdateManyWithWhereWithoutUpdatedByInput[]
-  deleteMany?: Prisma.PurchaseOrderItemScalarWhereInput | Prisma.PurchaseOrderItemScalarWhereInput[]
-}
-
 export type PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput = {
   create?: Prisma.XOR<Prisma.PurchaseOrderItemCreateWithoutDeletedByInput, Prisma.PurchaseOrderItemUncheckedCreateWithoutDeletedByInput> | Prisma.PurchaseOrderItemCreateWithoutDeletedByInput[] | Prisma.PurchaseOrderItemUncheckedCreateWithoutDeletedByInput[]
   connectOrCreate?: Prisma.PurchaseOrderItemCreateOrConnectWithoutDeletedByInput | Prisma.PurchaseOrderItemCreateOrConnectWithoutDeletedByInput[]
@@ -1101,6 +1087,20 @@ export type PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput = {
   connect?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
   update?: Prisma.PurchaseOrderItemUpdateWithWhereUniqueWithoutDeletedByInput | Prisma.PurchaseOrderItemUpdateWithWhereUniqueWithoutDeletedByInput[]
   updateMany?: Prisma.PurchaseOrderItemUpdateManyWithWhereWithoutDeletedByInput | Prisma.PurchaseOrderItemUpdateManyWithWhereWithoutDeletedByInput[]
+  deleteMany?: Prisma.PurchaseOrderItemScalarWhereInput | Prisma.PurchaseOrderItemScalarWhereInput[]
+}
+
+export type PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput, Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput> | Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput[] | Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput[]
+  connectOrCreate?: Prisma.PurchaseOrderItemCreateOrConnectWithoutUpdatedByInput | Prisma.PurchaseOrderItemCreateOrConnectWithoutUpdatedByInput[]
+  upsert?: Prisma.PurchaseOrderItemUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.PurchaseOrderItemUpsertWithWhereUniqueWithoutUpdatedByInput[]
+  createMany?: Prisma.PurchaseOrderItemCreateManyUpdatedByInputEnvelope
+  set?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
+  disconnect?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
+  delete?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
+  connect?: Prisma.PurchaseOrderItemWhereUniqueInput | Prisma.PurchaseOrderItemWhereUniqueInput[]
+  update?: Prisma.PurchaseOrderItemUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.PurchaseOrderItemUpdateWithWhereUniqueWithoutUpdatedByInput[]
+  updateMany?: Prisma.PurchaseOrderItemUpdateManyWithWhereWithoutUpdatedByInput | Prisma.PurchaseOrderItemUpdateManyWithWhereWithoutUpdatedByInput[]
   deleteMany?: Prisma.PurchaseOrderItemScalarWhereInput | Prisma.PurchaseOrderItemScalarWhereInput[]
 }
 
@@ -1265,12 +1265,12 @@ export type PurchaseOrderItemCreateWithoutCreatedByInput = {
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_deleted?: boolean
   deleted_at?: Date | string | null
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutItemsInput
-  product: Prisma.ProductMasterCreateNestedOneWithoutPurchaseOrderItemsInput
-  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingCreateNestedOneWithoutPurchaseOrderItemsInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsUpdatedInput
-  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsDeletedInput
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutPoItemInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsDeletedInput
+  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingCreateNestedOneWithoutPurchaseOrderItemsInput
+  product: Prisma.ProductMasterCreateNestedOneWithoutPurchaseOrderItemsInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutItemsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsUpdatedInput
 }
 
 export type PurchaseOrderItemUncheckedCreateWithoutCreatedByInput = {
@@ -1313,75 +1313,6 @@ export type PurchaseOrderItemCreateManyCreatedByInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type PurchaseOrderItemCreateWithoutUpdatedByInput = {
-  ordered_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
-  received_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  unit_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  uom?: string | null
-  expected_delivery_date?: Date | string | null
-  remarks?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  is_deleted?: boolean
-  deleted_at?: Date | string | null
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutItemsInput
-  product: Prisma.ProductMasterCreateNestedOneWithoutPurchaseOrderItemsInput
-  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingCreateNestedOneWithoutPurchaseOrderItemsInput
-  createdBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsCreatedInput
-  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsDeletedInput
-  grnItems?: Prisma.GRNItemCreateNestedManyWithoutPoItemInput
-}
-
-export type PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput = {
-  id?: number
-  purchase_order_id: number
-  product_id: number
-  pi_item_vendor_mapping_id?: number | null
-  ordered_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
-  received_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  unit_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  uom?: string | null
-  expected_delivery_date?: Date | string | null
-  remarks?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  created_by?: number | null
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  is_deleted?: boolean
-  deleted_at?: Date | string | null
-  deleted_by?: number | null
-  grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutPoItemInput
-}
-
-export type PurchaseOrderItemCreateOrConnectWithoutUpdatedByInput = {
-  where: Prisma.PurchaseOrderItemWhereUniqueInput
-  create: Prisma.XOR<Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput, Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput>
-}
-
-export type PurchaseOrderItemCreateManyUpdatedByInputEnvelope = {
-  data: Prisma.PurchaseOrderItemCreateManyUpdatedByInput | Prisma.PurchaseOrderItemCreateManyUpdatedByInput[]
-  skipDuplicates?: boolean
-}
-
 export type PurchaseOrderItemCreateWithoutDeletedByInput = {
   ordered_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   received_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1403,12 +1334,12 @@ export type PurchaseOrderItemCreateWithoutDeletedByInput = {
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_deleted?: boolean
   deleted_at?: Date | string | null
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutItemsInput
-  product: Prisma.ProductMasterCreateNestedOneWithoutPurchaseOrderItemsInput
-  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingCreateNestedOneWithoutPurchaseOrderItemsInput
-  createdBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsUpdatedInput
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutPoItemInput
+  createdBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsCreatedInput
+  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingCreateNestedOneWithoutPurchaseOrderItemsInput
+  product: Prisma.ProductMasterCreateNestedOneWithoutPurchaseOrderItemsInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutItemsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsUpdatedInput
 }
 
 export type PurchaseOrderItemUncheckedCreateWithoutDeletedByInput = {
@@ -1448,6 +1379,75 @@ export type PurchaseOrderItemCreateOrConnectWithoutDeletedByInput = {
 
 export type PurchaseOrderItemCreateManyDeletedByInputEnvelope = {
   data: Prisma.PurchaseOrderItemCreateManyDeletedByInput | Prisma.PurchaseOrderItemCreateManyDeletedByInput[]
+  skipDuplicates?: boolean
+}
+
+export type PurchaseOrderItemCreateWithoutUpdatedByInput = {
+  ordered_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
+  received_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  uom?: string | null
+  expected_delivery_date?: Date | string | null
+  remarks?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
+  grnItems?: Prisma.GRNItemCreateNestedManyWithoutPoItemInput
+  createdBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsCreatedInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsDeletedInput
+  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingCreateNestedOneWithoutPurchaseOrderItemsInput
+  product: Prisma.ProductMasterCreateNestedOneWithoutPurchaseOrderItemsInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutItemsInput
+}
+
+export type PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput = {
+  id?: number
+  purchase_order_id: number
+  product_id: number
+  pi_item_vendor_mapping_id?: number | null
+  ordered_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
+  received_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  uom?: string | null
+  expected_delivery_date?: Date | string | null
+  remarks?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  created_by?: number | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutPoItemInput
+}
+
+export type PurchaseOrderItemCreateOrConnectWithoutUpdatedByInput = {
+  where: Prisma.PurchaseOrderItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput, Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput>
+}
+
+export type PurchaseOrderItemCreateManyUpdatedByInputEnvelope = {
+  data: Prisma.PurchaseOrderItemCreateManyUpdatedByInput | Prisma.PurchaseOrderItemCreateManyUpdatedByInput[]
   skipDuplicates?: boolean
 }
 
@@ -1500,22 +1500,6 @@ export type PurchaseOrderItemScalarWhereInput = {
   deleted_by?: Prisma.IntNullableFilter<"PurchaseOrderItem"> | number | null
 }
 
-export type PurchaseOrderItemUpsertWithWhereUniqueWithoutUpdatedByInput = {
-  where: Prisma.PurchaseOrderItemWhereUniqueInput
-  update: Prisma.XOR<Prisma.PurchaseOrderItemUpdateWithoutUpdatedByInput, Prisma.PurchaseOrderItemUncheckedUpdateWithoutUpdatedByInput>
-  create: Prisma.XOR<Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput, Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput>
-}
-
-export type PurchaseOrderItemUpdateWithWhereUniqueWithoutUpdatedByInput = {
-  where: Prisma.PurchaseOrderItemWhereUniqueInput
-  data: Prisma.XOR<Prisma.PurchaseOrderItemUpdateWithoutUpdatedByInput, Prisma.PurchaseOrderItemUncheckedUpdateWithoutUpdatedByInput>
-}
-
-export type PurchaseOrderItemUpdateManyWithWhereWithoutUpdatedByInput = {
-  where: Prisma.PurchaseOrderItemScalarWhereInput
-  data: Prisma.XOR<Prisma.PurchaseOrderItemUpdateManyMutationInput, Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByInput>
-}
-
 export type PurchaseOrderItemUpsertWithWhereUniqueWithoutDeletedByInput = {
   where: Prisma.PurchaseOrderItemWhereUniqueInput
   update: Prisma.XOR<Prisma.PurchaseOrderItemUpdateWithoutDeletedByInput, Prisma.PurchaseOrderItemUncheckedUpdateWithoutDeletedByInput>
@@ -1530,6 +1514,22 @@ export type PurchaseOrderItemUpdateWithWhereUniqueWithoutDeletedByInput = {
 export type PurchaseOrderItemUpdateManyWithWhereWithoutDeletedByInput = {
   where: Prisma.PurchaseOrderItemScalarWhereInput
   data: Prisma.XOR<Prisma.PurchaseOrderItemUpdateManyMutationInput, Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByInput>
+}
+
+export type PurchaseOrderItemUpsertWithWhereUniqueWithoutUpdatedByInput = {
+  where: Prisma.PurchaseOrderItemWhereUniqueInput
+  update: Prisma.XOR<Prisma.PurchaseOrderItemUpdateWithoutUpdatedByInput, Prisma.PurchaseOrderItemUncheckedUpdateWithoutUpdatedByInput>
+  create: Prisma.XOR<Prisma.PurchaseOrderItemCreateWithoutUpdatedByInput, Prisma.PurchaseOrderItemUncheckedCreateWithoutUpdatedByInput>
+}
+
+export type PurchaseOrderItemUpdateWithWhereUniqueWithoutUpdatedByInput = {
+  where: Prisma.PurchaseOrderItemWhereUniqueInput
+  data: Prisma.XOR<Prisma.PurchaseOrderItemUpdateWithoutUpdatedByInput, Prisma.PurchaseOrderItemUncheckedUpdateWithoutUpdatedByInput>
+}
+
+export type PurchaseOrderItemUpdateManyWithWhereWithoutUpdatedByInput = {
+  where: Prisma.PurchaseOrderItemScalarWhereInput
+  data: Prisma.XOR<Prisma.PurchaseOrderItemUpdateManyMutationInput, Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByInput>
 }
 
 export type PurchaseOrderItemCreateWithoutProductInput = {
@@ -1553,12 +1553,12 @@ export type PurchaseOrderItemCreateWithoutProductInput = {
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_deleted?: boolean
   deleted_at?: Date | string | null
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutItemsInput
-  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingCreateNestedOneWithoutPurchaseOrderItemsInput
-  createdBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsUpdatedInput
-  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsDeletedInput
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutPoItemInput
+  createdBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsCreatedInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsDeletedInput
+  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingCreateNestedOneWithoutPurchaseOrderItemsInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutItemsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsUpdatedInput
 }
 
 export type PurchaseOrderItemUncheckedCreateWithoutProductInput = {
@@ -1638,12 +1638,12 @@ export type PurchaseOrderItemCreateWithoutPiVendorMappingInput = {
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_deleted?: boolean
   deleted_at?: Date | string | null
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutItemsInput
-  product: Prisma.ProductMasterCreateNestedOneWithoutPurchaseOrderItemsInput
-  createdBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsUpdatedInput
-  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsDeletedInput
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutPoItemInput
+  createdBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsCreatedInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsDeletedInput
+  product: Prisma.ProductMasterCreateNestedOneWithoutPurchaseOrderItemsInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutItemsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsUpdatedInput
 }
 
 export type PurchaseOrderItemUncheckedCreateWithoutPiVendorMappingInput = {
@@ -1723,12 +1723,12 @@ export type PurchaseOrderItemCreateWithoutPurchaseOrderInput = {
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_deleted?: boolean
   deleted_at?: Date | string | null
-  product: Prisma.ProductMasterCreateNestedOneWithoutPurchaseOrderItemsInput
-  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingCreateNestedOneWithoutPurchaseOrderItemsInput
-  createdBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsUpdatedInput
-  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsDeletedInput
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutPoItemInput
+  createdBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsCreatedInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsDeletedInput
+  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingCreateNestedOneWithoutPurchaseOrderItemsInput
+  product: Prisma.ProductMasterCreateNestedOneWithoutPurchaseOrderItemsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsUpdatedInput
 }
 
 export type PurchaseOrderItemUncheckedCreateWithoutPurchaseOrderInput = {
@@ -1808,12 +1808,12 @@ export type PurchaseOrderItemCreateWithoutGrnItemsInput = {
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_deleted?: boolean
   deleted_at?: Date | string | null
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutItemsInput
-  product: Prisma.ProductMasterCreateNestedOneWithoutPurchaseOrderItemsInput
-  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingCreateNestedOneWithoutPurchaseOrderItemsInput
   createdBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsUpdatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsDeletedInput
+  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingCreateNestedOneWithoutPurchaseOrderItemsInput
+  product: Prisma.ProductMasterCreateNestedOneWithoutPurchaseOrderItemsInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutItemsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPoItemsUpdatedInput
 }
 
 export type PurchaseOrderItemUncheckedCreateWithoutGrnItemsInput = {
@@ -1883,12 +1883,12 @@ export type PurchaseOrderItemUpdateWithoutGrnItemsInput = {
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutItemsNestedInput
-  product?: Prisma.ProductMasterUpdateOneRequiredWithoutPurchaseOrderItemsNestedInput
-  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingUpdateOneWithoutPurchaseOrderItemsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneWithoutPoItemsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsUpdatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsDeletedNestedInput
+  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingUpdateOneWithoutPurchaseOrderItemsNestedInput
+  product?: Prisma.ProductMasterUpdateOneRequiredWithoutPurchaseOrderItemsNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutItemsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsUpdatedNestedInput
 }
 
 export type PurchaseOrderItemUncheckedUpdateWithoutGrnItemsInput = {
@@ -1950,35 +1950,6 @@ export type PurchaseOrderItemCreateManyCreatedByInput = {
   deleted_by?: number | null
 }
 
-export type PurchaseOrderItemCreateManyUpdatedByInput = {
-  id?: number
-  purchase_order_id: number
-  product_id: number
-  pi_item_vendor_mapping_id?: number | null
-  ordered_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
-  received_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  unit_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  uom?: string | null
-  expected_delivery_date?: Date | string | null
-  remarks?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  created_by?: number | null
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  is_deleted?: boolean
-  deleted_at?: Date | string | null
-  deleted_by?: number | null
-}
-
 export type PurchaseOrderItemCreateManyDeletedByInput = {
   id?: number
   purchase_order_id: number
@@ -2008,6 +1979,35 @@ export type PurchaseOrderItemCreateManyDeletedByInput = {
   deleted_at?: Date | string | null
 }
 
+export type PurchaseOrderItemCreateManyUpdatedByInput = {
+  id?: number
+  purchase_order_id: number
+  product_id: number
+  pi_item_vendor_mapping_id?: number | null
+  ordered_qty: runtime.Decimal | runtime.DecimalJsLike | number | string
+  received_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  uom?: string | null
+  expected_delivery_date?: Date | string | null
+  remarks?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  created_by?: number | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+}
+
 export type PurchaseOrderItemUpdateWithoutCreatedByInput = {
   ordered_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   received_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2029,12 +2029,12 @@ export type PurchaseOrderItemUpdateWithoutCreatedByInput = {
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutItemsNestedInput
-  product?: Prisma.ProductMasterUpdateOneRequiredWithoutPurchaseOrderItemsNestedInput
-  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingUpdateOneWithoutPurchaseOrderItemsNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsUpdatedNestedInput
-  deletedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsDeletedNestedInput
   grnItems?: Prisma.GRNItemUpdateManyWithoutPoItemNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsDeletedNestedInput
+  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingUpdateOneWithoutPurchaseOrderItemsNestedInput
+  product?: Prisma.ProductMasterUpdateOneRequiredWithoutPurchaseOrderItemsNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutItemsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsUpdatedNestedInput
 }
 
 export type PurchaseOrderItemUncheckedUpdateWithoutCreatedByInput = {
@@ -2096,94 +2096,6 @@ export type PurchaseOrderItemUncheckedUpdateManyWithoutCreatedByInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
-export type PurchaseOrderItemUpdateWithoutUpdatedByInput = {
-  ordered_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  received_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  unit_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  uom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expected_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutItemsNestedInput
-  product?: Prisma.ProductMasterUpdateOneRequiredWithoutPurchaseOrderItemsNestedInput
-  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingUpdateOneWithoutPurchaseOrderItemsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneWithoutPoItemsCreatedNestedInput
-  deletedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsDeletedNestedInput
-  grnItems?: Prisma.GRNItemUpdateManyWithoutPoItemNestedInput
-}
-
-export type PurchaseOrderItemUncheckedUpdateWithoutUpdatedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  purchase_order_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_id?: Prisma.IntFieldUpdateOperationsInput | number
-  pi_item_vendor_mapping_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  ordered_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  received_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  unit_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  uom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expected_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutPoItemNestedInput
-}
-
-export type PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  purchase_order_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_id?: Prisma.IntFieldUpdateOperationsInput | number
-  pi_item_vendor_mapping_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  ordered_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  received_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  unit_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  uom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expected_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-}
-
 export type PurchaseOrderItemUpdateWithoutDeletedByInput = {
   ordered_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   received_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2205,12 +2117,12 @@ export type PurchaseOrderItemUpdateWithoutDeletedByInput = {
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutItemsNestedInput
-  product?: Prisma.ProductMasterUpdateOneRequiredWithoutPurchaseOrderItemsNestedInput
-  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingUpdateOneWithoutPurchaseOrderItemsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneWithoutPoItemsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsUpdatedNestedInput
   grnItems?: Prisma.GRNItemUpdateManyWithoutPoItemNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneWithoutPoItemsCreatedNestedInput
+  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingUpdateOneWithoutPurchaseOrderItemsNestedInput
+  product?: Prisma.ProductMasterUpdateOneRequiredWithoutPurchaseOrderItemsNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutItemsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsUpdatedNestedInput
 }
 
 export type PurchaseOrderItemUncheckedUpdateWithoutDeletedByInput = {
@@ -2272,6 +2184,94 @@ export type PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
+export type PurchaseOrderItemUpdateWithoutUpdatedByInput = {
+  ordered_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  received_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  uom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expected_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  grnItems?: Prisma.GRNItemUpdateManyWithoutPoItemNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneWithoutPoItemsCreatedNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsDeletedNestedInput
+  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingUpdateOneWithoutPurchaseOrderItemsNestedInput
+  product?: Prisma.ProductMasterUpdateOneRequiredWithoutPurchaseOrderItemsNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutItemsNestedInput
+}
+
+export type PurchaseOrderItemUncheckedUpdateWithoutUpdatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  purchase_order_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_id?: Prisma.IntFieldUpdateOperationsInput | number
+  pi_item_vendor_mapping_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ordered_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  received_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  uom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expected_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutPoItemNestedInput
+}
+
+export type PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  purchase_order_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_id?: Prisma.IntFieldUpdateOperationsInput | number
+  pi_item_vendor_mapping_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ordered_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  received_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  uom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expected_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
 export type PurchaseOrderItemCreateManyProductInput = {
   id?: number
   purchase_order_id: number
@@ -2322,12 +2322,12 @@ export type PurchaseOrderItemUpdateWithoutProductInput = {
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutItemsNestedInput
-  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingUpdateOneWithoutPurchaseOrderItemsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneWithoutPoItemsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsUpdatedNestedInput
-  deletedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsDeletedNestedInput
   grnItems?: Prisma.GRNItemUpdateManyWithoutPoItemNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneWithoutPoItemsCreatedNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsDeletedNestedInput
+  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingUpdateOneWithoutPurchaseOrderItemsNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutItemsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsUpdatedNestedInput
 }
 
 export type PurchaseOrderItemUncheckedUpdateWithoutProductInput = {
@@ -2439,12 +2439,12 @@ export type PurchaseOrderItemUpdateWithoutPiVendorMappingInput = {
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutItemsNestedInput
-  product?: Prisma.ProductMasterUpdateOneRequiredWithoutPurchaseOrderItemsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneWithoutPoItemsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsUpdatedNestedInput
-  deletedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsDeletedNestedInput
   grnItems?: Prisma.GRNItemUpdateManyWithoutPoItemNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneWithoutPoItemsCreatedNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsDeletedNestedInput
+  product?: Prisma.ProductMasterUpdateOneRequiredWithoutPurchaseOrderItemsNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutItemsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsUpdatedNestedInput
 }
 
 export type PurchaseOrderItemUncheckedUpdateWithoutPiVendorMappingInput = {
@@ -2556,12 +2556,12 @@ export type PurchaseOrderItemUpdateWithoutPurchaseOrderInput = {
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  product?: Prisma.ProductMasterUpdateOneRequiredWithoutPurchaseOrderItemsNestedInput
-  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingUpdateOneWithoutPurchaseOrderItemsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneWithoutPoItemsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsUpdatedNestedInput
-  deletedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsDeletedNestedInput
   grnItems?: Prisma.GRNItemUpdateManyWithoutPoItemNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneWithoutPoItemsCreatedNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsDeletedNestedInput
+  piVendorMapping?: Prisma.PurchaseIntentItemVendorMappingUpdateOneWithoutPurchaseOrderItemsNestedInput
+  product?: Prisma.ProductMasterUpdateOneRequiredWithoutPurchaseOrderItemsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutPoItemsUpdatedNestedInput
 }
 
 export type PurchaseOrderItemUncheckedUpdateWithoutPurchaseOrderInput = {
@@ -2682,13 +2682,13 @@ export type PurchaseOrderItemSelect<ExtArgs extends runtime.Types.Extensions.Int
   is_deleted?: boolean
   deleted_at?: boolean
   deleted_by?: boolean
-  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
-  piVendorMapping?: boolean | Prisma.PurchaseOrderItem$piVendorMappingArgs<ExtArgs>
-  createdBy?: boolean | Prisma.PurchaseOrderItem$createdByArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.PurchaseOrderItem$updatedByArgs<ExtArgs>
-  deletedBy?: boolean | Prisma.PurchaseOrderItem$deletedByArgs<ExtArgs>
   grnItems?: boolean | Prisma.PurchaseOrderItem$grnItemsArgs<ExtArgs>
+  createdBy?: boolean | Prisma.PurchaseOrderItem$createdByArgs<ExtArgs>
+  deletedBy?: boolean | Prisma.PurchaseOrderItem$deletedByArgs<ExtArgs>
+  piVendorMapping?: boolean | Prisma.PurchaseOrderItem$piVendorMappingArgs<ExtArgs>
+  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.PurchaseOrderItem$updatedByArgs<ExtArgs>
   _count?: boolean | Prisma.PurchaseOrderItemCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseOrderItem"]>
 
@@ -2720,12 +2720,12 @@ export type PurchaseOrderItemSelectCreateManyAndReturn<ExtArgs extends runtime.T
   is_deleted?: boolean
   deleted_at?: boolean
   deleted_by?: boolean
-  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
-  piVendorMapping?: boolean | Prisma.PurchaseOrderItem$piVendorMappingArgs<ExtArgs>
   createdBy?: boolean | Prisma.PurchaseOrderItem$createdByArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.PurchaseOrderItem$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.PurchaseOrderItem$deletedByArgs<ExtArgs>
+  piVendorMapping?: boolean | Prisma.PurchaseOrderItem$piVendorMappingArgs<ExtArgs>
+  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.PurchaseOrderItem$updatedByArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseOrderItem"]>
 
 export type PurchaseOrderItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2756,12 +2756,12 @@ export type PurchaseOrderItemSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   is_deleted?: boolean
   deleted_at?: boolean
   deleted_by?: boolean
-  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
-  piVendorMapping?: boolean | Prisma.PurchaseOrderItem$piVendorMappingArgs<ExtArgs>
   createdBy?: boolean | Prisma.PurchaseOrderItem$createdByArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.PurchaseOrderItem$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.PurchaseOrderItem$deletedByArgs<ExtArgs>
+  piVendorMapping?: boolean | Prisma.PurchaseOrderItem$piVendorMappingArgs<ExtArgs>
+  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.PurchaseOrderItem$updatedByArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseOrderItem"]>
 
 export type PurchaseOrderItemSelectScalar = {
@@ -2796,42 +2796,42 @@ export type PurchaseOrderItemSelectScalar = {
 
 export type PurchaseOrderItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "purchase_order_id" | "product_id" | "pi_item_vendor_mapping_id" | "ordered_qty" | "received_qty" | "unit_price" | "uom" | "expected_delivery_date" | "remarks" | "created_at" | "updated_at" | "created_by" | "updated_by" | "mrp" | "discount_pct" | "rate" | "tax_pct" | "cgst_pct" | "sgst_pct" | "igst_pct" | "tax_amount" | "amount" | "total_amount" | "is_deleted" | "deleted_at" | "deleted_by", ExtArgs["result"]["purchaseOrderItem"]>
 export type PurchaseOrderItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
-  piVendorMapping?: boolean | Prisma.PurchaseOrderItem$piVendorMappingArgs<ExtArgs>
-  createdBy?: boolean | Prisma.PurchaseOrderItem$createdByArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.PurchaseOrderItem$updatedByArgs<ExtArgs>
-  deletedBy?: boolean | Prisma.PurchaseOrderItem$deletedByArgs<ExtArgs>
   grnItems?: boolean | Prisma.PurchaseOrderItem$grnItemsArgs<ExtArgs>
+  createdBy?: boolean | Prisma.PurchaseOrderItem$createdByArgs<ExtArgs>
+  deletedBy?: boolean | Prisma.PurchaseOrderItem$deletedByArgs<ExtArgs>
+  piVendorMapping?: boolean | Prisma.PurchaseOrderItem$piVendorMappingArgs<ExtArgs>
+  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.PurchaseOrderItem$updatedByArgs<ExtArgs>
   _count?: boolean | Prisma.PurchaseOrderItemCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PurchaseOrderItemIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
-  piVendorMapping?: boolean | Prisma.PurchaseOrderItem$piVendorMappingArgs<ExtArgs>
   createdBy?: boolean | Prisma.PurchaseOrderItem$createdByArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.PurchaseOrderItem$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.PurchaseOrderItem$deletedByArgs<ExtArgs>
+  piVendorMapping?: boolean | Prisma.PurchaseOrderItem$piVendorMappingArgs<ExtArgs>
+  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.PurchaseOrderItem$updatedByArgs<ExtArgs>
 }
 export type PurchaseOrderItemIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
-  piVendorMapping?: boolean | Prisma.PurchaseOrderItem$piVendorMappingArgs<ExtArgs>
   createdBy?: boolean | Prisma.PurchaseOrderItem$createdByArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.PurchaseOrderItem$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.PurchaseOrderItem$deletedByArgs<ExtArgs>
+  piVendorMapping?: boolean | Prisma.PurchaseOrderItem$piVendorMappingArgs<ExtArgs>
+  product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.PurchaseOrderItem$updatedByArgs<ExtArgs>
 }
 
 export type $PurchaseOrderItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PurchaseOrderItem"
   objects: {
-    purchaseOrder: Prisma.$PurchaseOrderMasterPayload<ExtArgs>
-    product: Prisma.$ProductMasterPayload<ExtArgs>
-    piVendorMapping: Prisma.$PurchaseIntentItemVendorMappingPayload<ExtArgs> | null
-    createdBy: Prisma.$UserMasterPayload<ExtArgs> | null
-    updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
-    deletedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     grnItems: Prisma.$GRNItemPayload<ExtArgs>[]
+    createdBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    deletedBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    piVendorMapping: Prisma.$PurchaseIntentItemVendorMappingPayload<ExtArgs> | null
+    product: Prisma.$ProductMasterPayload<ExtArgs>
+    purchaseOrder: Prisma.$PurchaseOrderMasterPayload<ExtArgs>
+    updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -3255,13 +3255,13 @@ readonly fields: PurchaseOrderItemFieldRefs;
  */
 export interface Prisma__PurchaseOrderItemClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  purchaseOrder<T extends Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PurchaseOrderMasterClient<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  product<T extends Prisma.ProductMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  piVendorMapping<T extends Prisma.PurchaseOrderItem$piVendorMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderItem$piVendorMappingArgs<ExtArgs>>): Prisma.Prisma__PurchaseIntentItemVendorMappingClient<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentItemVendorMappingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  createdBy<T extends Prisma.PurchaseOrderItem$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderItem$createdByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  updatedBy<T extends Prisma.PurchaseOrderItem$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderItem$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  deletedBy<T extends Prisma.PurchaseOrderItem$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderItem$deletedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   grnItems<T extends Prisma.PurchaseOrderItem$grnItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderItem$grnItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdBy<T extends Prisma.PurchaseOrderItem$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderItem$createdByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  deletedBy<T extends Prisma.PurchaseOrderItem$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderItem$deletedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  piVendorMapping<T extends Prisma.PurchaseOrderItem$piVendorMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderItem$piVendorMappingArgs<ExtArgs>>): Prisma.Prisma__PurchaseIntentItemVendorMappingClient<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentItemVendorMappingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  product<T extends Prisma.ProductMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  purchaseOrder<T extends Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PurchaseOrderMasterClient<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  updatedBy<T extends Prisma.PurchaseOrderItem$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderItem$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3719,47 +3719,33 @@ export type PurchaseOrderItemDeleteManyArgs<ExtArgs extends runtime.Types.Extens
 }
 
 /**
- * PurchaseOrderItem.piVendorMapping
+ * PurchaseOrderItem.grnItems
  */
-export type PurchaseOrderItem$piVendorMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type PurchaseOrderItem$grnItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the PurchaseIntentItemVendorMapping
+   * Select specific fields to fetch from the GRNItem
    */
-  select?: Prisma.PurchaseIntentItemVendorMappingSelect<ExtArgs> | null
+  select?: Prisma.GRNItemSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the PurchaseIntentItemVendorMapping
+   * Omit specific fields from the GRNItem
    */
-  omit?: Prisma.PurchaseIntentItemVendorMappingOmit<ExtArgs> | null
+  omit?: Prisma.GRNItemOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.PurchaseIntentItemVendorMappingInclude<ExtArgs> | null
-  where?: Prisma.PurchaseIntentItemVendorMappingWhereInput
+  include?: Prisma.GRNItemInclude<ExtArgs> | null
+  where?: Prisma.GRNItemWhereInput
+  orderBy?: Prisma.GRNItemOrderByWithRelationInput | Prisma.GRNItemOrderByWithRelationInput[]
+  cursor?: Prisma.GRNItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GRNItemScalarFieldEnum | Prisma.GRNItemScalarFieldEnum[]
 }
 
 /**
  * PurchaseOrderItem.createdBy
  */
 export type PurchaseOrderItem$createdByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UserMaster
-   */
-  select?: Prisma.UserMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the UserMaster
-   */
-  omit?: Prisma.UserMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserMasterInclude<ExtArgs> | null
-  where?: Prisma.UserMasterWhereInput
-}
-
-/**
- * PurchaseOrderItem.updatedBy
- */
-export type PurchaseOrderItem$updatedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the UserMaster
    */
@@ -3795,27 +3781,41 @@ export type PurchaseOrderItem$deletedByArgs<ExtArgs extends runtime.Types.Extens
 }
 
 /**
- * PurchaseOrderItem.grnItems
+ * PurchaseOrderItem.piVendorMapping
  */
-export type PurchaseOrderItem$grnItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type PurchaseOrderItem$piVendorMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the GRNItem
+   * Select specific fields to fetch from the PurchaseIntentItemVendorMapping
    */
-  select?: Prisma.GRNItemSelect<ExtArgs> | null
+  select?: Prisma.PurchaseIntentItemVendorMappingSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the GRNItem
+   * Omit specific fields from the PurchaseIntentItemVendorMapping
    */
-  omit?: Prisma.GRNItemOmit<ExtArgs> | null
+  omit?: Prisma.PurchaseIntentItemVendorMappingOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.GRNItemInclude<ExtArgs> | null
-  where?: Prisma.GRNItemWhereInput
-  orderBy?: Prisma.GRNItemOrderByWithRelationInput | Prisma.GRNItemOrderByWithRelationInput[]
-  cursor?: Prisma.GRNItemWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.GRNItemScalarFieldEnum | Prisma.GRNItemScalarFieldEnum[]
+  include?: Prisma.PurchaseIntentItemVendorMappingInclude<ExtArgs> | null
+  where?: Prisma.PurchaseIntentItemVendorMappingWhereInput
+}
+
+/**
+ * PurchaseOrderItem.updatedBy
+ */
+export type PurchaseOrderItem$updatedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserMaster
+   */
+  select?: Prisma.UserMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserMaster
+   */
+  omit?: Prisma.UserMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserMasterInclude<ExtArgs> | null
+  where?: Prisma.UserMasterWhereInput
 }
 
 /**

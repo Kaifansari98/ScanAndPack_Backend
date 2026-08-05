@@ -240,8 +240,8 @@ export type PurchaseIntentItemWhereInput = {
   remarks?: Prisma.StringNullableFilter<"PurchaseIntentItem"> | string | null
   created_at?: Prisma.DateTimeFilter<"PurchaseIntentItem"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"PurchaseIntentItem"> | Date | string
-  purchaseIntent?: Prisma.XOR<Prisma.PurchaseIntentMasterScalarRelationFilter, Prisma.PurchaseIntentMasterWhereInput>
   product?: Prisma.XOR<Prisma.ProductMasterScalarRelationFilter, Prisma.ProductMasterWhereInput>
+  purchaseIntent?: Prisma.XOR<Prisma.PurchaseIntentMasterScalarRelationFilter, Prisma.PurchaseIntentMasterWhereInput>
   vendorMappings?: Prisma.PurchaseIntentItemVendorMappingListRelationFilter
 }
 
@@ -253,8 +253,8 @@ export type PurchaseIntentItemOrderByWithRelationInput = {
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  purchaseIntent?: Prisma.PurchaseIntentMasterOrderByWithRelationInput
   product?: Prisma.ProductMasterOrderByWithRelationInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterOrderByWithRelationInput
   vendorMappings?: Prisma.PurchaseIntentItemVendorMappingOrderByRelationAggregateInput
 }
 
@@ -269,8 +269,8 @@ export type PurchaseIntentItemWhereUniqueInput = Prisma.AtLeast<{
   remarks?: Prisma.StringNullableFilter<"PurchaseIntentItem"> | string | null
   created_at?: Prisma.DateTimeFilter<"PurchaseIntentItem"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"PurchaseIntentItem"> | Date | string
-  purchaseIntent?: Prisma.XOR<Prisma.PurchaseIntentMasterScalarRelationFilter, Prisma.PurchaseIntentMasterWhereInput>
   product?: Prisma.XOR<Prisma.ProductMasterScalarRelationFilter, Prisma.ProductMasterWhereInput>
+  purchaseIntent?: Prisma.XOR<Prisma.PurchaseIntentMasterScalarRelationFilter, Prisma.PurchaseIntentMasterWhereInput>
   vendorMappings?: Prisma.PurchaseIntentItemVendorMappingListRelationFilter
 }, "id">
 
@@ -307,8 +307,8 @@ export type PurchaseIntentItemCreateInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutItemsInput
   product: Prisma.ProductMasterCreateNestedOneWithoutPurchaseIntentItemsInput
+  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutItemsInput
   vendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutPurchaseIntentItemInput
 }
 
@@ -328,8 +328,8 @@ export type PurchaseIntentItemUpdateInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutItemsNestedInput
   product?: Prisma.ProductMasterUpdateOneRequiredWithoutPurchaseIntentItemsNestedInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutItemsNestedInput
   vendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutPurchaseIntentItemNestedInput
 }
 
@@ -634,8 +634,8 @@ export type PurchaseIntentItemCreateWithoutVendorMappingsInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutItemsInput
   product: Prisma.ProductMasterCreateNestedOneWithoutPurchaseIntentItemsInput
+  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutItemsInput
 }
 
 export type PurchaseIntentItemUncheckedCreateWithoutVendorMappingsInput = {
@@ -669,8 +669,8 @@ export type PurchaseIntentItemUpdateWithoutVendorMappingsInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutItemsNestedInput
   product?: Prisma.ProductMasterUpdateOneRequiredWithoutPurchaseIntentItemsNestedInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutItemsNestedInput
 }
 
 export type PurchaseIntentItemUncheckedUpdateWithoutVendorMappingsInput = {
@@ -796,8 +796,8 @@ export type PurchaseIntentItemSelect<ExtArgs extends runtime.Types.Extensions.In
   remarks?: boolean
   created_at?: boolean
   updated_at?: boolean
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   vendorMappings?: boolean | Prisma.PurchaseIntentItem$vendorMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.PurchaseIntentItemCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseIntentItem"]>
@@ -810,8 +810,8 @@ export type PurchaseIntentItemSelectCreateManyAndReturn<ExtArgs extends runtime.
   remarks?: boolean
   created_at?: boolean
   updated_at?: boolean
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseIntentItem"]>
 
 export type PurchaseIntentItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -822,8 +822,8 @@ export type PurchaseIntentItemSelectUpdateManyAndReturn<ExtArgs extends runtime.
   remarks?: boolean
   created_at?: boolean
   updated_at?: boolean
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseIntentItem"]>
 
 export type PurchaseIntentItemSelectScalar = {
@@ -838,25 +838,25 @@ export type PurchaseIntentItemSelectScalar = {
 
 export type PurchaseIntentItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "purchase_intent_id" | "product_id" | "uom" | "remarks" | "created_at" | "updated_at", ExtArgs["result"]["purchaseIntentItem"]>
 export type PurchaseIntentItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   vendorMappings?: boolean | Prisma.PurchaseIntentItem$vendorMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.PurchaseIntentItemCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PurchaseIntentItemIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
 }
 export type PurchaseIntentItemIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
 }
 
 export type $PurchaseIntentItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PurchaseIntentItem"
   objects: {
-    purchaseIntent: Prisma.$PurchaseIntentMasterPayload<ExtArgs>
     product: Prisma.$ProductMasterPayload<ExtArgs>
+    purchaseIntent: Prisma.$PurchaseIntentMasterPayload<ExtArgs>
     vendorMappings: Prisma.$PurchaseIntentItemVendorMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1261,8 +1261,8 @@ readonly fields: PurchaseIntentItemFieldRefs;
  */
 export interface Prisma__PurchaseIntentItemClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  purchaseIntent<T extends Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PurchaseIntentMasterClient<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   product<T extends Prisma.ProductMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  purchaseIntent<T extends Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PurchaseIntentMasterClient<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendorMappings<T extends Prisma.PurchaseIntentItem$vendorMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentItem$vendorMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentItemVendorMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.

@@ -130,11 +130,6 @@ export type ClientTypeMaster = Prisma.ClientTypeMasterModel
  */
 export type LeadMaster = Prisma.LeadMasterModel
 /**
- * Model LeadBillingAddress
- * 
- */
-export type LeadBillingAddress = Prisma.LeadBillingAddressModel
-/**
  * Model LeadSpecificationsMaster
  * 
  */
@@ -269,11 +264,6 @@ export type OtherAppliancesMaster = Prisma.OtherAppliancesMasterModel
  * 
  */
 export type LeadOtherAppliancesMapping = Prisma.LeadOtherAppliancesMappingModel
-/**
- * Model LeadOtherAppliancesRemarkMapping
- * 
- */
-export type LeadOtherAppliancesRemarkMapping = Prisma.LeadOtherAppliancesRemarkMappingModel
 /**
  * Model HandleTypeMaster
  * 

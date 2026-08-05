@@ -268,11 +268,11 @@ export type DefectCompletionPhotoWhereInput = {
   doc_sys_name?: Prisma.StringFilter<"DefectCompletionPhoto"> | string
   created_by?: Prisma.IntFilter<"DefectCompletionPhoto"> | number
   created_at?: Prisma.DateTimeFilter<"DefectCompletionPhoto"> | Date | string
-  cutListMachineMapping?: Prisma.XOR<Prisma.CutListMachineMappingScalarRelationFilter, Prisma.CutListMachineMappingWhereInput>
-  cutList?: Prisma.XOR<Prisma.CutListScalarRelationFilter, Prisma.CutListWhereInput>
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  cutList?: Prisma.XOR<Prisma.CutListScalarRelationFilter, Prisma.CutListWhereInput>
+  cutListMachineMapping?: Prisma.XOR<Prisma.CutListMachineMappingScalarRelationFilter, Prisma.CutListMachineMappingWhereInput>
   defectedItem?: Prisma.XOR<Prisma.DefectedItemNullableScalarRelationFilter, Prisma.DefectedItemWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type DefectCompletionPhotoOrderByWithRelationInput = {
@@ -285,11 +285,11 @@ export type DefectCompletionPhotoOrderByWithRelationInput = {
   doc_sys_name?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  cutListMachineMapping?: Prisma.CutListMachineMappingOrderByWithRelationInput
-  cutList?: Prisma.CutListOrderByWithRelationInput
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  cutList?: Prisma.CutListOrderByWithRelationInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingOrderByWithRelationInput
   defectedItem?: Prisma.DefectedItemOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type DefectCompletionPhotoWhereUniqueInput = Prisma.AtLeast<{
@@ -305,11 +305,11 @@ export type DefectCompletionPhotoWhereUniqueInput = Prisma.AtLeast<{
   doc_sys_name?: Prisma.StringFilter<"DefectCompletionPhoto"> | string
   created_by?: Prisma.IntFilter<"DefectCompletionPhoto"> | number
   created_at?: Prisma.DateTimeFilter<"DefectCompletionPhoto"> | Date | string
-  cutListMachineMapping?: Prisma.XOR<Prisma.CutListMachineMappingScalarRelationFilter, Prisma.CutListMachineMappingWhereInput>
-  cutList?: Prisma.XOR<Prisma.CutListScalarRelationFilter, Prisma.CutListWhereInput>
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  cutList?: Prisma.XOR<Prisma.CutListScalarRelationFilter, Prisma.CutListWhereInput>
+  cutListMachineMapping?: Prisma.XOR<Prisma.CutListMachineMappingScalarRelationFilter, Prisma.CutListMachineMappingWhereInput>
   defectedItem?: Prisma.XOR<Prisma.DefectedItemNullableScalarRelationFilter, Prisma.DefectedItemWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type DefectCompletionPhotoOrderByWithAggregationInput = {
@@ -348,11 +348,11 @@ export type DefectCompletionPhotoCreateInput = {
   doc_og_name: string
   doc_sys_name: string
   created_at?: Date | string
-  cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutCompletionPhotosInput
-  cutList: Prisma.CutListCreateNestedOneWithoutCompletionPhotosInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompletionPhotosInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCompletionPhotosInput
+  cutList: Prisma.CutListCreateNestedOneWithoutCompletionPhotosInput
+  cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutCompletionPhotosInput
   defectedItem?: Prisma.DefectedItemCreateNestedOneWithoutCompletionPhotosInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompletionPhotosInput
 }
 
 export type DefectCompletionPhotoUncheckedCreateInput = {
@@ -371,11 +371,11 @@ export type DefectCompletionPhotoUpdateInput = {
   doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
   doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutCompletionPhotosNestedInput
-  cutList?: Prisma.CutListUpdateOneRequiredWithoutCompletionPhotosNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompletionPhotosNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompletionPhotosNestedInput
+  cutList?: Prisma.CutListUpdateOneRequiredWithoutCompletionPhotosNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutCompletionPhotosNestedInput
   defectedItem?: Prisma.DefectedItemUpdateOneWithoutCompletionPhotosNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompletionPhotosNestedInput
 }
 
 export type DefectCompletionPhotoUncheckedUpdateInput = {
@@ -698,9 +698,9 @@ export type DefectCompletionPhotoCreateWithoutVendorInput = {
   doc_og_name: string
   doc_sys_name: string
   created_at?: Date | string
-  cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutCompletionPhotosInput
-  cutList: Prisma.CutListCreateNestedOneWithoutCompletionPhotosInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCompletionPhotosInput
+  cutList: Prisma.CutListCreateNestedOneWithoutCompletionPhotosInput
+  cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutCompletionPhotosInput
   defectedItem?: Prisma.DefectedItemCreateNestedOneWithoutCompletionPhotosInput
 }
 
@@ -760,10 +760,10 @@ export type DefectCompletionPhotoCreateWithoutCreatedByInput = {
   doc_og_name: string
   doc_sys_name: string
   created_at?: Date | string
-  cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutCompletionPhotosInput
   cutList: Prisma.CutListCreateNestedOneWithoutCompletionPhotosInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompletionPhotosInput
+  cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutCompletionPhotosInput
   defectedItem?: Prisma.DefectedItemCreateNestedOneWithoutCompletionPhotosInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompletionPhotosInput
 }
 
 export type DefectCompletionPhotoUncheckedCreateWithoutCreatedByInput = {
@@ -807,10 +807,10 @@ export type DefectCompletionPhotoCreateWithoutCutListInput = {
   doc_og_name: string
   doc_sys_name: string
   created_at?: Date | string
-  cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutCompletionPhotosInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompletionPhotosInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCompletionPhotosInput
+  cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutCompletionPhotosInput
   defectedItem?: Prisma.DefectedItemCreateNestedOneWithoutCompletionPhotosInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompletionPhotosInput
 }
 
 export type DefectCompletionPhotoUncheckedCreateWithoutCutListInput = {
@@ -854,10 +854,10 @@ export type DefectCompletionPhotoCreateWithoutCutListMachineMappingInput = {
   doc_og_name: string
   doc_sys_name: string
   created_at?: Date | string
-  cutList: Prisma.CutListCreateNestedOneWithoutCompletionPhotosInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompletionPhotosInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCompletionPhotosInput
+  cutList: Prisma.CutListCreateNestedOneWithoutCompletionPhotosInput
   defectedItem?: Prisma.DefectedItemCreateNestedOneWithoutCompletionPhotosInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompletionPhotosInput
 }
 
 export type DefectCompletionPhotoUncheckedCreateWithoutCutListMachineMappingInput = {
@@ -901,10 +901,10 @@ export type DefectCompletionPhotoCreateWithoutDefectedItemInput = {
   doc_og_name: string
   doc_sys_name: string
   created_at?: Date | string
-  cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutCompletionPhotosInput
-  cutList: Prisma.CutListCreateNestedOneWithoutCompletionPhotosInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompletionPhotosInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCompletionPhotosInput
+  cutList: Prisma.CutListCreateNestedOneWithoutCompletionPhotosInput
+  cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutCompletionPhotosInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompletionPhotosInput
 }
 
 export type DefectCompletionPhotoUncheckedCreateWithoutDefectedItemInput = {
@@ -959,9 +959,9 @@ export type DefectCompletionPhotoUpdateWithoutVendorInput = {
   doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
   doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutCompletionPhotosNestedInput
-  cutList?: Prisma.CutListUpdateOneRequiredWithoutCompletionPhotosNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompletionPhotosNestedInput
+  cutList?: Prisma.CutListUpdateOneRequiredWithoutCompletionPhotosNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutCompletionPhotosNestedInput
   defectedItem?: Prisma.DefectedItemUpdateOneWithoutCompletionPhotosNestedInput
 }
 
@@ -1002,10 +1002,10 @@ export type DefectCompletionPhotoUpdateWithoutCreatedByInput = {
   doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
   doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutCompletionPhotosNestedInput
   cutList?: Prisma.CutListUpdateOneRequiredWithoutCompletionPhotosNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompletionPhotosNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutCompletionPhotosNestedInput
   defectedItem?: Prisma.DefectedItemUpdateOneWithoutCompletionPhotosNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompletionPhotosNestedInput
 }
 
 export type DefectCompletionPhotoUncheckedUpdateWithoutCreatedByInput = {
@@ -1045,10 +1045,10 @@ export type DefectCompletionPhotoUpdateWithoutCutListInput = {
   doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
   doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutCompletionPhotosNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompletionPhotosNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompletionPhotosNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutCompletionPhotosNestedInput
   defectedItem?: Prisma.DefectedItemUpdateOneWithoutCompletionPhotosNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompletionPhotosNestedInput
 }
 
 export type DefectCompletionPhotoUncheckedUpdateWithoutCutListInput = {
@@ -1088,10 +1088,10 @@ export type DefectCompletionPhotoUpdateWithoutCutListMachineMappingInput = {
   doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
   doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cutList?: Prisma.CutListUpdateOneRequiredWithoutCompletionPhotosNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompletionPhotosNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompletionPhotosNestedInput
+  cutList?: Prisma.CutListUpdateOneRequiredWithoutCompletionPhotosNestedInput
   defectedItem?: Prisma.DefectedItemUpdateOneWithoutCompletionPhotosNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompletionPhotosNestedInput
 }
 
 export type DefectCompletionPhotoUncheckedUpdateWithoutCutListMachineMappingInput = {
@@ -1131,10 +1131,10 @@ export type DefectCompletionPhotoUpdateWithoutDefectedItemInput = {
   doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
   doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutCompletionPhotosNestedInput
-  cutList?: Prisma.CutListUpdateOneRequiredWithoutCompletionPhotosNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompletionPhotosNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompletionPhotosNestedInput
+  cutList?: Prisma.CutListUpdateOneRequiredWithoutCompletionPhotosNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutCompletionPhotosNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompletionPhotosNestedInput
 }
 
 export type DefectCompletionPhotoUncheckedUpdateWithoutDefectedItemInput = {
@@ -1171,11 +1171,11 @@ export type DefectCompletionPhotoSelect<ExtArgs extends runtime.Types.Extensions
   doc_sys_name?: boolean
   created_by?: boolean
   created_at?: boolean
-  cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
-  cutList?: boolean | Prisma.CutListDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  cutList?: boolean | Prisma.CutListDefaultArgs<ExtArgs>
+  cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
   defectedItem?: boolean | Prisma.DefectCompletionPhoto$defectedItemArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["defectCompletionPhoto"]>
 
 export type DefectCompletionPhotoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1188,11 +1188,11 @@ export type DefectCompletionPhotoSelectCreateManyAndReturn<ExtArgs extends runti
   doc_sys_name?: boolean
   created_by?: boolean
   created_at?: boolean
-  cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
-  cutList?: boolean | Prisma.CutListDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  cutList?: boolean | Prisma.CutListDefaultArgs<ExtArgs>
+  cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
   defectedItem?: boolean | Prisma.DefectCompletionPhoto$defectedItemArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["defectCompletionPhoto"]>
 
 export type DefectCompletionPhotoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1205,11 +1205,11 @@ export type DefectCompletionPhotoSelectUpdateManyAndReturn<ExtArgs extends runti
   doc_sys_name?: boolean
   created_by?: boolean
   created_at?: boolean
-  cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
-  cutList?: boolean | Prisma.CutListDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  cutList?: boolean | Prisma.CutListDefaultArgs<ExtArgs>
+  cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
   defectedItem?: boolean | Prisma.DefectCompletionPhoto$defectedItemArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["defectCompletionPhoto"]>
 
 export type DefectCompletionPhotoSelectScalar = {
@@ -1226,35 +1226,35 @@ export type DefectCompletionPhotoSelectScalar = {
 
 export type DefectCompletionPhotoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cut_list_machine_mapping_id" | "cut_list_id" | "vendor_id" | "defected_item_id" | "doc_og_name" | "doc_sys_name" | "created_by" | "created_at", ExtArgs["result"]["defectCompletionPhoto"]>
 export type DefectCompletionPhotoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
-  cutList?: boolean | Prisma.CutListDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  cutList?: boolean | Prisma.CutListDefaultArgs<ExtArgs>
+  cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
   defectedItem?: boolean | Prisma.DefectCompletionPhoto$defectedItemArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type DefectCompletionPhotoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
-  cutList?: boolean | Prisma.CutListDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  cutList?: boolean | Prisma.CutListDefaultArgs<ExtArgs>
+  cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
   defectedItem?: boolean | Prisma.DefectCompletionPhoto$defectedItemArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type DefectCompletionPhotoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
-  cutList?: boolean | Prisma.CutListDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  cutList?: boolean | Prisma.CutListDefaultArgs<ExtArgs>
+  cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
   defectedItem?: boolean | Prisma.DefectCompletionPhoto$defectedItemArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $DefectCompletionPhotoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "DefectCompletionPhoto"
   objects: {
-    cutListMachineMapping: Prisma.$CutListMachineMappingPayload<ExtArgs>
-    cutList: Prisma.$CutListPayload<ExtArgs>
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    cutList: Prisma.$CutListPayload<ExtArgs>
+    cutListMachineMapping: Prisma.$CutListMachineMappingPayload<ExtArgs>
     defectedItem: Prisma.$DefectedItemPayload<ExtArgs> | null
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1660,11 +1660,11 @@ readonly fields: DefectCompletionPhotoFieldRefs;
  */
 export interface Prisma__DefectCompletionPhotoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  cutListMachineMapping<T extends Prisma.CutListMachineMappingDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CutListMachineMappingDefaultArgs<ExtArgs>>): Prisma.Prisma__CutListMachineMappingClient<runtime.Types.Result.GetResult<Prisma.$CutListMachineMappingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  cutList<T extends Prisma.CutListDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CutListDefaultArgs<ExtArgs>>): Prisma.Prisma__CutListClient<runtime.Types.Result.GetResult<Prisma.$CutListPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  cutList<T extends Prisma.CutListDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CutListDefaultArgs<ExtArgs>>): Prisma.Prisma__CutListClient<runtime.Types.Result.GetResult<Prisma.$CutListPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  cutListMachineMapping<T extends Prisma.CutListMachineMappingDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CutListMachineMappingDefaultArgs<ExtArgs>>): Prisma.Prisma__CutListMachineMappingClient<runtime.Types.Result.GetResult<Prisma.$CutListMachineMappingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   defectedItem<T extends Prisma.DefectCompletionPhoto$defectedItemArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DefectCompletionPhoto$defectedItemArgs<ExtArgs>>): Prisma.Prisma__DefectedItemClient<runtime.Types.Result.GetResult<Prisma.$DefectedItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

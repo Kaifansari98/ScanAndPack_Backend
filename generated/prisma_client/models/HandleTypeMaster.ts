@@ -204,16 +204,16 @@ export type HandleTypeMasterWhereInput = {
   id?: Prisma.IntFilter<"HandleTypeMaster"> | number
   name?: Prisma.StringFilter<"HandleTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"HandleTypeMaster"> | number
-  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
 }
 
 export type HandleTypeMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingOrderByRelationAggregateInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingOrderByRelationAggregateInput
 }
 
 export type HandleTypeMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -223,8 +223,8 @@ export type HandleTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.HandleTypeMasterWhereInput | Prisma.HandleTypeMasterWhereInput[]
   name?: Prisma.StringFilter<"HandleTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"HandleTypeMaster"> | number
-  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
 }, "id">
 
 export type HandleTypeMasterOrderByWithAggregationInput = {
@@ -249,8 +249,8 @@ export type HandleTypeMasterScalarWhereWithAggregatesInput = {
 
 export type HandleTypeMasterCreateInput = {
   name: string
-  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutHandleTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutHandleTypesInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutHandleTypeInput
 }
 
 export type HandleTypeMasterUncheckedCreateInput = {
@@ -262,8 +262,8 @@ export type HandleTypeMasterUncheckedCreateInput = {
 
 export type HandleTypeMasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutHandleTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutHandleTypesNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutHandleTypeNestedInput
 }
 
 export type HandleTypeMasterUncheckedUpdateInput = {
@@ -530,8 +530,8 @@ export type HandleTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.Inte
   id?: boolean
   name?: boolean
   vendor_id?: boolean
-  chsSelectionMappings?: boolean | Prisma.HandleTypeMaster$chsSelectionMappingsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  chsSelectionMappings?: boolean | Prisma.HandleTypeMaster$chsSelectionMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.HandleTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["handleTypeMaster"]>
 
@@ -557,8 +557,8 @@ export type HandleTypeMasterSelectScalar = {
 
 export type HandleTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "vendor_id", ExtArgs["result"]["handleTypeMaster"]>
 export type HandleTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  chsSelectionMappings?: boolean | Prisma.HandleTypeMaster$chsSelectionMappingsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  chsSelectionMappings?: boolean | Prisma.HandleTypeMaster$chsSelectionMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.HandleTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type HandleTypeMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -571,8 +571,8 @@ export type HandleTypeMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.T
 export type $HandleTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "HandleTypeMaster"
   objects: {
-    chsSelectionMappings: Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>[]
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
+    chsSelectionMappings: Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -972,8 +972,8 @@ readonly fields: HandleTypeMasterFieldRefs;
  */
 export interface Prisma__HandleTypeMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  chsSelectionMappings<T extends Prisma.HandleTypeMaster$chsSelectionMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HandleTypeMaster$chsSelectionMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  chsSelectionMappings<T extends Prisma.HandleTypeMaster$chsSelectionMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HandleTypeMaster$chsSelectionMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

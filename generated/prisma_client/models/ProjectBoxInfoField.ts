@@ -300,9 +300,9 @@ export type ProjectBoxInfoFieldWhereInput = {
   updated_by?: Prisma.IntNullableFilter<"ProjectBoxInfoField"> | number | null
   created_at?: Prisma.DateTimeFilter<"ProjectBoxInfoField"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ProjectBoxInfoField"> | Date | string
+  values?: Prisma.BoxInfoFieldValueListRelationFilter
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  values?: Prisma.BoxInfoFieldValueListRelationFilter
 }
 
 export type ProjectBoxInfoFieldOrderByWithRelationInput = {
@@ -319,9 +319,9 @@ export type ProjectBoxInfoFieldOrderByWithRelationInput = {
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  values?: Prisma.BoxInfoFieldValueOrderByRelationAggregateInput
   project?: Prisma.ProjectMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  values?: Prisma.BoxInfoFieldValueOrderByRelationAggregateInput
 }
 
 export type ProjectBoxInfoFieldWhereUniqueInput = Prisma.AtLeast<{
@@ -341,9 +341,9 @@ export type ProjectBoxInfoFieldWhereUniqueInput = Prisma.AtLeast<{
   updated_by?: Prisma.IntNullableFilter<"ProjectBoxInfoField"> | number | null
   created_at?: Prisma.DateTimeFilter<"ProjectBoxInfoField"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ProjectBoxInfoField"> | Date | string
+  values?: Prisma.BoxInfoFieldValueListRelationFilter
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  values?: Prisma.BoxInfoFieldValueListRelationFilter
 }, "id">
 
 export type ProjectBoxInfoFieldOrderByWithAggregationInput = {
@@ -397,9 +397,9 @@ export type ProjectBoxInfoFieldCreateInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutFieldInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutBox_info_fieldsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutBox_info_fieldsInput
-  values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutFieldInput
 }
 
 export type ProjectBoxInfoFieldUncheckedCreateInput = {
@@ -430,9 +430,9 @@ export type ProjectBoxInfoFieldUpdateInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  values?: Prisma.BoxInfoFieldValueUpdateManyWithoutFieldNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBox_info_fieldsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBox_info_fieldsNestedInput
-  values?: Prisma.BoxInfoFieldValueUpdateManyWithoutFieldNestedInput
 }
 
 export type ProjectBoxInfoFieldUncheckedUpdateInput = {
@@ -691,8 +691,8 @@ export type ProjectBoxInfoFieldCreateWithoutVendorInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  project: Prisma.ProjectMasterCreateNestedOneWithoutBox_info_fieldsInput
   values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutFieldInput
+  project: Prisma.ProjectMasterCreateNestedOneWithoutBox_info_fieldsInput
 }
 
 export type ProjectBoxInfoFieldUncheckedCreateWithoutVendorInput = {
@@ -767,8 +767,8 @@ export type ProjectBoxInfoFieldCreateWithoutProjectInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutBox_info_fieldsInput
   values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutFieldInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutBox_info_fieldsInput
 }
 
 export type ProjectBoxInfoFieldUncheckedCreateWithoutProjectInput = {
@@ -917,8 +917,8 @@ export type ProjectBoxInfoFieldUpdateWithoutVendorInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBox_info_fieldsNestedInput
   values?: Prisma.BoxInfoFieldValueUpdateManyWithoutFieldNestedInput
+  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBox_info_fieldsNestedInput
 }
 
 export type ProjectBoxInfoFieldUncheckedUpdateWithoutVendorInput = {
@@ -978,8 +978,8 @@ export type ProjectBoxInfoFieldUpdateWithoutProjectInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBox_info_fieldsNestedInput
   values?: Prisma.BoxInfoFieldValueUpdateManyWithoutFieldNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBox_info_fieldsNestedInput
 }
 
 export type ProjectBoxInfoFieldUncheckedUpdateWithoutProjectInput = {
@@ -1058,9 +1058,9 @@ export type ProjectBoxInfoFieldSelect<ExtArgs extends runtime.Types.Extensions.I
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
+  values?: boolean | Prisma.ProjectBoxInfoField$valuesArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  values?: boolean | Prisma.ProjectBoxInfoField$valuesArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectBoxInfoFieldCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectBoxInfoField"]>
 
@@ -1118,9 +1118,9 @@ export type ProjectBoxInfoFieldSelectScalar = {
 
 export type ProjectBoxInfoFieldOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "field_label" | "field_key" | "field_type" | "is_required" | "sort_order" | "active" | "created_by" | "updated_by" | "created_at" | "updated_at", ExtArgs["result"]["projectBoxInfoField"]>
 export type ProjectBoxInfoFieldInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  values?: boolean | Prisma.ProjectBoxInfoField$valuesArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  values?: boolean | Prisma.ProjectBoxInfoField$valuesArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectBoxInfoFieldCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectBoxInfoFieldIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1135,9 +1135,9 @@ export type ProjectBoxInfoFieldIncludeUpdateManyAndReturn<ExtArgs extends runtim
 export type $ProjectBoxInfoFieldPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProjectBoxInfoField"
   objects: {
+    values: Prisma.$BoxInfoFieldValuePayload<ExtArgs>[]
     project: Prisma.$ProjectMasterPayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    values: Prisma.$BoxInfoFieldValuePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1547,9 +1547,9 @@ readonly fields: ProjectBoxInfoFieldFieldRefs;
  */
 export interface Prisma__ProjectBoxInfoFieldClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  values<T extends Prisma.ProjectBoxInfoField$valuesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectBoxInfoField$valuesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxInfoFieldValuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   project<T extends Prisma.ProjectMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectMasterClient<runtime.Types.Result.GetResult<Prisma.$ProjectMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  values<T extends Prisma.ProjectBoxInfoField$valuesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectBoxInfoField$valuesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxInfoFieldValuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

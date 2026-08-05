@@ -45,13 +45,13 @@ export type BrandMasterMinAggregateOutputType = {
   vendor_id: number | null
   brand_name: string | null
   active: $Enums.BrandActiveFlag | null
+  created_at: Date | null
+  updated_at: Date | null
   brand_short_name: string | null
   logo: string | null
   is_active: boolean | null
   created_by: number | null
   updated_by: number | null
-  created_at: Date | null
-  updated_at: Date | null
 }
 
 export type BrandMasterMaxAggregateOutputType = {
@@ -59,13 +59,13 @@ export type BrandMasterMaxAggregateOutputType = {
   vendor_id: number | null
   brand_name: string | null
   active: $Enums.BrandActiveFlag | null
+  created_at: Date | null
+  updated_at: Date | null
   brand_short_name: string | null
   logo: string | null
   is_active: boolean | null
   created_by: number | null
   updated_by: number | null
-  created_at: Date | null
-  updated_at: Date | null
 }
 
 export type BrandMasterCountAggregateOutputType = {
@@ -73,13 +73,13 @@ export type BrandMasterCountAggregateOutputType = {
   vendor_id: number
   brand_name: number
   active: number
+  created_at: number
+  updated_at: number
   brand_short_name: number
   logo: number
   is_active: number
   created_by: number
   updated_by: number
-  created_at: number
-  updated_at: number
   _all: number
 }
 
@@ -103,13 +103,13 @@ export type BrandMasterMinAggregateInputType = {
   vendor_id?: true
   brand_name?: true
   active?: true
+  created_at?: true
+  updated_at?: true
   brand_short_name?: true
   logo?: true
   is_active?: true
   created_by?: true
   updated_by?: true
-  created_at?: true
-  updated_at?: true
 }
 
 export type BrandMasterMaxAggregateInputType = {
@@ -117,13 +117,13 @@ export type BrandMasterMaxAggregateInputType = {
   vendor_id?: true
   brand_name?: true
   active?: true
+  created_at?: true
+  updated_at?: true
   brand_short_name?: true
   logo?: true
   is_active?: true
   created_by?: true
   updated_by?: true
-  created_at?: true
-  updated_at?: true
 }
 
 export type BrandMasterCountAggregateInputType = {
@@ -131,13 +131,13 @@ export type BrandMasterCountAggregateInputType = {
   vendor_id?: true
   brand_name?: true
   active?: true
+  created_at?: true
+  updated_at?: true
   brand_short_name?: true
   logo?: true
   is_active?: true
   created_by?: true
   updated_by?: true
-  created_at?: true
-  updated_at?: true
   _all?: true
 }
 
@@ -232,13 +232,13 @@ export type BrandMasterGroupByOutputType = {
   vendor_id: number
   brand_name: string
   active: $Enums.BrandActiveFlag
+  created_at: Date
+  updated_at: Date
   brand_short_name: string | null
   logo: string | null
   is_active: boolean
   created_by: number | null
   updated_by: number | null
-  created_at: Date
-  updated_at: Date
   _count: BrandMasterCountAggregateOutputType | null
   _avg: BrandMasterAvgAggregateOutputType | null
   _sum: BrandMasterSumAggregateOutputType | null
@@ -269,13 +269,13 @@ export type BrandMasterWhereInput = {
   vendor_id?: Prisma.IntFilter<"BrandMaster"> | number
   brand_name?: Prisma.StringFilter<"BrandMaster"> | string
   active?: Prisma.EnumBrandActiveFlagFilter<"BrandMaster"> | $Enums.BrandActiveFlag
+  created_at?: Prisma.DateTimeFilter<"BrandMaster"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"BrandMaster"> | Date | string
   brand_short_name?: Prisma.StringNullableFilter<"BrandMaster"> | string | null
   logo?: Prisma.StringNullableFilter<"BrandMaster"> | string | null
   is_active?: Prisma.BoolFilter<"BrandMaster"> | boolean
   created_by?: Prisma.IntNullableFilter<"BrandMaster"> | number | null
   updated_by?: Prisma.IntNullableFilter<"BrandMaster"> | number | null
-  created_at?: Prisma.DateTimeFilter<"BrandMaster"> | Date | string
-  updated_at?: Prisma.DateTimeFilter<"BrandMaster"> | Date | string
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   products?: Prisma.ProductMasterListRelationFilter
 }
@@ -285,13 +285,13 @@ export type BrandMasterOrderByWithRelationInput = {
   vendor_id?: Prisma.SortOrder
   brand_name?: Prisma.SortOrder
   active?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   brand_short_name?: Prisma.SortOrderInput | Prisma.SortOrder
   logo?: Prisma.SortOrderInput | Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   products?: Prisma.ProductMasterOrderByRelationAggregateInput
 }
@@ -304,13 +304,13 @@ export type BrandMasterWhereUniqueInput = Prisma.AtLeast<{
   vendor_id?: Prisma.IntFilter<"BrandMaster"> | number
   brand_name?: Prisma.StringFilter<"BrandMaster"> | string
   active?: Prisma.EnumBrandActiveFlagFilter<"BrandMaster"> | $Enums.BrandActiveFlag
+  created_at?: Prisma.DateTimeFilter<"BrandMaster"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"BrandMaster"> | Date | string
   brand_short_name?: Prisma.StringNullableFilter<"BrandMaster"> | string | null
   logo?: Prisma.StringNullableFilter<"BrandMaster"> | string | null
   is_active?: Prisma.BoolFilter<"BrandMaster"> | boolean
   created_by?: Prisma.IntNullableFilter<"BrandMaster"> | number | null
   updated_by?: Prisma.IntNullableFilter<"BrandMaster"> | number | null
-  created_at?: Prisma.DateTimeFilter<"BrandMaster"> | Date | string
-  updated_at?: Prisma.DateTimeFilter<"BrandMaster"> | Date | string
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   products?: Prisma.ProductMasterListRelationFilter
 }, "id">
@@ -320,13 +320,13 @@ export type BrandMasterOrderByWithAggregationInput = {
   vendor_id?: Prisma.SortOrder
   brand_name?: Prisma.SortOrder
   active?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   brand_short_name?: Prisma.SortOrderInput | Prisma.SortOrder
   logo?: Prisma.SortOrderInput | Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
   _count?: Prisma.BrandMasterCountOrderByAggregateInput
   _avg?: Prisma.BrandMasterAvgOrderByAggregateInput
   _max?: Prisma.BrandMasterMaxOrderByAggregateInput
@@ -342,25 +342,25 @@ export type BrandMasterScalarWhereWithAggregatesInput = {
   vendor_id?: Prisma.IntWithAggregatesFilter<"BrandMaster"> | number
   brand_name?: Prisma.StringWithAggregatesFilter<"BrandMaster"> | string
   active?: Prisma.EnumBrandActiveFlagWithAggregatesFilter<"BrandMaster"> | $Enums.BrandActiveFlag
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"BrandMaster"> | Date | string
+  updated_at?: Prisma.DateTimeWithAggregatesFilter<"BrandMaster"> | Date | string
   brand_short_name?: Prisma.StringNullableWithAggregatesFilter<"BrandMaster"> | string | null
   logo?: Prisma.StringNullableWithAggregatesFilter<"BrandMaster"> | string | null
   is_active?: Prisma.BoolWithAggregatesFilter<"BrandMaster"> | boolean
   created_by?: Prisma.IntNullableWithAggregatesFilter<"BrandMaster"> | number | null
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"BrandMaster"> | number | null
-  created_at?: Prisma.DateTimeWithAggregatesFilter<"BrandMaster"> | Date | string
-  updated_at?: Prisma.DateTimeWithAggregatesFilter<"BrandMaster"> | Date | string
 }
 
 export type BrandMasterCreateInput = {
   brand_name: string
   active?: $Enums.BrandActiveFlag
+  created_at?: Date | string
+  updated_at?: Date | string
   brand_short_name?: string | null
   logo?: string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
-  created_at?: Date | string
-  updated_at?: Date | string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutBrandsInput
   products?: Prisma.ProductMasterCreateNestedManyWithoutBrandInput
 }
@@ -370,26 +370,26 @@ export type BrandMasterUncheckedCreateInput = {
   vendor_id: number
   brand_name: string
   active?: $Enums.BrandActiveFlag
+  created_at?: Date | string
+  updated_at?: Date | string
   brand_short_name?: string | null
   logo?: string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
-  created_at?: Date | string
-  updated_at?: Date | string
   products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutBrandInput
 }
 
 export type BrandMasterUpdateInput = {
   brand_name?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.EnumBrandActiveFlagFieldUpdateOperationsInput | $Enums.BrandActiveFlag
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brand_short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBrandsNestedInput
   products?: Prisma.ProductMasterUpdateManyWithoutBrandNestedInput
 }
@@ -399,13 +399,13 @@ export type BrandMasterUncheckedUpdateInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   brand_name?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.EnumBrandActiveFlagFieldUpdateOperationsInput | $Enums.BrandActiveFlag
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brand_short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   products?: Prisma.ProductMasterUncheckedUpdateManyWithoutBrandNestedInput
 }
 
@@ -414,25 +414,25 @@ export type BrandMasterCreateManyInput = {
   vendor_id: number
   brand_name: string
   active?: $Enums.BrandActiveFlag
+  created_at?: Date | string
+  updated_at?: Date | string
   brand_short_name?: string | null
   logo?: string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
-  created_at?: Date | string
-  updated_at?: Date | string
 }
 
 export type BrandMasterUpdateManyMutationInput = {
   brand_name?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.EnumBrandActiveFlagFieldUpdateOperationsInput | $Enums.BrandActiveFlag
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brand_short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BrandMasterUncheckedUpdateManyInput = {
@@ -440,13 +440,13 @@ export type BrandMasterUncheckedUpdateManyInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   brand_name?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.EnumBrandActiveFlagFieldUpdateOperationsInput | $Enums.BrandActiveFlag
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brand_short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BrandMasterListRelationFilter = {
@@ -464,13 +464,13 @@ export type BrandMasterCountOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   brand_name?: Prisma.SortOrder
   active?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   brand_short_name?: Prisma.SortOrder
   logo?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
 }
 
 export type BrandMasterAvgOrderByAggregateInput = {
@@ -485,13 +485,13 @@ export type BrandMasterMaxOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   brand_name?: Prisma.SortOrder
   active?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   brand_short_name?: Prisma.SortOrder
   logo?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
 }
 
 export type BrandMasterMinOrderByAggregateInput = {
@@ -499,13 +499,13 @@ export type BrandMasterMinOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   brand_name?: Prisma.SortOrder
   active?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   brand_short_name?: Prisma.SortOrder
   logo?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
 }
 
 export type BrandMasterSumOrderByAggregateInput = {
@@ -585,13 +585,13 @@ export type BrandMasterUpdateOneWithoutProductsNestedInput = {
 export type BrandMasterCreateWithoutVendorInput = {
   brand_name: string
   active?: $Enums.BrandActiveFlag
+  created_at?: Date | string
+  updated_at?: Date | string
   brand_short_name?: string | null
   logo?: string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
-  created_at?: Date | string
-  updated_at?: Date | string
   products?: Prisma.ProductMasterCreateNestedManyWithoutBrandInput
 }
 
@@ -599,13 +599,13 @@ export type BrandMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   brand_name: string
   active?: $Enums.BrandActiveFlag
+  created_at?: Date | string
+  updated_at?: Date | string
   brand_short_name?: string | null
   logo?: string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
-  created_at?: Date | string
-  updated_at?: Date | string
   products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutBrandInput
 }
 
@@ -643,25 +643,25 @@ export type BrandMasterScalarWhereInput = {
   vendor_id?: Prisma.IntFilter<"BrandMaster"> | number
   brand_name?: Prisma.StringFilter<"BrandMaster"> | string
   active?: Prisma.EnumBrandActiveFlagFilter<"BrandMaster"> | $Enums.BrandActiveFlag
+  created_at?: Prisma.DateTimeFilter<"BrandMaster"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"BrandMaster"> | Date | string
   brand_short_name?: Prisma.StringNullableFilter<"BrandMaster"> | string | null
   logo?: Prisma.StringNullableFilter<"BrandMaster"> | string | null
   is_active?: Prisma.BoolFilter<"BrandMaster"> | boolean
   created_by?: Prisma.IntNullableFilter<"BrandMaster"> | number | null
   updated_by?: Prisma.IntNullableFilter<"BrandMaster"> | number | null
-  created_at?: Prisma.DateTimeFilter<"BrandMaster"> | Date | string
-  updated_at?: Prisma.DateTimeFilter<"BrandMaster"> | Date | string
 }
 
 export type BrandMasterCreateWithoutProductsInput = {
   brand_name: string
   active?: $Enums.BrandActiveFlag
+  created_at?: Date | string
+  updated_at?: Date | string
   brand_short_name?: string | null
   logo?: string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
-  created_at?: Date | string
-  updated_at?: Date | string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutBrandsInput
 }
 
@@ -670,13 +670,13 @@ export type BrandMasterUncheckedCreateWithoutProductsInput = {
   vendor_id: number
   brand_name: string
   active?: $Enums.BrandActiveFlag
+  created_at?: Date | string
+  updated_at?: Date | string
   brand_short_name?: string | null
   logo?: string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
-  created_at?: Date | string
-  updated_at?: Date | string
 }
 
 export type BrandMasterCreateOrConnectWithoutProductsInput = {
@@ -698,13 +698,13 @@ export type BrandMasterUpdateToOneWithWhereWithoutProductsInput = {
 export type BrandMasterUpdateWithoutProductsInput = {
   brand_name?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.EnumBrandActiveFlagFieldUpdateOperationsInput | $Enums.BrandActiveFlag
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brand_short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBrandsNestedInput
 }
 
@@ -713,38 +713,38 @@ export type BrandMasterUncheckedUpdateWithoutProductsInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   brand_name?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.EnumBrandActiveFlagFieldUpdateOperationsInput | $Enums.BrandActiveFlag
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brand_short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BrandMasterCreateManyVendorInput = {
   id?: number
   brand_name: string
   active?: $Enums.BrandActiveFlag
+  created_at?: Date | string
+  updated_at?: Date | string
   brand_short_name?: string | null
   logo?: string | null
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
-  created_at?: Date | string
-  updated_at?: Date | string
 }
 
 export type BrandMasterUpdateWithoutVendorInput = {
   brand_name?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.EnumBrandActiveFlagFieldUpdateOperationsInput | $Enums.BrandActiveFlag
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brand_short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   products?: Prisma.ProductMasterUpdateManyWithoutBrandNestedInput
 }
 
@@ -752,13 +752,13 @@ export type BrandMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   brand_name?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.EnumBrandActiveFlagFieldUpdateOperationsInput | $Enums.BrandActiveFlag
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brand_short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   products?: Prisma.ProductMasterUncheckedUpdateManyWithoutBrandNestedInput
 }
 
@@ -766,13 +766,13 @@ export type BrandMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   brand_name?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.EnumBrandActiveFlagFieldUpdateOperationsInput | $Enums.BrandActiveFlag
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brand_short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -811,13 +811,13 @@ export type BrandMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   vendor_id?: boolean
   brand_name?: boolean
   active?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   brand_short_name?: boolean
   logo?: boolean
   is_active?: boolean
   created_by?: boolean
   updated_by?: boolean
-  created_at?: boolean
-  updated_at?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   products?: boolean | Prisma.BrandMaster$productsArgs<ExtArgs>
   _count?: boolean | Prisma.BrandMasterCountOutputTypeDefaultArgs<ExtArgs>
@@ -828,13 +828,13 @@ export type BrandMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   vendor_id?: boolean
   brand_name?: boolean
   active?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   brand_short_name?: boolean
   logo?: boolean
   is_active?: boolean
   created_by?: boolean
   updated_by?: boolean
-  created_at?: boolean
-  updated_at?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["brandMaster"]>
 
@@ -843,13 +843,13 @@ export type BrandMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   vendor_id?: boolean
   brand_name?: boolean
   active?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   brand_short_name?: boolean
   logo?: boolean
   is_active?: boolean
   created_by?: boolean
   updated_by?: boolean
-  created_at?: boolean
-  updated_at?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["brandMaster"]>
 
@@ -858,16 +858,16 @@ export type BrandMasterSelectScalar = {
   vendor_id?: boolean
   brand_name?: boolean
   active?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   brand_short_name?: boolean
   logo?: boolean
   is_active?: boolean
   created_by?: boolean
   updated_by?: boolean
-  created_at?: boolean
-  updated_at?: boolean
 }
 
-export type BrandMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "brand_name" | "active" | "brand_short_name" | "logo" | "is_active" | "created_by" | "updated_by" | "created_at" | "updated_at", ExtArgs["result"]["brandMaster"]>
+export type BrandMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "brand_name" | "active" | "created_at" | "updated_at" | "brand_short_name" | "logo" | "is_active" | "created_by" | "updated_by", ExtArgs["result"]["brandMaster"]>
 export type BrandMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   products?: boolean | Prisma.BrandMaster$productsArgs<ExtArgs>
@@ -891,13 +891,13 @@ export type $BrandMasterPayload<ExtArgs extends runtime.Types.Extensions.Interna
     vendor_id: number
     brand_name: string
     active: $Enums.BrandActiveFlag
+    created_at: Date
+    updated_at: Date
     brand_short_name: string | null
     logo: string | null
     is_active: boolean
     created_by: number | null
     updated_by: number | null
-    created_at: Date
-    updated_at: Date
   }, ExtArgs["result"]["brandMaster"]>
   composites: {}
 }
@@ -1327,13 +1327,13 @@ export interface BrandMasterFieldRefs {
   readonly vendor_id: Prisma.FieldRef<"BrandMaster", 'Int'>
   readonly brand_name: Prisma.FieldRef<"BrandMaster", 'String'>
   readonly active: Prisma.FieldRef<"BrandMaster", 'BrandActiveFlag'>
+  readonly created_at: Prisma.FieldRef<"BrandMaster", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"BrandMaster", 'DateTime'>
   readonly brand_short_name: Prisma.FieldRef<"BrandMaster", 'String'>
   readonly logo: Prisma.FieldRef<"BrandMaster", 'String'>
   readonly is_active: Prisma.FieldRef<"BrandMaster", 'Boolean'>
   readonly created_by: Prisma.FieldRef<"BrandMaster", 'Int'>
   readonly updated_by: Prisma.FieldRef<"BrandMaster", 'Int'>
-  readonly created_at: Prisma.FieldRef<"BrandMaster", 'DateTime'>
-  readonly updated_at: Prisma.FieldRef<"BrandMaster", 'DateTime'>
 }
     
 

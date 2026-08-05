@@ -44,12 +44,12 @@ export type ArchitechuremasterMinAggregateOutputType = {
   name: string | null
   email: string | null
   mobile: string | null
-  alt_mobile: string | null
   isActive: boolean | null
   createdAt: Date | null
   createdBy: number | null
-  isDeleted: boolean | null
   deletedAt: Date | null
+  isDeleted: boolean | null
+  alt_mobile: string | null
 }
 
 export type ArchitechuremasterMaxAggregateOutputType = {
@@ -58,12 +58,12 @@ export type ArchitechuremasterMaxAggregateOutputType = {
   name: string | null
   email: string | null
   mobile: string | null
-  alt_mobile: string | null
   isActive: boolean | null
   createdAt: Date | null
   createdBy: number | null
-  isDeleted: boolean | null
   deletedAt: Date | null
+  isDeleted: boolean | null
+  alt_mobile: string | null
 }
 
 export type ArchitechuremasterCountAggregateOutputType = {
@@ -72,12 +72,12 @@ export type ArchitechuremasterCountAggregateOutputType = {
   name: number
   email: number
   mobile: number
-  alt_mobile: number
   isActive: number
   createdAt: number
   createdBy: number
-  isDeleted: number
   deletedAt: number
+  isDeleted: number
+  alt_mobile: number
   _all: number
 }
 
@@ -100,12 +100,12 @@ export type ArchitechuremasterMinAggregateInputType = {
   name?: true
   email?: true
   mobile?: true
-  alt_mobile?: true
   isActive?: true
   createdAt?: true
   createdBy?: true
-  isDeleted?: true
   deletedAt?: true
+  isDeleted?: true
+  alt_mobile?: true
 }
 
 export type ArchitechuremasterMaxAggregateInputType = {
@@ -114,12 +114,12 @@ export type ArchitechuremasterMaxAggregateInputType = {
   name?: true
   email?: true
   mobile?: true
-  alt_mobile?: true
   isActive?: true
   createdAt?: true
   createdBy?: true
-  isDeleted?: true
   deletedAt?: true
+  isDeleted?: true
+  alt_mobile?: true
 }
 
 export type ArchitechuremasterCountAggregateInputType = {
@@ -128,12 +128,12 @@ export type ArchitechuremasterCountAggregateInputType = {
   name?: true
   email?: true
   mobile?: true
-  alt_mobile?: true
   isActive?: true
   createdAt?: true
   createdBy?: true
-  isDeleted?: true
   deletedAt?: true
+  isDeleted?: true
+  alt_mobile?: true
   _all?: true
 }
 
@@ -229,12 +229,12 @@ export type ArchitechuremasterGroupByOutputType = {
   name: string
   email: string
   mobile: string
-  alt_mobile: string | null
   isActive: boolean
   createdAt: Date
   createdBy: number
-  isDeleted: boolean
   deletedAt: Date | null
+  isDeleted: boolean
+  alt_mobile: string | null
   _count: ArchitechuremasterCountAggregateOutputType | null
   _avg: ArchitechuremasterAvgAggregateOutputType | null
   _sum: ArchitechuremasterSumAggregateOutputType | null
@@ -266,14 +266,14 @@ export type ArchitechuremasterWhereInput = {
   name?: Prisma.StringFilter<"Architechuremaster"> | string
   email?: Prisma.StringFilter<"Architechuremaster"> | string
   mobile?: Prisma.StringFilter<"Architechuremaster"> | string
-  alt_mobile?: Prisma.StringNullableFilter<"Architechuremaster"> | string | null
   isActive?: Prisma.BoolFilter<"Architechuremaster"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Architechuremaster"> | Date | string
   createdBy?: Prisma.IntFilter<"Architechuremaster"> | number
-  isDeleted?: Prisma.BoolFilter<"Architechuremaster"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"Architechuremaster"> | Date | string | null
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  isDeleted?: Prisma.BoolFilter<"Architechuremaster"> | boolean
+  alt_mobile?: Prisma.StringNullableFilter<"Architechuremaster"> | string | null
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   leads?: Prisma.LeadMasterListRelationFilter
 }
 
@@ -283,14 +283,14 @@ export type ArchitechuremasterOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
-  alt_mobile?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
-  isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  isDeleted?: Prisma.SortOrder
+  alt_mobile?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   leads?: Prisma.LeadMasterOrderByRelationAggregateInput
 }
 
@@ -303,14 +303,14 @@ export type ArchitechuremasterWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Architechuremaster"> | string
   email?: Prisma.StringFilter<"Architechuremaster"> | string
   mobile?: Prisma.StringFilter<"Architechuremaster"> | string
-  alt_mobile?: Prisma.StringNullableFilter<"Architechuremaster"> | string | null
   isActive?: Prisma.BoolFilter<"Architechuremaster"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Architechuremaster"> | Date | string
   createdBy?: Prisma.IntFilter<"Architechuremaster"> | number
-  isDeleted?: Prisma.BoolFilter<"Architechuremaster"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"Architechuremaster"> | Date | string | null
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  isDeleted?: Prisma.BoolFilter<"Architechuremaster"> | boolean
+  alt_mobile?: Prisma.StringNullableFilter<"Architechuremaster"> | string | null
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   leads?: Prisma.LeadMasterListRelationFilter
 }, "id">
 
@@ -320,12 +320,12 @@ export type ArchitechuremasterOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
-  alt_mobile?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
-  isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
+  alt_mobile?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ArchitechuremasterCountOrderByAggregateInput
   _avg?: Prisma.ArchitechuremasterAvgOrderByAggregateInput
   _max?: Prisma.ArchitechuremasterMaxOrderByAggregateInput
@@ -342,25 +342,25 @@ export type ArchitechuremasterScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Architechuremaster"> | string
   email?: Prisma.StringWithAggregatesFilter<"Architechuremaster"> | string
   mobile?: Prisma.StringWithAggregatesFilter<"Architechuremaster"> | string
-  alt_mobile?: Prisma.StringNullableWithAggregatesFilter<"Architechuremaster"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"Architechuremaster"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Architechuremaster"> | Date | string
   createdBy?: Prisma.IntWithAggregatesFilter<"Architechuremaster"> | number
-  isDeleted?: Prisma.BoolWithAggregatesFilter<"Architechuremaster"> | boolean
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Architechuremaster"> | Date | string | null
+  isDeleted?: Prisma.BoolWithAggregatesFilter<"Architechuremaster"> | boolean
+  alt_mobile?: Prisma.StringNullableWithAggregatesFilter<"Architechuremaster"> | string | null
 }
 
 export type ArchitechuremasterCreateInput = {
   name: string
   email: string
   mobile: string
-  alt_mobile?: string | null
   isActive?: boolean
   createdAt?: Date | string
-  isDeleted?: boolean
   deletedAt?: Date | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutArchitechuremastersInput
+  isDeleted?: boolean
+  alt_mobile?: string | null
   user: Prisma.UserMasterCreateNestedOneWithoutArchitechuremastersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutArchitechuremastersInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutArchitectInput
 }
 
@@ -370,12 +370,12 @@ export type ArchitechuremasterUncheckedCreateInput = {
   name: string
   email: string
   mobile: string
-  alt_mobile?: string | null
   isActive?: boolean
   createdAt?: Date | string
   createdBy: number
-  isDeleted?: boolean
   deletedAt?: Date | string | null
+  isDeleted?: boolean
+  alt_mobile?: string | null
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutArchitectInput
 }
 
@@ -383,13 +383,13 @@ export type ArchitechuremasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutArchitectNestedInput
 }
 
@@ -399,12 +399,12 @@ export type ArchitechuremasterUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutArchitectNestedInput
 }
 
@@ -414,23 +414,23 @@ export type ArchitechuremasterCreateManyInput = {
   name: string
   email: string
   mobile: string
-  alt_mobile?: string | null
   isActive?: boolean
   createdAt?: Date | string
   createdBy: number
-  isDeleted?: boolean
   deletedAt?: Date | string | null
+  isDeleted?: boolean
+  alt_mobile?: string | null
 }
 
 export type ArchitechuremasterUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ArchitechuremasterUncheckedUpdateManyInput = {
@@ -439,12 +439,12 @@ export type ArchitechuremasterUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ArchitechuremasterListRelationFilter = {
@@ -468,12 +468,12 @@ export type ArchitechuremasterCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
-  alt_mobile?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
-  isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
+  alt_mobile?: Prisma.SortOrder
 }
 
 export type ArchitechuremasterAvgOrderByAggregateInput = {
@@ -488,12 +488,12 @@ export type ArchitechuremasterMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
-  alt_mobile?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
-  isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
+  alt_mobile?: Prisma.SortOrder
 }
 
 export type ArchitechuremasterMinOrderByAggregateInput = {
@@ -502,12 +502,12 @@ export type ArchitechuremasterMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
-  alt_mobile?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
-  isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
+  alt_mobile?: Prisma.SortOrder
 }
 
 export type ArchitechuremasterSumOrderByAggregateInput = {
@@ -620,11 +620,11 @@ export type ArchitechuremasterCreateWithoutVendorInput = {
   name: string
   email: string
   mobile: string
-  alt_mobile?: string | null
   isActive?: boolean
   createdAt?: Date | string
-  isDeleted?: boolean
   deletedAt?: Date | string | null
+  isDeleted?: boolean
+  alt_mobile?: string | null
   user: Prisma.UserMasterCreateNestedOneWithoutArchitechuremastersInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutArchitectInput
 }
@@ -634,12 +634,12 @@ export type ArchitechuremasterUncheckedCreateWithoutVendorInput = {
   name: string
   email: string
   mobile: string
-  alt_mobile?: string | null
   isActive?: boolean
   createdAt?: Date | string
   createdBy: number
-  isDeleted?: boolean
   deletedAt?: Date | string | null
+  isDeleted?: boolean
+  alt_mobile?: string | null
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutArchitectInput
 }
 
@@ -678,23 +678,23 @@ export type ArchitechuremasterScalarWhereInput = {
   name?: Prisma.StringFilter<"Architechuremaster"> | string
   email?: Prisma.StringFilter<"Architechuremaster"> | string
   mobile?: Prisma.StringFilter<"Architechuremaster"> | string
-  alt_mobile?: Prisma.StringNullableFilter<"Architechuremaster"> | string | null
   isActive?: Prisma.BoolFilter<"Architechuremaster"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Architechuremaster"> | Date | string
   createdBy?: Prisma.IntFilter<"Architechuremaster"> | number
-  isDeleted?: Prisma.BoolFilter<"Architechuremaster"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"Architechuremaster"> | Date | string | null
+  isDeleted?: Prisma.BoolFilter<"Architechuremaster"> | boolean
+  alt_mobile?: Prisma.StringNullableFilter<"Architechuremaster"> | string | null
 }
 
 export type ArchitechuremasterCreateWithoutUserInput = {
   name: string
   email: string
   mobile: string
-  alt_mobile?: string | null
   isActive?: boolean
   createdAt?: Date | string
-  isDeleted?: boolean
   deletedAt?: Date | string | null
+  isDeleted?: boolean
+  alt_mobile?: string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutArchitechuremastersInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutArchitectInput
 }
@@ -705,11 +705,11 @@ export type ArchitechuremasterUncheckedCreateWithoutUserInput = {
   name: string
   email: string
   mobile: string
-  alt_mobile?: string | null
   isActive?: boolean
   createdAt?: Date | string
-  isDeleted?: boolean
   deletedAt?: Date | string | null
+  isDeleted?: boolean
+  alt_mobile?: string | null
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutArchitectInput
 }
 
@@ -743,13 +743,13 @@ export type ArchitechuremasterCreateWithoutLeadsInput = {
   name: string
   email: string
   mobile: string
-  alt_mobile?: string | null
   isActive?: boolean
   createdAt?: Date | string
-  isDeleted?: boolean
   deletedAt?: Date | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutArchitechuremastersInput
+  isDeleted?: boolean
+  alt_mobile?: string | null
   user: Prisma.UserMasterCreateNestedOneWithoutArchitechuremastersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutArchitechuremastersInput
 }
 
 export type ArchitechuremasterUncheckedCreateWithoutLeadsInput = {
@@ -758,12 +758,12 @@ export type ArchitechuremasterUncheckedCreateWithoutLeadsInput = {
   name: string
   email: string
   mobile: string
-  alt_mobile?: string | null
   isActive?: boolean
   createdAt?: Date | string
   createdBy: number
-  isDeleted?: boolean
   deletedAt?: Date | string | null
+  isDeleted?: boolean
+  alt_mobile?: string | null
 }
 
 export type ArchitechuremasterCreateOrConnectWithoutLeadsInput = {
@@ -786,13 +786,13 @@ export type ArchitechuremasterUpdateWithoutLeadsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
 }
 
 export type ArchitechuremasterUncheckedUpdateWithoutLeadsInput = {
@@ -801,12 +801,12 @@ export type ArchitechuremasterUncheckedUpdateWithoutLeadsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ArchitechuremasterCreateManyVendorInput = {
@@ -814,23 +814,23 @@ export type ArchitechuremasterCreateManyVendorInput = {
   name: string
   email: string
   mobile: string
-  alt_mobile?: string | null
   isActive?: boolean
   createdAt?: Date | string
   createdBy: number
-  isDeleted?: boolean
   deletedAt?: Date | string | null
+  isDeleted?: boolean
+  alt_mobile?: string | null
 }
 
 export type ArchitechuremasterUpdateWithoutVendorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutArchitectNestedInput
 }
@@ -840,12 +840,12 @@ export type ArchitechuremasterUncheckedUpdateWithoutVendorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutArchitectNestedInput
 }
 
@@ -854,12 +854,12 @@ export type ArchitechuremasterUncheckedUpdateManyWithoutVendorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ArchitechuremasterCreateManyUserInput = {
@@ -868,22 +868,22 @@ export type ArchitechuremasterCreateManyUserInput = {
   name: string
   email: string
   mobile: string
-  alt_mobile?: string | null
   isActive?: boolean
   createdAt?: Date | string
-  isDeleted?: boolean
   deletedAt?: Date | string | null
+  isDeleted?: boolean
+  alt_mobile?: string | null
 }
 
 export type ArchitechuremasterUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutArchitectNestedInput
 }
@@ -894,11 +894,11 @@ export type ArchitechuremasterUncheckedUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutArchitectNestedInput
 }
 
@@ -908,11 +908,11 @@ export type ArchitechuremasterUncheckedUpdateManyWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  alt_mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -952,14 +952,14 @@ export type ArchitechuremasterSelect<ExtArgs extends runtime.Types.Extensions.In
   name?: boolean
   email?: boolean
   mobile?: boolean
-  alt_mobile?: boolean
   isActive?: boolean
   createdAt?: boolean
   createdBy?: boolean
-  isDeleted?: boolean
   deletedAt?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  isDeleted?: boolean
+  alt_mobile?: boolean
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   leads?: boolean | Prisma.Architechuremaster$leadsArgs<ExtArgs>
   _count?: boolean | Prisma.ArchitechuremasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["architechuremaster"]>
@@ -970,14 +970,14 @@ export type ArchitechuremasterSelectCreateManyAndReturn<ExtArgs extends runtime.
   name?: boolean
   email?: boolean
   mobile?: boolean
-  alt_mobile?: boolean
   isActive?: boolean
   createdAt?: boolean
   createdBy?: boolean
-  isDeleted?: boolean
   deletedAt?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  isDeleted?: boolean
+  alt_mobile?: boolean
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["architechuremaster"]>
 
 export type ArchitechuremasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -986,14 +986,14 @@ export type ArchitechuremasterSelectUpdateManyAndReturn<ExtArgs extends runtime.
   name?: boolean
   email?: boolean
   mobile?: boolean
-  alt_mobile?: boolean
   isActive?: boolean
   createdAt?: boolean
   createdBy?: boolean
-  isDeleted?: boolean
   deletedAt?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  isDeleted?: boolean
+  alt_mobile?: boolean
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["architechuremaster"]>
 
 export type ArchitechuremasterSelectScalar = {
@@ -1002,35 +1002,35 @@ export type ArchitechuremasterSelectScalar = {
   name?: boolean
   email?: boolean
   mobile?: boolean
-  alt_mobile?: boolean
   isActive?: boolean
   createdAt?: boolean
   createdBy?: boolean
-  isDeleted?: boolean
   deletedAt?: boolean
+  isDeleted?: boolean
+  alt_mobile?: boolean
 }
 
-export type ArchitechuremasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendorId" | "name" | "email" | "mobile" | "alt_mobile" | "isActive" | "createdAt" | "createdBy" | "isDeleted" | "deletedAt", ExtArgs["result"]["architechuremaster"]>
+export type ArchitechuremasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendorId" | "name" | "email" | "mobile" | "isActive" | "createdAt" | "createdBy" | "deletedAt" | "isDeleted" | "alt_mobile", ExtArgs["result"]["architechuremaster"]>
 export type ArchitechuremasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   leads?: boolean | Prisma.Architechuremaster$leadsArgs<ExtArgs>
   _count?: boolean | Prisma.ArchitechuremasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ArchitechuremasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type ArchitechuremasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $ArchitechuremasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Architechuremaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     user: Prisma.$UserMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     leads: Prisma.$LeadMasterPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1039,12 +1039,12 @@ export type $ArchitechuremasterPayload<ExtArgs extends runtime.Types.Extensions.
     name: string
     email: string
     mobile: string
-    alt_mobile: string | null
     isActive: boolean
     createdAt: Date
     createdBy: number
-    isDeleted: boolean
     deletedAt: Date | null
+    isDeleted: boolean
+    alt_mobile: string | null
   }, ExtArgs["result"]["architechuremaster"]>
   composites: {}
 }
@@ -1439,8 +1439,8 @@ readonly fields: ArchitechuremasterFieldRefs;
  */
 export interface Prisma__ArchitechuremasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   leads<T extends Prisma.Architechuremaster$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Architechuremaster$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1476,12 +1476,12 @@ export interface ArchitechuremasterFieldRefs {
   readonly name: Prisma.FieldRef<"Architechuremaster", 'String'>
   readonly email: Prisma.FieldRef<"Architechuremaster", 'String'>
   readonly mobile: Prisma.FieldRef<"Architechuremaster", 'String'>
-  readonly alt_mobile: Prisma.FieldRef<"Architechuremaster", 'String'>
   readonly isActive: Prisma.FieldRef<"Architechuremaster", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Architechuremaster", 'DateTime'>
   readonly createdBy: Prisma.FieldRef<"Architechuremaster", 'Int'>
-  readonly isDeleted: Prisma.FieldRef<"Architechuremaster", 'Boolean'>
   readonly deletedAt: Prisma.FieldRef<"Architechuremaster", 'DateTime'>
+  readonly isDeleted: Prisma.FieldRef<"Architechuremaster", 'Boolean'>
+  readonly alt_mobile: Prisma.FieldRef<"Architechuremaster", 'String'>
 }
     
 

@@ -308,15 +308,15 @@ export type CHSSelectionTypeMappingWhereInput = {
   created_by?: Prisma.IntFilter<"CHSSelectionTypeMapping"> | number
   updated_at?: Prisma.DateTimeFilter<"CHSSelectionTypeMapping"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"CHSSelectionTypeMapping"> | number | null
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  carcassType?: Prisma.XOR<Prisma.CarcassTypeMasterNullableScalarRelationFilter, Prisma.CarcassTypeMasterWhereInput> | null
+  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  handleType?: Prisma.XOR<Prisma.HandleTypeMasterNullableScalarRelationFilter, Prisma.HandleTypeMasterWhereInput> | null
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   selection?: Prisma.XOR<Prisma.LeadDesignSelectionScalarRelationFilter, Prisma.LeadDesignSelectionWhereInput>
-  carcassType?: Prisma.XOR<Prisma.CarcassTypeMasterNullableScalarRelationFilter, Prisma.CarcassTypeMasterWhereInput> | null
-  shutterType?: Prisma.XOR<Prisma.ShutterTypeMasterNullableScalarRelationFilter, Prisma.ShutterTypeMasterWhereInput> | null
   shutterSubType?: Prisma.XOR<Prisma.ShutterSubTypeMasterNullableScalarRelationFilter, Prisma.ShutterSubTypeMasterWhereInput> | null
-  handleType?: Prisma.XOR<Prisma.HandleTypeMasterNullableScalarRelationFilter, Prisma.HandleTypeMasterWhereInput> | null
-  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  shutterType?: Prisma.XOR<Prisma.ShutterTypeMasterNullableScalarRelationFilter, Prisma.ShutterTypeMasterWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type CHSSelectionTypeMappingOrderByWithRelationInput = {
@@ -332,15 +332,15 @@ export type CHSSelectionTypeMappingOrderByWithRelationInput = {
   created_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  carcassType?: Prisma.CarcassTypeMasterOrderByWithRelationInput
+  createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  handleType?: Prisma.HandleTypeMasterOrderByWithRelationInput
   lead?: Prisma.LeadMasterOrderByWithRelationInput
   selection?: Prisma.LeadDesignSelectionOrderByWithRelationInput
-  carcassType?: Prisma.CarcassTypeMasterOrderByWithRelationInput
-  shutterType?: Prisma.ShutterTypeMasterOrderByWithRelationInput
   shutterSubType?: Prisma.ShutterSubTypeMasterOrderByWithRelationInput
-  handleType?: Prisma.HandleTypeMasterOrderByWithRelationInput
-  createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  shutterType?: Prisma.ShutterTypeMasterOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type CHSSelectionTypeMappingWhereUniqueInput = Prisma.AtLeast<{
@@ -359,15 +359,15 @@ export type CHSSelectionTypeMappingWhereUniqueInput = Prisma.AtLeast<{
   created_by?: Prisma.IntFilter<"CHSSelectionTypeMapping"> | number
   updated_at?: Prisma.DateTimeFilter<"CHSSelectionTypeMapping"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"CHSSelectionTypeMapping"> | number | null
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  carcassType?: Prisma.XOR<Prisma.CarcassTypeMasterNullableScalarRelationFilter, Prisma.CarcassTypeMasterWhereInput> | null
+  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  handleType?: Prisma.XOR<Prisma.HandleTypeMasterNullableScalarRelationFilter, Prisma.HandleTypeMasterWhereInput> | null
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   selection?: Prisma.XOR<Prisma.LeadDesignSelectionScalarRelationFilter, Prisma.LeadDesignSelectionWhereInput>
-  carcassType?: Prisma.XOR<Prisma.CarcassTypeMasterNullableScalarRelationFilter, Prisma.CarcassTypeMasterWhereInput> | null
-  shutterType?: Prisma.XOR<Prisma.ShutterTypeMasterNullableScalarRelationFilter, Prisma.ShutterTypeMasterWhereInput> | null
   shutterSubType?: Prisma.XOR<Prisma.ShutterSubTypeMasterNullableScalarRelationFilter, Prisma.ShutterSubTypeMasterWhereInput> | null
-  handleType?: Prisma.XOR<Prisma.HandleTypeMasterNullableScalarRelationFilter, Prisma.HandleTypeMasterWhereInput> | null
-  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  shutterType?: Prisma.XOR<Prisma.ShutterTypeMasterNullableScalarRelationFilter, Prisma.ShutterTypeMasterWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type CHSSelectionTypeMappingOrderByWithAggregationInput = {
@@ -411,15 +411,15 @@ export type CHSSelectionTypeMappingScalarWhereWithAggregatesInput = {
 export type CHSSelectionTypeMappingCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  carcassType?: Prisma.CarcassTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutChsMappingCreatedByInput
+  handleType?: Prisma.HandleTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutChsSelectionMappingsInput
   selection: Prisma.LeadDesignSelectionCreateNestedOneWithoutChsSelectionMappingsInput
-  carcassType?: Prisma.CarcassTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  shutterType?: Prisma.ShutterTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   shutterSubType?: Prisma.ShutterSubTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  handleType?: Prisma.HandleTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutChsMappingCreatedByInput
+  shutterType?: Prisma.ShutterTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutChsMappingUpdatedByInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutChsSelectionMappingsInput
 }
 
 export type CHSSelectionTypeMappingUncheckedCreateInput = {
@@ -440,15 +440,15 @@ export type CHSSelectionTypeMappingUncheckedCreateInput = {
 export type CHSSelectionTypeMappingUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
+  carcassType?: Prisma.CarcassTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutChsMappingCreatedByNestedInput
+  handleType?: Prisma.HandleTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
   selection?: Prisma.LeadDesignSelectionUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
-  carcassType?: Prisma.CarcassTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  shutterType?: Prisma.ShutterTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   shutterSubType?: Prisma.ShutterSubTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  handleType?: Prisma.HandleTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutChsMappingCreatedByNestedInput
+  shutterType?: Prisma.ShutterTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutChsMappingUpdatedByNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
 }
 
 export type CHSSelectionTypeMappingUncheckedUpdateInput = {
@@ -963,13 +963,13 @@ export type CHSSelectionTypeMappingUncheckedUpdateManyWithoutSelectionNestedInpu
 export type CHSSelectionTypeMappingCreateWithoutVendorInput = {
   created_at?: Date | string
   updated_at?: Date | string
+  carcassType?: Prisma.CarcassTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutChsMappingCreatedByInput
+  handleType?: Prisma.HandleTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutChsSelectionMappingsInput
   selection: Prisma.LeadDesignSelectionCreateNestedOneWithoutChsSelectionMappingsInput
-  carcassType?: Prisma.CarcassTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  shutterType?: Prisma.ShutterTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   shutterSubType?: Prisma.ShutterSubTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  handleType?: Prisma.HandleTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutChsMappingCreatedByInput
+  shutterType?: Prisma.ShutterTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutChsMappingUpdatedByInput
 }
 
@@ -1034,14 +1034,14 @@ export type CHSSelectionTypeMappingScalarWhereInput = {
 export type CHSSelectionTypeMappingCreateWithoutCreatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  carcassType?: Prisma.CarcassTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  handleType?: Prisma.HandleTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutChsSelectionMappingsInput
   selection: Prisma.LeadDesignSelectionCreateNestedOneWithoutChsSelectionMappingsInput
-  carcassType?: Prisma.CarcassTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  shutterType?: Prisma.ShutterTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   shutterSubType?: Prisma.ShutterSubTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  handleType?: Prisma.HandleTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  shutterType?: Prisma.ShutterTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutChsMappingUpdatedByInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutChsSelectionMappingsInput
 }
 
 export type CHSSelectionTypeMappingUncheckedCreateWithoutCreatedByInput = {
@@ -1071,14 +1071,14 @@ export type CHSSelectionTypeMappingCreateManyCreatedByInputEnvelope = {
 export type CHSSelectionTypeMappingCreateWithoutUpdatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  carcassType?: Prisma.CarcassTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutChsMappingCreatedByInput
+  handleType?: Prisma.HandleTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutChsSelectionMappingsInput
   selection: Prisma.LeadDesignSelectionCreateNestedOneWithoutChsSelectionMappingsInput
-  carcassType?: Prisma.CarcassTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  shutterType?: Prisma.ShutterTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   shutterSubType?: Prisma.ShutterSubTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  handleType?: Prisma.HandleTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutChsMappingCreatedByInput
+  shutterType?: Prisma.ShutterTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutChsSelectionMappingsInput
 }
 
 export type CHSSelectionTypeMappingUncheckedCreateWithoutUpdatedByInput = {
@@ -1140,14 +1140,14 @@ export type CHSSelectionTypeMappingUpdateManyWithWhereWithoutUpdatedByInput = {
 export type CHSSelectionTypeMappingCreateWithoutLeadInput = {
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  selection: Prisma.LeadDesignSelectionCreateNestedOneWithoutChsSelectionMappingsInput
   carcassType?: Prisma.CarcassTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  shutterType?: Prisma.ShutterTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  shutterSubType?: Prisma.ShutterSubTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  handleType?: Prisma.HandleTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutChsMappingCreatedByInput
+  handleType?: Prisma.HandleTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  selection: Prisma.LeadDesignSelectionCreateNestedOneWithoutChsSelectionMappingsInput
+  shutterSubType?: Prisma.ShutterSubTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  shutterType?: Prisma.ShutterTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutChsMappingUpdatedByInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutChsSelectionMappingsInput
 }
 
 export type CHSSelectionTypeMappingUncheckedCreateWithoutLeadInput = {
@@ -1193,14 +1193,14 @@ export type CHSSelectionTypeMappingUpdateManyWithWhereWithoutLeadInput = {
 export type CHSSelectionTypeMappingCreateWithoutCarcassTypeInput = {
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutChsMappingCreatedByInput
+  handleType?: Prisma.HandleTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutChsSelectionMappingsInput
   selection: Prisma.LeadDesignSelectionCreateNestedOneWithoutChsSelectionMappingsInput
-  shutterType?: Prisma.ShutterTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   shutterSubType?: Prisma.ShutterSubTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  handleType?: Prisma.HandleTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutChsMappingCreatedByInput
+  shutterType?: Prisma.ShutterTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutChsMappingUpdatedByInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutChsSelectionMappingsInput
 }
 
 export type CHSSelectionTypeMappingUncheckedCreateWithoutCarcassTypeInput = {
@@ -1246,14 +1246,14 @@ export type CHSSelectionTypeMappingUpdateManyWithWhereWithoutCarcassTypeInput = 
 export type CHSSelectionTypeMappingCreateWithoutShutterTypeInput = {
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  carcassType?: Prisma.CarcassTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutChsMappingCreatedByInput
+  handleType?: Prisma.HandleTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutChsSelectionMappingsInput
   selection: Prisma.LeadDesignSelectionCreateNestedOneWithoutChsSelectionMappingsInput
-  carcassType?: Prisma.CarcassTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   shutterSubType?: Prisma.ShutterSubTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  handleType?: Prisma.HandleTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutChsMappingCreatedByInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutChsMappingUpdatedByInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutChsSelectionMappingsInput
 }
 
 export type CHSSelectionTypeMappingUncheckedCreateWithoutShutterTypeInput = {
@@ -1299,14 +1299,14 @@ export type CHSSelectionTypeMappingUpdateManyWithWhereWithoutShutterTypeInput = 
 export type CHSSelectionTypeMappingCreateWithoutShutterSubTypeInput = {
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  carcassType?: Prisma.CarcassTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutChsMappingCreatedByInput
+  handleType?: Prisma.HandleTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutChsSelectionMappingsInput
   selection: Prisma.LeadDesignSelectionCreateNestedOneWithoutChsSelectionMappingsInput
-  carcassType?: Prisma.CarcassTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   shutterType?: Prisma.ShutterTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  handleType?: Prisma.HandleTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutChsMappingCreatedByInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutChsMappingUpdatedByInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutChsSelectionMappingsInput
 }
 
 export type CHSSelectionTypeMappingUncheckedCreateWithoutShutterSubTypeInput = {
@@ -1352,14 +1352,14 @@ export type CHSSelectionTypeMappingUpdateManyWithWhereWithoutShutterSubTypeInput
 export type CHSSelectionTypeMappingCreateWithoutHandleTypeInput = {
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  carcassType?: Prisma.CarcassTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutChsMappingCreatedByInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutChsSelectionMappingsInput
   selection: Prisma.LeadDesignSelectionCreateNestedOneWithoutChsSelectionMappingsInput
-  carcassType?: Prisma.CarcassTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  shutterType?: Prisma.ShutterTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   shutterSubType?: Prisma.ShutterSubTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutChsMappingCreatedByInput
+  shutterType?: Prisma.ShutterTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutChsMappingUpdatedByInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutChsSelectionMappingsInput
 }
 
 export type CHSSelectionTypeMappingUncheckedCreateWithoutHandleTypeInput = {
@@ -1405,14 +1405,14 @@ export type CHSSelectionTypeMappingUpdateManyWithWhereWithoutHandleTypeInput = {
 export type CHSSelectionTypeMappingCreateWithoutSelectionInput = {
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutChsSelectionMappingsInput
   carcassType?: Prisma.CarcassTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  shutterType?: Prisma.ShutterTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  shutterSubType?: Prisma.ShutterSubTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
-  handleType?: Prisma.HandleTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutChsMappingCreatedByInput
+  handleType?: Prisma.HandleTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  shutterSubType?: Prisma.ShutterSubTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
+  shutterType?: Prisma.ShutterTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutChsMappingUpdatedByInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutChsSelectionMappingsInput
 }
 
 export type CHSSelectionTypeMappingUncheckedCreateWithoutSelectionInput = {
@@ -1472,13 +1472,13 @@ export type CHSSelectionTypeMappingCreateManyVendorInput = {
 export type CHSSelectionTypeMappingUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carcassType?: Prisma.CarcassTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutChsMappingCreatedByNestedInput
+  handleType?: Prisma.HandleTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
   selection?: Prisma.LeadDesignSelectionUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
-  carcassType?: Prisma.CarcassTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  shutterType?: Prisma.ShutterTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   shutterSubType?: Prisma.ShutterSubTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  handleType?: Prisma.HandleTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutChsMappingCreatedByNestedInput
+  shutterType?: Prisma.ShutterTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutChsMappingUpdatedByNestedInput
 }
 
@@ -1541,14 +1541,14 @@ export type CHSSelectionTypeMappingCreateManyUpdatedByInput = {
 export type CHSSelectionTypeMappingUpdateWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
+  carcassType?: Prisma.CarcassTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
+  handleType?: Prisma.HandleTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
   selection?: Prisma.LeadDesignSelectionUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
-  carcassType?: Prisma.CarcassTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  shutterType?: Prisma.ShutterTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   shutterSubType?: Prisma.ShutterSubTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  handleType?: Prisma.HandleTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
+  shutterType?: Prisma.ShutterTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutChsMappingUpdatedByNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
 }
 
 export type CHSSelectionTypeMappingUncheckedUpdateWithoutCreatedByInput = {
@@ -1582,14 +1582,14 @@ export type CHSSelectionTypeMappingUncheckedUpdateManyWithoutCreatedByInput = {
 export type CHSSelectionTypeMappingUpdateWithoutUpdatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
+  carcassType?: Prisma.CarcassTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutChsMappingCreatedByNestedInput
+  handleType?: Prisma.HandleTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
   selection?: Prisma.LeadDesignSelectionUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
-  carcassType?: Prisma.CarcassTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  shutterType?: Prisma.ShutterTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   shutterSubType?: Prisma.ShutterSubTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  handleType?: Prisma.HandleTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutChsMappingCreatedByNestedInput
+  shutterType?: Prisma.ShutterTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
 }
 
 export type CHSSelectionTypeMappingUncheckedUpdateWithoutUpdatedByInput = {
@@ -1637,14 +1637,14 @@ export type CHSSelectionTypeMappingCreateManyLeadInput = {
 export type CHSSelectionTypeMappingUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
-  selection?: Prisma.LeadDesignSelectionUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
   carcassType?: Prisma.CarcassTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  shutterType?: Prisma.ShutterTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  shutterSubType?: Prisma.ShutterSubTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  handleType?: Prisma.HandleTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutChsMappingCreatedByNestedInput
+  handleType?: Prisma.HandleTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
+  selection?: Prisma.LeadDesignSelectionUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
+  shutterSubType?: Prisma.ShutterSubTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
+  shutterType?: Prisma.ShutterTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutChsMappingUpdatedByNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
 }
 
 export type CHSSelectionTypeMappingUncheckedUpdateWithoutLeadInput = {
@@ -1692,14 +1692,14 @@ export type CHSSelectionTypeMappingCreateManyCarcassTypeInput = {
 export type CHSSelectionTypeMappingUpdateWithoutCarcassTypeInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutChsMappingCreatedByNestedInput
+  handleType?: Prisma.HandleTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
   selection?: Prisma.LeadDesignSelectionUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
-  shutterType?: Prisma.ShutterTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   shutterSubType?: Prisma.ShutterSubTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  handleType?: Prisma.HandleTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutChsMappingCreatedByNestedInput
+  shutterType?: Prisma.ShutterTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutChsMappingUpdatedByNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
 }
 
 export type CHSSelectionTypeMappingUncheckedUpdateWithoutCarcassTypeInput = {
@@ -1747,14 +1747,14 @@ export type CHSSelectionTypeMappingCreateManyShutterTypeInput = {
 export type CHSSelectionTypeMappingUpdateWithoutShutterTypeInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
+  carcassType?: Prisma.CarcassTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutChsMappingCreatedByNestedInput
+  handleType?: Prisma.HandleTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
   selection?: Prisma.LeadDesignSelectionUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
-  carcassType?: Prisma.CarcassTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   shutterSubType?: Prisma.ShutterSubTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  handleType?: Prisma.HandleTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutChsMappingCreatedByNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutChsMappingUpdatedByNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
 }
 
 export type CHSSelectionTypeMappingUncheckedUpdateWithoutShutterTypeInput = {
@@ -1802,14 +1802,14 @@ export type CHSSelectionTypeMappingCreateManyShutterSubTypeInput = {
 export type CHSSelectionTypeMappingUpdateWithoutShutterSubTypeInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
+  carcassType?: Prisma.CarcassTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutChsMappingCreatedByNestedInput
+  handleType?: Prisma.HandleTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
   selection?: Prisma.LeadDesignSelectionUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
-  carcassType?: Prisma.CarcassTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   shutterType?: Prisma.ShutterTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  handleType?: Prisma.HandleTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutChsMappingCreatedByNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutChsMappingUpdatedByNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
 }
 
 export type CHSSelectionTypeMappingUncheckedUpdateWithoutShutterSubTypeInput = {
@@ -1857,14 +1857,14 @@ export type CHSSelectionTypeMappingCreateManyHandleTypeInput = {
 export type CHSSelectionTypeMappingUpdateWithoutHandleTypeInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
+  carcassType?: Prisma.CarcassTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutChsMappingCreatedByNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
   selection?: Prisma.LeadDesignSelectionUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
-  carcassType?: Prisma.CarcassTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  shutterType?: Prisma.ShutterTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   shutterSubType?: Prisma.ShutterSubTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutChsMappingCreatedByNestedInput
+  shutterType?: Prisma.ShutterTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutChsMappingUpdatedByNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
 }
 
 export type CHSSelectionTypeMappingUncheckedUpdateWithoutHandleTypeInput = {
@@ -1912,14 +1912,14 @@ export type CHSSelectionTypeMappingCreateManySelectionInput = {
 export type CHSSelectionTypeMappingUpdateWithoutSelectionInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
   carcassType?: Prisma.CarcassTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  shutterType?: Prisma.ShutterTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  shutterSubType?: Prisma.ShutterSubTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
-  handleType?: Prisma.HandleTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutChsMappingCreatedByNestedInput
+  handleType?: Prisma.HandleTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
+  shutterSubType?: Prisma.ShutterSubTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
+  shutterType?: Prisma.ShutterTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutChsMappingUpdatedByNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput
 }
 
 export type CHSSelectionTypeMappingUncheckedUpdateWithoutSelectionInput = {
@@ -1965,15 +1965,15 @@ export type CHSSelectionTypeMappingSelect<ExtArgs extends runtime.Types.Extensio
   created_by?: boolean
   updated_at?: boolean
   updated_by?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  carcassType?: boolean | Prisma.CHSSelectionTypeMapping$carcassTypeArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  handleType?: boolean | Prisma.CHSSelectionTypeMapping$handleTypeArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   selection?: boolean | Prisma.LeadDesignSelectionDefaultArgs<ExtArgs>
-  carcassType?: boolean | Prisma.CHSSelectionTypeMapping$carcassTypeArgs<ExtArgs>
-  shutterType?: boolean | Prisma.CHSSelectionTypeMapping$shutterTypeArgs<ExtArgs>
   shutterSubType?: boolean | Prisma.CHSSelectionTypeMapping$shutterSubTypeArgs<ExtArgs>
-  handleType?: boolean | Prisma.CHSSelectionTypeMapping$handleTypeArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  shutterType?: boolean | Prisma.CHSSelectionTypeMapping$shutterTypeArgs<ExtArgs>
   updatedBy?: boolean | Prisma.CHSSelectionTypeMapping$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["cHSSelectionTypeMapping"]>
 
 export type CHSSelectionTypeMappingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1989,15 +1989,15 @@ export type CHSSelectionTypeMappingSelectCreateManyAndReturn<ExtArgs extends run
   created_by?: boolean
   updated_at?: boolean
   updated_by?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  carcassType?: boolean | Prisma.CHSSelectionTypeMapping$carcassTypeArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  handleType?: boolean | Prisma.CHSSelectionTypeMapping$handleTypeArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   selection?: boolean | Prisma.LeadDesignSelectionDefaultArgs<ExtArgs>
-  carcassType?: boolean | Prisma.CHSSelectionTypeMapping$carcassTypeArgs<ExtArgs>
-  shutterType?: boolean | Prisma.CHSSelectionTypeMapping$shutterTypeArgs<ExtArgs>
   shutterSubType?: boolean | Prisma.CHSSelectionTypeMapping$shutterSubTypeArgs<ExtArgs>
-  handleType?: boolean | Prisma.CHSSelectionTypeMapping$handleTypeArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  shutterType?: boolean | Prisma.CHSSelectionTypeMapping$shutterTypeArgs<ExtArgs>
   updatedBy?: boolean | Prisma.CHSSelectionTypeMapping$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["cHSSelectionTypeMapping"]>
 
 export type CHSSelectionTypeMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2013,15 +2013,15 @@ export type CHSSelectionTypeMappingSelectUpdateManyAndReturn<ExtArgs extends run
   created_by?: boolean
   updated_at?: boolean
   updated_by?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  carcassType?: boolean | Prisma.CHSSelectionTypeMapping$carcassTypeArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  handleType?: boolean | Prisma.CHSSelectionTypeMapping$handleTypeArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   selection?: boolean | Prisma.LeadDesignSelectionDefaultArgs<ExtArgs>
-  carcassType?: boolean | Prisma.CHSSelectionTypeMapping$carcassTypeArgs<ExtArgs>
-  shutterType?: boolean | Prisma.CHSSelectionTypeMapping$shutterTypeArgs<ExtArgs>
   shutterSubType?: boolean | Prisma.CHSSelectionTypeMapping$shutterSubTypeArgs<ExtArgs>
-  handleType?: boolean | Prisma.CHSSelectionTypeMapping$handleTypeArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  shutterType?: boolean | Prisma.CHSSelectionTypeMapping$shutterTypeArgs<ExtArgs>
   updatedBy?: boolean | Prisma.CHSSelectionTypeMapping$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["cHSSelectionTypeMapping"]>
 
 export type CHSSelectionTypeMappingSelectScalar = {
@@ -2041,51 +2041,51 @@ export type CHSSelectionTypeMappingSelectScalar = {
 
 export type CHSSelectionTypeMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "selection_id" | "carcass_type_id" | "shutter_type_id" | "shutter_sub_type_id" | "handle_type_id" | "created_at" | "created_by" | "updated_at" | "updated_by", ExtArgs["result"]["cHSSelectionTypeMapping"]>
 export type CHSSelectionTypeMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  carcassType?: boolean | Prisma.CHSSelectionTypeMapping$carcassTypeArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  handleType?: boolean | Prisma.CHSSelectionTypeMapping$handleTypeArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   selection?: boolean | Prisma.LeadDesignSelectionDefaultArgs<ExtArgs>
-  carcassType?: boolean | Prisma.CHSSelectionTypeMapping$carcassTypeArgs<ExtArgs>
-  shutterType?: boolean | Prisma.CHSSelectionTypeMapping$shutterTypeArgs<ExtArgs>
   shutterSubType?: boolean | Prisma.CHSSelectionTypeMapping$shutterSubTypeArgs<ExtArgs>
-  handleType?: boolean | Prisma.CHSSelectionTypeMapping$handleTypeArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  shutterType?: boolean | Prisma.CHSSelectionTypeMapping$shutterTypeArgs<ExtArgs>
   updatedBy?: boolean | Prisma.CHSSelectionTypeMapping$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type CHSSelectionTypeMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  carcassType?: boolean | Prisma.CHSSelectionTypeMapping$carcassTypeArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  handleType?: boolean | Prisma.CHSSelectionTypeMapping$handleTypeArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   selection?: boolean | Prisma.LeadDesignSelectionDefaultArgs<ExtArgs>
-  carcassType?: boolean | Prisma.CHSSelectionTypeMapping$carcassTypeArgs<ExtArgs>
-  shutterType?: boolean | Prisma.CHSSelectionTypeMapping$shutterTypeArgs<ExtArgs>
   shutterSubType?: boolean | Prisma.CHSSelectionTypeMapping$shutterSubTypeArgs<ExtArgs>
-  handleType?: boolean | Prisma.CHSSelectionTypeMapping$handleTypeArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  shutterType?: boolean | Prisma.CHSSelectionTypeMapping$shutterTypeArgs<ExtArgs>
   updatedBy?: boolean | Prisma.CHSSelectionTypeMapping$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type CHSSelectionTypeMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  carcassType?: boolean | Prisma.CHSSelectionTypeMapping$carcassTypeArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  handleType?: boolean | Prisma.CHSSelectionTypeMapping$handleTypeArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   selection?: boolean | Prisma.LeadDesignSelectionDefaultArgs<ExtArgs>
-  carcassType?: boolean | Prisma.CHSSelectionTypeMapping$carcassTypeArgs<ExtArgs>
-  shutterType?: boolean | Prisma.CHSSelectionTypeMapping$shutterTypeArgs<ExtArgs>
   shutterSubType?: boolean | Prisma.CHSSelectionTypeMapping$shutterSubTypeArgs<ExtArgs>
-  handleType?: boolean | Prisma.CHSSelectionTypeMapping$handleTypeArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  shutterType?: boolean | Prisma.CHSSelectionTypeMapping$shutterTypeArgs<ExtArgs>
   updatedBy?: boolean | Prisma.CHSSelectionTypeMapping$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $CHSSelectionTypeMappingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CHSSelectionTypeMapping"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
+    carcassType: Prisma.$CarcassTypeMasterPayload<ExtArgs> | null
+    createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    handleType: Prisma.$HandleTypeMasterPayload<ExtArgs> | null
     lead: Prisma.$LeadMasterPayload<ExtArgs>
     selection: Prisma.$LeadDesignSelectionPayload<ExtArgs>
-    carcassType: Prisma.$CarcassTypeMasterPayload<ExtArgs> | null
-    shutterType: Prisma.$ShutterTypeMasterPayload<ExtArgs> | null
     shutterSubType: Prisma.$ShutterSubTypeMasterPayload<ExtArgs> | null
-    handleType: Prisma.$HandleTypeMasterPayload<ExtArgs> | null
-    createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    shutterType: Prisma.$ShutterTypeMasterPayload<ExtArgs> | null
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2494,15 +2494,15 @@ readonly fields: CHSSelectionTypeMappingFieldRefs;
  */
 export interface Prisma__CHSSelectionTypeMappingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  carcassType<T extends Prisma.CHSSelectionTypeMapping$carcassTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CHSSelectionTypeMapping$carcassTypeArgs<ExtArgs>>): Prisma.Prisma__CarcassTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$CarcassTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  handleType<T extends Prisma.CHSSelectionTypeMapping$handleTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CHSSelectionTypeMapping$handleTypeArgs<ExtArgs>>): Prisma.Prisma__HandleTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$HandleTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   selection<T extends Prisma.LeadDesignSelectionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDesignSelectionDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadDesignSelectionClient<runtime.Types.Result.GetResult<Prisma.$LeadDesignSelectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  carcassType<T extends Prisma.CHSSelectionTypeMapping$carcassTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CHSSelectionTypeMapping$carcassTypeArgs<ExtArgs>>): Prisma.Prisma__CarcassTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$CarcassTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  shutterType<T extends Prisma.CHSSelectionTypeMapping$shutterTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CHSSelectionTypeMapping$shutterTypeArgs<ExtArgs>>): Prisma.Prisma__ShutterTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$ShutterTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   shutterSubType<T extends Prisma.CHSSelectionTypeMapping$shutterSubTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CHSSelectionTypeMapping$shutterSubTypeArgs<ExtArgs>>): Prisma.Prisma__ShutterSubTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$ShutterSubTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  handleType<T extends Prisma.CHSSelectionTypeMapping$handleTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CHSSelectionTypeMapping$handleTypeArgs<ExtArgs>>): Prisma.Prisma__HandleTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$HandleTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  shutterType<T extends Prisma.CHSSelectionTypeMapping$shutterTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CHSSelectionTypeMapping$shutterTypeArgs<ExtArgs>>): Prisma.Prisma__ShutterTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$ShutterTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.CHSSelectionTypeMapping$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CHSSelectionTypeMapping$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2964,22 +2964,22 @@ export type CHSSelectionTypeMapping$carcassTypeArgs<ExtArgs extends runtime.Type
 }
 
 /**
- * CHSSelectionTypeMapping.shutterType
+ * CHSSelectionTypeMapping.handleType
  */
-export type CHSSelectionTypeMapping$shutterTypeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type CHSSelectionTypeMapping$handleTypeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ShutterTypeMaster
+   * Select specific fields to fetch from the HandleTypeMaster
    */
-  select?: Prisma.ShutterTypeMasterSelect<ExtArgs> | null
+  select?: Prisma.HandleTypeMasterSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ShutterTypeMaster
+   * Omit specific fields from the HandleTypeMaster
    */
-  omit?: Prisma.ShutterTypeMasterOmit<ExtArgs> | null
+  omit?: Prisma.HandleTypeMasterOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ShutterTypeMasterInclude<ExtArgs> | null
-  where?: Prisma.ShutterTypeMasterWhereInput
+  include?: Prisma.HandleTypeMasterInclude<ExtArgs> | null
+  where?: Prisma.HandleTypeMasterWhereInput
 }
 
 /**
@@ -3002,22 +3002,22 @@ export type CHSSelectionTypeMapping$shutterSubTypeArgs<ExtArgs extends runtime.T
 }
 
 /**
- * CHSSelectionTypeMapping.handleType
+ * CHSSelectionTypeMapping.shutterType
  */
-export type CHSSelectionTypeMapping$handleTypeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type CHSSelectionTypeMapping$shutterTypeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the HandleTypeMaster
+   * Select specific fields to fetch from the ShutterTypeMaster
    */
-  select?: Prisma.HandleTypeMasterSelect<ExtArgs> | null
+  select?: Prisma.ShutterTypeMasterSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the HandleTypeMaster
+   * Omit specific fields from the ShutterTypeMaster
    */
-  omit?: Prisma.HandleTypeMasterOmit<ExtArgs> | null
+  omit?: Prisma.ShutterTypeMasterOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.HandleTypeMasterInclude<ExtArgs> | null
-  where?: Prisma.HandleTypeMasterWhereInput
+  include?: Prisma.ShutterTypeMasterInclude<ExtArgs> | null
+  where?: Prisma.ShutterTypeMasterWhereInput
 }
 
 /**

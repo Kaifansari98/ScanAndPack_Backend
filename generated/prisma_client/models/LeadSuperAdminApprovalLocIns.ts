@@ -284,10 +284,10 @@ export type LeadSuperAdminApprovalLocInsWhereInput = {
   approved_at?: Prisma.DateTimeNullableFilter<"LeadSuperAdminApprovalLocIns"> | Date | string | null
   approved_by?: Prisma.IntNullableFilter<"LeadSuperAdminApprovalLocIns"> | number | null
   approval_remark?: Prisma.StringNullableFilter<"LeadSuperAdminApprovalLocIns"> | string | null
+  approvedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   franchise?: Prisma.XOR<Prisma.FranchiseMasterNullableScalarRelationFilter, Prisma.FranchiseMasterWhereInput> | null
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
-  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  approvedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
@@ -303,10 +303,10 @@ export type LeadSuperAdminApprovalLocInsOrderByWithRelationInput = {
   approved_at?: Prisma.SortOrderInput | Prisma.SortOrder
   approved_by?: Prisma.SortOrderInput | Prisma.SortOrder
   approval_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  approvedBy?: Prisma.UserMasterOrderByWithRelationInput
+  createdBy?: Prisma.UserMasterOrderByWithRelationInput
   franchise?: Prisma.FranchiseMasterOrderByWithRelationInput
   lead?: Prisma.LeadMasterOrderByWithRelationInput
-  createdBy?: Prisma.UserMasterOrderByWithRelationInput
-  approvedBy?: Prisma.UserMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
@@ -326,10 +326,10 @@ export type LeadSuperAdminApprovalLocInsWhereUniqueInput = Prisma.AtLeast<{
   approved_at?: Prisma.DateTimeNullableFilter<"LeadSuperAdminApprovalLocIns"> | Date | string | null
   approved_by?: Prisma.IntNullableFilter<"LeadSuperAdminApprovalLocIns"> | number | null
   approval_remark?: Prisma.StringNullableFilter<"LeadSuperAdminApprovalLocIns"> | string | null
+  approvedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   franchise?: Prisma.XOR<Prisma.FranchiseMasterNullableScalarRelationFilter, Prisma.FranchiseMasterWhereInput> | null
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
-  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  approvedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id" | "uniq_lead_super_admin_approval_lockin">
 
@@ -375,10 +375,10 @@ export type LeadSuperAdminApprovalLocInsCreateInput = {
   is_approved?: boolean
   approved_at?: Date | string | null
   approval_remark?: string | null
+  approvedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsApprovedInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsCreatedInput
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadSuperAdminApprovalLocInsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutSuperAdminApprovalLocInsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsCreatedInput
-  approvedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsApprovedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadSuperAdminApprovalLocInsInput
 }
 
@@ -402,10 +402,10 @@ export type LeadSuperAdminApprovalLocInsUpdateInput = {
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedBy?: Prisma.UserMasterUpdateOneWithoutLeadSuperAdminApprovalsApprovedNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalsCreatedNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadSuperAdminApprovalLocInsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSuperAdminApprovalLocInsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalsCreatedNestedInput
-  approvedBy?: Prisma.UserMasterUpdateOneWithoutLeadSuperAdminApprovalsApprovedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalLocInsNestedInput
 }
 
@@ -755,10 +755,10 @@ export type LeadSuperAdminApprovalLocInsCreateWithoutVendorInput = {
   is_approved?: boolean
   approved_at?: Date | string | null
   approval_remark?: string | null
+  approvedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsApprovedInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsCreatedInput
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadSuperAdminApprovalLocInsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutSuperAdminApprovalLocInsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsCreatedInput
-  approvedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsApprovedInput
 }
 
 export type LeadSuperAdminApprovalLocInsUncheckedCreateWithoutVendorInput = {
@@ -823,9 +823,9 @@ export type LeadSuperAdminApprovalLocInsCreateWithoutApprovedByInput = {
   is_approved?: boolean
   approved_at?: Date | string | null
   approval_remark?: string | null
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsCreatedInput
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadSuperAdminApprovalLocInsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutSuperAdminApprovalLocInsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsCreatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadSuperAdminApprovalLocInsInput
 }
 
@@ -858,9 +858,9 @@ export type LeadSuperAdminApprovalLocInsCreateWithoutCreatedByInput = {
   is_approved?: boolean
   approved_at?: Date | string | null
   approval_remark?: string | null
+  approvedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsApprovedInput
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadSuperAdminApprovalLocInsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutSuperAdminApprovalLocInsInput
-  approvedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsApprovedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadSuperAdminApprovalLocInsInput
 }
 
@@ -925,9 +925,9 @@ export type LeadSuperAdminApprovalLocInsCreateWithoutLeadInput = {
   is_approved?: boolean
   approved_at?: Date | string | null
   approval_remark?: string | null
-  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadSuperAdminApprovalLocInsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsCreatedInput
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsApprovedInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadSuperAdminApprovalLocInsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadSuperAdminApprovalLocInsInput
 }
 
@@ -976,9 +976,9 @@ export type LeadSuperAdminApprovalLocInsCreateWithoutFranchiseInput = {
   is_approved?: boolean
   approved_at?: Date | string | null
   approval_remark?: string | null
-  lead: Prisma.LeadMasterCreateNestedOneWithoutSuperAdminApprovalLocInsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsCreatedInput
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsApprovedInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutSuperAdminApprovalLocInsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadSuperAdminApprovalLocInsInput
 }
 
@@ -1040,10 +1040,10 @@ export type LeadSuperAdminApprovalLocInsUpdateWithoutVendorInput = {
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedBy?: Prisma.UserMasterUpdateOneWithoutLeadSuperAdminApprovalsApprovedNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalsCreatedNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadSuperAdminApprovalLocInsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSuperAdminApprovalLocInsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalsCreatedNestedInput
-  approvedBy?: Prisma.UserMasterUpdateOneWithoutLeadSuperAdminApprovalsApprovedNestedInput
 }
 
 export type LeadSuperAdminApprovalLocInsUncheckedUpdateWithoutVendorInput = {
@@ -1104,9 +1104,9 @@ export type LeadSuperAdminApprovalLocInsUpdateWithoutApprovedByInput = {
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalsCreatedNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadSuperAdminApprovalLocInsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSuperAdminApprovalLocInsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalsCreatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalLocInsNestedInput
 }
 
@@ -1142,9 +1142,9 @@ export type LeadSuperAdminApprovalLocInsUpdateWithoutCreatedByInput = {
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedBy?: Prisma.UserMasterUpdateOneWithoutLeadSuperAdminApprovalsApprovedNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadSuperAdminApprovalLocInsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSuperAdminApprovalLocInsNestedInput
-  approvedBy?: Prisma.UserMasterUpdateOneWithoutLeadSuperAdminApprovalsApprovedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalLocInsNestedInput
 }
 
@@ -1193,9 +1193,9 @@ export type LeadSuperAdminApprovalLocInsUpdateWithoutLeadInput = {
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadSuperAdminApprovalLocInsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalsCreatedNestedInput
   approvedBy?: Prisma.UserMasterUpdateOneWithoutLeadSuperAdminApprovalsApprovedNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadSuperAdminApprovalLocInsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalLocInsNestedInput
 }
 
@@ -1244,9 +1244,9 @@ export type LeadSuperAdminApprovalLocInsUpdateWithoutFranchiseInput = {
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSuperAdminApprovalLocInsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalsCreatedNestedInput
   approvedBy?: Prisma.UserMasterUpdateOneWithoutLeadSuperAdminApprovalsApprovedNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSuperAdminApprovalLocInsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalLocInsNestedInput
 }
 
@@ -1290,10 +1290,10 @@ export type LeadSuperAdminApprovalLocInsSelect<ExtArgs extends runtime.Types.Ext
   approved_at?: boolean
   approved_by?: boolean
   approval_remark?: boolean
+  approvedBy?: boolean | Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   franchise?: boolean | Prisma.LeadSuperAdminApprovalLocIns$franchiseArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  approvedBy?: boolean | Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadSuperAdminApprovalLocIns"]>
 
@@ -1309,10 +1309,10 @@ export type LeadSuperAdminApprovalLocInsSelectCreateManyAndReturn<ExtArgs extend
   approved_at?: boolean
   approved_by?: boolean
   approval_remark?: boolean
+  approvedBy?: boolean | Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   franchise?: boolean | Prisma.LeadSuperAdminApprovalLocIns$franchiseArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  approvedBy?: boolean | Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadSuperAdminApprovalLocIns"]>
 
@@ -1328,10 +1328,10 @@ export type LeadSuperAdminApprovalLocInsSelectUpdateManyAndReturn<ExtArgs extend
   approved_at?: boolean
   approved_by?: boolean
   approval_remark?: boolean
+  approvedBy?: boolean | Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   franchise?: boolean | Prisma.LeadSuperAdminApprovalLocIns$franchiseArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  approvedBy?: boolean | Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadSuperAdminApprovalLocIns"]>
 
@@ -1351,34 +1351,34 @@ export type LeadSuperAdminApprovalLocInsSelectScalar = {
 
 export type LeadSuperAdminApprovalLocInsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "franchise_id" | "lead_id" | "approval_type" | "created_by" | "created_at" | "is_approved" | "approved_at" | "approved_by" | "approval_remark", ExtArgs["result"]["leadSuperAdminApprovalLocIns"]>
 export type LeadSuperAdminApprovalLocInsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  approvedBy?: boolean | Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   franchise?: boolean | Prisma.LeadSuperAdminApprovalLocIns$franchiseArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  approvedBy?: boolean | Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadSuperAdminApprovalLocInsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  approvedBy?: boolean | Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   franchise?: boolean | Prisma.LeadSuperAdminApprovalLocIns$franchiseArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  approvedBy?: boolean | Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadSuperAdminApprovalLocInsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  approvedBy?: boolean | Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   franchise?: boolean | Prisma.LeadSuperAdminApprovalLocIns$franchiseArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  approvedBy?: boolean | Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $LeadSuperAdminApprovalLocInsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadSuperAdminApprovalLocIns"
   objects: {
+    approvedBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    createdBy: Prisma.$UserMasterPayload<ExtArgs>
     franchise: Prisma.$FranchiseMasterPayload<ExtArgs> | null
     lead: Prisma.$LeadMasterPayload<ExtArgs>
-    createdBy: Prisma.$UserMasterPayload<ExtArgs>
-    approvedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1787,10 +1787,10 @@ readonly fields: LeadSuperAdminApprovalLocInsFieldRefs;
  */
 export interface Prisma__LeadSuperAdminApprovalLocInsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  approvedBy<T extends Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   franchise<T extends Prisma.LeadSuperAdminApprovalLocIns$franchiseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadSuperAdminApprovalLocIns$franchiseArgs<ExtArgs>>): Prisma.Prisma__FranchiseMasterClient<runtime.Types.Result.GetResult<Prisma.$FranchiseMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  approvedBy<T extends Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2233,25 +2233,6 @@ export type LeadSuperAdminApprovalLocInsDeleteManyArgs<ExtArgs extends runtime.T
 }
 
 /**
- * LeadSuperAdminApprovalLocIns.franchise
- */
-export type LeadSuperAdminApprovalLocIns$franchiseArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the FranchiseMaster
-   */
-  select?: Prisma.FranchiseMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the FranchiseMaster
-   */
-  omit?: Prisma.FranchiseMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FranchiseMasterInclude<ExtArgs> | null
-  where?: Prisma.FranchiseMasterWhereInput
-}
-
-/**
  * LeadSuperAdminApprovalLocIns.approvedBy
  */
 export type LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2268,6 +2249,25 @@ export type LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs extends runtime.
    */
   include?: Prisma.UserMasterInclude<ExtArgs> | null
   where?: Prisma.UserMasterWhereInput
+}
+
+/**
+ * LeadSuperAdminApprovalLocIns.franchise
+ */
+export type LeadSuperAdminApprovalLocIns$franchiseArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FranchiseMaster
+   */
+  select?: Prisma.FranchiseMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FranchiseMaster
+   */
+  omit?: Prisma.FranchiseMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FranchiseMasterInclude<ExtArgs> | null
+  where?: Prisma.FranchiseMasterWhereInput
 }
 
 /**

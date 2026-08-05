@@ -532,14 +532,14 @@ export type GRNMasterWhereInput = {
   transporter_name?: Prisma.StringNullableFilter<"GRNMaster"> | string | null
   lr_no?: Prisma.StringNullableFilter<"GRNMaster"> | string | null
   lr_date?: Prisma.DateTimeNullableFilter<"GRNMaster"> | Date | string | null
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  purchaseOrder?: Prisma.XOR<Prisma.PurchaseOrderMasterScalarRelationFilter, Prisma.PurchaseOrderMasterWhereInput>
-  companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
-  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
-  confirmedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
-  items?: Prisma.GRNItemListRelationFilter
   debitCreditNotes?: Prisma.DebitCreditNoteListRelationFilter
+  items?: Prisma.GRNItemListRelationFilter
+  companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
+  confirmedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  purchaseOrder?: Prisma.XOR<Prisma.PurchaseOrderMasterScalarRelationFilter, Prisma.PurchaseOrderMasterWhereInput>
+  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   paymentSchedules?: Prisma.POPaymentScheduleListRelationFilter
 }
 
@@ -579,14 +579,14 @@ export type GRNMasterOrderByWithRelationInput = {
   transporter_name?: Prisma.SortOrderInput | Prisma.SortOrder
   lr_no?: Prisma.SortOrderInput | Prisma.SortOrder
   lr_date?: Prisma.SortOrderInput | Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  purchaseOrder?: Prisma.PurchaseOrderMasterOrderByWithRelationInput
-  companyVendor?: Prisma.CompanyVendorsMasterOrderByWithRelationInput
-  createdBy?: Prisma.UserMasterOrderByWithRelationInput
-  updatedBy?: Prisma.UserMasterOrderByWithRelationInput
-  confirmedBy?: Prisma.UserMasterOrderByWithRelationInput
-  items?: Prisma.GRNItemOrderByRelationAggregateInput
   debitCreditNotes?: Prisma.DebitCreditNoteOrderByRelationAggregateInput
+  items?: Prisma.GRNItemOrderByRelationAggregateInput
+  companyVendor?: Prisma.CompanyVendorsMasterOrderByWithRelationInput
+  confirmedBy?: Prisma.UserMasterOrderByWithRelationInput
+  createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterOrderByWithRelationInput
+  updatedBy?: Prisma.UserMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   paymentSchedules?: Prisma.POPaymentScheduleOrderByRelationAggregateInput
 }
 
@@ -629,14 +629,14 @@ export type GRNMasterWhereUniqueInput = Prisma.AtLeast<{
   transporter_name?: Prisma.StringNullableFilter<"GRNMaster"> | string | null
   lr_no?: Prisma.StringNullableFilter<"GRNMaster"> | string | null
   lr_date?: Prisma.DateTimeNullableFilter<"GRNMaster"> | Date | string | null
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  purchaseOrder?: Prisma.XOR<Prisma.PurchaseOrderMasterScalarRelationFilter, Prisma.PurchaseOrderMasterWhereInput>
-  companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
-  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
-  confirmedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
-  items?: Prisma.GRNItemListRelationFilter
   debitCreditNotes?: Prisma.DebitCreditNoteListRelationFilter
+  items?: Prisma.GRNItemListRelationFilter
+  companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
+  confirmedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  purchaseOrder?: Prisma.XOR<Prisma.PurchaseOrderMasterScalarRelationFilter, Prisma.PurchaseOrderMasterWhereInput>
+  updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   paymentSchedules?: Prisma.POPaymentScheduleListRelationFilter
 }, "id" | "grn_no">
 
@@ -753,14 +753,14 @@ export type GRNMasterCreateInput = {
   transporter_name?: string | null
   lr_no?: string | null
   lr_date?: Date | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutGrnsInput
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutGrnsInput
-  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutGrnsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsUpdatedInput
-  confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
-  items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
+  items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
+  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
+  confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutGrnsCreatedInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutGrnsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutGrnsInput
   paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutGrnInput
 }
 
@@ -800,8 +800,8 @@ export type GRNMasterUncheckedCreateInput = {
   transporter_name?: string | null
   lr_no?: string | null
   lr_date?: Date | string | null
-  items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutGrnInput
+  items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutGrnInput
 }
 
@@ -834,14 +834,14 @@ export type GRNMasterUpdateInput = {
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutGrnsNestedInput
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutGrnsNestedInput
-  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutGrnsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutGrnsUpdatedNestedInput
-  confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
-  items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
+  items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
+  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
+  confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutGrnsCreatedNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutGrnsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutGrnsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutGrnsNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutGrnNestedInput
 }
 
@@ -881,8 +881,8 @@ export type GRNMasterUncheckedUpdateInput = {
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutGrnNestedInput
+  items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutGrnNestedInput
 }
 
@@ -1215,6 +1215,13 @@ export type GRNMasterUncheckedUpdateManyWithoutVendorNestedInput = {
   deleteMany?: Prisma.GRNMasterScalarWhereInput | Prisma.GRNMasterScalarWhereInput[]
 }
 
+export type GRNMasterCreateNestedManyWithoutConfirmedByInput = {
+  create?: Prisma.XOR<Prisma.GRNMasterCreateWithoutConfirmedByInput, Prisma.GRNMasterUncheckedCreateWithoutConfirmedByInput> | Prisma.GRNMasterCreateWithoutConfirmedByInput[] | Prisma.GRNMasterUncheckedCreateWithoutConfirmedByInput[]
+  connectOrCreate?: Prisma.GRNMasterCreateOrConnectWithoutConfirmedByInput | Prisma.GRNMasterCreateOrConnectWithoutConfirmedByInput[]
+  createMany?: Prisma.GRNMasterCreateManyConfirmedByInputEnvelope
+  connect?: Prisma.GRNMasterWhereUniqueInput | Prisma.GRNMasterWhereUniqueInput[]
+}
+
 export type GRNMasterCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.GRNMasterCreateWithoutCreatedByInput, Prisma.GRNMasterUncheckedCreateWithoutCreatedByInput> | Prisma.GRNMasterCreateWithoutCreatedByInput[] | Prisma.GRNMasterUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.GRNMasterCreateOrConnectWithoutCreatedByInput | Prisma.GRNMasterCreateOrConnectWithoutCreatedByInput[]
@@ -1229,7 +1236,7 @@ export type GRNMasterCreateNestedManyWithoutUpdatedByInput = {
   connect?: Prisma.GRNMasterWhereUniqueInput | Prisma.GRNMasterWhereUniqueInput[]
 }
 
-export type GRNMasterCreateNestedManyWithoutConfirmedByInput = {
+export type GRNMasterUncheckedCreateNestedManyWithoutConfirmedByInput = {
   create?: Prisma.XOR<Prisma.GRNMasterCreateWithoutConfirmedByInput, Prisma.GRNMasterUncheckedCreateWithoutConfirmedByInput> | Prisma.GRNMasterCreateWithoutConfirmedByInput[] | Prisma.GRNMasterUncheckedCreateWithoutConfirmedByInput[]
   connectOrCreate?: Prisma.GRNMasterCreateOrConnectWithoutConfirmedByInput | Prisma.GRNMasterCreateOrConnectWithoutConfirmedByInput[]
   createMany?: Prisma.GRNMasterCreateManyConfirmedByInputEnvelope
@@ -1250,11 +1257,18 @@ export type GRNMasterUncheckedCreateNestedManyWithoutUpdatedByInput = {
   connect?: Prisma.GRNMasterWhereUniqueInput | Prisma.GRNMasterWhereUniqueInput[]
 }
 
-export type GRNMasterUncheckedCreateNestedManyWithoutConfirmedByInput = {
+export type GRNMasterUpdateManyWithoutConfirmedByNestedInput = {
   create?: Prisma.XOR<Prisma.GRNMasterCreateWithoutConfirmedByInput, Prisma.GRNMasterUncheckedCreateWithoutConfirmedByInput> | Prisma.GRNMasterCreateWithoutConfirmedByInput[] | Prisma.GRNMasterUncheckedCreateWithoutConfirmedByInput[]
   connectOrCreate?: Prisma.GRNMasterCreateOrConnectWithoutConfirmedByInput | Prisma.GRNMasterCreateOrConnectWithoutConfirmedByInput[]
+  upsert?: Prisma.GRNMasterUpsertWithWhereUniqueWithoutConfirmedByInput | Prisma.GRNMasterUpsertWithWhereUniqueWithoutConfirmedByInput[]
   createMany?: Prisma.GRNMasterCreateManyConfirmedByInputEnvelope
+  set?: Prisma.GRNMasterWhereUniqueInput | Prisma.GRNMasterWhereUniqueInput[]
+  disconnect?: Prisma.GRNMasterWhereUniqueInput | Prisma.GRNMasterWhereUniqueInput[]
+  delete?: Prisma.GRNMasterWhereUniqueInput | Prisma.GRNMasterWhereUniqueInput[]
   connect?: Prisma.GRNMasterWhereUniqueInput | Prisma.GRNMasterWhereUniqueInput[]
+  update?: Prisma.GRNMasterUpdateWithWhereUniqueWithoutConfirmedByInput | Prisma.GRNMasterUpdateWithWhereUniqueWithoutConfirmedByInput[]
+  updateMany?: Prisma.GRNMasterUpdateManyWithWhereWithoutConfirmedByInput | Prisma.GRNMasterUpdateManyWithWhereWithoutConfirmedByInput[]
+  deleteMany?: Prisma.GRNMasterScalarWhereInput | Prisma.GRNMasterScalarWhereInput[]
 }
 
 export type GRNMasterUpdateManyWithoutCreatedByNestedInput = {
@@ -1285,7 +1299,7 @@ export type GRNMasterUpdateManyWithoutUpdatedByNestedInput = {
   deleteMany?: Prisma.GRNMasterScalarWhereInput | Prisma.GRNMasterScalarWhereInput[]
 }
 
-export type GRNMasterUpdateManyWithoutConfirmedByNestedInput = {
+export type GRNMasterUncheckedUpdateManyWithoutConfirmedByNestedInput = {
   create?: Prisma.XOR<Prisma.GRNMasterCreateWithoutConfirmedByInput, Prisma.GRNMasterUncheckedCreateWithoutConfirmedByInput> | Prisma.GRNMasterCreateWithoutConfirmedByInput[] | Prisma.GRNMasterUncheckedCreateWithoutConfirmedByInput[]
   connectOrCreate?: Prisma.GRNMasterCreateOrConnectWithoutConfirmedByInput | Prisma.GRNMasterCreateOrConnectWithoutConfirmedByInput[]
   upsert?: Prisma.GRNMasterUpsertWithWhereUniqueWithoutConfirmedByInput | Prisma.GRNMasterUpsertWithWhereUniqueWithoutConfirmedByInput[]
@@ -1324,20 +1338,6 @@ export type GRNMasterUncheckedUpdateManyWithoutUpdatedByNestedInput = {
   connect?: Prisma.GRNMasterWhereUniqueInput | Prisma.GRNMasterWhereUniqueInput[]
   update?: Prisma.GRNMasterUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.GRNMasterUpdateWithWhereUniqueWithoutUpdatedByInput[]
   updateMany?: Prisma.GRNMasterUpdateManyWithWhereWithoutUpdatedByInput | Prisma.GRNMasterUpdateManyWithWhereWithoutUpdatedByInput[]
-  deleteMany?: Prisma.GRNMasterScalarWhereInput | Prisma.GRNMasterScalarWhereInput[]
-}
-
-export type GRNMasterUncheckedUpdateManyWithoutConfirmedByNestedInput = {
-  create?: Prisma.XOR<Prisma.GRNMasterCreateWithoutConfirmedByInput, Prisma.GRNMasterUncheckedCreateWithoutConfirmedByInput> | Prisma.GRNMasterCreateWithoutConfirmedByInput[] | Prisma.GRNMasterUncheckedCreateWithoutConfirmedByInput[]
-  connectOrCreate?: Prisma.GRNMasterCreateOrConnectWithoutConfirmedByInput | Prisma.GRNMasterCreateOrConnectWithoutConfirmedByInput[]
-  upsert?: Prisma.GRNMasterUpsertWithWhereUniqueWithoutConfirmedByInput | Prisma.GRNMasterUpsertWithWhereUniqueWithoutConfirmedByInput[]
-  createMany?: Prisma.GRNMasterCreateManyConfirmedByInputEnvelope
-  set?: Prisma.GRNMasterWhereUniqueInput | Prisma.GRNMasterWhereUniqueInput[]
-  disconnect?: Prisma.GRNMasterWhereUniqueInput | Prisma.GRNMasterWhereUniqueInput[]
-  delete?: Prisma.GRNMasterWhereUniqueInput | Prisma.GRNMasterWhereUniqueInput[]
-  connect?: Prisma.GRNMasterWhereUniqueInput | Prisma.GRNMasterWhereUniqueInput[]
-  update?: Prisma.GRNMasterUpdateWithWhereUniqueWithoutConfirmedByInput | Prisma.GRNMasterUpdateWithWhereUniqueWithoutConfirmedByInput[]
-  updateMany?: Prisma.GRNMasterUpdateManyWithWhereWithoutConfirmedByInput | Prisma.GRNMasterUpdateManyWithWhereWithoutConfirmedByInput[]
   deleteMany?: Prisma.GRNMasterScalarWhereInput | Prisma.GRNMasterScalarWhereInput[]
 }
 
@@ -1502,13 +1502,13 @@ export type GRNMasterCreateWithoutVendorInput = {
   transporter_name?: string | null
   lr_no?: string | null
   lr_date?: Date | string | null
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutGrnsInput
-  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutGrnsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsUpdatedInput
-  confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
-  items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
+  items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
+  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
+  confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutGrnsCreatedInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutGrnsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsUpdatedInput
   paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutGrnInput
 }
 
@@ -1547,8 +1547,8 @@ export type GRNMasterUncheckedCreateWithoutVendorInput = {
   transporter_name?: string | null
   lr_no?: string | null
   lr_date?: Date | string | null
-  items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutGrnInput
+  items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutGrnInput
 }
 
@@ -1619,6 +1619,95 @@ export type GRNMasterScalarWhereInput = {
   lr_date?: Prisma.DateTimeNullableFilter<"GRNMaster"> | Date | string | null
 }
 
+export type GRNMasterCreateWithoutConfirmedByInput = {
+  grn_no: string
+  status?: $Enums.GRNStatus
+  received_date: Date | string
+  vehicle_no?: string | null
+  gate_entry_no?: string | null
+  invoice_no?: string | null
+  invoice_date?: Date | string | null
+  invoice_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  remarks?: string | null
+  confirmed_at?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
+  transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
+  items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
+  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutGrnsCreatedInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutGrnsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutGrnsInput
+  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutGrnInput
+}
+
+export type GRNMasterUncheckedCreateWithoutConfirmedByInput = {
+  id?: number
+  vendor_id: number
+  grn_no: string
+  purchase_order_id: number
+  company_vendor_id: number
+  status?: $Enums.GRNStatus
+  received_date: Date | string
+  vehicle_no?: string | null
+  gate_entry_no?: string | null
+  invoice_no?: string | null
+  invoice_date?: Date | string | null
+  invoice_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  remarks?: string | null
+  created_by: number
+  updated_by?: number | null
+  confirmed_at?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
+  transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutGrnInput
+  items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutGrnInput
+}
+
+export type GRNMasterCreateOrConnectWithoutConfirmedByInput = {
+  where: Prisma.GRNMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.GRNMasterCreateWithoutConfirmedByInput, Prisma.GRNMasterUncheckedCreateWithoutConfirmedByInput>
+}
+
+export type GRNMasterCreateManyConfirmedByInputEnvelope = {
+  data: Prisma.GRNMasterCreateManyConfirmedByInput | Prisma.GRNMasterCreateManyConfirmedByInput[]
+  skipDuplicates?: boolean
+}
+
 export type GRNMasterCreateWithoutCreatedByInput = {
   grn_no: string
   status?: $Enums.GRNStatus
@@ -1648,13 +1737,13 @@ export type GRNMasterCreateWithoutCreatedByInput = {
   transporter_name?: string | null
   lr_no?: string | null
   lr_date?: Date | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutGrnsInput
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutGrnsInput
-  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsUpdatedInput
-  confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
-  items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
+  items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
+  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
+  confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutGrnsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutGrnsInput
   paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutGrnInput
 }
 
@@ -1693,8 +1782,8 @@ export type GRNMasterUncheckedCreateWithoutCreatedByInput = {
   transporter_name?: string | null
   lr_no?: string | null
   lr_date?: Date | string | null
-  items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutGrnInput
+  items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutGrnInput
 }
 
@@ -1737,13 +1826,13 @@ export type GRNMasterCreateWithoutUpdatedByInput = {
   transporter_name?: string | null
   lr_no?: string | null
   lr_date?: Date | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutGrnsInput
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutGrnsInput
-  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutGrnsCreatedInput
-  confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
-  items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
+  items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
+  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
+  confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutGrnsCreatedInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutGrnsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutGrnsInput
   paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutGrnInput
 }
 
@@ -1782,8 +1871,8 @@ export type GRNMasterUncheckedCreateWithoutUpdatedByInput = {
   transporter_name?: string | null
   lr_no?: string | null
   lr_date?: Date | string | null
-  items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutGrnInput
+  items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutGrnInput
 }
 
@@ -1797,93 +1886,20 @@ export type GRNMasterCreateManyUpdatedByInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type GRNMasterCreateWithoutConfirmedByInput = {
-  grn_no: string
-  status?: $Enums.GRNStatus
-  received_date: Date | string
-  vehicle_no?: string | null
-  gate_entry_no?: string | null
-  invoice_no?: string | null
-  invoice_date?: Date | string | null
-  invoice_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  remarks?: string | null
-  confirmed_at?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  transporter_name?: string | null
-  lr_no?: string | null
-  lr_date?: Date | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutGrnsInput
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutGrnsInput
-  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutGrnsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsUpdatedInput
-  items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
-  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
-  paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutGrnInput
-}
-
-export type GRNMasterUncheckedCreateWithoutConfirmedByInput = {
-  id?: number
-  vendor_id: number
-  grn_no: string
-  purchase_order_id: number
-  company_vendor_id: number
-  status?: $Enums.GRNStatus
-  received_date: Date | string
-  vehicle_no?: string | null
-  gate_entry_no?: string | null
-  invoice_no?: string | null
-  invoice_date?: Date | string | null
-  invoice_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  remarks?: string | null
-  created_by: number
-  updated_by?: number | null
-  confirmed_at?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  transporter_name?: string | null
-  lr_no?: string | null
-  lr_date?: Date | string | null
-  items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
-  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutGrnInput
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutGrnInput
-}
-
-export type GRNMasterCreateOrConnectWithoutConfirmedByInput = {
+export type GRNMasterUpsertWithWhereUniqueWithoutConfirmedByInput = {
   where: Prisma.GRNMasterWhereUniqueInput
+  update: Prisma.XOR<Prisma.GRNMasterUpdateWithoutConfirmedByInput, Prisma.GRNMasterUncheckedUpdateWithoutConfirmedByInput>
   create: Prisma.XOR<Prisma.GRNMasterCreateWithoutConfirmedByInput, Prisma.GRNMasterUncheckedCreateWithoutConfirmedByInput>
 }
 
-export type GRNMasterCreateManyConfirmedByInputEnvelope = {
-  data: Prisma.GRNMasterCreateManyConfirmedByInput | Prisma.GRNMasterCreateManyConfirmedByInput[]
-  skipDuplicates?: boolean
+export type GRNMasterUpdateWithWhereUniqueWithoutConfirmedByInput = {
+  where: Prisma.GRNMasterWhereUniqueInput
+  data: Prisma.XOR<Prisma.GRNMasterUpdateWithoutConfirmedByInput, Prisma.GRNMasterUncheckedUpdateWithoutConfirmedByInput>
+}
+
+export type GRNMasterUpdateManyWithWhereWithoutConfirmedByInput = {
+  where: Prisma.GRNMasterScalarWhereInput
+  data: Prisma.XOR<Prisma.GRNMasterUpdateManyMutationInput, Prisma.GRNMasterUncheckedUpdateManyWithoutConfirmedByInput>
 }
 
 export type GRNMasterUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -1918,22 +1934,6 @@ export type GRNMasterUpdateManyWithWhereWithoutUpdatedByInput = {
   data: Prisma.XOR<Prisma.GRNMasterUpdateManyMutationInput, Prisma.GRNMasterUncheckedUpdateManyWithoutUpdatedByInput>
 }
 
-export type GRNMasterUpsertWithWhereUniqueWithoutConfirmedByInput = {
-  where: Prisma.GRNMasterWhereUniqueInput
-  update: Prisma.XOR<Prisma.GRNMasterUpdateWithoutConfirmedByInput, Prisma.GRNMasterUncheckedUpdateWithoutConfirmedByInput>
-  create: Prisma.XOR<Prisma.GRNMasterCreateWithoutConfirmedByInput, Prisma.GRNMasterUncheckedCreateWithoutConfirmedByInput>
-}
-
-export type GRNMasterUpdateWithWhereUniqueWithoutConfirmedByInput = {
-  where: Prisma.GRNMasterWhereUniqueInput
-  data: Prisma.XOR<Prisma.GRNMasterUpdateWithoutConfirmedByInput, Prisma.GRNMasterUncheckedUpdateWithoutConfirmedByInput>
-}
-
-export type GRNMasterUpdateManyWithWhereWithoutConfirmedByInput = {
-  where: Prisma.GRNMasterScalarWhereInput
-  data: Prisma.XOR<Prisma.GRNMasterUpdateManyMutationInput, Prisma.GRNMasterUncheckedUpdateManyWithoutConfirmedByInput>
-}
-
 export type GRNMasterCreateWithoutCompanyVendorInput = {
   grn_no: string
   status?: $Enums.GRNStatus
@@ -1963,13 +1963,13 @@ export type GRNMasterCreateWithoutCompanyVendorInput = {
   transporter_name?: string | null
   lr_no?: string | null
   lr_date?: Date | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutGrnsInput
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutGrnsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutGrnsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsUpdatedInput
-  confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
-  items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
+  items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
+  confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutGrnsCreatedInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutGrnsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutGrnsInput
   paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutGrnInput
 }
 
@@ -2008,8 +2008,8 @@ export type GRNMasterUncheckedCreateWithoutCompanyVendorInput = {
   transporter_name?: string | null
   lr_no?: string | null
   lr_date?: Date | string | null
-  items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutGrnInput
+  items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutGrnInput
 }
 
@@ -2068,13 +2068,13 @@ export type GRNMasterCreateWithoutPurchaseOrderInput = {
   transporter_name?: string | null
   lr_no?: string | null
   lr_date?: Date | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutGrnsInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
+  items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
+  confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutGrnsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsUpdatedInput
-  confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
-  items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
-  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutGrnsInput
   paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutGrnInput
 }
 
@@ -2113,8 +2113,8 @@ export type GRNMasterUncheckedCreateWithoutPurchaseOrderInput = {
   transporter_name?: string | null
   lr_no?: string | null
   lr_date?: Date | string | null
-  items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutGrnInput
+  items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutGrnInput
 }
 
@@ -2173,13 +2173,13 @@ export type GRNMasterCreateWithoutItemsInput = {
   transporter_name?: string | null
   lr_no?: string | null
   lr_date?: Date | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutGrnsInput
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutGrnsInput
-  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutGrnsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsUpdatedInput
-  confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
+  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
+  confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutGrnsCreatedInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutGrnsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutGrnsInput
   paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutGrnInput
 }
 
@@ -2268,13 +2268,13 @@ export type GRNMasterUpdateWithoutItemsInput = {
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutGrnsNestedInput
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutGrnsNestedInput
-  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutGrnsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutGrnsUpdatedNestedInput
-  confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
+  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
+  confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutGrnsCreatedNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutGrnsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutGrnsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutGrnsNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutGrnNestedInput
 }
 
@@ -2347,13 +2347,13 @@ export type GRNMasterCreateWithoutDebitCreditNotesInput = {
   transporter_name?: string | null
   lr_no?: string | null
   lr_date?: Date | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutGrnsInput
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutGrnsInput
-  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutGrnsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsUpdatedInput
-  confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
   items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
+  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
+  confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutGrnsCreatedInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutGrnsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutGrnsInput
   paymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutGrnInput
 }
 
@@ -2442,13 +2442,13 @@ export type GRNMasterUpdateWithoutDebitCreditNotesInput = {
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutGrnsNestedInput
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutGrnsNestedInput
-  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutGrnsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutGrnsUpdatedNestedInput
-  confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
   items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
+  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
+  confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutGrnsCreatedNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutGrnsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutGrnsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutGrnsNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutGrnNestedInput
 }
 
@@ -2521,14 +2521,14 @@ export type GRNMasterCreateWithoutPaymentSchedulesInput = {
   transporter_name?: string | null
   lr_no?: string | null
   lr_date?: Date | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutGrnsInput
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutGrnsInput
-  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutGrnsCreatedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsUpdatedInput
-  confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
-  items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
+  items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
+  companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
+  confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutGrnsCreatedInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutGrnsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutGrnsInput
 }
 
 export type GRNMasterUncheckedCreateWithoutPaymentSchedulesInput = {
@@ -2567,8 +2567,8 @@ export type GRNMasterUncheckedCreateWithoutPaymentSchedulesInput = {
   transporter_name?: string | null
   lr_no?: string | null
   lr_date?: Date | string | null
-  items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutGrnInput
+  items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
 }
 
 export type GRNMasterCreateOrConnectWithoutPaymentSchedulesInput = {
@@ -2616,14 +2616,14 @@ export type GRNMasterUpdateWithoutPaymentSchedulesInput = {
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutGrnsNestedInput
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutGrnsNestedInput
-  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutGrnsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutGrnsUpdatedNestedInput
-  confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
-  items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
+  items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
+  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
+  confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutGrnsCreatedNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutGrnsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutGrnsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutGrnsNestedInput
 }
 
 export type GRNMasterUncheckedUpdateWithoutPaymentSchedulesInput = {
@@ -2662,8 +2662,8 @@ export type GRNMasterUncheckedUpdateWithoutPaymentSchedulesInput = {
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutGrnNestedInput
+  items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
 }
 
 export type GRNMasterCreateManyVendorInput = {
@@ -2732,13 +2732,13 @@ export type GRNMasterUpdateWithoutVendorInput = {
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutGrnsNestedInput
-  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutGrnsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutGrnsUpdatedNestedInput
-  confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
-  items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
+  items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
+  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
+  confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutGrnsCreatedNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutGrnsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutGrnsUpdatedNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutGrnNestedInput
 }
 
@@ -2777,8 +2777,8 @@ export type GRNMasterUncheckedUpdateWithoutVendorInput = {
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutGrnNestedInput
+  items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutGrnNestedInput
 }
 
@@ -2817,6 +2817,43 @@ export type GRNMasterUncheckedUpdateManyWithoutVendorInput = {
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type GRNMasterCreateManyConfirmedByInput = {
+  id?: number
+  vendor_id: number
+  grn_no: string
+  purchase_order_id: number
+  company_vendor_id: number
+  status?: $Enums.GRNStatus
+  received_date: Date | string
+  vehicle_no?: string | null
+  gate_entry_no?: string | null
+  invoice_no?: string | null
+  invoice_date?: Date | string | null
+  invoice_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  remarks?: string | null
+  created_by: number
+  updated_by?: number | null
+  confirmed_at?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
+  transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
 }
 
 export type GRNMasterCreateManyCreatedByInput = {
@@ -2893,41 +2930,120 @@ export type GRNMasterCreateManyUpdatedByInput = {
   lr_date?: Date | string | null
 }
 
-export type GRNMasterCreateManyConfirmedByInput = {
-  id?: number
-  vendor_id: number
-  grn_no: string
-  purchase_order_id: number
-  company_vendor_id: number
-  status?: $Enums.GRNStatus
-  received_date: Date | string
-  vehicle_no?: string | null
-  gate_entry_no?: string | null
-  invoice_no?: string | null
-  invoice_date?: Date | string | null
-  invoice_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  remarks?: string | null
-  created_by: number
-  updated_by?: number | null
-  confirmed_at?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  transporter_name?: string | null
-  lr_no?: string | null
-  lr_date?: Date | string | null
+export type GRNMasterUpdateWithoutConfirmedByInput = {
+  grn_no?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumGRNStatusFieldUpdateOperationsInput | $Enums.GRNStatus
+  received_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gate_entry_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoice_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoice_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoice_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
+  items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
+  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutGrnsCreatedNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutGrnsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutGrnsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutGrnsNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutGrnNestedInput
+}
+
+export type GRNMasterUncheckedUpdateWithoutConfirmedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  grn_no?: Prisma.StringFieldUpdateOperationsInput | string
+  purchase_order_id?: Prisma.IntFieldUpdateOperationsInput | number
+  company_vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumGRNStatusFieldUpdateOperationsInput | $Enums.GRNStatus
+  received_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gate_entry_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoice_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoice_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoice_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutGrnNestedInput
+  items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
+  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutGrnNestedInput
+}
+
+export type GRNMasterUncheckedUpdateManyWithoutConfirmedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  grn_no?: Prisma.StringFieldUpdateOperationsInput | string
+  purchase_order_id?: Prisma.IntFieldUpdateOperationsInput | number
+  company_vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumGRNStatusFieldUpdateOperationsInput | $Enums.GRNStatus
+  received_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gate_entry_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoice_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoice_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoice_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type GRNMasterUpdateWithoutCreatedByInput = {
@@ -2959,13 +3075,13 @@ export type GRNMasterUpdateWithoutCreatedByInput = {
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutGrnsNestedInput
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutGrnsNestedInput
-  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutGrnsUpdatedNestedInput
-  confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
-  items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
+  items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
+  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
+  confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutGrnsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutGrnsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutGrnsNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutGrnNestedInput
 }
 
@@ -3004,8 +3120,8 @@ export type GRNMasterUncheckedUpdateWithoutCreatedByInput = {
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutGrnNestedInput
+  items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutGrnNestedInput
 }
 
@@ -3075,13 +3191,13 @@ export type GRNMasterUpdateWithoutUpdatedByInput = {
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutGrnsNestedInput
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutGrnsNestedInput
-  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutGrnsCreatedNestedInput
-  confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
-  items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
+  items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
+  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
+  confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutGrnsCreatedNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutGrnsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutGrnsNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutGrnNestedInput
 }
 
@@ -3120,8 +3236,8 @@ export type GRNMasterUncheckedUpdateWithoutUpdatedByInput = {
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutGrnNestedInput
+  items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutGrnNestedInput
 }
 
@@ -3141,122 +3257,6 @@ export type GRNMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   confirmed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-}
-
-export type GRNMasterUpdateWithoutConfirmedByInput = {
-  grn_no?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumGRNStatusFieldUpdateOperationsInput | $Enums.GRNStatus
-  received_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gate_entry_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  invoice_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  invoice_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  invoice_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutGrnsNestedInput
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutGrnsNestedInput
-  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutGrnsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutGrnsUpdatedNestedInput
-  items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
-  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutGrnNestedInput
-}
-
-export type GRNMasterUncheckedUpdateWithoutConfirmedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  grn_no?: Prisma.StringFieldUpdateOperationsInput | string
-  purchase_order_id?: Prisma.IntFieldUpdateOperationsInput | number
-  company_vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumGRNStatusFieldUpdateOperationsInput | $Enums.GRNStatus
-  received_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gate_entry_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  invoice_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  invoice_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  invoice_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
-  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutGrnNestedInput
-  paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutGrnNestedInput
-}
-
-export type GRNMasterUncheckedUpdateManyWithoutConfirmedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  grn_no?: Prisma.StringFieldUpdateOperationsInput | string
-  purchase_order_id?: Prisma.IntFieldUpdateOperationsInput | number
-  company_vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumGRNStatusFieldUpdateOperationsInput | $Enums.GRNStatus
-  received_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gate_entry_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  invoice_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  invoice_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  invoice_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3344,13 +3344,13 @@ export type GRNMasterUpdateWithoutCompanyVendorInput = {
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutGrnsNestedInput
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutGrnsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutGrnsCreatedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutGrnsUpdatedNestedInput
-  confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
-  items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
+  items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
+  confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutGrnsCreatedNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutGrnsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutGrnsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutGrnsNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutGrnNestedInput
 }
 
@@ -3389,8 +3389,8 @@ export type GRNMasterUncheckedUpdateWithoutCompanyVendorInput = {
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutGrnNestedInput
+  items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutGrnNestedInput
 }
 
@@ -3497,13 +3497,13 @@ export type GRNMasterUpdateWithoutPurchaseOrderInput = {
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutGrnsNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
+  items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
+  confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutGrnsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutGrnsUpdatedNestedInput
-  confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
-  items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
-  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutGrnsNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutGrnNestedInput
 }
 
@@ -3542,8 +3542,8 @@ export type GRNMasterUncheckedUpdateWithoutPurchaseOrderInput = {
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutGrnNestedInput
+  items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutGrnNestedInput
 }
 
@@ -3590,14 +3590,14 @@ export type GRNMasterUncheckedUpdateManyWithoutPurchaseOrderInput = {
  */
 
 export type GRNMasterCountOutputType = {
-  items: number
   debitCreditNotes: number
+  items: number
   paymentSchedules: number
 }
 
 export type GRNMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  items?: boolean | GRNMasterCountOutputTypeCountItemsArgs
   debitCreditNotes?: boolean | GRNMasterCountOutputTypeCountDebitCreditNotesArgs
+  items?: boolean | GRNMasterCountOutputTypeCountItemsArgs
   paymentSchedules?: boolean | GRNMasterCountOutputTypeCountPaymentSchedulesArgs
 }
 
@@ -3614,15 +3614,15 @@ export type GRNMasterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ex
 /**
  * GRNMasterCountOutputType without action
  */
-export type GRNMasterCountOutputTypeCountItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.GRNItemWhereInput
+export type GRNMasterCountOutputTypeCountDebitCreditNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DebitCreditNoteWhereInput
 }
 
 /**
  * GRNMasterCountOutputType without action
  */
-export type GRNMasterCountOutputTypeCountDebitCreditNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.DebitCreditNoteWhereInput
+export type GRNMasterCountOutputTypeCountItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GRNItemWhereInput
 }
 
 /**
@@ -3669,14 +3669,14 @@ export type GRNMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   transporter_name?: boolean
   lr_no?: boolean
   lr_date?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
-  companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.GRNMaster$updatedByArgs<ExtArgs>
-  confirmedBy?: boolean | Prisma.GRNMaster$confirmedByArgs<ExtArgs>
-  items?: boolean | Prisma.GRNMaster$itemsArgs<ExtArgs>
   debitCreditNotes?: boolean | Prisma.GRNMaster$debitCreditNotesArgs<ExtArgs>
+  items?: boolean | Prisma.GRNMaster$itemsArgs<ExtArgs>
+  companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
+  confirmedBy?: boolean | Prisma.GRNMaster$confirmedByArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.GRNMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   paymentSchedules?: boolean | Prisma.GRNMaster$paymentSchedulesArgs<ExtArgs>
   _count?: boolean | Prisma.GRNMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["gRNMaster"]>
@@ -3717,12 +3717,12 @@ export type GRNMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   transporter_name?: boolean
   lr_no?: boolean
   lr_date?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.GRNMaster$updatedByArgs<ExtArgs>
   confirmedBy?: boolean | Prisma.GRNMaster$confirmedByArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.GRNMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["gRNMaster"]>
 
 export type GRNMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -3761,12 +3761,12 @@ export type GRNMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   transporter_name?: boolean
   lr_no?: boolean
   lr_date?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.GRNMaster$updatedByArgs<ExtArgs>
   confirmedBy?: boolean | Prisma.GRNMaster$confirmedByArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.GRNMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["gRNMaster"]>
 
 export type GRNMasterSelectScalar = {
@@ -3809,45 +3809,45 @@ export type GRNMasterSelectScalar = {
 
 export type GRNMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "grn_no" | "purchase_order_id" | "company_vendor_id" | "status" | "received_date" | "vehicle_no" | "gate_entry_no" | "invoice_no" | "invoice_date" | "invoice_amount" | "remarks" | "created_by" | "updated_by" | "confirmed_by" | "confirmed_at" | "created_at" | "updated_at" | "subtotal_amount" | "cgst_amount" | "sgst_amount" | "igst_amount" | "cess_amount" | "discount_amount" | "packing_amount" | "freight_amount" | "other_charges_amount" | "roundoff_amount" | "taxable_amount" | "total_amount" | "eway_bill_no" | "transporter_name" | "lr_no" | "lr_date", ExtArgs["result"]["gRNMaster"]>
 export type GRNMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
-  companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.GRNMaster$updatedByArgs<ExtArgs>
-  confirmedBy?: boolean | Prisma.GRNMaster$confirmedByArgs<ExtArgs>
-  items?: boolean | Prisma.GRNMaster$itemsArgs<ExtArgs>
   debitCreditNotes?: boolean | Prisma.GRNMaster$debitCreditNotesArgs<ExtArgs>
+  items?: boolean | Prisma.GRNMaster$itemsArgs<ExtArgs>
+  companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
+  confirmedBy?: boolean | Prisma.GRNMaster$confirmedByArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.GRNMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   paymentSchedules?: boolean | Prisma.GRNMaster$paymentSchedulesArgs<ExtArgs>
   _count?: boolean | Prisma.GRNMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type GRNMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.GRNMaster$updatedByArgs<ExtArgs>
   confirmedBy?: boolean | Prisma.GRNMaster$confirmedByArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.GRNMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type GRNMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
-  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.GRNMaster$updatedByArgs<ExtArgs>
   confirmedBy?: boolean | Prisma.GRNMaster$confirmedByArgs<ExtArgs>
+  createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.GRNMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $GRNMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "GRNMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    purchaseOrder: Prisma.$PurchaseOrderMasterPayload<ExtArgs>
-    companyVendor: Prisma.$CompanyVendorsMasterPayload<ExtArgs>
-    createdBy: Prisma.$UserMasterPayload<ExtArgs>
-    updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
-    confirmedBy: Prisma.$UserMasterPayload<ExtArgs> | null
-    items: Prisma.$GRNItemPayload<ExtArgs>[]
     debitCreditNotes: Prisma.$DebitCreditNotePayload<ExtArgs>[]
+    items: Prisma.$GRNItemPayload<ExtArgs>[]
+    companyVendor: Prisma.$CompanyVendorsMasterPayload<ExtArgs>
+    confirmedBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    purchaseOrder: Prisma.$PurchaseOrderMasterPayload<ExtArgs>
+    updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     paymentSchedules: Prisma.$POPaymentSchedulePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -4280,14 +4280,14 @@ readonly fields: GRNMasterFieldRefs;
  */
 export interface Prisma__GRNMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  purchaseOrder<T extends Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PurchaseOrderMasterClient<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  companyVendor<T extends Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__CompanyVendorsMasterClient<runtime.Types.Result.GetResult<Prisma.$CompanyVendorsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  updatedBy<T extends Prisma.GRNMaster$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GRNMaster$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  confirmedBy<T extends Prisma.GRNMaster$confirmedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GRNMaster$confirmedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  items<T extends Prisma.GRNMaster$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GRNMaster$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   debitCreditNotes<T extends Prisma.GRNMaster$debitCreditNotesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GRNMaster$debitCreditNotesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DebitCreditNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  items<T extends Prisma.GRNMaster$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GRNMaster$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  companyVendor<T extends Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__CompanyVendorsMasterClient<runtime.Types.Result.GetResult<Prisma.$CompanyVendorsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  confirmedBy<T extends Prisma.GRNMaster$confirmedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GRNMaster$confirmedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  purchaseOrder<T extends Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PurchaseOrderMasterClient<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  updatedBy<T extends Prisma.GRNMaster$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GRNMaster$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   paymentSchedules<T extends Prisma.GRNMaster$paymentSchedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GRNMaster$paymentSchedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$POPaymentSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4754,41 +4754,27 @@ export type GRNMasterDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * GRNMaster.updatedBy
+ * GRNMaster.debitCreditNotes
  */
-export type GRNMaster$updatedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type GRNMaster$debitCreditNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the UserMaster
+   * Select specific fields to fetch from the DebitCreditNote
    */
-  select?: Prisma.UserMasterSelect<ExtArgs> | null
+  select?: Prisma.DebitCreditNoteSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the UserMaster
+   * Omit specific fields from the DebitCreditNote
    */
-  omit?: Prisma.UserMasterOmit<ExtArgs> | null
+  omit?: Prisma.DebitCreditNoteOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.UserMasterInclude<ExtArgs> | null
-  where?: Prisma.UserMasterWhereInput
-}
-
-/**
- * GRNMaster.confirmedBy
- */
-export type GRNMaster$confirmedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UserMaster
-   */
-  select?: Prisma.UserMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the UserMaster
-   */
-  omit?: Prisma.UserMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserMasterInclude<ExtArgs> | null
-  where?: Prisma.UserMasterWhereInput
+  include?: Prisma.DebitCreditNoteInclude<ExtArgs> | null
+  where?: Prisma.DebitCreditNoteWhereInput
+  orderBy?: Prisma.DebitCreditNoteOrderByWithRelationInput | Prisma.DebitCreditNoteOrderByWithRelationInput[]
+  cursor?: Prisma.DebitCreditNoteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DebitCreditNoteScalarFieldEnum | Prisma.DebitCreditNoteScalarFieldEnum[]
 }
 
 /**
@@ -4816,27 +4802,41 @@ export type GRNMaster$itemsArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * GRNMaster.debitCreditNotes
+ * GRNMaster.confirmedBy
  */
-export type GRNMaster$debitCreditNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type GRNMaster$confirmedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the DebitCreditNote
+   * Select specific fields to fetch from the UserMaster
    */
-  select?: Prisma.DebitCreditNoteSelect<ExtArgs> | null
+  select?: Prisma.UserMasterSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the DebitCreditNote
+   * Omit specific fields from the UserMaster
    */
-  omit?: Prisma.DebitCreditNoteOmit<ExtArgs> | null
+  omit?: Prisma.UserMasterOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.DebitCreditNoteInclude<ExtArgs> | null
-  where?: Prisma.DebitCreditNoteWhereInput
-  orderBy?: Prisma.DebitCreditNoteOrderByWithRelationInput | Prisma.DebitCreditNoteOrderByWithRelationInput[]
-  cursor?: Prisma.DebitCreditNoteWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.DebitCreditNoteScalarFieldEnum | Prisma.DebitCreditNoteScalarFieldEnum[]
+  include?: Prisma.UserMasterInclude<ExtArgs> | null
+  where?: Prisma.UserMasterWhereInput
+}
+
+/**
+ * GRNMaster.updatedBy
+ */
+export type GRNMaster$updatedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserMaster
+   */
+  select?: Prisma.UserMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserMaster
+   */
+  omit?: Prisma.UserMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserMasterInclude<ExtArgs> | null
+  where?: Prisma.UserMasterWhereInput
 }
 
 /**

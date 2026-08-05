@@ -380,10 +380,10 @@ export type PurchaseIntentSupplierAdditionalCostWhereInput = {
   updated_by?: Prisma.IntNullableFilter<"PurchaseIntentSupplierAdditionalCost"> | number | null
   created_at?: Prisma.DateTimeFilter<"PurchaseIntentSupplierAdditionalCost"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"PurchaseIntentSupplierAdditionalCost"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  purchaseIntent?: Prisma.XOR<Prisma.PurchaseIntentMasterScalarRelationFilter, Prisma.PurchaseIntentMasterWhereInput>
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
   additionalCost?: Prisma.XOR<Prisma.AdditionalCostMasterScalarRelationFilter, Prisma.AdditionalCostMasterWhereInput>
+  purchaseIntent?: Prisma.XOR<Prisma.PurchaseIntentMasterScalarRelationFilter, Prisma.PurchaseIntentMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostListRelationFilter
 }
 
@@ -407,10 +407,10 @@ export type PurchaseIntentSupplierAdditionalCostOrderByWithRelationInput = {
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  purchaseIntent?: Prisma.PurchaseIntentMasterOrderByWithRelationInput
   companyVendor?: Prisma.CompanyVendorsMasterOrderByWithRelationInput
   additionalCost?: Prisma.AdditionalCostMasterOrderByWithRelationInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostOrderByRelationAggregateInput
 }
 
@@ -437,10 +437,10 @@ export type PurchaseIntentSupplierAdditionalCostWhereUniqueInput = Prisma.AtLeas
   updated_by?: Prisma.IntNullableFilter<"PurchaseIntentSupplierAdditionalCost"> | number | null
   created_at?: Prisma.DateTimeFilter<"PurchaseIntentSupplierAdditionalCost"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"PurchaseIntentSupplierAdditionalCost"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  purchaseIntent?: Prisma.XOR<Prisma.PurchaseIntentMasterScalarRelationFilter, Prisma.PurchaseIntentMasterWhereInput>
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
   additionalCost?: Prisma.XOR<Prisma.AdditionalCostMasterScalarRelationFilter, Prisma.AdditionalCostMasterWhereInput>
+  purchaseIntent?: Prisma.XOR<Prisma.PurchaseIntentMasterScalarRelationFilter, Prisma.PurchaseIntentMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostListRelationFilter
 }, "id">
 
@@ -511,10 +511,10 @@ export type PurchaseIntentSupplierAdditionalCostCreateInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
-  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutSupplierAdditionalCostsInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
   additionalCost: Prisma.AdditionalCostMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
+  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutSupplierAdditionalCostsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutSourcePiAdditionalCostInput
 }
 
@@ -556,10 +556,10 @@ export type PurchaseIntentSupplierAdditionalCostUpdateInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
-  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutSupplierAdditionalCostsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
   additionalCost?: Prisma.AdditionalCostMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutSupplierAdditionalCostsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutSourcePiAdditionalCostNestedInput
 }
 
@@ -965,9 +965,9 @@ export type PurchaseIntentSupplierAdditionalCostCreateWithoutVendorInput = {
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutSupplierAdditionalCostsInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
   additionalCost: Prisma.AdditionalCostMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
+  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutSupplierAdditionalCostsInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutSourcePiAdditionalCostInput
 }
 
@@ -1059,9 +1059,9 @@ export type PurchaseIntentSupplierAdditionalCostCreateWithoutCompanyVendorInput 
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
-  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutSupplierAdditionalCostsInput
   additionalCost: Prisma.AdditionalCostMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
+  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutSupplierAdditionalCostsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutSourcePiAdditionalCostInput
 }
 
@@ -1128,9 +1128,9 @@ export type PurchaseIntentSupplierAdditionalCostCreateWithoutPurchaseIntentInput
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
   additionalCost: Prisma.AdditionalCostMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutSourcePiAdditionalCostInput
 }
 
@@ -1197,9 +1197,9 @@ export type PurchaseIntentSupplierAdditionalCostCreateWithoutAdditionalCostInput
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
-  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutSupplierAdditionalCostsInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
+  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutSupplierAdditionalCostsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutSourcePiAdditionalCostInput
 }
 
@@ -1266,10 +1266,10 @@ export type PurchaseIntentSupplierAdditionalCostCreateWithoutPoSupplierAdditiona
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
-  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutSupplierAdditionalCostsInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
   additionalCost: Prisma.AdditionalCostMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
+  purchaseIntent: Prisma.PurchaseIntentMasterCreateNestedOneWithoutSupplierAdditionalCostsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPiSupplierAdditionalCostsInput
 }
 
 export type PurchaseIntentSupplierAdditionalCostUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
@@ -1325,10 +1325,10 @@ export type PurchaseIntentSupplierAdditionalCostUpdateWithoutPoSupplierAdditiona
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
-  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutSupplierAdditionalCostsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
   additionalCost?: Prisma.AdditionalCostMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutSupplierAdditionalCostsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
 }
 
 export type PurchaseIntentSupplierAdditionalCostUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
@@ -1389,9 +1389,9 @@ export type PurchaseIntentSupplierAdditionalCostUpdateWithoutVendorInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutSupplierAdditionalCostsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
   additionalCost?: Prisma.AdditionalCostMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutSupplierAdditionalCostsNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutSourcePiAdditionalCostNestedInput
 }
 
@@ -1474,9 +1474,9 @@ export type PurchaseIntentSupplierAdditionalCostUpdateWithoutCompanyVendorInput 
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
-  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutSupplierAdditionalCostsNestedInput
   additionalCost?: Prisma.AdditionalCostMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutSupplierAdditionalCostsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutSourcePiAdditionalCostNestedInput
 }
 
@@ -1559,9 +1559,9 @@ export type PurchaseIntentSupplierAdditionalCostUpdateWithoutPurchaseIntentInput
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
   additionalCost?: Prisma.AdditionalCostMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutSourcePiAdditionalCostNestedInput
 }
 
@@ -1644,9 +1644,9 @@ export type PurchaseIntentSupplierAdditionalCostUpdateWithoutAdditionalCostInput
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
-  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutSupplierAdditionalCostsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
+  purchaseIntent?: Prisma.PurchaseIntentMasterUpdateOneRequiredWithoutSupplierAdditionalCostsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPiSupplierAdditionalCostsNestedInput
   poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutSourcePiAdditionalCostNestedInput
 }
 
@@ -1744,10 +1744,10 @@ export type PurchaseIntentSupplierAdditionalCostSelect<ExtArgs extends runtime.T
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   additionalCost?: boolean | Prisma.AdditionalCostMasterDefaultArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   poSupplierAdditionalCosts?: boolean | Prisma.PurchaseIntentSupplierAdditionalCost$poSupplierAdditionalCostsArgs<ExtArgs>
   _count?: boolean | Prisma.PurchaseIntentSupplierAdditionalCostCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseIntentSupplierAdditionalCost"]>
@@ -1772,10 +1772,10 @@ export type PurchaseIntentSupplierAdditionalCostSelectCreateManyAndReturn<ExtArg
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   additionalCost?: boolean | Prisma.AdditionalCostMasterDefaultArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseIntentSupplierAdditionalCost"]>
 
 export type PurchaseIntentSupplierAdditionalCostSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1798,10 +1798,10 @@ export type PurchaseIntentSupplierAdditionalCostSelectUpdateManyAndReturn<ExtArg
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   additionalCost?: boolean | Prisma.AdditionalCostMasterDefaultArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseIntentSupplierAdditionalCost"]>
 
 export type PurchaseIntentSupplierAdditionalCostSelectScalar = {
@@ -1828,33 +1828,33 @@ export type PurchaseIntentSupplierAdditionalCostSelectScalar = {
 
 export type PurchaseIntentSupplierAdditionalCostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "purchase_intent_id" | "company_vendor_id" | "additional_cost_id" | "cost_name" | "calculation_type" | "amount" | "percentage" | "base_amount" | "taxable_amount" | "tax_pct" | "tax_amount" | "total_amount" | "remarks" | "created_by" | "updated_by" | "created_at" | "updated_at", ExtArgs["result"]["purchaseIntentSupplierAdditionalCost"]>
 export type PurchaseIntentSupplierAdditionalCostInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   additionalCost?: boolean | Prisma.AdditionalCostMasterDefaultArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   poSupplierAdditionalCosts?: boolean | Prisma.PurchaseIntentSupplierAdditionalCost$poSupplierAdditionalCostsArgs<ExtArgs>
   _count?: boolean | Prisma.PurchaseIntentSupplierAdditionalCostCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PurchaseIntentSupplierAdditionalCostIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   additionalCost?: boolean | Prisma.AdditionalCostMasterDefaultArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type PurchaseIntentSupplierAdditionalCostIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   additionalCost?: boolean | Prisma.AdditionalCostMasterDefaultArgs<ExtArgs>
+  purchaseIntent?: boolean | Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $PurchaseIntentSupplierAdditionalCostPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PurchaseIntentSupplierAdditionalCost"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    purchaseIntent: Prisma.$PurchaseIntentMasterPayload<ExtArgs>
     companyVendor: Prisma.$CompanyVendorsMasterPayload<ExtArgs>
     additionalCost: Prisma.$AdditionalCostMasterPayload<ExtArgs>
+    purchaseIntent: Prisma.$PurchaseIntentMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     poSupplierAdditionalCosts: Prisma.$PurchaseOrderSupplierAdditionalCostPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -2271,10 +2271,10 @@ readonly fields: PurchaseIntentSupplierAdditionalCostFieldRefs;
  */
 export interface Prisma__PurchaseIntentSupplierAdditionalCostClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  purchaseIntent<T extends Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PurchaseIntentMasterClient<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   companyVendor<T extends Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__CompanyVendorsMasterClient<runtime.Types.Result.GetResult<Prisma.$CompanyVendorsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   additionalCost<T extends Prisma.AdditionalCostMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AdditionalCostMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__AdditionalCostMasterClient<runtime.Types.Result.GetResult<Prisma.$AdditionalCostMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  purchaseIntent<T extends Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PurchaseIntentMasterClient<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   poSupplierAdditionalCosts<T extends Prisma.PurchaseIntentSupplierAdditionalCost$poSupplierAdditionalCostsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentSupplierAdditionalCost$poSupplierAdditionalCostsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderSupplierAdditionalCostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.

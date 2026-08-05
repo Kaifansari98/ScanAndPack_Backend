@@ -404,10 +404,10 @@ export type PurchaseIntentItemVendorMappingWhereInput = {
   amount?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.IntNullableFilter<"PurchaseIntentItemVendorMapping"> | number | null
-  purchaseIntentItem?: Prisma.XOR<Prisma.PurchaseIntentItemScalarRelationFilter, Prisma.PurchaseIntentItemWhereInput>
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
-  purchaseOrderItems?: Prisma.PurchaseOrderItemListRelationFilter
   paymentTerm?: Prisma.XOR<Prisma.PaymentTermMasterNullableScalarRelationFilter, Prisma.PaymentTermMasterWhereInput> | null
+  purchaseIntentItem?: Prisma.XOR<Prisma.PurchaseIntentItemScalarRelationFilter, Prisma.PurchaseIntentItemWhereInput>
+  purchaseOrderItems?: Prisma.PurchaseOrderItemListRelationFilter
 }
 
 export type PurchaseIntentItemVendorMappingOrderByWithRelationInput = {
@@ -432,10 +432,10 @@ export type PurchaseIntentItemVendorMappingOrderByWithRelationInput = {
   amount?: Prisma.SortOrderInput | Prisma.SortOrder
   total_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   payment_term_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  purchaseIntentItem?: Prisma.PurchaseIntentItemOrderByWithRelationInput
   companyVendor?: Prisma.CompanyVendorsMasterOrderByWithRelationInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemOrderByRelationAggregateInput
   paymentTerm?: Prisma.PaymentTermMasterOrderByWithRelationInput
+  purchaseIntentItem?: Prisma.PurchaseIntentItemOrderByWithRelationInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemOrderByRelationAggregateInput
 }
 
 export type PurchaseIntentItemVendorMappingWhereUniqueInput = Prisma.AtLeast<{
@@ -463,10 +463,10 @@ export type PurchaseIntentItemVendorMappingWhereUniqueInput = Prisma.AtLeast<{
   amount?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.DecimalNullableFilter<"PurchaseIntentItemVendorMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   payment_term_id?: Prisma.IntNullableFilter<"PurchaseIntentItemVendorMapping"> | number | null
-  purchaseIntentItem?: Prisma.XOR<Prisma.PurchaseIntentItemScalarRelationFilter, Prisma.PurchaseIntentItemWhereInput>
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
-  purchaseOrderItems?: Prisma.PurchaseOrderItemListRelationFilter
   paymentTerm?: Prisma.XOR<Prisma.PaymentTermMasterNullableScalarRelationFilter, Prisma.PaymentTermMasterWhereInput> | null
+  purchaseIntentItem?: Prisma.XOR<Prisma.PurchaseIntentItemScalarRelationFilter, Prisma.PurchaseIntentItemWhereInput>
+  purchaseOrderItems?: Prisma.PurchaseOrderItemListRelationFilter
 }, "id">
 
 export type PurchaseIntentItemVendorMappingOrderByWithAggregationInput = {
@@ -543,10 +543,10 @@ export type PurchaseIntentItemVendorMappingCreateInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  purchaseIntentItem: Prisma.PurchaseIntentItemCreateNestedOneWithoutVendorMappingsInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPurchaseIntentVendorMappingsInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPiVendorMappingInput
   paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPiVendorMappingsInput
+  purchaseIntentItem: Prisma.PurchaseIntentItemCreateNestedOneWithoutVendorMappingsInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPiVendorMappingInput
 }
 
 export type PurchaseIntentItemVendorMappingUncheckedCreateInput = {
@@ -592,10 +592,10 @@ export type PurchaseIntentItemVendorMappingUpdateInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  purchaseIntentItem?: Prisma.PurchaseIntentItemUpdateOneRequiredWithoutVendorMappingsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseIntentVendorMappingsNestedInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutPiVendorMappingNestedInput
   paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPiVendorMappingsNestedInput
+  purchaseIntentItem?: Prisma.PurchaseIntentItemUpdateOneRequiredWithoutVendorMappingsNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutPiVendorMappingNestedInput
 }
 
 export type PurchaseIntentItemVendorMappingUncheckedUpdateInput = {
@@ -976,9 +976,9 @@ export type PurchaseIntentItemVendorMappingCreateWithoutCompanyVendorInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPiVendorMappingsInput
   purchaseIntentItem: Prisma.PurchaseIntentItemCreateNestedOneWithoutVendorMappingsInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPiVendorMappingInput
-  paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPiVendorMappingsInput
 }
 
 export type PurchaseIntentItemVendorMappingUncheckedCreateWithoutCompanyVendorInput = {
@@ -1077,8 +1077,8 @@ export type PurchaseIntentItemVendorMappingCreateWithoutPurchaseIntentItemInput 
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPurchaseIntentVendorMappingsInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPiVendorMappingInput
   paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPiVendorMappingsInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPiVendorMappingInput
 }
 
 export type PurchaseIntentItemVendorMappingUncheckedCreateWithoutPurchaseIntentItemInput = {
@@ -1149,9 +1149,9 @@ export type PurchaseIntentItemVendorMappingCreateWithoutPurchaseOrderItemsInput 
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  purchaseIntentItem: Prisma.PurchaseIntentItemCreateNestedOneWithoutVendorMappingsInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPurchaseIntentVendorMappingsInput
   paymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutPiVendorMappingsInput
+  purchaseIntentItem: Prisma.PurchaseIntentItemCreateNestedOneWithoutVendorMappingsInput
 }
 
 export type PurchaseIntentItemVendorMappingUncheckedCreateWithoutPurchaseOrderItemsInput = {
@@ -1212,9 +1212,9 @@ export type PurchaseIntentItemVendorMappingUpdateWithoutPurchaseOrderItemsInput 
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  purchaseIntentItem?: Prisma.PurchaseIntentItemUpdateOneRequiredWithoutVendorMappingsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseIntentVendorMappingsNestedInput
   paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPiVendorMappingsNestedInput
+  purchaseIntentItem?: Prisma.PurchaseIntentItemUpdateOneRequiredWithoutVendorMappingsNestedInput
 }
 
 export type PurchaseIntentItemVendorMappingUncheckedUpdateWithoutPurchaseOrderItemsInput = {
@@ -1259,8 +1259,8 @@ export type PurchaseIntentItemVendorMappingCreateWithoutPaymentTermInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  purchaseIntentItem: Prisma.PurchaseIntentItemCreateNestedOneWithoutVendorMappingsInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutPurchaseIntentVendorMappingsInput
+  purchaseIntentItem: Prisma.PurchaseIntentItemCreateNestedOneWithoutVendorMappingsInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPiVendorMappingInput
 }
 
@@ -1355,9 +1355,9 @@ export type PurchaseIntentItemVendorMappingUpdateWithoutCompanyVendorInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPiVendorMappingsNestedInput
   purchaseIntentItem?: Prisma.PurchaseIntentItemUpdateOneRequiredWithoutVendorMappingsNestedInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutPiVendorMappingNestedInput
-  paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPiVendorMappingsNestedInput
 }
 
 export type PurchaseIntentItemVendorMappingUncheckedUpdateWithoutCompanyVendorInput = {
@@ -1449,8 +1449,8 @@ export type PurchaseIntentItemVendorMappingUpdateWithoutPurchaseIntentItemInput 
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseIntentVendorMappingsNestedInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutPiVendorMappingNestedInput
   paymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutPiVendorMappingsNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutPiVendorMappingNestedInput
 }
 
 export type PurchaseIntentItemVendorMappingUncheckedUpdateWithoutPurchaseIntentItemInput = {
@@ -1541,8 +1541,8 @@ export type PurchaseIntentItemVendorMappingUpdateWithoutPaymentTermInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  purchaseIntentItem?: Prisma.PurchaseIntentItemUpdateOneRequiredWithoutVendorMappingsNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseIntentVendorMappingsNestedInput
+  purchaseIntentItem?: Prisma.PurchaseIntentItemUpdateOneRequiredWithoutVendorMappingsNestedInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutPiVendorMappingNestedInput
 }
 
@@ -1646,10 +1646,10 @@ export type PurchaseIntentItemVendorMappingSelect<ExtArgs extends runtime.Types.
   amount?: boolean
   total_amount?: boolean
   payment_term_id?: boolean
-  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
-  purchaseOrderItems?: boolean | Prisma.PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs>
   paymentTerm?: boolean | Prisma.PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs>
+  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
+  purchaseOrderItems?: boolean | Prisma.PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs>
   _count?: boolean | Prisma.PurchaseIntentItemVendorMappingCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseIntentItemVendorMapping"]>
 
@@ -1675,9 +1675,9 @@ export type PurchaseIntentItemVendorMappingSelectCreateManyAndReturn<ExtArgs ext
   amount?: boolean
   total_amount?: boolean
   payment_term_id?: boolean
-  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   paymentTerm?: boolean | Prisma.PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs>
+  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseIntentItemVendorMapping"]>
 
 export type PurchaseIntentItemVendorMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1702,9 +1702,9 @@ export type PurchaseIntentItemVendorMappingSelectUpdateManyAndReturn<ExtArgs ext
   amount?: boolean
   total_amount?: boolean
   payment_term_id?: boolean
-  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   paymentTerm?: boolean | Prisma.PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs>
+  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseIntentItemVendorMapping"]>
 
 export type PurchaseIntentItemVendorMappingSelectScalar = {
@@ -1733,30 +1733,30 @@ export type PurchaseIntentItemVendorMappingSelectScalar = {
 
 export type PurchaseIntentItemVendorMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "purchase_intent_item_id" | "company_vendor_id" | "required_qty" | "required_by_date" | "estimated_price" | "remarks" | "is_selected" | "created_at" | "updated_at" | "mrp" | "discount_pct" | "rate" | "tax_pct" | "cgst_pct" | "sgst_pct" | "igst_pct" | "tax_amount" | "amount" | "total_amount" | "payment_term_id", ExtArgs["result"]["purchaseIntentItemVendorMapping"]>
 export type PurchaseIntentItemVendorMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
-  purchaseOrderItems?: boolean | Prisma.PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs>
   paymentTerm?: boolean | Prisma.PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs>
+  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
+  purchaseOrderItems?: boolean | Prisma.PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs>
   _count?: boolean | Prisma.PurchaseIntentItemVendorMappingCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PurchaseIntentItemVendorMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   paymentTerm?: boolean | Prisma.PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs>
+  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
 }
 export type PurchaseIntentItemVendorMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   paymentTerm?: boolean | Prisma.PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs>
+  purchaseIntentItem?: boolean | Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>
 }
 
 export type $PurchaseIntentItemVendorMappingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PurchaseIntentItemVendorMapping"
   objects: {
-    purchaseIntentItem: Prisma.$PurchaseIntentItemPayload<ExtArgs>
     companyVendor: Prisma.$CompanyVendorsMasterPayload<ExtArgs>
-    purchaseOrderItems: Prisma.$PurchaseOrderItemPayload<ExtArgs>[]
     paymentTerm: Prisma.$PaymentTermMasterPayload<ExtArgs> | null
+    purchaseIntentItem: Prisma.$PurchaseIntentItemPayload<ExtArgs>
+    purchaseOrderItems: Prisma.$PurchaseOrderItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2174,10 +2174,10 @@ readonly fields: PurchaseIntentItemVendorMappingFieldRefs;
  */
 export interface Prisma__PurchaseIntentItemVendorMappingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  purchaseIntentItem<T extends Prisma.PurchaseIntentItemDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>>): Prisma.Prisma__PurchaseIntentItemClient<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   companyVendor<T extends Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__CompanyVendorsMasterClient<runtime.Types.Result.GetResult<Prisma.$CompanyVendorsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  purchaseOrderItems<T extends Prisma.PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   paymentTerm<T extends Prisma.PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs>>): Prisma.Prisma__PaymentTermMasterClient<runtime.Types.Result.GetResult<Prisma.$PaymentTermMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  purchaseIntentItem<T extends Prisma.PurchaseIntentItemDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentItemDefaultArgs<ExtArgs>>): Prisma.Prisma__PurchaseIntentItemClient<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  purchaseOrderItems<T extends Prisma.PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2629,6 +2629,25 @@ export type PurchaseIntentItemVendorMappingDeleteManyArgs<ExtArgs extends runtim
 }
 
 /**
+ * PurchaseIntentItemVendorMapping.paymentTerm
+ */
+export type PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PaymentTermMaster
+   */
+  select?: Prisma.PaymentTermMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PaymentTermMaster
+   */
+  omit?: Prisma.PaymentTermMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentTermMasterInclude<ExtArgs> | null
+  where?: Prisma.PaymentTermMasterWhereInput
+}
+
+/**
  * PurchaseIntentItemVendorMapping.purchaseOrderItems
  */
 export type PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2650,25 +2669,6 @@ export type PurchaseIntentItemVendorMapping$purchaseOrderItemsArgs<ExtArgs exten
   take?: number
   skip?: number
   distinct?: Prisma.PurchaseOrderItemScalarFieldEnum | Prisma.PurchaseOrderItemScalarFieldEnum[]
-}
-
-/**
- * PurchaseIntentItemVendorMapping.paymentTerm
- */
-export type PurchaseIntentItemVendorMapping$paymentTermArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PaymentTermMaster
-   */
-  select?: Prisma.PaymentTermMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the PaymentTermMaster
-   */
-  omit?: Prisma.PaymentTermMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PaymentTermMasterInclude<ExtArgs> | null
-  where?: Prisma.PaymentTermMasterWhereInput
 }
 
 /**

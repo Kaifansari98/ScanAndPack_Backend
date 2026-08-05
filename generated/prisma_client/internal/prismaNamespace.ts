@@ -415,7 +415,6 @@ export const ModelName = {
   ClientMaster: 'ClientMaster',
   ClientTypeMaster: 'ClientTypeMaster',
   LeadMaster: 'LeadMaster',
-  LeadBillingAddress: 'LeadBillingAddress',
   LeadSpecificationsMaster: 'LeadSpecificationsMaster',
   LeadCarcassMaterialMapping: 'LeadCarcassMaterialMapping',
   LeadShutterMaterialMapping: 'LeadShutterMaterialMapping',
@@ -443,7 +442,6 @@ export const ModelName = {
   LeadLightCarcasUnitMapping: 'LeadLightCarcasUnitMapping',
   OtherAppliancesMaster: 'OtherAppliancesMaster',
   LeadOtherAppliancesMapping: 'LeadOtherAppliancesMapping',
-  LeadOtherAppliancesRemarkMapping: 'LeadOtherAppliancesRemarkMapping',
   HandleTypeMaster: 'HandleTypeMaster',
   TimelineRule: 'TimelineRule',
   specificationDocumentMapping: 'specificationDocumentMapping',
@@ -605,7 +603,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "clientTypeMaster" | "leadMaster" | "leadBillingAddress" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterMaterialFinishMaster" | "carcassLegsMaster" | "skirtingCarcassLegsMaster" | "skirtingCarcassLegsColorMaster" | "leadHardwareMapping" | "lightCarcasTypeMaster" | "lightCarcasUnitMaster" | "leadLightCarcasUnitMapping" | "otherAppliancesMaster" | "leadOtherAppliancesMapping" | "leadOtherAppliancesRemarkMapping" | "handleTypeMaster" | "timelineRule" | "specificationDocumentMapping" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "coreProductMaster" | "gradeMaster" | "finishMaster" | "typeMaster" | "itemTypeMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost" | "projectBoxInfoField" | "boxInfoFieldValue" | "vendorTypeMaster" | "companyVendorTypeMapping" | "companyVendorContactPerson" | "companyVendorBankAccount" | "companyVendorDocumentMaster" | "companyVendorDocumentMapping" | "companyVendorAddress" | "broadcastMaster" | "broadcastCategoryMaster" | "broadcastAudienceMapping" | "broadcastAttachment" | "broadcastRead" | "notificationQueue"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "clientTypeMaster" | "leadMaster" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterMaterialFinishMaster" | "carcassLegsMaster" | "skirtingCarcassLegsMaster" | "skirtingCarcassLegsColorMaster" | "leadHardwareMapping" | "lightCarcasTypeMaster" | "lightCarcasUnitMaster" | "leadLightCarcasUnitMapping" | "otherAppliancesMaster" | "leadOtherAppliancesMapping" | "handleTypeMaster" | "timelineRule" | "specificationDocumentMapping" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "coreProductMaster" | "gradeMaster" | "finishMaster" | "typeMaster" | "itemTypeMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost" | "projectBoxInfoField" | "boxInfoFieldValue" | "vendorTypeMaster" | "companyVendorTypeMapping" | "companyVendorContactPerson" | "companyVendorBankAccount" | "companyVendorDocumentMaster" | "companyVendorDocumentMapping" | "companyVendorAddress" | "broadcastMaster" | "broadcastCategoryMaster" | "broadcastAudienceMapping" | "broadcastAttachment" | "broadcastRead" | "notificationQueue"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1938,80 +1936,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.LeadMasterCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.LeadMasterCountAggregateOutputType> | number
-        }
-      }
-    }
-    LeadBillingAddress: {
-      payload: Prisma.$LeadBillingAddressPayload<ExtArgs>
-      fields: Prisma.LeadBillingAddressFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.LeadBillingAddressFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.LeadBillingAddressFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload>
-        }
-        findFirst: {
-          args: Prisma.LeadBillingAddressFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.LeadBillingAddressFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload>
-        }
-        findMany: {
-          args: Prisma.LeadBillingAddressFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload>[]
-        }
-        create: {
-          args: Prisma.LeadBillingAddressCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload>
-        }
-        createMany: {
-          args: Prisma.LeadBillingAddressCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.LeadBillingAddressCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload>[]
-        }
-        delete: {
-          args: Prisma.LeadBillingAddressDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload>
-        }
-        update: {
-          args: Prisma.LeadBillingAddressUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload>
-        }
-        deleteMany: {
-          args: Prisma.LeadBillingAddressDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.LeadBillingAddressUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.LeadBillingAddressUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload>[]
-        }
-        upsert: {
-          args: Prisma.LeadBillingAddressUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload>
-        }
-        aggregate: {
-          args: Prisma.LeadBillingAddressAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadBillingAddress>
-        }
-        groupBy: {
-          args: Prisma.LeadBillingAddressGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.LeadBillingAddressGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.LeadBillingAddressCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.LeadBillingAddressCountAggregateOutputType> | number
         }
       }
     }
@@ -4010,80 +3934,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.LeadOtherAppliancesMappingCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.LeadOtherAppliancesMappingCountAggregateOutputType> | number
-        }
-      }
-    }
-    LeadOtherAppliancesRemarkMapping: {
-      payload: Prisma.$LeadOtherAppliancesRemarkMappingPayload<ExtArgs>
-      fields: Prisma.LeadOtherAppliancesRemarkMappingFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>
-        }
-        findFirst: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>
-        }
-        findMany: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>[]
-        }
-        create: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>
-        }
-        createMany: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>[]
-        }
-        delete: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>
-        }
-        update: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>
-        }
-        deleteMany: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>[]
-        }
-        upsert: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>
-        }
-        aggregate: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadOtherAppliancesRemarkMapping>
-        }
-        groupBy: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.LeadOtherAppliancesRemarkMappingGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.LeadOtherAppliancesRemarkMappingCountAggregateOutputType> | number
         }
       }
     }
@@ -14934,7 +14784,6 @@ export const VendorMasterScalarFieldEnum = {
   id: 'id',
   vendor_name: 'vendor_name',
   vendor_code: 'vendor_code',
-  vendor_report_code: 'vendor_report_code',
   primary_contact_number: 'primary_contact_number',
   primary_contact_email: 'primary_contact_email',
   primary_contact_name: 'primary_contact_name',
@@ -14942,36 +14791,36 @@ export const VendorMasterScalarFieldEnum = {
   head_office_id: 'head_office_id',
   status: 'status',
   logo: 'logo',
-  icon: 'icon',
-  login_image: 'login_image',
   time_zone: 'time_zone',
-  subdomain_url: 'subdomain_url',
-  IsAccountLocInEnabled: 'IsAccountLocInEnabled',
-  is_crm_enabled: 'is_crm_enabled',
-  is_custom_doc_nomenclature_enabled: 'is_custom_doc_nomenclature_enabled',
-  is_inventory_enabled: 'is_inventory_enabled',
-  is_tracktrace_enabled: 'is_tracktrace_enabled',
-  is_scanpack_enabled: 'is_scanpack_enabled',
-  is_approval_task_enabled: 'is_approval_task_enabled',
-  is_client_visit_enabled: 'is_client_visit_enabled',
-  is_this_vendor_is_custom_usertype_only: 'is_this_vendor_is_custom_usertype_only',
-  is_year_wise_lead_code_enabled: 'is_year_wise_lead_code_enabled',
-  handlesLargeScaleProjects: 'handlesLargeScaleProjects',
-  eligible_booking_days: 'eligible_booking_days',
-  is_self_assign_task_type_master_enabed: 'is_self_assign_task_type_master_enabed',
-  is_email_noti_enabled: 'is_email_noti_enabled',
-  is_in_app_noti_enabled: 'is_in_app_noti_enabled',
-  is_broadcast_enabled: 'is_broadcast_enabled',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  vendor_report_code: 'vendor_report_code',
+  IsAccountLocInEnabled: 'IsAccountLocInEnabled',
+  is_this_vendor_is_custom_usertype_only: 'is_this_vendor_is_custom_usertype_only',
   state_id: 'state_id',
+  is_inventory_enabled: 'is_inventory_enabled',
+  is_tracktrace_enabled: 'is_tracktrace_enabled',
+  is_approval_task_enabled: 'is_approval_task_enabled',
+  eligible_booking_days: 'eligible_booking_days',
+  is_self_assign_task_type_master_enabed: 'is_self_assign_task_type_master_enabed',
+  is_year_wise_lead_code_enabled: 'is_year_wise_lead_code_enabled',
+  is_client_visit_enabled: 'is_client_visit_enabled',
+  subdomain_url: 'subdomain_url',
+  is_crm_enabled: 'is_crm_enabled',
+  is_custom_doc_nomenclature_enabled: 'is_custom_doc_nomenclature_enabled',
+  handlesLargeScaleProjects: 'handlesLargeScaleProjects',
+  is_email_noti_enabled: 'is_email_noti_enabled',
+  is_in_app_noti_enabled: 'is_in_app_noti_enabled',
+  icon: 'icon',
+  login_image: 'login_image',
+  address: 'address',
+  city: 'city',
   gst_no: 'gst_no',
+  pincode: 'pincode',
+  tag_line: 'tag_line',
   toll_free_no: 'toll_free_no',
   website_link: 'website_link',
-  tag_line: 'tag_line',
-  address: 'address',
-  pincode: 'pincode',
-  city: 'city'
+  is_broadcast_enabled: 'is_broadcast_enabled'
 } as const
 
 export type VendorMasterScalarFieldEnum = (typeof VendorMasterScalarFieldEnum)[keyof typeof VendorMasterScalarFieldEnum]
@@ -15069,7 +14918,6 @@ export const UserSessionScalarFieldEnum = {
   platform: 'platform',
   ip_address: 'ip_address',
   user_agent: 'user_agent',
-  login_type: 'login_type',
   status: 'status',
   is_current: 'is_current',
   last_seen_at: 'last_seen_at',
@@ -15079,7 +14927,8 @@ export const UserSessionScalarFieldEnum = {
   revoked_by: 'revoked_by',
   revoke_reason: 'revoke_reason',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  login_type: 'login_type'
 } as const
 
 export type UserSessionScalarFieldEnum = (typeof UserSessionScalarFieldEnum)[keyof typeof UserSessionScalarFieldEnum]
@@ -15109,16 +14958,16 @@ export const ProjectMasterScalarFieldEnum = {
   unique_project_id: 'unique_project_id',
   is_grouping: 'is_grouping',
   lead_id: 'lead_id',
-  order_no: 'order_no',
-  client_name: 'client_name',
+  track_trace_status: 'track_trace_status',
+  track_completed_at: 'track_completed_at',
+  track_started_at: 'track_started_at',
   client_address: 'client_address',
   client_contact_no: 'client_contact_no',
-  packing_type: 'packing_type',
-  updated_by: 'updated_by',
+  client_name: 'client_name',
+  order_no: 'order_no',
   updated_at: 'updated_at',
-  track_trace_status: 'track_trace_status',
-  track_started_at: 'track_started_at',
-  track_completed_at: 'track_completed_at'
+  updated_by: 'updated_by',
+  packing_type: 'packing_type'
 } as const
 
 export type ProjectMasterScalarFieldEnum = (typeof ProjectMasterScalarFieldEnum)[keyof typeof ProjectMasterScalarFieldEnum]
@@ -15128,7 +14977,6 @@ export const ProjectDetailsScalarFieldEnum = {
   id: 'id',
   project_id: 'project_id',
   vendor_id: 'vendor_id',
-  lead_id: 'lead_id',
   total_items: 'total_items',
   total_packed: 'total_packed',
   total_unpacked: 'total_unpacked',
@@ -15136,7 +14984,8 @@ export const ProjectDetailsScalarFieldEnum = {
   estimated_completion_date: 'estimated_completion_date',
   start_date: 'start_date',
   is_grouping: 'is_grouping',
-  room_name: 'room_name'
+  room_name: 'room_name',
+  lead_id: 'lead_id'
 } as const
 
 export type ProjectDetailsScalarFieldEnum = (typeof ProjectDetailsScalarFieldEnum)[keyof typeof ProjectDetailsScalarFieldEnum]
@@ -15165,7 +15014,6 @@ export const BoxMasterScalarFieldEnum = {
   id: 'id',
   project_id: 'project_id',
   vendor_id: 'vendor_id',
-  lead_id: 'lead_id',
   box_name: 'box_name',
   box_status: 'box_status',
   created_by: 'created_by',
@@ -15174,12 +15022,13 @@ export const BoxMasterScalarFieldEnum = {
   deleted_by: 'deleted_by',
   is_deleted: 'is_deleted',
   project_details_id: 'project_details_id',
-  factory_out_by: 'factory_out_by',
   factory_out_at: 'factory_out_at',
-  site_in_by: 'site_in_by',
+  factory_out_by: 'factory_out_by',
+  lead_id: 'lead_id',
   site_in_at: 'site_in_at',
-  packed_by: 'packed_by',
-  packed_at: 'packed_at'
+  site_in_by: 'site_in_by',
+  packed_at: 'packed_at',
+  packed_by: 'packed_by'
 } as const
 
 export type BoxMasterScalarFieldEnum = (typeof BoxMasterScalarFieldEnum)[keyof typeof BoxMasterScalarFieldEnum]
@@ -15216,7 +15065,6 @@ export type VendorTokensScalarFieldEnum = (typeof VendorTokensScalarFieldEnum)[k
 
 export const ClientMasterScalarFieldEnum = {
   id: 'id',
-  vendor_id: 'vendor_id',
   name: 'name',
   contact: 'contact',
   alt_contact: 'alt_contact',
@@ -15227,12 +15075,13 @@ export const ClientMasterScalarFieldEnum = {
   country: 'country',
   pincode: 'pincode',
   clientCode: 'clientCode',
-  gst_number: 'gst_number',
-  company_name: 'company_name',
   client_type_id: 'client_type_id',
-  is_active: 'is_active',
+  company_name: 'company_name',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  gst_number: 'gst_number',
+  is_active: 'is_active',
+  updated_at: 'updated_at',
+  vendor_id: 'vendor_id'
 } as const
 
 export type ClientMasterScalarFieldEnum = (typeof ClientMasterScalarFieldEnum)[keyof typeof ClientMasterScalarFieldEnum]
@@ -15260,10 +15109,7 @@ export const LeadMasterScalarFieldEnum = {
   site_address: 'site_address',
   site_type_id: 'site_type_id',
   source_id: 'source_id',
-  refered_by: 'refered_by',
   archetech_name: 'archetech_name',
-  archetech_number: 'archetech_number',
-  architect_id: 'architect_id',
   designer_remark: 'designer_remark',
   created_by: 'created_by',
   created_at: 'created_at',
@@ -15273,12 +15119,10 @@ export const LeadMasterScalarFieldEnum = {
   assign_to: 'assign_to',
   assigned_by: 'assigned_by',
   account_id: 'account_id',
-  client_id: 'client_id',
   deleted_at: 'deleted_at',
   deleted_by: 'deleted_by',
   is_deleted: 'is_deleted',
   status_id: 'status_id',
-  priority: 'priority',
   initial_site_measurement_date: 'initial_site_measurement_date',
   final_desc_note: 'final_desc_note',
   advance_payment_date: 'advance_payment_date',
@@ -15289,12 +15133,9 @@ export const LeadMasterScalarFieldEnum = {
   pending_amount: 'pending_amount',
   total_project_amount: 'total_project_amount',
   is_draft: 'is_draft',
-  isLargeScaleProjectLead: 'isLargeScaleProjectLead',
   lead_code: 'lead_code',
-  is_small_order_request: 'is_small_order_request',
   is_client_approval_submitted: 'is_client_approval_submitted',
   client_required_order_login_complition_date: 'client_required_order_login_complition_date',
-  tentative_order_login_date: 'tentative_order_login_date',
   expected_order_login_ready_date: 'expected_order_login_ready_date',
   no_of_client_documents_initially_submitted: 'no_of_client_documents_initially_submitted',
   hardware_packing_details_remark: 'hardware_packing_details_remark',
@@ -15302,14 +15143,9 @@ export const LeadMasterScalarFieldEnum = {
   no_of_boxes: 'no_of_boxes',
   dispatch_planning_remark: 'dispatch_planning_remark',
   material_lift_availability: 'material_lift_availability',
-  material_lift_size: 'material_lift_size',
-  vehicle_approachability_for_dispatch: 'vehicle_approachability_for_dispatch',
   onsite_contact_person_name: 'onsite_contact_person_name',
   onsite_contact_person_number: 'onsite_contact_person_number',
   required_date_for_dispatch: 'required_date_for_dispatch',
-  is_fast_production: 'is_fast_production',
-  fast_production_status: 'fast_production_status',
-  fast_production_approved_at: 'fast_production_approved_at',
   alt_onsite_contact_person_name: 'alt_onsite_contact_person_name',
   alt_onsite_contact_person_number: 'alt_onsite_contact_person_number',
   dispatch_date: 'dispatch_date',
@@ -15317,10 +15153,7 @@ export const LeadMasterScalarFieldEnum = {
   driver_name: 'driver_name',
   driver_number: 'driver_number',
   vehicle_no: 'vehicle_no',
-  tech_check_reached_at: 'tech_check_reached_at',
-  tech_check_completed_at: 'tech_check_completed_at',
   actual_installation_start_date: 'actual_installation_start_date',
-  actual_installation_completion_at: 'actual_installation_completion_at',
   carcass_installation_completion_date: 'carcass_installation_completion_date',
   expected_installation_end_date: 'expected_installation_end_date',
   is_carcass_installation_completed: 'is_carcass_installation_completed',
@@ -15329,39 +15162,37 @@ export const LeadMasterScalarFieldEnum = {
   usable_handover_pending_work_details: 'usable_handover_pending_work_details',
   mrp_value: 'mrp_value',
   usable_handover_completed: 'usable_handover_completed',
-  usable_handover_completed_at: 'usable_handover_completed_at',
-  is_amc_opted: 'is_amc_opted',
-  amc_opted_at: 'amc_opted_at',
-  amc_plan_started_at: 'amc_plan_started_at',
-  amc_plan_closed_at: 'amc_plan_closed_at',
-  final_handover_marked_at: 'final_handover_marked_at',
   franchise_id: 'franchise_id',
   order_login_prod_files_remark: 'order_login_prod_files_remark',
+  actual_installation_completion_at: 'actual_installation_completion_at',
+  final_handover_marked_at: 'final_handover_marked_at',
+  usable_handover_completed_at: 'usable_handover_completed_at',
+  tech_check_completed_at: 'tech_check_completed_at',
+  tech_check_reached_at: 'tech_check_reached_at',
+  priority: 'priority',
+  amc_opted_at: 'amc_opted_at',
+  is_amc_opted: 'is_amc_opted',
+  amc_plan_closed_at: 'amc_plan_closed_at',
+  amc_plan_started_at: 'amc_plan_started_at',
+  vehicle_approachability_for_dispatch: 'vehicle_approachability_for_dispatch',
   total_required_chs_manufacturing_days: 'total_required_chs_manufacturing_days',
-  order_number: 'order_number',
   is_blocked: 'is_blocked',
-  lead_blocked_at: 'lead_blocked_at'
+  lead_blocked_at: 'lead_blocked_at',
+  archetech_number: 'archetech_number',
+  is_small_order_request: 'is_small_order_request',
+  material_lift_size: 'material_lift_size',
+  fast_production_approved_at: 'fast_production_approved_at',
+  fast_production_status: 'fast_production_status',
+  is_fast_production: 'is_fast_production',
+  tentative_order_login_date: 'tentative_order_login_date',
+  isLargeScaleProjectLead: 'isLargeScaleProjectLead',
+  architect_id: 'architect_id',
+  client_id: 'client_id',
+  order_number: 'order_number',
+  refered_by: 'refered_by'
 } as const
 
 export type LeadMasterScalarFieldEnum = (typeof LeadMasterScalarFieldEnum)[keyof typeof LeadMasterScalarFieldEnum]
-
-
-export const LeadBillingAddressScalarFieldEnum = {
-  id: 'id',
-  lead_id: 'lead_id',
-  vendor_id: 'vendor_id',
-  address_type: 'address_type',
-  name: 'name',
-  address: 'address',
-  map_link: 'map_link',
-  gst_number: 'gst_number',
-  state_name: 'state_name',
-  place_of_supply: 'place_of_supply',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type LeadBillingAddressScalarFieldEnum = (typeof LeadBillingAddressScalarFieldEnum)[keyof typeof LeadBillingAddressScalarFieldEnum]
 
 
 export const LeadSpecificationsMasterScalarFieldEnum = {
@@ -15369,10 +15200,10 @@ export const LeadSpecificationsMasterScalarFieldEnum = {
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
   name: 'name',
-  lights_remark: 'lights_remark',
-  item_code_id: 'item_code_id',
   created_at: 'created_at',
-  created_by: 'created_by'
+  created_by: 'created_by',
+  lights_remark: 'lights_remark',
+  item_code_id: 'item_code_id'
 } as const
 
 export type LeadSpecificationsMasterScalarFieldEnum = (typeof LeadSpecificationsMasterScalarFieldEnum)[keyof typeof LeadSpecificationsMasterScalarFieldEnum]
@@ -15382,7 +15213,6 @@ export const LeadCarcassMaterialMappingScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
-  specs_id: 'specs_id',
   carcass_type_id: 'carcass_type_id',
   carcas_material_id: 'carcas_material_id',
   carcass_material_finish_id: 'carcass_material_finish_id',
@@ -15397,7 +15227,6 @@ export const LeadShutterMaterialMappingScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
-  specs_id: 'specs_id',
   shutter_type_id: 'shutter_type_id',
   shutter_material_id: 'shutter_material_id',
   shutter_material_finish_id: 'shutter_material_finish_id',
@@ -15618,7 +15447,6 @@ export const LeadHardwareMappingScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
-  specs_id: 'specs_id',
   carcass_legs_id: 'carcass_legs_id',
   skirting_carcass_legs_id: 'skirting_carcass_legs_id',
   skirting_carcass_legs_color_id: 'skirting_carcass_legs_color_id',
@@ -15659,7 +15487,6 @@ export const LeadLightCarcasUnitMappingScalarFieldEnum = {
   lead_id: 'lead_id',
   specs_id: 'specs_id',
   light_carcas_unit_master_id: 'light_carcas_unit_master_id',
-  custom_remark: 'custom_remark',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -15670,10 +15497,10 @@ export type LeadLightCarcasUnitMappingScalarFieldEnum = (typeof LeadLightCarcasU
 export const OtherAppliancesMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
-  type: 'type',
   article_number: 'article_number',
   description: 'description',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  type: 'type'
 } as const
 
 export type OtherAppliancesMasterScalarFieldEnum = (typeof OtherAppliancesMasterScalarFieldEnum)[keyof typeof OtherAppliancesMasterScalarFieldEnum]
@@ -15684,28 +15511,12 @@ export const LeadOtherAppliancesMappingScalarFieldEnum = {
   lead_id: 'lead_id',
   vendor_id: 'vendor_id',
   specs_id: 'specs_id',
-  other_appliance_type: 'other_appliance_type',
   other_appliances_master_id: 'other_appliances_master_id',
-  custom_remark: 'custom_remark',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
 
 export type LeadOtherAppliancesMappingScalarFieldEnum = (typeof LeadOtherAppliancesMappingScalarFieldEnum)[keyof typeof LeadOtherAppliancesMappingScalarFieldEnum]
-
-
-export const LeadOtherAppliancesRemarkMappingScalarFieldEnum = {
-  id: 'id',
-  vendor_id: 'vendor_id',
-  lead_id: 'lead_id',
-  specs_id: 'specs_id',
-  other_appliance_type: 'other_appliance_type',
-  remark: 'remark',
-  created_at: 'created_at',
-  created_by: 'created_by'
-} as const
-
-export type LeadOtherAppliancesRemarkMappingScalarFieldEnum = (typeof LeadOtherAppliancesRemarkMappingScalarFieldEnum)[keyof typeof LeadOtherAppliancesRemarkMappingScalarFieldEnum]
 
 
 export const HandleTypeMasterScalarFieldEnum = {
@@ -15724,9 +15535,9 @@ export const TimelineRuleScalarFieldEnum = {
   shutter_id: 'shutter_id',
   kitchen_manufacturing_days: 'kitchen_manufacturing_days',
   other_manufacturing_days: 'other_manufacturing_days',
+  created_at: 'created_at',
   kitchen_manufacturing_days_for_fast_production: 'kitchen_manufacturing_days_for_fast_production',
-  other_manufacturing_days_for_fast_production: 'other_manufacturing_days_for_fast_production',
-  created_at: 'created_at'
+  other_manufacturing_days_for_fast_production: 'other_manufacturing_days_for_fast_production'
 } as const
 
 export type TimelineRuleScalarFieldEnum = (typeof TimelineRuleScalarFieldEnum)[keyof typeof TimelineRuleScalarFieldEnum]
@@ -15759,7 +15570,6 @@ export const LeadDocumentsScalarFieldEnum = {
   doc_type_id: 'doc_type_id',
   is_deleted: 'is_deleted',
   tech_check_status: 'tech_check_status',
-  product_type_id: 'product_type_id',
   product_structure_instance_id: 'product_structure_instance_id'
 } as const
 
@@ -15791,10 +15601,10 @@ export const LeadChatMessageScalarFieldEnum = {
   id: 'id',
   chat_room_id: 'chat_room_id',
   sender_id: 'sender_id',
-  reply_to_message_id: 'reply_to_message_id',
   message_type: 'message_type',
   message_text: 'message_text',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  reply_to_message_id: 'reply_to_message_id'
 } as const
 
 export type LeadChatMessageScalarFieldEnum = (typeof LeadChatMessageScalarFieldEnum)[keyof typeof LeadChatMessageScalarFieldEnum]
@@ -15841,9 +15651,9 @@ export const ProductStructureScalarFieldEnum = {
   id: 'id',
   type: 'type',
   vendor_id: 'vendor_id',
-  product_type_id: 'product_type_id',
   parent: 'parent',
-  status: 'status'
+  status: 'status',
+  product_type_id: 'product_type_id'
 } as const
 
 export type ProductStructureScalarFieldEnum = (typeof ProductStructureScalarFieldEnum)[keyof typeof ProductStructureScalarFieldEnum]
@@ -15898,13 +15708,9 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   account_id: 'account_id',
   product_type_id: 'product_type_id',
   product_structure_id: 'product_structure_id',
-  sub_product_structure_id: 'sub_product_structure_id',
-  product_item_code_id: 'product_item_code_id',
   quantity_index: 'quantity_index',
-  quantity: 'quantity',
   title: 'title',
   status: 'status',
-  isLargeScaleProjectInstance: 'isLargeScaleProjectInstance',
   description: 'description',
   created_by: 'created_by',
   created_at: 'created_at',
@@ -15912,22 +15718,26 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   updated_at: 'updated_at',
   is_order_login_completed: 'is_order_login_completed',
   order_login_completed_at: 'order_login_completed_at',
-  is_under_production: 'is_under_production',
-  under_production_at: 'under_production_at',
-  is_post_production: 'is_post_production',
-  is_pre_prod_done: 'is_pre_prod_done',
-  pre_prod_done_at: 'pre_prod_done_at',
   is_production_completed: 'is_production_completed',
   production_completed_at: 'production_completed_at',
-  production_erd_date: 'production_erd_date',
-  pre_prod_remark: 'pre_prod_remark',
   woodwork_packing_details_remark: 'woodwork_packing_details_remark',
   hardware_packing_details_remark: 'hardware_packing_details_remark',
   no_of_boxes: 'no_of_boxes',
-  no_of_client_documents_initially_submitted: 'no_of_client_documents_initially_submitted',
   is_tech_check_completed: 'is_tech_check_completed',
   tech_check_completed_at: 'tech_check_completed_at',
-  is_order_login_filled: 'is_order_login_filled'
+  no_of_client_documents_initially_submitted: 'no_of_client_documents_initially_submitted',
+  is_order_login_filled: 'is_order_login_filled',
+  is_pre_prod_done: 'is_pre_prod_done',
+  is_under_production: 'is_under_production',
+  pre_prod_done_at: 'pre_prod_done_at',
+  under_production_at: 'under_production_at',
+  production_erd_date: 'production_erd_date',
+  is_post_production: 'is_post_production',
+  pre_prod_remark: 'pre_prod_remark',
+  isLargeScaleProjectInstance: 'isLargeScaleProjectInstance',
+  product_item_code_id: 'product_item_code_id',
+  quantity: 'quantity',
+  sub_product_structure_id: 'sub_product_structure_id'
 } as const
 
 export type LeadProductStructureInstanceScalarFieldEnum = (typeof LeadProductStructureInstanceScalarFieldEnum)[keyof typeof LeadProductStructureInstanceScalarFieldEnum]
@@ -15948,13 +15758,7 @@ export const PaymentInfoScalarFieldEnum = {
   id: 'id',
   lead_id: 'lead_id',
   account_id: 'account_id',
-  status_id: 'status_id',
   amount: 'amount',
-  is_booking_received_amt: 'is_booking_received_amt',
-  basic_amount: 'basic_amount',
-  gst_percentage: 'gst_percentage',
-  gst_amount: 'gst_amount',
-  total_amount: 'total_amount',
   payment_date: 'payment_date',
   payment_text: 'payment_text',
   payment_file_id: 'payment_file_id',
@@ -15962,7 +15766,7 @@ export const PaymentInfoScalarFieldEnum = {
   created_by: 'created_by',
   vendor_id: 'vendor_id',
   payment_type_id: 'payment_type_id',
-  product_type_id: 'product_type_id'
+  status_id: 'status_id'
 } as const
 
 export type PaymentInfoScalarFieldEnum = (typeof PaymentInfoScalarFieldEnum)[keyof typeof PaymentInfoScalarFieldEnum]
@@ -15978,8 +15782,7 @@ export const LedgerScalarFieldEnum = {
   payment_date: 'payment_date',
   type: 'type',
   created_by: 'created_by',
-  created_at: 'created_at',
-  product_type_id: 'product_type_id'
+  created_at: 'created_at'
 } as const
 
 export type LedgerScalarFieldEnum = (typeof LedgerScalarFieldEnum)[keyof typeof LedgerScalarFieldEnum]
@@ -16017,7 +15820,6 @@ export const SmallOrderRequestScalarFieldEnum = {
   parent_lead_code: 'parent_lead_code',
   so_code: 'so_code',
   customer_name: 'customer_name',
-  status: 'status',
   request_source: 'request_source',
   request_type_id: 'request_type_id',
   required_date: 'required_date',
@@ -16031,10 +15833,11 @@ export const SmallOrderRequestScalarFieldEnum = {
   updated_by: 'updated_by',
   updated_at: 'updated_at',
   is_merge_to_parent_on_installation: 'is_merge_to_parent_on_installation',
-  is_request_resolved: 'is_request_resolved',
   usable_handover_date_snapshot: 'usable_handover_date_snapshot',
   small_order_sequence: 'small_order_sequence',
-  rejection_reason: 'rejection_reason'
+  rejection_reason: 'rejection_reason',
+  status: 'status',
+  is_request_resolved: 'is_request_resolved'
 } as const
 
 export type SmallOrderRequestScalarFieldEnum = (typeof SmallOrderRequestScalarFieldEnum)[keyof typeof SmallOrderRequestScalarFieldEnum]
@@ -16128,15 +15931,15 @@ export const LeadDesignMeetingScalarFieldEnum = {
   lead_id: 'lead_id',
   account_id: 'account_id',
   vendor_id: 'vendor_id',
-  meeting_type_id: 'meeting_type_id',
   date: 'date',
-  meeting_start_time: 'meeting_start_time',
-  meeting_end_time: 'meeting_end_time',
   desc: 'desc',
   created_by: 'created_by',
   updated_by: 'updated_by',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  meeting_type_id: 'meeting_type_id',
+  meeting_end_time: 'meeting_end_time',
+  meeting_start_time: 'meeting_start_time'
 } as const
 
 export type LeadDesignMeetingScalarFieldEnum = (typeof LeadDesignMeetingScalarFieldEnum)[keyof typeof LeadDesignMeetingScalarFieldEnum]
@@ -16266,7 +16069,6 @@ export const UserLeadTaskScalarFieldEnum = {
   account_id: 'account_id',
   vendor_id: 'vendor_id',
   user_id: 'user_id',
-  small_order_request_id: 'small_order_request_id',
   task_type: 'task_type',
   due_date: 'due_date',
   remark: 'remark',
@@ -16279,7 +16081,8 @@ export const UserLeadTaskScalarFieldEnum = {
   updated_by: 'updated_by',
   lead_stage: 'lead_stage',
   instance_id: 'instance_id',
-  franchise_id: 'franchise_id'
+  franchise_id: 'franchise_id',
+  small_order_request_id: 'small_order_request_id'
 } as const
 
 export type UserLeadTaskScalarFieldEnum = (typeof UserLeadTaskScalarFieldEnum)[keyof typeof UserLeadTaskScalarFieldEnum]
@@ -16325,7 +16128,6 @@ export const FastProductionRequestScalarFieldEnum = {
   hardware_selection: 'hardware_selection',
   accessory_selection: 'accessory_selection',
   special_requirements: 'special_requirements',
-  tentative_order_login_date: 'tentative_order_login_date',
   client_required_delivery_date: 'client_required_delivery_date',
   remarks: 'remarks',
   terms_accepted_at: 'terms_accepted_at',
@@ -16338,7 +16140,8 @@ export const FastProductionRequestScalarFieldEnum = {
   created_by: 'created_by',
   created_at: 'created_at',
   updated_by: 'updated_by',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  tentative_order_login_date: 'tentative_order_login_date'
 } as const
 
 export type FastProductionRequestScalarFieldEnum = (typeof FastProductionRequestScalarFieldEnum)[keyof typeof FastProductionRequestScalarFieldEnum]
@@ -16399,14 +16202,13 @@ export const LeadDetailedLogsScalarFieldEnum = {
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
   account_id: 'account_id',
-  task_id: 'task_id',
-  product_type_id: 'product_type_id',
   action: 'action',
   action_type: 'action_type',
+  created_at: 'created_at',
+  created_by: 'created_by',
   history_type: 'history_type',
   stage_id: 'stage_id',
-  created_at: 'created_at',
-  created_by: 'created_by'
+  task_id: 'task_id'
 } as const
 
 export type LeadDetailedLogsScalarFieldEnum = (typeof LeadDetailedLogsScalarFieldEnum)[keyof typeof LeadDetailedLogsScalarFieldEnum]
@@ -16468,17 +16270,10 @@ export const CompanyVendorsMasterScalarFieldEnum = {
   vendor_id: 'vendor_id',
   vendor_code: 'vendor_code',
   company_name: 'company_name',
-  vendor_name: 'vendor_name',
   point_of_contact: 'point_of_contact',
   contact_no: 'contact_no',
   email: 'email',
   address: 'address',
-  alternate_mobile_no: 'alternate_mobile_no',
-  alternate_email: 'alternate_email',
-  gst_no: 'gst_no',
-  pan_no: 'pan_no',
-  is_active: 'is_active',
-  primary_contact_id: 'primary_contact_id',
   created_at: 'created_at',
   created_by: 'created_by',
   updated_at: 'updated_at',
@@ -16487,8 +16282,15 @@ export const CompanyVendorsMasterScalarFieldEnum = {
   deleted_by: 'deleted_by',
   is_deleted: 'is_deleted',
   in_house: 'in_house',
+  default_payment_term_id: 'default_payment_term_id',
   state_id: 'state_id',
-  default_payment_term_id: 'default_payment_term_id'
+  alternate_email: 'alternate_email',
+  alternate_mobile_no: 'alternate_mobile_no',
+  gst_no: 'gst_no',
+  pan_no: 'pan_no',
+  primary_contact_id: 'primary_contact_id',
+  vendor_name: 'vendor_name',
+  is_active: 'is_active'
 } as const
 
 export type CompanyVendorsMasterScalarFieldEnum = (typeof CompanyVendorsMasterScalarFieldEnum)[keyof typeof CompanyVendorsMasterScalarFieldEnum]
@@ -16614,9 +16416,9 @@ export const MiscellaneousTypeMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   name: 'name',
-  status: 'status',
   created_by: 'created_by',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  status: 'status'
 } as const
 
 export type MiscellaneousTypeMasterScalarFieldEnum = (typeof MiscellaneousTypeMasterScalarFieldEnum)[keyof typeof MiscellaneousTypeMasterScalarFieldEnum]
@@ -16626,9 +16428,9 @@ export const MiscellaneousTeamMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   name: 'name',
-  status: 'status',
   created_by: 'created_by',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  status: 'status'
 } as const
 
 export type MiscellaneousTeamMasterScalarFieldEnum = (typeof MiscellaneousTeamMasterScalarFieldEnum)[keyof typeof MiscellaneousTeamMasterScalarFieldEnum]
@@ -16673,9 +16475,9 @@ export const IssueLogTypeMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   name: 'name',
-  status: 'status',
   created_by: 'created_by',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  status: 'status'
 } as const
 
 export type IssueLogTypeMasterScalarFieldEnum = (typeof IssueLogTypeMasterScalarFieldEnum)[keyof typeof IssueLogTypeMasterScalarFieldEnum]
@@ -16846,10 +16648,10 @@ export const CutListScalarFieldEnum = {
   elb: 'elb',
   esl: 'esl',
   esr: 'esr',
-  weight: 'weight',
+  category_name: 'category_name',
   group_name: 'group_name',
   procurement: 'procurement',
-  category_name: 'category_name'
+  weight: 'weight'
 } as const
 
 export type CutListScalarFieldEnum = (typeof CutListScalarFieldEnum)[keyof typeof CutListScalarFieldEnum]
@@ -16875,8 +16677,7 @@ export const CutListMachineMappingScalarFieldEnum = {
   created_at: 'created_at',
   box_id: 'box_id',
   site_in_at: 'site_in_at',
-  site_in_by: 'site_in_by',
-  weight: 'weight'
+  site_in_by: 'site_in_by'
 } as const
 
 export type CutListMachineMappingScalarFieldEnum = (typeof CutListMachineMappingScalarFieldEnum)[keyof typeof CutListMachineMappingScalarFieldEnum]
@@ -16974,10 +16775,10 @@ export const DefectedItemScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   action: 'action',
-  rework_machine_id: 'rework_machine_id',
-  defect_status: 'defect_status',
+  defect_completed_at: 'defect_completed_at',
   defect_completed_by: 'defect_completed_by',
-  defect_completed_at: 'defect_completed_at'
+  defect_status: 'defect_status',
+  rework_machine_id: 'rework_machine_id'
 } as const
 
 export type DefectedItemScalarFieldEnum = (typeof DefectedItemScalarFieldEnum)[keyof typeof DefectedItemScalarFieldEnum]
@@ -16992,7 +16793,6 @@ export const FranchiseMasterScalarFieldEnum = {
   contact_email: 'contact_email',
   contact_person: 'contact_person',
   is_head_office: 'is_head_office',
-  moduled_for_b2b: 'moduled_for_b2b',
   zone_id: 'zone_id',
   country_id: 'country_id',
   region_id: 'region_id',
@@ -17003,7 +16803,8 @@ export const FranchiseMasterScalarFieldEnum = {
   pincode: 'pincode',
   status: 'status',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  moduled_for_b2b: 'moduled_for_b2b'
 } as const
 
 export type FranchiseMasterScalarFieldEnum = (typeof FranchiseMasterScalarFieldEnum)[keyof typeof FranchiseMasterScalarFieldEnum]
@@ -17146,8 +16947,8 @@ export type ApiRequestLogScalarFieldEnum = (typeof ApiRequestLogScalarFieldEnum)
 export const ExternalPlatformMasterScalarFieldEnum = {
   id: 'id',
   external_platform_name: 'external_platform_name',
-  type: 'type',
-  active: 'active'
+  active: 'active',
+  type: 'type'
 } as const
 
 export type ExternalPlatformMasterScalarFieldEnum = (typeof ExternalPlatformMasterScalarFieldEnum)[keyof typeof ExternalPlatformMasterScalarFieldEnum]
@@ -17255,13 +17056,13 @@ export const BrandMasterScalarFieldEnum = {
   vendor_id: 'vendor_id',
   brand_name: 'brand_name',
   active: 'active',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
   brand_short_name: 'brand_short_name',
   logo: 'logo',
   is_active: 'is_active',
   created_by: 'created_by',
-  updated_by: 'updated_by',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_by: 'updated_by'
 } as const
 
 export type BrandMasterScalarFieldEnum = (typeof BrandMasterScalarFieldEnum)[keyof typeof BrandMasterScalarFieldEnum]
@@ -17295,7 +17096,6 @@ export const ProductMasterScalarFieldEnum = {
   finish: 'finish',
   group: 'group',
   hsn_code: 'hsn_code',
-  hsn_id: 'hsn_id',
   product_name: 'product_name',
   procurement: 'procurement',
   unit_of_measure: 'unit_of_measure',
@@ -17309,34 +17109,35 @@ export const ProductMasterScalarFieldEnum = {
   updated_by: 'updated_by',
   active: 'active',
   current_stock: 'current_stock',
+  hsn_id: 'hsn_id',
   stock_updated_at: 'stock_updated_at',
-  item_group_id: 'item_group_id',
-  primary_unit_id: 'primary_unit_id',
-  stock_unit_id: 'stock_unit_id',
   consumption_unit_id: 'consumption_unit_id',
-  shelf_life_days: 'shelf_life_days',
   costing_method: 'costing_method',
-  min_stock_qty: 'min_stock_qty',
-  min_stock_unit_id: 'min_stock_unit_id',
+  item_group_id: 'item_group_id',
+  item_type: 'item_type',
   max_stock_qty: 'max_stock_qty',
   max_stock_unit_id: 'max_stock_unit_id',
-  reorder_level_qty: 'reorder_level_qty',
-  reorder_level_unit_id: 'reorder_level_unit_id',
+  min_stock_qty: 'min_stock_qty',
+  min_stock_unit_id: 'min_stock_unit_id',
+  primary_unit_id: 'primary_unit_id',
   reorder_batch_qty: 'reorder_batch_qty',
   reorder_batch_unit_id: 'reorder_batch_unit_id',
-  item_type: 'item_type',
+  reorder_level_qty: 'reorder_level_qty',
+  reorder_level_unit_id: 'reorder_level_unit_id',
+  shelf_life_days: 'shelf_life_days',
+  stock_unit_id: 'stock_unit_id',
   sub_category_id: 'sub_category_id',
   item_code: 'item_code',
   barcode: 'barcode',
   purchase_unit_id: 'purchase_unit_id',
   item_type_master_id: 'item_type_master_id',
-  core_product_id: 'core_product_id',
   grade_id: 'grade_id',
   type_id: 'type_id',
   finish_id: 'finish_id',
   length: 'length',
   height: 'height',
   thickness: 'thickness',
+  core_product_id: 'core_product_id',
   size: 'size'
 } as const
 
@@ -17747,8 +17548,6 @@ export const POPaymentScheduleScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   purchase_order_id: 'purchase_order_id',
-  grn_id: 'grn_id',
-  payment_term_stage_id: 'payment_term_stage_id',
   stage_no: 'stage_no',
   stage_name: 'stage_name',
   trigger_type: 'trigger_type',
@@ -17760,7 +17559,9 @@ export const POPaymentScheduleScalarFieldEnum = {
   status: 'status',
   remarks: 'remarks',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  grn_id: 'grn_id',
+  payment_term_stage_id: 'payment_term_stage_id'
 } as const
 
 export type POPaymentScheduleScalarFieldEnum = (typeof POPaymentScheduleScalarFieldEnum)[keyof typeof POPaymentScheduleScalarFieldEnum]
@@ -17788,12 +17589,12 @@ export const UnitMasterScalarFieldEnum = {
   unit_name: 'unit_name',
   unit_class: 'unit_class',
   is_active: 'is_active',
-  short_name: 'short_name',
-  decimal_allowed: 'decimal_allowed',
   created_by: 'created_by',
   updated_by: 'updated_by',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  short_name: 'short_name',
+  decimal_allowed: 'decimal_allowed'
 } as const
 
 export type UnitMasterScalarFieldEnum = (typeof UnitMasterScalarFieldEnum)[keyof typeof UnitMasterScalarFieldEnum]
@@ -17820,14 +17621,14 @@ export const ProductSupplierMappingScalarFieldEnum = {
   company_vendor_id: 'company_vendor_id',
   supplier_item_code: 'supplier_item_code',
   amount: 'amount',
-  procurement_expense_amount: 'procurement_expense_amount',
-  procurement_expense_pct: 'procurement_expense_pct',
-  procurement_expense_total: 'procurement_expense_total',
   is_active: 'is_active',
   created_by: 'created_by',
   updated_by: 'updated_by',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  procurement_expense_amount: 'procurement_expense_amount',
+  procurement_expense_pct: 'procurement_expense_pct',
+  procurement_expense_total: 'procurement_expense_total'
 } as const
 
 export type ProductSupplierMappingScalarFieldEnum = (typeof ProductSupplierMappingScalarFieldEnum)[keyof typeof ProductSupplierMappingScalarFieldEnum]
@@ -17860,12 +17661,12 @@ export const ArchitechuremasterScalarFieldEnum = {
   name: 'name',
   email: 'email',
   mobile: 'mobile',
-  alt_mobile: 'alt_mobile',
   isActive: 'isActive',
   createdAt: 'createdAt',
   createdBy: 'createdBy',
+  deletedAt: 'deletedAt',
   isDeleted: 'isDeleted',
-  deletedAt: 'deletedAt'
+  alt_mobile: 'alt_mobile'
 } as const
 
 export type ArchitechuremasterScalarFieldEnum = (typeof ArchitechuremasterScalarFieldEnum)[keyof typeof ArchitechuremasterScalarFieldEnum]
@@ -18112,13 +17913,13 @@ export const BroadcastMasterScalarFieldEnum = {
   content: 'content',
   status: 'status',
   type: 'type',
-  category_id: 'category_id',
   publish_at: 'publish_at',
   vendor_id: 'vendor_id',
   created_by: 'created_by',
   updated_by: 'updated_by',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  category_id: 'category_id'
 } as const
 
 export type BroadcastMasterScalarFieldEnum = (typeof BroadcastMasterScalarFieldEnum)[keyof typeof BroadcastMasterScalarFieldEnum]
@@ -18160,11 +17961,11 @@ export const BroadcastAttachmentScalarFieldEnum = {
   original_file_name: 'original_file_name',
   file_url: 'file_url',
   file_type: 'file_type',
-  file_size: 'file_size',
   created_by: 'created_by',
   updated_by: 'updated_by',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  file_size: 'file_size'
 } as const
 
 export type BroadcastAttachmentScalarFieldEnum = (typeof BroadcastAttachmentScalarFieldEnum)[keyof typeof BroadcastAttachmentScalarFieldEnum]
@@ -18286,13 +18087,6 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-/**
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -18307,16 +18101,9 @@ export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
 
 
 /**
- * Reference to a field of type 'UserSessionLoginType'
+ * Reference to a field of type 'Boolean'
  */
-export type EnumUserSessionLoginTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserSessionLoginType'>
-    
-
-
-/**
- * Reference to a field of type 'UserSessionLoginType[]'
- */
-export type ListEnumUserSessionLoginTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserSessionLoginType[]'>
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -18331,6 +18118,20 @@ export type EnumUserSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType
  * Reference to a field of type 'UserSessionStatus[]'
  */
 export type ListEnumUserSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserSessionStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'UserSessionLoginType'
+ */
+export type EnumUserSessionLoginTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserSessionLoginType'>
+    
+
+
+/**
+ * Reference to a field of type 'UserSessionLoginType[]'
+ */
+export type ListEnumUserSessionLoginTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserSessionLoginType[]'>
     
 
 
@@ -18415,20 +18216,6 @@ export type EnumFastProductionRequestStatusFieldRefInput<$PrismaModel> = FieldRe
  * Reference to a field of type 'FastProductionRequestStatus[]'
  */
 export type ListEnumFastProductionRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FastProductionRequestStatus[]'>
-    
-
-
-/**
- * Reference to a field of type 'LeadBillingAddressType'
- */
-export type EnumLeadBillingAddressTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadBillingAddressType'>
-    
-
-
-/**
- * Reference to a field of type 'LeadBillingAddressType[]'
- */
-export type ListEnumLeadBillingAddressTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadBillingAddressType[]'>
     
 
 
@@ -18545,20 +18332,6 @@ export type ListEnumSmallOrderTypeKeyFieldRefInput<$PrismaModel> = FieldRefInput
 
 
 /**
- * Reference to a field of type 'SmallOrderRequestStatus'
- */
-export type EnumSmallOrderRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmallOrderRequestStatus'>
-    
-
-
-/**
- * Reference to a field of type 'SmallOrderRequestStatus[]'
- */
-export type ListEnumSmallOrderRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmallOrderRequestStatus[]'>
-    
-
-
-/**
  * Reference to a field of type 'SmallOrderRequestSource'
  */
 export type EnumSmallOrderRequestSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmallOrderRequestSource'>
@@ -18569,6 +18342,20 @@ export type EnumSmallOrderRequestSourceFieldRefInput<$PrismaModel> = FieldRefInp
  * Reference to a field of type 'SmallOrderRequestSource[]'
  */
 export type ListEnumSmallOrderRequestSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmallOrderRequestSource[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SmallOrderRequestStatus'
+ */
+export type EnumSmallOrderRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmallOrderRequestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SmallOrderRequestStatus[]'
+ */
+export type ListEnumSmallOrderRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmallOrderRequestStatus[]'>
     
 
 
@@ -19510,7 +19297,6 @@ export type GlobalOmitConfig = {
   clientMaster?: Prisma.ClientMasterOmit
   clientTypeMaster?: Prisma.ClientTypeMasterOmit
   leadMaster?: Prisma.LeadMasterOmit
-  leadBillingAddress?: Prisma.LeadBillingAddressOmit
   leadSpecificationsMaster?: Prisma.LeadSpecificationsMasterOmit
   leadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingOmit
   leadShutterMaterialMapping?: Prisma.LeadShutterMaterialMappingOmit
@@ -19538,7 +19324,6 @@ export type GlobalOmitConfig = {
   leadLightCarcasUnitMapping?: Prisma.LeadLightCarcasUnitMappingOmit
   otherAppliancesMaster?: Prisma.OtherAppliancesMasterOmit
   leadOtherAppliancesMapping?: Prisma.LeadOtherAppliancesMappingOmit
-  leadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingOmit
   handleTypeMaster?: Prisma.HandleTypeMasterOmit
   timelineRule?: Prisma.TimelineRuleOmit
   specificationDocumentMapping?: Prisma.specificationDocumentMappingOmit
