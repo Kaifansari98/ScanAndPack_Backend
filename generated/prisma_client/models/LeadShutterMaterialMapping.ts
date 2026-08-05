@@ -30,6 +30,7 @@ export type LeadShutterMaterialMappingAvgAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   lead_id: number | null
+  specs_id: number | null
   shutter_type_id: number | null
   shutter_material_id: number | null
   shutter_material_finish_id: number | null
@@ -40,6 +41,7 @@ export type LeadShutterMaterialMappingSumAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   lead_id: number | null
+  specs_id: number | null
   shutter_type_id: number | null
   shutter_material_id: number | null
   shutter_material_finish_id: number | null
@@ -50,6 +52,7 @@ export type LeadShutterMaterialMappingMinAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   lead_id: number | null
+  specs_id: number | null
   shutter_type_id: number | null
   shutter_material_id: number | null
   shutter_material_finish_id: number | null
@@ -61,6 +64,7 @@ export type LeadShutterMaterialMappingMaxAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   lead_id: number | null
+  specs_id: number | null
   shutter_type_id: number | null
   shutter_material_id: number | null
   shutter_material_finish_id: number | null
@@ -72,6 +76,7 @@ export type LeadShutterMaterialMappingCountAggregateOutputType = {
   id: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
@@ -85,6 +90,7 @@ export type LeadShutterMaterialMappingAvgAggregateInputType = {
   id?: true
   vendor_id?: true
   lead_id?: true
+  specs_id?: true
   shutter_type_id?: true
   shutter_material_id?: true
   shutter_material_finish_id?: true
@@ -95,6 +101,7 @@ export type LeadShutterMaterialMappingSumAggregateInputType = {
   id?: true
   vendor_id?: true
   lead_id?: true
+  specs_id?: true
   shutter_type_id?: true
   shutter_material_id?: true
   shutter_material_finish_id?: true
@@ -105,6 +112,7 @@ export type LeadShutterMaterialMappingMinAggregateInputType = {
   id?: true
   vendor_id?: true
   lead_id?: true
+  specs_id?: true
   shutter_type_id?: true
   shutter_material_id?: true
   shutter_material_finish_id?: true
@@ -116,6 +124,7 @@ export type LeadShutterMaterialMappingMaxAggregateInputType = {
   id?: true
   vendor_id?: true
   lead_id?: true
+  specs_id?: true
   shutter_type_id?: true
   shutter_material_id?: true
   shutter_material_finish_id?: true
@@ -127,6 +136,7 @@ export type LeadShutterMaterialMappingCountAggregateInputType = {
   id?: true
   vendor_id?: true
   lead_id?: true
+  specs_id?: true
   shutter_type_id?: true
   shutter_material_id?: true
   shutter_material_finish_id?: true
@@ -225,6 +235,7 @@ export type LeadShutterMaterialMappingGroupByOutputType = {
   id: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
@@ -259,6 +270,7 @@ export type LeadShutterMaterialMappingWhereInput = {
   id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   vendor_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   lead_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
+  specs_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   shutter_type_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   shutter_material_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   shutter_material_finish_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
@@ -266,6 +278,7 @@ export type LeadShutterMaterialMappingWhereInput = {
   created_by?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  specification?: Prisma.XOR<Prisma.LeadSpecificationsMasterScalarRelationFilter, Prisma.LeadSpecificationsMasterWhereInput>
   shutterMaterialFinish?: Prisma.XOR<Prisma.ShutterMaterialFinishMasterScalarRelationFilter, Prisma.ShutterMaterialFinishMasterWhereInput>
   shutterMaterial?: Prisma.XOR<Prisma.ShutterMaterialMasterScalarRelationFilter, Prisma.ShutterMaterialMasterWhereInput>
   shutterType?: Prisma.XOR<Prisma.ShutterTypeMasterScalarRelationFilter, Prisma.ShutterTypeMasterWhereInput>
@@ -276,6 +289,7 @@ export type LeadShutterMaterialMappingOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  specs_id?: Prisma.SortOrder
   shutter_type_id?: Prisma.SortOrder
   shutter_material_id?: Prisma.SortOrder
   shutter_material_finish_id?: Prisma.SortOrder
@@ -283,6 +297,7 @@ export type LeadShutterMaterialMappingOrderByWithRelationInput = {
   created_by?: Prisma.SortOrder
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   lead?: Prisma.LeadMasterOrderByWithRelationInput
+  specification?: Prisma.LeadSpecificationsMasterOrderByWithRelationInput
   shutterMaterialFinish?: Prisma.ShutterMaterialFinishMasterOrderByWithRelationInput
   shutterMaterial?: Prisma.ShutterMaterialMasterOrderByWithRelationInput
   shutterType?: Prisma.ShutterTypeMasterOrderByWithRelationInput
@@ -296,6 +311,7 @@ export type LeadShutterMaterialMappingWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.LeadShutterMaterialMappingWhereInput | Prisma.LeadShutterMaterialMappingWhereInput[]
   vendor_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   lead_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
+  specs_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   shutter_type_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   shutter_material_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   shutter_material_finish_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
@@ -303,6 +319,7 @@ export type LeadShutterMaterialMappingWhereUniqueInput = Prisma.AtLeast<{
   created_by?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  specification?: Prisma.XOR<Prisma.LeadSpecificationsMasterScalarRelationFilter, Prisma.LeadSpecificationsMasterWhereInput>
   shutterMaterialFinish?: Prisma.XOR<Prisma.ShutterMaterialFinishMasterScalarRelationFilter, Prisma.ShutterMaterialFinishMasterWhereInput>
   shutterMaterial?: Prisma.XOR<Prisma.ShutterMaterialMasterScalarRelationFilter, Prisma.ShutterMaterialMasterWhereInput>
   shutterType?: Prisma.XOR<Prisma.ShutterTypeMasterScalarRelationFilter, Prisma.ShutterTypeMasterWhereInput>
@@ -313,6 +330,7 @@ export type LeadShutterMaterialMappingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  specs_id?: Prisma.SortOrder
   shutter_type_id?: Prisma.SortOrder
   shutter_material_id?: Prisma.SortOrder
   shutter_material_finish_id?: Prisma.SortOrder
@@ -332,6 +350,7 @@ export type LeadShutterMaterialMappingScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"LeadShutterMaterialMapping"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"LeadShutterMaterialMapping"> | number
   lead_id?: Prisma.IntWithAggregatesFilter<"LeadShutterMaterialMapping"> | number
+  specs_id?: Prisma.IntWithAggregatesFilter<"LeadShutterMaterialMapping"> | number
   shutter_type_id?: Prisma.IntWithAggregatesFilter<"LeadShutterMaterialMapping"> | number
   shutter_material_id?: Prisma.IntWithAggregatesFilter<"LeadShutterMaterialMapping"> | number
   shutter_material_finish_id?: Prisma.IntWithAggregatesFilter<"LeadShutterMaterialMapping"> | number
@@ -343,6 +362,7 @@ export type LeadShutterMaterialMappingCreateInput = {
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadShutterMaterialMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutShutterMaterialMappingsInput
+  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutShutterMaterialMappingsInput
   shutterMaterialFinish: Prisma.ShutterMaterialFinishMasterCreateNestedOneWithoutLeadMappingsInput
   shutterMaterial: Prisma.ShutterMaterialMasterCreateNestedOneWithoutLeadMappingsInput
   shutterType: Prisma.ShutterTypeMasterCreateNestedOneWithoutLeadMappingsInput
@@ -353,6 +373,7 @@ export type LeadShutterMaterialMappingUncheckedCreateInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
@@ -364,6 +385,7 @@ export type LeadShutterMaterialMappingUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadShutterMaterialMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
+  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
   shutterMaterialFinish?: Prisma.ShutterMaterialFinishMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   shutterMaterial?: Prisma.ShutterMaterialMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   shutterType?: Prisma.ShutterTypeMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
@@ -374,6 +396,7 @@ export type LeadShutterMaterialMappingUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -385,6 +408,7 @@ export type LeadShutterMaterialMappingCreateManyInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
@@ -400,6 +424,7 @@ export type LeadShutterMaterialMappingUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -421,6 +446,7 @@ export type LeadShutterMaterialMappingCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  specs_id?: Prisma.SortOrder
   shutter_type_id?: Prisma.SortOrder
   shutter_material_id?: Prisma.SortOrder
   shutter_material_finish_id?: Prisma.SortOrder
@@ -432,6 +458,7 @@ export type LeadShutterMaterialMappingAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  specs_id?: Prisma.SortOrder
   shutter_type_id?: Prisma.SortOrder
   shutter_material_id?: Prisma.SortOrder
   shutter_material_finish_id?: Prisma.SortOrder
@@ -442,6 +469,7 @@ export type LeadShutterMaterialMappingMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  specs_id?: Prisma.SortOrder
   shutter_type_id?: Prisma.SortOrder
   shutter_material_id?: Prisma.SortOrder
   shutter_material_finish_id?: Prisma.SortOrder
@@ -453,6 +481,7 @@ export type LeadShutterMaterialMappingMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  specs_id?: Prisma.SortOrder
   shutter_type_id?: Prisma.SortOrder
   shutter_material_id?: Prisma.SortOrder
   shutter_material_finish_id?: Prisma.SortOrder
@@ -464,6 +493,7 @@ export type LeadShutterMaterialMappingSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  specs_id?: Prisma.SortOrder
   shutter_type_id?: Prisma.SortOrder
   shutter_material_id?: Prisma.SortOrder
   shutter_material_finish_id?: Prisma.SortOrder
@@ -593,6 +623,48 @@ export type LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput 
   connect?: Prisma.LeadShutterMaterialMappingWhereUniqueInput | Prisma.LeadShutterMaterialMappingWhereUniqueInput[]
   update?: Prisma.LeadShutterMaterialMappingUpdateWithWhereUniqueWithoutLeadInput | Prisma.LeadShutterMaterialMappingUpdateWithWhereUniqueWithoutLeadInput[]
   updateMany?: Prisma.LeadShutterMaterialMappingUpdateManyWithWhereWithoutLeadInput | Prisma.LeadShutterMaterialMappingUpdateManyWithWhereWithoutLeadInput[]
+  deleteMany?: Prisma.LeadShutterMaterialMappingScalarWhereInput | Prisma.LeadShutterMaterialMappingScalarWhereInput[]
+}
+
+export type LeadShutterMaterialMappingCreateNestedManyWithoutSpecificationInput = {
+  create?: Prisma.XOR<Prisma.LeadShutterMaterialMappingCreateWithoutSpecificationInput, Prisma.LeadShutterMaterialMappingUncheckedCreateWithoutSpecificationInput> | Prisma.LeadShutterMaterialMappingCreateWithoutSpecificationInput[] | Prisma.LeadShutterMaterialMappingUncheckedCreateWithoutSpecificationInput[]
+  connectOrCreate?: Prisma.LeadShutterMaterialMappingCreateOrConnectWithoutSpecificationInput | Prisma.LeadShutterMaterialMappingCreateOrConnectWithoutSpecificationInput[]
+  createMany?: Prisma.LeadShutterMaterialMappingCreateManySpecificationInputEnvelope
+  connect?: Prisma.LeadShutterMaterialMappingWhereUniqueInput | Prisma.LeadShutterMaterialMappingWhereUniqueInput[]
+}
+
+export type LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutSpecificationInput = {
+  create?: Prisma.XOR<Prisma.LeadShutterMaterialMappingCreateWithoutSpecificationInput, Prisma.LeadShutterMaterialMappingUncheckedCreateWithoutSpecificationInput> | Prisma.LeadShutterMaterialMappingCreateWithoutSpecificationInput[] | Prisma.LeadShutterMaterialMappingUncheckedCreateWithoutSpecificationInput[]
+  connectOrCreate?: Prisma.LeadShutterMaterialMappingCreateOrConnectWithoutSpecificationInput | Prisma.LeadShutterMaterialMappingCreateOrConnectWithoutSpecificationInput[]
+  createMany?: Prisma.LeadShutterMaterialMappingCreateManySpecificationInputEnvelope
+  connect?: Prisma.LeadShutterMaterialMappingWhereUniqueInput | Prisma.LeadShutterMaterialMappingWhereUniqueInput[]
+}
+
+export type LeadShutterMaterialMappingUpdateManyWithoutSpecificationNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadShutterMaterialMappingCreateWithoutSpecificationInput, Prisma.LeadShutterMaterialMappingUncheckedCreateWithoutSpecificationInput> | Prisma.LeadShutterMaterialMappingCreateWithoutSpecificationInput[] | Prisma.LeadShutterMaterialMappingUncheckedCreateWithoutSpecificationInput[]
+  connectOrCreate?: Prisma.LeadShutterMaterialMappingCreateOrConnectWithoutSpecificationInput | Prisma.LeadShutterMaterialMappingCreateOrConnectWithoutSpecificationInput[]
+  upsert?: Prisma.LeadShutterMaterialMappingUpsertWithWhereUniqueWithoutSpecificationInput | Prisma.LeadShutterMaterialMappingUpsertWithWhereUniqueWithoutSpecificationInput[]
+  createMany?: Prisma.LeadShutterMaterialMappingCreateManySpecificationInputEnvelope
+  set?: Prisma.LeadShutterMaterialMappingWhereUniqueInput | Prisma.LeadShutterMaterialMappingWhereUniqueInput[]
+  disconnect?: Prisma.LeadShutterMaterialMappingWhereUniqueInput | Prisma.LeadShutterMaterialMappingWhereUniqueInput[]
+  delete?: Prisma.LeadShutterMaterialMappingWhereUniqueInput | Prisma.LeadShutterMaterialMappingWhereUniqueInput[]
+  connect?: Prisma.LeadShutterMaterialMappingWhereUniqueInput | Prisma.LeadShutterMaterialMappingWhereUniqueInput[]
+  update?: Prisma.LeadShutterMaterialMappingUpdateWithWhereUniqueWithoutSpecificationInput | Prisma.LeadShutterMaterialMappingUpdateWithWhereUniqueWithoutSpecificationInput[]
+  updateMany?: Prisma.LeadShutterMaterialMappingUpdateManyWithWhereWithoutSpecificationInput | Prisma.LeadShutterMaterialMappingUpdateManyWithWhereWithoutSpecificationInput[]
+  deleteMany?: Prisma.LeadShutterMaterialMappingScalarWhereInput | Prisma.LeadShutterMaterialMappingScalarWhereInput[]
+}
+
+export type LeadShutterMaterialMappingUncheckedUpdateManyWithoutSpecificationNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadShutterMaterialMappingCreateWithoutSpecificationInput, Prisma.LeadShutterMaterialMappingUncheckedCreateWithoutSpecificationInput> | Prisma.LeadShutterMaterialMappingCreateWithoutSpecificationInput[] | Prisma.LeadShutterMaterialMappingUncheckedCreateWithoutSpecificationInput[]
+  connectOrCreate?: Prisma.LeadShutterMaterialMappingCreateOrConnectWithoutSpecificationInput | Prisma.LeadShutterMaterialMappingCreateOrConnectWithoutSpecificationInput[]
+  upsert?: Prisma.LeadShutterMaterialMappingUpsertWithWhereUniqueWithoutSpecificationInput | Prisma.LeadShutterMaterialMappingUpsertWithWhereUniqueWithoutSpecificationInput[]
+  createMany?: Prisma.LeadShutterMaterialMappingCreateManySpecificationInputEnvelope
+  set?: Prisma.LeadShutterMaterialMappingWhereUniqueInput | Prisma.LeadShutterMaterialMappingWhereUniqueInput[]
+  disconnect?: Prisma.LeadShutterMaterialMappingWhereUniqueInput | Prisma.LeadShutterMaterialMappingWhereUniqueInput[]
+  delete?: Prisma.LeadShutterMaterialMappingWhereUniqueInput | Prisma.LeadShutterMaterialMappingWhereUniqueInput[]
+  connect?: Prisma.LeadShutterMaterialMappingWhereUniqueInput | Prisma.LeadShutterMaterialMappingWhereUniqueInput[]
+  update?: Prisma.LeadShutterMaterialMappingUpdateWithWhereUniqueWithoutSpecificationInput | Prisma.LeadShutterMaterialMappingUpdateWithWhereUniqueWithoutSpecificationInput[]
+  updateMany?: Prisma.LeadShutterMaterialMappingUpdateManyWithWhereWithoutSpecificationInput | Prisma.LeadShutterMaterialMappingUpdateManyWithWhereWithoutSpecificationInput[]
   deleteMany?: Prisma.LeadShutterMaterialMappingScalarWhereInput | Prisma.LeadShutterMaterialMappingScalarWhereInput[]
 }
 
@@ -726,6 +798,7 @@ export type LeadShutterMaterialMappingCreateWithoutVendorInput = {
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadShutterMaterialMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutShutterMaterialMappingsInput
+  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutShutterMaterialMappingsInput
   shutterMaterialFinish: Prisma.ShutterMaterialFinishMasterCreateNestedOneWithoutLeadMappingsInput
   shutterMaterial: Prisma.ShutterMaterialMasterCreateNestedOneWithoutLeadMappingsInput
   shutterType: Prisma.ShutterTypeMasterCreateNestedOneWithoutLeadMappingsInput
@@ -734,6 +807,7 @@ export type LeadShutterMaterialMappingCreateWithoutVendorInput = {
 export type LeadShutterMaterialMappingUncheckedCreateWithoutVendorInput = {
   id?: number
   lead_id: number
+  specs_id: number
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
@@ -774,6 +848,7 @@ export type LeadShutterMaterialMappingScalarWhereInput = {
   id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   vendor_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   lead_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
+  specs_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   shutter_type_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   shutter_material_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
   shutter_material_finish_id?: Prisma.IntFilter<"LeadShutterMaterialMapping"> | number
@@ -784,6 +859,7 @@ export type LeadShutterMaterialMappingScalarWhereInput = {
 export type LeadShutterMaterialMappingCreateWithoutCreatedByInput = {
   created_at?: Date | string
   lead: Prisma.LeadMasterCreateNestedOneWithoutShutterMaterialMappingsInput
+  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutShutterMaterialMappingsInput
   shutterMaterialFinish: Prisma.ShutterMaterialFinishMasterCreateNestedOneWithoutLeadMappingsInput
   shutterMaterial: Prisma.ShutterMaterialMasterCreateNestedOneWithoutLeadMappingsInput
   shutterType: Prisma.ShutterTypeMasterCreateNestedOneWithoutLeadMappingsInput
@@ -794,6 +870,7 @@ export type LeadShutterMaterialMappingUncheckedCreateWithoutCreatedByInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
@@ -829,6 +906,7 @@ export type LeadShutterMaterialMappingUpdateManyWithWhereWithoutCreatedByInput =
 export type LeadShutterMaterialMappingCreateWithoutLeadInput = {
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadShutterMaterialMappingsCreatedInput
+  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutShutterMaterialMappingsInput
   shutterMaterialFinish: Prisma.ShutterMaterialFinishMasterCreateNestedOneWithoutLeadMappingsInput
   shutterMaterial: Prisma.ShutterMaterialMasterCreateNestedOneWithoutLeadMappingsInput
   shutterType: Prisma.ShutterTypeMasterCreateNestedOneWithoutLeadMappingsInput
@@ -838,6 +916,7 @@ export type LeadShutterMaterialMappingCreateWithoutLeadInput = {
 export type LeadShutterMaterialMappingUncheckedCreateWithoutLeadInput = {
   id?: number
   vendor_id: number
+  specs_id: number
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
@@ -871,10 +950,58 @@ export type LeadShutterMaterialMappingUpdateManyWithWhereWithoutLeadInput = {
   data: Prisma.XOR<Prisma.LeadShutterMaterialMappingUpdateManyMutationInput, Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadInput>
 }
 
+export type LeadShutterMaterialMappingCreateWithoutSpecificationInput = {
+  created_at?: Date | string
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadShutterMaterialMappingsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutShutterMaterialMappingsInput
+  shutterMaterialFinish: Prisma.ShutterMaterialFinishMasterCreateNestedOneWithoutLeadMappingsInput
+  shutterMaterial: Prisma.ShutterMaterialMasterCreateNestedOneWithoutLeadMappingsInput
+  shutterType: Prisma.ShutterTypeMasterCreateNestedOneWithoutLeadMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadShutterMaterialMappingsInput
+}
+
+export type LeadShutterMaterialMappingUncheckedCreateWithoutSpecificationInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  shutter_type_id: number
+  shutter_material_id: number
+  shutter_material_finish_id: number
+  created_at?: Date | string
+  created_by: number
+}
+
+export type LeadShutterMaterialMappingCreateOrConnectWithoutSpecificationInput = {
+  where: Prisma.LeadShutterMaterialMappingWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadShutterMaterialMappingCreateWithoutSpecificationInput, Prisma.LeadShutterMaterialMappingUncheckedCreateWithoutSpecificationInput>
+}
+
+export type LeadShutterMaterialMappingCreateManySpecificationInputEnvelope = {
+  data: Prisma.LeadShutterMaterialMappingCreateManySpecificationInput | Prisma.LeadShutterMaterialMappingCreateManySpecificationInput[]
+  skipDuplicates?: boolean
+}
+
+export type LeadShutterMaterialMappingUpsertWithWhereUniqueWithoutSpecificationInput = {
+  where: Prisma.LeadShutterMaterialMappingWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeadShutterMaterialMappingUpdateWithoutSpecificationInput, Prisma.LeadShutterMaterialMappingUncheckedUpdateWithoutSpecificationInput>
+  create: Prisma.XOR<Prisma.LeadShutterMaterialMappingCreateWithoutSpecificationInput, Prisma.LeadShutterMaterialMappingUncheckedCreateWithoutSpecificationInput>
+}
+
+export type LeadShutterMaterialMappingUpdateWithWhereUniqueWithoutSpecificationInput = {
+  where: Prisma.LeadShutterMaterialMappingWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeadShutterMaterialMappingUpdateWithoutSpecificationInput, Prisma.LeadShutterMaterialMappingUncheckedUpdateWithoutSpecificationInput>
+}
+
+export type LeadShutterMaterialMappingUpdateManyWithWhereWithoutSpecificationInput = {
+  where: Prisma.LeadShutterMaterialMappingScalarWhereInput
+  data: Prisma.XOR<Prisma.LeadShutterMaterialMappingUpdateManyMutationInput, Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutSpecificationInput>
+}
+
 export type LeadShutterMaterialMappingCreateWithoutShutterTypeInput = {
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadShutterMaterialMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutShutterMaterialMappingsInput
+  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutShutterMaterialMappingsInput
   shutterMaterialFinish: Prisma.ShutterMaterialFinishMasterCreateNestedOneWithoutLeadMappingsInput
   shutterMaterial: Prisma.ShutterMaterialMasterCreateNestedOneWithoutLeadMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadShutterMaterialMappingsInput
@@ -884,6 +1011,7 @@ export type LeadShutterMaterialMappingUncheckedCreateWithoutShutterTypeInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
   created_at?: Date | string
@@ -920,6 +1048,7 @@ export type LeadShutterMaterialMappingCreateWithoutShutterMaterialInput = {
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadShutterMaterialMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutShutterMaterialMappingsInput
+  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutShutterMaterialMappingsInput
   shutterMaterialFinish: Prisma.ShutterMaterialFinishMasterCreateNestedOneWithoutLeadMappingsInput
   shutterType: Prisma.ShutterTypeMasterCreateNestedOneWithoutLeadMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadShutterMaterialMappingsInput
@@ -929,6 +1058,7 @@ export type LeadShutterMaterialMappingUncheckedCreateWithoutShutterMaterialInput
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   shutter_type_id: number
   shutter_material_finish_id: number
   created_at?: Date | string
@@ -965,6 +1095,7 @@ export type LeadShutterMaterialMappingCreateWithoutShutterMaterialFinishInput = 
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadShutterMaterialMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutShutterMaterialMappingsInput
+  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutShutterMaterialMappingsInput
   shutterMaterial: Prisma.ShutterMaterialMasterCreateNestedOneWithoutLeadMappingsInput
   shutterType: Prisma.ShutterTypeMasterCreateNestedOneWithoutLeadMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadShutterMaterialMappingsInput
@@ -974,6 +1105,7 @@ export type LeadShutterMaterialMappingUncheckedCreateWithoutShutterMaterialFinis
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   shutter_type_id: number
   shutter_material_id: number
   created_at?: Date | string
@@ -1009,6 +1141,7 @@ export type LeadShutterMaterialMappingUpdateManyWithWhereWithoutShutterMaterialF
 export type LeadShutterMaterialMappingCreateManyVendorInput = {
   id?: number
   lead_id: number
+  specs_id: number
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
@@ -1020,6 +1153,7 @@ export type LeadShutterMaterialMappingUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadShutterMaterialMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
+  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
   shutterMaterialFinish?: Prisma.ShutterMaterialFinishMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   shutterMaterial?: Prisma.ShutterMaterialMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   shutterType?: Prisma.ShutterTypeMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
@@ -1028,6 +1162,7 @@ export type LeadShutterMaterialMappingUpdateWithoutVendorInput = {
 export type LeadShutterMaterialMappingUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1038,6 +1173,7 @@ export type LeadShutterMaterialMappingUncheckedUpdateWithoutVendorInput = {
 export type LeadShutterMaterialMappingUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1049,6 +1185,7 @@ export type LeadShutterMaterialMappingCreateManyCreatedByInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
@@ -1058,6 +1195,7 @@ export type LeadShutterMaterialMappingCreateManyCreatedByInput = {
 export type LeadShutterMaterialMappingUpdateWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
+  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
   shutterMaterialFinish?: Prisma.ShutterMaterialFinishMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   shutterMaterial?: Prisma.ShutterMaterialMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   shutterType?: Prisma.ShutterTypeMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
@@ -1068,6 +1206,7 @@ export type LeadShutterMaterialMappingUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1078,6 +1217,7 @@ export type LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByInput =
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1087,6 +1227,7 @@ export type LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByInput =
 export type LeadShutterMaterialMappingCreateManyLeadInput = {
   id?: number
   vendor_id: number
+  specs_id: number
   shutter_type_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
@@ -1097,6 +1238,7 @@ export type LeadShutterMaterialMappingCreateManyLeadInput = {
 export type LeadShutterMaterialMappingUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadShutterMaterialMappingsCreatedNestedInput
+  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
   shutterMaterialFinish?: Prisma.ShutterMaterialFinishMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   shutterMaterial?: Prisma.ShutterMaterialMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   shutterType?: Prisma.ShutterTypeMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
@@ -1106,6 +1248,7 @@ export type LeadShutterMaterialMappingUpdateWithoutLeadInput = {
 export type LeadShutterMaterialMappingUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1116,6 +1259,50 @@ export type LeadShutterMaterialMappingUncheckedUpdateWithoutLeadInput = {
 export type LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
+  shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
+  shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type LeadShutterMaterialMappingCreateManySpecificationInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  shutter_type_id: number
+  shutter_material_id: number
+  shutter_material_finish_id: number
+  created_at?: Date | string
+  created_by: number
+}
+
+export type LeadShutterMaterialMappingUpdateWithoutSpecificationInput = {
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadShutterMaterialMappingsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
+  shutterMaterialFinish?: Prisma.ShutterMaterialFinishMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
+  shutterMaterial?: Prisma.ShutterMaterialMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
+  shutterType?: Prisma.ShutterTypeMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadShutterMaterialMappingsNestedInput
+}
+
+export type LeadShutterMaterialMappingUncheckedUpdateWithoutSpecificationInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
+  shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type LeadShutterMaterialMappingUncheckedUpdateManyWithoutSpecificationInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1127,6 +1314,7 @@ export type LeadShutterMaterialMappingCreateManyShutterTypeInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   shutter_material_id: number
   shutter_material_finish_id: number
   created_at?: Date | string
@@ -1137,6 +1325,7 @@ export type LeadShutterMaterialMappingUpdateWithoutShutterTypeInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadShutterMaterialMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
+  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
   shutterMaterialFinish?: Prisma.ShutterMaterialFinishMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   shutterMaterial?: Prisma.ShutterMaterialMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadShutterMaterialMappingsNestedInput
@@ -1146,6 +1335,7 @@ export type LeadShutterMaterialMappingUncheckedUpdateWithoutShutterTypeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1156,6 +1346,7 @@ export type LeadShutterMaterialMappingUncheckedUpdateManyWithoutShutterTypeInput
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1166,6 +1357,7 @@ export type LeadShutterMaterialMappingCreateManyShutterMaterialInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   shutter_type_id: number
   shutter_material_finish_id: number
   created_at?: Date | string
@@ -1176,6 +1368,7 @@ export type LeadShutterMaterialMappingUpdateWithoutShutterMaterialInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadShutterMaterialMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
+  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
   shutterMaterialFinish?: Prisma.ShutterMaterialFinishMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   shutterType?: Prisma.ShutterTypeMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadShutterMaterialMappingsNestedInput
@@ -1185,6 +1378,7 @@ export type LeadShutterMaterialMappingUncheckedUpdateWithoutShutterMaterialInput
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1195,6 +1389,7 @@ export type LeadShutterMaterialMappingUncheckedUpdateManyWithoutShutterMaterialI
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1205,6 +1400,7 @@ export type LeadShutterMaterialMappingCreateManyShutterMaterialFinishInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   shutter_type_id: number
   shutter_material_id: number
   created_at?: Date | string
@@ -1215,6 +1411,7 @@ export type LeadShutterMaterialMappingUpdateWithoutShutterMaterialFinishInput = 
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadShutterMaterialMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
+  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutShutterMaterialMappingsNestedInput
   shutterMaterial?: Prisma.ShutterMaterialMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   shutterType?: Prisma.ShutterTypeMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadShutterMaterialMappingsNestedInput
@@ -1224,6 +1421,7 @@ export type LeadShutterMaterialMappingUncheckedUpdateWithoutShutterMaterialFinis
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1234,6 +1432,7 @@ export type LeadShutterMaterialMappingUncheckedUpdateManyWithoutShutterMaterialF
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1246,6 +1445,7 @@ export type LeadShutterMaterialMappingSelect<ExtArgs extends runtime.Types.Exten
   id?: boolean
   vendor_id?: boolean
   lead_id?: boolean
+  specs_id?: boolean
   shutter_type_id?: boolean
   shutter_material_id?: boolean
   shutter_material_finish_id?: boolean
@@ -1253,6 +1453,7 @@ export type LeadShutterMaterialMappingSelect<ExtArgs extends runtime.Types.Exten
   created_by?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   shutterMaterialFinish?: boolean | Prisma.ShutterMaterialFinishMasterDefaultArgs<ExtArgs>
   shutterMaterial?: boolean | Prisma.ShutterMaterialMasterDefaultArgs<ExtArgs>
   shutterType?: boolean | Prisma.ShutterTypeMasterDefaultArgs<ExtArgs>
@@ -1263,6 +1464,7 @@ export type LeadShutterMaterialMappingSelectCreateManyAndReturn<ExtArgs extends 
   id?: boolean
   vendor_id?: boolean
   lead_id?: boolean
+  specs_id?: boolean
   shutter_type_id?: boolean
   shutter_material_id?: boolean
   shutter_material_finish_id?: boolean
@@ -1270,6 +1472,7 @@ export type LeadShutterMaterialMappingSelectCreateManyAndReturn<ExtArgs extends 
   created_by?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   shutterMaterialFinish?: boolean | Prisma.ShutterMaterialFinishMasterDefaultArgs<ExtArgs>
   shutterMaterial?: boolean | Prisma.ShutterMaterialMasterDefaultArgs<ExtArgs>
   shutterType?: boolean | Prisma.ShutterTypeMasterDefaultArgs<ExtArgs>
@@ -1280,6 +1483,7 @@ export type LeadShutterMaterialMappingSelectUpdateManyAndReturn<ExtArgs extends 
   id?: boolean
   vendor_id?: boolean
   lead_id?: boolean
+  specs_id?: boolean
   shutter_type_id?: boolean
   shutter_material_id?: boolean
   shutter_material_finish_id?: boolean
@@ -1287,6 +1491,7 @@ export type LeadShutterMaterialMappingSelectUpdateManyAndReturn<ExtArgs extends 
   created_by?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   shutterMaterialFinish?: boolean | Prisma.ShutterMaterialFinishMasterDefaultArgs<ExtArgs>
   shutterMaterial?: boolean | Prisma.ShutterMaterialMasterDefaultArgs<ExtArgs>
   shutterType?: boolean | Prisma.ShutterTypeMasterDefaultArgs<ExtArgs>
@@ -1297,6 +1502,7 @@ export type LeadShutterMaterialMappingSelectScalar = {
   id?: boolean
   vendor_id?: boolean
   lead_id?: boolean
+  specs_id?: boolean
   shutter_type_id?: boolean
   shutter_material_id?: boolean
   shutter_material_finish_id?: boolean
@@ -1304,10 +1510,11 @@ export type LeadShutterMaterialMappingSelectScalar = {
   created_by?: boolean
 }
 
-export type LeadShutterMaterialMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "shutter_type_id" | "shutter_material_id" | "shutter_material_finish_id" | "created_at" | "created_by", ExtArgs["result"]["leadShutterMaterialMapping"]>
+export type LeadShutterMaterialMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "specs_id" | "shutter_type_id" | "shutter_material_id" | "shutter_material_finish_id" | "created_at" | "created_by", ExtArgs["result"]["leadShutterMaterialMapping"]>
 export type LeadShutterMaterialMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   shutterMaterialFinish?: boolean | Prisma.ShutterMaterialFinishMasterDefaultArgs<ExtArgs>
   shutterMaterial?: boolean | Prisma.ShutterMaterialMasterDefaultArgs<ExtArgs>
   shutterType?: boolean | Prisma.ShutterTypeMasterDefaultArgs<ExtArgs>
@@ -1316,6 +1523,7 @@ export type LeadShutterMaterialMappingInclude<ExtArgs extends runtime.Types.Exte
 export type LeadShutterMaterialMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   shutterMaterialFinish?: boolean | Prisma.ShutterMaterialFinishMasterDefaultArgs<ExtArgs>
   shutterMaterial?: boolean | Prisma.ShutterMaterialMasterDefaultArgs<ExtArgs>
   shutterType?: boolean | Prisma.ShutterTypeMasterDefaultArgs<ExtArgs>
@@ -1324,6 +1532,7 @@ export type LeadShutterMaterialMappingIncludeCreateManyAndReturn<ExtArgs extends
 export type LeadShutterMaterialMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   shutterMaterialFinish?: boolean | Prisma.ShutterMaterialFinishMasterDefaultArgs<ExtArgs>
   shutterMaterial?: boolean | Prisma.ShutterMaterialMasterDefaultArgs<ExtArgs>
   shutterType?: boolean | Prisma.ShutterTypeMasterDefaultArgs<ExtArgs>
@@ -1335,6 +1544,7 @@ export type $LeadShutterMaterialMappingPayload<ExtArgs extends runtime.Types.Ext
   objects: {
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     lead: Prisma.$LeadMasterPayload<ExtArgs>
+    specification: Prisma.$LeadSpecificationsMasterPayload<ExtArgs>
     shutterMaterialFinish: Prisma.$ShutterMaterialFinishMasterPayload<ExtArgs>
     shutterMaterial: Prisma.$ShutterMaterialMasterPayload<ExtArgs>
     shutterType: Prisma.$ShutterTypeMasterPayload<ExtArgs>
@@ -1344,6 +1554,7 @@ export type $LeadShutterMaterialMappingPayload<ExtArgs extends runtime.Types.Ext
     id: number
     vendor_id: number
     lead_id: number
+    specs_id: number
     shutter_type_id: number
     shutter_material_id: number
     shutter_material_finish_id: number
@@ -1745,6 +1956,7 @@ export interface Prisma__LeadShutterMaterialMappingClient<T, Null = never, ExtAr
   readonly [Symbol.toStringTag]: "PrismaPromise"
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  specification<T extends Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadSpecificationsMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadSpecificationsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   shutterMaterialFinish<T extends Prisma.ShutterMaterialFinishMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ShutterMaterialFinishMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ShutterMaterialFinishMasterClient<runtime.Types.Result.GetResult<Prisma.$ShutterMaterialFinishMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   shutterMaterial<T extends Prisma.ShutterMaterialMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ShutterMaterialMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ShutterMaterialMasterClient<runtime.Types.Result.GetResult<Prisma.$ShutterMaterialMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   shutterType<T extends Prisma.ShutterTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ShutterTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ShutterTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$ShutterTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
@@ -1781,6 +1993,7 @@ export interface LeadShutterMaterialMappingFieldRefs {
   readonly id: Prisma.FieldRef<"LeadShutterMaterialMapping", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"LeadShutterMaterialMapping", 'Int'>
   readonly lead_id: Prisma.FieldRef<"LeadShutterMaterialMapping", 'Int'>
+  readonly specs_id: Prisma.FieldRef<"LeadShutterMaterialMapping", 'Int'>
   readonly shutter_type_id: Prisma.FieldRef<"LeadShutterMaterialMapping", 'Int'>
   readonly shutter_material_id: Prisma.FieldRef<"LeadShutterMaterialMapping", 'Int'>
   readonly shutter_material_finish_id: Prisma.FieldRef<"LeadShutterMaterialMapping", 'Int'>
