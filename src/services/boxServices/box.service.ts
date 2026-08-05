@@ -1606,8 +1606,7 @@ export const generateBoxPdfService = async (
   font-weight: 700;
   font-style: italic;
 }
-@page {
-  size: 3in 5in;
+@page {  
   margin: 0;
 }
 
@@ -1620,9 +1619,11 @@ export const generateBoxPdfService = async (
 html,
 body {
   width: 3in;
-  height: 5in;
+  min-height: 0;
+  height: auto;
   margin: 0;
   padding: 0;
+  overflow: visible;
 }
 
 body {
@@ -1636,7 +1637,7 @@ body {
 
 .page {
   width: 3in;
-  height: 5in;
+  height: 100%;
   padding: 1.4mm;
   overflow: hidden;
   page-break-after: always;
@@ -2634,82 +2635,42 @@ color: #111827;
 
     /*
     |--------------------------------------------------------------------------
-    | 18. Generate PDF
+    | 18. Prepare printable HTML
     |--------------------------------------------------------------------------
+    | Backend cannot open the printer directly. This returns print_html.
+    | Open this HTML in a new browser window/tab; the script will trigger
+    | the browser print dialog automatically.
     */
 
-    const fileName =
-      `box_${sanitizeFileName(
-        project.project_name
-      )}_${sanitizeFileName(
-        box.box_name
-      )}_${Date.now()}.pdf`;
+    const printHtml = html.replace(
+      "</body>",
+      `
+<script>
+(function () {
+  function startPrint() {
+    window.focus();
 
-    tempFilePath =
-      path.join(
-        tempDir,
-        fileName
-      );
+    setTimeout(function () {
+      window.print();
+    }, 300);
+  }
 
-    await generateCustomSizePdf(
-      html,
-      tempFilePath,
-      {
-        width: "3in",
-        height: "5in",
-        printBackground: true,
-        preferCSSPageSize: true,
-
-        margin: {
-          top: "0",
-          bottom: "0",
-          left: "0",
-          right: "0",
-        },
-      }
+  if (document.readyState === "complete") {
+    startPrint();
+  } else {
+    window.addEventListener("load", startPrint);
+  }
+})();
+</script>
+</body>`
     );
-
-    if (
-      !fs.existsSync(
-        tempFilePath
-      )
-    ) {
-      throw new Error(
-        "PDF generation failed. File was not created."
-      );
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | 19. Upload PDF
-    |--------------------------------------------------------------------------
-    */
-
-    const {
-      signedUrl,
-      wasabiKey,
-    } =
-      await uploadPdfAndGetSignedUrl(
-        tempFilePath,
-        vendor_id,
-        project_id,
-        fileName
-      );
-
-    tempFilePath = null;
 
     return validationResponse(
       1,
-      "Box PDF generated successfully",
+      "Box print generated successfully",
       {
-        download_url:
-          signedUrl,
-
-        file_name:
-          fileName,
-
-        wasabi_key:
-          wasabiKey,
+        print_html:
+          printHtml,
 
         box_id:
           box.id,
@@ -2756,7 +2717,7 @@ color: #111827;
 
     return validationResponse(
       0,
-      "Failed to generate box PDF"
+      "Failed to generate box print"
     );
   }
 };
