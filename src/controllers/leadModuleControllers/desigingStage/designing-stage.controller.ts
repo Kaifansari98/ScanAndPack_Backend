@@ -3489,6 +3489,40 @@ export class DesigingStageController {
         orderBy: { created_at: "asc" },
       });
 
+      const specificationIds = specifications.map((specification) => specification.id);
+      const otherApplianceRemarkMappings =
+        specificationIds.length > 0
+          ? await prisma.leadOtherAppliancesRemarkMapping.findMany({
+              where: {
+                specs_id: { in: specificationIds },
+              },
+              select: {
+                specs_id: true,
+                other_appliance_type: true,
+                remark: true,
+              },
+            })
+          : [];
+      const remarkMap = new Map<
+        number,
+        Partial<{
+          appliances_remark: string;
+          stone_remark: string;
+          sinks_remark: string;
+          faucets_remark: string;
+        }>
+      >();
+
+      otherApplianceRemarkMappings.forEach((mapping) => {
+        const entry = remarkMap.get(mapping.specs_id) ?? {};
+        const type = String(mapping.other_appliance_type);
+        if (type === "Appliances") entry.appliances_remark = mapping.remark;
+        if (type === "Stone") entry.stone_remark = mapping.remark;
+        if (type === "Sinks") entry.sinks_remark = mapping.remark;
+        if (type === "Faucets") entry.faucets_remark = mapping.remark;
+        remarkMap.set(mapping.specs_id, entry);
+      });
+
       const actorRole = await DesigingStageController.getActorRole(req);
       const latestSpecByItemCode = new Map<number, number>();
 
@@ -3516,6 +3550,11 @@ export class DesigingStageController {
 
         return {
           ...specification,
+          appliances_remark:
+            remarkMap.get(specification.id)?.appliances_remark ?? null,
+          stone_remark: remarkMap.get(specification.id)?.stone_remark ?? null,
+          sinks_remark: remarkMap.get(specification.id)?.sinks_remark ?? null,
+          faucets_remark: remarkMap.get(specification.id)?.faucets_remark ?? null,
           is_latest_for_item_code: isLatestForItemCode,
           is_editable:
             actorRole === "super-admin" ? true : isLatestForItemCode,
@@ -3610,11 +3649,14 @@ export class DesigingStageController {
             lightCarcasUnitMappings: {
               select: {
                 light_carcas_unit_master_id: true,
+                custom_remark: true,
               },
             },
             otherAppliancesMappings: {
               select: {
+                other_appliance_type: true,
                 other_appliances_master_id: true,
+                custom_remark: true,
               },
             },
             specificationDocumentMappings: {
@@ -3624,6 +3666,17 @@ export class DesigingStageController {
             },
           },
         });
+        const previousOtherApplianceRemarkMappings = previousLatestSpecification
+          ? await tx.leadOtherAppliancesRemarkMapping.findMany({
+              where: {
+                specs_id: previousLatestSpecification.id,
+              },
+              select: {
+                other_appliance_type: true,
+                remark: true,
+              },
+            })
+          : [];
 
         const leadProductMapping = await tx.leadProductMapping.findFirst({
           where: { vendor_id: Number(vendorId), lead_id: Number(leadId) },
@@ -3740,11 +3793,26 @@ export class DesigingStageController {
                   vendor_id: Number(vendorId),
                   lead_id: Number(leadId),
                   specs_id: createdSpecification.id,
+                  other_appliance_type: mapping.other_appliance_type,
                   other_appliances_master_id:
                     mapping.other_appliances_master_id,
+                  custom_remark: mapping.custom_remark,
                   created_by: Number(created_by),
                 }),
               ),
+            });
+          }
+
+          if (previousOtherApplianceRemarkMappings.length > 0) {
+            await tx.leadOtherAppliancesRemarkMapping.createMany({
+              data: previousOtherApplianceRemarkMappings.map((mapping) => ({
+                vendor_id: Number(vendorId),
+                lead_id: Number(leadId),
+                specs_id: createdSpecification.id,
+                other_appliance_type: mapping.other_appliance_type,
+                remark: mapping.remark,
+                created_by: Number(created_by),
+              })),
             });
           }
 
@@ -3820,6 +3888,90 @@ export class DesigingStageController {
       });
     } catch (error: any) {
       console.error("Error updating lead specification lights remark:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
+
+  public static async updateLeadSpecificationSectionRemark(
+    req: Request,
+    res: Response,
+  ) {
+    try {
+      const specsId = Number(req.params.specsId);
+      const section = String(req.body.section || "").trim().toLowerCase();
+      const remark = req.body.remark;
+
+      const allowedValues = [
+        "In our scope",
+        "Not in our scope",
+        "Provide only grooves",
+      ];
+      const sectionFieldMap: Record<string, string> = {
+        appliances: "Appliances",
+        stone: "Stone",
+        sinks: "Sinks",
+        faucets: "Faucets",
+      };
+      const targetType = sectionFieldMap[section];
+
+      if (!specsId || !targetType || !allowedValues.includes(remark)) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "specsId is required and section/remark must be valid values.",
+        });
+      }
+
+      await DesigingStageController.ensureSpecificationEditable(req, specsId);
+
+      const specification = await prisma.leadSpecificationsMaster.findUnique({
+        where: { id: specsId },
+        select: {
+          id: true,
+          vendor_id: true,
+          lead_id: true,
+          created_by: true,
+        },
+      });
+
+      if (!specification) {
+        return res.status(404).json({
+          success: false,
+          message: "Specification not found",
+        });
+      }
+
+      await prisma.leadOtherAppliancesRemarkMapping.upsert({
+        where: {
+          specs_id_other_appliance_type: {
+            specs_id: specsId,
+            other_appliance_type: targetType as any,
+          },
+        },
+        update: {
+          remark,
+        },
+        create: {
+          vendor_id: specification.vendor_id,
+          lead_id: specification.lead_id,
+          specs_id: specsId,
+          other_appliance_type: targetType as any,
+          remark,
+          created_by: specification.created_by,
+        },
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Section remark updated successfully",
+        data: { specs_id: specsId, section, remark },
+      });
+    } catch (error: any) {
+      console.error("Error updating lead specification section remark:", error);
       return res.status(500).json({
         success: false,
         message: "Internal server error",
@@ -4495,20 +4647,41 @@ export class DesigingStageController {
       const vendorId = Number(req.body.vendor_id);
       const leadId = Number(req.body.lead_id);
       const specsId = Number(req.body.specs_id);
-      const otherAppliancesMasterId = Number(req.body.other_appliances_master_id);
+      const rawOtherAppliancesMasterId = req.body.other_appliances_master_id;
+      const otherAppliancesMasterId = rawOtherAppliancesMasterId
+        ? Number(rawOtherAppliancesMasterId)
+        : undefined;
+      const otherApplianceType =
+        typeof req.body.other_appliance_type === "string"
+          ? req.body.other_appliance_type.trim()
+          : undefined;
+      const customRemark =
+        typeof req.body.custom_remark === "string"
+          ? req.body.custom_remark.trim()
+          : "";
       const createdBy = Number(req.body.created_by);
 
       if (
         !vendorId ||
         !leadId ||
         !specsId ||
-        !otherAppliancesMasterId ||
         !createdBy
       ) {
         return res.status(400).json({
           success: false,
           message:
-            "vendor_id, lead_id, specs_id, other_appliances_master_id and created_by are required",
+            "vendor_id, lead_id, specs_id and created_by are required",
+        });
+      }
+
+      if (
+        (!otherAppliancesMasterId && !customRemark) ||
+        (otherAppliancesMasterId && customRemark)
+      ) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Provide either other_appliances_master_id or custom_remark.",
         });
       }
 
@@ -4522,7 +4695,9 @@ export class DesigingStageController {
         vendor_id: vendorId,
         lead_id: leadId,
         specs_id: specsId,
-        other_appliances_master_id: otherAppliancesMasterId,
+        other_appliance_type: otherApplianceType || null,
+        other_appliances_master_id: otherAppliancesMasterId ?? null,
+        custom_remark: customRemark || null,
         created_by: createdBy,
       };
 
@@ -4531,7 +4706,15 @@ export class DesigingStageController {
           vendor_id: vendorId,
           lead_id: leadId,
           specs_id: specsId,
-          other_appliances_master_id: otherAppliancesMasterId,
+          ...(otherApplianceType ? { other_appliance_type: otherApplianceType as any } : {}),
+          ...(otherAppliancesMasterId
+            ? { other_appliances_master_id: otherAppliancesMasterId }
+            : {
+                custom_remark: {
+                  equals: customRemark,
+                  mode: "insensitive",
+                },
+              }),
           ...(id ? { NOT: { id } } : {}),
         },
         select: { id: true },
@@ -4540,7 +4723,9 @@ export class DesigingStageController {
       if (existingDuplicate) {
         return res.status(400).json({
           success: false,
-          message: "This article has already been added.",
+          message: otherAppliancesMasterId
+            ? "This article has already been added."
+            : "This custom remark has already been added.",
         });
       }
 

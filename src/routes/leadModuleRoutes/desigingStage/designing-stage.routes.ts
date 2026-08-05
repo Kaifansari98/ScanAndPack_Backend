@@ -210,6 +210,11 @@ DesigningStageRouter.put(
   (req, res) => DesigingStageController.updateLeadSpecificationLightsRemark(req, res),
 );
 
+DesigningStageRouter.put(
+  "/specifications/:specsId/section-remark",
+  (req, res) => DesigingStageController.updateLeadSpecificationSectionRemark(req, res),
+);
+
 DesigningStageRouter.get(
   "/vendor/:vendorId/lead/:leadId/specs/:specsId/carcass-material-mappings",
   (req, res) => DesigingStageController.getLeadCarcassMaterialMappings(req, res),
