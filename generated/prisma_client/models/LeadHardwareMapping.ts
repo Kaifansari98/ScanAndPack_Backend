@@ -61,8 +61,10 @@ export type LeadHardwareMappingMinAggregateOutputType = {
   approved_at: Date | null
   is_amended: boolean | null
   amended_at: Date | null
+  amended_remark: string | null
   is_deleted_item: boolean | null
   deleted_item_at: Date | null
+  deleted_remark: string | null
   created_at: Date | null
   created_by: number | null
 }
@@ -80,8 +82,10 @@ export type LeadHardwareMappingMaxAggregateOutputType = {
   approved_at: Date | null
   is_amended: boolean | null
   amended_at: Date | null
+  amended_remark: string | null
   is_deleted_item: boolean | null
   deleted_item_at: Date | null
+  deleted_remark: string | null
   created_at: Date | null
   created_by: number | null
 }
@@ -99,8 +103,10 @@ export type LeadHardwareMappingCountAggregateOutputType = {
   approved_at: number
   is_amended: number
   amended_at: number
+  amended_remark: number
   is_deleted_item: number
   deleted_item_at: number
+  deleted_remark: number
   created_at: number
   created_by: number
   _all: number
@@ -142,8 +148,10 @@ export type LeadHardwareMappingMinAggregateInputType = {
   approved_at?: true
   is_amended?: true
   amended_at?: true
+  amended_remark?: true
   is_deleted_item?: true
   deleted_item_at?: true
+  deleted_remark?: true
   created_at?: true
   created_by?: true
 }
@@ -161,8 +169,10 @@ export type LeadHardwareMappingMaxAggregateInputType = {
   approved_at?: true
   is_amended?: true
   amended_at?: true
+  amended_remark?: true
   is_deleted_item?: true
   deleted_item_at?: true
+  deleted_remark?: true
   created_at?: true
   created_by?: true
 }
@@ -180,8 +190,10 @@ export type LeadHardwareMappingCountAggregateInputType = {
   approved_at?: true
   is_amended?: true
   amended_at?: true
+  amended_remark?: true
   is_deleted_item?: true
   deleted_item_at?: true
+  deleted_remark?: true
   created_at?: true
   created_by?: true
   _all?: true
@@ -286,8 +298,10 @@ export type LeadHardwareMappingGroupByOutputType = {
   approved_at: Date | null
   is_amended: boolean
   amended_at: Date | null
+  amended_remark: string | null
   is_deleted_item: boolean
   deleted_item_at: Date | null
+  deleted_remark: string | null
   created_at: Date
   created_by: number
   _count: LeadHardwareMappingCountAggregateOutputType | null
@@ -328,8 +342,10 @@ export type LeadHardwareMappingWhereInput = {
   approved_at?: Prisma.DateTimeNullableFilter<"LeadHardwareMapping"> | Date | string | null
   is_amended?: Prisma.BoolFilter<"LeadHardwareMapping"> | boolean
   amended_at?: Prisma.DateTimeNullableFilter<"LeadHardwareMapping"> | Date | string | null
+  amended_remark?: Prisma.StringNullableFilter<"LeadHardwareMapping"> | string | null
   is_deleted_item?: Prisma.BoolFilter<"LeadHardwareMapping"> | boolean
   deleted_item_at?: Prisma.DateTimeNullableFilter<"LeadHardwareMapping"> | Date | string | null
+  deleted_remark?: Prisma.StringNullableFilter<"LeadHardwareMapping"> | string | null
   created_at?: Prisma.DateTimeFilter<"LeadHardwareMapping"> | Date | string
   created_by?: Prisma.IntFilter<"LeadHardwareMapping"> | number
   carcassLegs?: Prisma.XOR<Prisma.CarcassLegsMasterScalarRelationFilter, Prisma.CarcassLegsMasterWhereInput>
@@ -354,8 +370,10 @@ export type LeadHardwareMappingOrderByWithRelationInput = {
   approved_at?: Prisma.SortOrderInput | Prisma.SortOrder
   is_amended?: Prisma.SortOrder
   amended_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  amended_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   is_deleted_item?: Prisma.SortOrder
   deleted_item_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  deleted_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   carcassLegs?: Prisma.CarcassLegsMasterOrderByWithRelationInput
@@ -383,8 +401,10 @@ export type LeadHardwareMappingWhereUniqueInput = Prisma.AtLeast<{
   approved_at?: Prisma.DateTimeNullableFilter<"LeadHardwareMapping"> | Date | string | null
   is_amended?: Prisma.BoolFilter<"LeadHardwareMapping"> | boolean
   amended_at?: Prisma.DateTimeNullableFilter<"LeadHardwareMapping"> | Date | string | null
+  amended_remark?: Prisma.StringNullableFilter<"LeadHardwareMapping"> | string | null
   is_deleted_item?: Prisma.BoolFilter<"LeadHardwareMapping"> | boolean
   deleted_item_at?: Prisma.DateTimeNullableFilter<"LeadHardwareMapping"> | Date | string | null
+  deleted_remark?: Prisma.StringNullableFilter<"LeadHardwareMapping"> | string | null
   created_at?: Prisma.DateTimeFilter<"LeadHardwareMapping"> | Date | string
   created_by?: Prisma.IntFilter<"LeadHardwareMapping"> | number
   carcassLegs?: Prisma.XOR<Prisma.CarcassLegsMasterScalarRelationFilter, Prisma.CarcassLegsMasterWhereInput>
@@ -409,8 +429,10 @@ export type LeadHardwareMappingOrderByWithAggregationInput = {
   approved_at?: Prisma.SortOrderInput | Prisma.SortOrder
   is_amended?: Prisma.SortOrder
   amended_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  amended_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   is_deleted_item?: Prisma.SortOrder
   deleted_item_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  deleted_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   _count?: Prisma.LeadHardwareMappingCountOrderByAggregateInput
@@ -436,8 +458,10 @@ export type LeadHardwareMappingScalarWhereWithAggregatesInput = {
   approved_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadHardwareMapping"> | Date | string | null
   is_amended?: Prisma.BoolWithAggregatesFilter<"LeadHardwareMapping"> | boolean
   amended_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadHardwareMapping"> | Date | string | null
+  amended_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadHardwareMapping"> | string | null
   is_deleted_item?: Prisma.BoolWithAggregatesFilter<"LeadHardwareMapping"> | boolean
   deleted_item_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadHardwareMapping"> | Date | string | null
+  deleted_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadHardwareMapping"> | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"LeadHardwareMapping"> | Date | string
   created_by?: Prisma.IntWithAggregatesFilter<"LeadHardwareMapping"> | number
 }
@@ -448,8 +472,10 @@ export type LeadHardwareMappingCreateInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadHardwareMappingsCreatedInput
@@ -473,8 +499,10 @@ export type LeadHardwareMappingUncheckedCreateInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -485,8 +513,10 @@ export type LeadHardwareMappingUpdateInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadHardwareMappingsCreatedNestedInput
@@ -510,8 +540,10 @@ export type LeadHardwareMappingUncheckedUpdateInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -529,8 +561,10 @@ export type LeadHardwareMappingCreateManyInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -541,8 +575,10 @@ export type LeadHardwareMappingUpdateManyMutationInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -559,8 +595,10 @@ export type LeadHardwareMappingUncheckedUpdateManyInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -588,8 +626,10 @@ export type LeadHardwareMappingCountOrderByAggregateInput = {
   approved_at?: Prisma.SortOrder
   is_amended?: Prisma.SortOrder
   amended_at?: Prisma.SortOrder
+  amended_remark?: Prisma.SortOrder
   is_deleted_item?: Prisma.SortOrder
   deleted_item_at?: Prisma.SortOrder
+  deleted_remark?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -618,8 +658,10 @@ export type LeadHardwareMappingMaxOrderByAggregateInput = {
   approved_at?: Prisma.SortOrder
   is_amended?: Prisma.SortOrder
   amended_at?: Prisma.SortOrder
+  amended_remark?: Prisma.SortOrder
   is_deleted_item?: Prisma.SortOrder
   deleted_item_at?: Prisma.SortOrder
+  deleted_remark?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -637,8 +679,10 @@ export type LeadHardwareMappingMinOrderByAggregateInput = {
   approved_at?: Prisma.SortOrder
   is_amended?: Prisma.SortOrder
   amended_at?: Prisma.SortOrder
+  amended_remark?: Prisma.SortOrder
   is_deleted_item?: Prisma.SortOrder
   deleted_item_at?: Prisma.SortOrder
+  deleted_remark?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -954,8 +998,10 @@ export type LeadHardwareMappingCreateWithoutVendorInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadHardwareMappingsCreatedInput
@@ -977,8 +1023,10 @@ export type LeadHardwareMappingUncheckedCreateWithoutVendorInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1025,8 +1073,10 @@ export type LeadHardwareMappingScalarWhereInput = {
   approved_at?: Prisma.DateTimeNullableFilter<"LeadHardwareMapping"> | Date | string | null
   is_amended?: Prisma.BoolFilter<"LeadHardwareMapping"> | boolean
   amended_at?: Prisma.DateTimeNullableFilter<"LeadHardwareMapping"> | Date | string | null
+  amended_remark?: Prisma.StringNullableFilter<"LeadHardwareMapping"> | string | null
   is_deleted_item?: Prisma.BoolFilter<"LeadHardwareMapping"> | boolean
   deleted_item_at?: Prisma.DateTimeNullableFilter<"LeadHardwareMapping"> | Date | string | null
+  deleted_remark?: Prisma.StringNullableFilter<"LeadHardwareMapping"> | string | null
   created_at?: Prisma.DateTimeFilter<"LeadHardwareMapping"> | Date | string
   created_by?: Prisma.IntFilter<"LeadHardwareMapping"> | number
 }
@@ -1037,8 +1087,10 @@ export type LeadHardwareMappingCreateWithoutCreatedByInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutHardwareMappingsInput
@@ -1061,8 +1113,10 @@ export type LeadHardwareMappingUncheckedCreateWithoutCreatedByInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
 }
 
@@ -1098,8 +1152,10 @@ export type LeadHardwareMappingCreateWithoutLeadInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadHardwareMappingsCreatedInput
@@ -1121,8 +1177,10 @@ export type LeadHardwareMappingUncheckedCreateWithoutLeadInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1159,8 +1217,10 @@ export type LeadHardwareMappingCreateWithoutSpecificationInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadHardwareMappingsCreatedInput
@@ -1182,8 +1242,10 @@ export type LeadHardwareMappingUncheckedCreateWithoutSpecificationInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1220,8 +1282,10 @@ export type LeadHardwareMappingCreateWithoutCarcassLegsInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadHardwareMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutHardwareMappingsInput
@@ -1243,8 +1307,10 @@ export type LeadHardwareMappingUncheckedCreateWithoutCarcassLegsInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1281,8 +1347,10 @@ export type LeadHardwareMappingCreateWithoutSkirtingCarcassLegsInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadHardwareMappingsCreatedInput
@@ -1304,8 +1372,10 @@ export type LeadHardwareMappingUncheckedCreateWithoutSkirtingCarcassLegsInput = 
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1342,8 +1412,10 @@ export type LeadHardwareMappingCreateWithoutSkirtingCarcassLegsColorInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadHardwareMappingsCreatedInput
@@ -1365,8 +1437,10 @@ export type LeadHardwareMappingUncheckedCreateWithoutSkirtingCarcassLegsColorInp
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1409,8 +1483,10 @@ export type LeadHardwareMappingCreateManyVendorInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1421,8 +1497,10 @@ export type LeadHardwareMappingUpdateWithoutVendorInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadHardwareMappingsCreatedNestedInput
@@ -1444,8 +1522,10 @@ export type LeadHardwareMappingUncheckedUpdateWithoutVendorInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1462,8 +1542,10 @@ export type LeadHardwareMappingUncheckedUpdateManyWithoutVendorInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1481,8 +1563,10 @@ export type LeadHardwareMappingCreateManyCreatedByInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
 }
 
@@ -1492,8 +1576,10 @@ export type LeadHardwareMappingUpdateWithoutCreatedByInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutHardwareMappingsNestedInput
@@ -1516,8 +1602,10 @@ export type LeadHardwareMappingUncheckedUpdateWithoutCreatedByInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1534,8 +1622,10 @@ export type LeadHardwareMappingUncheckedUpdateManyWithoutCreatedByInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1551,8 +1641,10 @@ export type LeadHardwareMappingCreateManyLeadInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1563,8 +1655,10 @@ export type LeadHardwareMappingUpdateWithoutLeadInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadHardwareMappingsCreatedNestedInput
@@ -1586,8 +1680,10 @@ export type LeadHardwareMappingUncheckedUpdateWithoutLeadInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1604,8 +1700,10 @@ export type LeadHardwareMappingUncheckedUpdateManyWithoutLeadInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1622,8 +1720,10 @@ export type LeadHardwareMappingCreateManySpecificationInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1634,8 +1734,10 @@ export type LeadHardwareMappingUpdateWithoutSpecificationInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadHardwareMappingsCreatedNestedInput
@@ -1657,8 +1759,10 @@ export type LeadHardwareMappingUncheckedUpdateWithoutSpecificationInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1675,8 +1779,10 @@ export type LeadHardwareMappingUncheckedUpdateManyWithoutSpecificationInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1693,8 +1799,10 @@ export type LeadHardwareMappingCreateManyCarcassLegsInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1705,8 +1813,10 @@ export type LeadHardwareMappingUpdateWithoutCarcassLegsInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadHardwareMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutHardwareMappingsNestedInput
@@ -1728,8 +1838,10 @@ export type LeadHardwareMappingUncheckedUpdateWithoutCarcassLegsInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1746,8 +1858,10 @@ export type LeadHardwareMappingUncheckedUpdateManyWithoutCarcassLegsInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1764,8 +1878,10 @@ export type LeadHardwareMappingCreateManySkirtingCarcassLegsInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1776,8 +1892,10 @@ export type LeadHardwareMappingUpdateWithoutSkirtingCarcassLegsInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadHardwareMappingsCreatedNestedInput
@@ -1799,8 +1917,10 @@ export type LeadHardwareMappingUncheckedUpdateWithoutSkirtingCarcassLegsInput = 
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1817,8 +1937,10 @@ export type LeadHardwareMappingUncheckedUpdateManyWithoutSkirtingCarcassLegsInpu
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1835,8 +1957,10 @@ export type LeadHardwareMappingCreateManySkirtingCarcassLegsColorInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1847,8 +1971,10 @@ export type LeadHardwareMappingUpdateWithoutSkirtingCarcassLegsColorInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadHardwareMappingsCreatedNestedInput
@@ -1870,8 +1996,10 @@ export type LeadHardwareMappingUncheckedUpdateWithoutSkirtingCarcassLegsColorInp
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1888,8 +2016,10 @@ export type LeadHardwareMappingUncheckedUpdateManyWithoutSkirtingCarcassLegsColo
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1909,8 +2039,10 @@ export type LeadHardwareMappingSelect<ExtArgs extends runtime.Types.Extensions.I
   approved_at?: boolean
   is_amended?: boolean
   amended_at?: boolean
+  amended_remark?: boolean
   is_deleted_item?: boolean
   deleted_item_at?: boolean
+  deleted_remark?: boolean
   created_at?: boolean
   created_by?: boolean
   carcassLegs?: boolean | Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>
@@ -1935,8 +2067,10 @@ export type LeadHardwareMappingSelectCreateManyAndReturn<ExtArgs extends runtime
   approved_at?: boolean
   is_amended?: boolean
   amended_at?: boolean
+  amended_remark?: boolean
   is_deleted_item?: boolean
   deleted_item_at?: boolean
+  deleted_remark?: boolean
   created_at?: boolean
   created_by?: boolean
   carcassLegs?: boolean | Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>
@@ -1961,8 +2095,10 @@ export type LeadHardwareMappingSelectUpdateManyAndReturn<ExtArgs extends runtime
   approved_at?: boolean
   is_amended?: boolean
   amended_at?: boolean
+  amended_remark?: boolean
   is_deleted_item?: boolean
   deleted_item_at?: boolean
+  deleted_remark?: boolean
   created_at?: boolean
   created_by?: boolean
   carcassLegs?: boolean | Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>
@@ -1987,13 +2123,15 @@ export type LeadHardwareMappingSelectScalar = {
   approved_at?: boolean
   is_amended?: boolean
   amended_at?: boolean
+  amended_remark?: boolean
   is_deleted_item?: boolean
   deleted_item_at?: boolean
+  deleted_remark?: boolean
   created_at?: boolean
   created_by?: boolean
 }
 
-export type LeadHardwareMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "specs_id" | "carcass_legs_id" | "skirting_carcass_legs_id" | "skirting_carcass_legs_color_id" | "note" | "is_approved" | "approved_at" | "is_amended" | "amended_at" | "is_deleted_item" | "deleted_item_at" | "created_at" | "created_by", ExtArgs["result"]["leadHardwareMapping"]>
+export type LeadHardwareMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "specs_id" | "carcass_legs_id" | "skirting_carcass_legs_id" | "skirting_carcass_legs_color_id" | "note" | "is_approved" | "approved_at" | "is_amended" | "amended_at" | "amended_remark" | "is_deleted_item" | "deleted_item_at" | "deleted_remark" | "created_at" | "created_by", ExtArgs["result"]["leadHardwareMapping"]>
 export type LeadHardwareMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   carcassLegs?: boolean | Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -2046,8 +2184,10 @@ export type $LeadHardwareMappingPayload<ExtArgs extends runtime.Types.Extensions
     approved_at: Date | null
     is_amended: boolean
     amended_at: Date | null
+    amended_remark: string | null
     is_deleted_item: boolean
     deleted_item_at: Date | null
+    deleted_remark: string | null
     created_at: Date
     created_by: number
   }, ExtArgs["result"]["leadHardwareMapping"]>
@@ -2492,8 +2632,10 @@ export interface LeadHardwareMappingFieldRefs {
   readonly approved_at: Prisma.FieldRef<"LeadHardwareMapping", 'DateTime'>
   readonly is_amended: Prisma.FieldRef<"LeadHardwareMapping", 'Boolean'>
   readonly amended_at: Prisma.FieldRef<"LeadHardwareMapping", 'DateTime'>
+  readonly amended_remark: Prisma.FieldRef<"LeadHardwareMapping", 'String'>
   readonly is_deleted_item: Prisma.FieldRef<"LeadHardwareMapping", 'Boolean'>
   readonly deleted_item_at: Prisma.FieldRef<"LeadHardwareMapping", 'DateTime'>
+  readonly deleted_remark: Prisma.FieldRef<"LeadHardwareMapping", 'String'>
   readonly created_at: Prisma.FieldRef<"LeadHardwareMapping", 'DateTime'>
   readonly created_by: Prisma.FieldRef<"LeadHardwareMapping", 'Int'>
 }

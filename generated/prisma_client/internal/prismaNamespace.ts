@@ -14922,8 +14922,10 @@ export const LeadCarcassMaterialMappingScalarFieldEnum = {
   approved_at: 'approved_at',
   is_amended: 'is_amended',
   amended_at: 'amended_at',
+  amended_remark: 'amended_remark',
   is_deleted_item: 'is_deleted_item',
   deleted_item_at: 'deleted_item_at',
+  deleted_remark: 'deleted_remark',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -14943,8 +14945,10 @@ export const LeadShutterMaterialMappingScalarFieldEnum = {
   approved_at: 'approved_at',
   is_amended: 'is_amended',
   amended_at: 'amended_at',
+  amended_remark: 'amended_remark',
   is_deleted_item: 'is_deleted_item',
   deleted_item_at: 'deleted_item_at',
+  deleted_remark: 'deleted_remark',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -15171,8 +15175,10 @@ export const LeadHardwareMappingScalarFieldEnum = {
   approved_at: 'approved_at',
   is_amended: 'is_amended',
   amended_at: 'amended_at',
+  amended_remark: 'amended_remark',
   is_deleted_item: 'is_deleted_item',
   deleted_item_at: 'deleted_item_at',
+  deleted_remark: 'deleted_remark',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -15214,8 +15220,10 @@ export const LeadLightCarcasUnitMappingScalarFieldEnum = {
   approved_at: 'approved_at',
   is_amended: 'is_amended',
   amended_at: 'amended_at',
+  amended_remark: 'amended_remark',
   is_deleted_item: 'is_deleted_item',
   deleted_item_at: 'deleted_item_at',
+  deleted_remark: 'deleted_remark',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -15247,8 +15255,10 @@ export const LeadOtherAppliancesMappingScalarFieldEnum = {
   approved_at: 'approved_at',
   is_amended: 'is_amended',
   amended_at: 'amended_at',
+  amended_remark: 'amended_remark',
   is_deleted_item: 'is_deleted_item',
   deleted_item_at: 'deleted_item_at',
+  deleted_remark: 'deleted_remark',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
