@@ -55,8 +55,10 @@ export type LeadLightCarcasUnitMappingMinAggregateOutputType = {
   approved_at: Date | null
   is_amended: boolean | null
   amended_at: Date | null
+  amended_remark: string | null
   is_deleted_item: boolean | null
   deleted_item_at: Date | null
+  deleted_remark: string | null
   created_at: Date | null
   created_by: number | null
 }
@@ -72,8 +74,10 @@ export type LeadLightCarcasUnitMappingMaxAggregateOutputType = {
   approved_at: Date | null
   is_amended: boolean | null
   amended_at: Date | null
+  amended_remark: string | null
   is_deleted_item: boolean | null
   deleted_item_at: Date | null
+  deleted_remark: string | null
   created_at: Date | null
   created_by: number | null
 }
@@ -89,8 +93,10 @@ export type LeadLightCarcasUnitMappingCountAggregateOutputType = {
   approved_at: number
   is_amended: number
   amended_at: number
+  amended_remark: number
   is_deleted_item: number
   deleted_item_at: number
+  deleted_remark: number
   created_at: number
   created_by: number
   _all: number
@@ -126,8 +132,10 @@ export type LeadLightCarcasUnitMappingMinAggregateInputType = {
   approved_at?: true
   is_amended?: true
   amended_at?: true
+  amended_remark?: true
   is_deleted_item?: true
   deleted_item_at?: true
+  deleted_remark?: true
   created_at?: true
   created_by?: true
 }
@@ -143,8 +151,10 @@ export type LeadLightCarcasUnitMappingMaxAggregateInputType = {
   approved_at?: true
   is_amended?: true
   amended_at?: true
+  amended_remark?: true
   is_deleted_item?: true
   deleted_item_at?: true
+  deleted_remark?: true
   created_at?: true
   created_by?: true
 }
@@ -160,8 +170,10 @@ export type LeadLightCarcasUnitMappingCountAggregateInputType = {
   approved_at?: true
   is_amended?: true
   amended_at?: true
+  amended_remark?: true
   is_deleted_item?: true
   deleted_item_at?: true
+  deleted_remark?: true
   created_at?: true
   created_by?: true
   _all?: true
@@ -264,8 +276,10 @@ export type LeadLightCarcasUnitMappingGroupByOutputType = {
   approved_at: Date | null
   is_amended: boolean
   amended_at: Date | null
+  amended_remark: string | null
   is_deleted_item: boolean
   deleted_item_at: Date | null
+  deleted_remark: string | null
   created_at: Date
   created_by: number
   _count: LeadLightCarcasUnitMappingCountAggregateOutputType | null
@@ -304,8 +318,10 @@ export type LeadLightCarcasUnitMappingWhereInput = {
   approved_at?: Prisma.DateTimeNullableFilter<"LeadLightCarcasUnitMapping"> | Date | string | null
   is_amended?: Prisma.BoolFilter<"LeadLightCarcasUnitMapping"> | boolean
   amended_at?: Prisma.DateTimeNullableFilter<"LeadLightCarcasUnitMapping"> | Date | string | null
+  amended_remark?: Prisma.StringNullableFilter<"LeadLightCarcasUnitMapping"> | string | null
   is_deleted_item?: Prisma.BoolFilter<"LeadLightCarcasUnitMapping"> | boolean
   deleted_item_at?: Prisma.DateTimeNullableFilter<"LeadLightCarcasUnitMapping"> | Date | string | null
+  deleted_remark?: Prisma.StringNullableFilter<"LeadLightCarcasUnitMapping"> | string | null
   created_at?: Prisma.DateTimeFilter<"LeadLightCarcasUnitMapping"> | Date | string
   created_by?: Prisma.IntFilter<"LeadLightCarcasUnitMapping"> | number
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
@@ -326,8 +342,10 @@ export type LeadLightCarcasUnitMappingOrderByWithRelationInput = {
   approved_at?: Prisma.SortOrderInput | Prisma.SortOrder
   is_amended?: Prisma.SortOrder
   amended_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  amended_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   is_deleted_item?: Prisma.SortOrder
   deleted_item_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  deleted_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
@@ -351,8 +369,10 @@ export type LeadLightCarcasUnitMappingWhereUniqueInput = Prisma.AtLeast<{
   approved_at?: Prisma.DateTimeNullableFilter<"LeadLightCarcasUnitMapping"> | Date | string | null
   is_amended?: Prisma.BoolFilter<"LeadLightCarcasUnitMapping"> | boolean
   amended_at?: Prisma.DateTimeNullableFilter<"LeadLightCarcasUnitMapping"> | Date | string | null
+  amended_remark?: Prisma.StringNullableFilter<"LeadLightCarcasUnitMapping"> | string | null
   is_deleted_item?: Prisma.BoolFilter<"LeadLightCarcasUnitMapping"> | boolean
   deleted_item_at?: Prisma.DateTimeNullableFilter<"LeadLightCarcasUnitMapping"> | Date | string | null
+  deleted_remark?: Prisma.StringNullableFilter<"LeadLightCarcasUnitMapping"> | string | null
   created_at?: Prisma.DateTimeFilter<"LeadLightCarcasUnitMapping"> | Date | string
   created_by?: Prisma.IntFilter<"LeadLightCarcasUnitMapping"> | number
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
@@ -373,8 +393,10 @@ export type LeadLightCarcasUnitMappingOrderByWithAggregationInput = {
   approved_at?: Prisma.SortOrderInput | Prisma.SortOrder
   is_amended?: Prisma.SortOrder
   amended_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  amended_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   is_deleted_item?: Prisma.SortOrder
   deleted_item_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  deleted_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   _count?: Prisma.LeadLightCarcasUnitMappingCountOrderByAggregateInput
@@ -398,8 +420,10 @@ export type LeadLightCarcasUnitMappingScalarWhereWithAggregatesInput = {
   approved_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadLightCarcasUnitMapping"> | Date | string | null
   is_amended?: Prisma.BoolWithAggregatesFilter<"LeadLightCarcasUnitMapping"> | boolean
   amended_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadLightCarcasUnitMapping"> | Date | string | null
+  amended_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadLightCarcasUnitMapping"> | string | null
   is_deleted_item?: Prisma.BoolWithAggregatesFilter<"LeadLightCarcasUnitMapping"> | boolean
   deleted_item_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadLightCarcasUnitMapping"> | Date | string | null
+  deleted_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadLightCarcasUnitMapping"> | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"LeadLightCarcasUnitMapping"> | Date | string
   created_by?: Prisma.IntWithAggregatesFilter<"LeadLightCarcasUnitMapping"> | number
 }
@@ -410,8 +434,10 @@ export type LeadLightCarcasUnitMappingCreateInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadLightCarcasUnitMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLightCarcasUnitMappingsInput
@@ -431,8 +457,10 @@ export type LeadLightCarcasUnitMappingUncheckedCreateInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -443,8 +471,10 @@ export type LeadLightCarcasUnitMappingUpdateInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadLightCarcasUnitMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLightCarcasUnitMappingsNestedInput
@@ -464,8 +494,10 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -481,8 +513,10 @@ export type LeadLightCarcasUnitMappingCreateManyInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -493,8 +527,10 @@ export type LeadLightCarcasUnitMappingUpdateManyMutationInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -509,8 +545,10 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateManyInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -536,8 +574,10 @@ export type LeadLightCarcasUnitMappingCountOrderByAggregateInput = {
   approved_at?: Prisma.SortOrder
   is_amended?: Prisma.SortOrder
   amended_at?: Prisma.SortOrder
+  amended_remark?: Prisma.SortOrder
   is_deleted_item?: Prisma.SortOrder
   deleted_item_at?: Prisma.SortOrder
+  deleted_remark?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -562,8 +602,10 @@ export type LeadLightCarcasUnitMappingMaxOrderByAggregateInput = {
   approved_at?: Prisma.SortOrder
   is_amended?: Prisma.SortOrder
   amended_at?: Prisma.SortOrder
+  amended_remark?: Prisma.SortOrder
   is_deleted_item?: Prisma.SortOrder
   deleted_item_at?: Prisma.SortOrder
+  deleted_remark?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -579,8 +621,10 @@ export type LeadLightCarcasUnitMappingMinOrderByAggregateInput = {
   approved_at?: Prisma.SortOrder
   is_amended?: Prisma.SortOrder
   amended_at?: Prisma.SortOrder
+  amended_remark?: Prisma.SortOrder
   is_deleted_item?: Prisma.SortOrder
   deleted_item_at?: Prisma.SortOrder
+  deleted_remark?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -810,8 +854,10 @@ export type LeadLightCarcasUnitMappingCreateWithoutVendorInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadLightCarcasUnitMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLightCarcasUnitMappingsInput
@@ -829,8 +875,10 @@ export type LeadLightCarcasUnitMappingUncheckedCreateWithoutVendorInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -875,8 +923,10 @@ export type LeadLightCarcasUnitMappingScalarWhereInput = {
   approved_at?: Prisma.DateTimeNullableFilter<"LeadLightCarcasUnitMapping"> | Date | string | null
   is_amended?: Prisma.BoolFilter<"LeadLightCarcasUnitMapping"> | boolean
   amended_at?: Prisma.DateTimeNullableFilter<"LeadLightCarcasUnitMapping"> | Date | string | null
+  amended_remark?: Prisma.StringNullableFilter<"LeadLightCarcasUnitMapping"> | string | null
   is_deleted_item?: Prisma.BoolFilter<"LeadLightCarcasUnitMapping"> | boolean
   deleted_item_at?: Prisma.DateTimeNullableFilter<"LeadLightCarcasUnitMapping"> | Date | string | null
+  deleted_remark?: Prisma.StringNullableFilter<"LeadLightCarcasUnitMapping"> | string | null
   created_at?: Prisma.DateTimeFilter<"LeadLightCarcasUnitMapping"> | Date | string
   created_by?: Prisma.IntFilter<"LeadLightCarcasUnitMapping"> | number
 }
@@ -887,8 +937,10 @@ export type LeadLightCarcasUnitMappingCreateWithoutCreatedByInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   lead: Prisma.LeadMasterCreateNestedOneWithoutLightCarcasUnitMappingsInput
   lightCarcasUnit: Prisma.LightCarcasUnitMasterCreateNestedOneWithoutLeadMappingsInput
@@ -907,8 +959,10 @@ export type LeadLightCarcasUnitMappingUncheckedCreateWithoutCreatedByInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
 }
 
@@ -944,8 +998,10 @@ export type LeadLightCarcasUnitMappingCreateWithoutLeadInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadLightCarcasUnitMappingsCreatedInput
   lightCarcasUnit: Prisma.LightCarcasUnitMasterCreateNestedOneWithoutLeadMappingsInput
@@ -963,8 +1019,10 @@ export type LeadLightCarcasUnitMappingUncheckedCreateWithoutLeadInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1001,8 +1059,10 @@ export type LeadLightCarcasUnitMappingCreateWithoutSpecificationInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadLightCarcasUnitMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLightCarcasUnitMappingsInput
@@ -1020,8 +1080,10 @@ export type LeadLightCarcasUnitMappingUncheckedCreateWithoutSpecificationInput =
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1058,8 +1120,10 @@ export type LeadLightCarcasUnitMappingCreateWithoutLightCarcasUnitInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadLightCarcasUnitMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLightCarcasUnitMappingsInput
@@ -1077,8 +1141,10 @@ export type LeadLightCarcasUnitMappingUncheckedCreateWithoutLightCarcasUnitInput
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1119,8 +1185,10 @@ export type LeadLightCarcasUnitMappingCreateManyVendorInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1131,8 +1199,10 @@ export type LeadLightCarcasUnitMappingUpdateWithoutVendorInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadLightCarcasUnitMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLightCarcasUnitMappingsNestedInput
@@ -1150,8 +1220,10 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateWithoutVendorInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1166,8 +1238,10 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutVendorInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1183,8 +1257,10 @@ export type LeadLightCarcasUnitMappingCreateManyCreatedByInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
 }
 
@@ -1194,8 +1270,10 @@ export type LeadLightCarcasUnitMappingUpdateWithoutCreatedByInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLightCarcasUnitMappingsNestedInput
   lightCarcasUnit?: Prisma.LightCarcasUnitMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
@@ -1214,8 +1292,10 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateWithoutCreatedByInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1230,8 +1310,10 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutCreatedByInput =
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1245,8 +1327,10 @@ export type LeadLightCarcasUnitMappingCreateManyLeadInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1257,8 +1341,10 @@ export type LeadLightCarcasUnitMappingUpdateWithoutLeadInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadLightCarcasUnitMappingsCreatedNestedInput
   lightCarcasUnit?: Prisma.LightCarcasUnitMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
@@ -1276,8 +1362,10 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateWithoutLeadInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1292,8 +1380,10 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1308,8 +1398,10 @@ export type LeadLightCarcasUnitMappingCreateManySpecificationInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1320,8 +1412,10 @@ export type LeadLightCarcasUnitMappingUpdateWithoutSpecificationInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadLightCarcasUnitMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLightCarcasUnitMappingsNestedInput
@@ -1339,8 +1433,10 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateWithoutSpecificationInput =
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1355,8 +1451,10 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutSpecificationInp
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1371,8 +1469,10 @@ export type LeadLightCarcasUnitMappingCreateManyLightCarcasUnitInput = {
   approved_at?: Date | string | null
   is_amended?: boolean
   amended_at?: Date | string | null
+  amended_remark?: string | null
   is_deleted_item?: boolean
   deleted_item_at?: Date | string | null
+  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1383,8 +1483,10 @@ export type LeadLightCarcasUnitMappingUpdateWithoutLightCarcasUnitInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadLightCarcasUnitMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLightCarcasUnitMappingsNestedInput
@@ -1402,8 +1504,10 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateWithoutLightCarcasUnitInput
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1418,8 +1522,10 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLightCarcasUnitI
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1437,8 +1543,10 @@ export type LeadLightCarcasUnitMappingSelect<ExtArgs extends runtime.Types.Exten
   approved_at?: boolean
   is_amended?: boolean
   amended_at?: boolean
+  amended_remark?: boolean
   is_deleted_item?: boolean
   deleted_item_at?: boolean
+  deleted_remark?: boolean
   created_at?: boolean
   created_by?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -1459,8 +1567,10 @@ export type LeadLightCarcasUnitMappingSelectCreateManyAndReturn<ExtArgs extends 
   approved_at?: boolean
   is_amended?: boolean
   amended_at?: boolean
+  amended_remark?: boolean
   is_deleted_item?: boolean
   deleted_item_at?: boolean
+  deleted_remark?: boolean
   created_at?: boolean
   created_by?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -1481,8 +1591,10 @@ export type LeadLightCarcasUnitMappingSelectUpdateManyAndReturn<ExtArgs extends 
   approved_at?: boolean
   is_amended?: boolean
   amended_at?: boolean
+  amended_remark?: boolean
   is_deleted_item?: boolean
   deleted_item_at?: boolean
+  deleted_remark?: boolean
   created_at?: boolean
   created_by?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -1503,13 +1615,15 @@ export type LeadLightCarcasUnitMappingSelectScalar = {
   approved_at?: boolean
   is_amended?: boolean
   amended_at?: boolean
+  amended_remark?: boolean
   is_deleted_item?: boolean
   deleted_item_at?: boolean
+  deleted_remark?: boolean
   created_at?: boolean
   created_by?: boolean
 }
 
-export type LeadLightCarcasUnitMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "specs_id" | "light_carcas_unit_master_id" | "custom_remark" | "is_approved" | "approved_at" | "is_amended" | "amended_at" | "is_deleted_item" | "deleted_item_at" | "created_at" | "created_by", ExtArgs["result"]["leadLightCarcasUnitMapping"]>
+export type LeadLightCarcasUnitMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "specs_id" | "light_carcas_unit_master_id" | "custom_remark" | "is_approved" | "approved_at" | "is_amended" | "amended_at" | "amended_remark" | "is_deleted_item" | "deleted_item_at" | "deleted_remark" | "created_at" | "created_by", ExtArgs["result"]["leadLightCarcasUnitMapping"]>
 export type LeadLightCarcasUnitMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -1552,8 +1666,10 @@ export type $LeadLightCarcasUnitMappingPayload<ExtArgs extends runtime.Types.Ext
     approved_at: Date | null
     is_amended: boolean
     amended_at: Date | null
+    amended_remark: string | null
     is_deleted_item: boolean
     deleted_item_at: Date | null
+    deleted_remark: string | null
     created_at: Date
     created_by: number
   }, ExtArgs["result"]["leadLightCarcasUnitMapping"]>
@@ -1994,8 +2110,10 @@ export interface LeadLightCarcasUnitMappingFieldRefs {
   readonly approved_at: Prisma.FieldRef<"LeadLightCarcasUnitMapping", 'DateTime'>
   readonly is_amended: Prisma.FieldRef<"LeadLightCarcasUnitMapping", 'Boolean'>
   readonly amended_at: Prisma.FieldRef<"LeadLightCarcasUnitMapping", 'DateTime'>
+  readonly amended_remark: Prisma.FieldRef<"LeadLightCarcasUnitMapping", 'String'>
   readonly is_deleted_item: Prisma.FieldRef<"LeadLightCarcasUnitMapping", 'Boolean'>
   readonly deleted_item_at: Prisma.FieldRef<"LeadLightCarcasUnitMapping", 'DateTime'>
+  readonly deleted_remark: Prisma.FieldRef<"LeadLightCarcasUnitMapping", 'String'>
   readonly created_at: Prisma.FieldRef<"LeadLightCarcasUnitMapping", 'DateTime'>
   readonly created_by: Prisma.FieldRef<"LeadLightCarcasUnitMapping", 'Int'>
 }

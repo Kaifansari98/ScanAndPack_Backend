@@ -832,8 +832,10 @@ model LeadCarcassMaterialMapping {
   approved_at                DateTime?
   is_amended                 Boolean                     @default(false)
   amended_at                 DateTime?
+  amended_remark             String?
   is_deleted_item            Boolean                     @default(false)
   deleted_item_at            DateTime?
+  deleted_remark             String?
   created_at                 DateTime                    @default(now())
   created_by                 Int
   carcasMaterial             CarcasMaterialMaster        @relation(fields: [carcas_material_id], references: [id], onDelete: Cascade)
@@ -865,8 +867,10 @@ model LeadShutterMaterialMapping {
   approved_at                DateTime?
   is_amended                 Boolean                     @default(false)
   amended_at                 DateTime?
+  amended_remark             String?
   is_deleted_item            Boolean                     @default(false)
   deleted_item_at            DateTime?
+  deleted_remark             String?
   created_at                 DateTime                    @default(now())
   created_by                 Int
   createdBy                  UserMaster                  @relation("LeadShutterMaterialMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
@@ -1156,8 +1160,10 @@ model LeadHardwareMapping {
   approved_at                    DateTime?
   is_amended                     Boolean                         @default(false)
   amended_at                     DateTime?
+  amended_remark                 String?
   is_deleted_item                Boolean                         @default(false)
   deleted_item_at                DateTime?
+  deleted_remark                 String?
   created_at                     DateTime                        @default(now())
   created_by                     Int
   carcassLegs                    CarcassLegsMaster               @relation(fields: [carcass_legs_id], references: [id], onDelete: Cascade)
@@ -1215,8 +1221,10 @@ model LeadLightCarcasUnitMapping {
   approved_at                 DateTime?
   is_amended                  Boolean                  @default(false)
   amended_at                  DateTime?
+  amended_remark              String?
   is_deleted_item             Boolean                  @default(false)
   deleted_item_at             DateTime?
+  deleted_remark              String?
   created_at                  DateTime                 @default(now())
   created_by                  Int
   createdBy                   UserMaster               @relation("LeadLightCarcasUnitMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
@@ -1257,8 +1265,10 @@ model LeadOtherAppliancesMapping {
   approved_at                DateTime?
   is_amended                 Boolean                  @default(false)
   amended_at                 DateTime?
+  amended_remark             String?
   is_deleted_item            Boolean                  @default(false)
   deleted_item_at            DateTime?
+  deleted_remark             String?
   created_at                 DateTime                 @default(now())
   created_by                 Int
   createdBy                  UserMaster               @relation("LeadOtherAppliancesMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)

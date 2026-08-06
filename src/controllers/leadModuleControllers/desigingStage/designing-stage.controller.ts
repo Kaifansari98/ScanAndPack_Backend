@@ -61,6 +61,14 @@ export class DesigingStageController {
     const isApproved = body.is_approved === true;
     const isAmended = body.is_amended === true;
     const isDeleted = body.is_deleted_item === true;
+    const amendedRemark =
+      typeof body.amended_remark === "string"
+        ? body.amended_remark.trim()
+        : "";
+    const deletedRemark =
+      typeof body.deleted_remark === "string"
+        ? body.deleted_remark.trim()
+        : "";
     const now = new Date();
 
     return {
@@ -68,8 +76,10 @@ export class DesigingStageController {
       approved_at: isApproved ? now : null,
       is_amended: isAmended,
       amended_at: isAmended ? now : null,
+      amended_remark: isAmended ? amendedRemark || null : null,
       is_deleted_item: isDeleted,
       deleted_item_at: isDeleted ? now : null,
+      deleted_remark: isDeleted ? deletedRemark || null : null,
     };
   }
 
