@@ -96,6 +96,7 @@ export const ModelName = {
   LeadLightCarcasUnitMapping: 'LeadLightCarcasUnitMapping',
   OtherAppliancesMaster: 'OtherAppliancesMaster',
   LeadOtherAppliancesMapping: 'LeadOtherAppliancesMapping',
+  LeadOtherAppliancesRemarkMapping: 'LeadOtherAppliancesRemarkMapping',
   HandleTypeMaster: 'HandleTypeMaster',
   TimelineRule: 'TimelineRule',
   specificationDocumentMapping: 'specificationDocumentMapping',
@@ -689,9 +690,16 @@ export const LeadCarcassMaterialMappingScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
+  specs_id: 'specs_id',
   carcass_type_id: 'carcass_type_id',
   carcas_material_id: 'carcas_material_id',
   carcass_material_finish_id: 'carcass_material_finish_id',
+  is_approved: 'is_approved',
+  approved_at: 'approved_at',
+  is_amended: 'is_amended',
+  amended_at: 'amended_at',
+  is_deleted_item: 'is_deleted_item',
+  deleted_item_at: 'deleted_item_at',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -703,9 +711,16 @@ export const LeadShutterMaterialMappingScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
+  specs_id: 'specs_id',
   shutter_type_id: 'shutter_type_id',
   shutter_material_id: 'shutter_material_id',
   shutter_material_finish_id: 'shutter_material_finish_id',
+  is_approved: 'is_approved',
+  approved_at: 'approved_at',
+  is_amended: 'is_amended',
+  amended_at: 'amended_at',
+  is_deleted_item: 'is_deleted_item',
+  deleted_item_at: 'deleted_item_at',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -923,10 +938,17 @@ export const LeadHardwareMappingScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
+  specs_id: 'specs_id',
   carcass_legs_id: 'carcass_legs_id',
   skirting_carcass_legs_id: 'skirting_carcass_legs_id',
   skirting_carcass_legs_color_id: 'skirting_carcass_legs_color_id',
   note: 'note',
+  is_approved: 'is_approved',
+  approved_at: 'approved_at',
+  is_amended: 'is_amended',
+  amended_at: 'amended_at',
+  is_deleted_item: 'is_deleted_item',
+  deleted_item_at: 'deleted_item_at',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -963,6 +985,13 @@ export const LeadLightCarcasUnitMappingScalarFieldEnum = {
   lead_id: 'lead_id',
   specs_id: 'specs_id',
   light_carcas_unit_master_id: 'light_carcas_unit_master_id',
+  custom_remark: 'custom_remark',
+  is_approved: 'is_approved',
+  approved_at: 'approved_at',
+  is_amended: 'is_amended',
+  amended_at: 'amended_at',
+  is_deleted_item: 'is_deleted_item',
+  deleted_item_at: 'deleted_item_at',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -987,12 +1016,34 @@ export const LeadOtherAppliancesMappingScalarFieldEnum = {
   lead_id: 'lead_id',
   vendor_id: 'vendor_id',
   specs_id: 'specs_id',
+  other_appliance_type: 'other_appliance_type',
   other_appliances_master_id: 'other_appliances_master_id',
+  custom_remark: 'custom_remark',
+  is_approved: 'is_approved',
+  approved_at: 'approved_at',
+  is_amended: 'is_amended',
+  amended_at: 'amended_at',
+  is_deleted_item: 'is_deleted_item',
+  deleted_item_at: 'deleted_item_at',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
 
 export type LeadOtherAppliancesMappingScalarFieldEnum = (typeof LeadOtherAppliancesMappingScalarFieldEnum)[keyof typeof LeadOtherAppliancesMappingScalarFieldEnum]
+
+
+export const LeadOtherAppliancesRemarkMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  specs_id: 'specs_id',
+  other_appliance_type: 'other_appliance_type',
+  remark: 'remark',
+  created_at: 'created_at',
+  created_by: 'created_by'
+} as const
+
+export type LeadOtherAppliancesRemarkMappingScalarFieldEnum = (typeof LeadOtherAppliancesRemarkMappingScalarFieldEnum)[keyof typeof LeadOtherAppliancesRemarkMappingScalarFieldEnum]
 
 
 export const HandleTypeMasterScalarFieldEnum = {
@@ -1236,6 +1287,7 @@ export const PaymentInfoScalarFieldEnum = {
   lead_id: 'lead_id',
   account_id: 'account_id',
   amount: 'amount',
+  is_booking_received_amt: 'is_booking_received_amt',
   payment_date: 'payment_date',
   payment_text: 'payment_text',
   payment_file_id: 'payment_file_id',
