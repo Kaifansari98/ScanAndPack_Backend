@@ -680,7 +680,9 @@ export const LeadSpecificationsMasterScalarFieldEnum = {
   created_at: 'created_at',
   created_by: 'created_by',
   lights_remark: 'lights_remark',
-  item_code_id: 'item_code_id'
+  item_code_id: 'item_code_id',
+  is_completed: 'is_completed',
+  completed_marked_at: 'completed_marked_at'
 } as const
 
 export type LeadSpecificationsMasterScalarFieldEnum = (typeof LeadSpecificationsMasterScalarFieldEnum)[keyof typeof LeadSpecificationsMasterScalarFieldEnum]
