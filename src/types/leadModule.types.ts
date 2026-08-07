@@ -116,6 +116,7 @@ export interface CarcassType {
   id: number;
   name: string;
   vendor_id: number;
+  can_do_fast_production?: boolean;
 }
 
 export interface ShutterSubType {
