@@ -802,6 +802,8 @@ model LeadSpecificationsMaster {
   created_by                    Int
   lights_remark                 String?
   item_code_id                  Int?
+  is_completed                  Boolean                        @default(false)
+  completed_marked_at           DateTime?
   carcassMaterialMappings       LeadCarcassMaterialMapping[]
   shutterMaterialMappings       LeadShutterMaterialMapping[]
   hardwareMappings              LeadHardwareMapping[]

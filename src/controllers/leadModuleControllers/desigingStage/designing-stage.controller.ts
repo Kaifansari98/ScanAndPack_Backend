@@ -4014,6 +4014,81 @@ export class DesigingStageController {
     }
   }
 
+  public static async markLeadSpecificationCompleted(
+    req: Request,
+    res: Response,
+  ) {
+    try {
+      const specsId = Number(req.params.specsId);
+
+      if (!specsId) {
+        return res.status(400).json({
+          success: false,
+          message: "specsId is required",
+        });
+      }
+
+      await DesigingStageController.ensureSpecificationEditable(req, specsId);
+
+      const unreviewedWhere = {
+        specs_id: specsId,
+        is_approved: false,
+        is_amended: false,
+        is_deleted_item: false,
+      };
+
+      const [
+        unreviewedCarcassCount,
+        unreviewedShutterCount,
+        unreviewedHardwareCount,
+        unreviewedLightCount,
+        unreviewedOtherApplianceCount,
+      ] = await Promise.all([
+        prisma.leadCarcassMaterialMapping.count({ where: unreviewedWhere }),
+        prisma.leadShutterMaterialMapping.count({ where: unreviewedWhere }),
+        prisma.leadHardwareMapping.count({ where: unreviewedWhere }),
+        prisma.leadLightCarcasUnitMapping.count({ where: unreviewedWhere }),
+        prisma.leadOtherAppliancesMapping.count({ where: unreviewedWhere }),
+      ]);
+
+      const totalUnreviewed =
+        unreviewedCarcassCount +
+        unreviewedShutterCount +
+        unreviewedHardwareCount +
+        unreviewedLightCount +
+        unreviewedOtherApplianceCount;
+
+      if (totalUnreviewed > 0) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "All specification items must be approved, amended, or deleted before marking as completed.",
+        });
+      }
+
+      const specification = await prisma.leadSpecificationsMaster.update({
+        where: { id: specsId },
+        data: {
+          is_completed: true,
+          completed_marked_at: new Date(),
+        },
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Specification marked as completed",
+        data: specification,
+      });
+    } catch (error: any) {
+      console.error("Error marking lead specification as completed:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
+
   public static async getLeadCarcassMaterialMappings(
     req: Request,
     res: Response,
