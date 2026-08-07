@@ -664,6 +664,8 @@ export const LeadMasterScalarFieldEnum = {
   isLargeScaleProjectLead: 'isLargeScaleProjectLead',
   is_fast_production: 'is_fast_production',
   tentative_order_login_date: 'tentative_order_login_date',
+  is_so_value_received: 'is_so_value_received',
+  so_value_received_at: 'so_value_received_at',
   client_id: 'client_id',
   order_number: 'order_number',
   refered_by: 'refered_by'

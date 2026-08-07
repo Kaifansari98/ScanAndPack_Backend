@@ -163,6 +163,8 @@ export type LeadMasterMinAggregateOutputType = {
   isLargeScaleProjectLead: boolean | null
   is_fast_production: boolean | null
   tentative_order_login_date: Date | null
+  is_so_value_received: boolean | null
+  so_value_received_at: Date | null
   client_id: number | null
   order_number: string | null
   refered_by: string | null
@@ -257,6 +259,8 @@ export type LeadMasterMaxAggregateOutputType = {
   isLargeScaleProjectLead: boolean | null
   is_fast_production: boolean | null
   tentative_order_login_date: Date | null
+  is_so_value_received: boolean | null
+  so_value_received_at: Date | null
   client_id: number | null
   order_number: string | null
   refered_by: string | null
@@ -351,6 +355,8 @@ export type LeadMasterCountAggregateOutputType = {
   isLargeScaleProjectLead: number
   is_fast_production: number
   tentative_order_login_date: number
+  is_so_value_received: number
+  so_value_received_at: number
   client_id: number
   order_number: number
   refered_by: number
@@ -495,6 +501,8 @@ export type LeadMasterMinAggregateInputType = {
   isLargeScaleProjectLead?: true
   is_fast_production?: true
   tentative_order_login_date?: true
+  is_so_value_received?: true
+  so_value_received_at?: true
   client_id?: true
   order_number?: true
   refered_by?: true
@@ -589,6 +597,8 @@ export type LeadMasterMaxAggregateInputType = {
   isLargeScaleProjectLead?: true
   is_fast_production?: true
   tentative_order_login_date?: true
+  is_so_value_received?: true
+  so_value_received_at?: true
   client_id?: true
   order_number?: true
   refered_by?: true
@@ -683,6 +693,8 @@ export type LeadMasterCountAggregateInputType = {
   isLargeScaleProjectLead?: true
   is_fast_production?: true
   tentative_order_login_date?: true
+  is_so_value_received?: true
+  so_value_received_at?: true
   client_id?: true
   order_number?: true
   refered_by?: true
@@ -864,6 +876,8 @@ export type LeadMasterGroupByOutputType = {
   isLargeScaleProjectLead: boolean
   is_fast_production: boolean
   tentative_order_login_date: Date | null
+  is_so_value_received: boolean
+  so_value_received_at: Date | null
   client_id: number | null
   order_number: string | null
   refered_by: string | null
@@ -981,6 +995,8 @@ export type LeadMasterWhereInput = {
   isLargeScaleProjectLead?: Prisma.BoolFilter<"LeadMaster"> | boolean
   is_fast_production?: Prisma.BoolFilter<"LeadMaster"> | boolean
   tentative_order_login_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
+  is_so_value_received?: Prisma.BoolFilter<"LeadMaster"> | boolean
+  so_value_received_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   client_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   order_number?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   refered_by?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
@@ -1136,6 +1152,8 @@ export type LeadMasterOrderByWithRelationInput = {
   isLargeScaleProjectLead?: Prisma.SortOrder
   is_fast_production?: Prisma.SortOrder
   tentative_order_login_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_so_value_received?: Prisma.SortOrder
+  so_value_received_at?: Prisma.SortOrderInput | Prisma.SortOrder
   client_id?: Prisma.SortOrderInput | Prisma.SortOrder
   order_number?: Prisma.SortOrderInput | Prisma.SortOrder
   refered_by?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1295,6 +1313,8 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   isLargeScaleProjectLead?: Prisma.BoolFilter<"LeadMaster"> | boolean
   is_fast_production?: Prisma.BoolFilter<"LeadMaster"> | boolean
   tentative_order_login_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
+  is_so_value_received?: Prisma.BoolFilter<"LeadMaster"> | boolean
+  so_value_received_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   client_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   order_number?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   refered_by?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
@@ -1450,6 +1470,8 @@ export type LeadMasterOrderByWithAggregationInput = {
   isLargeScaleProjectLead?: Prisma.SortOrder
   is_fast_production?: Prisma.SortOrder
   tentative_order_login_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_so_value_received?: Prisma.SortOrder
+  so_value_received_at?: Prisma.SortOrderInput | Prisma.SortOrder
   client_id?: Prisma.SortOrderInput | Prisma.SortOrder
   order_number?: Prisma.SortOrderInput | Prisma.SortOrder
   refered_by?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1552,6 +1574,8 @@ export type LeadMasterScalarWhereWithAggregatesInput = {
   isLargeScaleProjectLead?: Prisma.BoolWithAggregatesFilter<"LeadMaster"> | boolean
   is_fast_production?: Prisma.BoolWithAggregatesFilter<"LeadMaster"> | boolean
   tentative_order_login_date?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
+  is_so_value_received?: Prisma.BoolWithAggregatesFilter<"LeadMaster"> | boolean
+  so_value_received_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
   client_id?: Prisma.IntNullableWithAggregatesFilter<"LeadMaster"> | number | null
   order_number?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
   refered_by?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
@@ -1634,6 +1658,8 @@ export type LeadMasterCreateInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -1788,6 +1814,8 @@ export type LeadMasterUncheckedCreateInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -1919,6 +1947,8 @@ export type LeadMasterUpdateInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -2073,6 +2103,8 @@ export type LeadMasterUncheckedUpdateInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2216,6 +2248,8 @@ export type LeadMasterCreateManyInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -2298,6 +2332,8 @@ export type LeadMasterUpdateManyMutationInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -2391,6 +2427,8 @@ export type LeadMasterUncheckedUpdateManyInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2505,6 +2543,8 @@ export type LeadMasterCountOrderByAggregateInput = {
   isLargeScaleProjectLead?: Prisma.SortOrder
   is_fast_production?: Prisma.SortOrder
   tentative_order_login_date?: Prisma.SortOrder
+  is_so_value_received?: Prisma.SortOrder
+  so_value_received_at?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   order_number?: Prisma.SortOrder
   refered_by?: Prisma.SortOrder
@@ -2623,6 +2663,8 @@ export type LeadMasterMaxOrderByAggregateInput = {
   isLargeScaleProjectLead?: Prisma.SortOrder
   is_fast_production?: Prisma.SortOrder
   tentative_order_login_date?: Prisma.SortOrder
+  is_so_value_received?: Prisma.SortOrder
+  so_value_received_at?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   order_number?: Prisma.SortOrder
   refered_by?: Prisma.SortOrder
@@ -2717,6 +2759,8 @@ export type LeadMasterMinOrderByAggregateInput = {
   isLargeScaleProjectLead?: Prisma.SortOrder
   is_fast_production?: Prisma.SortOrder
   tentative_order_login_date?: Prisma.SortOrder
+  is_so_value_received?: Prisma.SortOrder
+  so_value_received_at?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   order_number?: Prisma.SortOrder
   refered_by?: Prisma.SortOrder
@@ -4070,6 +4114,8 @@ export type LeadMasterCreateWithoutVendorInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -4222,6 +4268,8 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -4394,6 +4442,8 @@ export type LeadMasterScalarWhereInput = {
   isLargeScaleProjectLead?: Prisma.BoolFilter<"LeadMaster"> | boolean
   is_fast_production?: Prisma.BoolFilter<"LeadMaster"> | boolean
   tentative_order_login_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
+  is_so_value_received?: Prisma.BoolFilter<"LeadMaster"> | boolean
+  so_value_received_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   client_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   order_number?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   refered_by?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
@@ -4476,6 +4526,8 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -4628,6 +4680,8 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -4769,6 +4823,8 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -4921,6 +4977,8 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -5062,6 +5120,8 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -5214,6 +5274,8 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -5355,6 +5417,8 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -5507,6 +5571,8 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -5712,6 +5778,8 @@ export type LeadMasterCreateWithoutProjectsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -5865,6 +5933,8 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -6011,6 +6081,8 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -6164,6 +6236,8 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6294,6 +6368,8 @@ export type LeadMasterCreateWithoutProjectDetailsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -6447,6 +6523,8 @@ export type LeadMasterUncheckedCreateWithoutProjectDetailsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -6593,6 +6671,8 @@ export type LeadMasterUpdateWithoutProjectDetailsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -6746,6 +6826,8 @@ export type LeadMasterUncheckedUpdateWithoutProjectDetailsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6876,6 +6958,8 @@ export type LeadMasterCreateWithoutBoxMasterInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -7029,6 +7113,8 @@ export type LeadMasterUncheckedCreateWithoutBoxMasterInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -7180,6 +7266,8 @@ export type LeadMasterCreateWithoutClientInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -7333,6 +7421,8 @@ export type LeadMasterUncheckedCreateWithoutClientInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
@@ -7489,6 +7579,8 @@ export type LeadMasterCreateWithoutSpecificationsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -7642,6 +7734,8 @@ export type LeadMasterUncheckedCreateWithoutSpecificationsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -7788,6 +7882,8 @@ export type LeadMasterUpdateWithoutSpecificationsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -7941,6 +8037,8 @@ export type LeadMasterUncheckedUpdateWithoutSpecificationsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8071,6 +8169,8 @@ export type LeadMasterCreateWithoutCarcassMaterialMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -8224,6 +8324,8 @@ export type LeadMasterUncheckedCreateWithoutCarcassMaterialMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -8370,6 +8472,8 @@ export type LeadMasterUpdateWithoutCarcassMaterialMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -8523,6 +8627,8 @@ export type LeadMasterUncheckedUpdateWithoutCarcassMaterialMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8653,6 +8759,8 @@ export type LeadMasterCreateWithoutShutterMaterialMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -8806,6 +8914,8 @@ export type LeadMasterUncheckedCreateWithoutShutterMaterialMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -8952,6 +9062,8 @@ export type LeadMasterUpdateWithoutShutterMaterialMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -9105,6 +9217,8 @@ export type LeadMasterUncheckedUpdateWithoutShutterMaterialMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9235,6 +9349,8 @@ export type LeadMasterCreateWithoutSuperAdminApprovalLocInsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -9388,6 +9504,8 @@ export type LeadMasterUncheckedCreateWithoutSuperAdminApprovalLocInsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -9534,6 +9652,8 @@ export type LeadMasterUpdateWithoutSuperAdminApprovalLocInsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -9687,6 +9807,8 @@ export type LeadMasterUncheckedUpdateWithoutSuperAdminApprovalLocInsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9817,6 +9939,8 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -9970,6 +10094,8 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -10116,6 +10242,8 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -10269,6 +10397,8 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10399,6 +10529,8 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -10552,6 +10684,8 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -10698,6 +10832,8 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -10851,6 +10987,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10981,6 +11119,8 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -11133,6 +11273,8 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -11290,6 +11432,8 @@ export type LeadMasterCreateWithoutSourceInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -11442,6 +11586,8 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -11599,6 +11745,8 @@ export type LeadMasterCreateWithoutAccountInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -11751,6 +11899,8 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -11908,6 +12058,8 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -12061,6 +12213,8 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -12207,6 +12361,8 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -12360,6 +12516,8 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12490,6 +12648,8 @@ export type LeadMasterCreateWithoutHardwareMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -12643,6 +12803,8 @@ export type LeadMasterUncheckedCreateWithoutHardwareMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -12789,6 +12951,8 @@ export type LeadMasterUpdateWithoutHardwareMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -12942,6 +13106,8 @@ export type LeadMasterUncheckedUpdateWithoutHardwareMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13072,6 +13238,8 @@ export type LeadMasterCreateWithoutLightCarcasUnitMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -13225,6 +13393,8 @@ export type LeadMasterUncheckedCreateWithoutLightCarcasUnitMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -13371,6 +13541,8 @@ export type LeadMasterUpdateWithoutLightCarcasUnitMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -13524,6 +13696,8 @@ export type LeadMasterUncheckedUpdateWithoutLightCarcasUnitMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13654,6 +13828,8 @@ export type LeadMasterCreateWithoutOtherAppliancesMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -13807,6 +13983,8 @@ export type LeadMasterUncheckedCreateWithoutOtherAppliancesMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -13953,6 +14131,8 @@ export type LeadMasterUpdateWithoutOtherAppliancesMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -14106,6 +14286,8 @@ export type LeadMasterUncheckedUpdateWithoutOtherAppliancesMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14236,6 +14418,8 @@ export type LeadMasterCreateWithoutOtherAppliancesRemarkMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -14389,6 +14573,8 @@ export type LeadMasterUncheckedCreateWithoutOtherAppliancesRemarkMappingsInput =
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -14535,6 +14721,8 @@ export type LeadMasterUpdateWithoutOtherAppliancesRemarkMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -14688,6 +14876,8 @@ export type LeadMasterUncheckedUpdateWithoutOtherAppliancesRemarkMappingsInput =
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14818,6 +15008,8 @@ export type LeadMasterCreateWithoutSpecificationDocumentMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -14971,6 +15163,8 @@ export type LeadMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput =
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -15117,6 +15311,8 @@ export type LeadMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -15270,6 +15466,8 @@ export type LeadMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput =
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15400,6 +15598,8 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -15553,6 +15753,8 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -15699,6 +15901,8 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -15852,6 +16056,8 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15982,6 +16188,8 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -16135,6 +16343,8 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -16281,6 +16491,8 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -16434,6 +16646,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16564,6 +16778,8 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -16717,6 +16933,8 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -16863,6 +17081,8 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -17016,6 +17236,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17146,6 +17368,8 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -17299,6 +17523,8 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -17445,6 +17671,8 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -17598,6 +17826,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17728,6 +17958,8 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -17881,6 +18113,8 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -18027,6 +18261,8 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -18180,6 +18416,8 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18310,6 +18548,8 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -18463,6 +18703,8 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -18609,6 +18851,8 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -18762,6 +19006,8 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18892,6 +19138,8 @@ export type LeadMasterCreateWithoutLedgersInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -19045,6 +19293,8 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -19191,6 +19441,8 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -19344,6 +19596,8 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -19474,6 +19728,8 @@ export type LeadMasterCreateWithoutSmallOrderRequestsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -19627,6 +19883,8 @@ export type LeadMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -19773,6 +20031,8 @@ export type LeadMasterUpdateWithoutSmallOrderRequestsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -19926,6 +20186,8 @@ export type LeadMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20056,6 +20318,8 @@ export type LeadMasterCreateWithoutAmcContractsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -20209,6 +20473,8 @@ export type LeadMasterUncheckedCreateWithoutAmcContractsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -20355,6 +20621,8 @@ export type LeadMasterUpdateWithoutAmcContractsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -20508,6 +20776,8 @@ export type LeadMasterUncheckedUpdateWithoutAmcContractsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20638,6 +20908,8 @@ export type LeadMasterCreateWithoutServiceSchedulesInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -20791,6 +21063,8 @@ export type LeadMasterUncheckedCreateWithoutServiceSchedulesInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -20937,6 +21211,8 @@ export type LeadMasterUpdateWithoutServiceSchedulesInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -21090,6 +21366,8 @@ export type LeadMasterUncheckedUpdateWithoutServiceSchedulesInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -21220,6 +21498,8 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -21372,6 +21652,8 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -21529,6 +21811,8 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -21682,6 +21966,8 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -21828,6 +22114,8 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -21981,6 +22269,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -22111,6 +22401,8 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -22264,6 +22556,8 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -22410,6 +22704,8 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -22563,6 +22859,8 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -22693,6 +22991,8 @@ export type LeadMasterCreateWithoutClientVisitsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -22846,6 +23146,8 @@ export type LeadMasterUncheckedCreateWithoutClientVisitsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -22992,6 +23294,8 @@ export type LeadMasterUpdateWithoutClientVisitsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -23145,6 +23449,8 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -23275,6 +23581,8 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -23428,6 +23736,8 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -23574,6 +23884,8 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -23727,6 +24039,8 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -23857,6 +24171,8 @@ export type LeadMasterCreateWithoutClientVisitDocumentMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -24010,6 +24326,8 @@ export type LeadMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -24156,6 +24474,8 @@ export type LeadMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -24309,6 +24629,8 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -24439,6 +24761,8 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -24592,6 +24916,8 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -24738,6 +25064,8 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -24891,6 +25219,8 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -25021,6 +25351,8 @@ export type LeadMasterCreateWithoutChsSelectionMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -25174,6 +25506,8 @@ export type LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -25320,6 +25654,8 @@ export type LeadMasterUpdateWithoutChsSelectionMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -25473,6 +25809,8 @@ export type LeadMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -25603,6 +25941,8 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -25756,6 +26096,8 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -25902,6 +26244,8 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -26055,6 +26399,8 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -26185,6 +26531,8 @@ export type LeadMasterCreateWithoutTasksInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -26338,6 +26686,8 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -26484,6 +26834,8 @@ export type LeadMasterUpdateWithoutTasksInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -26637,6 +26989,8 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -26767,6 +27121,8 @@ export type LeadMasterCreateWithoutFastProductionRequestBatchesInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -26920,6 +27276,8 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestBatchesInput = 
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -27066,6 +27424,8 @@ export type LeadMasterUpdateWithoutFastProductionRequestBatchesInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -27219,6 +27579,8 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput = 
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27349,6 +27711,8 @@ export type LeadMasterCreateWithoutFastProductionRequestsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -27502,6 +27866,8 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -27648,6 +28014,8 @@ export type LeadMasterUpdateWithoutFastProductionRequestsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -27801,6 +28169,8 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27931,6 +28301,8 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -28084,6 +28456,8 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -28230,6 +28604,8 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -28383,6 +28759,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -28513,6 +28891,8 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -28666,6 +29046,8 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -28812,6 +29194,8 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -28965,6 +29349,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -29095,6 +29481,8 @@ export type LeadMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -29248,6 +29636,8 @@ export type LeadMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -29394,6 +29784,8 @@ export type LeadMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -29547,6 +29939,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -29677,6 +30071,8 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -29830,6 +30226,8 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -29976,6 +30374,8 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -30129,6 +30529,8 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -30259,6 +30661,8 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -30412,6 +30816,8 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -30558,6 +30964,8 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -30711,6 +31119,8 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -30841,6 +31251,8 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -30994,6 +31406,8 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -31140,6 +31554,8 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -31293,6 +31709,8 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -31423,6 +31841,8 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -31576,6 +31996,8 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -31722,6 +32144,8 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -31875,6 +32299,8 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -32005,6 +32431,8 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -32158,6 +32586,8 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -32304,6 +32734,8 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -32457,6 +32889,8 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -32587,6 +33021,8 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -32740,6 +33176,8 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -32886,6 +33324,8 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -33039,6 +33479,8 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -33169,6 +33611,8 @@ export type LeadMasterCreateWithoutCutListInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
@@ -33322,6 +33766,8 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -33468,6 +33914,8 @@ export type LeadMasterUpdateWithoutCutListInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
@@ -33621,6 +34069,8 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -33751,6 +34201,8 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -33904,6 +34356,8 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -34050,6 +34504,8 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -34203,6 +34659,8 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -34333,6 +34791,8 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -34486,6 +34946,8 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -34632,6 +35094,8 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -34785,6 +35249,8 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -34915,6 +35381,8 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -35067,6 +35535,8 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -35224,6 +35694,8 @@ export type LeadMasterCreateWithoutExternalPlatformCustomerMappingsInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -35377,6 +35849,8 @@ export type LeadMasterUncheckedCreateWithoutExternalPlatformCustomerMappingsInpu
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -35523,6 +35997,8 @@ export type LeadMasterUpdateWithoutExternalPlatformCustomerMappingsInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -35676,6 +36152,8 @@ export type LeadMasterUncheckedUpdateWithoutExternalPlatformCustomerMappingsInpu
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -35806,6 +36284,8 @@ export type LeadMasterCreateWithoutArchitectInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
@@ -35958,6 +36438,8 @@ export type LeadMasterUncheckedCreateWithoutArchitectInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -36126,6 +36608,8 @@ export type LeadMasterCreateManyVendorInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -36208,6 +36692,8 @@ export type LeadMasterUpdateWithoutVendorInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -36360,6 +36846,8 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -36502,6 +36990,8 @@ export type LeadMasterUncheckedUpdateManyWithoutVendorInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -36595,6 +37085,8 @@ export type LeadMasterCreateManyAssignedToInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -36688,6 +37180,8 @@ export type LeadMasterCreateManyAssignedByInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -36781,6 +37275,8 @@ export type LeadMasterCreateManyCreatedByInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -36874,6 +37370,8 @@ export type LeadMasterCreateManyUpdatedByInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -36956,6 +37454,8 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -37108,6 +37608,8 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -37250,6 +37752,8 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedToInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -37332,6 +37836,8 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -37484,6 +37990,8 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -37626,6 +38134,8 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedByInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -37708,6 +38218,8 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -37860,6 +38372,8 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -38002,6 +38516,8 @@ export type LeadMasterUncheckedUpdateManyWithoutCreatedByInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -38084,6 +38600,8 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -38236,6 +38754,8 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -38378,6 +38898,8 @@ export type LeadMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -38460,6 +38982,8 @@ export type LeadMasterUpdateWithoutBoxMasterInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -38613,6 +39137,8 @@ export type LeadMasterUncheckedUpdateWithoutBoxMasterInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -38755,6 +39281,8 @@ export type LeadMasterUncheckedUpdateManyWithoutBoxMasterInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -38849,6 +39377,8 @@ export type LeadMasterCreateManyClientInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   order_number?: string | null
   refered_by?: string | null
 }
@@ -38930,6 +39460,8 @@ export type LeadMasterUpdateWithoutClientInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -39083,6 +39615,8 @@ export type LeadMasterUncheckedUpdateWithoutClientInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
@@ -39225,6 +39759,8 @@ export type LeadMasterUncheckedUpdateManyWithoutClientInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -39317,6 +39853,8 @@ export type LeadMasterCreateManySiteTypeInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -39399,6 +39937,8 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -39551,6 +40091,8 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -39693,6 +40235,8 @@ export type LeadMasterUncheckedUpdateManyWithoutSiteTypeInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -39786,6 +40330,8 @@ export type LeadMasterCreateManySourceInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -39868,6 +40414,8 @@ export type LeadMasterUpdateWithoutSourceInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -40020,6 +40568,8 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -40162,6 +40712,8 @@ export type LeadMasterUncheckedUpdateManyWithoutSourceInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -40255,6 +40807,8 @@ export type LeadMasterCreateManyAccountInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -40337,6 +40891,8 @@ export type LeadMasterUpdateWithoutAccountInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -40489,6 +41045,8 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -40631,6 +41189,8 @@ export type LeadMasterUncheckedUpdateManyWithoutAccountInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -40724,6 +41284,8 @@ export type LeadMasterCreateManyStatusTypeInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -40806,6 +41368,8 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -40958,6 +41522,8 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -41100,6 +41666,8 @@ export type LeadMasterUncheckedUpdateManyWithoutStatusTypeInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -41193,6 +41761,8 @@ export type LeadMasterCreateManyFranchiseInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -41275,6 +41845,8 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -41427,6 +41999,8 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -41569,6 +42143,8 @@ export type LeadMasterUncheckedUpdateManyWithoutFranchiseInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -41662,6 +42238,8 @@ export type LeadMasterCreateManyArchitectInput = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
   client_id?: number | null
   order_number?: string | null
   refered_by?: string | null
@@ -41744,6 +42322,8 @@ export type LeadMasterUpdateWithoutArchitectInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
@@ -41896,6 +42476,8 @@ export type LeadMasterUncheckedUpdateWithoutArchitectInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -42038,6 +42620,8 @@ export type LeadMasterUncheckedUpdateManyWithoutArchitectInput = {
   isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -42595,6 +43179,8 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: boolean
+  is_so_value_received?: boolean
+  so_value_received_at?: boolean
   client_id?: boolean
   order_number?: boolean
   refered_by?: boolean
@@ -42751,6 +43337,8 @@ export type LeadMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: boolean
+  is_so_value_received?: boolean
+  so_value_received_at?: boolean
   client_id?: boolean
   order_number?: boolean
   refered_by?: boolean
@@ -42857,6 +43445,8 @@ export type LeadMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: boolean
+  is_so_value_received?: boolean
+  so_value_received_at?: boolean
   client_id?: boolean
   order_number?: boolean
   refered_by?: boolean
@@ -42963,12 +43553,14 @@ export type LeadMasterSelectScalar = {
   isLargeScaleProjectLead?: boolean
   is_fast_production?: boolean
   tentative_order_login_date?: boolean
+  is_so_value_received?: boolean
+  so_value_received_at?: boolean
   client_id?: boolean
   order_number?: boolean
   refered_by?: boolean
 }
 
-export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "actual_installation_start_date" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "franchise_id" | "order_login_prod_files_remark" | "actual_installation_completion_at" | "final_handover_marked_at" | "priority" | "tech_check_completed_at" | "tech_check_reached_at" | "usable_handover_completed_at" | "amc_opted_at" | "is_amc_opted" | "amc_plan_closed_at" | "amc_plan_started_at" | "vehicle_approachability_for_dispatch" | "total_required_chs_manufacturing_days" | "archetech_number" | "is_blocked" | "lead_blocked_at" | "is_small_order_request" | "material_lift_size" | "architect_id" | "fast_production_approved_at" | "fast_production_status" | "isLargeScaleProjectLead" | "is_fast_production" | "tentative_order_login_date" | "client_id" | "order_number" | "refered_by", ExtArgs["result"]["leadMaster"]>
+export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "actual_installation_start_date" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "franchise_id" | "order_login_prod_files_remark" | "actual_installation_completion_at" | "final_handover_marked_at" | "priority" | "tech_check_completed_at" | "tech_check_reached_at" | "usable_handover_completed_at" | "amc_opted_at" | "is_amc_opted" | "amc_plan_closed_at" | "amc_plan_started_at" | "vehicle_approachability_for_dispatch" | "total_required_chs_manufacturing_days" | "archetech_number" | "is_blocked" | "lead_blocked_at" | "is_small_order_request" | "material_lift_size" | "architect_id" | "fast_production_approved_at" | "fast_production_status" | "isLargeScaleProjectLead" | "is_fast_production" | "tentative_order_login_date" | "is_so_value_received" | "so_value_received_at" | "client_id" | "order_number" | "refered_by", ExtArgs["result"]["leadMaster"]>
 export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cutList?: boolean | Prisma.LeadMaster$cutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.LeadMaster$cutListMachineMappingArgs<ExtArgs>
@@ -43216,6 +43808,8 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     isLargeScaleProjectLead: boolean
     is_fast_production: boolean
     tentative_order_login_date: Date | null
+    is_so_value_received: boolean
+    so_value_received_at: Date | null
     client_id: number | null
     order_number: string | null
     refered_by: string | null
@@ -43791,6 +44385,8 @@ export interface LeadMasterFieldRefs {
   readonly isLargeScaleProjectLead: Prisma.FieldRef<"LeadMaster", 'Boolean'>
   readonly is_fast_production: Prisma.FieldRef<"LeadMaster", 'Boolean'>
   readonly tentative_order_login_date: Prisma.FieldRef<"LeadMaster", 'DateTime'>
+  readonly is_so_value_received: Prisma.FieldRef<"LeadMaster", 'Boolean'>
+  readonly so_value_received_at: Prisma.FieldRef<"LeadMaster", 'DateTime'>
   readonly client_id: Prisma.FieldRef<"LeadMaster", 'Int'>
   readonly order_number: Prisma.FieldRef<"LeadMaster", 'String'>
   readonly refered_by: Prisma.FieldRef<"LeadMaster", 'String'>
