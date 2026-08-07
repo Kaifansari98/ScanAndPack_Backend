@@ -1062,6 +1062,7 @@ model CarcassTypeMaster {
   id                   Int                          @id @default(autoincrement())
   name                 String
   vendor_id            Int
+  can_do_fast_production Boolean                    @default(true)
   vendor               VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   leadMappings         LeadCarcassMaterialMapping[]
   rules                TimelineRule[]

@@ -31,11 +31,15 @@ const ensureVendorExists = async (vendor_id: number) => {
 
 export const getAllCarcassTypes = async (
   vendor_id: number,
+  onlyFastProduction = false,
 ): Promise<CarcassType[]> => {
   await ensureVendorExists(vendor_id);
 
   const types = await prisma.carcassTypeMaster.findMany({
-    where: { vendor_id },
+    where: {
+      vendor_id,
+      ...(onlyFastProduction ? { can_do_fast_production: true } : {}),
+    },
     orderBy: { name: "asc" },
   });
 
@@ -1158,6 +1162,7 @@ export const getFastProductionTimelineRules = async (vendor_id: number) => {
         select: {
           id: true,
           name: true,
+          can_do_fast_production: true,
         },
       },
       shutter: {
@@ -1317,4 +1322,3 @@ export const getOtherAppliancesReport = async (vendor_id: number) => {
   const buffer = await workbook.xlsx.writeBuffer();
   return buffer;
 };
-

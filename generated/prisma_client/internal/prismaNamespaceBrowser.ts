@@ -853,7 +853,8 @@ export type ProductTypeMasterScalarFieldEnum = (typeof ProductTypeMasterScalarFi
 export const CarcassTypeMasterScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  vendor_id: 'vendor_id'
+  vendor_id: 'vendor_id',
+  can_do_fast_production: 'can_do_fast_production'
 } as const
 
 export type CarcassTypeMasterScalarFieldEnum = (typeof CarcassTypeMasterScalarFieldEnum)[keyof typeof CarcassTypeMasterScalarFieldEnum]
