@@ -725,6 +725,8 @@ model LeadMaster {
   isLargeScaleProjectLead                     Boolean                               @default(false)
   is_fast_production                          Boolean                               @default(false)
   tentative_order_login_date                  DateTime?
+  is_so_value_received                        Boolean                               @default(false)
+  so_value_received_at                        DateTime?
   client_id                                   Int?
   order_number                                String?
   refered_by                                  String?
