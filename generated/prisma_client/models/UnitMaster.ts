@@ -284,6 +284,7 @@ export type UnitMasterWhereInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterListRelationFilter
   reorderLevelUnitProducts?: Prisma.ProductMasterListRelationFilter
   stockUnitProducts?: Prisma.ProductMasterListRelationFilter
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
@@ -307,6 +308,7 @@ export type UnitMasterOrderByWithRelationInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterOrderByRelationAggregateInput
   reorderLevelUnitProducts?: Prisma.ProductMasterOrderByRelationAggregateInput
   stockUnitProducts?: Prisma.ProductMasterOrderByRelationAggregateInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingOrderByRelationAggregateInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
@@ -334,6 +336,7 @@ export type UnitMasterWhereUniqueInput = Prisma.AtLeast<{
   reorderBatchUnitProducts?: Prisma.ProductMasterListRelationFilter
   reorderLevelUnitProducts?: Prisma.ProductMasterListRelationFilter
   stockUnitProducts?: Prisma.ProductMasterListRelationFilter
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id" | "vendor_id_unit_name">
 
@@ -391,6 +394,7 @@ export type UnitMasterCreateInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutStockUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUnitsInput
 }
 
@@ -414,6 +418,7 @@ export type UnitMasterUncheckedCreateInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutStockUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterUpdateInput = {
@@ -434,6 +439,7 @@ export type UnitMasterUpdateInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutStockUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUnitsNestedInput
 }
 
@@ -457,6 +463,7 @@ export type UnitMasterUncheckedUpdateInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutStockUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterCreateManyInput = {
@@ -617,6 +624,22 @@ export type UnitMasterUncheckedUpdateManyWithoutVendorNestedInput = {
   deleteMany?: Prisma.UnitMasterScalarWhereInput | Prisma.UnitMasterScalarWhereInput[]
 }
 
+export type UnitMasterCreateNestedOneWithoutLeadRequirementMaterialsInput = {
+  create?: Prisma.XOR<Prisma.UnitMasterCreateWithoutLeadRequirementMaterialsInput, Prisma.UnitMasterUncheckedCreateWithoutLeadRequirementMaterialsInput>
+  connectOrCreate?: Prisma.UnitMasterCreateOrConnectWithoutLeadRequirementMaterialsInput
+  connect?: Prisma.UnitMasterWhereUniqueInput
+}
+
+export type UnitMasterUpdateOneWithoutLeadRequirementMaterialsNestedInput = {
+  create?: Prisma.XOR<Prisma.UnitMasterCreateWithoutLeadRequirementMaterialsInput, Prisma.UnitMasterUncheckedCreateWithoutLeadRequirementMaterialsInput>
+  connectOrCreate?: Prisma.UnitMasterCreateOrConnectWithoutLeadRequirementMaterialsInput
+  upsert?: Prisma.UnitMasterUpsertWithoutLeadRequirementMaterialsInput
+  disconnect?: Prisma.UnitMasterWhereInput | boolean
+  delete?: Prisma.UnitMasterWhereInput | boolean
+  connect?: Prisma.UnitMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UnitMasterUpdateToOneWithWhereWithoutLeadRequirementMaterialsInput, Prisma.UnitMasterUpdateWithoutLeadRequirementMaterialsInput>, Prisma.UnitMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput>
+}
+
 export type UnitMasterCreateNestedOneWithoutConsumptionUnitProductsInput = {
   create?: Prisma.XOR<Prisma.UnitMasterCreateWithoutConsumptionUnitProductsInput, Prisma.UnitMasterUncheckedCreateWithoutConsumptionUnitProductsInput>
   connectOrCreate?: Prisma.UnitMasterCreateOrConnectWithoutConsumptionUnitProductsInput
@@ -763,6 +786,7 @@ export type UnitMasterCreateWithoutVendorInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutStockUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterUncheckedCreateWithoutVendorInput = {
@@ -784,6 +808,7 @@ export type UnitMasterUncheckedCreateWithoutVendorInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutStockUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterCreateOrConnectWithoutVendorInput = {
@@ -829,6 +854,108 @@ export type UnitMasterScalarWhereInput = {
   decimal_allowed?: Prisma.BoolFilter<"UnitMaster"> | boolean
 }
 
+export type UnitMasterCreateWithoutLeadRequirementMaterialsInput = {
+  unit_name: string
+  unit_class: string
+  is_active?: boolean
+  created_by?: number | null
+  updated_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  short_name?: string | null
+  decimal_allowed?: boolean
+  consumptionUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutConsumptionUnitInput
+  maxStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMaxStockUnitInput
+  minStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMinStockUnitInput
+  primaryUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutPrimaryUnitInput
+  purchaseUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutPurchaseUnitInput
+  reorderBatchUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderBatchUnitInput
+  reorderLevelUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderLevelUnitInput
+  stockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutStockUnitInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUnitsInput
+}
+
+export type UnitMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
+  id?: number
+  vendor_id: number
+  unit_name: string
+  unit_class: string
+  is_active?: boolean
+  created_by?: number | null
+  updated_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  short_name?: string | null
+  decimal_allowed?: boolean
+  consumptionUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutConsumptionUnitInput
+  maxStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMaxStockUnitInput
+  minStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMinStockUnitInput
+  primaryUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutPrimaryUnitInput
+  purchaseUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutPurchaseUnitInput
+  reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderBatchUnitInput
+  reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderLevelUnitInput
+  stockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutStockUnitInput
+}
+
+export type UnitMasterCreateOrConnectWithoutLeadRequirementMaterialsInput = {
+  where: Prisma.UnitMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.UnitMasterCreateWithoutLeadRequirementMaterialsInput, Prisma.UnitMasterUncheckedCreateWithoutLeadRequirementMaterialsInput>
+}
+
+export type UnitMasterUpsertWithoutLeadRequirementMaterialsInput = {
+  update: Prisma.XOR<Prisma.UnitMasterUpdateWithoutLeadRequirementMaterialsInput, Prisma.UnitMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput>
+  create: Prisma.XOR<Prisma.UnitMasterCreateWithoutLeadRequirementMaterialsInput, Prisma.UnitMasterUncheckedCreateWithoutLeadRequirementMaterialsInput>
+  where?: Prisma.UnitMasterWhereInput
+}
+
+export type UnitMasterUpdateToOneWithWhereWithoutLeadRequirementMaterialsInput = {
+  where?: Prisma.UnitMasterWhereInput
+  data: Prisma.XOR<Prisma.UnitMasterUpdateWithoutLeadRequirementMaterialsInput, Prisma.UnitMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput>
+}
+
+export type UnitMasterUpdateWithoutLeadRequirementMaterialsInput = {
+  unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  consumptionUnitProducts?: Prisma.ProductMasterUpdateManyWithoutConsumptionUnitNestedInput
+  maxStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMaxStockUnitNestedInput
+  minStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMinStockUnitNestedInput
+  primaryUnitProducts?: Prisma.ProductMasterUpdateManyWithoutPrimaryUnitNestedInput
+  purchaseUnitProducts?: Prisma.ProductMasterUpdateManyWithoutPurchaseUnitNestedInput
+  reorderBatchUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderBatchUnitNestedInput
+  reorderLevelUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderLevelUnitNestedInput
+  stockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutStockUnitNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUnitsNestedInput
+}
+
+export type UnitMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  consumptionUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutConsumptionUnitNestedInput
+  maxStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMaxStockUnitNestedInput
+  minStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMinStockUnitNestedInput
+  primaryUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutPrimaryUnitNestedInput
+  purchaseUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutPurchaseUnitNestedInput
+  reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitNestedInput
+  reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitNestedInput
+  stockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutStockUnitNestedInput
+}
+
 export type UnitMasterCreateWithoutConsumptionUnitProductsInput = {
   unit_name: string
   unit_class: string
@@ -846,6 +973,7 @@ export type UnitMasterCreateWithoutConsumptionUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutStockUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUnitsInput
 }
 
@@ -868,6 +996,7 @@ export type UnitMasterUncheckedCreateWithoutConsumptionUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutStockUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterCreateOrConnectWithoutConsumptionUnitProductsInput = {
@@ -892,6 +1021,7 @@ export type UnitMasterCreateWithoutMaxStockUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutStockUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUnitsInput
 }
 
@@ -914,6 +1044,7 @@ export type UnitMasterUncheckedCreateWithoutMaxStockUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutStockUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterCreateOrConnectWithoutMaxStockUnitProductsInput = {
@@ -938,6 +1069,7 @@ export type UnitMasterCreateWithoutMinStockUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutStockUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUnitsInput
 }
 
@@ -960,6 +1092,7 @@ export type UnitMasterUncheckedCreateWithoutMinStockUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutStockUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterCreateOrConnectWithoutMinStockUnitProductsInput = {
@@ -984,6 +1117,7 @@ export type UnitMasterCreateWithoutPrimaryUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutStockUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUnitsInput
 }
 
@@ -1006,6 +1140,7 @@ export type UnitMasterUncheckedCreateWithoutPrimaryUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutStockUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterCreateOrConnectWithoutPrimaryUnitProductsInput = {
@@ -1030,6 +1165,7 @@ export type UnitMasterCreateWithoutPurchaseUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutStockUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUnitsInput
 }
 
@@ -1052,6 +1188,7 @@ export type UnitMasterUncheckedCreateWithoutPurchaseUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutStockUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterCreateOrConnectWithoutPurchaseUnitProductsInput = {
@@ -1076,6 +1213,7 @@ export type UnitMasterCreateWithoutReorderBatchUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutPurchaseUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutStockUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUnitsInput
 }
 
@@ -1098,6 +1236,7 @@ export type UnitMasterUncheckedCreateWithoutReorderBatchUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutPurchaseUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutStockUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterCreateOrConnectWithoutReorderBatchUnitProductsInput = {
@@ -1122,6 +1261,7 @@ export type UnitMasterCreateWithoutReorderLevelUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutPurchaseUnitInput
   reorderBatchUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderBatchUnitInput
   stockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutStockUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUnitsInput
 }
 
@@ -1144,6 +1284,7 @@ export type UnitMasterUncheckedCreateWithoutReorderLevelUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutPurchaseUnitInput
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderBatchUnitInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutStockUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterCreateOrConnectWithoutReorderLevelUnitProductsInput = {
@@ -1168,6 +1309,7 @@ export type UnitMasterCreateWithoutStockUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutPurchaseUnitInput
   reorderBatchUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderLevelUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUnitsInput
 }
 
@@ -1190,6 +1332,7 @@ export type UnitMasterUncheckedCreateWithoutStockUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutPurchaseUnitInput
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderLevelUnitInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterCreateOrConnectWithoutStockUnitProductsInput = {
@@ -1225,6 +1368,7 @@ export type UnitMasterUpdateWithoutConsumptionUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutStockUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUnitsNestedInput
 }
 
@@ -1247,6 +1391,7 @@ export type UnitMasterUncheckedUpdateWithoutConsumptionUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutStockUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterUpsertWithoutMaxStockUnitProductsInput = {
@@ -1277,6 +1422,7 @@ export type UnitMasterUpdateWithoutMaxStockUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutStockUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUnitsNestedInput
 }
 
@@ -1299,6 +1445,7 @@ export type UnitMasterUncheckedUpdateWithoutMaxStockUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutStockUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterUpsertWithoutMinStockUnitProductsInput = {
@@ -1329,6 +1476,7 @@ export type UnitMasterUpdateWithoutMinStockUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutStockUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUnitsNestedInput
 }
 
@@ -1351,6 +1499,7 @@ export type UnitMasterUncheckedUpdateWithoutMinStockUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutStockUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterUpsertWithoutPrimaryUnitProductsInput = {
@@ -1381,6 +1530,7 @@ export type UnitMasterUpdateWithoutPrimaryUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutStockUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUnitsNestedInput
 }
 
@@ -1403,6 +1553,7 @@ export type UnitMasterUncheckedUpdateWithoutPrimaryUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutStockUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterUpsertWithoutPurchaseUnitProductsInput = {
@@ -1433,6 +1584,7 @@ export type UnitMasterUpdateWithoutPurchaseUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutStockUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUnitsNestedInput
 }
 
@@ -1455,6 +1607,7 @@ export type UnitMasterUncheckedUpdateWithoutPurchaseUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutStockUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterUpsertWithoutReorderBatchUnitProductsInput = {
@@ -1485,6 +1638,7 @@ export type UnitMasterUpdateWithoutReorderBatchUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterUpdateManyWithoutPurchaseUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutStockUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUnitsNestedInput
 }
 
@@ -1507,6 +1661,7 @@ export type UnitMasterUncheckedUpdateWithoutReorderBatchUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutPurchaseUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutStockUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterUpsertWithoutReorderLevelUnitProductsInput = {
@@ -1537,6 +1692,7 @@ export type UnitMasterUpdateWithoutReorderLevelUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterUpdateManyWithoutPurchaseUnitNestedInput
   reorderBatchUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderBatchUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutStockUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUnitsNestedInput
 }
 
@@ -1559,6 +1715,7 @@ export type UnitMasterUncheckedUpdateWithoutReorderLevelUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutPurchaseUnitNestedInput
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutStockUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterUpsertWithoutStockUnitProductsInput = {
@@ -1589,6 +1746,7 @@ export type UnitMasterUpdateWithoutStockUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterUpdateManyWithoutPurchaseUnitNestedInput
   reorderBatchUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderLevelUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUnitsNestedInput
 }
 
@@ -1611,6 +1769,7 @@ export type UnitMasterUncheckedUpdateWithoutStockUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutPurchaseUnitNestedInput
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterCreateManyVendorInput = {
@@ -1644,6 +1803,7 @@ export type UnitMasterUpdateWithoutVendorInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutStockUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterUncheckedUpdateWithoutVendorInput = {
@@ -1665,6 +1825,7 @@ export type UnitMasterUncheckedUpdateWithoutVendorInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutStockUnitNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -1694,6 +1855,7 @@ export type UnitMasterCountOutputType = {
   reorderBatchUnitProducts: number
   reorderLevelUnitProducts: number
   stockUnitProducts: number
+  leadRequirementMaterials: number
 }
 
 export type UnitMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1705,6 +1867,7 @@ export type UnitMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   reorderBatchUnitProducts?: boolean | UnitMasterCountOutputTypeCountReorderBatchUnitProductsArgs
   reorderLevelUnitProducts?: boolean | UnitMasterCountOutputTypeCountReorderLevelUnitProductsArgs
   stockUnitProducts?: boolean | UnitMasterCountOutputTypeCountStockUnitProductsArgs
+  leadRequirementMaterials?: boolean | UnitMasterCountOutputTypeCountLeadRequirementMaterialsArgs
 }
 
 /**
@@ -1773,6 +1936,13 @@ export type UnitMasterCountOutputTypeCountStockUnitProductsArgs<ExtArgs extends 
   where?: Prisma.ProductMasterWhereInput
 }
 
+/**
+ * UnitMasterCountOutputType without action
+ */
+export type UnitMasterCountOutputTypeCountLeadRequirementMaterialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadRequirementMaterialMappingWhereInput
+}
+
 
 export type UnitMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1794,6 +1964,7 @@ export type UnitMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   reorderBatchUnitProducts?: boolean | Prisma.UnitMaster$reorderBatchUnitProductsArgs<ExtArgs>
   reorderLevelUnitProducts?: boolean | Prisma.UnitMaster$reorderLevelUnitProductsArgs<ExtArgs>
   stockUnitProducts?: boolean | Prisma.UnitMaster$stockUnitProductsArgs<ExtArgs>
+  leadRequirementMaterials?: boolean | Prisma.UnitMaster$leadRequirementMaterialsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.UnitMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["unitMaster"]>
@@ -1852,6 +2023,7 @@ export type UnitMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   reorderBatchUnitProducts?: boolean | Prisma.UnitMaster$reorderBatchUnitProductsArgs<ExtArgs>
   reorderLevelUnitProducts?: boolean | Prisma.UnitMaster$reorderLevelUnitProductsArgs<ExtArgs>
   stockUnitProducts?: boolean | Prisma.UnitMaster$stockUnitProductsArgs<ExtArgs>
+  leadRequirementMaterials?: boolean | Prisma.UnitMaster$leadRequirementMaterialsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.UnitMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1873,6 +2045,7 @@ export type $UnitMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     reorderBatchUnitProducts: Prisma.$ProductMasterPayload<ExtArgs>[]
     reorderLevelUnitProducts: Prisma.$ProductMasterPayload<ExtArgs>[]
     stockUnitProducts: Prisma.$ProductMasterPayload<ExtArgs>[]
+    leadRequirementMaterials: Prisma.$LeadRequirementMaterialMappingPayload<ExtArgs>[]
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -2289,6 +2462,7 @@ export interface Prisma__UnitMasterClient<T, Null = never, ExtArgs extends runti
   reorderBatchUnitProducts<T extends Prisma.UnitMaster$reorderBatchUnitProductsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UnitMaster$reorderBatchUnitProductsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reorderLevelUnitProducts<T extends Prisma.UnitMaster$reorderLevelUnitProductsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UnitMaster$reorderLevelUnitProductsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stockUnitProducts<T extends Prisma.UnitMaster$stockUnitProductsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UnitMaster$stockUnitProductsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadRequirementMaterials<T extends Prisma.UnitMaster$leadRequirementMaterialsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UnitMaster$leadRequirementMaterialsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadRequirementMaterialMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2920,6 +3094,30 @@ export type UnitMaster$stockUnitProductsArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.ProductMasterScalarFieldEnum | Prisma.ProductMasterScalarFieldEnum[]
+}
+
+/**
+ * UnitMaster.leadRequirementMaterials
+ */
+export type UnitMaster$leadRequirementMaterialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadRequirementMaterialMapping
+   */
+  select?: Prisma.LeadRequirementMaterialMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadRequirementMaterialMapping
+   */
+  omit?: Prisma.LeadRequirementMaterialMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadRequirementMaterialMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadRequirementMaterialMappingWhereInput
+  orderBy?: Prisma.LeadRequirementMaterialMappingOrderByWithRelationInput | Prisma.LeadRequirementMaterialMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadRequirementMaterialMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadRequirementMaterialMappingScalarFieldEnum | Prisma.LeadRequirementMaterialMappingScalarFieldEnum[]
 }
 
 /**

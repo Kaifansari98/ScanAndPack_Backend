@@ -105,6 +105,7 @@ export type LeadMasterMinAggregateOutputType = {
   site_map_link: string | null
   activity_status: $Enums.ActivityStatus | null
   activity_status_remark: string | null
+  project_status: string | null
   booking_amount: number | null
   pending_amount: number | null
   total_project_amount: number | null
@@ -199,6 +200,7 @@ export type LeadMasterMaxAggregateOutputType = {
   site_map_link: string | null
   activity_status: $Enums.ActivityStatus | null
   activity_status_remark: string | null
+  project_status: string | null
   booking_amount: number | null
   pending_amount: number | null
   total_project_amount: number | null
@@ -293,6 +295,7 @@ export type LeadMasterCountAggregateOutputType = {
   site_map_link: number
   activity_status: number
   activity_status_remark: number
+  project_status: number
   booking_amount: number
   pending_amount: number
   total_project_amount: number
@@ -437,6 +440,7 @@ export type LeadMasterMinAggregateInputType = {
   site_map_link?: true
   activity_status?: true
   activity_status_remark?: true
+  project_status?: true
   booking_amount?: true
   pending_amount?: true
   total_project_amount?: true
@@ -531,6 +535,7 @@ export type LeadMasterMaxAggregateInputType = {
   site_map_link?: true
   activity_status?: true
   activity_status_remark?: true
+  project_status?: true
   booking_amount?: true
   pending_amount?: true
   total_project_amount?: true
@@ -625,6 +630,7 @@ export type LeadMasterCountAggregateInputType = {
   site_map_link?: true
   activity_status?: true
   activity_status_remark?: true
+  project_status?: true
   booking_amount?: true
   pending_amount?: true
   total_project_amount?: true
@@ -806,6 +812,7 @@ export type LeadMasterGroupByOutputType = {
   site_map_link: string | null
   activity_status: $Enums.ActivityStatus
   activity_status_remark: string | null
+  project_status: string | null
   booking_amount: number | null
   pending_amount: number | null
   total_project_amount: number | null
@@ -923,6 +930,7 @@ export type LeadMasterWhereInput = {
   site_map_link?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   activity_status?: Prisma.EnumActivityStatusFilter<"LeadMaster"> | $Enums.ActivityStatus
   activity_status_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
+  project_status?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   booking_amount?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   pending_amount?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   total_project_amount?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
@@ -1008,6 +1016,7 @@ export type LeadMasterWhereInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingListRelationFilter
   hardwareMappings?: Prisma.LeadHardwareMappingListRelationFilter
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingListRelationFilter
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterNullableScalarRelationFilter, Prisma.AccountMasterWhereInput> | null
   architect?: Prisma.XOR<Prisma.ArchitechuremasterNullableScalarRelationFilter, Prisma.ArchitechuremasterWhereInput> | null
   assignedTo?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
@@ -1022,6 +1031,7 @@ export type LeadMasterWhereInput = {
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingListRelationFilter
   productMappings?: Prisma.LeadProductMappingListRelationFilter
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingListRelationFilter
   productStructureInstances?: Prisma.LeadProductStructureInstanceListRelationFilter
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingListRelationFilter
   serviceSchedules?: Prisma.LeadServiceScheduleListRelationFilter
@@ -1077,6 +1087,7 @@ export type LeadMasterOrderByWithRelationInput = {
   site_map_link?: Prisma.SortOrderInput | Prisma.SortOrder
   activity_status?: Prisma.SortOrder
   activity_status_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  project_status?: Prisma.SortOrderInput | Prisma.SortOrder
   booking_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   pending_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   total_project_amount?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1162,6 +1173,7 @@ export type LeadMasterOrderByWithRelationInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingOrderByRelationAggregateInput
   hardwareMappings?: Prisma.LeadHardwareMappingOrderByRelationAggregateInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingOrderByRelationAggregateInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingOrderByRelationAggregateInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
   architect?: Prisma.ArchitechuremasterOrderByWithRelationInput
   assignedTo?: Prisma.UserMasterOrderByWithRelationInput
@@ -1176,6 +1188,7 @@ export type LeadMasterOrderByWithRelationInput = {
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingOrderByRelationAggregateInput
   productMappings?: Prisma.LeadProductMappingOrderByRelationAggregateInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingOrderByRelationAggregateInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceOrderByRelationAggregateInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingOrderByRelationAggregateInput
   serviceSchedules?: Prisma.LeadServiceScheduleOrderByRelationAggregateInput
@@ -1235,6 +1248,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   site_map_link?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   activity_status?: Prisma.EnumActivityStatusFilter<"LeadMaster"> | $Enums.ActivityStatus
   activity_status_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
+  project_status?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   booking_amount?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   pending_amount?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   total_project_amount?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
@@ -1320,6 +1334,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingListRelationFilter
   hardwareMappings?: Prisma.LeadHardwareMappingListRelationFilter
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingListRelationFilter
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterNullableScalarRelationFilter, Prisma.AccountMasterWhereInput> | null
   architect?: Prisma.XOR<Prisma.ArchitechuremasterNullableScalarRelationFilter, Prisma.ArchitechuremasterWhereInput> | null
   assignedTo?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
@@ -1334,6 +1349,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingListRelationFilter
   productMappings?: Prisma.LeadProductMappingListRelationFilter
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingListRelationFilter
   productStructureInstances?: Prisma.LeadProductStructureInstanceListRelationFilter
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingListRelationFilter
   serviceSchedules?: Prisma.LeadServiceScheduleListRelationFilter
@@ -1389,6 +1405,7 @@ export type LeadMasterOrderByWithAggregationInput = {
   site_map_link?: Prisma.SortOrderInput | Prisma.SortOrder
   activity_status?: Prisma.SortOrder
   activity_status_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  project_status?: Prisma.SortOrderInput | Prisma.SortOrder
   booking_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   pending_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   total_project_amount?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1491,6 +1508,7 @@ export type LeadMasterScalarWhereWithAggregatesInput = {
   site_map_link?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
   activity_status?: Prisma.EnumActivityStatusWithAggregatesFilter<"LeadMaster"> | $Enums.ActivityStatus
   activity_status_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
+  project_status?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
   booking_amount?: Prisma.FloatNullableWithAggregatesFilter<"LeadMaster"> | number | null
   pending_amount?: Prisma.FloatNullableWithAggregatesFilter<"LeadMaster"> | number | null
   total_project_amount?: Prisma.FloatNullableWithAggregatesFilter<"LeadMaster"> | number | null
@@ -1575,6 +1593,7 @@ export type LeadMasterCreateInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -1657,6 +1676,7 @@ export type LeadMasterCreateInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -1671,6 +1691,7 @@ export type LeadMasterCreateInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -1726,6 +1747,7 @@ export type LeadMasterUncheckedCreateInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -1811,8 +1833,10 @@ export type LeadMasterUncheckedCreateInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -1858,6 +1882,7 @@ export type LeadMasterUpdateInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1940,6 +1965,7 @@ export type LeadMasterUpdateInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -1954,6 +1980,7 @@ export type LeadMasterUpdateInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -2009,6 +2036,7 @@ export type LeadMasterUncheckedUpdateInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2094,8 +2122,10 @@ export type LeadMasterUncheckedUpdateInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -2151,6 +2181,7 @@ export type LeadMasterCreateManyInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -2235,6 +2266,7 @@ export type LeadMasterUpdateManyMutationInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2326,6 +2358,7 @@ export type LeadMasterUncheckedUpdateManyInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -2440,6 +2473,7 @@ export type LeadMasterCountOrderByAggregateInput = {
   site_map_link?: Prisma.SortOrder
   activity_status?: Prisma.SortOrder
   activity_status_remark?: Prisma.SortOrder
+  project_status?: Prisma.SortOrder
   booking_amount?: Prisma.SortOrder
   pending_amount?: Prisma.SortOrder
   total_project_amount?: Prisma.SortOrder
@@ -2558,6 +2592,7 @@ export type LeadMasterMaxOrderByAggregateInput = {
   site_map_link?: Prisma.SortOrder
   activity_status?: Prisma.SortOrder
   activity_status_remark?: Prisma.SortOrder
+  project_status?: Prisma.SortOrder
   booking_amount?: Prisma.SortOrder
   pending_amount?: Prisma.SortOrder
   total_project_amount?: Prisma.SortOrder
@@ -2652,6 +2687,7 @@ export type LeadMasterMinOrderByAggregateInput = {
   site_map_link?: Prisma.SortOrder
   activity_status?: Prisma.SortOrder
   activity_status_remark?: Prisma.SortOrder
+  project_status?: Prisma.SortOrder
   booking_amount?: Prisma.SortOrder
   pending_amount?: Prisma.SortOrder
   total_project_amount?: Prisma.SortOrder
@@ -3304,6 +3340,34 @@ export type LeadMasterUpdateOneRequiredWithoutProductMappingsNestedInput = {
   upsert?: Prisma.LeadMasterUpsertWithoutProductMappingsInput
   connect?: Prisma.LeadMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutProductMappingsInput, Prisma.LeadMasterUpdateWithoutProductMappingsInput>, Prisma.LeadMasterUncheckedUpdateWithoutProductMappingsInput>
+}
+
+export type LeadMasterCreateNestedOneWithoutLeadProcessBriefsInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutLeadProcessBriefsInput, Prisma.LeadMasterUncheckedCreateWithoutLeadProcessBriefsInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutLeadProcessBriefsInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+}
+
+export type LeadMasterUpdateOneRequiredWithoutLeadProcessBriefsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutLeadProcessBriefsInput, Prisma.LeadMasterUncheckedCreateWithoutLeadProcessBriefsInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutLeadProcessBriefsInput
+  upsert?: Prisma.LeadMasterUpsertWithoutLeadProcessBriefsInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutLeadProcessBriefsInput, Prisma.LeadMasterUpdateWithoutLeadProcessBriefsInput>, Prisma.LeadMasterUncheckedUpdateWithoutLeadProcessBriefsInput>
+}
+
+export type LeadMasterCreateNestedOneWithoutLeadRequirementMaterialsInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutLeadRequirementMaterialsInput, Prisma.LeadMasterUncheckedCreateWithoutLeadRequirementMaterialsInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutLeadRequirementMaterialsInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+}
+
+export type LeadMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutLeadRequirementMaterialsInput, Prisma.LeadMasterUncheckedCreateWithoutLeadRequirementMaterialsInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutLeadRequirementMaterialsInput
+  upsert?: Prisma.LeadMasterUpsertWithoutLeadRequirementMaterialsInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutLeadRequirementMaterialsInput, Prisma.LeadMasterUpdateWithoutLeadRequirementMaterialsInput>, Prisma.LeadMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput>
 }
 
 export type LeadMasterCreateNestedOneWithoutHardwareMappingsInput = {
@@ -3993,6 +4057,7 @@ export type LeadMasterCreateWithoutVendorInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -4075,6 +4140,7 @@ export type LeadMasterCreateWithoutVendorInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -4088,6 +4154,7 @@ export type LeadMasterCreateWithoutVendorInput = {
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -4142,6 +4209,7 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -4227,8 +4295,10 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -4313,6 +4383,7 @@ export type LeadMasterScalarWhereInput = {
   site_map_link?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   activity_status?: Prisma.EnumActivityStatusFilter<"LeadMaster"> | $Enums.ActivityStatus
   activity_status_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
+  project_status?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   booking_amount?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   pending_amount?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   total_project_amount?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
@@ -4397,6 +4468,7 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -4479,6 +4551,7 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -4492,6 +4565,7 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -4546,6 +4620,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -4631,8 +4706,10 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -4688,6 +4765,7 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -4770,6 +4848,7 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -4783,6 +4862,7 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -4837,6 +4917,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -4922,8 +5003,10 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -4979,6 +5062,7 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -5061,6 +5145,7 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -5074,6 +5159,7 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -5128,6 +5214,7 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -5213,8 +5300,10 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -5270,6 +5359,7 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -5352,6 +5442,7 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -5365,6 +5456,7 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -5419,6 +5511,7 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -5504,8 +5597,10 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -5625,6 +5720,7 @@ export type LeadMasterCreateWithoutProjectsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -5707,6 +5803,7 @@ export type LeadMasterCreateWithoutProjectsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -5721,6 +5818,7 @@ export type LeadMasterCreateWithoutProjectsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -5775,6 +5873,7 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -5860,8 +5959,10 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -5922,6 +6023,7 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -6004,6 +6106,7 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -6018,6 +6121,7 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -6072,6 +6176,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -6157,8 +6262,10 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -6203,6 +6310,7 @@ export type LeadMasterCreateWithoutProjectDetailsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -6285,6 +6393,7 @@ export type LeadMasterCreateWithoutProjectDetailsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -6299,6 +6408,7 @@ export type LeadMasterCreateWithoutProjectDetailsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -6353,6 +6463,7 @@ export type LeadMasterUncheckedCreateWithoutProjectDetailsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -6438,8 +6549,10 @@ export type LeadMasterUncheckedCreateWithoutProjectDetailsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -6500,6 +6613,7 @@ export type LeadMasterUpdateWithoutProjectDetailsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -6582,6 +6696,7 @@ export type LeadMasterUpdateWithoutProjectDetailsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -6596,6 +6711,7 @@ export type LeadMasterUpdateWithoutProjectDetailsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -6650,6 +6766,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectDetailsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -6735,8 +6852,10 @@ export type LeadMasterUncheckedUpdateWithoutProjectDetailsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -6781,6 +6900,7 @@ export type LeadMasterCreateWithoutBoxMasterInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -6863,6 +6983,7 @@ export type LeadMasterCreateWithoutBoxMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -6877,6 +6998,7 @@ export type LeadMasterCreateWithoutBoxMasterInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -6931,6 +7053,7 @@ export type LeadMasterUncheckedCreateWithoutBoxMasterInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -7016,8 +7139,10 @@ export type LeadMasterUncheckedCreateWithoutBoxMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -7083,6 +7208,7 @@ export type LeadMasterCreateWithoutClientInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -7165,6 +7291,7 @@ export type LeadMasterCreateWithoutClientInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -7178,6 +7305,7 @@ export type LeadMasterCreateWithoutClientInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -7233,6 +7361,7 @@ export type LeadMasterUncheckedCreateWithoutClientInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -7317,8 +7446,10 @@ export type LeadMasterUncheckedCreateWithoutClientInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -7390,6 +7521,7 @@ export type LeadMasterCreateWithoutSpecificationsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -7472,6 +7604,7 @@ export type LeadMasterCreateWithoutSpecificationsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -7486,6 +7619,7 @@ export type LeadMasterCreateWithoutSpecificationsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -7540,6 +7674,7 @@ export type LeadMasterUncheckedCreateWithoutSpecificationsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -7625,8 +7760,10 @@ export type LeadMasterUncheckedCreateWithoutSpecificationsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -7687,6 +7824,7 @@ export type LeadMasterUpdateWithoutSpecificationsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -7769,6 +7907,7 @@ export type LeadMasterUpdateWithoutSpecificationsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -7783,6 +7922,7 @@ export type LeadMasterUpdateWithoutSpecificationsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -7837,6 +7977,7 @@ export type LeadMasterUncheckedUpdateWithoutSpecificationsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -7922,8 +8063,10 @@ export type LeadMasterUncheckedUpdateWithoutSpecificationsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -7968,6 +8111,7 @@ export type LeadMasterCreateWithoutCarcassMaterialMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -8049,6 +8193,7 @@ export type LeadMasterCreateWithoutCarcassMaterialMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -8063,6 +8208,7 @@ export type LeadMasterCreateWithoutCarcassMaterialMappingsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -8118,6 +8264,7 @@ export type LeadMasterUncheckedCreateWithoutCarcassMaterialMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -8202,8 +8349,10 @@ export type LeadMasterUncheckedCreateWithoutCarcassMaterialMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -8265,6 +8414,7 @@ export type LeadMasterUpdateWithoutCarcassMaterialMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -8346,6 +8496,7 @@ export type LeadMasterUpdateWithoutCarcassMaterialMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -8360,6 +8511,7 @@ export type LeadMasterUpdateWithoutCarcassMaterialMappingsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -8415,6 +8567,7 @@ export type LeadMasterUncheckedUpdateWithoutCarcassMaterialMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -8499,8 +8652,10 @@ export type LeadMasterUncheckedUpdateWithoutCarcassMaterialMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -8546,6 +8701,7 @@ export type LeadMasterCreateWithoutShutterMaterialMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -8628,6 +8784,7 @@ export type LeadMasterCreateWithoutShutterMaterialMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -8642,6 +8799,7 @@ export type LeadMasterCreateWithoutShutterMaterialMappingsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -8696,6 +8854,7 @@ export type LeadMasterUncheckedCreateWithoutShutterMaterialMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -8781,8 +8940,10 @@ export type LeadMasterUncheckedCreateWithoutShutterMaterialMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -8843,6 +9004,7 @@ export type LeadMasterUpdateWithoutShutterMaterialMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -8925,6 +9087,7 @@ export type LeadMasterUpdateWithoutShutterMaterialMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -8939,6 +9102,7 @@ export type LeadMasterUpdateWithoutShutterMaterialMappingsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -8993,6 +9157,7 @@ export type LeadMasterUncheckedUpdateWithoutShutterMaterialMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -9078,8 +9243,10 @@ export type LeadMasterUncheckedUpdateWithoutShutterMaterialMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -9124,6 +9291,7 @@ export type LeadMasterCreateWithoutSuperAdminApprovalLocInsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -9206,6 +9374,7 @@ export type LeadMasterCreateWithoutSuperAdminApprovalLocInsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -9220,6 +9389,7 @@ export type LeadMasterCreateWithoutSuperAdminApprovalLocInsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -9274,6 +9444,7 @@ export type LeadMasterUncheckedCreateWithoutSuperAdminApprovalLocInsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -9359,8 +9530,10 @@ export type LeadMasterUncheckedCreateWithoutSuperAdminApprovalLocInsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -9421,6 +9594,7 @@ export type LeadMasterUpdateWithoutSuperAdminApprovalLocInsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -9503,6 +9677,7 @@ export type LeadMasterUpdateWithoutSuperAdminApprovalLocInsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -9517,6 +9692,7 @@ export type LeadMasterUpdateWithoutSuperAdminApprovalLocInsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -9571,6 +9747,7 @@ export type LeadMasterUncheckedUpdateWithoutSuperAdminApprovalLocInsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -9656,8 +9833,10 @@ export type LeadMasterUncheckedUpdateWithoutSuperAdminApprovalLocInsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -9702,6 +9881,7 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -9784,6 +9964,7 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -9798,6 +9979,7 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -9852,6 +10034,7 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -9937,8 +10120,10 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -9999,6 +10184,7 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -10081,6 +10267,7 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -10095,6 +10282,7 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -10149,6 +10337,7 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -10234,8 +10423,10 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -10280,6 +10471,7 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -10361,6 +10553,7 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -10375,6 +10568,7 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -10430,6 +10624,7 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -10514,8 +10709,10 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -10577,6 +10774,7 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -10658,6 +10856,7 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -10672,6 +10871,7 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -10727,6 +10927,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -10811,8 +11012,10 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -10858,6 +11061,7 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -10940,6 +11144,7 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -10953,6 +11158,7 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -11007,6 +11213,7 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -11092,8 +11299,10 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -11165,6 +11374,7 @@ export type LeadMasterCreateWithoutSourceInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -11247,6 +11457,7 @@ export type LeadMasterCreateWithoutSourceInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -11260,6 +11471,7 @@ export type LeadMasterCreateWithoutSourceInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -11314,6 +11526,7 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -11399,8 +11612,10 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -11472,6 +11687,7 @@ export type LeadMasterCreateWithoutAccountInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -11554,6 +11770,7 @@ export type LeadMasterCreateWithoutAccountInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -11567,6 +11784,7 @@ export type LeadMasterCreateWithoutAccountInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -11621,6 +11839,7 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -11706,8 +11925,10 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -11779,6 +12000,7 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -11861,6 +12083,7 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -11874,6 +12097,7 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -11929,6 +12153,7 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -12014,7 +12239,9 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -12076,6 +12303,597 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutLeadNestedInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
+  assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
+  assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
+  client?: Prisma.ClientMasterUpdateOneWithoutLeadsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadsNestedInput
+  siteType?: Prisma.SiteTypeMasterUpdateOneWithoutLeadsNestedInput
+  source?: Prisma.SourceMasterUpdateOneWithoutLeadsNestedInput
+  statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutLeadNestedInput
+  specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutLeadNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
+  BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+}
+
+export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  assign_to?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assigned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutLeadNestedInput
+  specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutLeadNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+}
+
+export type LeadMasterCreateWithoutLeadProcessBriefsInput = {
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  archetech_name?: string | null
+  designer_remark?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  project_status?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  lead_code: string
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  actual_installation_start_date?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  order_login_prod_files_remark?: string | null
+  actual_installation_completion_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  usable_handover_completed_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  tech_check_reached_at?: Date | string | null
+  priority?: string | null
+  amc_opted_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_plan_closed_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  total_required_chs_manufacturing_days?: number | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  archetech_number?: string | null
+  is_small_order_request?: boolean
+  material_lift_size?: string | null
+  fast_production_approved_at?: Date | string | null
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  is_fast_production?: boolean
+  tentative_order_login_date?: Date | string | null
+  isLargeScaleProjectLead?: boolean
+  order_number?: string | null
+  refered_by?: string | null
+  cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutLeadInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
+  assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
+  assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
+  client?: Prisma.ClientMasterCreateNestedOneWithoutLeadsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadsInput
+  siteType?: Prisma.SiteTypeMasterCreateNestedOneWithoutLeadsInput
+  source?: Prisma.SourceMasterCreateNestedOneWithoutLeadsInput
+  statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
+  productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutLeadInput
+  specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutLeadInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
+  BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+}
+
+export type LeadMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
+  id?: number
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  archetech_name?: string | null
+  designer_remark?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  vendor_id: number
+  assign_to?: number | null
+  assigned_by?: number | null
+  account_id?: number | null
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  status_id?: number | null
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  project_status?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  lead_code: string
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  actual_installation_start_date?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  franchise_id?: number | null
+  order_login_prod_files_remark?: string | null
+  actual_installation_completion_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  usable_handover_completed_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  tech_check_reached_at?: Date | string | null
+  priority?: string | null
+  amc_opted_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_plan_closed_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  total_required_chs_manufacturing_days?: number | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  archetech_number?: string | null
+  is_small_order_request?: boolean
+  material_lift_size?: string | null
+  fast_production_approved_at?: Date | string | null
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  is_fast_production?: boolean
+  tentative_order_login_date?: Date | string | null
+  isLargeScaleProjectLead?: boolean
+  architect_id?: number | null
+  client_id?: number | null
+  order_number?: string | null
+  refered_by?: string | null
+  cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
+  productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutLeadInput
+  specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutLeadInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+}
+
+export type LeadMasterCreateOrConnectWithoutLeadProcessBriefsInput = {
+  where: Prisma.LeadMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutLeadProcessBriefsInput, Prisma.LeadMasterUncheckedCreateWithoutLeadProcessBriefsInput>
+}
+
+export type LeadMasterUpsertWithoutLeadProcessBriefsInput = {
+  update: Prisma.XOR<Prisma.LeadMasterUpdateWithoutLeadProcessBriefsInput, Prisma.LeadMasterUncheckedUpdateWithoutLeadProcessBriefsInput>
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutLeadProcessBriefsInput, Prisma.LeadMasterUncheckedCreateWithoutLeadProcessBriefsInput>
+  where?: Prisma.LeadMasterWhereInput
+}
+
+export type LeadMasterUpdateToOneWithWhereWithoutLeadProcessBriefsInput = {
+  where?: Prisma.LeadMasterWhereInput
+  data: Prisma.XOR<Prisma.LeadMasterUpdateWithoutLeadProcessBriefsInput, Prisma.LeadMasterUncheckedUpdateWithoutLeadProcessBriefsInput>
+}
+
+export type LeadMasterUpdateWithoutLeadProcessBriefsInput = {
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -12171,6 +12989,8 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
+  productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -12195,7 +13015,7 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
 }
 
-export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
+export type LeadMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
@@ -12226,6 +13046,7 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -12312,6 +13133,598 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
+  productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutLeadNestedInput
+  specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutLeadNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+}
+
+export type LeadMasterCreateWithoutLeadRequirementMaterialsInput = {
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  archetech_name?: string | null
+  designer_remark?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  project_status?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  lead_code: string
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  actual_installation_start_date?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  order_login_prod_files_remark?: string | null
+  actual_installation_completion_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  usable_handover_completed_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  tech_check_reached_at?: Date | string | null
+  priority?: string | null
+  amc_opted_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_plan_closed_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  total_required_chs_manufacturing_days?: number | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  archetech_number?: string | null
+  is_small_order_request?: boolean
+  material_lift_size?: string | null
+  fast_production_approved_at?: Date | string | null
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  is_fast_production?: boolean
+  tentative_order_login_date?: Date | string | null
+  isLargeScaleProjectLead?: boolean
+  order_number?: string | null
+  refered_by?: string | null
+  cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutLeadInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
+  assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
+  assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
+  client?: Prisma.ClientMasterCreateNestedOneWithoutLeadsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadsInput
+  siteType?: Prisma.SiteTypeMasterCreateNestedOneWithoutLeadsInput
+  source?: Prisma.SourceMasterCreateNestedOneWithoutLeadsInput
+  statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
+  productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutLeadInput
+  specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutLeadInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
+  BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+}
+
+export type LeadMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
+  id?: number
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  archetech_name?: string | null
+  designer_remark?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  vendor_id: number
+  assign_to?: number | null
+  assigned_by?: number | null
+  account_id?: number | null
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  status_id?: number | null
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  project_status?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  lead_code: string
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  actual_installation_start_date?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  franchise_id?: number | null
+  order_login_prod_files_remark?: string | null
+  actual_installation_completion_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  usable_handover_completed_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  tech_check_reached_at?: Date | string | null
+  priority?: string | null
+  amc_opted_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_plan_closed_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  total_required_chs_manufacturing_days?: number | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  archetech_number?: string | null
+  is_small_order_request?: boolean
+  material_lift_size?: string | null
+  fast_production_approved_at?: Date | string | null
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  is_fast_production?: boolean
+  tentative_order_login_date?: Date | string | null
+  isLargeScaleProjectLead?: boolean
+  architect_id?: number | null
+  client_id?: number | null
+  order_number?: string | null
+  refered_by?: string | null
+  cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
+  productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutLeadInput
+  specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutLeadInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+}
+
+export type LeadMasterCreateOrConnectWithoutLeadRequirementMaterialsInput = {
+  where: Prisma.LeadMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutLeadRequirementMaterialsInput, Prisma.LeadMasterUncheckedCreateWithoutLeadRequirementMaterialsInput>
+}
+
+export type LeadMasterUpsertWithoutLeadRequirementMaterialsInput = {
+  update: Prisma.XOR<Prisma.LeadMasterUpdateWithoutLeadRequirementMaterialsInput, Prisma.LeadMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput>
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutLeadRequirementMaterialsInput, Prisma.LeadMasterUncheckedCreateWithoutLeadRequirementMaterialsInput>
+  where?: Prisma.LeadMasterWhereInput
+}
+
+export type LeadMasterUpdateToOneWithWhereWithoutLeadRequirementMaterialsInput = {
+  where?: Prisma.LeadMasterWhereInput
+  data: Prisma.XOR<Prisma.LeadMasterUpdateWithoutLeadRequirementMaterialsInput, Prisma.LeadMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput>
+}
+
+export type LeadMasterUpdateWithoutLeadRequirementMaterialsInput = {
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutLeadNestedInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
+  assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
+  assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
+  client?: Prisma.ClientMasterUpdateOneWithoutLeadsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadsNestedInput
+  siteType?: Prisma.SiteTypeMasterUpdateOneWithoutLeadsNestedInput
+  source?: Prisma.SourceMasterUpdateOneWithoutLeadsNestedInput
+  statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
+  productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutLeadNestedInput
+  specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutLeadNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
+  BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+}
+
+export type LeadMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  assign_to?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assigned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
+  productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -12357,6 +13770,7 @@ export type LeadMasterCreateWithoutHardwareMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -12438,6 +13852,7 @@ export type LeadMasterCreateWithoutHardwareMappingsInput = {
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -12452,6 +13867,7 @@ export type LeadMasterCreateWithoutHardwareMappingsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -12507,6 +13923,7 @@ export type LeadMasterUncheckedCreateWithoutHardwareMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -12591,8 +14008,10 @@ export type LeadMasterUncheckedCreateWithoutHardwareMappingsInput = {
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -12654,6 +14073,7 @@ export type LeadMasterUpdateWithoutHardwareMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -12735,6 +14155,7 @@ export type LeadMasterUpdateWithoutHardwareMappingsInput = {
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -12749,6 +14170,7 @@ export type LeadMasterUpdateWithoutHardwareMappingsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -12804,6 +14226,7 @@ export type LeadMasterUncheckedUpdateWithoutHardwareMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -12888,8 +14311,10 @@ export type LeadMasterUncheckedUpdateWithoutHardwareMappingsInput = {
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -12935,6 +14360,7 @@ export type LeadMasterCreateWithoutLightCarcasUnitMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -13016,6 +14442,7 @@ export type LeadMasterCreateWithoutLightCarcasUnitMappingsInput = {
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -13030,6 +14457,7 @@ export type LeadMasterCreateWithoutLightCarcasUnitMappingsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -13085,6 +14513,7 @@ export type LeadMasterUncheckedCreateWithoutLightCarcasUnitMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -13169,8 +14598,10 @@ export type LeadMasterUncheckedCreateWithoutLightCarcasUnitMappingsInput = {
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -13232,6 +14663,7 @@ export type LeadMasterUpdateWithoutLightCarcasUnitMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -13313,6 +14745,7 @@ export type LeadMasterUpdateWithoutLightCarcasUnitMappingsInput = {
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -13327,6 +14760,7 @@ export type LeadMasterUpdateWithoutLightCarcasUnitMappingsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -13382,6 +14816,7 @@ export type LeadMasterUncheckedUpdateWithoutLightCarcasUnitMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -13466,8 +14901,10 @@ export type LeadMasterUncheckedUpdateWithoutLightCarcasUnitMappingsInput = {
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -13513,6 +14950,7 @@ export type LeadMasterCreateWithoutOtherAppliancesMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -13595,6 +15033,7 @@ export type LeadMasterCreateWithoutOtherAppliancesMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -13608,6 +15047,7 @@ export type LeadMasterCreateWithoutOtherAppliancesMappingsInput = {
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -13663,6 +15103,7 @@ export type LeadMasterUncheckedCreateWithoutOtherAppliancesMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -13748,7 +15189,9 @@ export type LeadMasterUncheckedCreateWithoutOtherAppliancesMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -13810,6 +15253,7 @@ export type LeadMasterUpdateWithoutOtherAppliancesMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -13892,6 +15336,7 @@ export type LeadMasterUpdateWithoutOtherAppliancesMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -13905,6 +15350,7 @@ export type LeadMasterUpdateWithoutOtherAppliancesMappingsInput = {
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -13960,6 +15406,7 @@ export type LeadMasterUncheckedUpdateWithoutOtherAppliancesMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -14045,7 +15492,9 @@ export type LeadMasterUncheckedUpdateWithoutOtherAppliancesMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -14091,6 +15540,7 @@ export type LeadMasterCreateWithoutSpecificationDocumentMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -14173,6 +15623,7 @@ export type LeadMasterCreateWithoutSpecificationDocumentMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -14187,6 +15638,7 @@ export type LeadMasterCreateWithoutSpecificationDocumentMappingsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -14241,6 +15693,7 @@ export type LeadMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput =
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -14326,8 +15779,10 @@ export type LeadMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput =
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -14388,6 +15843,7 @@ export type LeadMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -14470,6 +15926,7 @@ export type LeadMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -14484,6 +15941,7 @@ export type LeadMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -14538,6 +15996,7 @@ export type LeadMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput =
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -14623,8 +16082,10 @@ export type LeadMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput =
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -14669,6 +16130,7 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -14750,6 +16212,7 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -14764,6 +16227,7 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -14819,6 +16283,7 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -14903,8 +16368,10 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -14966,6 +16433,7 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -15047,6 +16515,7 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -15061,6 +16530,7 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -15116,6 +16586,7 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -15200,8 +16671,10 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -15247,6 +16720,7 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -15328,6 +16802,7 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -15342,6 +16817,7 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -15397,6 +16873,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -15481,8 +16958,10 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -15544,6 +17023,7 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -15625,6 +17105,7 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -15639,6 +17120,7 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -15694,6 +17176,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -15778,8 +17261,10 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -15825,6 +17310,7 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -15906,6 +17392,7 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -15920,6 +17407,7 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -15975,6 +17463,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -16059,8 +17548,10 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -16122,6 +17613,7 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -16203,6 +17695,7 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -16217,6 +17710,7 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -16272,6 +17766,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -16356,8 +17851,10 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -16403,6 +17900,7 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -16485,6 +17983,7 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -16499,6 +17998,7 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
@@ -16553,6 +18053,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -16638,8 +18139,10 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -16700,6 +18203,7 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -16782,6 +18286,7 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -16796,6 +18301,7 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
@@ -16850,6 +18356,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -16935,8 +18442,10 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -16981,6 +18490,7 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -17063,6 +18573,7 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -17077,6 +18588,7 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
@@ -17131,6 +18643,7 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -17216,8 +18729,10 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -17278,6 +18793,7 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -17360,6 +18876,7 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -17374,6 +18891,7 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
@@ -17428,6 +18946,7 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -17513,8 +19032,10 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -17559,6 +19080,7 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -17641,6 +19163,7 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -17655,6 +19178,7 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -17709,6 +19233,7 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -17794,8 +19319,10 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -17856,6 +19383,7 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -17938,6 +19466,7 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -17952,6 +19481,7 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -18006,6 +19536,7 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -18091,8 +19622,10 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -18137,6 +19670,7 @@ export type LeadMasterCreateWithoutLedgersInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -18219,6 +19753,7 @@ export type LeadMasterCreateWithoutLedgersInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -18233,6 +19768,7 @@ export type LeadMasterCreateWithoutLedgersInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -18287,6 +19823,7 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -18372,8 +19909,10 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -18434,6 +19973,7 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -18516,6 +20056,7 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -18530,6 +20071,7 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -18584,6 +20126,7 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -18669,8 +20212,10 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -18715,6 +20260,7 @@ export type LeadMasterCreateWithoutSmallOrderRequestsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -18797,6 +20343,7 @@ export type LeadMasterCreateWithoutSmallOrderRequestsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -18811,6 +20358,7 @@ export type LeadMasterCreateWithoutSmallOrderRequestsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -18865,6 +20413,7 @@ export type LeadMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -18950,8 +20499,10 @@ export type LeadMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -19012,6 +20563,7 @@ export type LeadMasterUpdateWithoutSmallOrderRequestsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -19094,6 +20646,7 @@ export type LeadMasterUpdateWithoutSmallOrderRequestsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -19108,6 +20661,7 @@ export type LeadMasterUpdateWithoutSmallOrderRequestsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -19162,6 +20716,7 @@ export type LeadMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -19247,8 +20802,10 @@ export type LeadMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -19293,6 +20850,7 @@ export type LeadMasterCreateWithoutAmcContractsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -19374,6 +20932,7 @@ export type LeadMasterCreateWithoutAmcContractsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -19388,6 +20947,7 @@ export type LeadMasterCreateWithoutAmcContractsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -19443,6 +21003,7 @@ export type LeadMasterUncheckedCreateWithoutAmcContractsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -19527,8 +21088,10 @@ export type LeadMasterUncheckedCreateWithoutAmcContractsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -19590,6 +21153,7 @@ export type LeadMasterUpdateWithoutAmcContractsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -19671,6 +21235,7 @@ export type LeadMasterUpdateWithoutAmcContractsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -19685,6 +21250,7 @@ export type LeadMasterUpdateWithoutAmcContractsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -19740,6 +21306,7 @@ export type LeadMasterUncheckedUpdateWithoutAmcContractsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -19824,8 +21391,10 @@ export type LeadMasterUncheckedUpdateWithoutAmcContractsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -19871,6 +21440,7 @@ export type LeadMasterCreateWithoutServiceSchedulesInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -19953,6 +21523,7 @@ export type LeadMasterCreateWithoutServiceSchedulesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -19967,6 +21538,7 @@ export type LeadMasterCreateWithoutServiceSchedulesInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
@@ -20021,6 +21593,7 @@ export type LeadMasterUncheckedCreateWithoutServiceSchedulesInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -20106,8 +21679,10 @@ export type LeadMasterUncheckedCreateWithoutServiceSchedulesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -20168,6 +21743,7 @@ export type LeadMasterUpdateWithoutServiceSchedulesInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -20250,6 +21826,7 @@ export type LeadMasterUpdateWithoutServiceSchedulesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -20264,6 +21841,7 @@ export type LeadMasterUpdateWithoutServiceSchedulesInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
@@ -20318,6 +21896,7 @@ export type LeadMasterUncheckedUpdateWithoutServiceSchedulesInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -20403,8 +21982,10 @@ export type LeadMasterUncheckedUpdateWithoutServiceSchedulesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -20449,6 +22030,7 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -20531,6 +22113,7 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -20544,6 +22127,7 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -20598,6 +22182,7 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -20683,8 +22268,10 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -20756,6 +22343,7 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -20838,6 +22426,7 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -20852,6 +22441,7 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -20906,6 +22496,7 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -20991,8 +22582,10 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -21053,6 +22646,7 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -21135,6 +22729,7 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -21149,6 +22744,7 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -21203,6 +22799,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -21288,8 +22885,10 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -21334,6 +22933,7 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -21415,6 +23015,7 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -21429,6 +23030,7 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -21484,6 +23086,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -21568,8 +23171,10 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -21631,6 +23236,7 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -21712,6 +23318,7 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -21726,6 +23333,7 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -21781,6 +23389,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -21865,8 +23474,10 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -21912,6 +23523,7 @@ export type LeadMasterCreateWithoutClientVisitsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -21993,6 +23605,7 @@ export type LeadMasterCreateWithoutClientVisitsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -22007,6 +23620,7 @@ export type LeadMasterCreateWithoutClientVisitsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -22062,6 +23676,7 @@ export type LeadMasterUncheckedCreateWithoutClientVisitsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -22146,8 +23761,10 @@ export type LeadMasterUncheckedCreateWithoutClientVisitsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -22209,6 +23826,7 @@ export type LeadMasterUpdateWithoutClientVisitsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -22290,6 +23908,7 @@ export type LeadMasterUpdateWithoutClientVisitsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -22304,6 +23923,7 @@ export type LeadMasterUpdateWithoutClientVisitsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -22359,6 +23979,7 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -22443,8 +24064,10 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -22490,6 +24113,7 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -22571,6 +24195,7 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -22585,6 +24210,7 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -22640,6 +24266,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -22724,8 +24351,10 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -22787,6 +24416,7 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -22868,6 +24498,7 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -22882,6 +24513,7 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -22937,6 +24569,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -23021,8 +24654,10 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -23068,6 +24703,7 @@ export type LeadMasterCreateWithoutClientVisitDocumentMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -23149,6 +24785,7 @@ export type LeadMasterCreateWithoutClientVisitDocumentMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -23163,6 +24800,7 @@ export type LeadMasterCreateWithoutClientVisitDocumentMappingsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -23218,6 +24856,7 @@ export type LeadMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -23302,8 +24941,10 @@ export type LeadMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -23365,6 +25006,7 @@ export type LeadMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -23446,6 +25088,7 @@ export type LeadMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -23460,6 +25103,7 @@ export type LeadMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -23515,6 +25159,7 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -23599,8 +25244,10 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -23646,6 +25293,7 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -23727,6 +25375,7 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -23741,6 +25390,7 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -23796,6 +25446,7 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -23880,8 +25531,10 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -23943,6 +25596,7 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -24024,6 +25678,7 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -24038,6 +25693,7 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -24093,6 +25749,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -24177,8 +25834,10 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -24224,6 +25883,7 @@ export type LeadMasterCreateWithoutChsSelectionMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -24306,6 +25966,7 @@ export type LeadMasterCreateWithoutChsSelectionMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -24320,6 +25981,7 @@ export type LeadMasterCreateWithoutChsSelectionMappingsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -24374,6 +26036,7 @@ export type LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -24459,8 +26122,10 @@ export type LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -24521,6 +26186,7 @@ export type LeadMasterUpdateWithoutChsSelectionMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -24603,6 +26269,7 @@ export type LeadMasterUpdateWithoutChsSelectionMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -24617,6 +26284,7 @@ export type LeadMasterUpdateWithoutChsSelectionMappingsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -24671,6 +26339,7 @@ export type LeadMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -24756,8 +26425,10 @@ export type LeadMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -24802,6 +26473,7 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -24884,6 +26556,7 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -24898,6 +26571,7 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -24952,6 +26626,7 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -25037,8 +26712,10 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -25099,6 +26776,7 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -25181,6 +26859,7 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -25195,6 +26874,7 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -25249,6 +26929,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -25334,8 +27015,10 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -25380,6 +27063,7 @@ export type LeadMasterCreateWithoutTasksInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -25462,6 +27146,7 @@ export type LeadMasterCreateWithoutTasksInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -25476,6 +27161,7 @@ export type LeadMasterCreateWithoutTasksInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -25530,6 +27216,7 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -25615,8 +27302,10 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -25677,6 +27366,7 @@ export type LeadMasterUpdateWithoutTasksInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -25759,6 +27449,7 @@ export type LeadMasterUpdateWithoutTasksInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -25773,6 +27464,7 @@ export type LeadMasterUpdateWithoutTasksInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -25827,6 +27519,7 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -25912,8 +27605,10 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -25958,6 +27653,7 @@ export type LeadMasterCreateWithoutFastProductionRequestBatchesInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -26039,6 +27735,7 @@ export type LeadMasterCreateWithoutFastProductionRequestBatchesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -26053,6 +27750,7 @@ export type LeadMasterCreateWithoutFastProductionRequestBatchesInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -26108,6 +27806,7 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestBatchesInput = 
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -26192,8 +27891,10 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestBatchesInput = 
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -26255,6 +27956,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestBatchesInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -26336,6 +28038,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestBatchesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -26350,6 +28053,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestBatchesInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -26405,6 +28109,7 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput = 
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -26489,8 +28194,10 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput = 
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -26536,6 +28243,7 @@ export type LeadMasterCreateWithoutFastProductionRequestsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -26617,6 +28325,7 @@ export type LeadMasterCreateWithoutFastProductionRequestsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -26631,6 +28340,7 @@ export type LeadMasterCreateWithoutFastProductionRequestsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -26686,6 +28396,7 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -26770,8 +28481,10 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -26833,6 +28546,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -26914,6 +28628,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -26928,6 +28643,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -26983,6 +28699,7 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -27067,8 +28784,10 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -27114,6 +28833,7 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -27195,6 +28915,7 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -27209,6 +28930,7 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -27264,6 +28986,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -27348,8 +29071,10 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -27411,6 +29136,7 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -27492,6 +29218,7 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -27506,6 +29233,7 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -27561,6 +29289,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -27645,8 +29374,10 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -27692,6 +29423,7 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -27773,6 +29505,7 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -27787,6 +29520,7 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -27842,6 +29576,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -27926,8 +29661,10 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -27989,6 +29726,7 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -28070,6 +29808,7 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -28084,6 +29823,7 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -28139,6 +29879,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -28223,8 +29964,10 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -28270,6 +30013,7 @@ export type LeadMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -28351,6 +30095,7 @@ export type LeadMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -28365,6 +30110,7 @@ export type LeadMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -28420,6 +30166,7 @@ export type LeadMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -28504,8 +30251,10 @@ export type LeadMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -28567,6 +30316,7 @@ export type LeadMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -28648,6 +30398,7 @@ export type LeadMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -28662,6 +30413,7 @@ export type LeadMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -28717,6 +30469,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -28801,8 +30554,10 @@ export type LeadMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -28848,6 +30603,7 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -28930,6 +30686,7 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -28944,6 +30701,7 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -28998,6 +30756,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -29083,8 +30842,10 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -29145,6 +30906,7 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -29227,6 +30989,7 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -29241,6 +31004,7 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -29295,6 +31059,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -29380,8 +31145,10 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -29426,6 +31193,7 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -29508,6 +31276,7 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -29522,6 +31291,7 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -29576,6 +31346,7 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -29661,8 +31432,10 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -29723,6 +31496,7 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -29805,6 +31579,7 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -29819,6 +31594,7 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -29873,6 +31649,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -29958,8 +31735,10 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -30004,6 +31783,7 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -30085,6 +31865,7 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -30099,6 +31880,7 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -30154,6 +31936,7 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -30238,8 +32021,10 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -30301,6 +32086,7 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -30382,6 +32168,7 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -30396,6 +32183,7 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -30451,6 +32239,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -30535,8 +32324,10 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -30582,6 +32373,7 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -30663,6 +32455,7 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -30677,6 +32470,7 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -30732,6 +32526,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -30816,8 +32611,10 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -30879,6 +32676,7 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -30960,6 +32758,7 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -30974,6 +32773,7 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -31029,6 +32829,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -31113,8 +32914,10 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -31160,6 +32963,7 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -31242,6 +33046,7 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -31256,6 +33061,7 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -31310,6 +33116,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -31395,8 +33202,10 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -31457,6 +33266,7 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -31539,6 +33349,7 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -31553,6 +33364,7 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -31607,6 +33419,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -31692,8 +33505,10 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -31738,6 +33553,7 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -31819,6 +33635,7 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -31833,6 +33650,7 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -31888,6 +33706,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -31972,8 +33791,10 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -32035,6 +33856,7 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -32116,6 +33938,7 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -32130,6 +33953,7 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -32185,6 +34009,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -32269,8 +34094,10 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -32316,6 +34143,7 @@ export type LeadMasterCreateWithoutCutListInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -32397,6 +34225,7 @@ export type LeadMasterCreateWithoutCutListInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -32411,6 +34240,7 @@ export type LeadMasterCreateWithoutCutListInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -32466,6 +34296,7 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -32550,8 +34381,10 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -32613,6 +34446,7 @@ export type LeadMasterUpdateWithoutCutListInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -32694,6 +34528,7 @@ export type LeadMasterUpdateWithoutCutListInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -32708,6 +34543,7 @@ export type LeadMasterUpdateWithoutCutListInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -32763,6 +34599,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -32847,8 +34684,10 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -32894,6 +34733,7 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -32975,6 +34815,7 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -32989,6 +34830,7 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -33044,6 +34886,7 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -33128,8 +34971,10 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -33191,6 +35036,7 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -33272,6 +35118,7 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -33286,6 +35133,7 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -33341,6 +35189,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -33425,8 +35274,10 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -33472,6 +35323,7 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -33554,6 +35406,7 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -33568,6 +35421,7 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -33622,6 +35476,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -33707,8 +35562,10 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -33769,6 +35626,7 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -33851,6 +35709,7 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -33865,6 +35724,7 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -33919,6 +35779,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -34004,8 +35865,10 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -34050,6 +35913,7 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -34132,6 +35996,7 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -34145,6 +36010,7 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -34200,6 +36066,7 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -34284,8 +36151,10 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -34357,6 +36226,7 @@ export type LeadMasterCreateWithoutExternalPlatformCustomerMappingsInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -34438,6 +36308,7 @@ export type LeadMasterCreateWithoutExternalPlatformCustomerMappingsInput = {
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -34452,6 +36323,7 @@ export type LeadMasterCreateWithoutExternalPlatformCustomerMappingsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -34507,6 +36379,7 @@ export type LeadMasterUncheckedCreateWithoutExternalPlatformCustomerMappingsInpu
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -34591,8 +36464,10 @@ export type LeadMasterUncheckedCreateWithoutExternalPlatformCustomerMappingsInpu
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -34654,6 +36529,7 @@ export type LeadMasterUpdateWithoutExternalPlatformCustomerMappingsInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -34735,6 +36611,7 @@ export type LeadMasterUpdateWithoutExternalPlatformCustomerMappingsInput = {
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -34749,6 +36626,7 @@ export type LeadMasterUpdateWithoutExternalPlatformCustomerMappingsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -34804,6 +36682,7 @@ export type LeadMasterUncheckedUpdateWithoutExternalPlatformCustomerMappingsInpu
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -34888,8 +36767,10 @@ export type LeadMasterUncheckedUpdateWithoutExternalPlatformCustomerMappingsInpu
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -34935,6 +36816,7 @@ export type LeadMasterCreateWithoutArchitectInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -35017,6 +36899,7 @@ export type LeadMasterCreateWithoutArchitectInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -35030,6 +36913,7 @@ export type LeadMasterCreateWithoutArchitectInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
@@ -35085,6 +36969,7 @@ export type LeadMasterUncheckedCreateWithoutArchitectInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -35169,8 +37054,10 @@ export type LeadMasterUncheckedCreateWithoutArchitectInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
@@ -35251,6 +37138,7 @@ export type LeadMasterCreateManyVendorInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -35335,6 +37223,7 @@ export type LeadMasterUpdateWithoutVendorInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -35417,6 +37306,7 @@ export type LeadMasterUpdateWithoutVendorInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -35430,6 +37320,7 @@ export type LeadMasterUpdateWithoutVendorInput = {
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -35484,6 +37375,7 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -35569,8 +37461,10 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -35625,6 +37519,7 @@ export type LeadMasterUncheckedUpdateManyWithoutVendorInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -35718,6 +37613,7 @@ export type LeadMasterCreateManyAssignedToInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -35811,6 +37707,7 @@ export type LeadMasterCreateManyAssignedByInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -35904,6 +37801,7 @@ export type LeadMasterCreateManyCreatedByInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -35997,6 +37895,7 @@ export type LeadMasterCreateManyUpdatedByInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -36081,6 +37980,7 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -36163,6 +38063,7 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -36176,6 +38077,7 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -36230,6 +38132,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -36315,8 +38218,10 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -36371,6 +38276,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedToInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -36455,6 +38361,7 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -36537,6 +38444,7 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -36550,6 +38458,7 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -36604,6 +38513,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -36689,8 +38599,10 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -36745,6 +38657,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedByInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -36829,6 +38742,7 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -36911,6 +38825,7 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -36924,6 +38839,7 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -36978,6 +38894,7 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -37063,8 +38980,10 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -37119,6 +39038,7 @@ export type LeadMasterUncheckedUpdateManyWithoutCreatedByInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -37203,6 +39123,7 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -37285,6 +39206,7 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -37298,6 +39220,7 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -37352,6 +39275,7 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -37437,8 +39361,10 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -37493,6 +39419,7 @@ export type LeadMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -37577,6 +39504,7 @@ export type LeadMasterUpdateWithoutBoxMasterInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -37659,6 +39587,7 @@ export type LeadMasterUpdateWithoutBoxMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -37673,6 +39602,7 @@ export type LeadMasterUpdateWithoutBoxMasterInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -37727,6 +39657,7 @@ export type LeadMasterUncheckedUpdateWithoutBoxMasterInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -37812,8 +39743,10 @@ export type LeadMasterUncheckedUpdateWithoutBoxMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -37868,6 +39801,7 @@ export type LeadMasterUncheckedUpdateManyWithoutBoxMasterInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -37962,6 +39896,7 @@ export type LeadMasterCreateManyClientInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -38045,6 +39980,7 @@ export type LeadMasterUpdateWithoutClientInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -38127,6 +40063,7 @@ export type LeadMasterUpdateWithoutClientInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -38140,6 +40077,7 @@ export type LeadMasterUpdateWithoutClientInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -38195,6 +40133,7 @@ export type LeadMasterUncheckedUpdateWithoutClientInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -38279,8 +40218,10 @@ export type LeadMasterUncheckedUpdateWithoutClientInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -38336,6 +40277,7 @@ export type LeadMasterUncheckedUpdateManyWithoutClientInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -38428,6 +40370,7 @@ export type LeadMasterCreateManySiteTypeInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -38512,6 +40455,7 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -38594,6 +40538,7 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -38607,6 +40552,7 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -38661,6 +40607,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -38746,8 +40693,10 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -38802,6 +40751,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSiteTypeInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -38895,6 +40845,7 @@ export type LeadMasterCreateManySourceInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -38979,6 +40930,7 @@ export type LeadMasterUpdateWithoutSourceInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -39061,6 +41013,7 @@ export type LeadMasterUpdateWithoutSourceInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -39074,6 +41027,7 @@ export type LeadMasterUpdateWithoutSourceInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -39128,6 +41082,7 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -39213,8 +41168,10 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -39269,6 +41226,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSourceInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -39362,6 +41320,7 @@ export type LeadMasterCreateManyAccountInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -39446,6 +41405,7 @@ export type LeadMasterUpdateWithoutAccountInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -39528,6 +41488,7 @@ export type LeadMasterUpdateWithoutAccountInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -39541,6 +41502,7 @@ export type LeadMasterUpdateWithoutAccountInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -39595,6 +41557,7 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -39680,8 +41643,10 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -39736,6 +41701,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAccountInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -39829,6 +41795,7 @@ export type LeadMasterCreateManyStatusTypeInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -39913,6 +41880,7 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -39995,6 +41963,7 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -40008,6 +41977,7 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -40062,6 +42032,7 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -40147,8 +42118,10 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -40203,6 +42176,7 @@ export type LeadMasterUncheckedUpdateManyWithoutStatusTypeInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -40297,6 +42271,7 @@ export type LeadMasterCreateManyFranchiseInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -40380,6 +42355,7 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -40462,6 +42438,7 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -40475,6 +42452,7 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -40530,6 +42508,7 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -40614,8 +42593,10 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -40671,6 +42652,7 @@ export type LeadMasterUncheckedUpdateManyWithoutFranchiseInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -40764,6 +42746,7 @@ export type LeadMasterCreateManyArchitectInput = {
   site_map_link?: string | null
   activity_status?: $Enums.ActivityStatus
   activity_status_remark?: string | null
+  project_status?: string | null
   booking_amount?: number | null
   pending_amount?: number | null
   total_project_amount?: number | null
@@ -40847,6 +42830,7 @@ export type LeadMasterUpdateWithoutArchitectInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -40929,6 +42913,7 @@ export type LeadMasterUpdateWithoutArchitectInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -40942,6 +42927,7 @@ export type LeadMasterUpdateWithoutArchitectInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
@@ -40997,6 +42983,7 @@ export type LeadMasterUncheckedUpdateWithoutArchitectInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -41081,8 +43068,10 @@ export type LeadMasterUncheckedUpdateWithoutArchitectInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
@@ -41138,6 +43127,7 @@ export type LeadMasterUncheckedUpdateManyWithoutArchitectInput = {
   site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
   activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -41230,8 +43220,10 @@ export type LeadMasterCountOutputType = {
   externalPlatformCustomerMappings: number
   hardwareMappings: number
   lightCarcasUnitMappings: number
+  leadProcessBriefs: number
   otherAppliancesMappings: number
   productMappings: number
+  leadRequirementMaterials: number
   productStructureInstances: number
   leadProductStructureMapping: number
   serviceSchedules: number
@@ -41281,8 +43273,10 @@ export type LeadMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   externalPlatformCustomerMappings?: boolean | LeadMasterCountOutputTypeCountExternalPlatformCustomerMappingsArgs
   hardwareMappings?: boolean | LeadMasterCountOutputTypeCountHardwareMappingsArgs
   lightCarcasUnitMappings?: boolean | LeadMasterCountOutputTypeCountLightCarcasUnitMappingsArgs
+  leadProcessBriefs?: boolean | LeadMasterCountOutputTypeCountLeadProcessBriefsArgs
   otherAppliancesMappings?: boolean | LeadMasterCountOutputTypeCountOtherAppliancesMappingsArgs
   productMappings?: boolean | LeadMasterCountOutputTypeCountProductMappingsArgs
+  leadRequirementMaterials?: boolean | LeadMasterCountOutputTypeCountLeadRequirementMaterialsArgs
   productStructureInstances?: boolean | LeadMasterCountOutputTypeCountProductStructureInstancesArgs
   leadProductStructureMapping?: boolean | LeadMasterCountOutputTypeCountLeadProductStructureMappingArgs
   serviceSchedules?: boolean | LeadMasterCountOutputTypeCountServiceSchedulesArgs
@@ -41488,6 +43482,13 @@ export type LeadMasterCountOutputTypeCountLightCarcasUnitMappingsArgs<ExtArgs ex
 /**
  * LeadMasterCountOutputType without action
  */
+export type LeadMasterCountOutputTypeCountLeadProcessBriefsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadProcessBriefMappingWhereInput
+}
+
+/**
+ * LeadMasterCountOutputType without action
+ */
 export type LeadMasterCountOutputTypeCountOtherAppliancesMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LeadOtherAppliancesMappingWhereInput
 }
@@ -41497,6 +43498,13 @@ export type LeadMasterCountOutputTypeCountOtherAppliancesMappingsArgs<ExtArgs ex
  */
 export type LeadMasterCountOutputTypeCountProductMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LeadProductMappingWhereInput
+}
+
+/**
+ * LeadMasterCountOutputType without action
+ */
+export type LeadMasterCountOutputTypeCountLeadRequirementMaterialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadRequirementMaterialMappingWhereInput
 }
 
 /**
@@ -41685,6 +43693,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   site_map_link?: boolean
   activity_status?: boolean
   activity_status_remark?: boolean
+  project_status?: boolean
   booking_amount?: boolean
   pending_amount?: boolean
   total_project_amount?: boolean
@@ -41770,6 +43779,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   externalPlatformCustomerMappings?: boolean | Prisma.LeadMaster$externalPlatformCustomerMappingsArgs<ExtArgs>
   hardwareMappings?: boolean | Prisma.LeadMaster$hardwareMappingsArgs<ExtArgs>
   lightCarcasUnitMappings?: boolean | Prisma.LeadMaster$lightCarcasUnitMappingsArgs<ExtArgs>
+  leadProcessBriefs?: boolean | Prisma.LeadMaster$leadProcessBriefsArgs<ExtArgs>
   account?: boolean | Prisma.LeadMaster$accountArgs<ExtArgs>
   architect?: boolean | Prisma.LeadMaster$architectArgs<ExtArgs>
   assignedTo?: boolean | Prisma.LeadMaster$assignedToArgs<ExtArgs>
@@ -41784,6 +43794,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   otherAppliancesMappings?: boolean | Prisma.LeadMaster$otherAppliancesMappingsArgs<ExtArgs>
   productMappings?: boolean | Prisma.LeadMaster$productMappingsArgs<ExtArgs>
+  leadRequirementMaterials?: boolean | Prisma.LeadMaster$leadRequirementMaterialsArgs<ExtArgs>
   productStructureInstances?: boolean | Prisma.LeadMaster$productStructureInstancesArgs<ExtArgs>
   leadProductStructureMapping?: boolean | Prisma.LeadMaster$leadProductStructureMappingArgs<ExtArgs>
   serviceSchedules?: boolean | Prisma.LeadMaster$serviceSchedulesArgs<ExtArgs>
@@ -41840,6 +43851,7 @@ export type LeadMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   site_map_link?: boolean
   activity_status?: boolean
   activity_status_remark?: boolean
+  project_status?: boolean
   booking_amount?: boolean
   pending_amount?: boolean
   total_project_amount?: boolean
@@ -41946,6 +43958,7 @@ export type LeadMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   site_map_link?: boolean
   activity_status?: boolean
   activity_status_remark?: boolean
+  project_status?: boolean
   booking_amount?: boolean
   pending_amount?: boolean
   total_project_amount?: boolean
@@ -42052,6 +44065,7 @@ export type LeadMasterSelectScalar = {
   site_map_link?: boolean
   activity_status?: boolean
   activity_status_remark?: boolean
+  project_status?: boolean
   booking_amount?: boolean
   pending_amount?: boolean
   total_project_amount?: boolean
@@ -42115,7 +44129,7 @@ export type LeadMasterSelectScalar = {
   refered_by?: boolean
 }
 
-export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "actual_installation_start_date" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "franchise_id" | "order_login_prod_files_remark" | "actual_installation_completion_at" | "final_handover_marked_at" | "usable_handover_completed_at" | "tech_check_completed_at" | "tech_check_reached_at" | "priority" | "amc_opted_at" | "is_amc_opted" | "amc_plan_closed_at" | "amc_plan_started_at" | "vehicle_approachability_for_dispatch" | "total_required_chs_manufacturing_days" | "is_blocked" | "lead_blocked_at" | "archetech_number" | "is_small_order_request" | "material_lift_size" | "fast_production_approved_at" | "fast_production_status" | "is_fast_production" | "tentative_order_login_date" | "isLargeScaleProjectLead" | "architect_id" | "client_id" | "order_number" | "refered_by", ExtArgs["result"]["leadMaster"]>
+export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "project_status" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "actual_installation_start_date" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "franchise_id" | "order_login_prod_files_remark" | "actual_installation_completion_at" | "final_handover_marked_at" | "usable_handover_completed_at" | "tech_check_completed_at" | "tech_check_reached_at" | "priority" | "amc_opted_at" | "is_amc_opted" | "amc_plan_closed_at" | "amc_plan_started_at" | "vehicle_approachability_for_dispatch" | "total_required_chs_manufacturing_days" | "is_blocked" | "lead_blocked_at" | "archetech_number" | "is_small_order_request" | "material_lift_size" | "fast_production_approved_at" | "fast_production_status" | "is_fast_production" | "tentative_order_login_date" | "isLargeScaleProjectLead" | "architect_id" | "client_id" | "order_number" | "refered_by", ExtArgs["result"]["leadMaster"]>
 export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cutList?: boolean | Prisma.LeadMaster$cutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.LeadMaster$cutListMachineMappingArgs<ExtArgs>
@@ -42141,6 +44155,7 @@ export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   externalPlatformCustomerMappings?: boolean | Prisma.LeadMaster$externalPlatformCustomerMappingsArgs<ExtArgs>
   hardwareMappings?: boolean | Prisma.LeadMaster$hardwareMappingsArgs<ExtArgs>
   lightCarcasUnitMappings?: boolean | Prisma.LeadMaster$lightCarcasUnitMappingsArgs<ExtArgs>
+  leadProcessBriefs?: boolean | Prisma.LeadMaster$leadProcessBriefsArgs<ExtArgs>
   account?: boolean | Prisma.LeadMaster$accountArgs<ExtArgs>
   architect?: boolean | Prisma.LeadMaster$architectArgs<ExtArgs>
   assignedTo?: boolean | Prisma.LeadMaster$assignedToArgs<ExtArgs>
@@ -42155,6 +44170,7 @@ export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   otherAppliancesMappings?: boolean | Prisma.LeadMaster$otherAppliancesMappingsArgs<ExtArgs>
   productMappings?: boolean | Prisma.LeadMaster$productMappingsArgs<ExtArgs>
+  leadRequirementMaterials?: boolean | Prisma.LeadMaster$leadRequirementMaterialsArgs<ExtArgs>
   productStructureInstances?: boolean | Prisma.LeadMaster$productStructureInstancesArgs<ExtArgs>
   leadProductStructureMapping?: boolean | Prisma.LeadMaster$leadProductStructureMappingArgs<ExtArgs>
   serviceSchedules?: boolean | Prisma.LeadMaster$serviceSchedulesArgs<ExtArgs>
@@ -42235,6 +44251,7 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     externalPlatformCustomerMappings: Prisma.$LeadExternalPlatformCustomerMappingPayload<ExtArgs>[]
     hardwareMappings: Prisma.$LeadHardwareMappingPayload<ExtArgs>[]
     lightCarcasUnitMappings: Prisma.$LeadLightCarcasUnitMappingPayload<ExtArgs>[]
+    leadProcessBriefs: Prisma.$LeadProcessBriefMappingPayload<ExtArgs>[]
     account: Prisma.$AccountMasterPayload<ExtArgs> | null
     architect: Prisma.$ArchitechuremasterPayload<ExtArgs> | null
     assignedTo: Prisma.$UserMasterPayload<ExtArgs> | null
@@ -42249,6 +44266,7 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     otherAppliancesMappings: Prisma.$LeadOtherAppliancesMappingPayload<ExtArgs>[]
     productMappings: Prisma.$LeadProductMappingPayload<ExtArgs>[]
+    leadRequirementMaterials: Prisma.$LeadRequirementMaterialMappingPayload<ExtArgs>[]
     productStructureInstances: Prisma.$LeadProductStructureInstancePayload<ExtArgs>[]
     leadProductStructureMapping: Prisma.$LeadProductStructureMappingPayload<ExtArgs>[]
     serviceSchedules: Prisma.$LeadServiceSchedulePayload<ExtArgs>[]
@@ -42303,6 +44321,7 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     site_map_link: string | null
     activity_status: $Enums.ActivityStatus
     activity_status_remark: string | null
+    project_status: string | null
     booking_amount: number | null
     pending_amount: number | null
     total_project_amount: number | null
@@ -42782,6 +44801,7 @@ export interface Prisma__LeadMasterClient<T, Null = never, ExtArgs extends runti
   externalPlatformCustomerMappings<T extends Prisma.LeadMaster$externalPlatformCustomerMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$externalPlatformCustomerMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadExternalPlatformCustomerMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   hardwareMappings<T extends Prisma.LeadMaster$hardwareMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$hardwareMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadHardwareMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   lightCarcasUnitMappings<T extends Prisma.LeadMaster$lightCarcasUnitMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$lightCarcasUnitMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadLightCarcasUnitMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadProcessBriefs<T extends Prisma.LeadMaster$leadProcessBriefsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$leadProcessBriefsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProcessBriefMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   account<T extends Prisma.LeadMaster$accountArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$accountArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   architect<T extends Prisma.LeadMaster$architectArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$architectArgs<ExtArgs>>): Prisma.Prisma__ArchitechuremasterClient<runtime.Types.Result.GetResult<Prisma.$ArchitechuremasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   assignedTo<T extends Prisma.LeadMaster$assignedToArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$assignedToArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -42796,6 +44816,7 @@ export interface Prisma__LeadMasterClient<T, Null = never, ExtArgs extends runti
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   otherAppliancesMappings<T extends Prisma.LeadMaster$otherAppliancesMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$otherAppliancesMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadOtherAppliancesMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   productMappings<T extends Prisma.LeadMaster$productMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$productMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadRequirementMaterials<T extends Prisma.LeadMaster$leadRequirementMaterialsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$leadRequirementMaterialsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadRequirementMaterialMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   productStructureInstances<T extends Prisma.LeadMaster$productStructureInstancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$productStructureInstancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureInstancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadProductStructureMapping<T extends Prisma.LeadMaster$leadProductStructureMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$leadProductStructureMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   serviceSchedules<T extends Prisma.LeadMaster$serviceSchedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$serviceSchedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadServiceSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -42877,6 +44898,7 @@ export interface LeadMasterFieldRefs {
   readonly site_map_link: Prisma.FieldRef<"LeadMaster", 'String'>
   readonly activity_status: Prisma.FieldRef<"LeadMaster", 'ActivityStatus'>
   readonly activity_status_remark: Prisma.FieldRef<"LeadMaster", 'String'>
+  readonly project_status: Prisma.FieldRef<"LeadMaster", 'String'>
   readonly booking_amount: Prisma.FieldRef<"LeadMaster", 'Float'>
   readonly pending_amount: Prisma.FieldRef<"LeadMaster", 'Float'>
   readonly total_project_amount: Prisma.FieldRef<"LeadMaster", 'Float'>
@@ -43915,6 +45937,30 @@ export type LeadMaster$lightCarcasUnitMappingsArgs<ExtArgs extends runtime.Types
 }
 
 /**
+ * LeadMaster.leadProcessBriefs
+ */
+export type LeadMaster$leadProcessBriefsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadProcessBriefMapping
+   */
+  select?: Prisma.LeadProcessBriefMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadProcessBriefMapping
+   */
+  omit?: Prisma.LeadProcessBriefMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadProcessBriefMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadProcessBriefMappingWhereInput
+  orderBy?: Prisma.LeadProcessBriefMappingOrderByWithRelationInput | Prisma.LeadProcessBriefMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadProcessBriefMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadProcessBriefMappingScalarFieldEnum | Prisma.LeadProcessBriefMappingScalarFieldEnum[]
+}
+
+/**
  * LeadMaster.account
  */
 export type LeadMaster$accountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -44150,6 +46196,30 @@ export type LeadMaster$productMappingsArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.LeadProductMappingScalarFieldEnum | Prisma.LeadProductMappingScalarFieldEnum[]
+}
+
+/**
+ * LeadMaster.leadRequirementMaterials
+ */
+export type LeadMaster$leadRequirementMaterialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadRequirementMaterialMapping
+   */
+  select?: Prisma.LeadRequirementMaterialMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadRequirementMaterialMapping
+   */
+  omit?: Prisma.LeadRequirementMaterialMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadRequirementMaterialMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadRequirementMaterialMappingWhereInput
+  orderBy?: Prisma.LeadRequirementMaterialMappingOrderByWithRelationInput | Prisma.LeadRequirementMaterialMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadRequirementMaterialMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadRequirementMaterialMappingScalarFieldEnum | Prisma.LeadRequirementMaterialMappingScalarFieldEnum[]
 }
 
 /**

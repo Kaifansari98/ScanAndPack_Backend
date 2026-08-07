@@ -68,6 +68,7 @@ export const ModelName = {
   VendorTokens: 'VendorTokens',
   ClientMaster: 'ClientMaster',
   ClientTypeMaster: 'ClientTypeMaster',
+  ClientBankDetail: 'ClientBankDetail',
   LeadMaster: 'LeadMaster',
   LeadSpecificationsMaster: 'LeadSpecificationsMaster',
   LeadCarcassMaterialMapping: 'LeadCarcassMaterialMapping',
@@ -80,6 +81,9 @@ export const ModelName = {
   AccountMaster: 'AccountMaster',
   LeadProductMapping: 'LeadProductMapping',
   ProductTypeMaster: 'ProductTypeMaster',
+  ProcessBriefMaster: 'ProcessBriefMaster',
+  LeadProcessBriefMapping: 'LeadProcessBriefMapping',
+  LeadRequirementMaterialMapping: 'LeadRequirementMaterialMapping',
   CarcassTypeMaster: 'CarcassTypeMaster',
   CarcasMaterialMaster: 'CarcasMaterialMaster',
   CarcassMaterialFinishMaster: 'CarcassMaterialFinishMaster',
@@ -578,6 +582,30 @@ export const ClientTypeMasterScalarFieldEnum = {
 export type ClientTypeMasterScalarFieldEnum = (typeof ClientTypeMasterScalarFieldEnum)[keyof typeof ClientTypeMasterScalarFieldEnum]
 
 
+export const ClientBankDetailScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  client_id: 'client_id',
+  bank_name: 'bank_name',
+  holder_name: 'holder_name',
+  account_no: 'account_no',
+  ifsc: 'ifsc',
+  swift: 'swift',
+  branch: 'branch',
+  cancelled_cheque_path: 'cancelled_cheque_path',
+  cancelled_cheque_name: 'cancelled_cheque_name',
+  is_default: 'is_default',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by'
+} as const
+
+export type ClientBankDetailScalarFieldEnum = (typeof ClientBankDetailScalarFieldEnum)[keyof typeof ClientBankDetailScalarFieldEnum]
+
+
 export const LeadMasterScalarFieldEnum = {
   id: 'id',
   firstname: 'firstname',
@@ -609,6 +637,7 @@ export const LeadMasterScalarFieldEnum = {
   site_map_link: 'site_map_link',
   activity_status: 'activity_status',
   activity_status_remark: 'activity_status_remark',
+  project_status: 'project_status',
   booking_amount: 'booking_amount',
   pending_amount: 'pending_amount',
   total_project_amount: 'total_project_amount',
@@ -813,6 +842,8 @@ export const LeadProductMappingScalarFieldEnum = {
   lead_id: 'lead_id',
   account_id: 'account_id',
   product_type_id: 'product_type_id',
+  approximate_budget: 'approximate_budget',
+  project_status: 'project_status',
   created_by: 'created_by',
   created_at: 'created_at'
 } as const
@@ -829,6 +860,58 @@ export const ProductTypeMasterScalarFieldEnum = {
 } as const
 
 export type ProductTypeMasterScalarFieldEnum = (typeof ProductTypeMasterScalarFieldEnum)[keyof typeof ProductTypeMasterScalarFieldEnum]
+
+
+export const ProcessBriefMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  name: 'name',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by'
+} as const
+
+export type ProcessBriefMasterScalarFieldEnum = (typeof ProcessBriefMasterScalarFieldEnum)[keyof typeof ProcessBriefMasterScalarFieldEnum]
+
+
+export const LeadProcessBriefMappingScalarFieldEnum = {
+  id: 'id',
+  lead_id: 'lead_id',
+  vendor_id: 'vendor_id',
+  product_type_id: 'product_type_id',
+  process_brief_id: 'process_brief_id',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by'
+} as const
+
+export type LeadProcessBriefMappingScalarFieldEnum = (typeof LeadProcessBriefMappingScalarFieldEnum)[keyof typeof LeadProcessBriefMappingScalarFieldEnum]
+
+
+export const LeadRequirementMaterialMappingScalarFieldEnum = {
+  id: 'id',
+  lead_id: 'lead_id',
+  vendor_id: 'vendor_id',
+  product_type_id: 'product_type_id',
+  product_id: 'product_id',
+  quantity: 'quantity',
+  unit_id: 'unit_id',
+  unit_name: 'unit_name',
+  supplied_by: 'supplied_by',
+  client_percentage: 'client_percentage',
+  frankvin_percentage: 'frankvin_percentage',
+  client_quantity: 'client_quantity',
+  frankvin_quantity: 'frankvin_quantity',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by'
+} as const
+
+export type LeadRequirementMaterialMappingScalarFieldEnum = (typeof LeadRequirementMaterialMappingScalarFieldEnum)[keyof typeof LeadRequirementMaterialMappingScalarFieldEnum]
 
 
 export const CarcassTypeMasterScalarFieldEnum = {
@@ -1050,7 +1133,8 @@ export const LeadDocumentsScalarFieldEnum = {
   doc_type_id: 'doc_type_id',
   is_deleted: 'is_deleted',
   tech_check_status: 'tech_check_status',
-  product_structure_instance_id: 'product_structure_instance_id'
+  product_structure_instance_id: 'product_structure_instance_id',
+  product_type_id: 'product_type_id'
 } as const
 
 export type LeadDocumentsScalarFieldEnum = (typeof LeadDocumentsScalarFieldEnum)[keyof typeof LeadDocumentsScalarFieldEnum]

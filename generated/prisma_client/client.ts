@@ -125,6 +125,11 @@ export type ClientMaster = Prisma.ClientMasterModel
  */
 export type ClientTypeMaster = Prisma.ClientTypeMasterModel
 /**
+ * Model ClientBankDetail
+ * 
+ */
+export type ClientBankDetail = Prisma.ClientBankDetailModel
+/**
  * Model LeadMaster
  * 
  */
@@ -184,6 +189,21 @@ export type LeadProductMapping = Prisma.LeadProductMappingModel
  * 
  */
 export type ProductTypeMaster = Prisma.ProductTypeMasterModel
+/**
+ * Model ProcessBriefMaster
+ * 
+ */
+export type ProcessBriefMaster = Prisma.ProcessBriefMasterModel
+/**
+ * Model LeadProcessBriefMapping
+ * 
+ */
+export type LeadProcessBriefMapping = Prisma.LeadProcessBriefMappingModel
+/**
+ * Model LeadRequirementMaterialMapping
+ * 
+ */
+export type LeadRequirementMaterialMapping = Prisma.LeadRequirementMaterialMappingModel
 /**
  * Model CarcassTypeMaster
  * 

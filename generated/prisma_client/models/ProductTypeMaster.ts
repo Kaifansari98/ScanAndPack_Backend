@@ -223,6 +223,9 @@ export type ProductTypeMasterWhereInput = {
   leads?: Prisma.LeadProductMappingListRelationFilter
   productStructureInstances?: Prisma.LeadProductStructureInstanceListRelationFilter
   productStructures?: Prisma.ProductStructureListRelationFilter
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingListRelationFilter
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingListRelationFilter
+  requirementDocuments?: Prisma.LeadDocumentsListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
@@ -235,6 +238,9 @@ export type ProductTypeMasterOrderByWithRelationInput = {
   leads?: Prisma.LeadProductMappingOrderByRelationAggregateInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceOrderByRelationAggregateInput
   productStructures?: Prisma.ProductStructureOrderByRelationAggregateInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingOrderByRelationAggregateInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingOrderByRelationAggregateInput
+  requirementDocuments?: Prisma.LeadDocumentsOrderByRelationAggregateInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
@@ -250,6 +256,9 @@ export type ProductTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   leads?: Prisma.LeadProductMappingListRelationFilter
   productStructureInstances?: Prisma.LeadProductStructureInstanceListRelationFilter
   productStructures?: Prisma.ProductStructureListRelationFilter
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingListRelationFilter
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingListRelationFilter
+  requirementDocuments?: Prisma.LeadDocumentsListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
@@ -284,6 +293,9 @@ export type ProductTypeMasterCreateInput = {
   leads?: Prisma.LeadProductMappingCreateNestedManyWithoutProductTypeInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutProductTypeInput
   productStructures?: Prisma.ProductStructureCreateNestedManyWithoutProductTypeInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutProductTypeInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
 }
 
@@ -296,6 +308,9 @@ export type ProductTypeMasterUncheckedCreateInput = {
   leads?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutProductTypeInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutProductTypeInput
   productStructures?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutProductTypeInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterUpdateInput = {
@@ -305,6 +320,9 @@ export type ProductTypeMasterUpdateInput = {
   leads?: Prisma.LeadProductMappingUpdateManyWithoutProductTypeNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutProductTypeNestedInput
   productStructures?: Prisma.ProductStructureUpdateManyWithoutProductTypeNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutProductTypeNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
 }
 
@@ -317,6 +335,9 @@ export type ProductTypeMasterUncheckedUpdateInput = {
   leads?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutProductTypeNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeNestedInput
   productStructures?: Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutProductTypeNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterCreateManyInput = {
@@ -451,6 +472,50 @@ export type ProductTypeMasterUpdateOneRequiredWithoutLeadsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProductTypeMasterUpdateToOneWithWhereWithoutLeadsInput, Prisma.ProductTypeMasterUpdateWithoutLeadsInput>, Prisma.ProductTypeMasterUncheckedUpdateWithoutLeadsInput>
 }
 
+export type ProductTypeMasterCreateNestedOneWithoutLeadProcessBriefsInput = {
+  create?: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutLeadProcessBriefsInput, Prisma.ProductTypeMasterUncheckedCreateWithoutLeadProcessBriefsInput>
+  connectOrCreate?: Prisma.ProductTypeMasterCreateOrConnectWithoutLeadProcessBriefsInput
+  connect?: Prisma.ProductTypeMasterWhereUniqueInput
+}
+
+export type ProductTypeMasterUpdateOneRequiredWithoutLeadProcessBriefsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutLeadProcessBriefsInput, Prisma.ProductTypeMasterUncheckedCreateWithoutLeadProcessBriefsInput>
+  connectOrCreate?: Prisma.ProductTypeMasterCreateOrConnectWithoutLeadProcessBriefsInput
+  upsert?: Prisma.ProductTypeMasterUpsertWithoutLeadProcessBriefsInput
+  connect?: Prisma.ProductTypeMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductTypeMasterUpdateToOneWithWhereWithoutLeadProcessBriefsInput, Prisma.ProductTypeMasterUpdateWithoutLeadProcessBriefsInput>, Prisma.ProductTypeMasterUncheckedUpdateWithoutLeadProcessBriefsInput>
+}
+
+export type ProductTypeMasterCreateNestedOneWithoutLeadRequirementMaterialsInput = {
+  create?: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutLeadRequirementMaterialsInput, Prisma.ProductTypeMasterUncheckedCreateWithoutLeadRequirementMaterialsInput>
+  connectOrCreate?: Prisma.ProductTypeMasterCreateOrConnectWithoutLeadRequirementMaterialsInput
+  connect?: Prisma.ProductTypeMasterWhereUniqueInput
+}
+
+export type ProductTypeMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutLeadRequirementMaterialsInput, Prisma.ProductTypeMasterUncheckedCreateWithoutLeadRequirementMaterialsInput>
+  connectOrCreate?: Prisma.ProductTypeMasterCreateOrConnectWithoutLeadRequirementMaterialsInput
+  upsert?: Prisma.ProductTypeMasterUpsertWithoutLeadRequirementMaterialsInput
+  connect?: Prisma.ProductTypeMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductTypeMasterUpdateToOneWithWhereWithoutLeadRequirementMaterialsInput, Prisma.ProductTypeMasterUpdateWithoutLeadRequirementMaterialsInput>, Prisma.ProductTypeMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput>
+}
+
+export type ProductTypeMasterCreateNestedOneWithoutRequirementDocumentsInput = {
+  create?: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutRequirementDocumentsInput, Prisma.ProductTypeMasterUncheckedCreateWithoutRequirementDocumentsInput>
+  connectOrCreate?: Prisma.ProductTypeMasterCreateOrConnectWithoutRequirementDocumentsInput
+  connect?: Prisma.ProductTypeMasterWhereUniqueInput
+}
+
+export type ProductTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutRequirementDocumentsInput, Prisma.ProductTypeMasterUncheckedCreateWithoutRequirementDocumentsInput>
+  connectOrCreate?: Prisma.ProductTypeMasterCreateOrConnectWithoutRequirementDocumentsInput
+  upsert?: Prisma.ProductTypeMasterUpsertWithoutRequirementDocumentsInput
+  disconnect?: Prisma.ProductTypeMasterWhereInput | boolean
+  delete?: Prisma.ProductTypeMasterWhereInput | boolean
+  connect?: Prisma.ProductTypeMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductTypeMasterUpdateToOneWithWhereWithoutRequirementDocumentsInput, Prisma.ProductTypeMasterUpdateWithoutRequirementDocumentsInput>, Prisma.ProductTypeMasterUncheckedUpdateWithoutRequirementDocumentsInput>
+}
+
 export type ProductTypeMasterCreateNestedOneWithoutProductStructuresInput = {
   create?: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutProductStructuresInput, Prisma.ProductTypeMasterUncheckedCreateWithoutProductStructuresInput>
   connectOrCreate?: Prisma.ProductTypeMasterCreateOrConnectWithoutProductStructuresInput
@@ -488,6 +553,9 @@ export type ProductTypeMasterCreateWithoutVendorInput = {
   leads?: Prisma.LeadProductMappingCreateNestedManyWithoutProductTypeInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutProductTypeInput
   productStructures?: Prisma.ProductStructureCreateNestedManyWithoutProductTypeInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutProductTypeInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterUncheckedCreateWithoutVendorInput = {
@@ -498,6 +566,9 @@ export type ProductTypeMasterUncheckedCreateWithoutVendorInput = {
   leads?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutProductTypeInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutProductTypeInput
   productStructures?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutProductTypeInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterCreateOrConnectWithoutVendorInput = {
@@ -543,6 +614,9 @@ export type ProductTypeMasterCreateWithoutLeadsInput = {
   status?: string
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutProductTypeInput
   productStructures?: Prisma.ProductStructureCreateNestedManyWithoutProductTypeInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutProductTypeInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
 }
 
@@ -554,6 +628,9 @@ export type ProductTypeMasterUncheckedCreateWithoutLeadsInput = {
   status?: string
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutProductTypeInput
   productStructures?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutProductTypeInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterCreateOrConnectWithoutLeadsInput = {
@@ -578,6 +655,9 @@ export type ProductTypeMasterUpdateWithoutLeadsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutProductTypeNestedInput
   productStructures?: Prisma.ProductStructureUpdateManyWithoutProductTypeNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutProductTypeNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
 }
 
@@ -589,6 +669,207 @@ export type ProductTypeMasterUncheckedUpdateWithoutLeadsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeNestedInput
   productStructures?: Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutProductTypeNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
+}
+
+export type ProductTypeMasterCreateWithoutLeadProcessBriefsInput = {
+  type: string
+  tag: string
+  status?: string
+  leads?: Prisma.LeadProductMappingCreateNestedManyWithoutProductTypeInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutProductTypeInput
+  productStructures?: Prisma.ProductStructureCreateNestedManyWithoutProductTypeInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
+}
+
+export type ProductTypeMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
+  id?: number
+  type: string
+  vendor_id: number
+  tag: string
+  status?: string
+  leads?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutProductTypeInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutProductTypeInput
+  productStructures?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
+}
+
+export type ProductTypeMasterCreateOrConnectWithoutLeadProcessBriefsInput = {
+  where: Prisma.ProductTypeMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutLeadProcessBriefsInput, Prisma.ProductTypeMasterUncheckedCreateWithoutLeadProcessBriefsInput>
+}
+
+export type ProductTypeMasterUpsertWithoutLeadProcessBriefsInput = {
+  update: Prisma.XOR<Prisma.ProductTypeMasterUpdateWithoutLeadProcessBriefsInput, Prisma.ProductTypeMasterUncheckedUpdateWithoutLeadProcessBriefsInput>
+  create: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutLeadProcessBriefsInput, Prisma.ProductTypeMasterUncheckedCreateWithoutLeadProcessBriefsInput>
+  where?: Prisma.ProductTypeMasterWhereInput
+}
+
+export type ProductTypeMasterUpdateToOneWithWhereWithoutLeadProcessBriefsInput = {
+  where?: Prisma.ProductTypeMasterWhereInput
+  data: Prisma.XOR<Prisma.ProductTypeMasterUpdateWithoutLeadProcessBriefsInput, Prisma.ProductTypeMasterUncheckedUpdateWithoutLeadProcessBriefsInput>
+}
+
+export type ProductTypeMasterUpdateWithoutLeadProcessBriefsInput = {
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  leads?: Prisma.LeadProductMappingUpdateManyWithoutProductTypeNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutProductTypeNestedInput
+  productStructures?: Prisma.ProductStructureUpdateManyWithoutProductTypeNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
+}
+
+export type ProductTypeMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  leads?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutProductTypeNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeNestedInput
+  productStructures?: Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
+}
+
+export type ProductTypeMasterCreateWithoutLeadRequirementMaterialsInput = {
+  type: string
+  tag: string
+  status?: string
+  leads?: Prisma.LeadProductMappingCreateNestedManyWithoutProductTypeInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutProductTypeInput
+  productStructures?: Prisma.ProductStructureCreateNestedManyWithoutProductTypeInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutProductTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
+}
+
+export type ProductTypeMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
+  id?: number
+  type: string
+  vendor_id: number
+  tag: string
+  status?: string
+  leads?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutProductTypeInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutProductTypeInput
+  productStructures?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutProductTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
+}
+
+export type ProductTypeMasterCreateOrConnectWithoutLeadRequirementMaterialsInput = {
+  where: Prisma.ProductTypeMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutLeadRequirementMaterialsInput, Prisma.ProductTypeMasterUncheckedCreateWithoutLeadRequirementMaterialsInput>
+}
+
+export type ProductTypeMasterUpsertWithoutLeadRequirementMaterialsInput = {
+  update: Prisma.XOR<Prisma.ProductTypeMasterUpdateWithoutLeadRequirementMaterialsInput, Prisma.ProductTypeMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput>
+  create: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutLeadRequirementMaterialsInput, Prisma.ProductTypeMasterUncheckedCreateWithoutLeadRequirementMaterialsInput>
+  where?: Prisma.ProductTypeMasterWhereInput
+}
+
+export type ProductTypeMasterUpdateToOneWithWhereWithoutLeadRequirementMaterialsInput = {
+  where?: Prisma.ProductTypeMasterWhereInput
+  data: Prisma.XOR<Prisma.ProductTypeMasterUpdateWithoutLeadRequirementMaterialsInput, Prisma.ProductTypeMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput>
+}
+
+export type ProductTypeMasterUpdateWithoutLeadRequirementMaterialsInput = {
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  leads?: Prisma.LeadProductMappingUpdateManyWithoutProductTypeNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutProductTypeNestedInput
+  productStructures?: Prisma.ProductStructureUpdateManyWithoutProductTypeNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutProductTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
+}
+
+export type ProductTypeMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  leads?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutProductTypeNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeNestedInput
+  productStructures?: Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutProductTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
+}
+
+export type ProductTypeMasterCreateWithoutRequirementDocumentsInput = {
+  type: string
+  tag: string
+  status?: string
+  leads?: Prisma.LeadProductMappingCreateNestedManyWithoutProductTypeInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutProductTypeInput
+  productStructures?: Prisma.ProductStructureCreateNestedManyWithoutProductTypeInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutProductTypeInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductTypeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
+}
+
+export type ProductTypeMasterUncheckedCreateWithoutRequirementDocumentsInput = {
+  id?: number
+  type: string
+  vendor_id: number
+  tag: string
+  status?: string
+  leads?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutProductTypeInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutProductTypeInput
+  productStructures?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutProductTypeInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductTypeInput
+}
+
+export type ProductTypeMasterCreateOrConnectWithoutRequirementDocumentsInput = {
+  where: Prisma.ProductTypeMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutRequirementDocumentsInput, Prisma.ProductTypeMasterUncheckedCreateWithoutRequirementDocumentsInput>
+}
+
+export type ProductTypeMasterUpsertWithoutRequirementDocumentsInput = {
+  update: Prisma.XOR<Prisma.ProductTypeMasterUpdateWithoutRequirementDocumentsInput, Prisma.ProductTypeMasterUncheckedUpdateWithoutRequirementDocumentsInput>
+  create: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutRequirementDocumentsInput, Prisma.ProductTypeMasterUncheckedCreateWithoutRequirementDocumentsInput>
+  where?: Prisma.ProductTypeMasterWhereInput
+}
+
+export type ProductTypeMasterUpdateToOneWithWhereWithoutRequirementDocumentsInput = {
+  where?: Prisma.ProductTypeMasterWhereInput
+  data: Prisma.XOR<Prisma.ProductTypeMasterUpdateWithoutRequirementDocumentsInput, Prisma.ProductTypeMasterUncheckedUpdateWithoutRequirementDocumentsInput>
+}
+
+export type ProductTypeMasterUpdateWithoutRequirementDocumentsInput = {
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  leads?: Prisma.LeadProductMappingUpdateManyWithoutProductTypeNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutProductTypeNestedInput
+  productStructures?: Prisma.ProductStructureUpdateManyWithoutProductTypeNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutProductTypeNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductTypeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
+}
+
+export type ProductTypeMasterUncheckedUpdateWithoutRequirementDocumentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  leads?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutProductTypeNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeNestedInput
+  productStructures?: Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutProductTypeNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterCreateWithoutProductStructuresInput = {
@@ -597,6 +878,9 @@ export type ProductTypeMasterCreateWithoutProductStructuresInput = {
   status?: string
   leads?: Prisma.LeadProductMappingCreateNestedManyWithoutProductTypeInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutProductTypeInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutProductTypeInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
 }
 
@@ -608,6 +892,9 @@ export type ProductTypeMasterUncheckedCreateWithoutProductStructuresInput = {
   status?: string
   leads?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutProductTypeInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutProductTypeInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutProductTypeInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterCreateOrConnectWithoutProductStructuresInput = {
@@ -632,6 +919,9 @@ export type ProductTypeMasterUpdateWithoutProductStructuresInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   leads?: Prisma.LeadProductMappingUpdateManyWithoutProductTypeNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutProductTypeNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutProductTypeNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
 }
 
@@ -643,6 +933,9 @@ export type ProductTypeMasterUncheckedUpdateWithoutProductStructuresInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   leads?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutProductTypeNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutProductTypeNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterCreateWithoutProductStructureInstancesInput = {
@@ -651,6 +944,9 @@ export type ProductTypeMasterCreateWithoutProductStructureInstancesInput = {
   status?: string
   leads?: Prisma.LeadProductMappingCreateNestedManyWithoutProductTypeInput
   productStructures?: Prisma.ProductStructureCreateNestedManyWithoutProductTypeInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutProductTypeInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
 }
 
@@ -662,6 +958,9 @@ export type ProductTypeMasterUncheckedCreateWithoutProductStructureInstancesInpu
   status?: string
   leads?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutProductTypeInput
   productStructures?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutProductTypeInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterCreateOrConnectWithoutProductStructureInstancesInput = {
@@ -686,6 +985,9 @@ export type ProductTypeMasterUpdateWithoutProductStructureInstancesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   leads?: Prisma.LeadProductMappingUpdateManyWithoutProductTypeNestedInput
   productStructures?: Prisma.ProductStructureUpdateManyWithoutProductTypeNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutProductTypeNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
 }
 
@@ -697,6 +999,9 @@ export type ProductTypeMasterUncheckedUpdateWithoutProductStructureInstancesInpu
   status?: Prisma.StringFieldUpdateOperationsInput | string
   leads?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutProductTypeNestedInput
   productStructures?: Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutProductTypeNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterCreateManyVendorInput = {
@@ -713,6 +1018,9 @@ export type ProductTypeMasterUpdateWithoutVendorInput = {
   leads?: Prisma.LeadProductMappingUpdateManyWithoutProductTypeNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutProductTypeNestedInput
   productStructures?: Prisma.ProductStructureUpdateManyWithoutProductTypeNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutProductTypeNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterUncheckedUpdateWithoutVendorInput = {
@@ -723,6 +1031,9 @@ export type ProductTypeMasterUncheckedUpdateWithoutVendorInput = {
   leads?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutProductTypeNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeNestedInput
   productStructures?: Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutProductTypeNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -741,12 +1052,18 @@ export type ProductTypeMasterCountOutputType = {
   leads: number
   productStructureInstances: number
   productStructures: number
+  leadProcessBriefs: number
+  leadRequirementMaterials: number
+  requirementDocuments: number
 }
 
 export type ProductTypeMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   leads?: boolean | ProductTypeMasterCountOutputTypeCountLeadsArgs
   productStructureInstances?: boolean | ProductTypeMasterCountOutputTypeCountProductStructureInstancesArgs
   productStructures?: boolean | ProductTypeMasterCountOutputTypeCountProductStructuresArgs
+  leadProcessBriefs?: boolean | ProductTypeMasterCountOutputTypeCountLeadProcessBriefsArgs
+  leadRequirementMaterials?: boolean | ProductTypeMasterCountOutputTypeCountLeadRequirementMaterialsArgs
+  requirementDocuments?: boolean | ProductTypeMasterCountOutputTypeCountRequirementDocumentsArgs
 }
 
 /**
@@ -780,6 +1097,27 @@ export type ProductTypeMasterCountOutputTypeCountProductStructuresArgs<ExtArgs e
   where?: Prisma.ProductStructureWhereInput
 }
 
+/**
+ * ProductTypeMasterCountOutputType without action
+ */
+export type ProductTypeMasterCountOutputTypeCountLeadProcessBriefsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadProcessBriefMappingWhereInput
+}
+
+/**
+ * ProductTypeMasterCountOutputType without action
+ */
+export type ProductTypeMasterCountOutputTypeCountLeadRequirementMaterialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadRequirementMaterialMappingWhereInput
+}
+
+/**
+ * ProductTypeMasterCountOutputType without action
+ */
+export type ProductTypeMasterCountOutputTypeCountRequirementDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadDocumentsWhereInput
+}
+
 
 export type ProductTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -790,6 +1128,9 @@ export type ProductTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.Int
   leads?: boolean | Prisma.ProductTypeMaster$leadsArgs<ExtArgs>
   productStructureInstances?: boolean | Prisma.ProductTypeMaster$productStructureInstancesArgs<ExtArgs>
   productStructures?: boolean | Prisma.ProductTypeMaster$productStructuresArgs<ExtArgs>
+  leadProcessBriefs?: boolean | Prisma.ProductTypeMaster$leadProcessBriefsArgs<ExtArgs>
+  leadRequirementMaterials?: boolean | Prisma.ProductTypeMaster$leadRequirementMaterialsArgs<ExtArgs>
+  requirementDocuments?: boolean | Prisma.ProductTypeMaster$requirementDocumentsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProductTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productTypeMaster"]>
@@ -825,6 +1166,9 @@ export type ProductTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.In
   leads?: boolean | Prisma.ProductTypeMaster$leadsArgs<ExtArgs>
   productStructureInstances?: boolean | Prisma.ProductTypeMaster$productStructureInstancesArgs<ExtArgs>
   productStructures?: boolean | Prisma.ProductTypeMaster$productStructuresArgs<ExtArgs>
+  leadProcessBriefs?: boolean | Prisma.ProductTypeMaster$leadProcessBriefsArgs<ExtArgs>
+  leadRequirementMaterials?: boolean | Prisma.ProductTypeMaster$leadRequirementMaterialsArgs<ExtArgs>
+  requirementDocuments?: boolean | Prisma.ProductTypeMaster$requirementDocumentsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProductTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -841,6 +1185,9 @@ export type $ProductTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.I
     leads: Prisma.$LeadProductMappingPayload<ExtArgs>[]
     productStructureInstances: Prisma.$LeadProductStructureInstancePayload<ExtArgs>[]
     productStructures: Prisma.$ProductStructurePayload<ExtArgs>[]
+    leadProcessBriefs: Prisma.$LeadProcessBriefMappingPayload<ExtArgs>[]
+    leadRequirementMaterials: Prisma.$LeadRequirementMaterialMappingPayload<ExtArgs>[]
+    requirementDocuments: Prisma.$LeadDocumentsPayload<ExtArgs>[]
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1246,6 +1593,9 @@ export interface Prisma__ProductTypeMasterClient<T, Null = never, ExtArgs extend
   leads<T extends Prisma.ProductTypeMaster$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductTypeMaster$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   productStructureInstances<T extends Prisma.ProductTypeMaster$productStructureInstancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductTypeMaster$productStructureInstancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureInstancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   productStructures<T extends Prisma.ProductTypeMaster$productStructuresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductTypeMaster$productStructuresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductStructurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadProcessBriefs<T extends Prisma.ProductTypeMaster$leadProcessBriefsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductTypeMaster$leadProcessBriefsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProcessBriefMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadRequirementMaterials<T extends Prisma.ProductTypeMaster$leadRequirementMaterialsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductTypeMaster$leadRequirementMaterialsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadRequirementMaterialMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  requirementDocuments<T extends Prisma.ProductTypeMaster$requirementDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductTypeMaster$requirementDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1751,6 +2101,78 @@ export type ProductTypeMaster$productStructuresArgs<ExtArgs extends runtime.Type
   take?: number
   skip?: number
   distinct?: Prisma.ProductStructureScalarFieldEnum | Prisma.ProductStructureScalarFieldEnum[]
+}
+
+/**
+ * ProductTypeMaster.leadProcessBriefs
+ */
+export type ProductTypeMaster$leadProcessBriefsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadProcessBriefMapping
+   */
+  select?: Prisma.LeadProcessBriefMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadProcessBriefMapping
+   */
+  omit?: Prisma.LeadProcessBriefMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadProcessBriefMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadProcessBriefMappingWhereInput
+  orderBy?: Prisma.LeadProcessBriefMappingOrderByWithRelationInput | Prisma.LeadProcessBriefMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadProcessBriefMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadProcessBriefMappingScalarFieldEnum | Prisma.LeadProcessBriefMappingScalarFieldEnum[]
+}
+
+/**
+ * ProductTypeMaster.leadRequirementMaterials
+ */
+export type ProductTypeMaster$leadRequirementMaterialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadRequirementMaterialMapping
+   */
+  select?: Prisma.LeadRequirementMaterialMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadRequirementMaterialMapping
+   */
+  omit?: Prisma.LeadRequirementMaterialMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadRequirementMaterialMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadRequirementMaterialMappingWhereInput
+  orderBy?: Prisma.LeadRequirementMaterialMappingOrderByWithRelationInput | Prisma.LeadRequirementMaterialMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadRequirementMaterialMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadRequirementMaterialMappingScalarFieldEnum | Prisma.LeadRequirementMaterialMappingScalarFieldEnum[]
+}
+
+/**
+ * ProductTypeMaster.requirementDocuments
+ */
+export type ProductTypeMaster$requirementDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadDocuments
+   */
+  select?: Prisma.LeadDocumentsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadDocuments
+   */
+  omit?: Prisma.LeadDocumentsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadDocumentsInclude<ExtArgs> | null
+  where?: Prisma.LeadDocumentsWhereInput
+  orderBy?: Prisma.LeadDocumentsOrderByWithRelationInput | Prisma.LeadDocumentsOrderByWithRelationInput[]
+  cursor?: Prisma.LeadDocumentsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadDocumentsScalarFieldEnum | Prisma.LeadDocumentsScalarFieldEnum[]
 }
 
 /**
