@@ -3118,14 +3118,12 @@ export class OrderLoginService {
       },
     });
 
-    if (lead.account_id) {
+    if (isSoValueReceived && lead.account_id) {
       await createLeadLog(prisma, {
         vendor_id: vendorId,
         lead_id: leadId,
         account_id: lead.account_id,
-        action: isSoValueReceived
-          ? "SO Value marked as sent."
-          : "SO Value marked as not sent.",
+        action: "SO Value marked as sent.",
         action_type: "UPDATE",
         created_by: updatedBy,
       });
