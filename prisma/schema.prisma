@@ -197,6 +197,8 @@ model VendorMaster {
   smallOrderRequestDocuments             SmallOrderRequestDocument[]
   smallOrderRequestTypeMasters           SmallOrderRequestTypeMaster[]
   specificationDocumentMappings          specificationDocumentMapping[]
+  b2bRequirementTypes                    B2BRequirementTypeMaster[]
+  leadB2BReqMappings                     LeadB2BRequirementTypeMapping[]
 
   @@index([state_id])
 }
@@ -360,6 +362,8 @@ model UserMaster {
   leadReqMaterialsCreated                    LeadRequirementMaterialMapping[]       @relation("LeadReqMatCreatedBy")
   leadReqMaterialsUpdated                    LeadRequirementMaterialMapping[]       @relation("LeadReqMatUpdatedBy")
   leadProductsCreated                        LeadProductMapping[]                   @relation("LeadProductCreatedBy")
+  leadB2BReqMappingsCreated                  LeadB2BRequirementTypeMapping[]        @relation("LeadB2BReqMappingCreatedBy")
+  leadB2BReqMappingsUpdated                  LeadB2BRequirementTypeMapping[]        @relation("LeadB2BReqMappingUpdatedBy")
   productStructureInstances                  LeadProductStructureInstance[]
   leadServiceSchedulesCompleted              LeadServiceSchedule[]                  @relation("LeadServiceScheduleCompletedBy")
   leadServiceSchedulesCreated                LeadServiceSchedule[]                  @relation("LeadServiceScheduleCreatedBy")
@@ -817,6 +821,7 @@ model LeadMaster {
   hardwareMappings                            LeadHardwareMapping[]
   lightCarcasUnitMappings                     LeadLightCarcasUnitMapping[]
   leadProcessBriefs                           LeadProcessBriefMapping[]
+  leadB2BReqMappings                          LeadB2BRequirementTypeMapping[]
   otherAppliancesRemarkMappings               LeadOtherAppliancesRemarkMapping[]
   account                                     AccountMaster?                        @relation(fields: [account_id], references: [id], onDelete: Cascade)
   architect                                   Architechuremaster?                   @relation(fields: [architect_id], references: [id])
@@ -1151,6 +1156,7 @@ model LeadProcessBriefMapping {
   vendor_id        Int                @map("vendor_id")
   product_type_id  Int                @map("product_type_id")
   process_brief_id Int                @map("process_brief_id")
+  b2b_requirement_type_id Int?        @map("b2b_requirement_type_id")
   created_at       DateTime           @default(now()) @map("created_at")
   created_by       Int                @map("created_by")
   updated_at       DateTime           @updatedAt @map("updated_at")
@@ -1159,12 +1165,14 @@ model LeadProcessBriefMapping {
   vendor           VendorMaster       @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   productType      ProductTypeMaster  @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
   processBrief     ProcessBriefMaster @relation(fields: [process_brief_id], references: [id], onDelete: Cascade)
+  b2bRequirementType B2BRequirementTypeMaster? @relation(fields: [b2b_requirement_type_id], references: [id], onDelete: Cascade)
   createdBy        UserMaster         @relation("LeadProcessBriefCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   updatedBy        UserMaster?        @relation("LeadProcessBriefUpdatedBy", fields: [updated_by], references: [id])
 
   @@index([lead_id])
   @@index([vendor_id])
   @@index([product_type_id])
+  @@index([b2b_requirement_type_id])
   @@index([process_brief_id])
   @@map("LeadProcessBriefMapping")
 }
@@ -1180,6 +1188,7 @@ model LeadRequirementMaterialMapping {
   lead_id             Int                @map("lead_id")
   vendor_id           Int                @map("vendor_id")
   product_type_id     Int                @map("product_type_id")
+  b2b_requirement_type_id Int?           @map("b2b_requirement_type_id")
   product_id          Int                @map("product_id")
   quantity            Decimal            @db.Decimal(12, 2) @map("quantity")
   unit_id             Int?               @map("unit_id")
@@ -1196,6 +1205,7 @@ model LeadRequirementMaterialMapping {
   lead                LeadMaster         @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   vendor              VendorMaster       @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   productType         ProductTypeMaster  @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
+  b2bRequirementType  B2BRequirementTypeMaster? @relation(fields: [b2b_requirement_type_id], references: [id], onDelete: Cascade)
   product             ProductMaster      @relation(fields: [product_id], references: [id], onDelete: Cascade)
   unit                UnitMaster?        @relation(fields: [unit_id], references: [id])
   createdBy           UserMaster         @relation("LeadReqMatCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
@@ -1204,6 +1214,7 @@ model LeadRequirementMaterialMapping {
   @@index([lead_id])
   @@index([vendor_id])
   @@index([product_type_id])
+  @@index([b2b_requirement_type_id])
   @@index([product_id])
   @@map("LeadRequirementMaterialMapping")
 }
@@ -1524,6 +1535,7 @@ model LeadDocuments {
   tech_check_status                   TechCheckStatus?
   product_structure_instance_id       Int?
   product_type_id                     Int?
+  b2b_requirement_type_id             Int?                                 @map("b2b_requirement_type_id")
   fastProductionRequestDocuments      FastProductionRequestDocument[]
   installationUpdateDocs              InstallationUpdateDocuments[]        @relation("InstallationUpdateDocumentLink")
   amcContracts                        LeadAmcContract[]                    @relation("LeadAmcContractDocument")
@@ -1537,6 +1549,7 @@ model LeadDocuments {
   lead                                LeadMaster?                          @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   productStructureInstance            LeadProductStructureInstance?        @relation(fields: [product_structure_instance_id], references: [id])
   productType                         ProductTypeMaster?                   @relation("LeadDocumentsToProductType", fields: [product_type_id], references: [id], onDelete: Cascade)
+  b2bRequirementType                  B2BRequirementTypeMaster?            @relation("LeadDocumentsToB2BRequirementType", fields: [b2b_requirement_type_id], references: [id], onDelete: Cascade)
   vendor                              VendorMaster                         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   completedServiceSchedules           LeadServiceSchedule[]                @relation("LeadServiceScheduleCompletionDocument")
   miscellaneousDocument               MiscellaneousDocument[]
@@ -1547,6 +1560,7 @@ model LeadDocuments {
   site_readiness_photos               SiteReadiness[]                      @relation("LeadDocumentsToSiteReadiness")
 
   @@index([product_type_id])
+  @@index([b2b_requirement_type_id])
 }
 
 model LeadChatRoom {
@@ -4962,6 +4976,46 @@ enum OtherApplianceType {
   Stone
   Sinks
   Faucets
+}
+
+model B2BRequirementTypeMaster {
+  id                       Int                              @id @default(autoincrement())
+  type                     String                           @map("type")
+  vendor_id                Int                              @map("vendor_id")
+  status                   String                           @default("active") @map("status")
+  created_at               DateTime                         @default(now()) @map("created_at")
+  updated_at               DateTime                         @updatedAt @map("updated_at")
+  vendor                   VendorMaster                     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  leadProcessBriefs        LeadProcessBriefMapping[]
+  leadRequirementMaterials LeadRequirementMaterialMapping[]
+  requirementDocuments     LeadDocuments[]                  @relation("LeadDocumentsToB2BRequirementType")
+  leadB2BReqMappings       LeadB2BRequirementTypeMapping[]
+
+  @@index([vendor_id])
+  @@map("B2BRequirementTypeMaster")
+}
+
+model LeadB2BRequirementTypeMapping {
+  id                      Int                      @id @default(autoincrement())
+  lead_id                 Int                      @map("lead_id")
+  vendor_id               Int                      @map("vendor_id")
+  b2b_requirement_type_id Int                      @map("b2b_requirement_type_id")
+  approximate_budget      Decimal?                 @db.Decimal(12, 2) @map("approximate_budget")
+  project_status          String?                  @map("project_status")
+  created_at              DateTime                 @default(now()) @map("created_at")
+  created_by              Int                      @map("created_by")
+  updated_at              DateTime                 @updatedAt @map("updated_at")
+  updated_by              Int?                     @map("updated_by")
+  lead                    LeadMaster               @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  vendor                  VendorMaster             @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  b2bRequirementType      B2BRequirementTypeMaster @relation(fields: [b2b_requirement_type_id], references: [id], onDelete: Cascade)
+  createdBy               UserMaster               @relation("LeadB2BReqMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  updatedBy               UserMaster?              @relation("LeadB2BReqMappingUpdatedBy", fields: [updated_by], references: [id])
+
+  @@index([lead_id])
+  @@index([vendor_id])
+  @@index([b2b_requirement_type_id])
+  @@map("LeadB2BRequirementTypeMapping")
 }
 
 enum LeadEntryType {

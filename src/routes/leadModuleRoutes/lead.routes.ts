@@ -20,6 +20,14 @@ import {
   deleteLeadRequirementMaterialHandler,
 } from "../../controllers/leadModuleControllers/leadRequirementMaterial.controller";
 import {
+  getB2BRequirementTypesHandler,
+  createB2BRequirementTypeHandler,
+  updateB2BRequirementTypeHandler,
+  deleteB2BRequirementTypeHandler,
+  saveLeadB2BRequirementMappingsHandler,
+  getLeadB2BRequirementMappingsHandler,
+} from "../../controllers/leadModuleControllers/b2bRequirementType.controller";
+import {
   getRequirementDocumentTypesHandler,
   uploadRequirementDocumentHandler,
   getRequirementDocumentsHandler,
@@ -152,6 +160,13 @@ leadsRouter.post("/create-lead-requirement-material", createLeadRequirementMater
 leadsRouter.get("/get-lead-requirement-materials/:lead_id", getLeadRequirementMaterialsHandler);
 leadsRouter.put("/update-lead-requirement-material/:id", updateLeadRequirementMaterialHandler);
 leadsRouter.delete("/delete-lead-requirement-material/:id", deleteLeadRequirementMaterialHandler);
+
+leadsRouter.get("/get-all-b2b-requirement-types/:vendor_id", getB2BRequirementTypesHandler);
+leadsRouter.post("/create-b2b-requirement-type", createB2BRequirementTypeHandler);
+leadsRouter.put("/update-b2b-requirement-type/:id", updateB2BRequirementTypeHandler);
+leadsRouter.delete("/delete-b2b-requirement-type/:id", deleteB2BRequirementTypeHandler);
+leadsRouter.post("/save-lead-b2b-requirement-mappings", saveLeadB2BRequirementMappingsHandler);
+leadsRouter.get("/get-lead-b2b-requirement-mappings/:lead_id", getLeadB2BRequirementMappingsHandler);
 leadsRouter.get(
   "/get-all-small-order-request-types/:vendor_id",
   fetchAllSmallOrderRequestTypes,
