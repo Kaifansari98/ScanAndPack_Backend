@@ -1351,7 +1351,7 @@ model LeadLightCarcasUnitMapping {
   vendor_id                   Int
   lead_id                     Int
   specs_id                    Int
-  light_carcas_unit_master_id Int
+  light_carcas_unit_master_id Int?
   custom_remark               String?
   is_approved                 Boolean                  @default(false)
   approved_at                 DateTime?
@@ -1365,7 +1365,7 @@ model LeadLightCarcasUnitMapping {
   created_by                  Int
   createdBy                   UserMaster               @relation("LeadLightCarcasUnitMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   lead                        LeadMaster               @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  lightCarcasUnit             LightCarcasUnitMaster    @relation(fields: [light_carcas_unit_master_id], references: [id], onDelete: Cascade)
+  lightCarcasUnit             LightCarcasUnitMaster?   @relation(fields: [light_carcas_unit_master_id], references: [id], onDelete: Cascade)
   specification               LeadSpecificationsMaster @relation(fields: [specs_id], references: [id], onDelete: Cascade)
   vendor                      VendorMaster             @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
@@ -3293,14 +3293,21 @@ model ProjectCategoriesMaster {
   category_name                        String
   status                               ProjectCategoriesStatus                @default(Yes)
   vendor_id                            Int
+  parent_id                            Int?
   created_at                           DateTime                               @default(now())
+  created_by                           Int?
   updated_at                           DateTime                               @updatedAt
+  updated_by                           Int?
   external_category_id                 Int?
   products                             ProductMaster[]                        @relation("ProductCategory")
   subCategoryProducts                  ProductMaster[]                        @relation("ProductSubCategory")
+  parent                               ProjectCategoriesMaster?               @relation("ProjectCategoryHierarchy", fields: [parent_id], references: [id])
+  children                             ProjectCategoriesMaster[]              @relation("ProjectCategoryHierarchy")
   vendor                               VendorMaster                           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   projectCategoriesMasterVendorMapping ProjectCategoriesMasterVendorMapping[]
   purchaseIntents                      PurchaseIntentMaster[]                 @relation("PICategory")
+
+  @@index([parent_id])
 }
 
 model ProjectCategoriesMasterVendorMapping {
@@ -3320,14 +3327,19 @@ model ProjectCategoriesMasterVendorMapping {
 }
 
 model BrandMaster {
-  id         Int             @id @default(autoincrement())
-  vendor_id  Int
-  brand_name String
-  active     BrandActiveFlag @default(Yes)
-  created_at DateTime        @default(now())
-  updated_at DateTime        @updatedAt
-  vendor     VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  products   ProductMaster[]
+  id               Int             @id @default(autoincrement())
+  vendor_id        Int
+  brand_name       String
+  active           BrandActiveFlag @default(Yes)
+  created_at       DateTime        @default(now())
+  updated_at       DateTime        @updatedAt
+  brand_short_name String?
+  logo             String?
+  is_active        Boolean         @default(true)
+  created_by       Int?
+  updated_by       Int?
+  vendor           VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  products         ProductMaster[]
 
   @@index([vendor_id])
 }
