@@ -25,6 +25,7 @@ model VendorMaster {
   subdomain_url                          String?
   IsAccountLocInEnabled                  Boolean? @default(false)
   is_crm_enabled                         Boolean  @default(true)
+  is_online_lead_feature_enabled         Boolean  @default(false)
   is_custom_doc_nomenclature_enabled     Boolean  @default(false)
   is_inventory_enabled                   Boolean  @default(false)
   is_tracktrace_enabled                  Boolean  @default(false)
