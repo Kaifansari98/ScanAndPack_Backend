@@ -9,7 +9,10 @@ async function getSuperAdminUserTypeIds(): Promise<number[]> {
     const roles = await prisma.userTypeMaster.findMany({
       where: {
         user_type: {
-          in: ["super-admin", "superadmin", "super_admin"],
+          in: [
+            "super-admin", "superadmin", "super_admin",
+            "master", "vloq master", "vloq_master"
+          ],
           mode: "insensitive",
         },
       },
