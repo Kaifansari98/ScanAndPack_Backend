@@ -582,7 +582,19 @@ export const ModelName = {
   BroadcastAudienceMapping: 'BroadcastAudienceMapping',
   BroadcastAttachment: 'BroadcastAttachment',
   BroadcastRead: 'BroadcastRead',
-  NotificationQueue: 'NotificationQueue'
+  NotificationQueue: 'NotificationQueue',
+  SubCategory: 'SubCategory',
+  CoreProduct: 'CoreProduct',
+  Grade: 'Grade',
+  Finish: 'Finish',
+  Size: 'Size',
+  OnlineLead: 'OnlineLead',
+  OnlineLeadFollowupStatus: 'OnlineLeadFollowupStatus',
+  OnlineLeadHistory: 'OnlineLeadHistory',
+  OnlineLeadCallLog: 'OnlineLeadCallLog',
+  OnlineLeadStoreLog: 'OnlineLeadStoreLog',
+  UserTypePrivilegeMapping: 'UserTypePrivilegeMapping',
+  TelecallerCampaignLead: 'TelecallerCampaignLead'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -598,7 +610,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "clientTypeMaster" | "leadMaster" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterMaterialFinishMaster" | "carcassLegsMaster" | "skirtingCarcassLegsMaster" | "skirtingCarcassLegsColorMaster" | "leadHardwareMapping" | "lightCarcasTypeMaster" | "lightCarcasUnitMaster" | "leadLightCarcasUnitMapping" | "otherAppliancesMaster" | "leadOtherAppliancesMapping" | "handleTypeMaster" | "timelineRule" | "specificationDocumentMapping" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost" | "projectBoxInfoField" | "boxInfoFieldValue" | "vendorTypeMaster" | "companyVendorTypeMapping" | "companyVendorContactPerson" | "companyVendorBankAccount" | "companyVendorDocumentMaster" | "companyVendorDocumentMapping" | "companyVendorAddress" | "broadcastMaster" | "broadcastCategoryMaster" | "broadcastAudienceMapping" | "broadcastAttachment" | "broadcastRead" | "notificationQueue"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "clientTypeMaster" | "leadMaster" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterMaterialFinishMaster" | "carcassLegsMaster" | "skirtingCarcassLegsMaster" | "skirtingCarcassLegsColorMaster" | "leadHardwareMapping" | "lightCarcasTypeMaster" | "lightCarcasUnitMaster" | "leadLightCarcasUnitMapping" | "otherAppliancesMaster" | "leadOtherAppliancesMapping" | "handleTypeMaster" | "timelineRule" | "specificationDocumentMapping" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost" | "projectBoxInfoField" | "boxInfoFieldValue" | "vendorTypeMaster" | "companyVendorTypeMapping" | "companyVendorContactPerson" | "companyVendorBankAccount" | "companyVendorDocumentMaster" | "companyVendorDocumentMapping" | "companyVendorAddress" | "broadcastMaster" | "broadcastCategoryMaster" | "broadcastAudienceMapping" | "broadcastAttachment" | "broadcastRead" | "notificationQueue" | "subCategory" | "coreProduct" | "grade" | "finish" | "size" | "onlineLead" | "onlineLeadFollowupStatus" | "onlineLeadHistory" | "onlineLeadCallLog" | "onlineLeadStoreLog" | "userTypePrivilegeMapping" | "telecallerCampaignLead"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -14366,6 +14378,894 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SubCategory: {
+      payload: Prisma.$SubCategoryPayload<ExtArgs>
+      fields: Prisma.SubCategoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SubCategoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubCategoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SubCategoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubCategoryPayload>
+        }
+        findFirst: {
+          args: Prisma.SubCategoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubCategoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SubCategoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubCategoryPayload>
+        }
+        findMany: {
+          args: Prisma.SubCategoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubCategoryPayload>[]
+        }
+        create: {
+          args: Prisma.SubCategoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubCategoryPayload>
+        }
+        createMany: {
+          args: Prisma.SubCategoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SubCategoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubCategoryPayload>[]
+        }
+        delete: {
+          args: Prisma.SubCategoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubCategoryPayload>
+        }
+        update: {
+          args: Prisma.SubCategoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubCategoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.SubCategoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SubCategoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SubCategoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubCategoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.SubCategoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubCategoryPayload>
+        }
+        aggregate: {
+          args: Prisma.SubCategoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSubCategory>
+        }
+        groupBy: {
+          args: Prisma.SubCategoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SubCategoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SubCategoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SubCategoryCountAggregateOutputType> | number
+        }
+      }
+    }
+    CoreProduct: {
+      payload: Prisma.$CoreProductPayload<ExtArgs>
+      fields: Prisma.CoreProductFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CoreProductFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoreProductPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CoreProductFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoreProductPayload>
+        }
+        findFirst: {
+          args: Prisma.CoreProductFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoreProductPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CoreProductFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoreProductPayload>
+        }
+        findMany: {
+          args: Prisma.CoreProductFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoreProductPayload>[]
+        }
+        create: {
+          args: Prisma.CoreProductCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoreProductPayload>
+        }
+        createMany: {
+          args: Prisma.CoreProductCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CoreProductCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoreProductPayload>[]
+        }
+        delete: {
+          args: Prisma.CoreProductDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoreProductPayload>
+        }
+        update: {
+          args: Prisma.CoreProductUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoreProductPayload>
+        }
+        deleteMany: {
+          args: Prisma.CoreProductDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CoreProductUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CoreProductUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoreProductPayload>[]
+        }
+        upsert: {
+          args: Prisma.CoreProductUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CoreProductPayload>
+        }
+        aggregate: {
+          args: Prisma.CoreProductAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCoreProduct>
+        }
+        groupBy: {
+          args: Prisma.CoreProductGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CoreProductGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CoreProductCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CoreProductCountAggregateOutputType> | number
+        }
+      }
+    }
+    Grade: {
+      payload: Prisma.$GradePayload<ExtArgs>
+      fields: Prisma.GradeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GradeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GradeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradePayload>
+        }
+        findFirst: {
+          args: Prisma.GradeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GradeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradePayload>
+        }
+        findMany: {
+          args: Prisma.GradeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradePayload>[]
+        }
+        create: {
+          args: Prisma.GradeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradePayload>
+        }
+        createMany: {
+          args: Prisma.GradeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GradeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradePayload>[]
+        }
+        delete: {
+          args: Prisma.GradeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradePayload>
+        }
+        update: {
+          args: Prisma.GradeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradePayload>
+        }
+        deleteMany: {
+          args: Prisma.GradeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GradeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GradeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradePayload>[]
+        }
+        upsert: {
+          args: Prisma.GradeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradePayload>
+        }
+        aggregate: {
+          args: Prisma.GradeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGrade>
+        }
+        groupBy: {
+          args: Prisma.GradeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GradeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GradeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GradeCountAggregateOutputType> | number
+        }
+      }
+    }
+    Finish: {
+      payload: Prisma.$FinishPayload<ExtArgs>
+      fields: Prisma.FinishFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FinishFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinishPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FinishFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinishPayload>
+        }
+        findFirst: {
+          args: Prisma.FinishFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinishPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FinishFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinishPayload>
+        }
+        findMany: {
+          args: Prisma.FinishFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinishPayload>[]
+        }
+        create: {
+          args: Prisma.FinishCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinishPayload>
+        }
+        createMany: {
+          args: Prisma.FinishCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FinishCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinishPayload>[]
+        }
+        delete: {
+          args: Prisma.FinishDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinishPayload>
+        }
+        update: {
+          args: Prisma.FinishUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinishPayload>
+        }
+        deleteMany: {
+          args: Prisma.FinishDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FinishUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FinishUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinishPayload>[]
+        }
+        upsert: {
+          args: Prisma.FinishUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinishPayload>
+        }
+        aggregate: {
+          args: Prisma.FinishAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFinish>
+        }
+        groupBy: {
+          args: Prisma.FinishGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FinishGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FinishCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FinishCountAggregateOutputType> | number
+        }
+      }
+    }
+    Size: {
+      payload: Prisma.$SizePayload<ExtArgs>
+      fields: Prisma.SizeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SizeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SizePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SizeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SizePayload>
+        }
+        findFirst: {
+          args: Prisma.SizeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SizePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SizeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SizePayload>
+        }
+        findMany: {
+          args: Prisma.SizeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SizePayload>[]
+        }
+        create: {
+          args: Prisma.SizeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SizePayload>
+        }
+        createMany: {
+          args: Prisma.SizeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SizeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SizePayload>[]
+        }
+        delete: {
+          args: Prisma.SizeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SizePayload>
+        }
+        update: {
+          args: Prisma.SizeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SizePayload>
+        }
+        deleteMany: {
+          args: Prisma.SizeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SizeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SizeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SizePayload>[]
+        }
+        upsert: {
+          args: Prisma.SizeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SizePayload>
+        }
+        aggregate: {
+          args: Prisma.SizeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSize>
+        }
+        groupBy: {
+          args: Prisma.SizeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SizeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SizeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SizeCountAggregateOutputType> | number
+        }
+      }
+    }
+    OnlineLead: {
+      payload: Prisma.$OnlineLeadPayload<ExtArgs>
+      fields: Prisma.OnlineLeadFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OnlineLeadFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OnlineLeadFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadPayload>
+        }
+        findFirst: {
+          args: Prisma.OnlineLeadFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OnlineLeadFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadPayload>
+        }
+        findMany: {
+          args: Prisma.OnlineLeadFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadPayload>[]
+        }
+        create: {
+          args: Prisma.OnlineLeadCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadPayload>
+        }
+        createMany: {
+          args: Prisma.OnlineLeadCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OnlineLeadCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadPayload>[]
+        }
+        delete: {
+          args: Prisma.OnlineLeadDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadPayload>
+        }
+        update: {
+          args: Prisma.OnlineLeadUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadPayload>
+        }
+        deleteMany: {
+          args: Prisma.OnlineLeadDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OnlineLeadUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OnlineLeadUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadPayload>[]
+        }
+        upsert: {
+          args: Prisma.OnlineLeadUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadPayload>
+        }
+        aggregate: {
+          args: Prisma.OnlineLeadAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOnlineLead>
+        }
+        groupBy: {
+          args: Prisma.OnlineLeadGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OnlineLeadGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OnlineLeadCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OnlineLeadCountAggregateOutputType> | number
+        }
+      }
+    }
+    OnlineLeadFollowupStatus: {
+      payload: Prisma.$OnlineLeadFollowupStatusPayload<ExtArgs>
+      fields: Prisma.OnlineLeadFollowupStatusFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OnlineLeadFollowupStatusFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadFollowupStatusPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OnlineLeadFollowupStatusFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadFollowupStatusPayload>
+        }
+        findFirst: {
+          args: Prisma.OnlineLeadFollowupStatusFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadFollowupStatusPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OnlineLeadFollowupStatusFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadFollowupStatusPayload>
+        }
+        findMany: {
+          args: Prisma.OnlineLeadFollowupStatusFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadFollowupStatusPayload>[]
+        }
+        create: {
+          args: Prisma.OnlineLeadFollowupStatusCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadFollowupStatusPayload>
+        }
+        createMany: {
+          args: Prisma.OnlineLeadFollowupStatusCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OnlineLeadFollowupStatusCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadFollowupStatusPayload>[]
+        }
+        delete: {
+          args: Prisma.OnlineLeadFollowupStatusDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadFollowupStatusPayload>
+        }
+        update: {
+          args: Prisma.OnlineLeadFollowupStatusUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadFollowupStatusPayload>
+        }
+        deleteMany: {
+          args: Prisma.OnlineLeadFollowupStatusDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OnlineLeadFollowupStatusUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OnlineLeadFollowupStatusUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadFollowupStatusPayload>[]
+        }
+        upsert: {
+          args: Prisma.OnlineLeadFollowupStatusUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadFollowupStatusPayload>
+        }
+        aggregate: {
+          args: Prisma.OnlineLeadFollowupStatusAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOnlineLeadFollowupStatus>
+        }
+        groupBy: {
+          args: Prisma.OnlineLeadFollowupStatusGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OnlineLeadFollowupStatusGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OnlineLeadFollowupStatusCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OnlineLeadFollowupStatusCountAggregateOutputType> | number
+        }
+      }
+    }
+    OnlineLeadHistory: {
+      payload: Prisma.$OnlineLeadHistoryPayload<ExtArgs>
+      fields: Prisma.OnlineLeadHistoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OnlineLeadHistoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadHistoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OnlineLeadHistoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadHistoryPayload>
+        }
+        findFirst: {
+          args: Prisma.OnlineLeadHistoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadHistoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OnlineLeadHistoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadHistoryPayload>
+        }
+        findMany: {
+          args: Prisma.OnlineLeadHistoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadHistoryPayload>[]
+        }
+        create: {
+          args: Prisma.OnlineLeadHistoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadHistoryPayload>
+        }
+        createMany: {
+          args: Prisma.OnlineLeadHistoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OnlineLeadHistoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadHistoryPayload>[]
+        }
+        delete: {
+          args: Prisma.OnlineLeadHistoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadHistoryPayload>
+        }
+        update: {
+          args: Prisma.OnlineLeadHistoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadHistoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.OnlineLeadHistoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OnlineLeadHistoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OnlineLeadHistoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadHistoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.OnlineLeadHistoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadHistoryPayload>
+        }
+        aggregate: {
+          args: Prisma.OnlineLeadHistoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOnlineLeadHistory>
+        }
+        groupBy: {
+          args: Prisma.OnlineLeadHistoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OnlineLeadHistoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OnlineLeadHistoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OnlineLeadHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
+    OnlineLeadCallLog: {
+      payload: Prisma.$OnlineLeadCallLogPayload<ExtArgs>
+      fields: Prisma.OnlineLeadCallLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OnlineLeadCallLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadCallLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OnlineLeadCallLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadCallLogPayload>
+        }
+        findFirst: {
+          args: Prisma.OnlineLeadCallLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadCallLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OnlineLeadCallLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadCallLogPayload>
+        }
+        findMany: {
+          args: Prisma.OnlineLeadCallLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadCallLogPayload>[]
+        }
+        create: {
+          args: Prisma.OnlineLeadCallLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadCallLogPayload>
+        }
+        createMany: {
+          args: Prisma.OnlineLeadCallLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OnlineLeadCallLogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadCallLogPayload>[]
+        }
+        delete: {
+          args: Prisma.OnlineLeadCallLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadCallLogPayload>
+        }
+        update: {
+          args: Prisma.OnlineLeadCallLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadCallLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.OnlineLeadCallLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OnlineLeadCallLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OnlineLeadCallLogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadCallLogPayload>[]
+        }
+        upsert: {
+          args: Prisma.OnlineLeadCallLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadCallLogPayload>
+        }
+        aggregate: {
+          args: Prisma.OnlineLeadCallLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOnlineLeadCallLog>
+        }
+        groupBy: {
+          args: Prisma.OnlineLeadCallLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OnlineLeadCallLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OnlineLeadCallLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OnlineLeadCallLogCountAggregateOutputType> | number
+        }
+      }
+    }
+    OnlineLeadStoreLog: {
+      payload: Prisma.$OnlineLeadStoreLogPayload<ExtArgs>
+      fields: Prisma.OnlineLeadStoreLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OnlineLeadStoreLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadStoreLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OnlineLeadStoreLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadStoreLogPayload>
+        }
+        findFirst: {
+          args: Prisma.OnlineLeadStoreLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadStoreLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OnlineLeadStoreLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadStoreLogPayload>
+        }
+        findMany: {
+          args: Prisma.OnlineLeadStoreLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadStoreLogPayload>[]
+        }
+        create: {
+          args: Prisma.OnlineLeadStoreLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadStoreLogPayload>
+        }
+        createMany: {
+          args: Prisma.OnlineLeadStoreLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OnlineLeadStoreLogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadStoreLogPayload>[]
+        }
+        delete: {
+          args: Prisma.OnlineLeadStoreLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadStoreLogPayload>
+        }
+        update: {
+          args: Prisma.OnlineLeadStoreLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadStoreLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.OnlineLeadStoreLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OnlineLeadStoreLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OnlineLeadStoreLogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadStoreLogPayload>[]
+        }
+        upsert: {
+          args: Prisma.OnlineLeadStoreLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnlineLeadStoreLogPayload>
+        }
+        aggregate: {
+          args: Prisma.OnlineLeadStoreLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOnlineLeadStoreLog>
+        }
+        groupBy: {
+          args: Prisma.OnlineLeadStoreLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OnlineLeadStoreLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OnlineLeadStoreLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OnlineLeadStoreLogCountAggregateOutputType> | number
+        }
+      }
+    }
+    UserTypePrivilegeMapping: {
+      payload: Prisma.$UserTypePrivilegeMappingPayload<ExtArgs>
+      fields: Prisma.UserTypePrivilegeMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserTypePrivilegeMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserTypePrivilegeMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.UserTypePrivilegeMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserTypePrivilegeMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload>
+        }
+        findMany: {
+          args: Prisma.UserTypePrivilegeMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload>[]
+        }
+        create: {
+          args: Prisma.UserTypePrivilegeMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload>
+        }
+        createMany: {
+          args: Prisma.UserTypePrivilegeMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserTypePrivilegeMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.UserTypePrivilegeMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload>
+        }
+        update: {
+          args: Prisma.UserTypePrivilegeMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserTypePrivilegeMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserTypePrivilegeMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserTypePrivilegeMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserTypePrivilegeMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.UserTypePrivilegeMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserTypePrivilegeMapping>
+        }
+        groupBy: {
+          args: Prisma.UserTypePrivilegeMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserTypePrivilegeMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserTypePrivilegeMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserTypePrivilegeMappingCountAggregateOutputType> | number
+        }
+      }
+    }
+    TelecallerCampaignLead: {
+      payload: Prisma.$TelecallerCampaignLeadPayload<ExtArgs>
+      fields: Prisma.TelecallerCampaignLeadFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TelecallerCampaignLeadFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TelecallerCampaignLeadPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TelecallerCampaignLeadFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TelecallerCampaignLeadPayload>
+        }
+        findFirst: {
+          args: Prisma.TelecallerCampaignLeadFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TelecallerCampaignLeadPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TelecallerCampaignLeadFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TelecallerCampaignLeadPayload>
+        }
+        findMany: {
+          args: Prisma.TelecallerCampaignLeadFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TelecallerCampaignLeadPayload>[]
+        }
+        create: {
+          args: Prisma.TelecallerCampaignLeadCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TelecallerCampaignLeadPayload>
+        }
+        createMany: {
+          args: Prisma.TelecallerCampaignLeadCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TelecallerCampaignLeadCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TelecallerCampaignLeadPayload>[]
+        }
+        delete: {
+          args: Prisma.TelecallerCampaignLeadDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TelecallerCampaignLeadPayload>
+        }
+        update: {
+          args: Prisma.TelecallerCampaignLeadUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TelecallerCampaignLeadPayload>
+        }
+        deleteMany: {
+          args: Prisma.TelecallerCampaignLeadDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TelecallerCampaignLeadUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TelecallerCampaignLeadUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TelecallerCampaignLeadPayload>[]
+        }
+        upsert: {
+          args: Prisma.TelecallerCampaignLeadUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TelecallerCampaignLeadPayload>
+        }
+        aggregate: {
+          args: Prisma.TelecallerCampaignLeadAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTelecallerCampaignLead>
+        }
+        groupBy: {
+          args: Prisma.TelecallerCampaignLeadGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TelecallerCampaignLeadGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TelecallerCampaignLeadCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TelecallerCampaignLeadCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -16677,6 +17577,8 @@ export const BrandMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   brand_name: 'brand_name',
+  brand_short_name: 'brand_short_name',
+  brand_logo: 'brand_logo',
   active: 'active',
   created_at: 'created_at',
   updated_at: 'updated_at'
@@ -16729,6 +17631,21 @@ export const ProductMasterScalarFieldEnum = {
   current_stock: 'current_stock',
   stock_updated_at: 'stock_updated_at',
   item_group_id: 'item_group_id',
+  barcode: 'barcode',
+  sub_category_id: 'sub_category_id',
+  core_product_id: 'core_product_id',
+  grade_id: 'grade_id',
+  product_type_id: 'product_type_id',
+  finish_id: 'finish_id',
+  size_id: 'size_id',
+  product_as_per_vendor_invoice: 'product_as_per_vendor_invoice',
+  p_code: 'p_code',
+  color_name: 'color_name',
+  thickness_mm: 'thickness_mm',
+  cost_price: 'cost_price',
+  b2c_selling_price: 'b2c_selling_price',
+  b2b_selling_price: 'b2b_selling_price',
+  mrp: 'mrp',
   primary_unit_id: 'primary_unit_id',
   stock_unit_id: 'stock_unit_id',
   consumption_unit_id: 'consumption_unit_id',
@@ -17534,6 +18451,161 @@ export const NotificationQueueScalarFieldEnum = {
 } as const
 
 export type NotificationQueueScalarFieldEnum = (typeof NotificationQueueScalarFieldEnum)[keyof typeof NotificationQueueScalarFieldEnum]
+
+
+export const SubCategoryScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  categoryId: 'categoryId',
+  name: 'name'
+} as const
+
+export type SubCategoryScalarFieldEnum = (typeof SubCategoryScalarFieldEnum)[keyof typeof SubCategoryScalarFieldEnum]
+
+
+export const CoreProductScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  name: 'name'
+} as const
+
+export type CoreProductScalarFieldEnum = (typeof CoreProductScalarFieldEnum)[keyof typeof CoreProductScalarFieldEnum]
+
+
+export const GradeScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  name: 'name'
+} as const
+
+export type GradeScalarFieldEnum = (typeof GradeScalarFieldEnum)[keyof typeof GradeScalarFieldEnum]
+
+
+export const FinishScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  name: 'name'
+} as const
+
+export type FinishScalarFieldEnum = (typeof FinishScalarFieldEnum)[keyof typeof FinishScalarFieldEnum]
+
+
+export const SizeScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  name: 'name'
+} as const
+
+export type SizeScalarFieldEnum = (typeof SizeScalarFieldEnum)[keyof typeof SizeScalarFieldEnum]
+
+
+export const OnlineLeadScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  leads_name: 'leads_name',
+  email: 'email',
+  contact: 'contact',
+  source: 'source',
+  lead_entry_type: 'lead_entry_type',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  assign_to: 'assign_to',
+  status: 'status',
+  remark: 'remark',
+  follow_up_date: 'follow_up_date',
+  store_id: 'store_id',
+  final_assigned_leads: 'final_assigned_leads'
+} as const
+
+export type OnlineLeadScalarFieldEnum = (typeof OnlineLeadScalarFieldEnum)[keyof typeof OnlineLeadScalarFieldEnum]
+
+
+export const OnlineLeadFollowupStatusScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  status_name: 'status_name',
+  followup_required: 'followup_required',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by'
+} as const
+
+export type OnlineLeadFollowupStatusScalarFieldEnum = (typeof OnlineLeadFollowupStatusScalarFieldEnum)[keyof typeof OnlineLeadFollowupStatusScalarFieldEnum]
+
+
+export const OnlineLeadHistoryScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  online_lead_id: 'online_lead_id',
+  remark: 'remark',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  follow_up_date: 'follow_up_date',
+  store_id: 'store_id',
+  store_preference_option: 'store_preference_option',
+  online_lead_status_id: 'online_lead_status_id'
+} as const
+
+export type OnlineLeadHistoryScalarFieldEnum = (typeof OnlineLeadHistoryScalarFieldEnum)[keyof typeof OnlineLeadHistoryScalarFieldEnum]
+
+
+export const OnlineLeadCallLogScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  online_lead_id: 'online_lead_id',
+  telecaller_id: 'telecaller_id',
+  call_type: 'call_type',
+  online_lead_status_id: 'online_lead_status_id',
+  started_at: 'started_at',
+  ended_at: 'ended_at',
+  duration_seconds: 'duration_seconds',
+  remark: 'remark',
+  created_at: 'created_at'
+} as const
+
+export type OnlineLeadCallLogScalarFieldEnum = (typeof OnlineLeadCallLogScalarFieldEnum)[keyof typeof OnlineLeadCallLogScalarFieldEnum]
+
+
+export const OnlineLeadStoreLogScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  online_lead_id: 'online_lead_id',
+  from_store_id: 'from_store_id',
+  to_store_id: 'to_store_id',
+  action_type: 'action_type',
+  selected_by: 'selected_by',
+  assigned_to: 'assigned_to',
+  remark: 'remark',
+  created_at: 'created_at'
+} as const
+
+export type OnlineLeadStoreLogScalarFieldEnum = (typeof OnlineLeadStoreLogScalarFieldEnum)[keyof typeof OnlineLeadStoreLogScalarFieldEnum]
+
+
+export const UserTypePrivilegeMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  user_type_id: 'user_type_id',
+  privilege_id: 'privilege_id',
+  is_allowed: 'is_allowed',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type UserTypePrivilegeMappingScalarFieldEnum = (typeof UserTypePrivilegeMappingScalarFieldEnum)[keyof typeof UserTypePrivilegeMappingScalarFieldEnum]
+
+
+export const TelecallerCampaignLeadScalarFieldEnum = {
+  id: 'id',
+  campaign_name: 'campaign_name',
+  online_lead_id: 'online_lead_id'
+} as const
+
+export type TelecallerCampaignLeadScalarFieldEnum = (typeof TelecallerCampaignLeadScalarFieldEnum)[keyof typeof TelecallerCampaignLeadScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -18660,6 +19732,48 @@ export type EnumNotificationStatusFieldRefInput<$PrismaModel> = FieldRefInputTyp
 export type ListEnumNotificationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationStatus[]'>
     
 
+
+/**
+ * Reference to a field of type 'LeadEntryType'
+ */
+export type EnumLeadEntryTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadEntryType'>
+    
+
+
+/**
+ * Reference to a field of type 'LeadEntryType[]'
+ */
+export type ListEnumLeadEntryTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadEntryType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'LeadCallType'
+ */
+export type EnumLeadCallTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadCallType'>
+    
+
+
+/**
+ * Reference to a field of type 'LeadCallType[]'
+ */
+export type ListEnumLeadCallTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadCallType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'LeadStoreActionType'
+ */
+export type EnumLeadStoreActionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadStoreActionType'>
+    
+
+
+/**
+ * Reference to a field of type 'LeadStoreActionType[]'
+ */
+export type ListEnumLeadStoreActionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadStoreActionType[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -18997,6 +20111,18 @@ export type GlobalOmitConfig = {
   broadcastAttachment?: Prisma.BroadcastAttachmentOmit
   broadcastRead?: Prisma.BroadcastReadOmit
   notificationQueue?: Prisma.NotificationQueueOmit
+  subCategory?: Prisma.SubCategoryOmit
+  coreProduct?: Prisma.CoreProductOmit
+  grade?: Prisma.GradeOmit
+  finish?: Prisma.FinishOmit
+  size?: Prisma.SizeOmit
+  onlineLead?: Prisma.OnlineLeadOmit
+  onlineLeadFollowupStatus?: Prisma.OnlineLeadFollowupStatusOmit
+  onlineLeadHistory?: Prisma.OnlineLeadHistoryOmit
+  onlineLeadCallLog?: Prisma.OnlineLeadCallLogOmit
+  onlineLeadStoreLog?: Prisma.OnlineLeadStoreLogOmit
+  userTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingOmit
+  telecallerCampaignLead?: Prisma.TelecallerCampaignLeadOmit
 }
 
 /* Types for Logging */

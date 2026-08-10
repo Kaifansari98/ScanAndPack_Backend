@@ -39,6 +39,32 @@ type ProductPayload = {
     supplier_item_code?: string | null;
     amount?: number | null;
   }[];
+
+  barcode?: string | null;
+  sub_category_id?: number | null;
+  core_product_id?: number | null;
+  grade_id?: number | null;
+  product_type_id?: number | null;
+  finish_id?: number | null;
+  size_id?: number | null;
+  brand_id?: number | null;
+
+  product_as_per_vendor_invoice?: string | null;
+  p_code?: string | null;
+  color_name?: string | null;
+  thickness_mm?: number | null;
+  cost_price?: number | null;
+  b2c_selling_price?: number | null;
+  b2b_selling_price?: number | null;
+  mrp?: number | null;
+
+  board_length?: number | null;
+  board_width?: number | null;
+  dimension_1?: number | null;
+  dimension_2?: number | null;
+  dimension_3?: number | null;
+
+  vendor_code?: string | null;
 };
 
 const toDecimal = (v: any) =>
@@ -47,6 +73,8 @@ const toDecimal = (v: any) =>
 const toIntOrNull = (v: any) =>
   v === undefined || v === null || v === "" ? null : Number(v);
 
+
+
 const buildProductData = (payload: ProductPayload) => {
   return {
     vendor_id: Number(payload.vendor_id),
@@ -54,6 +82,7 @@ const buildProductData = (payload: ProductPayload) => {
 
     product_name: payload.product_name.trim(),
     article_code: payload.article_code.trim(),
+    vendor_code: payload.vendor_code?.trim() || null,
 
     item_group_id: toIntOrNull(payload.item_group_id),
 
@@ -86,6 +115,31 @@ const buildProductData = (payload: ProductPayload) => {
 
     created_by: payload.user_id || null,
     updated_by: payload.user_id || null,
+
+    // New fields
+    barcode: payload.barcode?.trim() || null,
+    sub_category_id: toIntOrNull(payload.sub_category_id),
+    core_product_id: toIntOrNull(payload.core_product_id),
+    grade_id: toIntOrNull(payload.grade_id),
+    product_type_id: toIntOrNull(payload.product_type_id),
+    finish_id: toIntOrNull(payload.finish_id),
+    size_id: toIntOrNull(payload.size_id),
+    brand_id: toIntOrNull(payload.brand_id),
+
+    product_as_per_vendor_invoice: payload.product_as_per_vendor_invoice?.trim() || null,
+    p_code: payload.p_code?.trim() || null,
+    color_name: payload.color_name?.trim() || null,
+    thickness_mm: payload.thickness_mm !== undefined && payload.thickness_mm !== null && (payload.thickness_mm as any) !== "" ? Number(payload.thickness_mm) : null,
+    cost_price: toDecimal(payload.cost_price),
+    b2c_selling_price: toDecimal(payload.b2c_selling_price),
+    b2b_selling_price: toDecimal(payload.b2b_selling_price),
+    mrp: toDecimal(payload.mrp),
+
+    board_length: payload.board_length !== undefined && payload.board_length !== null && (payload.board_length as any) !== "" ? Number(payload.board_length) : 0,
+    board_width: payload.board_width !== undefined && payload.board_width !== null && (payload.board_width as any) !== "" ? Number(payload.board_width) : 0,
+    dimension_1: payload.dimension_1 !== undefined && payload.dimension_1 !== null && (payload.dimension_1 as any) !== "" ? Number(payload.dimension_1) : 0,
+    dimension_2: payload.dimension_2 !== undefined && payload.dimension_2 !== null && (payload.dimension_2 as any) !== "" ? Number(payload.dimension_2) : 0,
+    dimension_3: payload.dimension_3 !== undefined && payload.dimension_3 !== null && (payload.dimension_3 as any) !== "" ? Number(payload.dimension_3) : 0,
   };
 };
 
@@ -153,6 +207,104 @@ const validateProductReferences = async (payload: ProductPayload) => {
     if (!group) return "Invalid item group";
   }
 
+  // Validate Sub Category
+  if (payload.sub_category_id) {
+    const subCategory = await prisma.subCategory.findFirst({
+      where: {
+        id: Number(payload.sub_category_id),
+        categoryId: Number(payload.category_id),
+      },
+      select: { id: true },
+    });
+    if (!subCategory) return "Invalid sub-category";
+  }
+
+  // Validate Core Product
+  if (payload.core_product_id) {
+    const coreProduct = await prisma.coreProduct.findFirst({
+      where: {
+        id: Number(payload.core_product_id),
+        OR: [{ vendor_id: null }, { vendor_id }],
+      },
+      select: { id: true },
+    });
+    if (!coreProduct) return "Invalid core product";
+  }
+
+  // Validate Grade
+  if (payload.grade_id) {
+    const grade = await prisma.grade.findFirst({
+      where: {
+        id: Number(payload.grade_id),
+        OR: [{ vendor_id: null }, { vendor_id }],
+      },
+      select: { id: true },
+    });
+    if (!grade) return "Invalid grade";
+  }
+
+  // Validate Finish
+  if (payload.finish_id) {
+    const finish = await prisma.finish.findFirst({
+      where: {
+        id: Number(payload.finish_id),
+        OR: [{ vendor_id: null }, { vendor_id }],
+      },
+      select: { id: true },
+    });
+    if (!finish) return "Invalid finish";
+  }
+
+  // Validation: If Dimensions has any value, Size must be empty. If Size has any value, Dimensions must be empty.
+  const hasDimensions = 
+    (payload.board_length !== undefined && Number(payload.board_length) > 0) ||
+    (payload.board_width !== undefined && Number(payload.board_width) > 0) ||
+    (payload.dimension_1 !== undefined && Number(payload.dimension_1) > 0) ||
+    (payload.dimension_2 !== undefined && Number(payload.dimension_2) > 0) ||
+    (payload.dimension_3 !== undefined && Number(payload.dimension_3) > 0);
+
+  if (hasDimensions && payload.size_id) {
+    return "Product cannot have both Dimensions and Size. Choose either one.";
+  }
+
+  // Validate Size
+  if (payload.size_id) {
+    const size = await prisma.size.findFirst({
+      where: {
+        id: Number(payload.size_id),
+        OR: [{ vendor_id: null }, { vendor_id }],
+      },
+      select: { id: true },
+    });
+    if (!size) return "Invalid size";
+  }
+
+  // Validate Brand
+  if (payload.brand_id) {
+    const brand = await prisma.brandMaster.findFirst({
+      where: {
+        id: Number(payload.brand_id),
+        vendor_id,
+        active: "Yes",
+      },
+      select: { id: true },
+    });
+    if (!brand) return "Invalid brand";
+  }
+
+  // Validate Product Type
+  if (payload.product_type_id) {
+    const productType = await prisma.productTypeMaster.findFirst({
+      where: {
+        id: Number(payload.product_type_id),
+        vendor_id,
+        status: "active",
+      },
+      select: { id: true },
+    });
+    if (!productType) return "Invalid product type";
+  }
+
   const unitIds = [
     payload.primary_unit_id,
     payload.stock_unit_id,
@@ -200,7 +352,41 @@ const validateProductReferences = async (payload: ProductPayload) => {
 
 export const getProductMasters = async (vendor_id: number) => {
   try {
-    const [categories, units, itemGroups, hsns, suppliers] = await Promise.all([
+    const standardUnits = ['PCS', 'KG', 'LTR', 'SQFT', 'RMT', 'NOS', 'SET', 'BOX', 'ROLL'];
+    const existing = await prisma.unitMaster.findMany({
+      where: {
+        vendor_id,
+        unit_name: { in: standardUnits }
+      },
+      select: { unit_name: true }
+    });
+    const existingNames = existing.map(u => u.unit_name.toUpperCase());
+    const missingNames = standardUnits.filter(name => !existingNames.includes(name.toUpperCase()));
+    if (missingNames.length > 0) {
+      await prisma.unitMaster.createMany({
+        data: missingNames.map(name => ({
+          vendor_id,
+          unit_name: name,
+          unit_class: name,
+          is_active: true
+        }))
+      });
+    }
+
+    const [
+      categories,
+      units,
+      itemGroups,
+      hsns,
+      suppliers,
+      subCategories,
+      coreProducts,
+      grades,
+      finishes,
+      sizes,
+      brands,
+      productTypes
+    ] = await Promise.all([
       prisma.projectCategoriesMaster.findMany({
         where: {
           vendor_id,
@@ -252,6 +438,7 @@ export const getProductMasters = async (vendor_id: number) => {
         },
         orderBy: { hsn_code: "asc" },
       }),
+
       prisma.companyVendorsMaster.findMany({
         where: {
           vendor_id,
@@ -266,6 +453,103 @@ export const getProductMasters = async (vendor_id: number) => {
           company_name: "asc",
         },
       }),
+
+      prisma.subCategory.findMany({
+        where: {
+          OR: [
+            { vendor_id: null },
+            { vendor_id },
+          ],
+        },
+        select: {
+          id: true,
+          categoryId: true,
+          name: true,
+        },
+        orderBy: { name: "asc" },
+      }),
+
+      prisma.coreProduct.findMany({
+        where: {
+          OR: [
+            { vendor_id: null },
+            { vendor_id },
+          ],
+        },
+        select: {
+          id: true,
+          name: true,
+        },
+        orderBy: { name: "asc" },
+      }),
+
+      prisma.grade.findMany({
+        where: {
+          OR: [
+            { vendor_id: null },
+            { vendor_id },
+          ],
+        },
+        select: {
+          id: true,
+          name: true,
+        },
+        orderBy: { name: "asc" },
+      }),
+
+      prisma.finish.findMany({
+        where: {
+          OR: [
+            { vendor_id: null },
+            { vendor_id },
+          ],
+        },
+        select: {
+          id: true,
+          name: true,
+        },
+        orderBy: { name: "asc" },
+      }),
+
+      prisma.size.findMany({
+        where: {
+          OR: [
+            { vendor_id: null },
+            { vendor_id },
+          ],
+        },
+        select: {
+          id: true,
+          name: true,
+        },
+        orderBy: { name: "asc" },
+      }),
+
+      prisma.brandMaster.findMany({
+        where: {
+          vendor_id,
+          active: "Yes",
+        },
+        select: {
+          id: true,
+          brand_name: true,
+          brand_short_name: true,
+        },
+        orderBy: { brand_name: "asc" },
+      }),
+
+      prisma.productTypeMaster.findMany({
+        where: {
+          vendor_id,
+          status: "active",
+        },
+        select: {
+          id: true,
+          type: true,
+          tag: true,
+        },
+        orderBy: { type: "asc" },
+      }),
     ]);
 
     return validationResponse(1, "Product masters fetched", {
@@ -274,9 +558,15 @@ export const getProductMasters = async (vendor_id: number) => {
       itemGroups,
       hsns,
       suppliers,
+      subCategories,
+      coreProducts,
+      grades,
+      finishes,
+      sizes,
+      brands,
+      productTypes,
       costingMethods: ["FIFO", "MANUAL"],
       itemTypes: ["CapitalGoods", "Goods", "Services"],
-
     });
   } catch (error) {
     console.error("getProductMasters error:", error);
@@ -377,6 +667,13 @@ export const listProducts = async (
               igst_rate: true,
             },
           },
+          subCategory: true,
+          coreProduct: true,
+          grade: true,
+          productType: true,
+          finishMaster: true,
+          sizeMaster: true,
+          brand: true,
           supplierMappings: {
             where: {
               is_active: true,
@@ -399,6 +696,7 @@ export const listProducts = async (
 
       prisma.productMaster.count({ where }),
     ]);
+
 
     return validationResponse(1, "Products fetched", {
       products,
@@ -431,6 +729,13 @@ export const getProductById = async (vendor_id: number, id: number) => {
         reorderLevelUnit: true,
         reorderBatchUnit: true,
         hsn: true,
+        subCategory: true,
+        coreProduct: true,
+        grade: true,
+        productType: true,
+        finishMaster: true,
+        sizeMaster: true,
+        brand: true,
         supplierMappings: {
           where: {
             is_active: true,
@@ -574,6 +879,13 @@ export const createProduct = async (payload: ProductPayload) => {
         stockUnit: true,
         consumptionUnit: true,
         hsn: true,
+        subCategory: true,
+        coreProduct: true,
+        grade: true,
+        productType: true,
+        finishMaster: true,
+        sizeMaster: true,
+        brand: true,
         supplierMappings: {
           where: {
             is_active: true,
@@ -699,6 +1011,13 @@ export const updateProduct = async (id: number, payload: ProductPayload) => {
         stockUnit: true,
         consumptionUnit: true,
         hsn: true,
+        subCategory: true,
+        coreProduct: true,
+        grade: true,
+        productType: true,
+        finishMaster: true,
+        sizeMaster: true,
+        brand: true,
         supplierMappings: {
           where: {
             is_active: true,

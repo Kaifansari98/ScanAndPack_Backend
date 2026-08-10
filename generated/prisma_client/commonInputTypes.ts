@@ -1676,6 +1676,57 @@ export type EnumNotificationStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumNotificationStatusFilter<$PrismaModel>
 }
 
+export type EnumLeadEntryTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadEntryType | Prisma.EnumLeadEntryTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadEntryType[] | Prisma.ListEnumLeadEntryTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadEntryType[] | Prisma.ListEnumLeadEntryTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadEntryTypeFilter<$PrismaModel> | $Enums.LeadEntryType
+}
+
+export type EnumLeadEntryTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadEntryType | Prisma.EnumLeadEntryTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadEntryType[] | Prisma.ListEnumLeadEntryTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadEntryType[] | Prisma.ListEnumLeadEntryTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadEntryTypeWithAggregatesFilter<$PrismaModel> | $Enums.LeadEntryType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumLeadEntryTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumLeadEntryTypeFilter<$PrismaModel>
+}
+
+export type EnumLeadCallTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadCallType | Prisma.EnumLeadCallTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadCallType[] | Prisma.ListEnumLeadCallTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadCallType[] | Prisma.ListEnumLeadCallTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadCallTypeFilter<$PrismaModel> | $Enums.LeadCallType
+}
+
+export type EnumLeadCallTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadCallType | Prisma.EnumLeadCallTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadCallType[] | Prisma.ListEnumLeadCallTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadCallType[] | Prisma.ListEnumLeadCallTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadCallTypeWithAggregatesFilter<$PrismaModel> | $Enums.LeadCallType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumLeadCallTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumLeadCallTypeFilter<$PrismaModel>
+}
+
+export type EnumLeadStoreActionTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadStoreActionType | Prisma.EnumLeadStoreActionTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadStoreActionType[] | Prisma.ListEnumLeadStoreActionTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadStoreActionType[] | Prisma.ListEnumLeadStoreActionTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadStoreActionTypeFilter<$PrismaModel> | $Enums.LeadStoreActionType
+}
+
+export type EnumLeadStoreActionTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadStoreActionType | Prisma.EnumLeadStoreActionTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadStoreActionType[] | Prisma.ListEnumLeadStoreActionTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadStoreActionType[] | Prisma.ListEnumLeadStoreActionTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadStoreActionTypeWithAggregatesFilter<$PrismaModel> | $Enums.LeadStoreActionType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumLeadStoreActionTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumLeadStoreActionTypeFilter<$PrismaModel>
+}
+
 export type NestedIntFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
@@ -3273,6 +3324,57 @@ export type NestedEnumNotificationStatusWithAggregatesFilter<$PrismaModel = neve
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumNotificationStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumNotificationStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumLeadEntryTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadEntryType | Prisma.EnumLeadEntryTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadEntryType[] | Prisma.ListEnumLeadEntryTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadEntryType[] | Prisma.ListEnumLeadEntryTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadEntryTypeFilter<$PrismaModel> | $Enums.LeadEntryType
+}
+
+export type NestedEnumLeadEntryTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadEntryType | Prisma.EnumLeadEntryTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadEntryType[] | Prisma.ListEnumLeadEntryTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadEntryType[] | Prisma.ListEnumLeadEntryTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadEntryTypeWithAggregatesFilter<$PrismaModel> | $Enums.LeadEntryType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumLeadEntryTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumLeadEntryTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumLeadCallTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadCallType | Prisma.EnumLeadCallTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadCallType[] | Prisma.ListEnumLeadCallTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadCallType[] | Prisma.ListEnumLeadCallTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadCallTypeFilter<$PrismaModel> | $Enums.LeadCallType
+}
+
+export type NestedEnumLeadCallTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadCallType | Prisma.EnumLeadCallTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadCallType[] | Prisma.ListEnumLeadCallTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadCallType[] | Prisma.ListEnumLeadCallTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadCallTypeWithAggregatesFilter<$PrismaModel> | $Enums.LeadCallType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumLeadCallTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumLeadCallTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumLeadStoreActionTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadStoreActionType | Prisma.EnumLeadStoreActionTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadStoreActionType[] | Prisma.ListEnumLeadStoreActionTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadStoreActionType[] | Prisma.ListEnumLeadStoreActionTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadStoreActionTypeFilter<$PrismaModel> | $Enums.LeadStoreActionType
+}
+
+export type NestedEnumLeadStoreActionTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadStoreActionType | Prisma.EnumLeadStoreActionTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadStoreActionType[] | Prisma.ListEnumLeadStoreActionTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadStoreActionType[] | Prisma.ListEnumLeadStoreActionTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadStoreActionTypeWithAggregatesFilter<$PrismaModel> | $Enums.LeadStoreActionType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumLeadStoreActionTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumLeadStoreActionTypeFilter<$PrismaModel>
 }
 
 

@@ -155,3 +155,164 @@ export const createAdditionalCostMaster = async (req: Request, res: Response) =>
     });
   }
 };
+
+export const createSubCategory = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    const result = await inventoryService.createSubCategoryService(vendor_id, req.body);
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("createSubCategory controller error:", error);
+    return res.status(500).json({ status: 0, message: "Failed to create subcategory" });
+  }
+};
+
+export const createCoreProduct = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    const result = await inventoryService.createCoreProductService(vendor_id, req.body);
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("createCoreProduct controller error:", error);
+    return res.status(500).json({ status: 0, message: "Failed to create core product" });
+  }
+};
+
+export const createGrade = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    const result = await inventoryService.createGradeService(vendor_id, req.body);
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("createGrade controller error:", error);
+    return res.status(500).json({ status: 0, message: "Failed to create grade" });
+  }
+};
+
+export const createFinish = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    const result = await inventoryService.createFinishService(vendor_id, req.body);
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("createFinish controller error:", error);
+    return res.status(500).json({ status: 0, message: "Failed to create finish" });
+  }
+};
+
+export const createSize = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    const result = await inventoryService.createSizeService(vendor_id, req.body);
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("createSize controller error:", error);
+    return res.status(500).json({ status: 0, message: "Failed to create size" });
+  }
+};
+
+export const deleteSubCategory = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    const id = Number(req.params.id);
+    const result = await inventoryService.deleteSubCategoryService(vendor_id, id);
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("deleteSubCategory controller error:", error);
+    return res.status(500).json({ status: 0, message: "Failed to delete subcategory" });
+  }
+};
+
+export const deleteCoreProduct = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    const id = Number(req.params.id);
+    const result = await inventoryService.deleteCoreProductService(vendor_id, id);
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("deleteCoreProduct controller error:", error);
+    return res.status(500).json({ status: 0, message: "Failed to delete core product" });
+  }
+};
+
+export const deleteGrade = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    const id = Number(req.params.id);
+    const result = await inventoryService.deleteGradeService(vendor_id, id);
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("deleteGrade controller error:", error);
+    return res.status(500).json({ status: 0, message: "Failed to delete grade" });
+  }
+};
+
+export const deleteFinish = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    const id = Number(req.params.id);
+    const result = await inventoryService.deleteFinishService(vendor_id, id);
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("deleteFinish controller error:", error);
+    return res.status(500).json({ status: 0, message: "Failed to delete finish" });
+  }
+};
+
+export const deleteSize = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    const id = Number(req.params.id);
+    const result = await inventoryService.deleteSizeService(vendor_id, id);
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("deleteSize controller error:", error);
+    return res.status(500).json({ status: 0, message: "Failed to delete size" });
+  }
+};
+
+export const createBrand = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    const result = await inventoryService.createBrandService(vendor_id, req.body);
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("createBrand controller error:", error);
+    return res.status(500).json({ status: 0, message: "Failed to create brand" });
+  }
+};
+
+export const deleteBrand = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    const id = Number(req.params.id);
+    const result = await inventoryService.deleteBrandService(vendor_id, id);
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("deleteBrand controller error:", error);
+    return res.status(500).json({ status: 0, message: "Failed to delete brand" });
+  }
+};
+
+export const createProductType = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    const result = await inventoryService.createProductTypeService(vendor_id, req.body);
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("createProductType controller error:", error);
+    return res.status(500).json({ status: 0, message: "Failed to create product type" });
+  }
+};
+
+export const deleteProductType = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    const id = Number(req.params.id);
+    const result = await inventoryService.deleteProductTypeService(vendor_id, id);
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("deleteProductType controller error:", error);
+    return res.status(500).json({ status: 0, message: "Failed to delete product type" });
+  }
+};
