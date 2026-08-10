@@ -4478,6 +4478,10 @@ export const getProjectCategories = async (vendor_id: number) => {
       select: {
         id: true,
         category_name: true,
+        parent_id: true,
+        parent: {
+          select: { id: true, category_name: true },
+        },
         status: true,
         created_at: true,
         projectCategoriesMasterVendorMapping: {
@@ -4519,12 +4523,20 @@ export const createProjectCategory = async (
   vendor_id: number,
   category_name: string,
   type_ids: number[],
-  created_by: number
+  created_by: number,
+  parent_id?: number | null
 ) => {
   try {
     const result = await prisma.$transaction(async (tx) => {
       const category = await tx.projectCategoriesMaster.create({
-        data: { category_name, vendor_id, status: "Yes" },
+        data: {
+          category_name,
+          vendor_id,
+          status: "Yes",
+          parent_id: parent_id ? Number(parent_id) : null,
+          created_by,
+          updated_by: created_by,
+        },
       });
 
       if (type_ids.length > 0) {
@@ -4556,13 +4568,19 @@ export const updateProjectCategory = async (
   category_name: string,
   status: "Yes" | "No",
   type_ids: number[],
-  updated_by: number
+  updated_by: number,
+  parent_id?: number | null
 ) => {
   try {
     await prisma.$transaction(async (tx) => {
       await tx.projectCategoriesMaster.update({
         where: { id },
-        data: { category_name, status },
+        data: {
+          category_name,
+          status,
+          parent_id: parent_id ? Number(parent_id) : null,
+          updated_by,
+        },
       });
 
       // Delete existing mappings and re-insert (clean replace)
@@ -4605,6 +4623,347 @@ export const toggleProjectCategoryStatus = async (
   } catch (error) {
     console.error("Error in toggleProjectCategoryStatus", error);
     return validationResponse(0, "Something went wrong");
+  }
+};
+
+// ─── Brand Master Services ───────────────────────────────────────────────────
+export const getBrandMasters = async (vendor_id: number) => {
+  try {
+    const brands = await prisma.brandMaster.findMany({
+      where: { vendor_id },
+      orderBy: { brand_name: "asc" },
+    });
+    return validationResponse(1, "Brands fetched", { brands });
+  } catch (error) {
+    console.error("Error in getBrandMasters", error);
+    return validationResponse(0, "Failed to fetch brands");
+  }
+};
+
+export const createBrandMaster = async (
+  vendor_id: number,
+  brand_name: string,
+  brand_short_name?: string | null,
+  logo?: string | null,
+  created_by?: number | null
+) => {
+  try {
+    const brand = await prisma.brandMaster.create({
+      data: {
+        vendor_id,
+        brand_name: brand_name.trim(),
+        brand_short_name: brand_short_name?.trim() || null,
+        logo: logo?.trim() || null,
+        is_active: true,
+        active: "Yes",
+        created_by,
+        updated_by: created_by,
+      },
+    });
+    return validationResponse(1, "Brand created successfully", brand);
+  } catch (error) {
+    console.error("Error in createBrandMaster", error);
+    return validationResponse(0, "Failed to create brand");
+  }
+};
+
+export const updateBrandMaster = async (
+  id: number,
+  vendor_id: number,
+  brand_name: string,
+  brand_short_name?: string | null,
+  logo?: string | null,
+  is_active?: boolean,
+  updated_by?: number | null
+) => {
+  try {
+    const brand = await prisma.brandMaster.update({
+      where: { id },
+      data: {
+        brand_name: brand_name.trim(),
+        brand_short_name: brand_short_name?.trim() || null,
+        logo: logo?.trim() || null,
+        is_active: is_active ?? true,
+        active: (is_active ?? true) ? "Yes" : "No",
+        updated_by,
+      },
+    });
+    return validationResponse(1, "Brand updated successfully", brand);
+  } catch (error) {
+    console.error("Error in updateBrandMaster", error);
+    return validationResponse(0, "Failed to update brand");
+  }
+};
+
+export const toggleBrandMasterStatus = async (id: number, is_active: boolean) => {
+  try {
+    await prisma.brandMaster.update({
+      where: { id },
+      data: {
+        is_active,
+        active: is_active ? "Yes" : "No",
+      },
+    });
+    return validationResponse(1, `Brand ${is_active ? "activated" : "deactivated"} successfully`);
+  } catch (error) {
+    console.error("Error in toggleBrandMasterStatus", error);
+    return validationResponse(0, "Failed to toggle brand status");
+  }
+};
+
+export const deleteBrandMaster = async (id: number, vendor_id: number) => {
+  try {
+    await prisma.brandMaster.delete({
+      where: { id },
+    });
+    return validationResponse(1, "Brand deleted successfully");
+  } catch (error) {
+    console.error("Error in deleteBrandMaster", error);
+    return validationResponse(0, "Failed to delete brand");
+  }
+};
+
+// ─── Grade Master Services ────────────────────────────────────────────────────
+export const getGradeMasters = async (vendor_id: number) => {
+  try {
+    const grades = await prisma.gradeMaster.findMany({
+      where: { vendor_id },
+      orderBy: { grade_name: "asc" },
+    });
+    return validationResponse(1, "Grades fetched", { grades });
+  } catch (error) {
+    console.error("Error in getGradeMasters", error);
+    return validationResponse(0, "Failed to fetch grades");
+  }
+};
+
+export const createGradeMaster = async (vendor_id: number, grade_name: string, created_by?: number | null) => {
+  try {
+    const grade = await prisma.gradeMaster.create({
+      data: { vendor_id, grade_name: grade_name.trim(), is_active: true, created_by, updated_by: created_by },
+    });
+    return validationResponse(1, "Grade created successfully", grade);
+  } catch (error: any) {
+    if (error?.code === "P2002") return validationResponse(0, "Grade name already exists");
+    console.error("Error in createGradeMaster", error);
+    return validationResponse(0, "Failed to create grade");
+  }
+};
+
+export const updateGradeMaster = async (id: number, grade_name: string, updated_by?: number | null) => {
+  try {
+    const grade = await prisma.gradeMaster.update({
+      where: { id },
+      data: { grade_name: grade_name.trim(), updated_by },
+    });
+    return validationResponse(1, "Grade updated successfully", grade);
+  } catch (error: any) {
+    if (error?.code === "P2002") return validationResponse(0, "Grade name already exists");
+    console.error("Error in updateGradeMaster", error);
+    return validationResponse(0, "Failed to update grade");
+  }
+};
+
+export const toggleGradeMasterStatus = async (id: number, is_active: boolean) => {
+  try {
+    await prisma.gradeMaster.update({ where: { id }, data: { is_active } });
+    return validationResponse(1, `Grade ${is_active ? "activated" : "deactivated"} successfully`);
+  } catch (error) {
+    console.error("Error in toggleGradeMasterStatus", error);
+    return validationResponse(0, "Failed to toggle grade status");
+  }
+};
+
+export const deleteGradeMaster = async (id: number) => {
+  try {
+    await prisma.gradeMaster.delete({ where: { id } });
+    return validationResponse(1, "Grade deleted successfully");
+  } catch (error) {
+    console.error("Error in deleteGradeMaster", error);
+    return validationResponse(0, "Failed to delete grade");
+  }
+};
+
+// ─── Finish Master Services ───────────────────────────────────────────────────
+export const getFinishMasters = async (vendor_id: number) => {
+  try {
+    const finishes = await prisma.finishMaster.findMany({
+      where: { vendor_id },
+      orderBy: { finish_name: "asc" },
+    });
+    return validationResponse(1, "Finishes fetched", { finishes });
+  } catch (error) {
+    console.error("Error in getFinishMasters", error);
+    return validationResponse(0, "Failed to fetch finishes");
+  }
+};
+
+export const createFinishMaster = async (vendor_id: number, finish_name: string, created_by?: number | null) => {
+  try {
+    const finish = await prisma.finishMaster.create({
+      data: { vendor_id, finish_name: finish_name.trim(), is_active: true, created_by, updated_by: created_by },
+    });
+    return validationResponse(1, "Finish created successfully", finish);
+  } catch (error: any) {
+    if (error?.code === "P2002") return validationResponse(0, "Finish name already exists");
+    console.error("Error in createFinishMaster", error);
+    return validationResponse(0, "Failed to create finish");
+  }
+};
+
+export const updateFinishMaster = async (id: number, finish_name: string, updated_by?: number | null) => {
+  try {
+    const finish = await prisma.finishMaster.update({
+      where: { id },
+      data: { finish_name: finish_name.trim(), updated_by },
+    });
+    return validationResponse(1, "Finish updated successfully", finish);
+  } catch (error: any) {
+    if (error?.code === "P2002") return validationResponse(0, "Finish name already exists");
+    console.error("Error in updateFinishMaster", error);
+    return validationResponse(0, "Failed to update finish");
+  }
+};
+
+export const toggleFinishMasterStatus = async (id: number, is_active: boolean) => {
+  try {
+    await prisma.finishMaster.update({ where: { id }, data: { is_active } });
+    return validationResponse(1, `Finish ${is_active ? "activated" : "deactivated"} successfully`);
+  } catch (error) {
+    console.error("Error in toggleFinishMasterStatus", error);
+    return validationResponse(0, "Failed to toggle finish status");
+  }
+};
+
+export const deleteFinishMaster = async (id: number) => {
+  try {
+    await prisma.finishMaster.delete({ where: { id } });
+    return validationResponse(1, "Finish deleted successfully");
+  } catch (error) {
+    console.error("Error in deleteFinishMaster", error);
+    return validationResponse(0, "Failed to delete finish");
+  }
+};
+
+// ─── Type Master Services ─────────────────────────────────────────────────────
+export const getTypeMasters = async (vendor_id: number) => {
+  try {
+    const types = await prisma.typeMaster.findMany({
+      where: { vendor_id },
+      orderBy: { type_name: "asc" },
+    });
+    return validationResponse(1, "Types fetched", { types });
+  } catch (error) {
+    console.error("Error in getTypeMasters", error);
+    return validationResponse(0, "Failed to fetch types");
+  }
+};
+
+export const createTypeMaster = async (vendor_id: number, type_name: string, created_by?: number | null) => {
+  try {
+    const type = await prisma.typeMaster.create({
+      data: { vendor_id, type_name: type_name.trim(), is_active: true, created_by, updated_by: created_by },
+    });
+    return validationResponse(1, "Type created successfully", type);
+  } catch (error: any) {
+    if (error?.code === "P2002") return validationResponse(0, "Type name already exists");
+    console.error("Error in createTypeMaster", error);
+    return validationResponse(0, "Failed to create type");
+  }
+};
+
+export const updateTypeMaster = async (id: number, type_name: string, updated_by?: number | null) => {
+  try {
+    const type = await prisma.typeMaster.update({
+      where: { id },
+      data: { type_name: type_name.trim(), updated_by },
+    });
+    return validationResponse(1, "Type updated successfully", type);
+  } catch (error: any) {
+    if (error?.code === "P2002") return validationResponse(0, "Type name already exists");
+    console.error("Error in updateTypeMaster", error);
+    return validationResponse(0, "Failed to update type");
+  }
+};
+
+export const toggleTypeMasterStatus = async (id: number, is_active: boolean) => {
+  try {
+    await prisma.typeMaster.update({ where: { id }, data: { is_active } });
+    return validationResponse(1, `Type ${is_active ? "activated" : "deactivated"} successfully`);
+  } catch (error) {
+    console.error("Error in toggleTypeMasterStatus", error);
+    return validationResponse(0, "Failed to toggle type status");
+  }
+};
+
+export const deleteTypeMaster = async (id: number) => {
+  try {
+    await prisma.typeMaster.delete({ where: { id } });
+    return validationResponse(1, "Type deleted successfully");
+  } catch (error) {
+    console.error("Error in deleteTypeMaster", error);
+    return validationResponse(0, "Failed to delete type");
+  }
+};
+
+// ─── Core Product Master Services ──────────────────────────────────────────────
+export const getCoreProductMasters = async (vendor_id: number) => {
+  try {
+    const coreProducts = await prisma.coreProductMaster.findMany({
+      where: { vendor_id },
+      orderBy: { core_product_name: "asc" },
+    });
+    return validationResponse(1, "Core Products fetched", { coreProducts });
+  } catch (error) {
+    console.error("Error in getCoreProductMasters", error);
+    return validationResponse(0, "Failed to fetch core products");
+  }
+};
+
+export const createCoreProductMaster = async (vendor_id: number, core_product_name: string, created_by?: number | null) => {
+  try {
+    const coreProduct = await prisma.coreProductMaster.create({
+      data: { vendor_id, core_product_name: core_product_name.trim(), is_active: true, created_by, updated_by: created_by },
+    });
+    return validationResponse(1, "Core Product created successfully", coreProduct);
+  } catch (error: any) {
+    if (error?.code === "P2002") return validationResponse(0, "Core Product name already exists");
+    console.error("Error in createCoreProductMaster", error);
+    return validationResponse(0, "Failed to create core product");
+  }
+};
+
+export const updateCoreProductMaster = async (id: number, core_product_name: string, updated_by?: number | null) => {
+  try {
+    const coreProduct = await prisma.coreProductMaster.update({
+      where: { id },
+      data: { core_product_name: core_product_name.trim(), updated_by },
+    });
+    return validationResponse(1, "Core Product updated successfully", coreProduct);
+  } catch (error: any) {
+    if (error?.code === "P2002") return validationResponse(0, "Core Product name already exists");
+    console.error("Error in updateCoreProductMaster", error);
+    return validationResponse(0, "Failed to update core product");
+  }
+};
+
+export const toggleCoreProductMasterStatus = async (id: number, is_active: boolean) => {
+  try {
+    await prisma.coreProductMaster.update({ where: { id }, data: { is_active } });
+    return validationResponse(1, `Core Product ${is_active ? "activated" : "deactivated"} successfully`);
+  } catch (error) {
+    console.error("Error in toggleCoreProductMasterStatus", error);
+    return validationResponse(0, "Failed to toggle core product status");
+  }
+};
+
+export const deleteCoreProductMaster = async (id: number) => {
+  try {
+    await prisma.coreProductMaster.delete({ where: { id } });
+    return validationResponse(1, "Core Product deleted successfully");
+  } catch (error) {
+    console.error("Error in deleteCoreProductMaster", error);
+    return validationResponse(0, "Failed to delete core product");
   }
 };
 
@@ -6132,4 +6491,28 @@ export const getResolvedDefectsService = async (vendor_id: number, page: number)
   }
 };
 
-
+export const createUnitMaster = async (
+  vendor_id: number,
+  unit_name: string,
+  short_name: string,
+  created_by?: number | null
+) => {
+  try {
+    const unit = await prisma.unitMaster.create({
+      data: {
+        vendor_id,
+        unit_name: unit_name.trim(),
+        unit_class: "UOM",
+        short_name: short_name.trim(),
+        is_active: true,
+        created_by,
+        updated_by: created_by,
+      },
+    });
+    return validationResponse(1, "Unit created successfully", unit);
+  } catch (error: any) {
+    if (error?.code === "P2002") return validationResponse(0, "Unit already exists");
+    console.error("Error in createUnitMaster", error);
+    return validationResponse(0, "Failed to create unit");
+  }
+};

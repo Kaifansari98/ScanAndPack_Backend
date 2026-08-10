@@ -29,13 +29,22 @@ export const addProductType = async (payload: ProductTypeInput): Promise<Product
         throw new Error("Invalid vendor_id");
     }
 
-    const nextTag = await getNextProductTypeTag(payload.vendor_id);
+    let finalTag: string;
+
+    const rawPayload = payload as any;
+    if (rawPayload.tag && String(rawPayload.tag).trim() !== "") {
+        finalTag = String(rawPayload.tag).trim().toUpperCase();
+    } else if (rawPayload.is_b2b) {
+        finalTag = String(payload.type).trim().toUpperCase().replace(/\s+/g, "_");
+    } else {
+        finalTag = await getNextProductTypeTag(payload.vendor_id);
+    }
 
     // ✅ Create new product type
     const productType = await prisma.productTypeMaster.create({
         data: {
             type: payload.type,
-            tag: nextTag,
+            tag: finalTag,
             vendor_id: payload.vendor_id,
         }
     });

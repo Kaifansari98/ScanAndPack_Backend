@@ -432,6 +432,9 @@ export const getProductMasterService = async (
           dimension_1: true,
           dimension_2: true,
           dimension_3: true,
+          length: true,
+          height: true,
+          thickness: true,
           item1_weight: true,
           level1_price: true,
           level2_price: true,
@@ -453,6 +456,10 @@ export const getProductMasterService = async (
           // ── Category + Brand ──────────────────────────────────────────────
           category: { select: { id: true, category_name: true } },
           brand: { select: { id: true, brand_name: true } },
+          finish_id: true,
+          core_product_id: true,
+          finishMaster: { select: { id: true, finish_name: true } },
+          coreProduct: { select: { id: true, core_product_name: true } },
           // ── HSN mapping (for tax rates) ────────────────────────────────────
           // hsn_id is the FK; include the joined row so the frontend can
           // display/use cgst_rate, sgst_rate, igst_rate without a second call
@@ -532,6 +539,7 @@ export const getProductPurchaseHistoryService = async (
           unit_of_measure: true, moq: true,
           level1_price: true, current_stock: true, stock_updated_at: true,
           dimension_1: true, dimension_2: true, dimension_3: true,
+          length: true, height: true, thickness: true,
           board_length: true, board_width: true, procurement: true,
           category: { select: { id: true, category_name: true } },
         },

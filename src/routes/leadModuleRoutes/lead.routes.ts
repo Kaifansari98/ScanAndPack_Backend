@@ -8,6 +8,24 @@ import {
   toggleProductTypeStatus,
 } from "../../controllers/leadModuleControllers/productType.controller";
 import {
+  createProcessBrief,
+  fetchAllProcessBriefs,
+  fetchLeadProcessBriefsHandler,
+  saveLeadProcessBriefsHandler,
+} from "../../controllers/leadModuleControllers/processBrief.controller";
+import {
+  createLeadRequirementMaterialHandler,
+  getLeadRequirementMaterialsHandler,
+  updateLeadRequirementMaterialHandler,
+  deleteLeadRequirementMaterialHandler,
+} from "../../controllers/leadModuleControllers/leadRequirementMaterial.controller";
+import {
+  getRequirementDocumentTypesHandler,
+  uploadRequirementDocumentHandler,
+  getRequirementDocumentsHandler,
+  deleteRequirementDocumentHandler,
+} from "../../controllers/leadModuleControllers/leadRequirementDocument.controller";
+import {
   createSiteType,
   editSiteType,
   fetchAllSiteTypes,
@@ -117,6 +135,7 @@ leadsRouter.post("/create-document-type", createDocumentType);
 leadsRouter.post("/create-payment-type", createPaymentType);
 leadsRouter.post("/create-status-type", createStatusType);
 leadsRouter.post("/create-product-type", createProductType);
+leadsRouter.post("/create-process-brief", createProcessBrief);
 leadsRouter.post("/create-site-type", createSiteType);
 leadsRouter.post("/create-source-type", createSourceType);
 leadsRouter.post("/create-product-structure", createProductStructureType);
@@ -126,6 +145,13 @@ leadsRouter.get("/get-all-status-types/:vendor_id", fetchAllStatusTypes);
 leadsRouter.get("/get-all-payment-types/:vendor_id", fetchAllPaymentTypes);
 leadsRouter.get("/get-all-document-types/:vendor_id", fetchAllDocumentTypes);
 leadsRouter.get("/get-all-product-types/:vendor_id", fetchAllProductTypes);
+leadsRouter.get("/get-all-process-briefs/:vendor_id", fetchAllProcessBriefs);
+leadsRouter.post("/save-lead-process-briefs", saveLeadProcessBriefsHandler);
+leadsRouter.get("/get-lead-process-briefs/:lead_id", fetchLeadProcessBriefsHandler);
+leadsRouter.post("/create-lead-requirement-material", createLeadRequirementMaterialHandler);
+leadsRouter.get("/get-lead-requirement-materials/:lead_id", getLeadRequirementMaterialsHandler);
+leadsRouter.put("/update-lead-requirement-material/:id", updateLeadRequirementMaterialHandler);
+leadsRouter.delete("/delete-lead-requirement-material/:id", deleteLeadRequirementMaterialHandler);
 leadsRouter.get(
   "/get-all-small-order-request-types/:vendor_id",
   fetchAllSmallOrderRequestTypes,
@@ -367,6 +393,10 @@ leadsRouter.put(
   "/update-product-type/:leadId/userId/:userId",
   leadController.updateLeadProductType
 );
+leadsRouter.post(
+  "/update-requirement-meta",
+  leadController.updateLeadRequirementMeta
+);
 
 // GET /api/sales-executives/vendor/:vendorId
 // Fetch all sales executives for a specific vendor
@@ -546,6 +576,27 @@ leadsRouter.get(
       return res.status(500).json({ success: false, message: error.message || "Failed to resolve URL" });
     }
   }
+);
+
+leadsRouter.get(
+  "/requirement-documents/types",
+  getRequirementDocumentTypesHandler
+);
+
+leadsRouter.post(
+  "/requirement-documents/upload",
+  multer({ storage: multer.memoryStorage() }).single("file"),
+  uploadRequirementDocumentHandler
+);
+
+leadsRouter.get(
+  "/requirement-documents",
+  getRequirementDocumentsHandler
+);
+
+leadsRouter.delete(
+  "/requirement-documents/:id",
+  deleteRequirementDocumentHandler
 );
 
 export default leadsRouter;
