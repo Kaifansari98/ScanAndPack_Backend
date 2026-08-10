@@ -246,7 +246,14 @@ export const ModelName = {
   BroadcastAudienceMapping: 'BroadcastAudienceMapping',
   BroadcastAttachment: 'BroadcastAttachment',
   BroadcastRead: 'BroadcastRead',
-  NotificationQueue: 'NotificationQueue'
+  NotificationQueue: 'NotificationQueue',
+  OnlineLead: 'OnlineLead',
+  OnlineLeadFollowupStatus: 'OnlineLeadFollowupStatus',
+  OnlineLeadHistory: 'OnlineLeadHistory',
+  OnlineLeadCallLog: 'OnlineLeadCallLog',
+  OnlineLeadStoreLog: 'OnlineLeadStoreLog',
+  UserTypePrivilegeMapping: 'UserTypePrivilegeMapping',
+  TelecallerCampaignLead: 'TelecallerCampaignLead'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -288,6 +295,7 @@ export const VendorMasterScalarFieldEnum = {
   is_crm_enabled: 'is_crm_enabled',
   is_custom_doc_nomenclature_enabled: 'is_custom_doc_nomenclature_enabled',
   is_inventory_enabled: 'is_inventory_enabled',
+  is_online_lead_feature_enabled: 'is_online_lead_feature_enabled',
   is_self_assign_task_type_master_enabed: 'is_self_assign_task_type_master_enabed',
   is_this_vendor_is_custom_usertype_only: 'is_this_vendor_is_custom_usertype_only',
   is_tracktrace_enabled: 'is_tracktrace_enabled',
@@ -3642,6 +3650,115 @@ export const NotificationQueueScalarFieldEnum = {
 } as const
 
 export type NotificationQueueScalarFieldEnum = (typeof NotificationQueueScalarFieldEnum)[keyof typeof NotificationQueueScalarFieldEnum]
+
+
+export const OnlineLeadScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  leads_name: 'leads_name',
+  email: 'email',
+  contact: 'contact',
+  source: 'source',
+  lead_entry_type: 'lead_entry_type',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  assign_to: 'assign_to',
+  status: 'status',
+  remark: 'remark',
+  follow_up_date: 'follow_up_date',
+  store_id: 'store_id',
+  final_assigned_leads: 'final_assigned_leads'
+} as const
+
+export type OnlineLeadScalarFieldEnum = (typeof OnlineLeadScalarFieldEnum)[keyof typeof OnlineLeadScalarFieldEnum]
+
+
+export const OnlineLeadFollowupStatusScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  status_name: 'status_name',
+  followup_required: 'followup_required',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by'
+} as const
+
+export type OnlineLeadFollowupStatusScalarFieldEnum = (typeof OnlineLeadFollowupStatusScalarFieldEnum)[keyof typeof OnlineLeadFollowupStatusScalarFieldEnum]
+
+
+export const OnlineLeadHistoryScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  online_lead_id: 'online_lead_id',
+  remark: 'remark',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  follow_up_date: 'follow_up_date',
+  store_id: 'store_id',
+  store_preference_option: 'store_preference_option',
+  online_lead_status_id: 'online_lead_status_id'
+} as const
+
+export type OnlineLeadHistoryScalarFieldEnum = (typeof OnlineLeadHistoryScalarFieldEnum)[keyof typeof OnlineLeadHistoryScalarFieldEnum]
+
+
+export const OnlineLeadCallLogScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  online_lead_id: 'online_lead_id',
+  telecaller_id: 'telecaller_id',
+  call_type: 'call_type',
+  online_lead_status_id: 'online_lead_status_id',
+  started_at: 'started_at',
+  ended_at: 'ended_at',
+  duration_seconds: 'duration_seconds',
+  remark: 'remark',
+  created_at: 'created_at'
+} as const
+
+export type OnlineLeadCallLogScalarFieldEnum = (typeof OnlineLeadCallLogScalarFieldEnum)[keyof typeof OnlineLeadCallLogScalarFieldEnum]
+
+
+export const OnlineLeadStoreLogScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  online_lead_id: 'online_lead_id',
+  from_store_id: 'from_store_id',
+  to_store_id: 'to_store_id',
+  action_type: 'action_type',
+  selected_by: 'selected_by',
+  assigned_to: 'assigned_to',
+  remark: 'remark',
+  created_at: 'created_at'
+} as const
+
+export type OnlineLeadStoreLogScalarFieldEnum = (typeof OnlineLeadStoreLogScalarFieldEnum)[keyof typeof OnlineLeadStoreLogScalarFieldEnum]
+
+
+export const UserTypePrivilegeMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  user_type_id: 'user_type_id',
+  privilege_id: 'privilege_id',
+  is_allowed: 'is_allowed',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type UserTypePrivilegeMappingScalarFieldEnum = (typeof UserTypePrivilegeMappingScalarFieldEnum)[keyof typeof UserTypePrivilegeMappingScalarFieldEnum]
+
+
+export const TelecallerCampaignLeadScalarFieldEnum = {
+  id: 'id',
+  campaign_name: 'campaign_name',
+  online_lead_id: 'online_lead_id'
+} as const
+
+export type TelecallerCampaignLeadScalarFieldEnum = (typeof TelecallerCampaignLeadScalarFieldEnum)[keyof typeof TelecallerCampaignLeadScalarFieldEnum]
 
 
 export const SortOrder = {

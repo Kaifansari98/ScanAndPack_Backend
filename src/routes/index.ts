@@ -16,6 +16,7 @@ import Statsrouter from "./generic/leadStats.routes";
 
 // Leads Routes
 import leadModuleRoutes from "./leadModuleRoutes/lead.routes";
+import onlineLeadRoutes from "./onlineLeadRoutes/onlineLead.routes";
 import { paymentUploadRoutes } from "./leadModuleRoutes/initial-site-measurement.routes";
 import DesigningStageRouter from "./leadModuleRoutes/desigingStage/designing-stage.routes";
 import bookingStageRouter from "./bookingStageRoutes/booking-stage.routes";
@@ -83,6 +84,7 @@ router.use("/auth", authRoutes);
 router.use("/clients", clientRoutes);
 router.use("/client-types", clientTypeRoutes);
 router.use("/leads", leadModuleRoutes);
+router.use("/online-leads", onlineLeadRoutes);
 router.use("/leads/initial-site-measurement", paymentUploadRoutes);
 router.use("/leads/designing-stage", DesigningStageRouter);
 router.use("/leads/stats", Statsrouter);

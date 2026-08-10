@@ -30,6 +30,7 @@ model VendorMaster {
   is_crm_enabled                         Boolean                                @default(true)
   is_custom_doc_nomenclature_enabled     Boolean                                @default(false)
   is_inventory_enabled                   Boolean                                @default(false)
+  is_online_lead_feature_enabled         Boolean                                @default(false)
   is_self_assign_task_type_master_enabed Boolean                                @default(true)
   is_this_vendor_is_custom_usertype_only Boolean?
   is_tracktrace_enabled                  Boolean                                @default(false)
@@ -135,6 +136,11 @@ model VendorMaster {
   miscellaneousTypeMaster                MiscellaneousTypeMaster[]
   notifications                          Notification[]
   orderLoginDetails                      OrderLoginDetails[]
+  onlineLeads                            OnlineLead[]
+  onlineLeadHistories                    OnlineLeadHistory[]
+  onlineLeadFollowupStatuses             OnlineLeadFollowupStatus[]
+  onlineLeadCallLogs                     OnlineLeadCallLog[]
+  onlineLeadStoreLogs                    OnlineLeadStoreLog[]
   otherAppliances                        OtherAppliancesMaster[]
   poPayments                             POPayment[]
   poPaymentSchedules                     POPaymentSchedule[]
@@ -177,6 +183,7 @@ model VendorMaster {
   userMachineMapping                     UserMachineMapping[]
   users                                  UserMaster[]
   userPrivilegeMappings                  UserPrivilegeMapping[]
+  userTypePrivilegeMappings              UserTypePrivilegeMapping[]
   userPushTokens                         UserPushToken[]
   userSessions                           UserSession[]
   addresses                              VendorAddress[]
@@ -221,6 +228,7 @@ model UserTypeMaster {
   id                        Int                        @id @default(autoincrement())
   user_type                 String
   selfAssignTaskTypeMasters SelfAssignTaskTypeMaster[]
+  userTypePrivilegeMappings UserTypePrivilegeMapping[]
   users                     UserMaster[]
 }
 
@@ -238,6 +246,7 @@ model PrivilegeMaster {
   updated_at            DateTime               @updatedAt
   vendor                VendorMaster           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   userPrivilegeMappings UserPrivilegeMapping[]
+  userTypePrivilegeMappings UserTypePrivilegeMapping[]
 
   @@unique([vendor_id, code])
   @@index([vendor_id])
@@ -334,6 +343,16 @@ model UserMaster {
   leadsDelegated                             LeadMaster[]                           @relation("LeadAssignedBy")
   leadsCreated                               LeadMaster[]                           @relation("LeadCreatedBy")
   leadsUpdated                               LeadMaster[]                           @relation("LeadUpdatedBy")
+  onlineLeadsCreated                         OnlineLead[]                           @relation("OnlineLeadCreatedBy")
+  onlineLeadsUpdated                         OnlineLead[]                           @relation("OnlineLeadUpdatedBy")
+  onlineLeadsAssigned                        OnlineLead[]                           @relation("OnlineLeadAssignedTo")
+  onlineLeadsFinalAssigned                   OnlineLead[]                           @relation("OnlineLeadFinalAssigned")
+  followupStatusesCreated                    OnlineLeadFollowupStatus[]             @relation("FollowupStatusCreatedBy")
+  followupStatusesUpdated                    OnlineLeadFollowupStatus[]             @relation("FollowupStatusUpdatedBy")
+  leadHistoriesCreated                       OnlineLeadHistory[]                    @relation("LeadHistoryCreatedBy")
+  callLogsMade                               OnlineLeadCallLog[]                    @relation("CallLogTelecaller")
+  storeLogsSelected                          OnlineLeadStoreLog[]                   @relation("StoreLogSelectedBy")
+  storeLogsAssigned                          OnlineLeadStoreLog[]                   @relation("StoreLogAssignedTo")
   leadOtherAppliancesMappingsCreated         LeadOtherAppliancesMapping[]           @relation("LeadOtherAppliancesMappingCreatedBy")
   leadOtherAppliancesRemarkMappingsCreated   LeadOtherAppliancesRemarkMapping[]     @relation("LeadOtherAppliancesRemarkMappingCreatedBy")
   leadProcessBriefsCreated                   LeadProcessBriefMapping[]              @relation("LeadProcessBriefCreatedBy")
@@ -3064,6 +3083,10 @@ model FranchiseMaster {
   headSiteSupervisorFranchiseMappings HeadSiteSupervisorFranchiseMapping[]
   leads                               LeadMaster[]
   leadSuperAdminApprovalLocIns        LeadSuperAdminApprovalLocIns[]
+  onlineLeads                         OnlineLead[]
+  leadHistories                       OnlineLeadHistory[]
+  storeLogsFrom                       OnlineLeadStoreLog[]                 @relation("StoreLogFromFranchise")
+  storeLogsTo                         OnlineLeadStoreLog[]                 @relation("StoreLogToFranchise")
   users                               UserMaster[]
 
   @@unique([vendor_id, franchise_code])
@@ -4939,4 +4962,168 @@ enum OtherApplianceType {
   Stone
   Sinks
   Faucets
+}
+
+enum LeadEntryType {
+  ONLINE
+  WALK_IN
+}
+
+enum LeadCallType {
+  OUTGOING
+  INCOMING
+}
+
+enum LeadStoreActionType {
+  PREFERENCE
+  ASSIGNED
+  TRANSFERRED
+}
+
+model OnlineLead {
+  id                   Int           @id @default(autoincrement())
+  vendor_id            Int
+  leads_name           String
+  email                String?
+  contact              String
+  source               String
+  lead_entry_type      LeadEntryType @default(ONLINE)
+  created_at           DateTime      @default(now())
+  created_by           Int?
+  updated_at           DateTime      @updatedAt
+  updated_by           Int?
+  assign_to            Int?
+  status               Int?
+  remark               String?
+  follow_up_date       DateTime?
+  store_id             Int?
+  final_assigned_leads Int?
+
+  vendor             VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdBy          UserMaster?               @relation("OnlineLeadCreatedBy", fields: [created_by], references: [id], onDelete: SetNull)
+  updatedBy          UserMaster?               @relation("OnlineLeadUpdatedBy", fields: [updated_by], references: [id], onDelete: SetNull)
+  assignedTo         UserMaster?               @relation("OnlineLeadAssignedTo", fields: [assign_to], references: [id], onDelete: SetNull)
+  finalAssignedLeads UserMaster?               @relation("OnlineLeadFinalAssigned", fields: [final_assigned_leads], references: [id], onDelete: SetNull)
+  franchise          FranchiseMaster?          @relation(fields: [store_id], references: [id], onDelete: SetNull)
+  followupStatus     OnlineLeadFollowupStatus? @relation(fields: [status], references: [id], onDelete: SetNull)
+
+  call_log            OnlineLeadCallLog[]
+  online_lead_history OnlineLeadHistory[]
+  store_logs          OnlineLeadStoreLog[]
+  campaignLeads       TelecallerCampaignLead[]
+
+  @@map("online_leads")
+}
+
+model OnlineLeadFollowupStatus {
+  id                Int          @id @default(autoincrement())
+  vendor_id         Int
+  status_name       String
+  followup_required Boolean
+  is_active         Boolean      @default(true)
+  created_at        DateTime     @default(now())
+  created_by        Int?
+  updated_at        DateTime     @updatedAt
+  updated_by        Int?
+
+  vendor     VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdBy  UserMaster?  @relation("FollowupStatusCreatedBy", fields: [created_by], references: [id], onDelete: SetNull)
+  updatedBy  UserMaster?  @relation("FollowupStatusUpdatedBy", fields: [updated_by], references: [id], onDelete: SetNull)
+  leads      OnlineLead[]
+  histories  OnlineLeadHistory[]
+  callLogs   OnlineLeadCallLog[]
+
+  @@map("online_lead_followup_status")
+}
+
+model OnlineLeadHistory {
+  id                      Int                      @id @default(autoincrement())
+  vendor_id               Int
+  online_lead_id          Int
+  remark                  String?
+  created_by              Int
+  created_at              DateTime                 @default(now())
+  follow_up_date          DateTime?
+  store_id                Int?
+  store_preference_option String?
+  online_lead_status_id   Int
+
+  vendor     VendorMaster             @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  onlineLead OnlineLead               @relation(fields: [online_lead_id], references: [id], onDelete: Cascade)
+  createdBy  UserMaster               @relation("LeadHistoryCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  franchise  FranchiseMaster?         @relation(fields: [store_id], references: [id], onDelete: SetNull)
+  status     OnlineLeadFollowupStatus @relation(fields: [online_lead_status_id], references: [id], onDelete: Cascade)
+
+  @@map("online_lead_history")
+}
+
+model OnlineLeadCallLog {
+  id                    Int                       @id @default(autoincrement())
+  vendor_id             Int
+  online_lead_id        Int
+  telecaller_id         Int
+  call_type             LeadCallType              @default(OUTGOING)
+  online_lead_status_id Int?
+  started_at            DateTime?
+  ended_at              DateTime?
+  duration_seconds      Int?
+  remark                String?
+  created_at            DateTime                  @default(now())
+
+  vendor     VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  onlineLead OnlineLead                @relation(fields: [online_lead_id], references: [id], onDelete: Cascade)
+  telecaller UserMaster                @relation("CallLogTelecaller", fields: [telecaller_id], references: [id], onDelete: Cascade)
+  status     OnlineLeadFollowupStatus? @relation(fields: [online_lead_status_id], references: [id], onDelete: SetNull)
+
+  @@map("online_lead_call_log")
+}
+
+model OnlineLeadStoreLog {
+  id             Int                 @id @default(autoincrement())
+  vendor_id      Int
+  online_lead_id Int
+  from_store_id  Int?
+  to_store_id    Int
+  action_type    LeadStoreActionType
+  selected_by    Int
+  assigned_to    Int?
+  remark         String?
+  created_at     DateTime            @default(now())
+
+  vendor        VendorMaster     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  onlineLead    OnlineLead       @relation(fields: [online_lead_id], references: [id], onDelete: Cascade)
+  fromFranchise FranchiseMaster? @relation("StoreLogFromFranchise", fields: [from_store_id], references: [id], onDelete: SetNull)
+  toFranchise   FranchiseMaster  @relation("StoreLogToFranchise", fields: [to_store_id], references: [id], onDelete: Cascade)
+  selectedBy    UserMaster       @relation("StoreLogSelectedBy", fields: [selected_by], references: [id], onDelete: Cascade)
+  assignedTo    UserMaster?      @relation("StoreLogAssignedTo", fields: [assigned_to], references: [id], onDelete: SetNull)
+
+  @@map("online_lead_store_log")
+}
+
+model UserTypePrivilegeMapping {
+  id           Int             @id @default(autoincrement())
+  vendor_id    Int
+  user_type_id Int
+  privilege_id Int
+  is_allowed   Boolean         @default(false)
+  created_at   DateTime        @default(now())
+  updated_at   DateTime        @updatedAt
+
+  vendor    VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  userType  UserTypeMaster  @relation(fields: [user_type_id], references: [id], onDelete: Cascade)
+  privilege PrivilegeMaster @relation(fields: [privilege_id], references: [id], onDelete: Cascade)
+
+  @@unique([vendor_id, user_type_id, privilege_id])
+  @@index([vendor_id])
+  @@index([user_type_id])
+  @@index([privilege_id])
+}
+
+model TelecallerCampaignLead {
+  id             Int        @id @default(autoincrement())
+  campaign_name  String
+  online_lead_id Int
+  onlineLead     OnlineLead @relation(fields: [online_lead_id], references: [id], onDelete: Cascade)
+
+  @@map("telecaller_campaign_leads")
 }
