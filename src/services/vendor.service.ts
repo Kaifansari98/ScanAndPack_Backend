@@ -2105,3 +2105,167 @@ export const getStates = async () => {
     },
   });
 };
+
+export interface LeadServicingReportRow {
+  lead_id: number;
+  instance_id: number | null;
+  lead_code: string;
+  client_name: string;
+  franchise_store: string;
+  product_type: string;
+  instance: string;
+  usable_handover_date: Date | null;
+  final_handover_date: Date | null;
+  service_1_due_date: Date | null;
+  service_1_completed_date: Date | null;
+  service_2_due_date: Date | null;
+  service_2_completed_date: Date | null;
+  service_3_due_date: Date | null;
+  service_3_completed_date: Date | null;
+  amc_opted_date: Date | null;
+  amc_dates_same_as_service_dates: string;
+}
+
+export const getLeadServicingReportData = async (
+  vendorId: number,
+  franchiseId: number | null,
+  fromDate: string | null,
+  toDate: string | null,
+): Promise<LeadServicingReportRow[]> => {
+  const where: any = {
+    vendor_id: vendorId,
+    is_deleted: false,
+  };
+
+  if (franchiseId !== null) {
+    where.franchise_id = franchiseId;
+  }
+
+  if (fromDate && toDate) {
+    where.created_at = {
+      gte: new Date(fromDate),
+      lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
+    };
+  }
+
+  const leads = await prisma.leadMaster.findMany({
+    where,
+    select: {
+      id: true,
+      lead_code: true,
+      firstname: true,
+      lastname: true,
+      usable_handover_completed_at: true,
+      final_handover_marked_at: true,
+      is_amc_opted: true,
+      amc_opted_at: true,
+      franchise: {
+        select: {
+          franchise_name: true,
+        },
+      },
+      productStructureInstances: {
+        select: {
+          id: true,
+          quantity_index: true,
+          title: true,
+          productType: {
+            select: {
+              type: true,
+            },
+          },
+        },
+        orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+      },
+      serviceSchedules: {
+        select: {
+          service_no: true,
+          service_type: true,
+          scheduled_for: true,
+          completed_at: true,
+        },
+      },
+    },
+    orderBy: {
+      created_at: "desc",
+    },
+  });
+
+  return leads.flatMap((lead) => {
+    const hasMultipleInstances = lead.productStructureInstances.length > 1;
+
+    const freeService1 = lead.serviceSchedules.find(
+      (s) => s.service_no === 1 && s.service_type === "free"
+    );
+    const freeService2 = lead.serviceSchedules.find(
+      (s) => s.service_no === 2 && s.service_type === "free"
+    );
+    const freeService3 = lead.serviceSchedules.find(
+      (s) => s.service_no === 3 && s.service_type === "free"
+    );
+
+    const amcService1 = lead.serviceSchedules.find(
+      (s) => s.service_no === 1 && s.service_type === "amc"
+    );
+    const amcService2 = lead.serviceSchedules.find(
+      (s) => s.service_no === 2 && s.service_type === "amc"
+    );
+    const amcService3 = lead.serviceSchedules.find(
+      (s) => s.service_no === 3 && s.service_type === "amc"
+    );
+
+    let amc_dates_same_as_service_dates = "-";
+    if (lead.is_amc_opted) {
+      const datesMatch = (
+        freeService1 && freeService2 && freeService3 &&
+        amcService1 && amcService2 && amcService3 &&
+        amcService1.scheduled_for?.getTime() === freeService1.scheduled_for?.getTime() &&
+        amcService2.scheduled_for?.getTime() === freeService2.scheduled_for?.getTime() &&
+        amcService3.scheduled_for?.getTime() === freeService3.scheduled_for?.getTime()
+      );
+      amc_dates_same_as_service_dates = datesMatch ? "Yes" : "No";
+    }
+
+    const buildRow = (
+      instanceId: number | null,
+      quantityIndex?: number | null,
+      productType?: string | null,
+      instanceTitle?: string | null
+    ): LeadServicingReportRow => ({
+      lead_id: lead.id,
+      instance_id: instanceId,
+      lead_code: formatOverviewLeadCode(
+        lead.lead_code,
+        quantityIndex,
+        hasMultipleInstances
+      ),
+      client_name: `${lead.firstname} ${lead.lastname}`.trim(),
+      franchise_store: lead.franchise?.franchise_name ?? "-",
+      product_type: productType ?? "-",
+      instance: instanceTitle ?? "-",
+      usable_handover_date: lead.usable_handover_completed_at,
+      final_handover_date: lead.final_handover_marked_at,
+      service_1_due_date: freeService1?.scheduled_for ?? null,
+      service_1_completed_date: freeService1?.completed_at ?? null,
+      service_2_due_date: freeService2?.scheduled_for ?? null,
+      service_2_completed_date: freeService2?.completed_at ?? null,
+      service_3_due_date: freeService3?.scheduled_for ?? null,
+      service_3_completed_date: freeService3?.completed_at ?? null,
+      amc_opted_date: lead.amc_opted_at ?? null,
+      amc_dates_same_as_service_dates,
+    });
+
+    if (!lead.productStructureInstances.length) {
+      return [buildRow(null, null, null, null)];
+    }
+
+    return lead.productStructureInstances.map((instance) =>
+      buildRow(
+        instance.id,
+        instance.quantity_index,
+        instance.productType?.type,
+        instance.title
+      )
+    );
+  });
+};
