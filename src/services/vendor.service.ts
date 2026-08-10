@@ -2135,6 +2135,9 @@ export const getLeadServicingReportData = async (
   const where: any = {
     vendor_id: vendorId,
     is_deleted: false,
+    serviceSchedules: {
+      some: {},
+    },
   };
 
   if (franchiseId !== null) {
