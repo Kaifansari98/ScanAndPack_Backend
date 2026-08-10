@@ -252,10 +252,10 @@ export type ProcessBriefMasterWhereInput = {
   created_by?: Prisma.IntFilter<"ProcessBriefMaster"> | number
   updated_at?: Prisma.DateTimeFilter<"ProcessBriefMaster"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"ProcessBriefMaster"> | number | null
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
-  leadProcessBriefs?: Prisma.LeadProcessBriefMappingListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type ProcessBriefMasterOrderByWithRelationInput = {
@@ -267,10 +267,10 @@ export type ProcessBriefMasterOrderByWithRelationInput = {
   created_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingOrderByRelationAggregateInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
-  leadProcessBriefs?: Prisma.LeadProcessBriefMappingOrderByRelationAggregateInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type ProcessBriefMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -285,10 +285,10 @@ export type ProcessBriefMasterWhereUniqueInput = Prisma.AtLeast<{
   created_by?: Prisma.IntFilter<"ProcessBriefMaster"> | number
   updated_at?: Prisma.DateTimeFilter<"ProcessBriefMaster"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"ProcessBriefMaster"> | number | null
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
-  leadProcessBriefs?: Prisma.LeadProcessBriefMappingListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type ProcessBriefMasterOrderByWithAggregationInput = {
@@ -326,10 +326,10 @@ export type ProcessBriefMasterCreateInput = {
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProcessBriefsInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutProcessBriefInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsUpdatedInput
-  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutProcessBriefInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProcessBriefsInput
 }
 
 export type ProcessBriefMasterUncheckedCreateInput = {
@@ -349,10 +349,10 @@ export type ProcessBriefMasterUpdateInput = {
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProcessBriefsNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutProcessBriefNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutProcessBriefsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProcessBriefsUpdatedNestedInput
-  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutProcessBriefNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProcessBriefsNestedInput
 }
 
 export type ProcessBriefMasterUncheckedUpdateInput = {
@@ -603,9 +603,9 @@ export type ProcessBriefMasterCreateWithoutVendorInput = {
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutProcessBriefInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsUpdatedInput
-  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutProcessBriefInput
 }
 
 export type ProcessBriefMasterUncheckedCreateWithoutVendorInput = {
@@ -664,9 +664,9 @@ export type ProcessBriefMasterCreateWithoutCreatedByInput = {
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProcessBriefsInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsUpdatedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutProcessBriefInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProcessBriefsInput
 }
 
 export type ProcessBriefMasterUncheckedCreateWithoutCreatedByInput = {
@@ -695,9 +695,9 @@ export type ProcessBriefMasterCreateWithoutUpdatedByInput = {
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProcessBriefsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsCreatedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutProcessBriefInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsCreatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProcessBriefsInput
 }
 
 export type ProcessBriefMasterUncheckedCreateWithoutUpdatedByInput = {
@@ -758,9 +758,9 @@ export type ProcessBriefMasterCreateWithoutLeadProcessBriefsInput = {
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProcessBriefsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProcessBriefsInput
 }
 
 export type ProcessBriefMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
@@ -795,9 +795,9 @@ export type ProcessBriefMasterUpdateWithoutLeadProcessBriefsInput = {
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProcessBriefsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutProcessBriefsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProcessBriefsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProcessBriefsNestedInput
 }
 
 export type ProcessBriefMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
@@ -826,9 +826,9 @@ export type ProcessBriefMasterUpdateWithoutVendorInput = {
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutProcessBriefNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutProcessBriefsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProcessBriefsUpdatedNestedInput
-  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutProcessBriefNestedInput
 }
 
 export type ProcessBriefMasterUncheckedUpdateWithoutVendorInput = {
@@ -877,9 +877,9 @@ export type ProcessBriefMasterUpdateWithoutCreatedByInput = {
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProcessBriefsNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutProcessBriefsUpdatedNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutProcessBriefNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutProcessBriefsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProcessBriefsNestedInput
 }
 
 export type ProcessBriefMasterUncheckedUpdateWithoutCreatedByInput = {
@@ -908,9 +908,9 @@ export type ProcessBriefMasterUpdateWithoutUpdatedByInput = {
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProcessBriefsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutProcessBriefsCreatedNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutProcessBriefNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutProcessBriefsCreatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProcessBriefsNestedInput
 }
 
 export type ProcessBriefMasterUncheckedUpdateWithoutUpdatedByInput = {
@@ -974,10 +974,10 @@ export type ProcessBriefMasterSelect<ExtArgs extends runtime.Types.Extensions.In
   created_by?: boolean
   updated_at?: boolean
   updated_by?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  leadProcessBriefs?: boolean | Prisma.ProcessBriefMaster$leadProcessBriefsArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.ProcessBriefMaster$updatedByArgs<ExtArgs>
-  leadProcessBriefs?: boolean | Prisma.ProcessBriefMaster$leadProcessBriefsArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProcessBriefMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["processBriefMaster"]>
 
@@ -990,9 +990,9 @@ export type ProcessBriefMasterSelectCreateManyAndReturn<ExtArgs extends runtime.
   created_by?: boolean
   updated_at?: boolean
   updated_by?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.ProcessBriefMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["processBriefMaster"]>
 
 export type ProcessBriefMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1004,9 +1004,9 @@ export type ProcessBriefMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.
   created_by?: boolean
   updated_at?: boolean
   updated_by?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.ProcessBriefMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["processBriefMaster"]>
 
 export type ProcessBriefMasterSelectScalar = {
@@ -1022,30 +1022,30 @@ export type ProcessBriefMasterSelectScalar = {
 
 export type ProcessBriefMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "name" | "is_active" | "created_at" | "created_by" | "updated_at" | "updated_by", ExtArgs["result"]["processBriefMaster"]>
 export type ProcessBriefMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  leadProcessBriefs?: boolean | Prisma.ProcessBriefMaster$leadProcessBriefsArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.ProcessBriefMaster$updatedByArgs<ExtArgs>
-  leadProcessBriefs?: boolean | Prisma.ProcessBriefMaster$leadProcessBriefsArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProcessBriefMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProcessBriefMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.ProcessBriefMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type ProcessBriefMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.ProcessBriefMaster$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $ProcessBriefMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProcessBriefMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
+    leadProcessBriefs: Prisma.$LeadProcessBriefMappingPayload<ExtArgs>[]
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
-    leadProcessBriefs: Prisma.$LeadProcessBriefMappingPayload<ExtArgs>[]
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1450,10 +1450,10 @@ readonly fields: ProcessBriefMasterFieldRefs;
  */
 export interface Prisma__ProcessBriefMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  leadProcessBriefs<T extends Prisma.ProcessBriefMaster$leadProcessBriefsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProcessBriefMaster$leadProcessBriefsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProcessBriefMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.ProcessBriefMaster$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProcessBriefMaster$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  leadProcessBriefs<T extends Prisma.ProcessBriefMaster$leadProcessBriefsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProcessBriefMaster$leadProcessBriefsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProcessBriefMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1892,25 +1892,6 @@ export type ProcessBriefMasterDeleteManyArgs<ExtArgs extends runtime.Types.Exten
 }
 
 /**
- * ProcessBriefMaster.updatedBy
- */
-export type ProcessBriefMaster$updatedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UserMaster
-   */
-  select?: Prisma.UserMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the UserMaster
-   */
-  omit?: Prisma.UserMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserMasterInclude<ExtArgs> | null
-  where?: Prisma.UserMasterWhereInput
-}
-
-/**
  * ProcessBriefMaster.leadProcessBriefs
  */
 export type ProcessBriefMaster$leadProcessBriefsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1932,6 +1913,25 @@ export type ProcessBriefMaster$leadProcessBriefsArgs<ExtArgs extends runtime.Typ
   take?: number
   skip?: number
   distinct?: Prisma.LeadProcessBriefMappingScalarFieldEnum | Prisma.LeadProcessBriefMappingScalarFieldEnum[]
+}
+
+/**
+ * ProcessBriefMaster.updatedBy
+ */
+export type ProcessBriefMaster$updatedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserMaster
+   */
+  select?: Prisma.UserMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserMaster
+   */
+  omit?: Prisma.UserMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserMasterInclude<ExtArgs> | null
+  where?: Prisma.UserMasterWhereInput
 }
 
 /**

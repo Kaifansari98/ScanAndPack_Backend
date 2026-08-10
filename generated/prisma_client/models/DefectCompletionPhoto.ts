@@ -31,8 +31,8 @@ export type DefectCompletionPhotoAvgAggregateOutputType = {
   cut_list_machine_mapping_id: number | null
   cut_list_id: number | null
   vendor_id: number | null
-  created_by: number | null
   defected_item_id: number | null
+  created_by: number | null
 }
 
 export type DefectCompletionPhotoSumAggregateOutputType = {
@@ -40,8 +40,8 @@ export type DefectCompletionPhotoSumAggregateOutputType = {
   cut_list_machine_mapping_id: number | null
   cut_list_id: number | null
   vendor_id: number | null
-  created_by: number | null
   defected_item_id: number | null
+  created_by: number | null
 }
 
 export type DefectCompletionPhotoMinAggregateOutputType = {
@@ -49,11 +49,11 @@ export type DefectCompletionPhotoMinAggregateOutputType = {
   cut_list_machine_mapping_id: number | null
   cut_list_id: number | null
   vendor_id: number | null
+  defected_item_id: number | null
   doc_og_name: string | null
   doc_sys_name: string | null
   created_by: number | null
   created_at: Date | null
-  defected_item_id: number | null
 }
 
 export type DefectCompletionPhotoMaxAggregateOutputType = {
@@ -61,11 +61,11 @@ export type DefectCompletionPhotoMaxAggregateOutputType = {
   cut_list_machine_mapping_id: number | null
   cut_list_id: number | null
   vendor_id: number | null
+  defected_item_id: number | null
   doc_og_name: string | null
   doc_sys_name: string | null
   created_by: number | null
   created_at: Date | null
-  defected_item_id: number | null
 }
 
 export type DefectCompletionPhotoCountAggregateOutputType = {
@@ -73,11 +73,11 @@ export type DefectCompletionPhotoCountAggregateOutputType = {
   cut_list_machine_mapping_id: number
   cut_list_id: number
   vendor_id: number
+  defected_item_id: number
   doc_og_name: number
   doc_sys_name: number
   created_by: number
   created_at: number
-  defected_item_id: number
   _all: number
 }
 
@@ -87,8 +87,8 @@ export type DefectCompletionPhotoAvgAggregateInputType = {
   cut_list_machine_mapping_id?: true
   cut_list_id?: true
   vendor_id?: true
-  created_by?: true
   defected_item_id?: true
+  created_by?: true
 }
 
 export type DefectCompletionPhotoSumAggregateInputType = {
@@ -96,8 +96,8 @@ export type DefectCompletionPhotoSumAggregateInputType = {
   cut_list_machine_mapping_id?: true
   cut_list_id?: true
   vendor_id?: true
-  created_by?: true
   defected_item_id?: true
+  created_by?: true
 }
 
 export type DefectCompletionPhotoMinAggregateInputType = {
@@ -105,11 +105,11 @@ export type DefectCompletionPhotoMinAggregateInputType = {
   cut_list_machine_mapping_id?: true
   cut_list_id?: true
   vendor_id?: true
+  defected_item_id?: true
   doc_og_name?: true
   doc_sys_name?: true
   created_by?: true
   created_at?: true
-  defected_item_id?: true
 }
 
 export type DefectCompletionPhotoMaxAggregateInputType = {
@@ -117,11 +117,11 @@ export type DefectCompletionPhotoMaxAggregateInputType = {
   cut_list_machine_mapping_id?: true
   cut_list_id?: true
   vendor_id?: true
+  defected_item_id?: true
   doc_og_name?: true
   doc_sys_name?: true
   created_by?: true
   created_at?: true
-  defected_item_id?: true
 }
 
 export type DefectCompletionPhotoCountAggregateInputType = {
@@ -129,11 +129,11 @@ export type DefectCompletionPhotoCountAggregateInputType = {
   cut_list_machine_mapping_id?: true
   cut_list_id?: true
   vendor_id?: true
+  defected_item_id?: true
   doc_og_name?: true
   doc_sys_name?: true
   created_by?: true
   created_at?: true
-  defected_item_id?: true
   _all?: true
 }
 
@@ -228,11 +228,11 @@ export type DefectCompletionPhotoGroupByOutputType = {
   cut_list_machine_mapping_id: number
   cut_list_id: number
   vendor_id: number
+  defected_item_id: number | null
   doc_og_name: string
   doc_sys_name: string
   created_by: number
   created_at: Date
-  defected_item_id: number | null
   _count: DefectCompletionPhotoCountAggregateOutputType | null
   _avg: DefectCompletionPhotoAvgAggregateOutputType | null
   _sum: DefectCompletionPhotoSumAggregateOutputType | null
@@ -263,11 +263,11 @@ export type DefectCompletionPhotoWhereInput = {
   cut_list_machine_mapping_id?: Prisma.IntFilter<"DefectCompletionPhoto"> | number
   cut_list_id?: Prisma.IntFilter<"DefectCompletionPhoto"> | number
   vendor_id?: Prisma.IntFilter<"DefectCompletionPhoto"> | number
+  defected_item_id?: Prisma.IntNullableFilter<"DefectCompletionPhoto"> | number | null
   doc_og_name?: Prisma.StringFilter<"DefectCompletionPhoto"> | string
   doc_sys_name?: Prisma.StringFilter<"DefectCompletionPhoto"> | string
   created_by?: Prisma.IntFilter<"DefectCompletionPhoto"> | number
   created_at?: Prisma.DateTimeFilter<"DefectCompletionPhoto"> | Date | string
-  defected_item_id?: Prisma.IntNullableFilter<"DefectCompletionPhoto"> | number | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   cutList?: Prisma.XOR<Prisma.CutListScalarRelationFilter, Prisma.CutListWhereInput>
   cutListMachineMapping?: Prisma.XOR<Prisma.CutListMachineMappingScalarRelationFilter, Prisma.CutListMachineMappingWhereInput>
@@ -280,11 +280,11 @@ export type DefectCompletionPhotoOrderByWithRelationInput = {
   cut_list_machine_mapping_id?: Prisma.SortOrder
   cut_list_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  defected_item_id?: Prisma.SortOrderInput | Prisma.SortOrder
   doc_og_name?: Prisma.SortOrder
   doc_sys_name?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  defected_item_id?: Prisma.SortOrderInput | Prisma.SortOrder
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   cutList?: Prisma.CutListOrderByWithRelationInput
   cutListMachineMapping?: Prisma.CutListMachineMappingOrderByWithRelationInput
@@ -300,11 +300,11 @@ export type DefectCompletionPhotoWhereUniqueInput = Prisma.AtLeast<{
   cut_list_machine_mapping_id?: Prisma.IntFilter<"DefectCompletionPhoto"> | number
   cut_list_id?: Prisma.IntFilter<"DefectCompletionPhoto"> | number
   vendor_id?: Prisma.IntFilter<"DefectCompletionPhoto"> | number
+  defected_item_id?: Prisma.IntNullableFilter<"DefectCompletionPhoto"> | number | null
   doc_og_name?: Prisma.StringFilter<"DefectCompletionPhoto"> | string
   doc_sys_name?: Prisma.StringFilter<"DefectCompletionPhoto"> | string
   created_by?: Prisma.IntFilter<"DefectCompletionPhoto"> | number
   created_at?: Prisma.DateTimeFilter<"DefectCompletionPhoto"> | Date | string
-  defected_item_id?: Prisma.IntNullableFilter<"DefectCompletionPhoto"> | number | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   cutList?: Prisma.XOR<Prisma.CutListScalarRelationFilter, Prisma.CutListWhereInput>
   cutListMachineMapping?: Prisma.XOR<Prisma.CutListMachineMappingScalarRelationFilter, Prisma.CutListMachineMappingWhereInput>
@@ -317,11 +317,11 @@ export type DefectCompletionPhotoOrderByWithAggregationInput = {
   cut_list_machine_mapping_id?: Prisma.SortOrder
   cut_list_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  defected_item_id?: Prisma.SortOrderInput | Prisma.SortOrder
   doc_og_name?: Prisma.SortOrder
   doc_sys_name?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  defected_item_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.DefectCompletionPhotoCountOrderByAggregateInput
   _avg?: Prisma.DefectCompletionPhotoAvgOrderByAggregateInput
   _max?: Prisma.DefectCompletionPhotoMaxOrderByAggregateInput
@@ -337,11 +337,11 @@ export type DefectCompletionPhotoScalarWhereWithAggregatesInput = {
   cut_list_machine_mapping_id?: Prisma.IntWithAggregatesFilter<"DefectCompletionPhoto"> | number
   cut_list_id?: Prisma.IntWithAggregatesFilter<"DefectCompletionPhoto"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"DefectCompletionPhoto"> | number
+  defected_item_id?: Prisma.IntNullableWithAggregatesFilter<"DefectCompletionPhoto"> | number | null
   doc_og_name?: Prisma.StringWithAggregatesFilter<"DefectCompletionPhoto"> | string
   doc_sys_name?: Prisma.StringWithAggregatesFilter<"DefectCompletionPhoto"> | string
   created_by?: Prisma.IntWithAggregatesFilter<"DefectCompletionPhoto"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"DefectCompletionPhoto"> | Date | string
-  defected_item_id?: Prisma.IntNullableWithAggregatesFilter<"DefectCompletionPhoto"> | number | null
 }
 
 export type DefectCompletionPhotoCreateInput = {
@@ -360,11 +360,11 @@ export type DefectCompletionPhotoUncheckedCreateInput = {
   cut_list_machine_mapping_id: number
   cut_list_id: number
   vendor_id: number
+  defected_item_id?: number | null
   doc_og_name: string
   doc_sys_name: string
   created_by: number
   created_at?: Date | string
-  defected_item_id?: number | null
 }
 
 export type DefectCompletionPhotoUpdateInput = {
@@ -383,11 +383,11 @@ export type DefectCompletionPhotoUncheckedUpdateInput = {
   cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
   cut_list_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
   doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DefectCompletionPhotoCreateManyInput = {
@@ -395,11 +395,11 @@ export type DefectCompletionPhotoCreateManyInput = {
   cut_list_machine_mapping_id: number
   cut_list_id: number
   vendor_id: number
+  defected_item_id?: number | null
   doc_og_name: string
   doc_sys_name: string
   created_by: number
   created_at?: Date | string
-  defected_item_id?: number | null
 }
 
 export type DefectCompletionPhotoUpdateManyMutationInput = {
@@ -413,11 +413,11 @@ export type DefectCompletionPhotoUncheckedUpdateManyInput = {
   cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
   cut_list_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
   doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DefectCompletionPhotoListRelationFilter = {
@@ -435,11 +435,11 @@ export type DefectCompletionPhotoCountOrderByAggregateInput = {
   cut_list_machine_mapping_id?: Prisma.SortOrder
   cut_list_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  defected_item_id?: Prisma.SortOrder
   doc_og_name?: Prisma.SortOrder
   doc_sys_name?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  defected_item_id?: Prisma.SortOrder
 }
 
 export type DefectCompletionPhotoAvgOrderByAggregateInput = {
@@ -447,8 +447,8 @@ export type DefectCompletionPhotoAvgOrderByAggregateInput = {
   cut_list_machine_mapping_id?: Prisma.SortOrder
   cut_list_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  created_by?: Prisma.SortOrder
   defected_item_id?: Prisma.SortOrder
+  created_by?: Prisma.SortOrder
 }
 
 export type DefectCompletionPhotoMaxOrderByAggregateInput = {
@@ -456,11 +456,11 @@ export type DefectCompletionPhotoMaxOrderByAggregateInput = {
   cut_list_machine_mapping_id?: Prisma.SortOrder
   cut_list_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  defected_item_id?: Prisma.SortOrder
   doc_og_name?: Prisma.SortOrder
   doc_sys_name?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  defected_item_id?: Prisma.SortOrder
 }
 
 export type DefectCompletionPhotoMinOrderByAggregateInput = {
@@ -468,11 +468,11 @@ export type DefectCompletionPhotoMinOrderByAggregateInput = {
   cut_list_machine_mapping_id?: Prisma.SortOrder
   cut_list_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  defected_item_id?: Prisma.SortOrder
   doc_og_name?: Prisma.SortOrder
   doc_sys_name?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  defected_item_id?: Prisma.SortOrder
 }
 
 export type DefectCompletionPhotoSumOrderByAggregateInput = {
@@ -480,8 +480,8 @@ export type DefectCompletionPhotoSumOrderByAggregateInput = {
   cut_list_machine_mapping_id?: Prisma.SortOrder
   cut_list_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  created_by?: Prisma.SortOrder
   defected_item_id?: Prisma.SortOrder
+  created_by?: Prisma.SortOrder
 }
 
 export type DefectCompletionPhotoCreateNestedManyWithoutVendorInput = {
@@ -708,11 +708,11 @@ export type DefectCompletionPhotoUncheckedCreateWithoutVendorInput = {
   id?: number
   cut_list_machine_mapping_id: number
   cut_list_id: number
+  defected_item_id?: number | null
   doc_og_name: string
   doc_sys_name: string
   created_by: number
   created_at?: Date | string
-  defected_item_id?: number | null
 }
 
 export type DefectCompletionPhotoCreateOrConnectWithoutVendorInput = {
@@ -749,11 +749,11 @@ export type DefectCompletionPhotoScalarWhereInput = {
   cut_list_machine_mapping_id?: Prisma.IntFilter<"DefectCompletionPhoto"> | number
   cut_list_id?: Prisma.IntFilter<"DefectCompletionPhoto"> | number
   vendor_id?: Prisma.IntFilter<"DefectCompletionPhoto"> | number
+  defected_item_id?: Prisma.IntNullableFilter<"DefectCompletionPhoto"> | number | null
   doc_og_name?: Prisma.StringFilter<"DefectCompletionPhoto"> | string
   doc_sys_name?: Prisma.StringFilter<"DefectCompletionPhoto"> | string
   created_by?: Prisma.IntFilter<"DefectCompletionPhoto"> | number
   created_at?: Prisma.DateTimeFilter<"DefectCompletionPhoto"> | Date | string
-  defected_item_id?: Prisma.IntNullableFilter<"DefectCompletionPhoto"> | number | null
 }
 
 export type DefectCompletionPhotoCreateWithoutCreatedByInput = {
@@ -771,10 +771,10 @@ export type DefectCompletionPhotoUncheckedCreateWithoutCreatedByInput = {
   cut_list_machine_mapping_id: number
   cut_list_id: number
   vendor_id: number
+  defected_item_id?: number | null
   doc_og_name: string
   doc_sys_name: string
   created_at?: Date | string
-  defected_item_id?: number | null
 }
 
 export type DefectCompletionPhotoCreateOrConnectWithoutCreatedByInput = {
@@ -817,11 +817,11 @@ export type DefectCompletionPhotoUncheckedCreateWithoutCutListInput = {
   id?: number
   cut_list_machine_mapping_id: number
   vendor_id: number
+  defected_item_id?: number | null
   doc_og_name: string
   doc_sys_name: string
   created_by: number
   created_at?: Date | string
-  defected_item_id?: number | null
 }
 
 export type DefectCompletionPhotoCreateOrConnectWithoutCutListInput = {
@@ -864,11 +864,11 @@ export type DefectCompletionPhotoUncheckedCreateWithoutCutListMachineMappingInpu
   id?: number
   cut_list_id: number
   vendor_id: number
+  defected_item_id?: number | null
   doc_og_name: string
   doc_sys_name: string
   created_by: number
   created_at?: Date | string
-  defected_item_id?: number | null
 }
 
 export type DefectCompletionPhotoCreateOrConnectWithoutCutListMachineMappingInput = {
@@ -948,11 +948,11 @@ export type DefectCompletionPhotoCreateManyVendorInput = {
   id?: number
   cut_list_machine_mapping_id: number
   cut_list_id: number
+  defected_item_id?: number | null
   doc_og_name: string
   doc_sys_name: string
   created_by: number
   created_at?: Date | string
-  defected_item_id?: number | null
 }
 
 export type DefectCompletionPhotoUpdateWithoutVendorInput = {
@@ -969,22 +969,22 @@ export type DefectCompletionPhotoUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
   cut_list_id?: Prisma.IntFieldUpdateOperationsInput | number
+  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
   doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DefectCompletionPhotoUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
   cut_list_id?: Prisma.IntFieldUpdateOperationsInput | number
+  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
   doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DefectCompletionPhotoCreateManyCreatedByInput = {
@@ -992,10 +992,10 @@ export type DefectCompletionPhotoCreateManyCreatedByInput = {
   cut_list_machine_mapping_id: number
   cut_list_id: number
   vendor_id: number
+  defected_item_id?: number | null
   doc_og_name: string
   doc_sys_name: string
   created_at?: Date | string
-  defected_item_id?: number | null
 }
 
 export type DefectCompletionPhotoUpdateWithoutCreatedByInput = {
@@ -1013,10 +1013,10 @@ export type DefectCompletionPhotoUncheckedUpdateWithoutCreatedByInput = {
   cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
   cut_list_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
   doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DefectCompletionPhotoUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1024,21 +1024,21 @@ export type DefectCompletionPhotoUncheckedUpdateManyWithoutCreatedByInput = {
   cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
   cut_list_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
   doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DefectCompletionPhotoCreateManyCutListInput = {
   id?: number
   cut_list_machine_mapping_id: number
   vendor_id: number
+  defected_item_id?: number | null
   doc_og_name: string
   doc_sys_name: string
   created_by: number
   created_at?: Date | string
-  defected_item_id?: number | null
 }
 
 export type DefectCompletionPhotoUpdateWithoutCutListInput = {
@@ -1055,33 +1055,33 @@ export type DefectCompletionPhotoUncheckedUpdateWithoutCutListInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
   doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DefectCompletionPhotoUncheckedUpdateManyWithoutCutListInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
   doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DefectCompletionPhotoCreateManyCutListMachineMappingInput = {
   id?: number
   cut_list_id: number
   vendor_id: number
+  defected_item_id?: number | null
   doc_og_name: string
   doc_sys_name: string
   created_by: number
   created_at?: Date | string
-  defected_item_id?: number | null
 }
 
 export type DefectCompletionPhotoUpdateWithoutCutListMachineMappingInput = {
@@ -1098,22 +1098,22 @@ export type DefectCompletionPhotoUncheckedUpdateWithoutCutListMachineMappingInpu
   id?: Prisma.IntFieldUpdateOperationsInput | number
   cut_list_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
   doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DefectCompletionPhotoUncheckedUpdateManyWithoutCutListMachineMappingInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   cut_list_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
   doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  defected_item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DefectCompletionPhotoCreateManyDefectedItemInput = {
@@ -1166,11 +1166,11 @@ export type DefectCompletionPhotoSelect<ExtArgs extends runtime.Types.Extensions
   cut_list_machine_mapping_id?: boolean
   cut_list_id?: boolean
   vendor_id?: boolean
+  defected_item_id?: boolean
   doc_og_name?: boolean
   doc_sys_name?: boolean
   created_by?: boolean
   created_at?: boolean
-  defected_item_id?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   cutList?: boolean | Prisma.CutListDefaultArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
@@ -1183,11 +1183,11 @@ export type DefectCompletionPhotoSelectCreateManyAndReturn<ExtArgs extends runti
   cut_list_machine_mapping_id?: boolean
   cut_list_id?: boolean
   vendor_id?: boolean
+  defected_item_id?: boolean
   doc_og_name?: boolean
   doc_sys_name?: boolean
   created_by?: boolean
   created_at?: boolean
-  defected_item_id?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   cutList?: boolean | Prisma.CutListDefaultArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
@@ -1200,11 +1200,11 @@ export type DefectCompletionPhotoSelectUpdateManyAndReturn<ExtArgs extends runti
   cut_list_machine_mapping_id?: boolean
   cut_list_id?: boolean
   vendor_id?: boolean
+  defected_item_id?: boolean
   doc_og_name?: boolean
   doc_sys_name?: boolean
   created_by?: boolean
   created_at?: boolean
-  defected_item_id?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   cutList?: boolean | Prisma.CutListDefaultArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
@@ -1217,14 +1217,14 @@ export type DefectCompletionPhotoSelectScalar = {
   cut_list_machine_mapping_id?: boolean
   cut_list_id?: boolean
   vendor_id?: boolean
+  defected_item_id?: boolean
   doc_og_name?: boolean
   doc_sys_name?: boolean
   created_by?: boolean
   created_at?: boolean
-  defected_item_id?: boolean
 }
 
-export type DefectCompletionPhotoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cut_list_machine_mapping_id" | "cut_list_id" | "vendor_id" | "doc_og_name" | "doc_sys_name" | "created_by" | "created_at" | "defected_item_id", ExtArgs["result"]["defectCompletionPhoto"]>
+export type DefectCompletionPhotoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cut_list_machine_mapping_id" | "cut_list_id" | "vendor_id" | "defected_item_id" | "doc_og_name" | "doc_sys_name" | "created_by" | "created_at", ExtArgs["result"]["defectCompletionPhoto"]>
 export type DefectCompletionPhotoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   cutList?: boolean | Prisma.CutListDefaultArgs<ExtArgs>
@@ -1261,11 +1261,11 @@ export type $DefectCompletionPhotoPayload<ExtArgs extends runtime.Types.Extensio
     cut_list_machine_mapping_id: number
     cut_list_id: number
     vendor_id: number
+    defected_item_id: number | null
     doc_og_name: string
     doc_sys_name: string
     created_by: number
     created_at: Date
-    defected_item_id: number | null
   }, ExtArgs["result"]["defectCompletionPhoto"]>
   composites: {}
 }
@@ -1698,11 +1698,11 @@ export interface DefectCompletionPhotoFieldRefs {
   readonly cut_list_machine_mapping_id: Prisma.FieldRef<"DefectCompletionPhoto", 'Int'>
   readonly cut_list_id: Prisma.FieldRef<"DefectCompletionPhoto", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"DefectCompletionPhoto", 'Int'>
+  readonly defected_item_id: Prisma.FieldRef<"DefectCompletionPhoto", 'Int'>
   readonly doc_og_name: Prisma.FieldRef<"DefectCompletionPhoto", 'String'>
   readonly doc_sys_name: Prisma.FieldRef<"DefectCompletionPhoto", 'String'>
   readonly created_by: Prisma.FieldRef<"DefectCompletionPhoto", 'Int'>
   readonly created_at: Prisma.FieldRef<"DefectCompletionPhoto", 'DateTime'>
-  readonly defected_item_id: Prisma.FieldRef<"DefectCompletionPhoto", 'Int'>
 }
     
 

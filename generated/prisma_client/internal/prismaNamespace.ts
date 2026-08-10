@@ -446,7 +446,6 @@ export const ModelName = {
   LeadLightCarcasUnitMapping: 'LeadLightCarcasUnitMapping',
   OtherAppliancesMaster: 'OtherAppliancesMaster',
   LeadOtherAppliancesMapping: 'LeadOtherAppliancesMapping',
-  LeadOtherAppliancesRemarkMapping: 'LeadOtherAppliancesRemarkMapping',
   HandleTypeMaster: 'HandleTypeMaster',
   TimelineRule: 'TimelineRule',
   specificationDocumentMapping: 'specificationDocumentMapping',
@@ -592,7 +591,9 @@ export const ModelName = {
   BroadcastAudienceMapping: 'BroadcastAudienceMapping',
   BroadcastAttachment: 'BroadcastAttachment',
   BroadcastRead: 'BroadcastRead',
-  NotificationQueue: 'NotificationQueue'
+  NotificationQueue: 'NotificationQueue',
+  B2BRequirementTypeMaster: 'B2BRequirementTypeMaster',
+  LeadB2BRequirementTypeMapping: 'LeadB2BRequirementTypeMapping'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -608,7 +609,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "clientBankDetail" | "clientTypeMaster" | "leadMaster" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "processBriefMaster" | "leadProcessBriefMapping" | "leadRequirementMaterialMapping" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterMaterialFinishMaster" | "carcassLegsMaster" | "skirtingCarcassLegsMaster" | "skirtingCarcassLegsColorMaster" | "leadHardwareMapping" | "lightCarcasTypeMaster" | "lightCarcasUnitMaster" | "leadLightCarcasUnitMapping" | "otherAppliancesMaster" | "leadOtherAppliancesMapping" | "leadOtherAppliancesRemarkMapping" | "handleTypeMaster" | "timelineRule" | "specificationDocumentMapping" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "coreProductMaster" | "gradeMaster" | "finishMaster" | "typeMaster" | "itemTypeMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost" | "projectBoxInfoField" | "boxInfoFieldValue" | "vendorTypeMaster" | "companyVendorTypeMapping" | "companyVendorContactPerson" | "companyVendorBankAccount" | "companyVendorDocumentMaster" | "companyVendorDocumentMapping" | "companyVendorAddress" | "broadcastMaster" | "broadcastCategoryMaster" | "broadcastAudienceMapping" | "broadcastAttachment" | "broadcastRead" | "notificationQueue"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "clientBankDetail" | "clientTypeMaster" | "leadMaster" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "processBriefMaster" | "leadProcessBriefMapping" | "leadRequirementMaterialMapping" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterMaterialFinishMaster" | "carcassLegsMaster" | "skirtingCarcassLegsMaster" | "skirtingCarcassLegsColorMaster" | "leadHardwareMapping" | "lightCarcasTypeMaster" | "lightCarcasUnitMaster" | "leadLightCarcasUnitMapping" | "otherAppliancesMaster" | "leadOtherAppliancesMapping" | "handleTypeMaster" | "timelineRule" | "specificationDocumentMapping" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "coreProductMaster" | "gradeMaster" | "finishMaster" | "typeMaster" | "itemTypeMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost" | "projectBoxInfoField" | "boxInfoFieldValue" | "vendorTypeMaster" | "companyVendorTypeMapping" | "companyVendorContactPerson" | "companyVendorBankAccount" | "companyVendorDocumentMaster" | "companyVendorDocumentMapping" | "companyVendorAddress" | "broadcastMaster" | "broadcastCategoryMaster" | "broadcastAudienceMapping" | "broadcastAttachment" | "broadcastRead" | "notificationQueue" | "b2BRequirementTypeMaster" | "leadB2BRequirementTypeMapping"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4235,80 +4236,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.LeadOtherAppliancesMappingCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.LeadOtherAppliancesMappingCountAggregateOutputType> | number
-        }
-      }
-    }
-    LeadOtherAppliancesRemarkMapping: {
-      payload: Prisma.$LeadOtherAppliancesRemarkMappingPayload<ExtArgs>
-      fields: Prisma.LeadOtherAppliancesRemarkMappingFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>
-        }
-        findFirst: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>
-        }
-        findMany: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>[]
-        }
-        create: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>
-        }
-        createMany: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>[]
-        }
-        delete: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>
-        }
-        update: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>
-        }
-        deleteMany: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>[]
-        }
-        upsert: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>
-        }
-        aggregate: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadOtherAppliancesRemarkMapping>
-        }
-        groupBy: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.LeadOtherAppliancesRemarkMappingGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.LeadOtherAppliancesRemarkMappingCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.LeadOtherAppliancesRemarkMappingCountAggregateOutputType> | number
         }
       }
     }
@@ -15116,6 +15043,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    B2BRequirementTypeMaster: {
+      payload: Prisma.$B2BRequirementTypeMasterPayload<ExtArgs>
+      fields: Prisma.B2BRequirementTypeMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.B2BRequirementTypeMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$B2BRequirementTypeMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.B2BRequirementTypeMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$B2BRequirementTypeMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.B2BRequirementTypeMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$B2BRequirementTypeMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.B2BRequirementTypeMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$B2BRequirementTypeMasterPayload>
+        }
+        findMany: {
+          args: Prisma.B2BRequirementTypeMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$B2BRequirementTypeMasterPayload>[]
+        }
+        create: {
+          args: Prisma.B2BRequirementTypeMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$B2BRequirementTypeMasterPayload>
+        }
+        createMany: {
+          args: Prisma.B2BRequirementTypeMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.B2BRequirementTypeMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$B2BRequirementTypeMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.B2BRequirementTypeMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$B2BRequirementTypeMasterPayload>
+        }
+        update: {
+          args: Prisma.B2BRequirementTypeMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$B2BRequirementTypeMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.B2BRequirementTypeMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.B2BRequirementTypeMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.B2BRequirementTypeMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$B2BRequirementTypeMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.B2BRequirementTypeMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$B2BRequirementTypeMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.B2BRequirementTypeMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateB2BRequirementTypeMaster>
+        }
+        groupBy: {
+          args: Prisma.B2BRequirementTypeMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.B2BRequirementTypeMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.B2BRequirementTypeMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.B2BRequirementTypeMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeadB2BRequirementTypeMapping: {
+      payload: Prisma.$LeadB2BRequirementTypeMappingPayload<ExtArgs>
+      fields: Prisma.LeadB2BRequirementTypeMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadB2BRequirementTypeMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BRequirementTypeMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadB2BRequirementTypeMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BRequirementTypeMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.LeadB2BRequirementTypeMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BRequirementTypeMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadB2BRequirementTypeMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BRequirementTypeMappingPayload>
+        }
+        findMany: {
+          args: Prisma.LeadB2BRequirementTypeMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BRequirementTypeMappingPayload>[]
+        }
+        create: {
+          args: Prisma.LeadB2BRequirementTypeMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BRequirementTypeMappingPayload>
+        }
+        createMany: {
+          args: Prisma.LeadB2BRequirementTypeMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadB2BRequirementTypeMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BRequirementTypeMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.LeadB2BRequirementTypeMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BRequirementTypeMappingPayload>
+        }
+        update: {
+          args: Prisma.LeadB2BRequirementTypeMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BRequirementTypeMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadB2BRequirementTypeMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadB2BRequirementTypeMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadB2BRequirementTypeMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BRequirementTypeMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadB2BRequirementTypeMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BRequirementTypeMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.LeadB2BRequirementTypeMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadB2BRequirementTypeMapping>
+        }
+        groupBy: {
+          args: Prisma.LeadB2BRequirementTypeMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadB2BRequirementTypeMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadB2BRequirementTypeMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadB2BRequirementTypeMappingCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -15171,22 +15246,22 @@ export const VendorMasterScalarFieldEnum = {
   updatedAt: 'updatedAt',
   vendor_report_code: 'vendor_report_code',
   IsAccountLocInEnabled: 'IsAccountLocInEnabled',
+  is_this_vendor_is_custom_usertype_only: 'is_this_vendor_is_custom_usertype_only',
   state_id: 'state_id',
-  eligible_booking_days: 'eligible_booking_days',
+  is_inventory_enabled: 'is_inventory_enabled',
+  is_tracktrace_enabled: 'is_tracktrace_enabled',
   is_approval_task_enabled: 'is_approval_task_enabled',
+  eligible_booking_days: 'eligible_booking_days',
+  is_self_assign_task_type_master_enabed: 'is_self_assign_task_type_master_enabed',
+  is_year_wise_lead_code_enabled: 'is_year_wise_lead_code_enabled',
   is_client_visit_enabled: 'is_client_visit_enabled',
+  subdomain_url: 'subdomain_url',
   is_crm_enabled: 'is_crm_enabled',
   is_custom_doc_nomenclature_enabled: 'is_custom_doc_nomenclature_enabled',
-  is_inventory_enabled: 'is_inventory_enabled',
-  is_self_assign_task_type_master_enabed: 'is_self_assign_task_type_master_enabed',
-  is_this_vendor_is_custom_usertype_only: 'is_this_vendor_is_custom_usertype_only',
-  is_tracktrace_enabled: 'is_tracktrace_enabled',
-  is_year_wise_lead_code_enabled: 'is_year_wise_lead_code_enabled',
-  subdomain_url: 'subdomain_url',
   handlesLargeScaleProjects: 'handlesLargeScaleProjects',
-  icon: 'icon',
   is_email_noti_enabled: 'is_email_noti_enabled',
   is_in_app_noti_enabled: 'is_in_app_noti_enabled',
+  icon: 'icon',
   login_image: 'login_image',
   address: 'address',
   city: 'city',
@@ -15195,8 +15270,7 @@ export const VendorMasterScalarFieldEnum = {
   tag_line: 'tag_line',
   toll_free_no: 'toll_free_no',
   website_link: 'website_link',
-  is_broadcast_enabled: 'is_broadcast_enabled',
-  is_scanpack_enabled: 'is_scanpack_enabled'
+  is_broadcast_enabled: 'is_broadcast_enabled'
 } as const
 
 export type VendorMasterScalarFieldEnum = (typeof VendorMasterScalarFieldEnum)[keyof typeof VendorMasterScalarFieldEnum]
@@ -15294,7 +15368,6 @@ export const UserSessionScalarFieldEnum = {
   platform: 'platform',
   ip_address: 'ip_address',
   user_agent: 'user_agent',
-  login_type: 'login_type',
   status: 'status',
   is_current: 'is_current',
   last_seen_at: 'last_seen_at',
@@ -15304,7 +15377,8 @@ export const UserSessionScalarFieldEnum = {
   revoked_by: 'revoked_by',
   revoke_reason: 'revoke_reason',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  login_type: 'login_type'
 } as const
 
 export type UserSessionScalarFieldEnum = (typeof UserSessionScalarFieldEnum)[keyof typeof UserSessionScalarFieldEnum]
@@ -15333,8 +15407,8 @@ export const ProjectMasterScalarFieldEnum = {
   created_at: 'created_at',
   unique_project_id: 'unique_project_id',
   is_grouping: 'is_grouping',
-  track_trace_status: 'track_trace_status',
   lead_id: 'lead_id',
+  track_trace_status: 'track_trace_status',
   track_completed_at: 'track_completed_at',
   track_started_at: 'track_started_at',
   client_address: 'client_address',
@@ -15398,9 +15472,9 @@ export const BoxMasterScalarFieldEnum = {
   deleted_by: 'deleted_by',
   is_deleted: 'is_deleted',
   project_details_id: 'project_details_id',
-  lead_id: 'lead_id',
   factory_out_at: 'factory_out_at',
   factory_out_by: 'factory_out_by',
+  lead_id: 'lead_id',
   site_in_at: 'site_in_at',
   site_in_by: 'site_in_by',
   packed_at: 'packed_at',
@@ -15529,7 +15603,6 @@ export const LeadMasterScalarFieldEnum = {
   site_map_link: 'site_map_link',
   activity_status: 'activity_status',
   activity_status_remark: 'activity_status_remark',
-  project_status: 'project_status',
   booking_amount: 'booking_amount',
   pending_amount: 'pending_amount',
   total_project_amount: 'total_project_amount',
@@ -15567,32 +15640,31 @@ export const LeadMasterScalarFieldEnum = {
   order_login_prod_files_remark: 'order_login_prod_files_remark',
   actual_installation_completion_at: 'actual_installation_completion_at',
   final_handover_marked_at: 'final_handover_marked_at',
-  priority: 'priority',
+  usable_handover_completed_at: 'usable_handover_completed_at',
   tech_check_completed_at: 'tech_check_completed_at',
   tech_check_reached_at: 'tech_check_reached_at',
-  usable_handover_completed_at: 'usable_handover_completed_at',
+  priority: 'priority',
   amc_opted_at: 'amc_opted_at',
   is_amc_opted: 'is_amc_opted',
   amc_plan_closed_at: 'amc_plan_closed_at',
   amc_plan_started_at: 'amc_plan_started_at',
   vehicle_approachability_for_dispatch: 'vehicle_approachability_for_dispatch',
   total_required_chs_manufacturing_days: 'total_required_chs_manufacturing_days',
-  archetech_number: 'archetech_number',
   is_blocked: 'is_blocked',
   lead_blocked_at: 'lead_blocked_at',
+  archetech_number: 'archetech_number',
   is_small_order_request: 'is_small_order_request',
   material_lift_size: 'material_lift_size',
-  architect_id: 'architect_id',
   fast_production_approved_at: 'fast_production_approved_at',
   fast_production_status: 'fast_production_status',
-  isLargeScaleProjectLead: 'isLargeScaleProjectLead',
   is_fast_production: 'is_fast_production',
   tentative_order_login_date: 'tentative_order_login_date',
-  is_so_value_received: 'is_so_value_received',
-  so_value_received_at: 'so_value_received_at',
+  isLargeScaleProjectLead: 'isLargeScaleProjectLead',
+  architect_id: 'architect_id',
   client_id: 'client_id',
   order_number: 'order_number',
-  refered_by: 'refered_by'
+  refered_by: 'refered_by',
+  project_status: 'project_status'
 } as const
 
 export type LeadMasterScalarFieldEnum = (typeof LeadMasterScalarFieldEnum)[keyof typeof LeadMasterScalarFieldEnum]
@@ -15606,9 +15678,7 @@ export const LeadSpecificationsMasterScalarFieldEnum = {
   created_at: 'created_at',
   created_by: 'created_by',
   lights_remark: 'lights_remark',
-  item_code_id: 'item_code_id',
-  is_completed: 'is_completed',
-  completed_marked_at: 'completed_marked_at'
+  item_code_id: 'item_code_id'
 } as const
 
 export type LeadSpecificationsMasterScalarFieldEnum = (typeof LeadSpecificationsMasterScalarFieldEnum)[keyof typeof LeadSpecificationsMasterScalarFieldEnum]
@@ -15618,18 +15688,9 @@ export const LeadCarcassMaterialMappingScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
-  specs_id: 'specs_id',
   carcass_type_id: 'carcass_type_id',
   carcas_material_id: 'carcas_material_id',
   carcass_material_finish_id: 'carcass_material_finish_id',
-  is_approved: 'is_approved',
-  approved_at: 'approved_at',
-  is_amended: 'is_amended',
-  amended_at: 'amended_at',
-  amended_remark: 'amended_remark',
-  is_deleted_item: 'is_deleted_item',
-  deleted_item_at: 'deleted_item_at',
-  deleted_remark: 'deleted_remark',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -15641,18 +15702,9 @@ export const LeadShutterMaterialMappingScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
-  specs_id: 'specs_id',
   shutter_type_id: 'shutter_type_id',
   shutter_material_id: 'shutter_material_id',
   shutter_material_finish_id: 'shutter_material_finish_id',
-  is_approved: 'is_approved',
-  approved_at: 'approved_at',
-  is_amended: 'is_amended',
-  amended_at: 'amended_at',
-  amended_remark: 'amended_remark',
-  is_deleted_item: 'is_deleted_item',
-  deleted_item_at: 'deleted_item_at',
-  deleted_remark: 'deleted_remark',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -15756,10 +15808,10 @@ export const LeadProductMappingScalarFieldEnum = {
   lead_id: 'lead_id',
   account_id: 'account_id',
   product_type_id: 'product_type_id',
-  approximate_budget: 'approximate_budget',
-  project_status: 'project_status',
   created_by: 'created_by',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  approximate_budget: 'approximate_budget',
+  project_status: 'project_status'
 } as const
 
 export type LeadProductMappingScalarFieldEnum = (typeof LeadProductMappingScalarFieldEnum)[keyof typeof LeadProductMappingScalarFieldEnum]
@@ -15794,12 +15846,12 @@ export const LeadProcessBriefMappingScalarFieldEnum = {
   id: 'id',
   lead_id: 'lead_id',
   vendor_id: 'vendor_id',
-  product_type_id: 'product_type_id',
   process_brief_id: 'process_brief_id',
   created_at: 'created_at',
   created_by: 'created_by',
   updated_at: 'updated_at',
-  updated_by: 'updated_by'
+  updated_by: 'updated_by',
+  b2b_requirement_type_id: 'b2b_requirement_type_id'
 } as const
 
 export type LeadProcessBriefMappingScalarFieldEnum = (typeof LeadProcessBriefMappingScalarFieldEnum)[keyof typeof LeadProcessBriefMappingScalarFieldEnum]
@@ -15809,7 +15861,7 @@ export const LeadRequirementMaterialMappingScalarFieldEnum = {
   id: 'id',
   lead_id: 'lead_id',
   vendor_id: 'vendor_id',
-  product_type_id: 'product_type_id',
+  b2b_requirement_type_id: 'b2b_requirement_type_id',
   product_id: 'product_id',
   quantity: 'quantity',
   unit_id: 'unit_id',
@@ -15831,8 +15883,7 @@ export type LeadRequirementMaterialMappingScalarFieldEnum = (typeof LeadRequirem
 export const CarcassTypeMasterScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  vendor_id: 'vendor_id',
-  can_do_fast_production: 'can_do_fast_production'
+  vendor_id: 'vendor_id'
 } as const
 
 export type CarcassTypeMasterScalarFieldEnum = (typeof CarcassTypeMasterScalarFieldEnum)[keyof typeof CarcassTypeMasterScalarFieldEnum]
@@ -15925,19 +15976,10 @@ export const LeadHardwareMappingScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
-  specs_id: 'specs_id',
   carcass_legs_id: 'carcass_legs_id',
   skirting_carcass_legs_id: 'skirting_carcass_legs_id',
   skirting_carcass_legs_color_id: 'skirting_carcass_legs_color_id',
   note: 'note',
-  is_approved: 'is_approved',
-  approved_at: 'approved_at',
-  is_amended: 'is_amended',
-  amended_at: 'amended_at',
-  amended_remark: 'amended_remark',
-  is_deleted_item: 'is_deleted_item',
-  deleted_item_at: 'deleted_item_at',
-  deleted_remark: 'deleted_remark',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -15974,15 +16016,6 @@ export const LeadLightCarcasUnitMappingScalarFieldEnum = {
   lead_id: 'lead_id',
   specs_id: 'specs_id',
   light_carcas_unit_master_id: 'light_carcas_unit_master_id',
-  custom_remark: 'custom_remark',
-  is_approved: 'is_approved',
-  approved_at: 'approved_at',
-  is_amended: 'is_amended',
-  amended_at: 'amended_at',
-  amended_remark: 'amended_remark',
-  is_deleted_item: 'is_deleted_item',
-  deleted_item_at: 'deleted_item_at',
-  deleted_remark: 'deleted_remark',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -16007,36 +16040,12 @@ export const LeadOtherAppliancesMappingScalarFieldEnum = {
   lead_id: 'lead_id',
   vendor_id: 'vendor_id',
   specs_id: 'specs_id',
-  other_appliance_type: 'other_appliance_type',
   other_appliances_master_id: 'other_appliances_master_id',
-  custom_remark: 'custom_remark',
-  is_approved: 'is_approved',
-  approved_at: 'approved_at',
-  is_amended: 'is_amended',
-  amended_at: 'amended_at',
-  amended_remark: 'amended_remark',
-  is_deleted_item: 'is_deleted_item',
-  deleted_item_at: 'deleted_item_at',
-  deleted_remark: 'deleted_remark',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
 
 export type LeadOtherAppliancesMappingScalarFieldEnum = (typeof LeadOtherAppliancesMappingScalarFieldEnum)[keyof typeof LeadOtherAppliancesMappingScalarFieldEnum]
-
-
-export const LeadOtherAppliancesRemarkMappingScalarFieldEnum = {
-  id: 'id',
-  vendor_id: 'vendor_id',
-  lead_id: 'lead_id',
-  specs_id: 'specs_id',
-  other_appliance_type: 'other_appliance_type',
-  remark: 'remark',
-  created_at: 'created_at',
-  created_by: 'created_by'
-} as const
-
-export type LeadOtherAppliancesRemarkMappingScalarFieldEnum = (typeof LeadOtherAppliancesRemarkMappingScalarFieldEnum)[keyof typeof LeadOtherAppliancesRemarkMappingScalarFieldEnum]
 
 
 export const HandleTypeMasterScalarFieldEnum = {
@@ -16091,7 +16100,8 @@ export const LeadDocumentsScalarFieldEnum = {
   is_deleted: 'is_deleted',
   tech_check_status: 'tech_check_status',
   product_structure_instance_id: 'product_structure_instance_id',
-  product_type_id: 'product_type_id'
+  product_type_id: 'product_type_id',
+  b2b_requirement_type_id: 'b2b_requirement_type_id'
 } as const
 
 export type LeadDocumentsScalarFieldEnum = (typeof LeadDocumentsScalarFieldEnum)[keyof typeof LeadDocumentsScalarFieldEnum]
@@ -16237,23 +16247,23 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   created_at: 'created_at',
   updated_by: 'updated_by',
   updated_at: 'updated_at',
-  hardware_packing_details_remark: 'hardware_packing_details_remark',
   is_order_login_completed: 'is_order_login_completed',
-  is_production_completed: 'is_production_completed',
-  is_tech_check_completed: 'is_tech_check_completed',
-  no_of_boxes: 'no_of_boxes',
-  no_of_client_documents_initially_submitted: 'no_of_client_documents_initially_submitted',
   order_login_completed_at: 'order_login_completed_at',
+  is_production_completed: 'is_production_completed',
   production_completed_at: 'production_completed_at',
-  tech_check_completed_at: 'tech_check_completed_at',
   woodwork_packing_details_remark: 'woodwork_packing_details_remark',
+  hardware_packing_details_remark: 'hardware_packing_details_remark',
+  no_of_boxes: 'no_of_boxes',
+  is_tech_check_completed: 'is_tech_check_completed',
+  tech_check_completed_at: 'tech_check_completed_at',
+  no_of_client_documents_initially_submitted: 'no_of_client_documents_initially_submitted',
   is_order_login_filled: 'is_order_login_filled',
   is_pre_prod_done: 'is_pre_prod_done',
   is_under_production: 'is_under_production',
   pre_prod_done_at: 'pre_prod_done_at',
   under_production_at: 'under_production_at',
-  is_post_production: 'is_post_production',
   production_erd_date: 'production_erd_date',
+  is_post_production: 'is_post_production',
   pre_prod_remark: 'pre_prod_remark',
   isLargeScaleProjectInstance: 'isLargeScaleProjectInstance',
   product_item_code_id: 'product_item_code_id',
@@ -16280,7 +16290,6 @@ export const PaymentInfoScalarFieldEnum = {
   lead_id: 'lead_id',
   account_id: 'account_id',
   amount: 'amount',
-  is_booking_received_amt: 'is_booking_received_amt',
   payment_date: 'payment_date',
   payment_text: 'payment_text',
   payment_file_id: 'payment_file_id',
@@ -16288,12 +16297,7 @@ export const PaymentInfoScalarFieldEnum = {
   created_by: 'created_by',
   vendor_id: 'vendor_id',
   payment_type_id: 'payment_type_id',
-  status_id: 'status_id',
-  product_type_id: 'product_type_id',
-  basic_amount: 'basic_amount',
-  gst_amount: 'gst_amount',
-  gst_percentage: 'gst_percentage',
-  total_amount: 'total_amount'
+  status_id: 'status_id'
 } as const
 
 export type PaymentInfoScalarFieldEnum = (typeof PaymentInfoScalarFieldEnum)[keyof typeof PaymentInfoScalarFieldEnum]
@@ -16309,8 +16313,7 @@ export const LedgerScalarFieldEnum = {
   payment_date: 'payment_date',
   type: 'type',
   created_by: 'created_by',
-  created_at: 'created_at',
-  product_type_id: 'product_type_id'
+  created_at: 'created_at'
 } as const
 
 export type LedgerScalarFieldEnum = (typeof LedgerScalarFieldEnum)[keyof typeof LedgerScalarFieldEnum]
@@ -16348,7 +16351,6 @@ export const SmallOrderRequestScalarFieldEnum = {
   parent_lead_code: 'parent_lead_code',
   so_code: 'so_code',
   customer_name: 'customer_name',
-  status: 'status',
   request_source: 'request_source',
   request_type_id: 'request_type_id',
   required_date: 'required_date',
@@ -16362,10 +16364,11 @@ export const SmallOrderRequestScalarFieldEnum = {
   updated_by: 'updated_by',
   updated_at: 'updated_at',
   is_merge_to_parent_on_installation: 'is_merge_to_parent_on_installation',
-  is_request_resolved: 'is_request_resolved',
   usable_handover_date_snapshot: 'usable_handover_date_snapshot',
   small_order_sequence: 'small_order_sequence',
-  rejection_reason: 'rejection_reason'
+  rejection_reason: 'rejection_reason',
+  status: 'status',
+  is_request_resolved: 'is_request_resolved'
 } as const
 
 export type SmallOrderRequestScalarFieldEnum = (typeof SmallOrderRequestScalarFieldEnum)[keyof typeof SmallOrderRequestScalarFieldEnum]
@@ -16465,9 +16468,9 @@ export const LeadDesignMeetingScalarFieldEnum = {
   updated_by: 'updated_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
+  meeting_type_id: 'meeting_type_id',
   meeting_end_time: 'meeting_end_time',
-  meeting_start_time: 'meeting_start_time',
-  meeting_type_id: 'meeting_type_id'
+  meeting_start_time: 'meeting_start_time'
 } as const
 
 export type LeadDesignMeetingScalarFieldEnum = (typeof LeadDesignMeetingScalarFieldEnum)[keyof typeof LeadDesignMeetingScalarFieldEnum]
@@ -16656,7 +16659,6 @@ export const FastProductionRequestScalarFieldEnum = {
   hardware_selection: 'hardware_selection',
   accessory_selection: 'accessory_selection',
   special_requirements: 'special_requirements',
-  tentative_order_login_date: 'tentative_order_login_date',
   client_required_delivery_date: 'client_required_delivery_date',
   remarks: 'remarks',
   terms_accepted_at: 'terms_accepted_at',
@@ -16669,7 +16671,8 @@ export const FastProductionRequestScalarFieldEnum = {
   created_by: 'created_by',
   created_at: 'created_at',
   updated_by: 'updated_by',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  tentative_order_login_date: 'tentative_order_login_date'
 } as const
 
 export type FastProductionRequestScalarFieldEnum = (typeof FastProductionRequestScalarFieldEnum)[keyof typeof FastProductionRequestScalarFieldEnum]
@@ -16736,8 +16739,7 @@ export const LeadDetailedLogsScalarFieldEnum = {
   created_by: 'created_by',
   history_type: 'history_type',
   stage_id: 'stage_id',
-  task_id: 'task_id',
-  product_type_id: 'product_type_id'
+  task_id: 'task_id'
 } as const
 
 export type LeadDetailedLogsScalarFieldEnum = (typeof LeadDetailedLogsScalarFieldEnum)[keyof typeof LeadDetailedLogsScalarFieldEnum]
@@ -16811,8 +16813,8 @@ export const CompanyVendorsMasterScalarFieldEnum = {
   deleted_by: 'deleted_by',
   is_deleted: 'is_deleted',
   in_house: 'in_house',
-  state_id: 'state_id',
   default_payment_term_id: 'default_payment_term_id',
+  state_id: 'state_id',
   alternate_email: 'alternate_email',
   alternate_mobile_no: 'alternate_mobile_no',
   gst_no: 'gst_no',
@@ -17136,19 +17138,19 @@ export const MachineMasterScalarFieldEnum = {
   machine_name: 'machine_name',
   machine_code: 'machine_code',
   machine_type: 'machine_type',
+  machine_type_id: 'machine_type_id',
   status: 'status',
   scan_type: 'scan_type',
   description: 'description',
   vendor_id: 'vendor_id',
   factory_id: 'factory_id',
+  sequence_no: 'sequence_no',
+  target_per_hour: 'target_per_hour',
+  image_path: 'image_path',
   created_by: 'created_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  updated_by: 'updated_by',
-  sequence_no: 'sequence_no',
-  image_path: 'image_path',
-  target_per_hour: 'target_per_hour',
-  machine_type_id: 'machine_type_id'
+  updated_by: 'updated_by'
 } as const
 
 export type MachineMasterScalarFieldEnum = (typeof MachineMasterScalarFieldEnum)[keyof typeof MachineMasterScalarFieldEnum]
@@ -17158,6 +17160,7 @@ export const CutListScalarFieldEnum = {
   id: 'id',
   project_id: 'project_id',
   vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
   description: 'description',
   length: 'length',
   width: 'width',
@@ -17166,17 +17169,16 @@ export const CutListScalarFieldEnum = {
   material_details: 'material_details',
   item_name: 'item_name',
   unique_code: 'unique_code',
+  unique_code_2: 'unique_code_2',
   status: 'status',
   created_by: 'created_by',
   created_at: 'created_at',
   updated_by: 'updated_by',
   updated_at: 'updated_at',
-  lead_id: 'lead_id',
-  elb: 'elb',
   elf: 'elf',
+  elb: 'elb',
   esl: 'esl',
   esr: 'esr',
-  unique_code_2: 'unique_code_2',
   category_name: 'category_name',
   group_name: 'group_name',
   procurement: 'procurement',
@@ -17191,6 +17193,7 @@ export const CutListMachineMappingScalarFieldEnum = {
   cut_list_id: 'cut_list_id',
   machine_id: 'machine_id',
   vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
   project_id: 'project_id',
   sequence_no: 'sequence_no',
   is_optional: 'is_optional',
@@ -17203,11 +17206,9 @@ export const CutListMachineMappingScalarFieldEnum = {
   out_operator: 'out_operator',
   created_by: 'created_by',
   created_at: 'created_at',
-  lead_id: 'lead_id',
   box_id: 'box_id',
   site_in_at: 'site_in_at',
-  site_in_by: 'site_in_by',
-  weight: 'weight'
+  site_in_by: 'site_in_by'
 } as const
 
 export type CutListMachineMappingScalarFieldEnum = (typeof CutListMachineMappingScalarFieldEnum)[keyof typeof CutListMachineMappingScalarFieldEnum]
@@ -17293,22 +17294,22 @@ export const DefectedItemScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   project_id: 'project_id',
+  cut_list_machine_mapping_id: 'cut_list_machine_mapping_id',
+  cut_list_id: 'cut_list_id',
   machine_id: 'machine_id',
   defect_id: 'defect_id',
+  previous_scanned_by: 'previous_scanned_by',
+  previous_scanned_at: 'previous_scanned_at',
+  previous_scanned_machine_id: 'previous_scanned_machine_id',
   remark: 'remark',
   created_by: 'created_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  previous_scanned_at: 'previous_scanned_at',
-  previous_scanned_by: 'previous_scanned_by',
-  previous_scanned_machine_id: 'previous_scanned_machine_id',
-  cut_list_machine_mapping_id: 'cut_list_machine_mapping_id',
-  cut_list_id: 'cut_list_id',
   action: 'action',
-  rework_machine_id: 'rework_machine_id',
-  defect_status: 'defect_status',
   defect_completed_at: 'defect_completed_at',
-  defect_completed_by: 'defect_completed_by'
+  defect_completed_by: 'defect_completed_by',
+  defect_status: 'defect_status',
+  rework_machine_id: 'rework_machine_id'
 } as const
 
 export type DefectedItemScalarFieldEnum = (typeof DefectedItemScalarFieldEnum)[keyof typeof DefectedItemScalarFieldEnum]
@@ -17531,11 +17532,11 @@ export const DefectCompletionPhotoScalarFieldEnum = {
   cut_list_machine_mapping_id: 'cut_list_machine_mapping_id',
   cut_list_id: 'cut_list_id',
   vendor_id: 'vendor_id',
+  defected_item_id: 'defected_item_id',
   doc_og_name: 'doc_og_name',
   doc_sys_name: 'doc_sys_name',
   created_by: 'created_by',
-  created_at: 'created_at',
-  defected_item_id: 'defected_item_id'
+  created_at: 'created_at'
 } as const
 
 export type DefectCompletionPhotoScalarFieldEnum = (typeof DefectCompletionPhotoScalarFieldEnum)[keyof typeof DefectCompletionPhotoScalarFieldEnum]
@@ -17556,12 +17557,12 @@ export const ProjectCategoriesMasterScalarFieldEnum = {
   category_name: 'category_name',
   status: 'status',
   vendor_id: 'vendor_id',
-  parent_id: 'parent_id',
   created_at: 'created_at',
-  created_by: 'created_by',
   updated_at: 'updated_at',
-  updated_by: 'updated_by',
-  external_category_id: 'external_category_id'
+  external_category_id: 'external_category_id',
+  parent_id: 'parent_id',
+  created_by: 'created_by',
+  updated_by: 'updated_by'
 } as const
 
 export type ProjectCategoriesMasterScalarFieldEnum = (typeof ProjectCategoriesMasterScalarFieldEnum)[keyof typeof ProjectCategoriesMasterScalarFieldEnum]
@@ -17639,8 +17640,8 @@ export const ProductMasterScalarFieldEnum = {
   updated_by: 'updated_by',
   active: 'active',
   current_stock: 'current_stock',
-  stock_updated_at: 'stock_updated_at',
   hsn_id: 'hsn_id',
+  stock_updated_at: 'stock_updated_at',
   consumption_unit_id: 'consumption_unit_id',
   costing_method: 'costing_method',
   item_group_id: 'item_group_id',
@@ -17789,22 +17790,22 @@ export const PurchaseIntentItemVendorMappingScalarFieldEnum = {
   id: 'id',
   purchase_intent_item_id: 'purchase_intent_item_id',
   company_vendor_id: 'company_vendor_id',
+  required_qty: 'required_qty',
+  required_by_date: 'required_by_date',
   estimated_price: 'estimated_price',
   remarks: 'remarks',
   is_selected: 'is_selected',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  required_by_date: 'required_by_date',
-  required_qty: 'required_qty',
-  amount: 'amount',
-  cgst_pct: 'cgst_pct',
-  discount_pct: 'discount_pct',
-  igst_pct: 'igst_pct',
   mrp: 'mrp',
+  discount_pct: 'discount_pct',
   rate: 'rate',
-  sgst_pct: 'sgst_pct',
-  tax_amount: 'tax_amount',
   tax_pct: 'tax_pct',
+  cgst_pct: 'cgst_pct',
+  sgst_pct: 'sgst_pct',
+  igst_pct: 'igst_pct',
+  tax_amount: 'tax_amount',
+  amount: 'amount',
   total_amount: 'total_amount',
   payment_term_id: 'payment_term_id'
 } as const
@@ -17863,21 +17864,21 @@ export const PurchaseOrderItemScalarFieldEnum = {
   remarks: 'remarks',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  amount: 'amount',
-  cgst_pct: 'cgst_pct',
-  discount_pct: 'discount_pct',
-  igst_pct: 'igst_pct',
-  mrp: 'mrp',
-  rate: 'rate',
-  sgst_pct: 'sgst_pct',
-  tax_amount: 'tax_amount',
-  tax_pct: 'tax_pct',
-  total_amount: 'total_amount',
   created_by: 'created_by',
   updated_by: 'updated_by',
+  mrp: 'mrp',
+  discount_pct: 'discount_pct',
+  rate: 'rate',
+  tax_pct: 'tax_pct',
+  cgst_pct: 'cgst_pct',
+  sgst_pct: 'sgst_pct',
+  igst_pct: 'igst_pct',
+  tax_amount: 'tax_amount',
+  amount: 'amount',
+  total_amount: 'total_amount',
+  is_deleted: 'is_deleted',
   deleted_at: 'deleted_at',
-  deleted_by: 'deleted_by',
-  is_deleted: 'is_deleted'
+  deleted_by: 'deleted_by'
 } as const
 
 export type PurchaseOrderItemScalarFieldEnum = (typeof PurchaseOrderItemScalarFieldEnum)[keyof typeof PurchaseOrderItemScalarFieldEnum]
@@ -17903,22 +17904,22 @@ export const GRNMasterScalarFieldEnum = {
   confirmed_at: 'confirmed_at',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  cess_amount: 'cess_amount',
-  cgst_amount: 'cgst_amount',
-  discount_amount: 'discount_amount',
-  eway_bill_no: 'eway_bill_no',
-  freight_amount: 'freight_amount',
-  igst_amount: 'igst_amount',
-  lr_date: 'lr_date',
-  lr_no: 'lr_no',
-  other_charges_amount: 'other_charges_amount',
-  packing_amount: 'packing_amount',
-  roundoff_amount: 'roundoff_amount',
-  sgst_amount: 'sgst_amount',
   subtotal_amount: 'subtotal_amount',
+  cgst_amount: 'cgst_amount',
+  sgst_amount: 'sgst_amount',
+  igst_amount: 'igst_amount',
+  cess_amount: 'cess_amount',
+  discount_amount: 'discount_amount',
+  packing_amount: 'packing_amount',
+  freight_amount: 'freight_amount',
+  other_charges_amount: 'other_charges_amount',
+  roundoff_amount: 'roundoff_amount',
   taxable_amount: 'taxable_amount',
   total_amount: 'total_amount',
-  transporter_name: 'transporter_name'
+  eway_bill_no: 'eway_bill_no',
+  transporter_name: 'transporter_name',
+  lr_no: 'lr_no',
+  lr_date: 'lr_date'
 } as const
 
 export type GRNMasterScalarFieldEnum = (typeof GRNMasterScalarFieldEnum)[keyof typeof GRNMasterScalarFieldEnum]
@@ -17938,28 +17939,28 @@ export const GRNItemScalarFieldEnum = {
   rejection_reason: 'rejection_reason',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  amount: 'amount',
-  cgst_pct: 'cgst_pct',
-  discount_pct: 'discount_pct',
-  igst_pct: 'igst_pct',
   mrp: 'mrp',
+  discount_pct: 'discount_pct',
   rate: 'rate',
-  sgst_pct: 'sgst_pct',
-  tax_amount: 'tax_amount',
   tax_pct: 'tax_pct',
+  cgst_pct: 'cgst_pct',
+  sgst_pct: 'sgst_pct',
+  igst_pct: 'igst_pct',
+  tax_amount: 'tax_amount',
+  amount: 'amount',
   total_amount: 'total_amount',
-  cgst_amount: 'cgst_amount',
-  cgst_percentage: 'cgst_percentage',
-  discount_amount: 'discount_amount',
-  discount_percentage: 'discount_percentage',
-  gst_percentage: 'gst_percentage',
   hsn_code: 'hsn_code',
-  igst_amount: 'igst_amount',
-  igst_percentage: 'igst_percentage',
-  line_total: 'line_total',
-  sgst_amount: 'sgst_amount',
+  gst_percentage: 'gst_percentage',
+  taxable_amount: 'taxable_amount',
+  cgst_percentage: 'cgst_percentage',
   sgst_percentage: 'sgst_percentage',
-  taxable_amount: 'taxable_amount'
+  igst_percentage: 'igst_percentage',
+  cgst_amount: 'cgst_amount',
+  sgst_amount: 'sgst_amount',
+  igst_amount: 'igst_amount',
+  discount_percentage: 'discount_percentage',
+  discount_amount: 'discount_amount',
+  line_total: 'line_total'
 } as const
 
 export type GRNItemScalarFieldEnum = (typeof GRNItemScalarFieldEnum)[keyof typeof GRNItemScalarFieldEnum]
@@ -18042,14 +18043,14 @@ export type ProductStockHistoryScalarFieldEnum = (typeof ProductStockHistoryScal
 export const PaymentTermMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
+  company_vendor_id: 'company_vendor_id',
   term_name: 'term_name',
   description: 'description',
   is_active: 'is_active',
   created_by: 'created_by',
   updated_by: 'updated_by',
   created_at: 'created_at',
-  updated_at: 'updated_at',
-  company_vendor_id: 'company_vendor_id'
+  updated_at: 'updated_at'
 } as const
 
 export type PaymentTermMasterScalarFieldEnum = (typeof PaymentTermMasterScalarFieldEnum)[keyof typeof PaymentTermMasterScalarFieldEnum]
@@ -18117,12 +18118,12 @@ export const UnitMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   unit_name: 'unit_name',
+  unit_class: 'unit_class',
   is_active: 'is_active',
   created_by: 'created_by',
   updated_by: 'updated_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  unit_class: 'unit_class',
   short_name: 'short_name',
   decimal_allowed: 'decimal_allowed'
 } as const
@@ -18191,12 +18192,12 @@ export const ArchitechuremasterScalarFieldEnum = {
   name: 'name',
   email: 'email',
   mobile: 'mobile',
-  alt_mobile: 'alt_mobile',
   isActive: 'isActive',
   createdAt: 'createdAt',
   createdBy: 'createdBy',
+  deletedAt: 'deletedAt',
   isDeleted: 'isDeleted',
-  deletedAt: 'deletedAt'
+  alt_mobile: 'alt_mobile'
 } as const
 
 export type ArchitechuremasterScalarFieldEnum = (typeof ArchitechuremasterScalarFieldEnum)[keyof typeof ArchitechuremasterScalarFieldEnum]
@@ -18491,11 +18492,11 @@ export const BroadcastAttachmentScalarFieldEnum = {
   original_file_name: 'original_file_name',
   file_url: 'file_url',
   file_type: 'file_type',
-  file_size: 'file_size',
   created_by: 'created_by',
   updated_by: 'updated_by',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  file_size: 'file_size'
 } as const
 
 export type BroadcastAttachmentScalarFieldEnum = (typeof BroadcastAttachmentScalarFieldEnum)[keyof typeof BroadcastAttachmentScalarFieldEnum]
@@ -18532,6 +18533,34 @@ export const NotificationQueueScalarFieldEnum = {
 } as const
 
 export type NotificationQueueScalarFieldEnum = (typeof NotificationQueueScalarFieldEnum)[keyof typeof NotificationQueueScalarFieldEnum]
+
+
+export const B2BRequirementTypeMasterScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  vendor_id: 'vendor_id',
+  status: 'status',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type B2BRequirementTypeMasterScalarFieldEnum = (typeof B2BRequirementTypeMasterScalarFieldEnum)[keyof typeof B2BRequirementTypeMasterScalarFieldEnum]
+
+
+export const LeadB2BRequirementTypeMappingScalarFieldEnum = {
+  id: 'id',
+  lead_id: 'lead_id',
+  vendor_id: 'vendor_id',
+  b2b_requirement_type_id: 'b2b_requirement_type_id',
+  approximate_budget: 'approximate_budget',
+  project_status: 'project_status',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by'
+} as const
+
+export type LeadB2BRequirementTypeMappingScalarFieldEnum = (typeof LeadB2BRequirementTypeMappingScalarFieldEnum)[keyof typeof LeadB2BRequirementTypeMappingScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -18638,20 +18667,6 @@ export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
- * Reference to a field of type 'UserSessionLoginType'
- */
-export type EnumUserSessionLoginTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserSessionLoginType'>
-    
-
-
-/**
- * Reference to a field of type 'UserSessionLoginType[]'
- */
-export type ListEnumUserSessionLoginTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserSessionLoginType[]'>
-    
-
-
-/**
  * Reference to a field of type 'UserSessionStatus'
  */
 export type EnumUserSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserSessionStatus'>
@@ -18662,6 +18677,20 @@ export type EnumUserSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType
  * Reference to a field of type 'UserSessionStatus[]'
  */
 export type ListEnumUserSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserSessionStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'UserSessionLoginType'
+ */
+export type EnumUserSessionLoginTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserSessionLoginType'>
+    
+
+
+/**
+ * Reference to a field of type 'UserSessionLoginType[]'
+ */
+export type ListEnumUserSessionLoginTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserSessionLoginType[]'>
     
 
 
@@ -18890,20 +18919,6 @@ export type ListEnumSmallOrderTypeKeyFieldRefInput<$PrismaModel> = FieldRefInput
 
 
 /**
- * Reference to a field of type 'SmallOrderRequestStatus'
- */
-export type EnumSmallOrderRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmallOrderRequestStatus'>
-    
-
-
-/**
- * Reference to a field of type 'SmallOrderRequestStatus[]'
- */
-export type ListEnumSmallOrderRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmallOrderRequestStatus[]'>
-    
-
-
-/**
  * Reference to a field of type 'SmallOrderRequestSource'
  */
 export type EnumSmallOrderRequestSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmallOrderRequestSource'>
@@ -18914,6 +18929,20 @@ export type EnumSmallOrderRequestSourceFieldRefInput<$PrismaModel> = FieldRefInp
  * Reference to a field of type 'SmallOrderRequestSource[]'
  */
 export type ListEnumSmallOrderRequestSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmallOrderRequestSource[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SmallOrderRequestStatus'
+ */
+export type EnumSmallOrderRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmallOrderRequestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SmallOrderRequestStatus[]'
+ */
+export type ListEnumSmallOrderRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmallOrderRequestStatus[]'>
     
 
 
@@ -19872,7 +19901,6 @@ export type GlobalOmitConfig = {
   leadLightCarcasUnitMapping?: Prisma.LeadLightCarcasUnitMappingOmit
   otherAppliancesMaster?: Prisma.OtherAppliancesMasterOmit
   leadOtherAppliancesMapping?: Prisma.LeadOtherAppliancesMappingOmit
-  leadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingOmit
   handleTypeMaster?: Prisma.HandleTypeMasterOmit
   timelineRule?: Prisma.TimelineRuleOmit
   specificationDocumentMapping?: Prisma.specificationDocumentMappingOmit
@@ -20019,6 +20047,8 @@ export type GlobalOmitConfig = {
   broadcastAttachment?: Prisma.BroadcastAttachmentOmit
   broadcastRead?: Prisma.BroadcastReadOmit
   notificationQueue?: Prisma.NotificationQueueOmit
+  b2BRequirementTypeMaster?: Prisma.B2BRequirementTypeMasterOmit
+  leadB2BRequirementTypeMapping?: Prisma.LeadB2BRequirementTypeMappingOmit
 }
 
 /* Types for Logging */

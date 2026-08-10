@@ -30,7 +30,6 @@ export type LeadCarcassMaterialMappingAvgAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   lead_id: number | null
-  specs_id: number | null
   carcass_type_id: number | null
   carcas_material_id: number | null
   carcass_material_finish_id: number | null
@@ -41,7 +40,6 @@ export type LeadCarcassMaterialMappingSumAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   lead_id: number | null
-  specs_id: number | null
   carcass_type_id: number | null
   carcas_material_id: number | null
   carcass_material_finish_id: number | null
@@ -52,18 +50,9 @@ export type LeadCarcassMaterialMappingMinAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   lead_id: number | null
-  specs_id: number | null
   carcass_type_id: number | null
   carcas_material_id: number | null
   carcass_material_finish_id: number | null
-  is_approved: boolean | null
-  approved_at: Date | null
-  is_amended: boolean | null
-  amended_at: Date | null
-  amended_remark: string | null
-  is_deleted_item: boolean | null
-  deleted_item_at: Date | null
-  deleted_remark: string | null
   created_at: Date | null
   created_by: number | null
 }
@@ -72,18 +61,9 @@ export type LeadCarcassMaterialMappingMaxAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   lead_id: number | null
-  specs_id: number | null
   carcass_type_id: number | null
   carcas_material_id: number | null
   carcass_material_finish_id: number | null
-  is_approved: boolean | null
-  approved_at: Date | null
-  is_amended: boolean | null
-  amended_at: Date | null
-  amended_remark: string | null
-  is_deleted_item: boolean | null
-  deleted_item_at: Date | null
-  deleted_remark: string | null
   created_at: Date | null
   created_by: number | null
 }
@@ -92,18 +72,9 @@ export type LeadCarcassMaterialMappingCountAggregateOutputType = {
   id: number
   vendor_id: number
   lead_id: number
-  specs_id: number
   carcass_type_id: number
   carcas_material_id: number
   carcass_material_finish_id: number
-  is_approved: number
-  approved_at: number
-  is_amended: number
-  amended_at: number
-  amended_remark: number
-  is_deleted_item: number
-  deleted_item_at: number
-  deleted_remark: number
   created_at: number
   created_by: number
   _all: number
@@ -114,7 +85,6 @@ export type LeadCarcassMaterialMappingAvgAggregateInputType = {
   id?: true
   vendor_id?: true
   lead_id?: true
-  specs_id?: true
   carcass_type_id?: true
   carcas_material_id?: true
   carcass_material_finish_id?: true
@@ -125,7 +95,6 @@ export type LeadCarcassMaterialMappingSumAggregateInputType = {
   id?: true
   vendor_id?: true
   lead_id?: true
-  specs_id?: true
   carcass_type_id?: true
   carcas_material_id?: true
   carcass_material_finish_id?: true
@@ -136,18 +105,9 @@ export type LeadCarcassMaterialMappingMinAggregateInputType = {
   id?: true
   vendor_id?: true
   lead_id?: true
-  specs_id?: true
   carcass_type_id?: true
   carcas_material_id?: true
   carcass_material_finish_id?: true
-  is_approved?: true
-  approved_at?: true
-  is_amended?: true
-  amended_at?: true
-  amended_remark?: true
-  is_deleted_item?: true
-  deleted_item_at?: true
-  deleted_remark?: true
   created_at?: true
   created_by?: true
 }
@@ -156,18 +116,9 @@ export type LeadCarcassMaterialMappingMaxAggregateInputType = {
   id?: true
   vendor_id?: true
   lead_id?: true
-  specs_id?: true
   carcass_type_id?: true
   carcas_material_id?: true
   carcass_material_finish_id?: true
-  is_approved?: true
-  approved_at?: true
-  is_amended?: true
-  amended_at?: true
-  amended_remark?: true
-  is_deleted_item?: true
-  deleted_item_at?: true
-  deleted_remark?: true
   created_at?: true
   created_by?: true
 }
@@ -176,18 +127,9 @@ export type LeadCarcassMaterialMappingCountAggregateInputType = {
   id?: true
   vendor_id?: true
   lead_id?: true
-  specs_id?: true
   carcass_type_id?: true
   carcas_material_id?: true
   carcass_material_finish_id?: true
-  is_approved?: true
-  approved_at?: true
-  is_amended?: true
-  amended_at?: true
-  amended_remark?: true
-  is_deleted_item?: true
-  deleted_item_at?: true
-  deleted_remark?: true
   created_at?: true
   created_by?: true
   _all?: true
@@ -283,18 +225,9 @@ export type LeadCarcassMaterialMappingGroupByOutputType = {
   id: number
   vendor_id: number
   lead_id: number
-  specs_id: number
   carcass_type_id: number
   carcas_material_id: number
   carcass_material_finish_id: number
-  is_approved: boolean
-  approved_at: Date | null
-  is_amended: boolean
-  amended_at: Date | null
-  amended_remark: string | null
-  is_deleted_item: boolean
-  deleted_item_at: Date | null
-  deleted_remark: string | null
   created_at: Date
   created_by: number
   _count: LeadCarcassMaterialMappingCountAggregateOutputType | null
@@ -326,18 +259,9 @@ export type LeadCarcassMaterialMappingWhereInput = {
   id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
   vendor_id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
   lead_id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
-  specs_id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
   carcass_type_id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
   carcas_material_id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
   carcass_material_finish_id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
-  is_approved?: Prisma.BoolFilter<"LeadCarcassMaterialMapping"> | boolean
-  approved_at?: Prisma.DateTimeNullableFilter<"LeadCarcassMaterialMapping"> | Date | string | null
-  is_amended?: Prisma.BoolFilter<"LeadCarcassMaterialMapping"> | boolean
-  amended_at?: Prisma.DateTimeNullableFilter<"LeadCarcassMaterialMapping"> | Date | string | null
-  amended_remark?: Prisma.StringNullableFilter<"LeadCarcassMaterialMapping"> | string | null
-  is_deleted_item?: Prisma.BoolFilter<"LeadCarcassMaterialMapping"> | boolean
-  deleted_item_at?: Prisma.DateTimeNullableFilter<"LeadCarcassMaterialMapping"> | Date | string | null
-  deleted_remark?: Prisma.StringNullableFilter<"LeadCarcassMaterialMapping"> | string | null
   created_at?: Prisma.DateTimeFilter<"LeadCarcassMaterialMapping"> | Date | string
   created_by?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
   carcasMaterial?: Prisma.XOR<Prisma.CarcasMaterialMasterScalarRelationFilter, Prisma.CarcasMaterialMasterWhereInput>
@@ -345,7 +269,6 @@ export type LeadCarcassMaterialMappingWhereInput = {
   carcassType?: Prisma.XOR<Prisma.CarcassTypeMasterScalarRelationFilter, Prisma.CarcassTypeMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
-  specification?: Prisma.XOR<Prisma.LeadSpecificationsMasterScalarRelationFilter, Prisma.LeadSpecificationsMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
@@ -353,18 +276,9 @@ export type LeadCarcassMaterialMappingOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
-  specs_id?: Prisma.SortOrder
   carcass_type_id?: Prisma.SortOrder
   carcas_material_id?: Prisma.SortOrder
   carcass_material_finish_id?: Prisma.SortOrder
-  is_approved?: Prisma.SortOrder
-  approved_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  is_amended?: Prisma.SortOrder
-  amended_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  amended_remark?: Prisma.SortOrderInput | Prisma.SortOrder
-  is_deleted_item?: Prisma.SortOrder
-  deleted_item_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  deleted_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   carcasMaterial?: Prisma.CarcasMaterialMasterOrderByWithRelationInput
@@ -372,7 +286,6 @@ export type LeadCarcassMaterialMappingOrderByWithRelationInput = {
   carcassType?: Prisma.CarcassTypeMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   lead?: Prisma.LeadMasterOrderByWithRelationInput
-  specification?: Prisma.LeadSpecificationsMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
@@ -383,18 +296,9 @@ export type LeadCarcassMaterialMappingWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.LeadCarcassMaterialMappingWhereInput | Prisma.LeadCarcassMaterialMappingWhereInput[]
   vendor_id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
   lead_id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
-  specs_id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
   carcass_type_id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
   carcas_material_id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
   carcass_material_finish_id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
-  is_approved?: Prisma.BoolFilter<"LeadCarcassMaterialMapping"> | boolean
-  approved_at?: Prisma.DateTimeNullableFilter<"LeadCarcassMaterialMapping"> | Date | string | null
-  is_amended?: Prisma.BoolFilter<"LeadCarcassMaterialMapping"> | boolean
-  amended_at?: Prisma.DateTimeNullableFilter<"LeadCarcassMaterialMapping"> | Date | string | null
-  amended_remark?: Prisma.StringNullableFilter<"LeadCarcassMaterialMapping"> | string | null
-  is_deleted_item?: Prisma.BoolFilter<"LeadCarcassMaterialMapping"> | boolean
-  deleted_item_at?: Prisma.DateTimeNullableFilter<"LeadCarcassMaterialMapping"> | Date | string | null
-  deleted_remark?: Prisma.StringNullableFilter<"LeadCarcassMaterialMapping"> | string | null
   created_at?: Prisma.DateTimeFilter<"LeadCarcassMaterialMapping"> | Date | string
   created_by?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
   carcasMaterial?: Prisma.XOR<Prisma.CarcasMaterialMasterScalarRelationFilter, Prisma.CarcasMaterialMasterWhereInput>
@@ -402,7 +306,6 @@ export type LeadCarcassMaterialMappingWhereUniqueInput = Prisma.AtLeast<{
   carcassType?: Prisma.XOR<Prisma.CarcassTypeMasterScalarRelationFilter, Prisma.CarcassTypeMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
-  specification?: Prisma.XOR<Prisma.LeadSpecificationsMasterScalarRelationFilter, Prisma.LeadSpecificationsMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
@@ -410,18 +313,9 @@ export type LeadCarcassMaterialMappingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
-  specs_id?: Prisma.SortOrder
   carcass_type_id?: Prisma.SortOrder
   carcas_material_id?: Prisma.SortOrder
   carcass_material_finish_id?: Prisma.SortOrder
-  is_approved?: Prisma.SortOrder
-  approved_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  is_amended?: Prisma.SortOrder
-  amended_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  amended_remark?: Prisma.SortOrderInput | Prisma.SortOrder
-  is_deleted_item?: Prisma.SortOrder
-  deleted_item_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  deleted_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   _count?: Prisma.LeadCarcassMaterialMappingCountOrderByAggregateInput
@@ -438,38 +332,20 @@ export type LeadCarcassMaterialMappingScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"LeadCarcassMaterialMapping"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"LeadCarcassMaterialMapping"> | number
   lead_id?: Prisma.IntWithAggregatesFilter<"LeadCarcassMaterialMapping"> | number
-  specs_id?: Prisma.IntWithAggregatesFilter<"LeadCarcassMaterialMapping"> | number
   carcass_type_id?: Prisma.IntWithAggregatesFilter<"LeadCarcassMaterialMapping"> | number
   carcas_material_id?: Prisma.IntWithAggregatesFilter<"LeadCarcassMaterialMapping"> | number
   carcass_material_finish_id?: Prisma.IntWithAggregatesFilter<"LeadCarcassMaterialMapping"> | number
-  is_approved?: Prisma.BoolWithAggregatesFilter<"LeadCarcassMaterialMapping"> | boolean
-  approved_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadCarcassMaterialMapping"> | Date | string | null
-  is_amended?: Prisma.BoolWithAggregatesFilter<"LeadCarcassMaterialMapping"> | boolean
-  amended_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadCarcassMaterialMapping"> | Date | string | null
-  amended_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadCarcassMaterialMapping"> | string | null
-  is_deleted_item?: Prisma.BoolWithAggregatesFilter<"LeadCarcassMaterialMapping"> | boolean
-  deleted_item_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadCarcassMaterialMapping"> | Date | string | null
-  deleted_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadCarcassMaterialMapping"> | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"LeadCarcassMaterialMapping"> | Date | string
   created_by?: Prisma.IntWithAggregatesFilter<"LeadCarcassMaterialMapping"> | number
 }
 
 export type LeadCarcassMaterialMappingCreateInput = {
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
   carcasMaterial: Prisma.CarcasMaterialMasterCreateNestedOneWithoutLeadMappingsInput
   carcassMaterialFinish: Prisma.CarcassMaterialFinishMasterCreateNestedOneWithoutLeadMappingsInput
   carcassType: Prisma.CarcassTypeMasterCreateNestedOneWithoutLeadMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadCarcassMaterialMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutCarcassMaterialMappingsInput
-  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutCarcassMaterialMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadCarcassMaterialMappingsInput
 }
 
@@ -477,38 +353,20 @@ export type LeadCarcassMaterialMappingUncheckedCreateInput = {
   id?: number
   vendor_id: number
   lead_id: number
-  specs_id: number
   carcass_type_id: number
   carcas_material_id: number
   carcass_material_finish_id: number
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadCarcassMaterialMappingUpdateInput = {
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carcasMaterial?: Prisma.CarcasMaterialMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   carcassMaterialFinish?: Prisma.CarcassMaterialFinishMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   carcassType?: Prisma.CarcassTypeMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadCarcassMaterialMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCarcassMaterialMappingsNestedInput
-  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutCarcassMaterialMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadCarcassMaterialMappingsNestedInput
 }
 
@@ -516,18 +374,9 @@ export type LeadCarcassMaterialMappingUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcas_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -536,31 +385,14 @@ export type LeadCarcassMaterialMappingCreateManyInput = {
   id?: number
   vendor_id: number
   lead_id: number
-  specs_id: number
   carcass_type_id: number
   carcas_material_id: number
   carcass_material_finish_id: number
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadCarcassMaterialMappingUpdateManyMutationInput = {
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -568,18 +400,9 @@ export type LeadCarcassMaterialMappingUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcas_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -598,18 +421,9 @@ export type LeadCarcassMaterialMappingCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
-  specs_id?: Prisma.SortOrder
   carcass_type_id?: Prisma.SortOrder
   carcas_material_id?: Prisma.SortOrder
   carcass_material_finish_id?: Prisma.SortOrder
-  is_approved?: Prisma.SortOrder
-  approved_at?: Prisma.SortOrder
-  is_amended?: Prisma.SortOrder
-  amended_at?: Prisma.SortOrder
-  amended_remark?: Prisma.SortOrder
-  is_deleted_item?: Prisma.SortOrder
-  deleted_item_at?: Prisma.SortOrder
-  deleted_remark?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -618,7 +432,6 @@ export type LeadCarcassMaterialMappingAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
-  specs_id?: Prisma.SortOrder
   carcass_type_id?: Prisma.SortOrder
   carcas_material_id?: Prisma.SortOrder
   carcass_material_finish_id?: Prisma.SortOrder
@@ -629,18 +442,9 @@ export type LeadCarcassMaterialMappingMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
-  specs_id?: Prisma.SortOrder
   carcass_type_id?: Prisma.SortOrder
   carcas_material_id?: Prisma.SortOrder
   carcass_material_finish_id?: Prisma.SortOrder
-  is_approved?: Prisma.SortOrder
-  approved_at?: Prisma.SortOrder
-  is_amended?: Prisma.SortOrder
-  amended_at?: Prisma.SortOrder
-  amended_remark?: Prisma.SortOrder
-  is_deleted_item?: Prisma.SortOrder
-  deleted_item_at?: Prisma.SortOrder
-  deleted_remark?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -649,18 +453,9 @@ export type LeadCarcassMaterialMappingMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
-  specs_id?: Prisma.SortOrder
   carcass_type_id?: Prisma.SortOrder
   carcas_material_id?: Prisma.SortOrder
   carcass_material_finish_id?: Prisma.SortOrder
-  is_approved?: Prisma.SortOrder
-  approved_at?: Prisma.SortOrder
-  is_amended?: Prisma.SortOrder
-  amended_at?: Prisma.SortOrder
-  amended_remark?: Prisma.SortOrder
-  is_deleted_item?: Prisma.SortOrder
-  deleted_item_at?: Prisma.SortOrder
-  deleted_remark?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -669,7 +464,6 @@ export type LeadCarcassMaterialMappingSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
-  specs_id?: Prisma.SortOrder
   carcass_type_id?: Prisma.SortOrder
   carcas_material_id?: Prisma.SortOrder
   carcass_material_finish_id?: Prisma.SortOrder
@@ -802,48 +596,6 @@ export type LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput 
   deleteMany?: Prisma.LeadCarcassMaterialMappingScalarWhereInput | Prisma.LeadCarcassMaterialMappingScalarWhereInput[]
 }
 
-export type LeadCarcassMaterialMappingCreateNestedManyWithoutSpecificationInput = {
-  create?: Prisma.XOR<Prisma.LeadCarcassMaterialMappingCreateWithoutSpecificationInput, Prisma.LeadCarcassMaterialMappingUncheckedCreateWithoutSpecificationInput> | Prisma.LeadCarcassMaterialMappingCreateWithoutSpecificationInput[] | Prisma.LeadCarcassMaterialMappingUncheckedCreateWithoutSpecificationInput[]
-  connectOrCreate?: Prisma.LeadCarcassMaterialMappingCreateOrConnectWithoutSpecificationInput | Prisma.LeadCarcassMaterialMappingCreateOrConnectWithoutSpecificationInput[]
-  createMany?: Prisma.LeadCarcassMaterialMappingCreateManySpecificationInputEnvelope
-  connect?: Prisma.LeadCarcassMaterialMappingWhereUniqueInput | Prisma.LeadCarcassMaterialMappingWhereUniqueInput[]
-}
-
-export type LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutSpecificationInput = {
-  create?: Prisma.XOR<Prisma.LeadCarcassMaterialMappingCreateWithoutSpecificationInput, Prisma.LeadCarcassMaterialMappingUncheckedCreateWithoutSpecificationInput> | Prisma.LeadCarcassMaterialMappingCreateWithoutSpecificationInput[] | Prisma.LeadCarcassMaterialMappingUncheckedCreateWithoutSpecificationInput[]
-  connectOrCreate?: Prisma.LeadCarcassMaterialMappingCreateOrConnectWithoutSpecificationInput | Prisma.LeadCarcassMaterialMappingCreateOrConnectWithoutSpecificationInput[]
-  createMany?: Prisma.LeadCarcassMaterialMappingCreateManySpecificationInputEnvelope
-  connect?: Prisma.LeadCarcassMaterialMappingWhereUniqueInput | Prisma.LeadCarcassMaterialMappingWhereUniqueInput[]
-}
-
-export type LeadCarcassMaterialMappingUpdateManyWithoutSpecificationNestedInput = {
-  create?: Prisma.XOR<Prisma.LeadCarcassMaterialMappingCreateWithoutSpecificationInput, Prisma.LeadCarcassMaterialMappingUncheckedCreateWithoutSpecificationInput> | Prisma.LeadCarcassMaterialMappingCreateWithoutSpecificationInput[] | Prisma.LeadCarcassMaterialMappingUncheckedCreateWithoutSpecificationInput[]
-  connectOrCreate?: Prisma.LeadCarcassMaterialMappingCreateOrConnectWithoutSpecificationInput | Prisma.LeadCarcassMaterialMappingCreateOrConnectWithoutSpecificationInput[]
-  upsert?: Prisma.LeadCarcassMaterialMappingUpsertWithWhereUniqueWithoutSpecificationInput | Prisma.LeadCarcassMaterialMappingUpsertWithWhereUniqueWithoutSpecificationInput[]
-  createMany?: Prisma.LeadCarcassMaterialMappingCreateManySpecificationInputEnvelope
-  set?: Prisma.LeadCarcassMaterialMappingWhereUniqueInput | Prisma.LeadCarcassMaterialMappingWhereUniqueInput[]
-  disconnect?: Prisma.LeadCarcassMaterialMappingWhereUniqueInput | Prisma.LeadCarcassMaterialMappingWhereUniqueInput[]
-  delete?: Prisma.LeadCarcassMaterialMappingWhereUniqueInput | Prisma.LeadCarcassMaterialMappingWhereUniqueInput[]
-  connect?: Prisma.LeadCarcassMaterialMappingWhereUniqueInput | Prisma.LeadCarcassMaterialMappingWhereUniqueInput[]
-  update?: Prisma.LeadCarcassMaterialMappingUpdateWithWhereUniqueWithoutSpecificationInput | Prisma.LeadCarcassMaterialMappingUpdateWithWhereUniqueWithoutSpecificationInput[]
-  updateMany?: Prisma.LeadCarcassMaterialMappingUpdateManyWithWhereWithoutSpecificationInput | Prisma.LeadCarcassMaterialMappingUpdateManyWithWhereWithoutSpecificationInput[]
-  deleteMany?: Prisma.LeadCarcassMaterialMappingScalarWhereInput | Prisma.LeadCarcassMaterialMappingScalarWhereInput[]
-}
-
-export type LeadCarcassMaterialMappingUncheckedUpdateManyWithoutSpecificationNestedInput = {
-  create?: Prisma.XOR<Prisma.LeadCarcassMaterialMappingCreateWithoutSpecificationInput, Prisma.LeadCarcassMaterialMappingUncheckedCreateWithoutSpecificationInput> | Prisma.LeadCarcassMaterialMappingCreateWithoutSpecificationInput[] | Prisma.LeadCarcassMaterialMappingUncheckedCreateWithoutSpecificationInput[]
-  connectOrCreate?: Prisma.LeadCarcassMaterialMappingCreateOrConnectWithoutSpecificationInput | Prisma.LeadCarcassMaterialMappingCreateOrConnectWithoutSpecificationInput[]
-  upsert?: Prisma.LeadCarcassMaterialMappingUpsertWithWhereUniqueWithoutSpecificationInput | Prisma.LeadCarcassMaterialMappingUpsertWithWhereUniqueWithoutSpecificationInput[]
-  createMany?: Prisma.LeadCarcassMaterialMappingCreateManySpecificationInputEnvelope
-  set?: Prisma.LeadCarcassMaterialMappingWhereUniqueInput | Prisma.LeadCarcassMaterialMappingWhereUniqueInput[]
-  disconnect?: Prisma.LeadCarcassMaterialMappingWhereUniqueInput | Prisma.LeadCarcassMaterialMappingWhereUniqueInput[]
-  delete?: Prisma.LeadCarcassMaterialMappingWhereUniqueInput | Prisma.LeadCarcassMaterialMappingWhereUniqueInput[]
-  connect?: Prisma.LeadCarcassMaterialMappingWhereUniqueInput | Prisma.LeadCarcassMaterialMappingWhereUniqueInput[]
-  update?: Prisma.LeadCarcassMaterialMappingUpdateWithWhereUniqueWithoutSpecificationInput | Prisma.LeadCarcassMaterialMappingUpdateWithWhereUniqueWithoutSpecificationInput[]
-  updateMany?: Prisma.LeadCarcassMaterialMappingUpdateManyWithWhereWithoutSpecificationInput | Prisma.LeadCarcassMaterialMappingUpdateManyWithWhereWithoutSpecificationInput[]
-  deleteMany?: Prisma.LeadCarcassMaterialMappingScalarWhereInput | Prisma.LeadCarcassMaterialMappingScalarWhereInput[]
-}
-
 export type LeadCarcassMaterialMappingCreateNestedManyWithoutCarcassTypeInput = {
   create?: Prisma.XOR<Prisma.LeadCarcassMaterialMappingCreateWithoutCarcassTypeInput, Prisma.LeadCarcassMaterialMappingUncheckedCreateWithoutCarcassTypeInput> | Prisma.LeadCarcassMaterialMappingCreateWithoutCarcassTypeInput[] | Prisma.LeadCarcassMaterialMappingUncheckedCreateWithoutCarcassTypeInput[]
   connectOrCreate?: Prisma.LeadCarcassMaterialMappingCreateOrConnectWithoutCarcassTypeInput | Prisma.LeadCarcassMaterialMappingCreateOrConnectWithoutCarcassTypeInput[]
@@ -971,38 +723,20 @@ export type LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCarcassMaterialF
 }
 
 export type LeadCarcassMaterialMappingCreateWithoutVendorInput = {
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
   carcasMaterial: Prisma.CarcasMaterialMasterCreateNestedOneWithoutLeadMappingsInput
   carcassMaterialFinish: Prisma.CarcassMaterialFinishMasterCreateNestedOneWithoutLeadMappingsInput
   carcassType: Prisma.CarcassTypeMasterCreateNestedOneWithoutLeadMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadCarcassMaterialMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutCarcassMaterialMappingsInput
-  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutCarcassMaterialMappingsInput
 }
 
 export type LeadCarcassMaterialMappingUncheckedCreateWithoutVendorInput = {
   id?: number
   lead_id: number
-  specs_id: number
   carcass_type_id: number
   carcas_material_id: number
   carcass_material_finish_id: number
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1040,37 +774,19 @@ export type LeadCarcassMaterialMappingScalarWhereInput = {
   id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
   vendor_id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
   lead_id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
-  specs_id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
   carcass_type_id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
   carcas_material_id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
   carcass_material_finish_id?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
-  is_approved?: Prisma.BoolFilter<"LeadCarcassMaterialMapping"> | boolean
-  approved_at?: Prisma.DateTimeNullableFilter<"LeadCarcassMaterialMapping"> | Date | string | null
-  is_amended?: Prisma.BoolFilter<"LeadCarcassMaterialMapping"> | boolean
-  amended_at?: Prisma.DateTimeNullableFilter<"LeadCarcassMaterialMapping"> | Date | string | null
-  amended_remark?: Prisma.StringNullableFilter<"LeadCarcassMaterialMapping"> | string | null
-  is_deleted_item?: Prisma.BoolFilter<"LeadCarcassMaterialMapping"> | boolean
-  deleted_item_at?: Prisma.DateTimeNullableFilter<"LeadCarcassMaterialMapping"> | Date | string | null
-  deleted_remark?: Prisma.StringNullableFilter<"LeadCarcassMaterialMapping"> | string | null
   created_at?: Prisma.DateTimeFilter<"LeadCarcassMaterialMapping"> | Date | string
   created_by?: Prisma.IntFilter<"LeadCarcassMaterialMapping"> | number
 }
 
 export type LeadCarcassMaterialMappingCreateWithoutCreatedByInput = {
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
   carcasMaterial: Prisma.CarcasMaterialMasterCreateNestedOneWithoutLeadMappingsInput
   carcassMaterialFinish: Prisma.CarcassMaterialFinishMasterCreateNestedOneWithoutLeadMappingsInput
   carcassType: Prisma.CarcassTypeMasterCreateNestedOneWithoutLeadMappingsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutCarcassMaterialMappingsInput
-  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutCarcassMaterialMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadCarcassMaterialMappingsInput
 }
 
@@ -1078,18 +794,9 @@ export type LeadCarcassMaterialMappingUncheckedCreateWithoutCreatedByInput = {
   id?: number
   vendor_id: number
   lead_id: number
-  specs_id: number
   carcass_type_id: number
   carcas_material_id: number
   carcass_material_finish_id: number
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
 }
 
@@ -1120,38 +827,20 @@ export type LeadCarcassMaterialMappingUpdateManyWithWhereWithoutCreatedByInput =
 }
 
 export type LeadCarcassMaterialMappingCreateWithoutLeadInput = {
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
   carcasMaterial: Prisma.CarcasMaterialMasterCreateNestedOneWithoutLeadMappingsInput
   carcassMaterialFinish: Prisma.CarcassMaterialFinishMasterCreateNestedOneWithoutLeadMappingsInput
   carcassType: Prisma.CarcassTypeMasterCreateNestedOneWithoutLeadMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadCarcassMaterialMappingsCreatedInput
-  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutCarcassMaterialMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadCarcassMaterialMappingsInput
 }
 
 export type LeadCarcassMaterialMappingUncheckedCreateWithoutLeadInput = {
   id?: number
   vendor_id: number
-  specs_id: number
   carcass_type_id: number
   carcas_material_id: number
   carcass_material_finish_id: number
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1182,84 +871,12 @@ export type LeadCarcassMaterialMappingUpdateManyWithWhereWithoutLeadInput = {
   data: Prisma.XOR<Prisma.LeadCarcassMaterialMappingUpdateManyMutationInput, Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadInput>
 }
 
-export type LeadCarcassMaterialMappingCreateWithoutSpecificationInput = {
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
-  created_at?: Date | string
-  carcasMaterial: Prisma.CarcasMaterialMasterCreateNestedOneWithoutLeadMappingsInput
-  carcassMaterialFinish: Prisma.CarcassMaterialFinishMasterCreateNestedOneWithoutLeadMappingsInput
-  carcassType: Prisma.CarcassTypeMasterCreateNestedOneWithoutLeadMappingsInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadCarcassMaterialMappingsCreatedInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutCarcassMaterialMappingsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadCarcassMaterialMappingsInput
-}
-
-export type LeadCarcassMaterialMappingUncheckedCreateWithoutSpecificationInput = {
-  id?: number
-  vendor_id: number
-  lead_id: number
-  carcass_type_id: number
-  carcas_material_id: number
-  carcass_material_finish_id: number
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
-  created_at?: Date | string
-  created_by: number
-}
-
-export type LeadCarcassMaterialMappingCreateOrConnectWithoutSpecificationInput = {
-  where: Prisma.LeadCarcassMaterialMappingWhereUniqueInput
-  create: Prisma.XOR<Prisma.LeadCarcassMaterialMappingCreateWithoutSpecificationInput, Prisma.LeadCarcassMaterialMappingUncheckedCreateWithoutSpecificationInput>
-}
-
-export type LeadCarcassMaterialMappingCreateManySpecificationInputEnvelope = {
-  data: Prisma.LeadCarcassMaterialMappingCreateManySpecificationInput | Prisma.LeadCarcassMaterialMappingCreateManySpecificationInput[]
-  skipDuplicates?: boolean
-}
-
-export type LeadCarcassMaterialMappingUpsertWithWhereUniqueWithoutSpecificationInput = {
-  where: Prisma.LeadCarcassMaterialMappingWhereUniqueInput
-  update: Prisma.XOR<Prisma.LeadCarcassMaterialMappingUpdateWithoutSpecificationInput, Prisma.LeadCarcassMaterialMappingUncheckedUpdateWithoutSpecificationInput>
-  create: Prisma.XOR<Prisma.LeadCarcassMaterialMappingCreateWithoutSpecificationInput, Prisma.LeadCarcassMaterialMappingUncheckedCreateWithoutSpecificationInput>
-}
-
-export type LeadCarcassMaterialMappingUpdateWithWhereUniqueWithoutSpecificationInput = {
-  where: Prisma.LeadCarcassMaterialMappingWhereUniqueInput
-  data: Prisma.XOR<Prisma.LeadCarcassMaterialMappingUpdateWithoutSpecificationInput, Prisma.LeadCarcassMaterialMappingUncheckedUpdateWithoutSpecificationInput>
-}
-
-export type LeadCarcassMaterialMappingUpdateManyWithWhereWithoutSpecificationInput = {
-  where: Prisma.LeadCarcassMaterialMappingScalarWhereInput
-  data: Prisma.XOR<Prisma.LeadCarcassMaterialMappingUpdateManyMutationInput, Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutSpecificationInput>
-}
-
 export type LeadCarcassMaterialMappingCreateWithoutCarcassTypeInput = {
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
   carcasMaterial: Prisma.CarcasMaterialMasterCreateNestedOneWithoutLeadMappingsInput
   carcassMaterialFinish: Prisma.CarcassMaterialFinishMasterCreateNestedOneWithoutLeadMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadCarcassMaterialMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutCarcassMaterialMappingsInput
-  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutCarcassMaterialMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadCarcassMaterialMappingsInput
 }
 
@@ -1267,17 +884,8 @@ export type LeadCarcassMaterialMappingUncheckedCreateWithoutCarcassTypeInput = {
   id?: number
   vendor_id: number
   lead_id: number
-  specs_id: number
   carcas_material_id: number
   carcass_material_finish_id: number
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1309,20 +917,11 @@ export type LeadCarcassMaterialMappingUpdateManyWithWhereWithoutCarcassTypeInput
 }
 
 export type LeadCarcassMaterialMappingCreateWithoutCarcasMaterialInput = {
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
   carcassMaterialFinish: Prisma.CarcassMaterialFinishMasterCreateNestedOneWithoutLeadMappingsInput
   carcassType: Prisma.CarcassTypeMasterCreateNestedOneWithoutLeadMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadCarcassMaterialMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutCarcassMaterialMappingsInput
-  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutCarcassMaterialMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadCarcassMaterialMappingsInput
 }
 
@@ -1330,17 +929,8 @@ export type LeadCarcassMaterialMappingUncheckedCreateWithoutCarcasMaterialInput 
   id?: number
   vendor_id: number
   lead_id: number
-  specs_id: number
   carcass_type_id: number
   carcass_material_finish_id: number
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1372,20 +962,11 @@ export type LeadCarcassMaterialMappingUpdateManyWithWhereWithoutCarcasMaterialIn
 }
 
 export type LeadCarcassMaterialMappingCreateWithoutCarcassMaterialFinishInput = {
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
   carcasMaterial: Prisma.CarcasMaterialMasterCreateNestedOneWithoutLeadMappingsInput
   carcassType: Prisma.CarcassTypeMasterCreateNestedOneWithoutLeadMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadCarcassMaterialMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutCarcassMaterialMappingsInput
-  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutCarcassMaterialMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadCarcassMaterialMappingsInput
 }
 
@@ -1393,17 +974,8 @@ export type LeadCarcassMaterialMappingUncheckedCreateWithoutCarcassMaterialFinis
   id?: number
   vendor_id: number
   lead_id: number
-  specs_id: number
   carcass_type_id: number
   carcas_material_id: number
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -1437,55 +1009,28 @@ export type LeadCarcassMaterialMappingUpdateManyWithWhereWithoutCarcassMaterialF
 export type LeadCarcassMaterialMappingCreateManyVendorInput = {
   id?: number
   lead_id: number
-  specs_id: number
   carcass_type_id: number
   carcas_material_id: number
   carcass_material_finish_id: number
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadCarcassMaterialMappingUpdateWithoutVendorInput = {
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carcasMaterial?: Prisma.CarcasMaterialMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   carcassMaterialFinish?: Prisma.CarcassMaterialFinishMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   carcassType?: Prisma.CarcassTypeMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadCarcassMaterialMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCarcassMaterialMappingsNestedInput
-  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutCarcassMaterialMappingsNestedInput
 }
 
 export type LeadCarcassMaterialMappingUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcas_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1493,18 +1038,9 @@ export type LeadCarcassMaterialMappingUncheckedUpdateWithoutVendorInput = {
 export type LeadCarcassMaterialMappingUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcas_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1513,36 +1049,18 @@ export type LeadCarcassMaterialMappingCreateManyCreatedByInput = {
   id?: number
   vendor_id: number
   lead_id: number
-  specs_id: number
   carcass_type_id: number
   carcas_material_id: number
   carcass_material_finish_id: number
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
 }
 
 export type LeadCarcassMaterialMappingUpdateWithoutCreatedByInput = {
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carcasMaterial?: Prisma.CarcasMaterialMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   carcassMaterialFinish?: Prisma.CarcassMaterialFinishMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   carcassType?: Prisma.CarcassTypeMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCarcassMaterialMappingsNestedInput
-  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutCarcassMaterialMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadCarcassMaterialMappingsNestedInput
 }
 
@@ -1550,18 +1068,9 @@ export type LeadCarcassMaterialMappingUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcas_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1569,73 +1078,37 @@ export type LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByInput =
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcas_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LeadCarcassMaterialMappingCreateManyLeadInput = {
   id?: number
   vendor_id: number
-  specs_id: number
   carcass_type_id: number
   carcas_material_id: number
   carcass_material_finish_id: number
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadCarcassMaterialMappingUpdateWithoutLeadInput = {
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carcasMaterial?: Prisma.CarcasMaterialMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   carcassMaterialFinish?: Prisma.CarcassMaterialFinishMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   carcassType?: Prisma.CarcassTypeMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadCarcassMaterialMappingsCreatedNestedInput
-  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutCarcassMaterialMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadCarcassMaterialMappingsNestedInput
 }
 
 export type LeadCarcassMaterialMappingUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcas_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1643,93 +1116,9 @@ export type LeadCarcassMaterialMappingUncheckedUpdateWithoutLeadInput = {
 export type LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcas_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-}
-
-export type LeadCarcassMaterialMappingCreateManySpecificationInput = {
-  id?: number
-  vendor_id: number
-  lead_id: number
-  carcass_type_id: number
-  carcas_material_id: number
-  carcass_material_finish_id: number
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
-  created_at?: Date | string
-  created_by: number
-}
-
-export type LeadCarcassMaterialMappingUpdateWithoutSpecificationInput = {
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  carcasMaterial?: Prisma.CarcasMaterialMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
-  carcassMaterialFinish?: Prisma.CarcassMaterialFinishMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
-  carcassType?: Prisma.CarcassTypeMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadCarcassMaterialMappingsCreatedNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCarcassMaterialMappingsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadCarcassMaterialMappingsNestedInput
-}
-
-export type LeadCarcassMaterialMappingUncheckedUpdateWithoutSpecificationInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  carcass_type_id?: Prisma.IntFieldUpdateOperationsInput | number
-  carcas_material_id?: Prisma.IntFieldUpdateOperationsInput | number
-  carcass_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-}
-
-export type LeadCarcassMaterialMappingUncheckedUpdateManyWithoutSpecificationInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  carcass_type_id?: Prisma.IntFieldUpdateOperationsInput | number
-  carcas_material_id?: Prisma.IntFieldUpdateOperationsInput | number
-  carcass_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1738,36 +1127,18 @@ export type LeadCarcassMaterialMappingCreateManyCarcassTypeInput = {
   id?: number
   vendor_id: number
   lead_id: number
-  specs_id: number
   carcas_material_id: number
   carcass_material_finish_id: number
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadCarcassMaterialMappingUpdateWithoutCarcassTypeInput = {
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carcasMaterial?: Prisma.CarcasMaterialMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   carcassMaterialFinish?: Prisma.CarcassMaterialFinishMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadCarcassMaterialMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCarcassMaterialMappingsNestedInput
-  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutCarcassMaterialMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadCarcassMaterialMappingsNestedInput
 }
 
@@ -1775,17 +1146,8 @@ export type LeadCarcassMaterialMappingUncheckedUpdateWithoutCarcassTypeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcas_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1794,17 +1156,8 @@ export type LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCarcassTypeInput
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcas_material_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1813,36 +1166,18 @@ export type LeadCarcassMaterialMappingCreateManyCarcasMaterialInput = {
   id?: number
   vendor_id: number
   lead_id: number
-  specs_id: number
   carcass_type_id: number
   carcass_material_finish_id: number
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadCarcassMaterialMappingUpdateWithoutCarcasMaterialInput = {
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carcassMaterialFinish?: Prisma.CarcassMaterialFinishMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   carcassType?: Prisma.CarcassTypeMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadCarcassMaterialMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCarcassMaterialMappingsNestedInput
-  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutCarcassMaterialMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadCarcassMaterialMappingsNestedInput
 }
 
@@ -1850,17 +1185,8 @@ export type LeadCarcassMaterialMappingUncheckedUpdateWithoutCarcasMaterialInput 
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1869,17 +1195,8 @@ export type LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCarcasMaterialIn
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_material_finish_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1888,36 +1205,18 @@ export type LeadCarcassMaterialMappingCreateManyCarcassMaterialFinishInput = {
   id?: number
   vendor_id: number
   lead_id: number
-  specs_id: number
   carcass_type_id: number
   carcas_material_id: number
-  is_approved?: boolean
-  approved_at?: Date | string | null
-  is_amended?: boolean
-  amended_at?: Date | string | null
-  amended_remark?: string | null
-  is_deleted_item?: boolean
-  deleted_item_at?: Date | string | null
-  deleted_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadCarcassMaterialMappingUpdateWithoutCarcassMaterialFinishInput = {
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carcasMaterial?: Prisma.CarcasMaterialMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   carcassType?: Prisma.CarcassTypeMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadCarcassMaterialMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutCarcassMaterialMappingsNestedInput
-  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutCarcassMaterialMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadCarcassMaterialMappingsNestedInput
 }
 
@@ -1925,17 +1224,8 @@ export type LeadCarcassMaterialMappingUncheckedUpdateWithoutCarcassMaterialFinis
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcas_material_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1944,17 +1234,8 @@ export type LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCarcassMaterialF
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcas_material_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_amended?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  amended_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  amended_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_deleted_item?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deleted_item_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1965,18 +1246,9 @@ export type LeadCarcassMaterialMappingSelect<ExtArgs extends runtime.Types.Exten
   id?: boolean
   vendor_id?: boolean
   lead_id?: boolean
-  specs_id?: boolean
   carcass_type_id?: boolean
   carcas_material_id?: boolean
   carcass_material_finish_id?: boolean
-  is_approved?: boolean
-  approved_at?: boolean
-  is_amended?: boolean
-  amended_at?: boolean
-  amended_remark?: boolean
-  is_deleted_item?: boolean
-  deleted_item_at?: boolean
-  deleted_remark?: boolean
   created_at?: boolean
   created_by?: boolean
   carcasMaterial?: boolean | Prisma.CarcasMaterialMasterDefaultArgs<ExtArgs>
@@ -1984,7 +1256,6 @@ export type LeadCarcassMaterialMappingSelect<ExtArgs extends runtime.Types.Exten
   carcassType?: boolean | Prisma.CarcassTypeMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadCarcassMaterialMapping"]>
 
@@ -1992,18 +1263,9 @@ export type LeadCarcassMaterialMappingSelectCreateManyAndReturn<ExtArgs extends 
   id?: boolean
   vendor_id?: boolean
   lead_id?: boolean
-  specs_id?: boolean
   carcass_type_id?: boolean
   carcas_material_id?: boolean
   carcass_material_finish_id?: boolean
-  is_approved?: boolean
-  approved_at?: boolean
-  is_amended?: boolean
-  amended_at?: boolean
-  amended_remark?: boolean
-  is_deleted_item?: boolean
-  deleted_item_at?: boolean
-  deleted_remark?: boolean
   created_at?: boolean
   created_by?: boolean
   carcasMaterial?: boolean | Prisma.CarcasMaterialMasterDefaultArgs<ExtArgs>
@@ -2011,7 +1273,6 @@ export type LeadCarcassMaterialMappingSelectCreateManyAndReturn<ExtArgs extends 
   carcassType?: boolean | Prisma.CarcassTypeMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadCarcassMaterialMapping"]>
 
@@ -2019,18 +1280,9 @@ export type LeadCarcassMaterialMappingSelectUpdateManyAndReturn<ExtArgs extends 
   id?: boolean
   vendor_id?: boolean
   lead_id?: boolean
-  specs_id?: boolean
   carcass_type_id?: boolean
   carcas_material_id?: boolean
   carcass_material_finish_id?: boolean
-  is_approved?: boolean
-  approved_at?: boolean
-  is_amended?: boolean
-  amended_at?: boolean
-  amended_remark?: boolean
-  is_deleted_item?: boolean
-  deleted_item_at?: boolean
-  deleted_remark?: boolean
   created_at?: boolean
   created_by?: boolean
   carcasMaterial?: boolean | Prisma.CarcasMaterialMasterDefaultArgs<ExtArgs>
@@ -2038,7 +1290,6 @@ export type LeadCarcassMaterialMappingSelectUpdateManyAndReturn<ExtArgs extends 
   carcassType?: boolean | Prisma.CarcassTypeMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadCarcassMaterialMapping"]>
 
@@ -2046,30 +1297,20 @@ export type LeadCarcassMaterialMappingSelectScalar = {
   id?: boolean
   vendor_id?: boolean
   lead_id?: boolean
-  specs_id?: boolean
   carcass_type_id?: boolean
   carcas_material_id?: boolean
   carcass_material_finish_id?: boolean
-  is_approved?: boolean
-  approved_at?: boolean
-  is_amended?: boolean
-  amended_at?: boolean
-  amended_remark?: boolean
-  is_deleted_item?: boolean
-  deleted_item_at?: boolean
-  deleted_remark?: boolean
   created_at?: boolean
   created_by?: boolean
 }
 
-export type LeadCarcassMaterialMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "specs_id" | "carcass_type_id" | "carcas_material_id" | "carcass_material_finish_id" | "is_approved" | "approved_at" | "is_amended" | "amended_at" | "amended_remark" | "is_deleted_item" | "deleted_item_at" | "deleted_remark" | "created_at" | "created_by", ExtArgs["result"]["leadCarcassMaterialMapping"]>
+export type LeadCarcassMaterialMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "carcass_type_id" | "carcas_material_id" | "carcass_material_finish_id" | "created_at" | "created_by", ExtArgs["result"]["leadCarcassMaterialMapping"]>
 export type LeadCarcassMaterialMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   carcasMaterial?: boolean | Prisma.CarcasMaterialMasterDefaultArgs<ExtArgs>
   carcassMaterialFinish?: boolean | Prisma.CarcassMaterialFinishMasterDefaultArgs<ExtArgs>
   carcassType?: boolean | Prisma.CarcassTypeMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadCarcassMaterialMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2078,7 +1319,6 @@ export type LeadCarcassMaterialMappingIncludeCreateManyAndReturn<ExtArgs extends
   carcassType?: boolean | Prisma.CarcassTypeMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadCarcassMaterialMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2087,7 +1327,6 @@ export type LeadCarcassMaterialMappingIncludeUpdateManyAndReturn<ExtArgs extends
   carcassType?: boolean | Prisma.CarcassTypeMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
@@ -2099,25 +1338,15 @@ export type $LeadCarcassMaterialMappingPayload<ExtArgs extends runtime.Types.Ext
     carcassType: Prisma.$CarcassTypeMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     lead: Prisma.$LeadMasterPayload<ExtArgs>
-    specification: Prisma.$LeadSpecificationsMasterPayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     vendor_id: number
     lead_id: number
-    specs_id: number
     carcass_type_id: number
     carcas_material_id: number
     carcass_material_finish_id: number
-    is_approved: boolean
-    approved_at: Date | null
-    is_amended: boolean
-    amended_at: Date | null
-    amended_remark: string | null
-    is_deleted_item: boolean
-    deleted_item_at: Date | null
-    deleted_remark: string | null
     created_at: Date
     created_by: number
   }, ExtArgs["result"]["leadCarcassMaterialMapping"]>
@@ -2519,7 +1748,6 @@ export interface Prisma__LeadCarcassMaterialMappingClient<T, Null = never, ExtAr
   carcassType<T extends Prisma.CarcassTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarcassTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__CarcassTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$CarcassTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  specification<T extends Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadSpecificationsMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadSpecificationsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2553,18 +1781,9 @@ export interface LeadCarcassMaterialMappingFieldRefs {
   readonly id: Prisma.FieldRef<"LeadCarcassMaterialMapping", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"LeadCarcassMaterialMapping", 'Int'>
   readonly lead_id: Prisma.FieldRef<"LeadCarcassMaterialMapping", 'Int'>
-  readonly specs_id: Prisma.FieldRef<"LeadCarcassMaterialMapping", 'Int'>
   readonly carcass_type_id: Prisma.FieldRef<"LeadCarcassMaterialMapping", 'Int'>
   readonly carcas_material_id: Prisma.FieldRef<"LeadCarcassMaterialMapping", 'Int'>
   readonly carcass_material_finish_id: Prisma.FieldRef<"LeadCarcassMaterialMapping", 'Int'>
-  readonly is_approved: Prisma.FieldRef<"LeadCarcassMaterialMapping", 'Boolean'>
-  readonly approved_at: Prisma.FieldRef<"LeadCarcassMaterialMapping", 'DateTime'>
-  readonly is_amended: Prisma.FieldRef<"LeadCarcassMaterialMapping", 'Boolean'>
-  readonly amended_at: Prisma.FieldRef<"LeadCarcassMaterialMapping", 'DateTime'>
-  readonly amended_remark: Prisma.FieldRef<"LeadCarcassMaterialMapping", 'String'>
-  readonly is_deleted_item: Prisma.FieldRef<"LeadCarcassMaterialMapping", 'Boolean'>
-  readonly deleted_item_at: Prisma.FieldRef<"LeadCarcassMaterialMapping", 'DateTime'>
-  readonly deleted_remark: Prisma.FieldRef<"LeadCarcassMaterialMapping", 'String'>
   readonly created_at: Prisma.FieldRef<"LeadCarcassMaterialMapping", 'DateTime'>
   readonly created_by: Prisma.FieldRef<"LeadCarcassMaterialMapping", 'Int'>
 }

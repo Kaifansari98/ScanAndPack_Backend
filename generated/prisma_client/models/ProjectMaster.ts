@@ -54,8 +54,8 @@ export type ProjectMasterMinAggregateOutputType = {
   created_at: Date | null
   unique_project_id: string | null
   is_grouping: boolean | null
-  track_trace_status: string | null
   lead_id: number | null
+  track_trace_status: string | null
   track_completed_at: Date | null
   track_started_at: Date | null
   client_address: string | null
@@ -77,8 +77,8 @@ export type ProjectMasterMaxAggregateOutputType = {
   created_at: Date | null
   unique_project_id: string | null
   is_grouping: boolean | null
-  track_trace_status: string | null
   lead_id: number | null
+  track_trace_status: string | null
   track_completed_at: Date | null
   track_started_at: Date | null
   client_address: string | null
@@ -100,8 +100,8 @@ export type ProjectMasterCountAggregateOutputType = {
   created_at: number
   unique_project_id: number
   is_grouping: number
-  track_trace_status: number
   lead_id: number
+  track_trace_status: number
   track_completed_at: number
   track_started_at: number
   client_address: number
@@ -143,8 +143,8 @@ export type ProjectMasterMinAggregateInputType = {
   created_at?: true
   unique_project_id?: true
   is_grouping?: true
-  track_trace_status?: true
   lead_id?: true
+  track_trace_status?: true
   track_completed_at?: true
   track_started_at?: true
   client_address?: true
@@ -166,8 +166,8 @@ export type ProjectMasterMaxAggregateInputType = {
   created_at?: true
   unique_project_id?: true
   is_grouping?: true
-  track_trace_status?: true
   lead_id?: true
+  track_trace_status?: true
   track_completed_at?: true
   track_started_at?: true
   client_address?: true
@@ -189,8 +189,8 @@ export type ProjectMasterCountAggregateInputType = {
   created_at?: true
   unique_project_id?: true
   is_grouping?: true
-  track_trace_status?: true
   lead_id?: true
+  track_trace_status?: true
   track_completed_at?: true
   track_started_at?: true
   client_address?: true
@@ -299,8 +299,8 @@ export type ProjectMasterGroupByOutputType = {
   created_at: Date
   unique_project_id: string
   is_grouping: boolean
-  track_trace_status: string
   lead_id: number | null
+  track_trace_status: string
   track_completed_at: Date | null
   track_started_at: Date | null
   client_address: string | null
@@ -345,8 +345,8 @@ export type ProjectMasterWhereInput = {
   created_at?: Prisma.DateTimeFilter<"ProjectMaster"> | Date | string
   unique_project_id?: Prisma.StringFilter<"ProjectMaster"> | string
   is_grouping?: Prisma.BoolFilter<"ProjectMaster"> | boolean
-  track_trace_status?: Prisma.StringFilter<"ProjectMaster"> | string
   lead_id?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
+  track_trace_status?: Prisma.StringFilter<"ProjectMaster"> | string
   track_completed_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
   track_started_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
   client_address?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
@@ -381,8 +381,8 @@ export type ProjectMasterOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   unique_project_id?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
-  track_trace_status?: Prisma.SortOrder
   lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  track_trace_status?: Prisma.SortOrder
   track_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   track_started_at?: Prisma.SortOrderInput | Prisma.SortOrder
   client_address?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -420,8 +420,8 @@ export type ProjectMasterWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"ProjectMaster"> | Date | string
   unique_project_id?: Prisma.StringFilter<"ProjectMaster"> | string
   is_grouping?: Prisma.BoolFilter<"ProjectMaster"> | boolean
-  track_trace_status?: Prisma.StringFilter<"ProjectMaster"> | string
   lead_id?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
+  track_trace_status?: Prisma.StringFilter<"ProjectMaster"> | string
   track_completed_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
   track_started_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
   client_address?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
@@ -456,8 +456,8 @@ export type ProjectMasterOrderByWithAggregationInput = {
   created_at?: Prisma.SortOrder
   unique_project_id?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
-  track_trace_status?: Prisma.SortOrder
   lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  track_trace_status?: Prisma.SortOrder
   track_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   track_started_at?: Prisma.SortOrderInput | Prisma.SortOrder
   client_address?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -487,8 +487,8 @@ export type ProjectMasterScalarWhereWithAggregatesInput = {
   created_at?: Prisma.DateTimeWithAggregatesFilter<"ProjectMaster"> | Date | string
   unique_project_id?: Prisma.StringWithAggregatesFilter<"ProjectMaster"> | string
   is_grouping?: Prisma.BoolWithAggregatesFilter<"ProjectMaster"> | boolean
-  track_trace_status?: Prisma.StringWithAggregatesFilter<"ProjectMaster"> | string
   lead_id?: Prisma.IntNullableWithAggregatesFilter<"ProjectMaster"> | number | null
+  track_trace_status?: Prisma.StringWithAggregatesFilter<"ProjectMaster"> | string
   track_completed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"ProjectMaster"> | Date | string | null
   track_started_at?: Prisma.DateTimeNullableWithAggregatesFilter<"ProjectMaster"> | Date | string | null
   client_address?: Prisma.StringNullableWithAggregatesFilter<"ProjectMaster"> | string | null
@@ -541,8 +541,8 @@ export type ProjectMasterUncheckedCreateInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  track_trace_status?: string
   lead_id?: number | null
+  track_trace_status?: string
   track_completed_at?: Date | string | null
   track_started_at?: Date | string | null
   client_address?: string | null
@@ -604,8 +604,8 @@ export type ProjectMasterUncheckedUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -636,8 +636,8 @@ export type ProjectMasterCreateManyInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  track_trace_status?: string
   lead_id?: number | null
+  track_trace_status?: string
   track_completed_at?: Date | string | null
   track_started_at?: Date | string | null
   client_address?: string | null
@@ -677,8 +677,8 @@ export type ProjectMasterUncheckedUpdateManyInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -710,8 +710,8 @@ export type ProjectMasterCountOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   unique_project_id?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
-  track_trace_status?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  track_trace_status?: Prisma.SortOrder
   track_completed_at?: Prisma.SortOrder
   track_started_at?: Prisma.SortOrder
   client_address?: Prisma.SortOrder
@@ -742,8 +742,8 @@ export type ProjectMasterMaxOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   unique_project_id?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
-  track_trace_status?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  track_trace_status?: Prisma.SortOrder
   track_completed_at?: Prisma.SortOrder
   track_started_at?: Prisma.SortOrder
   client_address?: Prisma.SortOrder
@@ -765,8 +765,8 @@ export type ProjectMasterMinOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   unique_project_id?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
-  track_trace_status?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  track_trace_status?: Prisma.SortOrder
   track_completed_at?: Prisma.SortOrder
   track_started_at?: Prisma.SortOrder
   client_address?: Prisma.SortOrder
@@ -1129,8 +1129,8 @@ export type ProjectMasterUncheckedCreateWithoutVendorInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  track_trace_status?: string
   lead_id?: number | null
+  track_trace_status?: string
   track_completed_at?: Date | string | null
   track_started_at?: Date | string | null
   client_address?: string | null
@@ -1190,8 +1190,8 @@ export type ProjectMasterScalarWhereInput = {
   created_at?: Prisma.DateTimeFilter<"ProjectMaster"> | Date | string
   unique_project_id?: Prisma.StringFilter<"ProjectMaster"> | string
   is_grouping?: Prisma.BoolFilter<"ProjectMaster"> | boolean
-  track_trace_status?: Prisma.StringFilter<"ProjectMaster"> | string
   lead_id?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
+  track_trace_status?: Prisma.StringFilter<"ProjectMaster"> | string
   track_completed_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
   track_started_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
   client_address?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
@@ -1242,8 +1242,8 @@ export type ProjectMasterUncheckedCreateWithoutCreatedByUserInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  track_trace_status?: string
   lead_id?: number | null
+  track_trace_status?: string
   track_completed_at?: Date | string | null
   track_started_at?: Date | string | null
   client_address?: string | null
@@ -1330,8 +1330,8 @@ export type ProjectMasterUncheckedCreateWithoutDetailsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  track_trace_status?: string
   lead_id?: number | null
+  track_trace_status?: string
   track_completed_at?: Date | string | null
   track_started_at?: Date | string | null
   client_address?: string | null
@@ -1407,8 +1407,8 @@ export type ProjectMasterUncheckedUpdateWithoutDetailsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1468,8 +1468,8 @@ export type ProjectMasterUncheckedCreateWithoutItemsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  track_trace_status?: string
   lead_id?: number | null
+  track_trace_status?: string
   track_completed_at?: Date | string | null
   track_started_at?: Date | string | null
   client_address?: string | null
@@ -1545,8 +1545,8 @@ export type ProjectMasterUncheckedUpdateWithoutItemsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1606,8 +1606,8 @@ export type ProjectMasterUncheckedCreateWithoutBoxesInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  track_trace_status?: string
   lead_id?: number | null
+  track_trace_status?: string
   track_completed_at?: Date | string | null
   track_started_at?: Date | string | null
   client_address?: string | null
@@ -1683,8 +1683,8 @@ export type ProjectMasterUncheckedUpdateWithoutBoxesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1744,8 +1744,8 @@ export type ProjectMasterUncheckedCreateWithoutScanItemsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  track_trace_status?: string
   lead_id?: number | null
+  track_trace_status?: string
   track_completed_at?: Date | string | null
   track_started_at?: Date | string | null
   client_address?: string | null
@@ -1821,8 +1821,8 @@ export type ProjectMasterUncheckedUpdateWithoutScanItemsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1881,8 +1881,8 @@ export type ProjectMasterUncheckedCreateWithoutClientInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  track_trace_status?: string
   lead_id?: number | null
+  track_trace_status?: string
   track_completed_at?: Date | string | null
   track_started_at?: Date | string | null
   client_address?: string | null
@@ -2056,8 +2056,8 @@ export type ProjectMasterUncheckedCreateWithoutCutListInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  track_trace_status?: string
   lead_id?: number | null
+  track_trace_status?: string
   track_completed_at?: Date | string | null
   track_started_at?: Date | string | null
   client_address?: string | null
@@ -2133,8 +2133,8 @@ export type ProjectMasterUncheckedUpdateWithoutCutListInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2194,8 +2194,8 @@ export type ProjectMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  track_trace_status?: string
   lead_id?: number | null
+  track_trace_status?: string
   track_completed_at?: Date | string | null
   track_started_at?: Date | string | null
   client_address?: string | null
@@ -2271,8 +2271,8 @@ export type ProjectMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2332,8 +2332,8 @@ export type ProjectMasterUncheckedCreateWithoutDefectedItemsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  track_trace_status?: string
   lead_id?: number | null
+  track_trace_status?: string
   track_completed_at?: Date | string | null
   track_started_at?: Date | string | null
   client_address?: string | null
@@ -2409,8 +2409,8 @@ export type ProjectMasterUncheckedUpdateWithoutDefectedItemsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2470,8 +2470,8 @@ export type ProjectMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  track_trace_status?: string
   lead_id?: number | null
+  track_trace_status?: string
   track_completed_at?: Date | string | null
   track_started_at?: Date | string | null
   client_address?: string | null
@@ -2547,8 +2547,8 @@ export type ProjectMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2608,8 +2608,8 @@ export type ProjectMasterUncheckedCreateWithoutBox_info_valuesInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  track_trace_status?: string
   lead_id?: number | null
+  track_trace_status?: string
   track_completed_at?: Date | string | null
   track_started_at?: Date | string | null
   client_address?: string | null
@@ -2685,8 +2685,8 @@ export type ProjectMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2715,8 +2715,8 @@ export type ProjectMasterCreateManyVendorInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  track_trace_status?: string
   lead_id?: number | null
+  track_trace_status?: string
   track_completed_at?: Date | string | null
   track_started_at?: Date | string | null
   client_address?: string | null
@@ -2767,8 +2767,8 @@ export type ProjectMasterUncheckedUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2798,8 +2798,8 @@ export type ProjectMasterUncheckedUpdateManyWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2820,8 +2820,8 @@ export type ProjectMasterCreateManyCreatedByUserInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  track_trace_status?: string
   lead_id?: number | null
+  track_trace_status?: string
   track_completed_at?: Date | string | null
   track_started_at?: Date | string | null
   client_address?: string | null
@@ -2872,8 +2872,8 @@ export type ProjectMasterUncheckedUpdateWithoutCreatedByUserInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2903,8 +2903,8 @@ export type ProjectMasterUncheckedUpdateManyWithoutCreatedByUserInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2925,8 +2925,8 @@ export type ProjectMasterCreateManyClientInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  track_trace_status?: string
   lead_id?: number | null
+  track_trace_status?: string
   track_completed_at?: Date | string | null
   track_started_at?: Date | string | null
   client_address?: string | null
@@ -2977,8 +2977,8 @@ export type ProjectMasterUncheckedUpdateWithoutClientInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3008,8 +3008,8 @@ export type ProjectMasterUncheckedUpdateManyWithoutClientInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3239,8 +3239,8 @@ export type ProjectMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   created_at?: boolean
   unique_project_id?: boolean
   is_grouping?: boolean
-  track_trace_status?: boolean
   lead_id?: boolean
+  track_trace_status?: boolean
   track_completed_at?: boolean
   track_started_at?: boolean
   client_address?: boolean
@@ -3276,8 +3276,8 @@ export type ProjectMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   created_at?: boolean
   unique_project_id?: boolean
   is_grouping?: boolean
-  track_trace_status?: boolean
   lead_id?: boolean
+  track_trace_status?: boolean
   track_completed_at?: boolean
   track_started_at?: boolean
   client_address?: boolean
@@ -3303,8 +3303,8 @@ export type ProjectMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   created_at?: boolean
   unique_project_id?: boolean
   is_grouping?: boolean
-  track_trace_status?: boolean
   lead_id?: boolean
+  track_trace_status?: boolean
   track_completed_at?: boolean
   track_started_at?: boolean
   client_address?: boolean
@@ -3330,8 +3330,8 @@ export type ProjectMasterSelectScalar = {
   created_at?: boolean
   unique_project_id?: boolean
   is_grouping?: boolean
-  track_trace_status?: boolean
   lead_id?: boolean
+  track_trace_status?: boolean
   track_completed_at?: boolean
   track_started_at?: boolean
   client_address?: boolean
@@ -3343,7 +3343,7 @@ export type ProjectMasterSelectScalar = {
   packing_type?: boolean
 }
 
-export type ProjectMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_name" | "vendor_id" | "client_id" | "created_by" | "project_status" | "created_at" | "unique_project_id" | "is_grouping" | "track_trace_status" | "lead_id" | "track_completed_at" | "track_started_at" | "client_address" | "client_contact_no" | "client_name" | "order_no" | "updated_at" | "updated_by" | "packing_type", ExtArgs["result"]["projectMaster"]>
+export type ProjectMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_name" | "vendor_id" | "client_id" | "created_by" | "project_status" | "created_at" | "unique_project_id" | "is_grouping" | "lead_id" | "track_trace_status" | "track_completed_at" | "track_started_at" | "client_address" | "client_contact_no" | "client_name" | "order_no" | "updated_at" | "updated_by" | "packing_type", ExtArgs["result"]["projectMaster"]>
 export type ProjectMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   box_info_values?: boolean | Prisma.ProjectMaster$box_info_valuesArgs<ExtArgs>
   boxes?: boolean | Prisma.ProjectMaster$boxesArgs<ExtArgs>
@@ -3400,8 +3400,8 @@ export type $ProjectMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     created_at: Date
     unique_project_id: string
     is_grouping: boolean
-    track_trace_status: string
     lead_id: number | null
+    track_trace_status: string
     track_completed_at: Date | null
     track_started_at: Date | null
     client_address: string | null
@@ -3856,8 +3856,8 @@ export interface ProjectMasterFieldRefs {
   readonly created_at: Prisma.FieldRef<"ProjectMaster", 'DateTime'>
   readonly unique_project_id: Prisma.FieldRef<"ProjectMaster", 'String'>
   readonly is_grouping: Prisma.FieldRef<"ProjectMaster", 'Boolean'>
-  readonly track_trace_status: Prisma.FieldRef<"ProjectMaster", 'String'>
   readonly lead_id: Prisma.FieldRef<"ProjectMaster", 'Int'>
+  readonly track_trace_status: Prisma.FieldRef<"ProjectMaster", 'String'>
   readonly track_completed_at: Prisma.FieldRef<"ProjectMaster", 'DateTime'>
   readonly track_started_at: Prisma.FieldRef<"ProjectMaster", 'DateTime'>
   readonly client_address: Prisma.FieldRef<"ProjectMaster", 'String'>
