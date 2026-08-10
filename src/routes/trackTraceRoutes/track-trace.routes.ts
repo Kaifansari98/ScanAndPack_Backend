@@ -2,6 +2,7 @@ import { Router } from "express";
 import multer from "multer";
 import os from "os";
 
+// Trigger dev server restart after service update
 import { getAllProjectsTrackTrace } from "../../controllers/trackTraceController/project.controller";
 
 import {
@@ -38,6 +39,31 @@ import {
   createProjectCategory,
   updateProjectCategory,
   toggleProjectCategoryStatus,
+  getBrandMasters,
+  createBrandMaster,
+  updateBrandMaster,
+  toggleBrandMasterStatus,
+  deleteBrandMaster,
+  getGradeMasters,
+  createGradeMaster,
+  updateGradeMaster,
+  toggleGradeMasterStatus,
+  deleteGradeMaster,
+  getFinishMasters,
+  createFinishMaster,
+  updateFinishMaster,
+  toggleFinishMasterStatus,
+  deleteFinishMaster,
+  getTypeMasters,
+  createTypeMaster,
+  updateTypeMaster,
+  toggleTypeMasterStatus,
+  deleteTypeMaster,
+  getCoreProductMasters,
+  createCoreProductMaster,
+  updateCoreProductMaster,
+  toggleCoreProductMasterStatus,
+  deleteCoreProductMaster,
   unsetBoxFromMapping,
   markBoxFactoryOut,
   markBoxSiteIn,
@@ -50,6 +76,8 @@ import {
   getDefectSummary,
   getPendingDefects,
   getResolvedDefects,
+  uploadBrandLogo,
+  createUnitMaster,
 } from "../../controllers/trackTraceController/trackTrace.controller";
 
 import {
@@ -65,6 +93,7 @@ import { uploadMachineExcel } from "../../../src/controllers/trackTraceControlle
 
 const router = Router();
 const uploadDisk = multer({ dest: os.tmpdir() });
+const uploadMemory = multer({ storage: multer.memoryStorage(), limits: { fileSize: 2 * 1024 * 1024 } });
 
 router.get("/project/:vendor_id", getAllProjectsTrackTrace);
 router.get("/get-filter-track-trace/:vendor_id", get_filter_track_trace);
@@ -138,6 +167,46 @@ router.get("/project-categories/:vendor_id", getProjectCategories);
 router.post("/project-categories", createProjectCategory);
 router.put("/project-categories/:id", updateProjectCategory);
 router.patch("/project-categories/:id/status", toggleProjectCategoryStatus);
+
+// Brand Master
+router.get("/brands/:vendor_id", getBrandMasters);
+router.post("/brands/upload-logo", uploadMemory.single("logo"), uploadBrandLogo);
+router.post("/brands", createBrandMaster);
+router.put("/brands/:id", updateBrandMaster);
+router.patch("/brands/:id/status", toggleBrandMasterStatus);
+router.delete("/brands/:id", deleteBrandMaster);
+
+// Grade Master
+router.get("/grades/:vendor_id", getGradeMasters);
+router.post("/grades", createGradeMaster);
+router.put("/grades/:id", updateGradeMaster);
+router.patch("/grades/:id/status", toggleGradeMasterStatus);
+router.delete("/grades/:id", deleteGradeMaster);
+
+// Finish Master
+router.get("/finishes/:vendor_id", getFinishMasters);
+router.post("/finishes", createFinishMaster);
+router.put("/finishes/:id", updateFinishMaster);
+router.patch("/finishes/:id/status", toggleFinishMasterStatus);
+router.delete("/finishes/:id", deleteFinishMaster);
+
+// Type Master
+router.get("/types/:vendor_id", getTypeMasters);
+router.post("/types", createTypeMaster);
+router.put("/types/:id", updateTypeMaster);
+router.patch("/types/:id/status", toggleTypeMasterStatus);
+router.delete("/types/:id", deleteTypeMaster);
+
+// Core Product Master
+router.get("/core-products/:vendor_id", getCoreProductMasters);
+router.post("/core-products", createCoreProductMaster);
+router.put("/core-products/:id", updateCoreProductMaster);
+router.patch("/core-products/:id/status", toggleCoreProductMasterStatus);
+router.delete("/core-products/:id", deleteCoreProductMaster);
+
+// Units Master
+router.post("/units", createUnitMaster);
+
 
 router.patch("/boxes/:box_id/factory-out", markBoxFactoryOut);
 router.patch("/boxes/:box_id/site-in", markBoxSiteIn);

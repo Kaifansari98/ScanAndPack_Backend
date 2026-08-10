@@ -9,6 +9,15 @@
 * 🟢 You can import this file directly.
 */
 
+export const MaterialSupplyType = {
+  Frankvin: 'Frankvin',
+  Client: 'Client',
+  Shared: 'Shared'
+} as const
+
+export type MaterialSupplyType = (typeof MaterialSupplyType)[keyof typeof MaterialSupplyType]
+
+
 export const BoxInfoFieldType = {
   TEXT: 'TEXT',
   NUMBER: 'NUMBER',

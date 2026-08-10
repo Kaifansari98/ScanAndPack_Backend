@@ -4,6 +4,7 @@ export interface ProductTypeInput {
   vendor_id: number;
   type: string;
   tag?: string;
+  is_b2b?: boolean;
 }
 
 export interface ProductType {

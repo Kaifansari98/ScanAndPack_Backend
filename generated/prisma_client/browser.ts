@@ -98,6 +98,11 @@ export type VendorTokens = Prisma.VendorTokensModel
  */
 export type ClientMaster = Prisma.ClientMasterModel
 /**
+ * Model ClientBankDetail
+ * 
+ */
+export type ClientBankDetail = Prisma.ClientBankDetailModel
+/**
  * Model ClientTypeMaster
  * 
  */
@@ -162,6 +167,21 @@ export type LeadProductMapping = Prisma.LeadProductMappingModel
  * 
  */
 export type ProductTypeMaster = Prisma.ProductTypeMasterModel
+/**
+ * Model ProcessBriefMaster
+ * 
+ */
+export type ProcessBriefMaster = Prisma.ProcessBriefMasterModel
+/**
+ * Model LeadProcessBriefMapping
+ * 
+ */
+export type LeadProcessBriefMapping = Prisma.LeadProcessBriefMappingModel
+/**
+ * Model LeadRequirementMaterialMapping
+ * 
+ */
+export type LeadRequirementMaterialMapping = Prisma.LeadRequirementMaterialMappingModel
 /**
  * Model CarcassTypeMaster
  * 
@@ -757,6 +777,31 @@ export type BrandMaster = Prisma.BrandMasterModel
  * 
  */
 export type ProductMaster = Prisma.ProductMasterModel
+/**
+ * Model CoreProductMaster
+ * 
+ */
+export type CoreProductMaster = Prisma.CoreProductMasterModel
+/**
+ * Model GradeMaster
+ * 
+ */
+export type GradeMaster = Prisma.GradeMasterModel
+/**
+ * Model FinishMaster
+ * 
+ */
+export type FinishMaster = Prisma.FinishMasterModel
+/**
+ * Model TypeMaster
+ * 
+ */
+export type TypeMaster = Prisma.TypeMasterModel
+/**
+ * Model ItemTypeMaster
+ * 
+ */
+export type ItemTypeMaster = Prisma.ItemTypeMasterModel
 /**
  * Model PurchaseIntentMaster
  * 

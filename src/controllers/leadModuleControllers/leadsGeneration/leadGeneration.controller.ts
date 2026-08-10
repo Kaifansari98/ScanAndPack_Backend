@@ -1637,7 +1637,8 @@ export class LeadController {
     try {
       const leadId = Number(getParam(req.params.leadId));
       const updatedBy = Number(getParam(req.params.userId));
-      const productTypeId = Number(req.body.product_type_id);
+      const rawProductTypeIds = req.body.product_type_ids;
+      const rawProductTypeId = req.body.product_type_id;
       const productTypeName = req.body.product_type;
 
       if (!updatedBy || isNaN(updatedBy)) {
@@ -1654,18 +1655,6 @@ export class LeadController {
         return;
       }
 
-      if ((!productTypeId || isNaN(productTypeId)) && !productTypeName) {
-        res
-          .status(400)
-          .json(
-            ApiResponse.error(
-              "product_type_id or product_type is required",
-              400,
-            ),
-          );
-        return;
-      }
-
       const lead = await prisma.leadMaster.findFirst({
         where: { id: leadId, is_deleted: false },
         select: { id: true, vendor_id: true, account_id: true },
@@ -1676,9 +1665,19 @@ export class LeadController {
         return;
       }
 
-      let resolvedProductTypeId = productTypeId;
+      let targetTypeIds: number[] = [];
 
-      if (!resolvedProductTypeId || isNaN(resolvedProductTypeId)) {
+      if (Array.isArray(rawProductTypeIds) && rawProductTypeIds.length > 0) {
+        targetTypeIds = Array.from(
+          new Set(
+            rawProductTypeIds
+              .map((id: any) => Number(id))
+              .filter((id: number) => !isNaN(id) && id > 0),
+          ),
+        );
+      } else if (rawProductTypeId && !isNaN(Number(rawProductTypeId))) {
+        targetTypeIds = [Number(rawProductTypeId)];
+      } else if (productTypeName) {
         const productType = await prisma.productTypeMaster.findFirst({
           where: {
             vendor_id: lead.vendor_id,
@@ -1687,17 +1686,24 @@ export class LeadController {
           select: { id: true },
         });
 
-        if (!productType) {
-          res
-            .status(404)
-            .json(ApiResponse.error("Product type not found", 404));
-          return;
+        if (productType) {
+          targetTypeIds = [productType.id];
         }
-
-        resolvedProductTypeId = productType.id;
       }
 
-      let mapping = await prisma.leadProductMapping.findFirst({
+      if (targetTypeIds.length === 0) {
+        res
+          .status(400)
+          .json(
+            ApiResponse.error(
+              "At least one valid product_type_id, product_type_ids array, or product_type is required",
+              400,
+            ),
+          );
+        return;
+      }
+
+      const existingMappings = await prisma.leadProductMapping.findMany({
         where: {
           lead_id: leadId,
           vendor_id: lead.vendor_id,
@@ -1705,71 +1711,60 @@ export class LeadController {
         select: { id: true, product_type_id: true },
       });
 
-      if (!mapping) {
-        // No mapping yet — create one (first-time product type assignment)
-        mapping = await prisma.leadProductMapping.create({
-          data: {
-            lead_id: leadId,
-            vendor_id: lead.vendor_id,
-            account_id: lead.account_id!,
-            product_type_id: resolvedProductTypeId,
-            created_by: updatedBy,
-          },
-          select: { id: true, product_type_id: true },
-        });
-      } else {
-        await prisma.leadProductMapping.update({
-          where: { id: mapping.id },
-          data: {
-            product_type_id: resolvedProductTypeId,
-          },
+      const existingTypeIds = existingMappings.map((m) => m.product_type_id);
+
+      // Delete mappings no longer present in targetTypeIds
+      const idsToDelete = existingMappings
+        .filter((m) => !targetTypeIds.includes(m.product_type_id))
+        .map((m) => m.id);
+
+      if (idsToDelete.length > 0) {
+        await prisma.leadProductMapping.deleteMany({
+          where: { id: { in: idsToDelete } },
         });
       }
 
+      // Add mappings for newly selected type IDs
+      const idsToAdd = targetTypeIds.filter(
+        (typeId) => !existingTypeIds.includes(typeId),
+      );
+
+      if (idsToAdd.length > 0) {
+        await prisma.leadProductMapping.createMany({
+          data: idsToAdd.map((typeId) => ({
+            lead_id: leadId,
+            vendor_id: lead.vendor_id,
+            account_id: lead.account_id!,
+            product_type_id: typeId,
+            created_by: updatedBy,
+          })),
+        });
+      }
+
+      const primaryTypeId = targetTypeIds[0];
       await prisma.leadProductStructureInstance.updateMany({
         where: {
           lead_id: leadId,
           vendor_id: lead.vendor_id,
         },
         data: {
-          product_type_id: resolvedProductTypeId,
+          product_type_id: primaryTypeId,
         },
       });
 
-      if (mapping.product_type_id !== resolvedProductTypeId) {
-        const [oldType, newType] = await Promise.all([
-          mapping.product_type_id
-            ? prisma.productTypeMaster.findFirst({
-              where: {
-                id: mapping.product_type_id,
-                vendor_id: lead.vendor_id,
-              },
-              select: { type: true },
-            })
-            : Promise.resolve(null),
-          prisma.productTypeMaster.findFirst({
-            where: {
-              id: resolvedProductTypeId,
-              vendor_id: lead.vendor_id,
-            },
-            select: { type: true },
-          }),
-        ]);
-
-        const oldLabel = oldType?.type || "Unknown";
-        const newLabel = newType?.type || "Unknown";
-        const actionMessage = `Product Type has been updated from "${oldLabel}" to "${newLabel}".`;
-
-        await createLeadLog(prisma, {
-          vendor_id: lead.vendor_id,
+      const updatedMappings = await prisma.leadProductMapping.findMany({
+        where: {
           lead_id: leadId,
-          account_id: lead.account_id!,
-          action: actionMessage,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-          created_at: new Date(),
-        });
-      }
+          vendor_id: lead.vendor_id,
+        },
+        select: {
+          id: true,
+          product_type_id: true,
+          productType: {
+            select: { id: true, type: true, tag: true },
+          },
+        },
+      });
 
       res.status(200).json(
         ApiResponse.success(
@@ -1777,14 +1772,73 @@ export class LeadController {
             lead: {
               id: leadId,
             },
-            product_type_id: resolvedProductTypeId,
+            product_type_ids: targetTypeIds,
+            product_type_id: primaryTypeId,
+            productMappings: updatedMappings,
           },
-          "Product type updated successfully",
+          "Product type(s) updated successfully",
           200,
         ),
       );
     } catch (error: any) {
       console.error("[ERROR] Failed to update product type:", error.message);
+      res.status(500).json(ApiResponse.error(error.message, 500));
+    }
+  }
+
+  /**
+   * Update Approximate Budget and Project Status for a Lead Requirement Type
+   */
+  async updateLeadRequirementMeta(req: Request, res: Response): Promise<void> {
+    try {
+      const { lead_id, vendor_id, product_type_id, approximate_budget, project_status } = req.body;
+
+      if (!lead_id || !vendor_id || !product_type_id) {
+        res
+          .status(400)
+          .json(ApiResponse.error("lead_id, vendor_id, and product_type_id are required", 400));
+        return;
+      }
+
+      const existingMapping = await prisma.leadProductMapping.findFirst({
+        where: {
+          lead_id: Number(lead_id),
+          vendor_id: Number(vendor_id),
+          product_type_id: Number(product_type_id),
+        },
+      });
+
+      if (!existingMapping) {
+        res
+          .status(404)
+          .json(ApiResponse.error("Requirement type mapping not found for this lead", 404));
+        return;
+      }
+
+      const budgetVal = approximate_budget != null && approximate_budget !== "" ? Number(approximate_budget) : null;
+      const statusVal = project_status ? String(project_status).trim() : null;
+
+      const updated = await prisma.leadProductMapping.update({
+        where: { id: existingMapping.id },
+        data: {
+          approximate_budget: budgetVal != null && !isNaN(budgetVal) ? budgetVal : null,
+          project_status: statusVal,
+        },
+        include: {
+          productType: true,
+        },
+      });
+
+      if (statusVal) {
+        await prisma.leadMaster.update({
+          where: { id: Number(lead_id) },
+          data: { project_status: statusVal },
+        });
+      }
+
+      res.status(200).json(ApiResponse.success(updated, "Requirement details updated successfully", 200));
+    } catch (error: any) {
+      console.error("[ERROR] Failed to update lead requirement meta:", error.message);
       res.status(500).json(ApiResponse.error(error.message, 500));
     }
   }

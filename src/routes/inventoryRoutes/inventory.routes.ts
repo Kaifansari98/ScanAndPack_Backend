@@ -43,7 +43,6 @@ const router = Router();
 // ── Inventory / Products ──────────────────────────────────────────────────────
 router.post("/sync-cadbid-products",                      syncCadbidProduct);
 router.get("/products/:vendor_id/filters",                getProductFilters);
-router.get("/products/:vendor_id",                        getProductMaster);
 router.get("/products/:vendor_id/:product_id/history",    getProductPurchaseHistory);
 
 // ── Purchase Intents ──────────────────────────────────────────────────────────

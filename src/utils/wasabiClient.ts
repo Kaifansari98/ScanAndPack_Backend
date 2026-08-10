@@ -39,15 +39,26 @@ export const generateSignedUrl = async (
   originalName?: string
 ) => {
   let contentDisposition = disposition as string;
-  if (originalName) {
+  if (originalName && disposition === "attachment") {
     const safeName = originalName.replace(/"/g, '');
     contentDisposition = `${disposition}; filename="${safeName}"`;
   }
+
+  let contentType: string | undefined = undefined;
+  const ext = (originalName || key).split(".").pop()?.toLowerCase();
+  if (ext === "pdf") contentType = "application/pdf";
+  else if (ext === "png") contentType = "image/png";
+  else if (ext === "jpg" || ext === "jpeg") contentType = "image/jpeg";
+  else if (ext === "webp") contentType = "image/webp";
+  else if (ext === "gif") contentType = "image/gif";
+  else if (ext === "svg") contentType = "image/svg+xml";
+  else if (ext === "txt") contentType = "text/plain";
 
   const command = new GetObjectCommand({
     Bucket: process.env.WASABI_BUCKET_NAME!,
     Key: key,
     ResponseContentDisposition: contentDisposition,
+    ResponseContentType: contentType,
   });
 
   return await getSignedUrl(wasabi, command, { expiresIn });
@@ -155,6 +166,27 @@ export const uploadToWasabiCompanyVendorDocument = async (
   );
 
   return sysName; // returns key
+};
+
+export const uploadToWasabiClientBankDocument = async (
+  buffer: Buffer,
+  vendorId: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop()?.toLowerCase() || "";
+  const sysName = `client_bank_documents/${vendorId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: contentType || "application/octet-stream",
+    }),
+  );
+
+  return sysName;
 };
 
 export const uploadToWasabStage1DesingsFile = async (

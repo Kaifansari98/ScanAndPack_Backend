@@ -3,6 +3,7 @@ import path from "path";
 import fs from "fs";
 import * as trackTraceService from "../../services/trackTraceServices/trackTrace.service";
 import * as machineService from "../../services/machineService/machineService.service";
+import { generateSignedUrl, uploadToWasabiCompanyVendorDocument } from "../../utils/wasabiClient";
 
 import { ApiResponse } from "../../../src/utils/apiResponse";
 import {
@@ -859,13 +860,14 @@ export const getProjectCategoryTypes = async (_req: Request, res: Response) => {
 
 // Controller
 export const createProjectCategory = async (_req: Request, res: Response) => {
-  const { vendor_id, category_name, type_ids, created_by } = _req.body;
+  const { vendor_id, category_name, type_ids, created_by, parent_id } = _req.body;
 
   const serviceResponse = await trackTraceService.createProjectCategory(
     Number(vendor_id),
     String(category_name),
     Array.isArray(type_ids) ? type_ids.map(Number) : [],
     Number(created_by),
+    parent_id ? Number(parent_id) : null
   );
 
   if (serviceResponse.status == 0) {
@@ -879,7 +881,7 @@ export const createProjectCategory = async (_req: Request, res: Response) => {
 };
 
 export const updateProjectCategory = async (_req: Request, res: Response) => {
-  const { id, vendor_id, category_name, type_ids, updated_by, status } =
+  const { id, vendor_id, category_name, type_ids, updated_by, status, parent_id } =
     _req.body;
 
   const serviceResponse = await trackTraceService.updateProjectCategory(
@@ -889,6 +891,7 @@ export const updateProjectCategory = async (_req: Request, res: Response) => {
     status as "Yes" | "No",
     Array.isArray(type_ids) ? type_ids.map(Number) : [],
     Number(updated_by),
+    parent_id ? Number(parent_id) : null
   );
 
   if (serviceResponse.status == 0) {
@@ -899,6 +902,54 @@ export const updateProjectCategory = async (_req: Request, res: Response) => {
   return res
     .status(200)
     .json(ApiResponse.success(serviceResponse.data, "", 200));
+};
+
+// Brand Master Controllers
+export const getBrandMasters = async (req: Request, res: Response) => {
+  const vendor_id = Number(req.params.vendor_id);
+  const result = await trackTraceService.getBrandMasters(vendor_id);
+  return res.status(200).json(result.status ? ApiResponse.success(result.data, result.message, 200) : ApiResponse.error(result.message, 400));
+};
+
+export const createBrandMaster = async (req: Request, res: Response) => {
+  const { vendor_id, brand_name, brand_short_name, logo, created_by } = req.body;
+  const result = await trackTraceService.createBrandMaster(
+    Number(vendor_id),
+    String(brand_name),
+    brand_short_name,
+    logo,
+    created_by ? Number(created_by) : null
+  );
+  return res.status(200).json(result.status ? ApiResponse.success(result.data, result.message, 200) : ApiResponse.error(result.message, 400));
+};
+
+export const updateBrandMaster = async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const { vendor_id, brand_name, brand_short_name, logo, is_active, updated_by } = req.body;
+  const result = await trackTraceService.updateBrandMaster(
+    id,
+    Number(vendor_id),
+    String(brand_name),
+    brand_short_name,
+    logo,
+    is_active,
+    updated_by ? Number(updated_by) : null
+  );
+  return res.status(200).json(result.status ? ApiResponse.success(result.data, result.message, 200) : ApiResponse.error(result.message, 400));
+};
+
+export const toggleBrandMasterStatus = async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const { is_active } = req.body;
+  const result = await trackTraceService.toggleBrandMasterStatus(id, Boolean(is_active));
+  return res.status(200).json(result.status ? ApiResponse.success(result.data, result.message, 200) : ApiResponse.error(result.message, 400));
+};
+
+export const deleteBrandMaster = async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const vendor_id = Number(req.body.vendor_id || req.query.vendor_id || 0);
+  const result = await trackTraceService.deleteBrandMaster(id, vendor_id);
+  return res.status(200).json(result.status ? ApiResponse.success(result.data, result.message, 200) : ApiResponse.error(result.message, 400));
 };
 
 export const toggleProjectCategoryStatus = async (
@@ -1230,3 +1281,176 @@ export const getResolvedDefects = async (req: Request, res: Response) => {
       .json(ApiResponse.error("Internal server error", 500));
   }
 };
+
+// ─── Grade Master Controllers ──────────────────────────────────────────────────
+export const getGradeMasters = async (req: Request, res: Response) => {
+  const vendor_id = Number(req.params.vendor_id);
+  if (isNaN(vendor_id)) return res.status(400).json({ message: "Invalid vendor_id" });
+  const result = await trackTraceService.getGradeMasters(vendor_id);
+  return res.status(result.status === 1 ? 200 : 500).json(result);
+};
+export const createGradeMaster = async (req: Request, res: Response) => {
+  const { vendor_id, grade_name, created_by } = req.body;
+  if (!vendor_id || !grade_name) return res.status(400).json({ message: "vendor_id and grade_name are required" });
+  const result = await trackTraceService.createGradeMaster(Number(vendor_id), grade_name, created_by);
+  return res.status(result.status === 1 ? 201 : 400).json(result);
+};
+export const updateGradeMaster = async (req: Request, res: Response) => {
+  const { grade_name, updated_by } = req.body;
+  const id = Number(req.params.id);
+  if (!grade_name) return res.status(400).json({ message: "grade_name is required" });
+  const result = await trackTraceService.updateGradeMaster(id, grade_name, updated_by);
+  return res.status(result.status === 1 ? 200 : 400).json(result);
+};
+export const toggleGradeMasterStatus = async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const { is_active } = req.body;
+  const result = await trackTraceService.toggleGradeMasterStatus(id, Boolean(is_active));
+  return res.status(result.status === 1 ? 200 : 400).json(result);
+};
+export const deleteGradeMaster = async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const result = await trackTraceService.deleteGradeMaster(id);
+  return res.status(result.status === 1 ? 200 : 400).json(result);
+};
+
+// ─── Finish Master Controllers ─────────────────────────────────────────────────
+export const getFinishMasters = async (req: Request, res: Response) => {
+  const vendor_id = Number(req.params.vendor_id);
+  if (isNaN(vendor_id)) return res.status(400).json({ message: "Invalid vendor_id" });
+  const result = await trackTraceService.getFinishMasters(vendor_id);
+  return res.status(result.status === 1 ? 200 : 500).json(result);
+};
+export const createFinishMaster = async (req: Request, res: Response) => {
+  const { vendor_id, finish_name, created_by } = req.body;
+  if (!vendor_id || !finish_name) return res.status(400).json({ message: "vendor_id and finish_name are required" });
+  const result = await trackTraceService.createFinishMaster(Number(vendor_id), finish_name, created_by);
+  return res.status(result.status === 1 ? 201 : 400).json(result);
+};
+export const updateFinishMaster = async (req: Request, res: Response) => {
+  const { finish_name, updated_by } = req.body;
+  const id = Number(req.params.id);
+  if (!finish_name) return res.status(400).json({ message: "finish_name is required" });
+  const result = await trackTraceService.updateFinishMaster(id, finish_name, updated_by);
+  return res.status(result.status === 1 ? 200 : 400).json(result);
+};
+export const toggleFinishMasterStatus = async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const { is_active } = req.body;
+  const result = await trackTraceService.toggleFinishMasterStatus(id, Boolean(is_active));
+  return res.status(result.status === 1 ? 200 : 400).json(result);
+};
+export const deleteFinishMaster = async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const result = await trackTraceService.deleteFinishMaster(id);
+  return res.status(result.status === 1 ? 200 : 400).json(result);
+};
+
+// ─── Type Master Controllers ───────────────────────────────────────────────────
+export const getTypeMasters = async (req: Request, res: Response) => {
+  const vendor_id = Number(req.params.vendor_id);
+  if (isNaN(vendor_id)) return res.status(400).json({ message: "Invalid vendor_id" });
+  const result = await trackTraceService.getTypeMasters(vendor_id);
+  return res.status(result.status === 1 ? 200 : 500).json(result);
+};
+export const createTypeMaster = async (req: Request, res: Response) => {
+  const { vendor_id, type_name, created_by } = req.body;
+  if (!vendor_id || !type_name) return res.status(400).json({ message: "vendor_id and type_name are required" });
+  const result = await trackTraceService.createTypeMaster(Number(vendor_id), type_name, created_by);
+  return res.status(result.status === 1 ? 201 : 400).json(result);
+};
+export const updateTypeMaster = async (req: Request, res: Response) => {
+  const { type_name, updated_by } = req.body;
+  const id = Number(req.params.id);
+  if (!type_name) return res.status(400).json({ message: "type_name is required" });
+  const result = await trackTraceService.updateTypeMaster(id, type_name, updated_by);
+  return res.status(result.status === 1 ? 200 : 400).json(result);
+};
+export const toggleTypeMasterStatus = async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const { is_active } = req.body;
+  const result = await trackTraceService.toggleTypeMasterStatus(id, Boolean(is_active));
+  return res.status(result.status === 1 ? 200 : 400).json(result);
+};
+export const deleteTypeMaster = async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const result = await trackTraceService.deleteTypeMaster(id);
+  return res.status(result.status === 1 ? 200 : 400).json(result);
+};
+
+// ─── Core Product Master Controllers ───────────────────────────────────────────
+export const getCoreProductMasters = async (req: Request, res: Response) => {
+  const vendor_id = Number(req.params.vendor_id);
+  if (isNaN(vendor_id)) return res.status(400).json({ message: "Invalid vendor_id" });
+  const result = await trackTraceService.getCoreProductMasters(vendor_id);
+  return res.status(result.status === 1 ? 200 : 500).json(result);
+};
+export const createCoreProductMaster = async (req: Request, res: Response) => {
+  const { vendor_id, core_product_name, created_by } = req.body;
+  if (!vendor_id || !core_product_name) return res.status(400).json({ message: "vendor_id and core_product_name are required" });
+  const result = await trackTraceService.createCoreProductMaster(Number(vendor_id), core_product_name, created_by);
+  return res.status(result.status === 1 ? 201 : 400).json(result);
+};
+export const updateCoreProductMaster = async (req: Request, res: Response) => {
+  const { core_product_name, updated_by } = req.body;
+  const id = Number(req.params.id);
+  if (!core_product_name) return res.status(400).json({ message: "core_product_name is required" });
+  const result = await trackTraceService.updateCoreProductMaster(id, core_product_name, updated_by);
+  return res.status(result.status === 1 ? 200 : 400).json(result);
+};
+export const toggleCoreProductMasterStatus = async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const { is_active } = req.body;
+  const result = await trackTraceService.toggleCoreProductMasterStatus(id, Boolean(is_active));
+  return res.status(result.status === 1 ? 200 : 400).json(result);
+};
+export const deleteCoreProductMaster = async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const result = await trackTraceService.deleteCoreProductMaster(id);
+  return res.status(result.status === 1 ? 200 : 400).json(result);
+};
+
+// ─── Brand Logo Upload ─────────────────────────────────────────────────────────
+export const uploadBrandLogo = async (req: Request, res: Response) => {
+  try {
+    const file = (req as any).file as Express.Multer.File | undefined;
+    const vendor_id = Number(req.body?.vendor_id);
+
+    if (!file) return res.status(400).json({ message: "No file uploaded" });
+    if (isNaN(vendor_id)) return res.status(400).json({ message: "Invalid vendor_id" });
+
+    const ext = (file.originalname || "logo").split(".").pop()?.toLowerCase() || "png";
+    const allowedExts = ["jpg", "jpeg", "png", "svg", "webp"];
+    if (!allowedExts.includes(ext)) {
+      return res.status(400).json({ message: "Only image files (jpg, jpeg, png, svg, webp) are allowed" });
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      return res.status(400).json({ message: "File size must be under 2MB" });
+    }
+
+    const key = await uploadToWasabiCompanyVendorDocument(
+      file.buffer,
+      vendor_id,
+      `brand_logo_${Date.now()}.${ext}`,
+      file.mimetype,
+    );
+
+    const signedUrl = await generateSignedUrl(key);
+    return res.status(200).json({ status: 1, message: "Logo uploaded", data: { key, url: signedUrl } });
+  } catch (err) {
+    console.error("Error uploading brand logo:", err);
+    return res.status(500).json({ message: "Upload failed" });
+  }
+};
+
+export const createUnitMaster = async (req: Request, res: Response) => {
+  const { vendor_id, unit_name, short_name, created_by } = req.body;
+  const result = await trackTraceService.createUnitMaster(
+    Number(vendor_id),
+    String(unit_name),
+    String(short_name || unit_name),
+    created_by ? Number(created_by) : null
+  );
+  return res.status(200).json(result.status ? ApiResponse.success(result.data, result.message, 200) : ApiResponse.error(result.message, 400));
+};
+

@@ -6,12 +6,17 @@ type ProductPayload = {
   user_id?: number;
 
   category_id: number;
+  sub_category_id?: number | null;
   product_name: string;
-  article_code: string;
+  article_code?: string;
+  item_code?: string;
+  barcode?: string | null;
 
+  brand_id?: number | null;
   item_group_id?: number | null;
 
   primary_unit_id?: number | null;
+  purchase_unit_id?: number | null;
   stock_unit_id?: number | null;
   consumption_unit_id?: number | null;
 
@@ -34,6 +39,18 @@ type ProductPayload = {
 
   hsn_id?: number | null;
   item_type?: "CapitalGoods" | "Goods" | "Services";
+  item_type_master_id?: number | null;
+
+  core_product_id?: number | null;
+  grade_id?: number | null;
+  type_id?: number | null;
+  finish_id?: number | null;
+
+  length?: number | null;
+  height?: number | null;
+  thickness?: number | null;
+  size?: string | null;
+
   suppliers?: {
     company_vendor_id: number;
     supplier_item_code?: string | null;
@@ -47,17 +64,31 @@ const toDecimal = (v: any) =>
 const toIntOrNull = (v: any) =>
   v === undefined || v === null || v === "" ? null : Number(v);
 
+const generateAutoBarcode = (vendorId: number, productId: number, customBarcode?: string | null) => {
+  if (customBarcode && customBarcode.trim().length > 0) {
+    return customBarcode.trim();
+  }
+  return `BC${String(vendorId).padStart(3, "0")}${String(productId).padStart(6, "0")}`;
+};
+
 const buildProductData = (payload: ProductPayload) => {
+  const itemCode = (payload.item_code || payload.article_code || "").trim();
+
   return {
     vendor_id: Number(payload.vendor_id),
     category_id: Number(payload.category_id),
+    sub_category_id: toIntOrNull(payload.sub_category_id),
 
     product_name: payload.product_name.trim(),
-    article_code: payload.article_code.trim(),
+    article_code: itemCode,
+    item_code: itemCode,
+    barcode: payload.barcode?.trim() || null,
 
+    brand_id: toIntOrNull(payload.brand_id),
     item_group_id: toIntOrNull(payload.item_group_id),
 
     primary_unit_id: toIntOrNull(payload.primary_unit_id),
+    purchase_unit_id: toIntOrNull(payload.purchase_unit_id),
     stock_unit_id: toIntOrNull(payload.stock_unit_id),
     consumption_unit_id: toIntOrNull(payload.consumption_unit_id),
 
@@ -81,6 +112,17 @@ const buildProductData = (payload: ProductPayload) => {
 
     hsn_id: toIntOrNull(payload.hsn_id),
     item_type: payload.item_type || "Goods",
+    item_type_master_id: toIntOrNull(payload.item_type_master_id),
+
+    core_product_id: toIntOrNull(payload.core_product_id),
+    grade_id: toIntOrNull(payload.grade_id),
+    type_id: toIntOrNull(payload.type_id),
+    finish_id: toIntOrNull(payload.finish_id),
+
+    length: toDecimal(payload.length),
+    height: toDecimal(payload.height),
+    thickness: toDecimal(payload.thickness),
+    size: payload.size?.trim() || null,
 
     unit_of_measure: payload.primary_unit_id ? undefined : null,
 
@@ -88,7 +130,6 @@ const buildProductData = (payload: ProductPayload) => {
     updated_by: payload.user_id || null,
   };
 };
-
 
 const validateProductSuppliers = async (payload: ProductPayload) => {
   const vendor_id = Number(payload.vendor_id);
@@ -129,7 +170,6 @@ const validateProductSuppliers = async (payload: ProductPayload) => {
 const validateProductReferences = async (payload: ProductPayload) => {
   const vendor_id = Number(payload.vendor_id);
 
-
   const category = await prisma.projectCategoriesMaster.findFirst({
     where: {
       id: Number(payload.category_id),
@@ -139,6 +179,30 @@ const validateProductReferences = async (payload: ProductPayload) => {
   });
 
   if (!category) return "Invalid item category";
+
+  if (payload.sub_category_id) {
+    const subCategory = await prisma.projectCategoriesMaster.findFirst({
+      where: {
+        id: Number(payload.sub_category_id),
+        parent_id: Number(payload.category_id),
+        vendor_id,
+      },
+      select: { id: true },
+    });
+    if (!subCategory) return "Invalid sub-category for selected category";
+  }
+
+  if (payload.brand_id) {
+    const brand = await prisma.brandMaster.findFirst({
+      where: {
+        id: Number(payload.brand_id),
+        vendor_id,
+        is_active: true,
+      },
+      select: { id: true },
+    });
+    if (!brand) return "Invalid brand";
+  }
 
   if (payload.item_group_id) {
     const group = await prisma.itemGroupMaster.findFirst({
@@ -155,6 +219,7 @@ const validateProductReferences = async (payload: ProductPayload) => {
 
   const unitIds = [
     payload.primary_unit_id,
+    payload.purchase_unit_id,
     payload.stock_unit_id,
     payload.consumption_unit_id,
     payload.min_stock_unit_id,
@@ -195,12 +260,52 @@ const validateProductReferences = async (payload: ProductPayload) => {
     if (!hsn) return "Invalid HSN";
   }
 
+  if (payload.grade_id) {
+    const grade = await prisma.gradeMaster.findFirst({
+      where: { id: Number(payload.grade_id), vendor_id, is_active: true },
+      select: { id: true },
+    });
+    if (!grade) return "Invalid grade selection";
+  }
+
+  if (payload.finish_id) {
+    const finish = await prisma.finishMaster.findFirst({
+      where: { id: Number(payload.finish_id), vendor_id, is_active: true },
+      select: { id: true },
+    });
+    if (!finish) return "Invalid finish selection";
+  }
+
+  if (payload.type_id) {
+    const typeObj = await prisma.typeMaster.findFirst({
+      where: { id: Number(payload.type_id), vendor_id, is_active: true },
+      select: { id: true },
+    });
+    if (!typeObj) return "Invalid type selection";
+  }
+
+  if (payload.item_type_master_id) {
+    const itemTypeObj = await prisma.itemTypeMaster.findFirst({
+      where: { id: Number(payload.item_type_master_id), vendor_id, is_active: true },
+      select: { id: true },
+    });
+    if (!itemTypeObj) return "Invalid item type master selection";
+  }
+
+  if (payload.core_product_id) {
+    const coreProduct = await prisma.coreProductMaster.findFirst({
+      where: { id: Number(payload.core_product_id), vendor_id, is_active: true },
+      select: { id: true },
+    });
+    if (!coreProduct) return "Invalid core product selection";
+  }
+
   return null;
 };
 
 export const getProductMasters = async (vendor_id: number) => {
   try {
-    const [categories, units, itemGroups, hsns, suppliers] = await Promise.all([
+    const [categories, brands, grades, finishes, types, itemTypeMasters, units, itemGroups, hsns, suppliers, coreProducts] = await Promise.all([
       prisma.projectCategoriesMaster.findMany({
         where: {
           vendor_id,
@@ -209,8 +314,47 @@ export const getProductMasters = async (vendor_id: number) => {
         select: {
           id: true,
           category_name: true,
+          parent_id: true,
         },
         orderBy: { category_name: "asc" },
+      }),
+
+      prisma.brandMaster.findMany({
+        where: {
+          vendor_id,
+          is_active: true,
+        },
+        select: {
+          id: true,
+          brand_name: true,
+          brand_short_name: true,
+          logo: true,
+        },
+        orderBy: { brand_name: "asc" },
+      }),
+
+      prisma.gradeMaster.findMany({
+        where: { vendor_id, is_active: true },
+        select: { id: true, grade_name: true },
+        orderBy: { grade_name: "asc" },
+      }),
+
+      prisma.finishMaster.findMany({
+        where: { vendor_id, is_active: true },
+        select: { id: true, finish_name: true },
+        orderBy: { finish_name: "asc" },
+      }),
+
+      prisma.typeMaster.findMany({
+        where: { vendor_id, is_active: true },
+        select: { id: true, type_name: true },
+        orderBy: { type_name: "asc" },
+      }),
+
+      prisma.itemTypeMaster.findMany({
+        where: { vendor_id, is_active: true },
+        select: { id: true, item_type_name: true },
+        orderBy: { item_type_name: "asc" },
       }),
 
       prisma.unitMaster.findMany({
@@ -221,6 +365,8 @@ export const getProductMasters = async (vendor_id: number) => {
         select: {
           id: true,
           unit_name: true,
+          short_name: true,
+          decimal_allowed: true,
         },
         orderBy: { unit_name: "asc" },
       }),
@@ -266,17 +412,27 @@ export const getProductMasters = async (vendor_id: number) => {
           company_name: "asc",
         },
       }),
+      prisma.coreProductMaster.findMany({
+        where: { vendor_id, is_active: true },
+        select: { id: true, core_product_name: true },
+        orderBy: { core_product_name: "asc" },
+      }),
     ]);
 
     return validationResponse(1, "Product masters fetched", {
       categories,
+      brands,
+      grades,
+      finishes,
+      types,
+      itemTypeMasters,
       units,
       itemGroups,
       hsns,
       suppliers,
+      coreProducts,
       costingMethods: ["FIFO", "MANUAL"],
       itemTypes: ["CapitalGoods", "Goods", "Services"],
-
     });
   } catch (error) {
     console.error("getProductMasters error:", error);
@@ -301,6 +457,8 @@ export const listProducts = async (
           OR: [
             { product_name: { contains: search, mode: "insensitive" } },
             { article_code: { contains: search, mode: "insensitive" } },
+            { item_code: { contains: search, mode: "insensitive" } },
+            { barcode: { contains: search, mode: "insensitive" } },
             { hsn: { hsn_code: { contains: search, mode: "insensitive" } } },
           ],
         }
@@ -329,6 +487,37 @@ export const listProducts = async (
             select: {
               id: true,
               unit_name: true,
+              short_name: true,
+            },
+          },
+          brand: {
+            select: {
+              id: true,
+              brand_name: true,
+            },
+          },
+          finishMaster: {
+            select: {
+              id: true,
+              finish_name: true,
+            },
+          },
+          coreProduct: {
+            select: {
+              id: true,
+              core_product_name: true,
+            },
+          },
+          grade: {
+            select: {
+              id: true,
+              grade_name: true,
+            },
+          },
+          type: {
+            select: {
+              id: true,
+              type_name: true,
             },
           },
           stockUnit: {
@@ -400,8 +589,30 @@ export const listProducts = async (
       prisma.productMaster.count({ where }),
     ]);
 
+    const productIds = products.map((p) => p.id);
+    const sizeMap = new Map<number, string | null>();
+    if (productIds.length > 0) {
+      try {
+        const rawSizes: { id: number; size: string | null }[] = await (prisma as any).$queryRawUnsafe(
+          `SELECT id, size FROM "ProductMaster" WHERE id = ANY($1)`,
+          productIds
+        );
+        rawSizes.forEach((r) => sizeMap.set(Number(r.id), r.size));
+      } catch (err) {
+        console.error("Failed to fetch raw sizes:", err);
+      }
+    }
+
+    const mappedProducts = products.map((product) => ({
+      ...product,
+      size: sizeMap.get(product.id) ?? (product as any).size ?? null,
+      core_material: product.coreProduct?.core_product_name ?? product.core_material,
+      finish: product.finishMaster?.finish_name ?? product.finish,
+    }));
+
+
     return validationResponse(1, "Products fetched", {
-      products,
+      products: mappedProducts,
       total,
       page,
       page_size: pageSize,
@@ -422,14 +633,22 @@ export const getProductById = async (vendor_id: number, id: number) => {
       },
       include: {
         category: true,
+        subCategory: true,
+        brand: true,
         itemGroup: true,
         primaryUnit: true,
+        purchaseUnit: true,
         stockUnit: true,
         consumptionUnit: true,
         minStockUnit: true,
         maxStockUnit: true,
         reorderLevelUnit: true,
         reorderBatchUnit: true,
+        itemTypeMaster: true,
+        grade: true,
+        type: true,
+        finishMaster: true,
+        coreProduct: true,
         hsn: true,
         supplierMappings: {
           where: {
@@ -450,7 +669,13 @@ export const getProductById = async (vendor_id: number, id: number) => {
 
     if (!product) return validationResponse(0, "Product not found");
 
-    return validationResponse(1, "Product fetched", product);
+    const mappedProduct = {
+      ...product,
+      core_material: product.coreProduct?.core_product_name ?? product.core_material,
+      finish: product.finishMaster?.finish_name ?? product.finish,
+    };
+
+    return validationResponse(1, "Product fetched", mappedProduct);
   } catch (error) {
     console.error("getProductById error:", error);
     return validationResponse(0, "Failed to fetch product");
@@ -525,6 +750,14 @@ export const createProduct = async (payload: ProductPayload) => {
         data: buildProductData(payload) as any,
       });
 
+      const finalBarcode = generateAutoBarcode(Number(payload.vendor_id), createdProduct.id, payload.barcode);
+      if (!payload.barcode || !payload.barcode.trim()) {
+        await tx.productMaster.update({
+          where: { id: createdProduct.id },
+          data: { barcode: finalBarcode },
+        });
+      }
+
       if (payload.suppliers?.length) {
         await tx.productSupplierMapping.createMany({
           data: payload.suppliers.map((s) => {
@@ -569,10 +802,18 @@ export const createProduct = async (payload: ProductPayload) => {
       },
       include: {
         category: true,
+        subCategory: true,
+        brand: true,
         itemGroup: true,
         primaryUnit: true,
+        purchaseUnit: true,
         stockUnit: true,
         consumptionUnit: true,
+        itemTypeMaster: true,
+        grade: true,
+        type: true,
+        finishMaster: true,
+        coreProduct: true,
         hsn: true,
         supplierMappings: {
           where: {
@@ -694,10 +935,18 @@ export const updateProduct = async (id: number, payload: ProductPayload) => {
       where: { id },
       include: {
         category: true,
+        subCategory: true,
+        brand: true,
         itemGroup: true,
         primaryUnit: true,
+        purchaseUnit: true,
         stockUnit: true,
         consumptionUnit: true,
+        itemTypeMaster: true,
+        grade: true,
+        type: true,
+        finishMaster: true,
+        coreProduct: true,
         hsn: true,
         supplierMappings: {
           where: {
