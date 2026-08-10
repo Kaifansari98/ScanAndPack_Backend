@@ -247,6 +247,8 @@ export const ModelName = {
   BroadcastAttachment: 'BroadcastAttachment',
   BroadcastRead: 'BroadcastRead',
   NotificationQueue: 'NotificationQueue',
+  B2BRequirementTypeMaster: 'B2BRequirementTypeMaster',
+  LeadB2BRequirementTypeMapping: 'LeadB2BRequirementTypeMapping',
   OnlineLead: 'OnlineLead',
   OnlineLeadFollowupStatus: 'OnlineLeadFollowupStatus',
   OnlineLeadHistory: 'OnlineLeadHistory',
@@ -914,6 +916,7 @@ export const LeadProcessBriefMappingScalarFieldEnum = {
   vendor_id: 'vendor_id',
   product_type_id: 'product_type_id',
   process_brief_id: 'process_brief_id',
+  b2b_requirement_type_id: 'b2b_requirement_type_id',
   created_at: 'created_at',
   created_by: 'created_by',
   updated_at: 'updated_at',
@@ -928,6 +931,7 @@ export const LeadRequirementMaterialMappingScalarFieldEnum = {
   lead_id: 'lead_id',
   vendor_id: 'vendor_id',
   product_type_id: 'product_type_id',
+  b2b_requirement_type_id: 'b2b_requirement_type_id',
   product_id: 'product_id',
   quantity: 'quantity',
   unit_id: 'unit_id',
@@ -1209,7 +1213,8 @@ export const LeadDocumentsScalarFieldEnum = {
   is_deleted: 'is_deleted',
   tech_check_status: 'tech_check_status',
   product_structure_instance_id: 'product_structure_instance_id',
-  product_type_id: 'product_type_id'
+  product_type_id: 'product_type_id',
+  b2b_requirement_type_id: 'b2b_requirement_type_id'
 } as const
 
 export type LeadDocumentsScalarFieldEnum = (typeof LeadDocumentsScalarFieldEnum)[keyof typeof LeadDocumentsScalarFieldEnum]
@@ -3650,6 +3655,34 @@ export const NotificationQueueScalarFieldEnum = {
 } as const
 
 export type NotificationQueueScalarFieldEnum = (typeof NotificationQueueScalarFieldEnum)[keyof typeof NotificationQueueScalarFieldEnum]
+
+
+export const B2BRequirementTypeMasterScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  vendor_id: 'vendor_id',
+  status: 'status',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type B2BRequirementTypeMasterScalarFieldEnum = (typeof B2BRequirementTypeMasterScalarFieldEnum)[keyof typeof B2BRequirementTypeMasterScalarFieldEnum]
+
+
+export const LeadB2BRequirementTypeMappingScalarFieldEnum = {
+  id: 'id',
+  lead_id: 'lead_id',
+  vendor_id: 'vendor_id',
+  b2b_requirement_type_id: 'b2b_requirement_type_id',
+  approximate_budget: 'approximate_budget',
+  project_status: 'project_status',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by'
+} as const
+
+export type LeadB2BRequirementTypeMappingScalarFieldEnum = (typeof LeadB2BRequirementTypeMappingScalarFieldEnum)[keyof typeof LeadB2BRequirementTypeMappingScalarFieldEnum]
 
 
 export const OnlineLeadScalarFieldEnum = {

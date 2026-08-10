@@ -56,18 +56,22 @@ export const uploadRequirementDocument = async ({
   lead_id,
   vendor_id,
   product_type_id,
+  b2b_requirement_type_id,
   doc_type_id,
   created_by,
   file,
 }: {
   lead_id: number;
   vendor_id: number;
-  product_type_id: number;
+  product_type_id?: number;
+  b2b_requirement_type_id?: number;
   doc_type_id: number;
   created_by: number;
   file: Express.Multer.File;
 }) => {
-  if (!lead_id || !vendor_id || !product_type_id || !doc_type_id || !file) {
+  const reqTypeId = b2b_requirement_type_id || product_type_id;
+
+  if (!lead_id || !vendor_id || !reqTypeId || !doc_type_id || !file) {
     throw new Error("Missing required parameters or file");
   }
 
@@ -100,7 +104,7 @@ export const uploadRequirementDocument = async ({
       vendor_id,
       lead_id,
       account_id: lead.account_id ?? undefined,
-      product_type_id,
+      b2b_requirement_type_id: reqTypeId,
       doc_type_id,
       created_by,
     },
@@ -127,9 +131,12 @@ export const uploadRequirementDocument = async ({
 export const getRequirementDocuments = async (
   lead_id: number,
   vendor_id: number,
-  product_type_id?: number
+  product_type_id?: number,
+  b2b_requirement_type_id?: number
 ) => {
   if (!lead_id || !vendor_id) throw new Error("lead_id and vendor_id are required");
+
+  const reqTypeId = b2b_requirement_type_id || product_type_id;
 
   const whereClause: any = {
     lead_id,
@@ -140,8 +147,8 @@ export const getRequirementDocuments = async (
     },
   };
 
-  if (product_type_id) {
-    whereClause.product_type_id = product_type_id;
+  if (reqTypeId) {
+    whereClause.b2b_requirement_type_id = reqTypeId;
   }
 
   const documents = await prisma.leadDocuments.findMany({

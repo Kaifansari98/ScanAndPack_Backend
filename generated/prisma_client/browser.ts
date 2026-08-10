@@ -998,6 +998,16 @@ export type BroadcastRead = Prisma.BroadcastReadModel
  */
 export type NotificationQueue = Prisma.NotificationQueueModel
 /**
+ * Model B2BRequirementTypeMaster
+ * 
+ */
+export type B2BRequirementTypeMaster = Prisma.B2BRequirementTypeMasterModel
+/**
+ * Model LeadB2BRequirementTypeMapping
+ * 
+ */
+export type LeadB2BRequirementTypeMapping = Prisma.LeadB2BRequirementTypeMappingModel
+/**
  * Model OnlineLead
  * 
  */

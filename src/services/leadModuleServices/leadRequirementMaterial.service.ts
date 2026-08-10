@@ -3,7 +3,8 @@ import { prisma } from "../../prisma/client";
 export interface AddLeadRequirementMaterialInput {
   lead_id: number;
   vendor_id: number;
-  product_type_id: number;
+  product_type_id?: number;
+  b2b_requirement_type_id?: number;
   product_id?: number;
   product_ids?: number[];
   quantity: number;
@@ -22,6 +23,7 @@ export const addLeadRequirementMaterial = async (
     lead_id,
     vendor_id,
     product_type_id,
+    b2b_requirement_type_id,
     product_id,
     product_ids,
     quantity,
@@ -29,6 +31,8 @@ export const addLeadRequirementMaterial = async (
     unit_name,
     created_by,
   } = payload;
+
+  const reqTypeId = b2b_requirement_type_id || product_type_id;
 
   const targetProductIds: number[] = Array.isArray(product_ids) && product_ids.length > 0
     ? product_ids
@@ -68,7 +72,7 @@ export const addLeadRequirementMaterial = async (
       data: {
         lead_id,
         vendor_id,
-        product_type_id,
+        b2b_requirement_type_id: reqTypeId || null,
         product_id: pId,
         quantity,
         unit_id: unit_id || null,
@@ -89,7 +93,7 @@ export const addLeadRequirementMaterial = async (
             unit_of_measure: true,
           },
         },
-        productType: {
+        b2bRequirementType: {
           select: {
             id: true,
             type: true,
@@ -128,7 +132,7 @@ export const getLeadRequirementMaterials = async (
           unit_of_measure: true,
         },
       },
-      productType: {
+      b2bRequirementType: {
         select: {
           id: true,
           type: true,
@@ -210,7 +214,7 @@ export const updateLeadRequirementMaterial = async (
           unit_of_measure: true,
         },
       },
-      productType: {
+      b2bRequirementType: {
         select: {
           id: true,
           type: true,

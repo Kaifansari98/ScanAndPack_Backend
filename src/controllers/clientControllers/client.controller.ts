@@ -59,12 +59,13 @@ export const getClientsListController = async (req: Request, res: Response) => {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 20;
     const search = req.query.search as string | undefined;
+    const activeOnly = req.query.activeOnly === "true";
 
     if (!vendor_id) {
       return res.status(400).json(ApiResponse.validationError("vendor_id is required"));
     }
 
-    const result = await getClientsList(vendor_id, page, limit, search);
+    const result = await getClientsList(vendor_id, page, limit, search, activeOnly);
     return res.status(200).json(ApiResponse.success(result, "Clients fetched successfully"));
   } catch (error: any) {
     return res.status(500).json(ApiResponse.error(error.message || "Failed to fetch clients"));

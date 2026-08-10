@@ -334,9 +334,54 @@ export class BroadcastRepository {
 
     const userMap = new Map<number, { id: number; user_name: string; email?: string }>();
 
-    // Add users from notifications
+    // 1. Resolve target users from audiences first (ensures the full target audience is shown immediately)
+    const isAll = broadcast.audiences.some((a) => a.audience_type === "ALL") || broadcast.audiences.length === 0;
+    if (isAll) {
+      const activeUsers = await prisma.userMaster.findMany({
+        where: {
+          status: { equals: "active", mode: "insensitive" },
+          ...(broadcast.vendor_id ? { vendor_id: broadcast.vendor_id } : {}),
+          ...(superAdminTypeIds.length > 0 ? { user_type_id: { notIn: superAdminTypeIds } } : {}),
+        },
+        select: { id: true, user_name: true, user_email: true },
+      });
+      activeUsers.forEach((u) => {
+        userMap.set(u.id, { id: u.id, user_name: u.user_name, email: u.user_email || undefined });
+      });
+    } else {
+      const franchiseIds = broadcast.audiences.filter((a) => a.audience_type === "FRANCHISE" && a.target_id).map((a) => a.target_id!);
+      const roleIds = broadcast.audiences.filter((a) => a.audience_type === "ROLE" && a.target_id).map((a) => a.target_id!);
+      const userIds = broadcast.audiences.filter((a) => a.audience_type === "USER" && a.target_id).map((a) => a.target_id!);
+
+      const orConds: any[] = [];
+      if (userIds.length > 0) orConds.push({ id: { in: userIds } });
+      if (franchiseIds.length > 0 && roleIds.length > 0) {
+        orConds.push({ franchise_id: { in: franchiseIds }, user_type_id: { in: roleIds } });
+      } else if (franchiseIds.length > 0) {
+        orConds.push({ franchise_id: { in: franchiseIds } });
+      } else if (roleIds.length > 0) {
+        orConds.push({ user_type_id: { in: roleIds } });
+      }
+
+      if (orConds.length > 0) {
+        const matched = await prisma.userMaster.findMany({
+          where: {
+            status: { equals: "active", mode: "insensitive" },
+            ...(broadcast.vendor_id ? { vendor_id: broadcast.vendor_id } : {}),
+            ...(superAdminTypeIds.length > 0 ? { user_type_id: { notIn: superAdminTypeIds } } : {}),
+            OR: orConds,
+          },
+          select: { id: true, user_name: true, user_email: true },
+        });
+        matched.forEach((u) => {
+          userMap.set(u.id, { id: u.id, user_name: u.user_name, email: u.user_email || undefined });
+        });
+      }
+    }
+
+    // 2. Merge users from notifications table (for completeness or legacy mapping)
     notifications.forEach((n) => {
-      if (n.user) {
+      if (n.user && !userMap.has(n.user.id)) {
         userMap.set(n.user.id, {
           id: n.user.id,
           user_name: n.user.user_name,
@@ -345,7 +390,7 @@ export class BroadcastRepository {
       }
     });
 
-    // Add readers into userMap as well in case notifications weren't created for legacy items
+    // 3. Merge readers (in case they read it but weren't in the original target audience)
     reads.forEach((r) => {
       if (r.user && !userMap.has(r.user.id)) {
         userMap.set(r.user.id, {
@@ -355,53 +400,6 @@ export class BroadcastRepository {
         });
       }
     });
-
-    // 3. Fallback: If no notifications or readers exist yet, resolve target users from audiences
-    if (userMap.size === 0) {
-      const isAll = broadcast.audiences.some((a) => a.audience_type === "ALL") || broadcast.audiences.length === 0;
-      if (isAll) {
-        const activeUsers = await prisma.userMaster.findMany({
-          where: {
-            status: { equals: "active", mode: "insensitive" },
-            ...(broadcast.vendor_id ? { vendor_id: broadcast.vendor_id } : {}),
-            ...(superAdminTypeIds.length > 0 ? { user_type_id: { notIn: superAdminTypeIds } } : {}),
-          },
-          select: { id: true, user_name: true, user_email: true },
-        });
-        activeUsers.forEach((u) => {
-          userMap.set(u.id, { id: u.id, user_name: u.user_name, email: u.user_email || undefined });
-        });
-      } else {
-        const franchiseIds = broadcast.audiences.filter((a) => a.audience_type === "FRANCHISE" && a.target_id).map((a) => a.target_id!);
-        const roleIds = broadcast.audiences.filter((a) => a.audience_type === "ROLE" && a.target_id).map((a) => a.target_id!);
-        const userIds = broadcast.audiences.filter((a) => a.audience_type === "USER" && a.target_id).map((a) => a.target_id!);
-
-        const orConds: any[] = [];
-        if (userIds.length > 0) orConds.push({ id: { in: userIds } });
-        if (franchiseIds.length > 0 && roleIds.length > 0) {
-          orConds.push({ franchise_id: { in: franchiseIds }, user_type_id: { in: roleIds } });
-        } else if (franchiseIds.length > 0) {
-          orConds.push({ franchise_id: { in: franchiseIds } });
-        } else if (roleIds.length > 0) {
-          orConds.push({ user_type_id: { in: roleIds } });
-        }
-
-        if (orConds.length > 0) {
-          const matched = await prisma.userMaster.findMany({
-            where: {
-              status: { equals: "active", mode: "insensitive" },
-              ...(broadcast.vendor_id ? { vendor_id: broadcast.vendor_id } : {}),
-              ...(superAdminTypeIds.length > 0 ? { user_type_id: { notIn: superAdminTypeIds } } : {}),
-              OR: orConds,
-            },
-            select: { id: true, user_name: true, user_email: true },
-          });
-          matched.forEach((u) => {
-            userMap.set(u.id, { id: u.id, user_name: u.user_name, email: u.user_email || undefined });
-          });
-        }
-      }
-    }
 
     // Combine userMap with read logs
     const result = Array.from(userMap.values()).map((user) => {

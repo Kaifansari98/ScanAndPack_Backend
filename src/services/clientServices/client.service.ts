@@ -119,11 +119,16 @@ export const getClientsList = async (
   vendor_id: number,
   page: number,
   limit: number,
-  search?: string
+  search?: string,
+  activeOnly?: boolean
 ) => {
   const skip = (page - 1) * limit;
 
   const whereCondition: any = { vendor_id };
+
+  if (activeOnly) {
+    whereCondition.is_active = true;
+  }
 
   if (search) {
     whereCondition.OR = [

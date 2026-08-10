@@ -1033,6 +1033,7 @@ export type LeadMasterWhereInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingListRelationFilter
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingListRelationFilter
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingListRelationFilter
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingListRelationFilter
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterNullableScalarRelationFilter, Prisma.AccountMasterWhereInput> | null
   architect?: Prisma.XOR<Prisma.ArchitechuremasterNullableScalarRelationFilter, Prisma.ArchitechuremasterWhereInput> | null
@@ -1193,6 +1194,7 @@ export type LeadMasterOrderByWithRelationInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingOrderByRelationAggregateInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingOrderByRelationAggregateInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingOrderByRelationAggregateInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingOrderByRelationAggregateInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingOrderByRelationAggregateInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
   architect?: Prisma.ArchitechuremasterOrderByWithRelationInput
@@ -1357,6 +1359,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   hardwareMappings?: Prisma.LeadHardwareMappingListRelationFilter
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingListRelationFilter
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingListRelationFilter
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingListRelationFilter
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterNullableScalarRelationFilter, Prisma.AccountMasterWhereInput> | null
   architect?: Prisma.XOR<Prisma.ArchitechuremasterNullableScalarRelationFilter, Prisma.ArchitechuremasterWhereInput> | null
@@ -1706,6 +1709,7 @@ export type LeadMasterCreateInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -1866,6 +1870,7 @@ export type LeadMasterUncheckedCreateInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -2001,6 +2006,7 @@ export type LeadMasterUpdateInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -2161,6 +2167,7 @@ export type LeadMasterUncheckedUpdateInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -4101,6 +4108,20 @@ export type LeadMasterUncheckedUpdateManyWithoutArchitectNestedInput = {
   deleteMany?: Prisma.LeadMasterScalarWhereInput | Prisma.LeadMasterScalarWhereInput[]
 }
 
+export type LeadMasterCreateNestedOneWithoutLeadB2BReqMappingsInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutLeadB2BReqMappingsInput, Prisma.LeadMasterUncheckedCreateWithoutLeadB2BReqMappingsInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutLeadB2BReqMappingsInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+}
+
+export type LeadMasterUpdateOneRequiredWithoutLeadB2BReqMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutLeadB2BReqMappingsInput, Prisma.LeadMasterUncheckedCreateWithoutLeadB2BReqMappingsInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutLeadB2BReqMappingsInput
+  upsert?: Prisma.LeadMasterUpsertWithoutLeadB2BReqMappingsInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutLeadB2BReqMappingsInput, Prisma.LeadMasterUpdateWithoutLeadB2BReqMappingsInput>, Prisma.LeadMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput>
+}
+
 export type LeadMasterCreateWithoutVendorInput = {
   firstname: string
   lastname: string
@@ -4208,6 +4229,7 @@ export type LeadMasterCreateWithoutVendorInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -4366,6 +4388,7 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -4627,6 +4650,7 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -4785,6 +4809,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -4930,6 +4955,7 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -5088,6 +5114,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -5233,6 +5260,7 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -5391,6 +5419,7 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -5536,6 +5565,7 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -5694,6 +5724,7 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -5903,6 +5934,7 @@ export type LeadMasterCreateWithoutProjectsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -6062,6 +6094,7 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -6212,6 +6245,7 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -6371,6 +6405,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -6505,6 +6540,7 @@ export type LeadMasterCreateWithoutProjectDetailsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -6664,6 +6700,7 @@ export type LeadMasterUncheckedCreateWithoutProjectDetailsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -6814,6 +6851,7 @@ export type LeadMasterUpdateWithoutProjectDetailsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -6973,6 +7011,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectDetailsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -7107,6 +7146,7 @@ export type LeadMasterCreateWithoutBoxMasterInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -7266,6 +7306,7 @@ export type LeadMasterUncheckedCreateWithoutBoxMasterInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -7421,6 +7462,7 @@ export type LeadMasterCreateWithoutClientInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -7579,6 +7621,7 @@ export type LeadMasterUncheckedCreateWithoutClientInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -7740,6 +7783,7 @@ export type LeadMasterCreateWithoutSpecificationsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -7899,6 +7943,7 @@ export type LeadMasterUncheckedCreateWithoutSpecificationsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -8049,6 +8094,7 @@ export type LeadMasterUpdateWithoutSpecificationsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -8208,6 +8254,7 @@ export type LeadMasterUncheckedUpdateWithoutSpecificationsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -8341,6 +8388,7 @@ export type LeadMasterCreateWithoutCarcassMaterialMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -8500,6 +8548,7 @@ export type LeadMasterUncheckedCreateWithoutCarcassMaterialMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -8650,6 +8699,7 @@ export type LeadMasterUpdateWithoutCarcassMaterialMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -8809,6 +8859,7 @@ export type LeadMasterUncheckedUpdateWithoutCarcassMaterialMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -8944,6 +8995,7 @@ export type LeadMasterCreateWithoutShutterMaterialMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -9103,6 +9155,7 @@ export type LeadMasterUncheckedCreateWithoutShutterMaterialMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -9253,6 +9306,7 @@ export type LeadMasterUpdateWithoutShutterMaterialMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -9412,6 +9466,7 @@ export type LeadMasterUncheckedUpdateWithoutShutterMaterialMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -9546,6 +9601,7 @@ export type LeadMasterCreateWithoutSuperAdminApprovalLocInsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -9705,6 +9761,7 @@ export type LeadMasterUncheckedCreateWithoutSuperAdminApprovalLocInsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -9855,6 +9912,7 @@ export type LeadMasterUpdateWithoutSuperAdminApprovalLocInsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -10014,6 +10072,7 @@ export type LeadMasterUncheckedUpdateWithoutSuperAdminApprovalLocInsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -10148,6 +10207,7 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -10307,6 +10367,7 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -10457,6 +10518,7 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -10616,6 +10678,7 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -10749,6 +10812,7 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -10908,6 +10972,7 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -11058,6 +11123,7 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -11217,6 +11283,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -11352,6 +11419,7 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -11510,6 +11578,7 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -11671,6 +11740,7 @@ export type LeadMasterCreateWithoutSourceInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -11829,6 +11899,7 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -11990,6 +12061,7 @@ export type LeadMasterCreateWithoutAccountInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -12148,6 +12220,7 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -12309,6 +12382,7 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -12468,6 +12542,7 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -12618,6 +12693,7 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -12777,6 +12853,7 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -12910,6 +12987,7 @@ export type LeadMasterCreateWithoutLeadProcessBriefsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -13069,6 +13147,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -13219,6 +13298,7 @@ export type LeadMasterUpdateWithoutLeadProcessBriefsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -13378,6 +13458,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -13513,6 +13594,7 @@ export type LeadMasterCreateWithoutLeadRequirementMaterialsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -13672,6 +13754,7 @@ export type LeadMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -13822,6 +13905,7 @@ export type LeadMasterUpdateWithoutLeadRequirementMaterialsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -13981,6 +14065,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -14114,6 +14199,7 @@ export type LeadMasterCreateWithoutHardwareMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -14273,6 +14359,7 @@ export type LeadMasterUncheckedCreateWithoutHardwareMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -14423,6 +14510,7 @@ export type LeadMasterUpdateWithoutHardwareMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -14582,6 +14670,7 @@ export type LeadMasterUncheckedUpdateWithoutHardwareMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -14716,6 +14805,7 @@ export type LeadMasterCreateWithoutLightCarcasUnitMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -14875,6 +14965,7 @@ export type LeadMasterUncheckedCreateWithoutLightCarcasUnitMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -15025,6 +15116,7 @@ export type LeadMasterUpdateWithoutLightCarcasUnitMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -15184,6 +15276,7 @@ export type LeadMasterUncheckedUpdateWithoutLightCarcasUnitMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -15319,6 +15412,7 @@ export type LeadMasterCreateWithoutOtherAppliancesMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -15478,6 +15572,7 @@ export type LeadMasterUncheckedCreateWithoutOtherAppliancesMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -15628,6 +15723,7 @@ export type LeadMasterUpdateWithoutOtherAppliancesMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -15787,6 +15883,7 @@ export type LeadMasterUncheckedUpdateWithoutOtherAppliancesMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -15921,6 +16018,7 @@ export type LeadMasterCreateWithoutOtherAppliancesRemarkMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -16080,6 +16178,7 @@ export type LeadMasterUncheckedCreateWithoutOtherAppliancesRemarkMappingsInput =
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -16230,6 +16329,7 @@ export type LeadMasterUpdateWithoutOtherAppliancesRemarkMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -16389,6 +16489,7 @@ export type LeadMasterUncheckedUpdateWithoutOtherAppliancesRemarkMappingsInput =
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -16523,6 +16624,7 @@ export type LeadMasterCreateWithoutSpecificationDocumentMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -16682,6 +16784,7 @@ export type LeadMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput =
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -16832,6 +16935,7 @@ export type LeadMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -16991,6 +17095,7 @@ export type LeadMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput =
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -17124,6 +17229,7 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -17283,6 +17389,7 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -17433,6 +17540,7 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -17592,6 +17700,7 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -17726,6 +17835,7 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -17885,6 +17995,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -18035,6 +18146,7 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -18194,6 +18306,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -18328,6 +18441,7 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -18487,6 +18601,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -18637,6 +18752,7 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -18796,6 +18912,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -18931,6 +19048,7 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -19090,6 +19208,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -19240,6 +19359,7 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -19399,6 +19519,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -19533,6 +19654,7 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -19692,6 +19814,7 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -19842,6 +19965,7 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -20001,6 +20125,7 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -20135,6 +20260,7 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -20294,6 +20420,7 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -20444,6 +20571,7 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -20603,6 +20731,7 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -20737,6 +20866,7 @@ export type LeadMasterCreateWithoutLedgersInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -20896,6 +21026,7 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -21046,6 +21177,7 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -21205,6 +21337,7 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -21339,6 +21472,7 @@ export type LeadMasterCreateWithoutSmallOrderRequestsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -21498,6 +21632,7 @@ export type LeadMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -21648,6 +21783,7 @@ export type LeadMasterUpdateWithoutSmallOrderRequestsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -21807,6 +21943,7 @@ export type LeadMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -21940,6 +22077,7 @@ export type LeadMasterCreateWithoutAmcContractsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -22099,6 +22237,7 @@ export type LeadMasterUncheckedCreateWithoutAmcContractsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -22249,6 +22388,7 @@ export type LeadMasterUpdateWithoutAmcContractsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -22408,6 +22548,7 @@ export type LeadMasterUncheckedUpdateWithoutAmcContractsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -22543,6 +22684,7 @@ export type LeadMasterCreateWithoutServiceSchedulesInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -22702,6 +22844,7 @@ export type LeadMasterUncheckedCreateWithoutServiceSchedulesInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -22852,6 +22995,7 @@ export type LeadMasterUpdateWithoutServiceSchedulesInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -23011,6 +23155,7 @@ export type LeadMasterUncheckedUpdateWithoutServiceSchedulesInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -23145,6 +23290,7 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -23303,6 +23449,7 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -23464,6 +23611,7 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -23623,6 +23771,7 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -23773,6 +23922,7 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -23932,6 +24082,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -24065,6 +24216,7 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -24224,6 +24376,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -24374,6 +24527,7 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -24533,6 +24687,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -24667,6 +24822,7 @@ export type LeadMasterCreateWithoutClientVisitsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -24826,6 +24982,7 @@ export type LeadMasterUncheckedCreateWithoutClientVisitsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -24976,6 +25133,7 @@ export type LeadMasterUpdateWithoutClientVisitsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -25135,6 +25293,7 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -25269,6 +25428,7 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -25428,6 +25588,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -25578,6 +25739,7 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -25737,6 +25899,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -25871,6 +26034,7 @@ export type LeadMasterCreateWithoutClientVisitDocumentMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -26030,6 +26194,7 @@ export type LeadMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -26180,6 +26345,7 @@ export type LeadMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -26339,6 +26505,7 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -26473,6 +26640,7 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -26632,6 +26800,7 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -26782,6 +26951,7 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -26941,6 +27111,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -27076,6 +27247,7 @@ export type LeadMasterCreateWithoutChsSelectionMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -27235,6 +27407,7 @@ export type LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -27385,6 +27558,7 @@ export type LeadMasterUpdateWithoutChsSelectionMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -27544,6 +27718,7 @@ export type LeadMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -27678,6 +27853,7 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -27837,6 +28013,7 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -27987,6 +28164,7 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -28146,6 +28324,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -28280,6 +28459,7 @@ export type LeadMasterCreateWithoutTasksInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -28439,6 +28619,7 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -28589,6 +28770,7 @@ export type LeadMasterUpdateWithoutTasksInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -28748,6 +28930,7 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -28881,6 +29064,7 @@ export type LeadMasterCreateWithoutFastProductionRequestBatchesInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -29040,6 +29224,7 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestBatchesInput = 
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -29190,6 +29375,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestBatchesInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -29349,6 +29535,7 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput = 
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -29483,6 +29670,7 @@ export type LeadMasterCreateWithoutFastProductionRequestsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -29642,6 +29830,7 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -29792,6 +29981,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -29951,6 +30141,7 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -30085,6 +30276,7 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -30244,6 +30436,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -30394,6 +30587,7 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -30553,6 +30747,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -30687,6 +30882,7 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -30846,6 +31042,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -30996,6 +31193,7 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -31155,6 +31353,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -31289,6 +31488,7 @@ export type LeadMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -31448,6 +31648,7 @@ export type LeadMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -31598,6 +31799,7 @@ export type LeadMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -31757,6 +31959,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -31892,6 +32095,7 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -32051,6 +32255,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -32201,6 +32406,7 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -32360,6 +32566,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -32494,6 +32701,7 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -32653,6 +32861,7 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -32803,6 +33012,7 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -32962,6 +33172,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -33095,6 +33306,7 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -33254,6 +33466,7 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -33404,6 +33617,7 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -33563,6 +33777,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -33697,6 +33912,7 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -33856,6 +34072,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -34006,6 +34223,7 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -34165,6 +34383,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -34300,6 +34519,7 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -34459,6 +34679,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -34609,6 +34830,7 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -34768,6 +34990,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -34901,6 +35124,7 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -35060,6 +35284,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -35210,6 +35435,7 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -35369,6 +35595,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -35503,6 +35730,7 @@ export type LeadMasterCreateWithoutCutListInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -35662,6 +35890,7 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -35812,6 +36041,7 @@ export type LeadMasterUpdateWithoutCutListInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -35971,6 +36201,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -36105,6 +36336,7 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -36264,6 +36496,7 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -36414,6 +36647,7 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -36573,6 +36807,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -36708,6 +36943,7 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -36867,6 +37103,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -37017,6 +37254,7 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -37176,6 +37414,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -37310,6 +37549,7 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -37468,6 +37708,7 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -37628,6 +37869,7 @@ export type LeadMasterCreateWithoutExternalPlatformCustomerMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
@@ -37787,6 +38029,7 @@ export type LeadMasterUncheckedCreateWithoutExternalPlatformCustomerMappingsInpu
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -37937,6 +38180,7 @@ export type LeadMasterUpdateWithoutExternalPlatformCustomerMappingsInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -38096,6 +38340,7 @@ export type LeadMasterUncheckedUpdateWithoutExternalPlatformCustomerMappingsInpu
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -38231,6 +38476,7 @@ export type LeadMasterCreateWithoutArchitectInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
@@ -38389,6 +38635,7 @@ export type LeadMasterUncheckedCreateWithoutArchitectInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -38441,6 +38688,612 @@ export type LeadMasterUpdateWithWhereUniqueWithoutArchitectInput = {
 export type LeadMasterUpdateManyWithWhereWithoutArchitectInput = {
   where: Prisma.LeadMasterScalarWhereInput
   data: Prisma.XOR<Prisma.LeadMasterUpdateManyMutationInput, Prisma.LeadMasterUncheckedUpdateManyWithoutArchitectInput>
+}
+
+export type LeadMasterCreateWithoutLeadB2BReqMappingsInput = {
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  archetech_name?: string | null
+  designer_remark?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  project_status?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  lead_code: string
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  actual_installation_start_date?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  order_login_prod_files_remark?: string | null
+  actual_installation_completion_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  priority?: string | null
+  tech_check_completed_at?: Date | string | null
+  tech_check_reached_at?: Date | string | null
+  usable_handover_completed_at?: Date | string | null
+  amc_opted_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_plan_closed_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  total_required_chs_manufacturing_days?: number | null
+  archetech_number?: string | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  is_small_order_request?: boolean
+  material_lift_size?: string | null
+  fast_production_approved_at?: Date | string | null
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  isLargeScaleProjectLead?: boolean
+  is_fast_production?: boolean
+  tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
+  order_number?: string | null
+  refered_by?: string | null
+  cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutLeadInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadInput
+  account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
+  assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
+  assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
+  client?: Prisma.ClientMasterCreateNestedOneWithoutLeadsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadsInput
+  siteType?: Prisma.SiteTypeMasterCreateNestedOneWithoutLeadsInput
+  source?: Prisma.SourceMasterCreateNestedOneWithoutLeadsInput
+  statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
+  productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutLeadInput
+  specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutLeadInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
+  BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+}
+
+export type LeadMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
+  id?: number
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  archetech_name?: string | null
+  designer_remark?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  vendor_id: number
+  assign_to?: number | null
+  assigned_by?: number | null
+  account_id?: number | null
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  status_id?: number | null
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  project_status?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  lead_code: string
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  actual_installation_start_date?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  franchise_id?: number | null
+  order_login_prod_files_remark?: string | null
+  actual_installation_completion_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  priority?: string | null
+  tech_check_completed_at?: Date | string | null
+  tech_check_reached_at?: Date | string | null
+  usable_handover_completed_at?: Date | string | null
+  amc_opted_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_plan_closed_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  total_required_chs_manufacturing_days?: number | null
+  archetech_number?: string | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  is_small_order_request?: boolean
+  material_lift_size?: string | null
+  architect_id?: number | null
+  fast_production_approved_at?: Date | string | null
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  isLargeScaleProjectLead?: boolean
+  is_fast_production?: boolean
+  tentative_order_login_date?: Date | string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
+  client_id?: number | null
+  order_number?: string | null
+  refered_by?: string | null
+  cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
+  productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutLeadInput
+  specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutLeadInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+}
+
+export type LeadMasterCreateOrConnectWithoutLeadB2BReqMappingsInput = {
+  where: Prisma.LeadMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutLeadB2BReqMappingsInput, Prisma.LeadMasterUncheckedCreateWithoutLeadB2BReqMappingsInput>
+}
+
+export type LeadMasterUpsertWithoutLeadB2BReqMappingsInput = {
+  update: Prisma.XOR<Prisma.LeadMasterUpdateWithoutLeadB2BReqMappingsInput, Prisma.LeadMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput>
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutLeadB2BReqMappingsInput, Prisma.LeadMasterUncheckedCreateWithoutLeadB2BReqMappingsInput>
+  where?: Prisma.LeadMasterWhereInput
+}
+
+export type LeadMasterUpdateToOneWithWhereWithoutLeadB2BReqMappingsInput = {
+  where?: Prisma.LeadMasterWhereInput
+  data: Prisma.XOR<Prisma.LeadMasterUpdateWithoutLeadB2BReqMappingsInput, Prisma.LeadMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput>
+}
+
+export type LeadMasterUpdateWithoutLeadB2BReqMappingsInput = {
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutLeadNestedInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
+  account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
+  assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
+  assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
+  client?: Prisma.ClientMasterUpdateOneWithoutLeadsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadsNestedInput
+  siteType?: Prisma.SiteTypeMasterUpdateOneWithoutLeadsNestedInput
+  source?: Prisma.SourceMasterUpdateOneWithoutLeadsNestedInput
+  statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
+  productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutLeadNestedInput
+  specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutLeadNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
+  BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+}
+
+export type LeadMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  assign_to?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assigned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
+  productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutLeadNestedInput
+  specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutLeadNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
 }
 
 export type LeadMasterCreateManyVendorInput = {
@@ -38646,6 +39499,7 @@ export type LeadMasterUpdateWithoutVendorInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -38804,6 +39658,7 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -39419,6 +40274,7 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -39577,6 +40433,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -39808,6 +40665,7 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -39966,6 +40824,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -40197,6 +41056,7 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -40355,6 +41215,7 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -40586,6 +41447,7 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -40744,6 +41606,7 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -40975,6 +41838,7 @@ export type LeadMasterUpdateWithoutBoxMasterInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -41134,6 +41998,7 @@ export type LeadMasterUncheckedUpdateWithoutBoxMasterInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -41461,6 +42326,7 @@ export type LeadMasterUpdateWithoutClientInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -41619,6 +42485,7 @@ export type LeadMasterUncheckedUpdateWithoutClientInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -41946,6 +42813,7 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -42104,6 +42972,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -42431,6 +43300,7 @@ export type LeadMasterUpdateWithoutSourceInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -42589,6 +43459,7 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -42916,6 +43787,7 @@ export type LeadMasterUpdateWithoutAccountInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -43074,6 +43946,7 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -43401,6 +44274,7 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -43559,6 +44433,7 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -43886,6 +44761,7 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
@@ -44044,6 +44920,7 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -44371,6 +45248,7 @@ export type LeadMasterUpdateWithoutArchitectInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
@@ -44529,6 +45407,7 @@ export type LeadMasterUncheckedUpdateWithoutArchitectInput = {
   hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesRemarkMappings?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -44684,6 +45563,7 @@ export type LeadMasterCountOutputType = {
   hardwareMappings: number
   lightCarcasUnitMappings: number
   leadProcessBriefs: number
+  leadB2BReqMappings: number
   otherAppliancesRemarkMappings: number
   leadRequirementMaterials: number
   otherAppliancesMappings: number
@@ -44738,6 +45618,7 @@ export type LeadMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   hardwareMappings?: boolean | LeadMasterCountOutputTypeCountHardwareMappingsArgs
   lightCarcasUnitMappings?: boolean | LeadMasterCountOutputTypeCountLightCarcasUnitMappingsArgs
   leadProcessBriefs?: boolean | LeadMasterCountOutputTypeCountLeadProcessBriefsArgs
+  leadB2BReqMappings?: boolean | LeadMasterCountOutputTypeCountLeadB2BReqMappingsArgs
   otherAppliancesRemarkMappings?: boolean | LeadMasterCountOutputTypeCountOtherAppliancesRemarkMappingsArgs
   leadRequirementMaterials?: boolean | LeadMasterCountOutputTypeCountLeadRequirementMaterialsArgs
   otherAppliancesMappings?: boolean | LeadMasterCountOutputTypeCountOtherAppliancesMappingsArgs
@@ -44949,6 +45830,13 @@ export type LeadMasterCountOutputTypeCountLightCarcasUnitMappingsArgs<ExtArgs ex
  */
 export type LeadMasterCountOutputTypeCountLeadProcessBriefsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LeadProcessBriefMappingWhereInput
+}
+
+/**
+ * LeadMasterCountOutputType without action
+ */
+export type LeadMasterCountOutputTypeCountLeadB2BReqMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadB2BRequirementTypeMappingWhereInput
 }
 
 /**
@@ -45254,6 +46142,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   hardwareMappings?: boolean | Prisma.LeadMaster$hardwareMappingsArgs<ExtArgs>
   lightCarcasUnitMappings?: boolean | Prisma.LeadMaster$lightCarcasUnitMappingsArgs<ExtArgs>
   leadProcessBriefs?: boolean | Prisma.LeadMaster$leadProcessBriefsArgs<ExtArgs>
+  leadB2BReqMappings?: boolean | Prisma.LeadMaster$leadB2BReqMappingsArgs<ExtArgs>
   otherAppliancesRemarkMappings?: boolean | Prisma.LeadMaster$otherAppliancesRemarkMappingsArgs<ExtArgs>
   account?: boolean | Prisma.LeadMaster$accountArgs<ExtArgs>
   architect?: boolean | Prisma.LeadMaster$architectArgs<ExtArgs>
@@ -45637,6 +46526,7 @@ export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   hardwareMappings?: boolean | Prisma.LeadMaster$hardwareMappingsArgs<ExtArgs>
   lightCarcasUnitMappings?: boolean | Prisma.LeadMaster$lightCarcasUnitMappingsArgs<ExtArgs>
   leadProcessBriefs?: boolean | Prisma.LeadMaster$leadProcessBriefsArgs<ExtArgs>
+  leadB2BReqMappings?: boolean | Prisma.LeadMaster$leadB2BReqMappingsArgs<ExtArgs>
   otherAppliancesRemarkMappings?: boolean | Prisma.LeadMaster$otherAppliancesRemarkMappingsArgs<ExtArgs>
   account?: boolean | Prisma.LeadMaster$accountArgs<ExtArgs>
   architect?: boolean | Prisma.LeadMaster$architectArgs<ExtArgs>
@@ -45734,6 +46624,7 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     hardwareMappings: Prisma.$LeadHardwareMappingPayload<ExtArgs>[]
     lightCarcasUnitMappings: Prisma.$LeadLightCarcasUnitMappingPayload<ExtArgs>[]
     leadProcessBriefs: Prisma.$LeadProcessBriefMappingPayload<ExtArgs>[]
+    leadB2BReqMappings: Prisma.$LeadB2BRequirementTypeMappingPayload<ExtArgs>[]
     otherAppliancesRemarkMappings: Prisma.$LeadOtherAppliancesRemarkMappingPayload<ExtArgs>[]
     account: Prisma.$AccountMasterPayload<ExtArgs> | null
     architect: Prisma.$ArchitechuremasterPayload<ExtArgs> | null
@@ -46287,6 +47178,7 @@ export interface Prisma__LeadMasterClient<T, Null = never, ExtArgs extends runti
   hardwareMappings<T extends Prisma.LeadMaster$hardwareMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$hardwareMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadHardwareMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   lightCarcasUnitMappings<T extends Prisma.LeadMaster$lightCarcasUnitMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$lightCarcasUnitMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadLightCarcasUnitMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadProcessBriefs<T extends Prisma.LeadMaster$leadProcessBriefsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$leadProcessBriefsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProcessBriefMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadB2BReqMappings<T extends Prisma.LeadMaster$leadB2BReqMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$leadB2BReqMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadB2BRequirementTypeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   otherAppliancesRemarkMappings<T extends Prisma.LeadMaster$otherAppliancesRemarkMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$otherAppliancesRemarkMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   account<T extends Prisma.LeadMaster$accountArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$accountArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   architect<T extends Prisma.LeadMaster$architectArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$architectArgs<ExtArgs>>): Prisma.Prisma__ArchitechuremasterClient<runtime.Types.Result.GetResult<Prisma.$ArchitechuremasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -47446,6 +48338,30 @@ export type LeadMaster$leadProcessBriefsArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.LeadProcessBriefMappingScalarFieldEnum | Prisma.LeadProcessBriefMappingScalarFieldEnum[]
+}
+
+/**
+ * LeadMaster.leadB2BReqMappings
+ */
+export type LeadMaster$leadB2BReqMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadB2BRequirementTypeMapping
+   */
+  select?: Prisma.LeadB2BRequirementTypeMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadB2BRequirementTypeMapping
+   */
+  omit?: Prisma.LeadB2BRequirementTypeMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadB2BRequirementTypeMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadB2BRequirementTypeMappingWhereInput
+  orderBy?: Prisma.LeadB2BRequirementTypeMappingOrderByWithRelationInput | Prisma.LeadB2BRequirementTypeMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadB2BRequirementTypeMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadB2BRequirementTypeMappingScalarFieldEnum | Prisma.LeadB2BRequirementTypeMappingScalarFieldEnum[]
 }
 
 /**

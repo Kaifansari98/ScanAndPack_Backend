@@ -37,7 +37,8 @@ export const getAllProcessBriefs = async (vendor_id: number) => {
 };
 
 export interface ProcessBriefMappingItem {
-  product_type_id: number;
+  product_type_id?: number;
+  b2b_requirement_type_id?: number;
   process_brief_id: number;
 }
 
@@ -66,7 +67,7 @@ export const saveLeadProcessBriefs = async (payload: SaveLeadProcessBriefsInput)
     const data = mappings.map((m) => ({
       lead_id,
       vendor_id,
-      product_type_id: m.product_type_id,
+      b2b_requirement_type_id: m.b2b_requirement_type_id || m.product_type_id,
       process_brief_id: m.process_brief_id,
       created_by,
     }));
@@ -75,15 +76,15 @@ export const saveLeadProcessBriefs = async (payload: SaveLeadProcessBriefsInput)
       data,
     });
   } else if (process_brief_ids && process_brief_ids.length > 0) {
-    const firstProductType = await prisma.productTypeMaster.findFirst({
-      where: { vendor_id, status: "active" },
+    const firstB2bType = await prisma.b2BRequirementTypeMaster.findFirst({
+      where: { vendor_id, status: { equals: "active", mode: "insensitive" } },
     });
-    const defaultTypeId = firstProductType?.id || 1;
+    const defaultTypeId = firstB2bType?.id || null;
 
     const data = process_brief_ids.map((bId) => ({
       lead_id,
       vendor_id,
-      product_type_id: defaultTypeId,
+      b2b_requirement_type_id: defaultTypeId,
       process_brief_id: bId,
       created_by,
     }));
@@ -101,11 +102,10 @@ export const getLeadProcessBriefs = async (lead_id: number, vendor_id: number) =
     where: { lead_id, vendor_id },
     include: {
       processBrief: true,
-      productType: {
+      b2bRequirementType: {
         select: {
           id: true,
           type: true,
-          tag: true,
         },
       },
     },
