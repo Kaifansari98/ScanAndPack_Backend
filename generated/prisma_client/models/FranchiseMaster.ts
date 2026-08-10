@@ -371,6 +371,10 @@ export type FranchiseMasterWhereInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingListRelationFilter
   leads?: Prisma.LeadMasterListRelationFilter
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsListRelationFilter
+  onlineLeads?: Prisma.OnlineLeadListRelationFilter
+  leadHistories?: Prisma.OnlineLeadHistoryListRelationFilter
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogListRelationFilter
+  storeLogsTo?: Prisma.OnlineLeadStoreLogListRelationFilter
   users?: Prisma.UserMasterListRelationFilter
 }
 
@@ -402,6 +406,10 @@ export type FranchiseMasterOrderByWithRelationInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingOrderByRelationAggregateInput
   leads?: Prisma.LeadMasterOrderByRelationAggregateInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsOrderByRelationAggregateInput
+  onlineLeads?: Prisma.OnlineLeadOrderByRelationAggregateInput
+  leadHistories?: Prisma.OnlineLeadHistoryOrderByRelationAggregateInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogOrderByRelationAggregateInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogOrderByRelationAggregateInput
   users?: Prisma.UserMasterOrderByRelationAggregateInput
 }
 
@@ -437,6 +445,10 @@ export type FranchiseMasterWhereUniqueInput = Prisma.AtLeast<{
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingListRelationFilter
   leads?: Prisma.LeadMasterListRelationFilter
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsListRelationFilter
+  onlineLeads?: Prisma.OnlineLeadListRelationFilter
+  leadHistories?: Prisma.OnlineLeadHistoryListRelationFilter
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogListRelationFilter
+  storeLogsTo?: Prisma.OnlineLeadStoreLogListRelationFilter
   users?: Prisma.UserMasterListRelationFilter
 }, "id" | "vendor_id_franchise_code">
 
@@ -520,6 +532,10 @@ export type FranchiseMasterCreateInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutFranchiseInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutToFranchiseInput
   users?: Prisma.UserMasterCreateNestedManyWithoutFranchiseInput
 }
 
@@ -550,6 +566,10 @@ export type FranchiseMasterUncheckedCreateInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutFranchiseInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutToFranchiseInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutFranchiseInput
 }
 
@@ -579,6 +599,10 @@ export type FranchiseMasterUpdateInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutFranchiseNestedInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUpdateManyWithoutToFranchiseNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutFranchiseNestedInput
 }
 
@@ -609,6 +633,10 @@ export type FranchiseMasterUncheckedUpdateInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutToFranchiseNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutFranchiseNestedInput
 }
 
@@ -947,6 +975,68 @@ export type FranchiseMasterUpdateOneRequiredWithoutHeadSiteSupervisorFranchiseMa
   update?: Prisma.XOR<Prisma.XOR<Prisma.FranchiseMasterUpdateToOneWithWhereWithoutHeadSiteSupervisorFranchiseMappingsInput, Prisma.FranchiseMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput>, Prisma.FranchiseMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput>
 }
 
+export type FranchiseMasterCreateNestedOneWithoutOnlineLeadsInput = {
+  create?: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutOnlineLeadsInput, Prisma.FranchiseMasterUncheckedCreateWithoutOnlineLeadsInput>
+  connectOrCreate?: Prisma.FranchiseMasterCreateOrConnectWithoutOnlineLeadsInput
+  connect?: Prisma.FranchiseMasterWhereUniqueInput
+}
+
+export type FranchiseMasterUpdateOneWithoutOnlineLeadsNestedInput = {
+  create?: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutOnlineLeadsInput, Prisma.FranchiseMasterUncheckedCreateWithoutOnlineLeadsInput>
+  connectOrCreate?: Prisma.FranchiseMasterCreateOrConnectWithoutOnlineLeadsInput
+  upsert?: Prisma.FranchiseMasterUpsertWithoutOnlineLeadsInput
+  disconnect?: Prisma.FranchiseMasterWhereInput | boolean
+  delete?: Prisma.FranchiseMasterWhereInput | boolean
+  connect?: Prisma.FranchiseMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FranchiseMasterUpdateToOneWithWhereWithoutOnlineLeadsInput, Prisma.FranchiseMasterUpdateWithoutOnlineLeadsInput>, Prisma.FranchiseMasterUncheckedUpdateWithoutOnlineLeadsInput>
+}
+
+export type FranchiseMasterCreateNestedOneWithoutLeadHistoriesInput = {
+  create?: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutLeadHistoriesInput, Prisma.FranchiseMasterUncheckedCreateWithoutLeadHistoriesInput>
+  connectOrCreate?: Prisma.FranchiseMasterCreateOrConnectWithoutLeadHistoriesInput
+  connect?: Prisma.FranchiseMasterWhereUniqueInput
+}
+
+export type FranchiseMasterUpdateOneWithoutLeadHistoriesNestedInput = {
+  create?: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutLeadHistoriesInput, Prisma.FranchiseMasterUncheckedCreateWithoutLeadHistoriesInput>
+  connectOrCreate?: Prisma.FranchiseMasterCreateOrConnectWithoutLeadHistoriesInput
+  upsert?: Prisma.FranchiseMasterUpsertWithoutLeadHistoriesInput
+  disconnect?: Prisma.FranchiseMasterWhereInput | boolean
+  delete?: Prisma.FranchiseMasterWhereInput | boolean
+  connect?: Prisma.FranchiseMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FranchiseMasterUpdateToOneWithWhereWithoutLeadHistoriesInput, Prisma.FranchiseMasterUpdateWithoutLeadHistoriesInput>, Prisma.FranchiseMasterUncheckedUpdateWithoutLeadHistoriesInput>
+}
+
+export type FranchiseMasterCreateNestedOneWithoutStoreLogsFromInput = {
+  create?: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutStoreLogsFromInput, Prisma.FranchiseMasterUncheckedCreateWithoutStoreLogsFromInput>
+  connectOrCreate?: Prisma.FranchiseMasterCreateOrConnectWithoutStoreLogsFromInput
+  connect?: Prisma.FranchiseMasterWhereUniqueInput
+}
+
+export type FranchiseMasterCreateNestedOneWithoutStoreLogsToInput = {
+  create?: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutStoreLogsToInput, Prisma.FranchiseMasterUncheckedCreateWithoutStoreLogsToInput>
+  connectOrCreate?: Prisma.FranchiseMasterCreateOrConnectWithoutStoreLogsToInput
+  connect?: Prisma.FranchiseMasterWhereUniqueInput
+}
+
+export type FranchiseMasterUpdateOneWithoutStoreLogsFromNestedInput = {
+  create?: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutStoreLogsFromInput, Prisma.FranchiseMasterUncheckedCreateWithoutStoreLogsFromInput>
+  connectOrCreate?: Prisma.FranchiseMasterCreateOrConnectWithoutStoreLogsFromInput
+  upsert?: Prisma.FranchiseMasterUpsertWithoutStoreLogsFromInput
+  disconnect?: Prisma.FranchiseMasterWhereInput | boolean
+  delete?: Prisma.FranchiseMasterWhereInput | boolean
+  connect?: Prisma.FranchiseMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FranchiseMasterUpdateToOneWithWhereWithoutStoreLogsFromInput, Prisma.FranchiseMasterUpdateWithoutStoreLogsFromInput>, Prisma.FranchiseMasterUncheckedUpdateWithoutStoreLogsFromInput>
+}
+
+export type FranchiseMasterUpdateOneRequiredWithoutStoreLogsToNestedInput = {
+  create?: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutStoreLogsToInput, Prisma.FranchiseMasterUncheckedCreateWithoutStoreLogsToInput>
+  connectOrCreate?: Prisma.FranchiseMasterCreateOrConnectWithoutStoreLogsToInput
+  upsert?: Prisma.FranchiseMasterUpsertWithoutStoreLogsToInput
+  connect?: Prisma.FranchiseMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FranchiseMasterUpdateToOneWithWhereWithoutStoreLogsToInput, Prisma.FranchiseMasterUpdateWithoutStoreLogsToInput>, Prisma.FranchiseMasterUncheckedUpdateWithoutStoreLogsToInput>
+}
+
 export type FranchiseMasterCreateWithoutVendorInput = {
   franchise_name: string
   franchise_code?: string | null
@@ -972,6 +1062,10 @@ export type FranchiseMasterCreateWithoutVendorInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutFranchiseInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutToFranchiseInput
   users?: Prisma.UserMasterCreateNestedManyWithoutFranchiseInput
 }
 
@@ -1001,6 +1095,10 @@ export type FranchiseMasterUncheckedCreateWithoutVendorInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutFranchiseInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutToFranchiseInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutFranchiseInput
 }
 
@@ -1082,6 +1180,10 @@ export type FranchiseMasterCreateWithoutUsersInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutFranchiseInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutToFranchiseInput
 }
 
 export type FranchiseMasterUncheckedCreateWithoutUsersInput = {
@@ -1111,6 +1213,10 @@ export type FranchiseMasterUncheckedCreateWithoutUsersInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutFranchiseInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutToFranchiseInput
 }
 
 export type FranchiseMasterCreateOrConnectWithoutUsersInput = {
@@ -1155,6 +1261,10 @@ export type FranchiseMasterUpdateWithoutUsersInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutFranchiseNestedInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUpdateManyWithoutToFranchiseNestedInput
 }
 
 export type FranchiseMasterUncheckedUpdateWithoutUsersInput = {
@@ -1184,6 +1294,10 @@ export type FranchiseMasterUncheckedUpdateWithoutUsersInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutToFranchiseNestedInput
 }
 
 export type FranchiseMasterCreateWithoutLeadsInput = {
@@ -1211,6 +1325,10 @@ export type FranchiseMasterCreateWithoutLeadsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutFranchisesInput
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutFranchiseInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutToFranchiseInput
   users?: Prisma.UserMasterCreateNestedManyWithoutFranchiseInput
 }
 
@@ -1240,6 +1358,10 @@ export type FranchiseMasterUncheckedCreateWithoutLeadsInput = {
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutToFranchiseInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutFranchiseInput
 }
 
@@ -1284,6 +1406,10 @@ export type FranchiseMasterUpdateWithoutLeadsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFranchisesNestedInput
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutFranchiseNestedInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUpdateManyWithoutToFranchiseNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutFranchiseNestedInput
 }
 
@@ -1313,6 +1439,10 @@ export type FranchiseMasterUncheckedUpdateWithoutLeadsInput = {
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutToFranchiseNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutFranchiseNestedInput
 }
 
@@ -1341,6 +1471,10 @@ export type FranchiseMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutFranchisesInput
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutToFranchiseInput
   users?: Prisma.UserMasterCreateNestedManyWithoutFranchiseInput
 }
 
@@ -1370,6 +1504,10 @@ export type FranchiseMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInp
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutToFranchiseInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutFranchiseInput
 }
 
@@ -1414,6 +1552,10 @@ export type FranchiseMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFranchisesNestedInput
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUpdateManyWithoutToFranchiseNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutFranchiseNestedInput
 }
 
@@ -1443,6 +1585,10 @@ export type FranchiseMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInp
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutToFranchiseNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutFranchiseNestedInput
 }
 
@@ -1471,6 +1617,10 @@ export type FranchiseMasterCreateWithoutAccountsInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutFranchiseInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutToFranchiseInput
   users?: Prisma.UserMasterCreateNestedManyWithoutFranchiseInput
 }
 
@@ -1500,6 +1650,10 @@ export type FranchiseMasterUncheckedCreateWithoutAccountsInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutFranchiseInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutToFranchiseInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutFranchiseInput
 }
 
@@ -1544,6 +1698,10 @@ export type FranchiseMasterUpdateWithoutAccountsInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutFranchiseNestedInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUpdateManyWithoutToFranchiseNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutFranchiseNestedInput
 }
 
@@ -1573,6 +1731,10 @@ export type FranchiseMasterUncheckedUpdateWithoutAccountsInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutToFranchiseNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutFranchiseNestedInput
 }
 
@@ -1601,6 +1763,10 @@ export type FranchiseMasterCreateWithoutFastProductionRequestBatchesInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutFranchiseInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutToFranchiseInput
   users?: Prisma.UserMasterCreateNestedManyWithoutFranchiseInput
 }
 
@@ -1630,6 +1796,10 @@ export type FranchiseMasterUncheckedCreateWithoutFastProductionRequestBatchesInp
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutFranchiseInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutToFranchiseInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutFranchiseInput
 }
 
@@ -1674,6 +1844,10 @@ export type FranchiseMasterUpdateWithoutFastProductionRequestBatchesInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutFranchiseNestedInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUpdateManyWithoutToFranchiseNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutFranchiseNestedInput
 }
 
@@ -1703,6 +1877,10 @@ export type FranchiseMasterUncheckedUpdateWithoutFastProductionRequestBatchesInp
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutToFranchiseNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutFranchiseNestedInput
 }
 
@@ -1731,6 +1909,10 @@ export type FranchiseMasterCreateWithoutFastProductionRequestsInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutFranchiseInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutToFranchiseInput
   users?: Prisma.UserMasterCreateNestedManyWithoutFranchiseInput
 }
 
@@ -1760,6 +1942,10 @@ export type FranchiseMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutFranchiseInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutToFranchiseInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutFranchiseInput
 }
 
@@ -1804,6 +1990,10 @@ export type FranchiseMasterUpdateWithoutFastProductionRequestsInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutFranchiseNestedInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUpdateManyWithoutToFranchiseNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutFranchiseNestedInput
 }
 
@@ -1833,6 +2023,10 @@ export type FranchiseMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutToFranchiseNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutFranchiseNestedInput
 }
 
@@ -1861,6 +2055,10 @@ export type FranchiseMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutFranchisesInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutFranchiseInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutToFranchiseInput
   users?: Prisma.UserMasterCreateNestedManyWithoutFranchiseInput
 }
 
@@ -1890,6 +2088,10 @@ export type FranchiseMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapp
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutFranchiseInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutToFranchiseInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutFranchiseInput
 }
 
@@ -1934,6 +2136,10 @@ export type FranchiseMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFranchisesNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutFranchiseNestedInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUpdateManyWithoutToFranchiseNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutFranchiseNestedInput
 }
 
@@ -1963,6 +2169,594 @@ export type FranchiseMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapp
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutToFranchiseNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+}
+
+export type FranchiseMasterCreateWithoutOnlineLeadsInput = {
+  franchise_name: string
+  franchise_code?: string | null
+  contact_number?: string | null
+  contact_email?: string | null
+  contact_person?: string | null
+  is_head_office?: boolean
+  zone_id?: number | null
+  country_id?: number | null
+  region_id?: number | null
+  state_id?: number | null
+  city_id?: number | null
+  area_id?: number | null
+  address?: string | null
+  pincode?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  moduled_for_b2b?: boolean
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutFranchiseInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutFranchiseInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFranchisesInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutFranchiseInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutFranchiseInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutToFranchiseInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutFranchiseInput
+}
+
+export type FranchiseMasterUncheckedCreateWithoutOnlineLeadsInput = {
+  id?: number
+  vendor_id: number
+  franchise_name: string
+  franchise_code?: string | null
+  contact_number?: string | null
+  contact_email?: string | null
+  contact_person?: string | null
+  is_head_office?: boolean
+  zone_id?: number | null
+  country_id?: number | null
+  region_id?: number | null
+  state_id?: number | null
+  city_id?: number | null
+  area_id?: number | null
+  address?: string | null
+  pincode?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  moduled_for_b2b?: boolean
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutFranchiseInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutFranchiseInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutToFranchiseInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutFranchiseInput
+}
+
+export type FranchiseMasterCreateOrConnectWithoutOnlineLeadsInput = {
+  where: Prisma.FranchiseMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutOnlineLeadsInput, Prisma.FranchiseMasterUncheckedCreateWithoutOnlineLeadsInput>
+}
+
+export type FranchiseMasterUpsertWithoutOnlineLeadsInput = {
+  update: Prisma.XOR<Prisma.FranchiseMasterUpdateWithoutOnlineLeadsInput, Prisma.FranchiseMasterUncheckedUpdateWithoutOnlineLeadsInput>
+  create: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutOnlineLeadsInput, Prisma.FranchiseMasterUncheckedCreateWithoutOnlineLeadsInput>
+  where?: Prisma.FranchiseMasterWhereInput
+}
+
+export type FranchiseMasterUpdateToOneWithWhereWithoutOnlineLeadsInput = {
+  where?: Prisma.FranchiseMasterWhereInput
+  data: Prisma.XOR<Prisma.FranchiseMasterUpdateWithoutOnlineLeadsInput, Prisma.FranchiseMasterUncheckedUpdateWithoutOnlineLeadsInput>
+}
+
+export type FranchiseMasterUpdateWithoutOnlineLeadsInput = {
+  franchise_name?: Prisma.StringFieldUpdateOperationsInput | string
+  franchise_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_person?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_head_office?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  zone_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  country_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  region_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  city_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  area_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutFranchiseNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFranchisesNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutFranchiseNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutFranchiseNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUpdateManyWithoutToFranchiseNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutFranchiseNestedInput
+}
+
+export type FranchiseMasterUncheckedUpdateWithoutOnlineLeadsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_name?: Prisma.StringFieldUpdateOperationsInput | string
+  franchise_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_person?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_head_office?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  zone_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  country_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  region_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  city_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  area_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutToFranchiseNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+}
+
+export type FranchiseMasterCreateWithoutLeadHistoriesInput = {
+  franchise_name: string
+  franchise_code?: string | null
+  contact_number?: string | null
+  contact_email?: string | null
+  contact_person?: string | null
+  is_head_office?: boolean
+  zone_id?: number | null
+  country_id?: number | null
+  region_id?: number | null
+  state_id?: number | null
+  city_id?: number | null
+  area_id?: number | null
+  address?: string | null
+  pincode?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  moduled_for_b2b?: boolean
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutFranchiseInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutFranchiseInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFranchisesInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutFranchiseInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutFranchiseInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutToFranchiseInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutFranchiseInput
+}
+
+export type FranchiseMasterUncheckedCreateWithoutLeadHistoriesInput = {
+  id?: number
+  vendor_id: number
+  franchise_name: string
+  franchise_code?: string | null
+  contact_number?: string | null
+  contact_email?: string | null
+  contact_person?: string | null
+  is_head_office?: boolean
+  zone_id?: number | null
+  country_id?: number | null
+  region_id?: number | null
+  state_id?: number | null
+  city_id?: number | null
+  area_id?: number | null
+  address?: string | null
+  pincode?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  moduled_for_b2b?: boolean
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutFranchiseInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutFranchiseInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutFromFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutToFranchiseInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutFranchiseInput
+}
+
+export type FranchiseMasterCreateOrConnectWithoutLeadHistoriesInput = {
+  where: Prisma.FranchiseMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutLeadHistoriesInput, Prisma.FranchiseMasterUncheckedCreateWithoutLeadHistoriesInput>
+}
+
+export type FranchiseMasterUpsertWithoutLeadHistoriesInput = {
+  update: Prisma.XOR<Prisma.FranchiseMasterUpdateWithoutLeadHistoriesInput, Prisma.FranchiseMasterUncheckedUpdateWithoutLeadHistoriesInput>
+  create: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutLeadHistoriesInput, Prisma.FranchiseMasterUncheckedCreateWithoutLeadHistoriesInput>
+  where?: Prisma.FranchiseMasterWhereInput
+}
+
+export type FranchiseMasterUpdateToOneWithWhereWithoutLeadHistoriesInput = {
+  where?: Prisma.FranchiseMasterWhereInput
+  data: Prisma.XOR<Prisma.FranchiseMasterUpdateWithoutLeadHistoriesInput, Prisma.FranchiseMasterUncheckedUpdateWithoutLeadHistoriesInput>
+}
+
+export type FranchiseMasterUpdateWithoutLeadHistoriesInput = {
+  franchise_name?: Prisma.StringFieldUpdateOperationsInput | string
+  franchise_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_person?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_head_office?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  zone_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  country_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  region_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  city_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  area_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutFranchiseNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFranchisesNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutFranchiseNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutFranchiseNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUpdateManyWithoutToFranchiseNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutFranchiseNestedInput
+}
+
+export type FranchiseMasterUncheckedUpdateWithoutLeadHistoriesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_name?: Prisma.StringFieldUpdateOperationsInput | string
+  franchise_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_person?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_head_office?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  zone_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  country_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  region_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  city_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  area_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutToFranchiseNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+}
+
+export type FranchiseMasterCreateWithoutStoreLogsFromInput = {
+  franchise_name: string
+  franchise_code?: string | null
+  contact_number?: string | null
+  contact_email?: string | null
+  contact_person?: string | null
+  is_head_office?: boolean
+  zone_id?: number | null
+  country_id?: number | null
+  region_id?: number | null
+  state_id?: number | null
+  city_id?: number | null
+  area_id?: number | null
+  address?: string | null
+  pincode?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  moduled_for_b2b?: boolean
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutFranchiseInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutFranchiseInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFranchisesInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutFranchiseInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutFranchiseInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryCreateNestedManyWithoutFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutToFranchiseInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutFranchiseInput
+}
+
+export type FranchiseMasterUncheckedCreateWithoutStoreLogsFromInput = {
+  id?: number
+  vendor_id: number
+  franchise_name: string
+  franchise_code?: string | null
+  contact_number?: string | null
+  contact_email?: string | null
+  contact_person?: string | null
+  is_head_office?: boolean
+  zone_id?: number | null
+  country_id?: number | null
+  region_id?: number | null
+  state_id?: number | null
+  city_id?: number | null
+  area_id?: number | null
+  address?: string | null
+  pincode?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  moduled_for_b2b?: boolean
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutFranchiseInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutFranchiseInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedCreateNestedManyWithoutFranchiseInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutToFranchiseInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutFranchiseInput
+}
+
+export type FranchiseMasterCreateOrConnectWithoutStoreLogsFromInput = {
+  where: Prisma.FranchiseMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutStoreLogsFromInput, Prisma.FranchiseMasterUncheckedCreateWithoutStoreLogsFromInput>
+}
+
+export type FranchiseMasterCreateWithoutStoreLogsToInput = {
+  franchise_name: string
+  franchise_code?: string | null
+  contact_number?: string | null
+  contact_email?: string | null
+  contact_person?: string | null
+  is_head_office?: boolean
+  zone_id?: number | null
+  country_id?: number | null
+  region_id?: number | null
+  state_id?: number | null
+  city_id?: number | null
+  area_id?: number | null
+  address?: string | null
+  pincode?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  moduled_for_b2b?: boolean
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutFranchiseInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutFranchiseInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFranchisesInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutFranchiseInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutFranchiseInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogCreateNestedManyWithoutFromFranchiseInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutFranchiseInput
+}
+
+export type FranchiseMasterUncheckedCreateWithoutStoreLogsToInput = {
+  id?: number
+  vendor_id: number
+  franchise_name: string
+  franchise_code?: string | null
+  contact_number?: string | null
+  contact_email?: string | null
+  contact_person?: string | null
+  is_head_office?: boolean
+  zone_id?: number | null
+  country_id?: number | null
+  region_id?: number | null
+  state_id?: number | null
+  city_id?: number | null
+  area_id?: number | null
+  address?: string | null
+  pincode?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  moduled_for_b2b?: boolean
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutFranchiseInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutFranchiseInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutFranchiseInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedCreateNestedManyWithoutFranchiseInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedCreateNestedManyWithoutFranchiseInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedCreateNestedManyWithoutFromFranchiseInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutFranchiseInput
+}
+
+export type FranchiseMasterCreateOrConnectWithoutStoreLogsToInput = {
+  where: Prisma.FranchiseMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutStoreLogsToInput, Prisma.FranchiseMasterUncheckedCreateWithoutStoreLogsToInput>
+}
+
+export type FranchiseMasterUpsertWithoutStoreLogsFromInput = {
+  update: Prisma.XOR<Prisma.FranchiseMasterUpdateWithoutStoreLogsFromInput, Prisma.FranchiseMasterUncheckedUpdateWithoutStoreLogsFromInput>
+  create: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutStoreLogsFromInput, Prisma.FranchiseMasterUncheckedCreateWithoutStoreLogsFromInput>
+  where?: Prisma.FranchiseMasterWhereInput
+}
+
+export type FranchiseMasterUpdateToOneWithWhereWithoutStoreLogsFromInput = {
+  where?: Prisma.FranchiseMasterWhereInput
+  data: Prisma.XOR<Prisma.FranchiseMasterUpdateWithoutStoreLogsFromInput, Prisma.FranchiseMasterUncheckedUpdateWithoutStoreLogsFromInput>
+}
+
+export type FranchiseMasterUpdateWithoutStoreLogsFromInput = {
+  franchise_name?: Prisma.StringFieldUpdateOperationsInput | string
+  franchise_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_person?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_head_office?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  zone_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  country_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  region_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  city_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  area_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutFranchiseNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFranchisesNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutFranchiseNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutFranchiseNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUpdateManyWithoutFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUpdateManyWithoutToFranchiseNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutFranchiseNestedInput
+}
+
+export type FranchiseMasterUncheckedUpdateWithoutStoreLogsFromInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_name?: Prisma.StringFieldUpdateOperationsInput | string
+  franchise_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_person?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_head_office?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  zone_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  country_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  region_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  city_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  area_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedUpdateManyWithoutFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutToFranchiseNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+}
+
+export type FranchiseMasterUpsertWithoutStoreLogsToInput = {
+  update: Prisma.XOR<Prisma.FranchiseMasterUpdateWithoutStoreLogsToInput, Prisma.FranchiseMasterUncheckedUpdateWithoutStoreLogsToInput>
+  create: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutStoreLogsToInput, Prisma.FranchiseMasterUncheckedCreateWithoutStoreLogsToInput>
+  where?: Prisma.FranchiseMasterWhereInput
+}
+
+export type FranchiseMasterUpdateToOneWithWhereWithoutStoreLogsToInput = {
+  where?: Prisma.FranchiseMasterWhereInput
+  data: Prisma.XOR<Prisma.FranchiseMasterUpdateWithoutStoreLogsToInput, Prisma.FranchiseMasterUncheckedUpdateWithoutStoreLogsToInput>
+}
+
+export type FranchiseMasterUpdateWithoutStoreLogsToInput = {
+  franchise_name?: Prisma.StringFieldUpdateOperationsInput | string
+  franchise_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_person?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_head_office?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  zone_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  country_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  region_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  city_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  area_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutFranchiseNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFranchisesNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutFranchiseNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutFranchiseNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUpdateManyWithoutFromFranchiseNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutFranchiseNestedInput
+}
+
+export type FranchiseMasterUncheckedUpdateWithoutStoreLogsToInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_name?: Prisma.StringFieldUpdateOperationsInput | string
+  franchise_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_person?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_head_office?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  zone_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  country_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  region_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  city_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  area_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutFromFranchiseNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutFranchiseNestedInput
 }
 
@@ -2013,6 +2807,10 @@ export type FranchiseMasterUpdateWithoutVendorInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutFranchiseNestedInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUpdateManyWithoutToFranchiseNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutFranchiseNestedInput
 }
 
@@ -2042,6 +2840,10 @@ export type FranchiseMasterUncheckedUpdateWithoutVendorInput = {
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutFranchiseNestedInput
+  onlineLeads?: Prisma.OnlineLeadUncheckedUpdateManyWithoutFranchiseNestedInput
+  leadHistories?: Prisma.OnlineLeadHistoryUncheckedUpdateManyWithoutFranchiseNestedInput
+  storeLogsFrom?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutFromFranchiseNestedInput
+  storeLogsTo?: Prisma.OnlineLeadStoreLogUncheckedUpdateManyWithoutToFranchiseNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutFranchiseNestedInput
 }
 
@@ -2079,6 +2881,10 @@ export type FranchiseMasterCountOutputType = {
   headSiteSupervisorFranchiseMappings: number
   leads: number
   leadSuperAdminApprovalLocIns: number
+  onlineLeads: number
+  leadHistories: number
+  storeLogsFrom: number
+  storeLogsTo: number
   users: number
 }
 
@@ -2089,6 +2895,10 @@ export type FranchiseMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.E
   headSiteSupervisorFranchiseMappings?: boolean | FranchiseMasterCountOutputTypeCountHeadSiteSupervisorFranchiseMappingsArgs
   leads?: boolean | FranchiseMasterCountOutputTypeCountLeadsArgs
   leadSuperAdminApprovalLocIns?: boolean | FranchiseMasterCountOutputTypeCountLeadSuperAdminApprovalLocInsArgs
+  onlineLeads?: boolean | FranchiseMasterCountOutputTypeCountOnlineLeadsArgs
+  leadHistories?: boolean | FranchiseMasterCountOutputTypeCountLeadHistoriesArgs
+  storeLogsFrom?: boolean | FranchiseMasterCountOutputTypeCountStoreLogsFromArgs
+  storeLogsTo?: boolean | FranchiseMasterCountOutputTypeCountStoreLogsToArgs
   users?: boolean | FranchiseMasterCountOutputTypeCountUsersArgs
 }
 
@@ -2147,6 +2957,34 @@ export type FranchiseMasterCountOutputTypeCountLeadSuperAdminApprovalLocInsArgs<
 /**
  * FranchiseMasterCountOutputType without action
  */
+export type FranchiseMasterCountOutputTypeCountOnlineLeadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OnlineLeadWhereInput
+}
+
+/**
+ * FranchiseMasterCountOutputType without action
+ */
+export type FranchiseMasterCountOutputTypeCountLeadHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OnlineLeadHistoryWhereInput
+}
+
+/**
+ * FranchiseMasterCountOutputType without action
+ */
+export type FranchiseMasterCountOutputTypeCountStoreLogsFromArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OnlineLeadStoreLogWhereInput
+}
+
+/**
+ * FranchiseMasterCountOutputType without action
+ */
+export type FranchiseMasterCountOutputTypeCountStoreLogsToArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OnlineLeadStoreLogWhereInput
+}
+
+/**
+ * FranchiseMasterCountOutputType without action
+ */
 export type FranchiseMasterCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.UserMasterWhereInput
 }
@@ -2180,6 +3018,10 @@ export type FranchiseMasterSelect<ExtArgs extends runtime.Types.Extensions.Inter
   headSiteSupervisorFranchiseMappings?: boolean | Prisma.FranchiseMaster$headSiteSupervisorFranchiseMappingsArgs<ExtArgs>
   leads?: boolean | Prisma.FranchiseMaster$leadsArgs<ExtArgs>
   leadSuperAdminApprovalLocIns?: boolean | Prisma.FranchiseMaster$leadSuperAdminApprovalLocInsArgs<ExtArgs>
+  onlineLeads?: boolean | Prisma.FranchiseMaster$onlineLeadsArgs<ExtArgs>
+  leadHistories?: boolean | Prisma.FranchiseMaster$leadHistoriesArgs<ExtArgs>
+  storeLogsFrom?: boolean | Prisma.FranchiseMaster$storeLogsFromArgs<ExtArgs>
+  storeLogsTo?: boolean | Prisma.FranchiseMaster$storeLogsToArgs<ExtArgs>
   users?: boolean | Prisma.FranchiseMaster$usersArgs<ExtArgs>
   _count?: boolean | Prisma.FranchiseMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["franchiseMaster"]>
@@ -2264,6 +3106,10 @@ export type FranchiseMasterInclude<ExtArgs extends runtime.Types.Extensions.Inte
   headSiteSupervisorFranchiseMappings?: boolean | Prisma.FranchiseMaster$headSiteSupervisorFranchiseMappingsArgs<ExtArgs>
   leads?: boolean | Prisma.FranchiseMaster$leadsArgs<ExtArgs>
   leadSuperAdminApprovalLocIns?: boolean | Prisma.FranchiseMaster$leadSuperAdminApprovalLocInsArgs<ExtArgs>
+  onlineLeads?: boolean | Prisma.FranchiseMaster$onlineLeadsArgs<ExtArgs>
+  leadHistories?: boolean | Prisma.FranchiseMaster$leadHistoriesArgs<ExtArgs>
+  storeLogsFrom?: boolean | Prisma.FranchiseMaster$storeLogsFromArgs<ExtArgs>
+  storeLogsTo?: boolean | Prisma.FranchiseMaster$storeLogsToArgs<ExtArgs>
   users?: boolean | Prisma.FranchiseMaster$usersArgs<ExtArgs>
   _count?: boolean | Prisma.FranchiseMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -2284,6 +3130,10 @@ export type $FranchiseMasterPayload<ExtArgs extends runtime.Types.Extensions.Int
     headSiteSupervisorFranchiseMappings: Prisma.$HeadSiteSupervisorFranchiseMappingPayload<ExtArgs>[]
     leads: Prisma.$LeadMasterPayload<ExtArgs>[]
     leadSuperAdminApprovalLocIns: Prisma.$LeadSuperAdminApprovalLocInsPayload<ExtArgs>[]
+    onlineLeads: Prisma.$OnlineLeadPayload<ExtArgs>[]
+    leadHistories: Prisma.$OnlineLeadHistoryPayload<ExtArgs>[]
+    storeLogsFrom: Prisma.$OnlineLeadStoreLogPayload<ExtArgs>[]
+    storeLogsTo: Prisma.$OnlineLeadStoreLogPayload<ExtArgs>[]
     users: Prisma.$UserMasterPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -2708,6 +3558,10 @@ export interface Prisma__FranchiseMasterClient<T, Null = never, ExtArgs extends 
   headSiteSupervisorFranchiseMappings<T extends Prisma.FranchiseMaster$headSiteSupervisorFranchiseMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FranchiseMaster$headSiteSupervisorFranchiseMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HeadSiteSupervisorFranchiseMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leads<T extends Prisma.FranchiseMaster$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FranchiseMaster$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadSuperAdminApprovalLocIns<T extends Prisma.FranchiseMaster$leadSuperAdminApprovalLocInsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FranchiseMaster$leadSuperAdminApprovalLocInsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadSuperAdminApprovalLocInsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  onlineLeads<T extends Prisma.FranchiseMaster$onlineLeadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FranchiseMaster$onlineLeadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OnlineLeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadHistories<T extends Prisma.FranchiseMaster$leadHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FranchiseMaster$leadHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OnlineLeadHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  storeLogsFrom<T extends Prisma.FranchiseMaster$storeLogsFromArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FranchiseMaster$storeLogsFromArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OnlineLeadStoreLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  storeLogsTo<T extends Prisma.FranchiseMaster$storeLogsToArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FranchiseMaster$storeLogsToArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OnlineLeadStoreLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   users<T extends Prisma.FranchiseMaster$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FranchiseMaster$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3300,6 +4154,102 @@ export type FranchiseMaster$leadSuperAdminApprovalLocInsArgs<ExtArgs extends run
   take?: number
   skip?: number
   distinct?: Prisma.LeadSuperAdminApprovalLocInsScalarFieldEnum | Prisma.LeadSuperAdminApprovalLocInsScalarFieldEnum[]
+}
+
+/**
+ * FranchiseMaster.onlineLeads
+ */
+export type FranchiseMaster$onlineLeadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OnlineLead
+   */
+  select?: Prisma.OnlineLeadSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OnlineLead
+   */
+  omit?: Prisma.OnlineLeadOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OnlineLeadInclude<ExtArgs> | null
+  where?: Prisma.OnlineLeadWhereInput
+  orderBy?: Prisma.OnlineLeadOrderByWithRelationInput | Prisma.OnlineLeadOrderByWithRelationInput[]
+  cursor?: Prisma.OnlineLeadWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OnlineLeadScalarFieldEnum | Prisma.OnlineLeadScalarFieldEnum[]
+}
+
+/**
+ * FranchiseMaster.leadHistories
+ */
+export type FranchiseMaster$leadHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OnlineLeadHistory
+   */
+  select?: Prisma.OnlineLeadHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OnlineLeadHistory
+   */
+  omit?: Prisma.OnlineLeadHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OnlineLeadHistoryInclude<ExtArgs> | null
+  where?: Prisma.OnlineLeadHistoryWhereInput
+  orderBy?: Prisma.OnlineLeadHistoryOrderByWithRelationInput | Prisma.OnlineLeadHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.OnlineLeadHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OnlineLeadHistoryScalarFieldEnum | Prisma.OnlineLeadHistoryScalarFieldEnum[]
+}
+
+/**
+ * FranchiseMaster.storeLogsFrom
+ */
+export type FranchiseMaster$storeLogsFromArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OnlineLeadStoreLog
+   */
+  select?: Prisma.OnlineLeadStoreLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OnlineLeadStoreLog
+   */
+  omit?: Prisma.OnlineLeadStoreLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OnlineLeadStoreLogInclude<ExtArgs> | null
+  where?: Prisma.OnlineLeadStoreLogWhereInput
+  orderBy?: Prisma.OnlineLeadStoreLogOrderByWithRelationInput | Prisma.OnlineLeadStoreLogOrderByWithRelationInput[]
+  cursor?: Prisma.OnlineLeadStoreLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OnlineLeadStoreLogScalarFieldEnum | Prisma.OnlineLeadStoreLogScalarFieldEnum[]
+}
+
+/**
+ * FranchiseMaster.storeLogsTo
+ */
+export type FranchiseMaster$storeLogsToArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OnlineLeadStoreLog
+   */
+  select?: Prisma.OnlineLeadStoreLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OnlineLeadStoreLog
+   */
+  omit?: Prisma.OnlineLeadStoreLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OnlineLeadStoreLogInclude<ExtArgs> | null
+  where?: Prisma.OnlineLeadStoreLogWhereInput
+  orderBy?: Prisma.OnlineLeadStoreLogOrderByWithRelationInput | Prisma.OnlineLeadStoreLogOrderByWithRelationInput[]
+  cursor?: Prisma.OnlineLeadStoreLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OnlineLeadStoreLogScalarFieldEnum | Prisma.OnlineLeadStoreLogScalarFieldEnum[]
 }
 
 /**

@@ -655,3 +655,28 @@ export const OtherApplianceType = {
 } as const
 
 export type OtherApplianceType = (typeof OtherApplianceType)[keyof typeof OtherApplianceType]
+
+
+export const LeadEntryType = {
+  ONLINE: 'ONLINE',
+  WALK_IN: 'WALK_IN'
+} as const
+
+export type LeadEntryType = (typeof LeadEntryType)[keyof typeof LeadEntryType]
+
+
+export const LeadCallType = {
+  OUTGOING: 'OUTGOING',
+  INCOMING: 'INCOMING'
+} as const
+
+export type LeadCallType = (typeof LeadCallType)[keyof typeof LeadCallType]
+
+
+export const LeadStoreActionType = {
+  PREFERENCE: 'PREFERENCE',
+  ASSIGNED: 'ASSIGNED',
+  TRANSFERRED: 'TRANSFERRED'
+} as const
+
+export type LeadStoreActionType = (typeof LeadStoreActionType)[keyof typeof LeadStoreActionType]

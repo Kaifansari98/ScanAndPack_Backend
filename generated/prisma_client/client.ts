@@ -1019,3 +1019,38 @@ export type BroadcastRead = Prisma.BroadcastReadModel
  * 
  */
 export type NotificationQueue = Prisma.NotificationQueueModel
+/**
+ * Model OnlineLead
+ * 
+ */
+export type OnlineLead = Prisma.OnlineLeadModel
+/**
+ * Model OnlineLeadFollowupStatus
+ * 
+ */
+export type OnlineLeadFollowupStatus = Prisma.OnlineLeadFollowupStatusModel
+/**
+ * Model OnlineLeadHistory
+ * 
+ */
+export type OnlineLeadHistory = Prisma.OnlineLeadHistoryModel
+/**
+ * Model OnlineLeadCallLog
+ * 
+ */
+export type OnlineLeadCallLog = Prisma.OnlineLeadCallLogModel
+/**
+ * Model OnlineLeadStoreLog
+ * 
+ */
+export type OnlineLeadStoreLog = Prisma.OnlineLeadStoreLogModel
+/**
+ * Model UserTypePrivilegeMapping
+ * 
+ */
+export type UserTypePrivilegeMapping = Prisma.UserTypePrivilegeMappingModel
+/**
+ * Model TelecallerCampaignLead
+ * 
+ */
+export type TelecallerCampaignLead = Prisma.TelecallerCampaignLeadModel
