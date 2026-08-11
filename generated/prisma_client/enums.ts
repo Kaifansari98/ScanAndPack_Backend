@@ -463,6 +463,16 @@ export const ProductInstanceStatus = {
 export type ProductInstanceStatus = (typeof ProductInstanceStatus)[keyof typeof ProductInstanceStatus]
 
 
+export const ActivityStatusScopeType = {
+  lead: 'lead',
+  item_group: 'item_group',
+  item_code: 'item_code',
+  instance: 'instance'
+} as const
+
+export type ActivityStatusScopeType = (typeof ActivityStatusScopeType)[keyof typeof ActivityStatusScopeType]
+
+
 export const ActiveStatus = {
   Yes: 'Yes',
   No: 'No'

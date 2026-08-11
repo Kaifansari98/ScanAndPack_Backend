@@ -326,6 +326,7 @@ export type AccountMasterWhereInput = {
   installationUpdates?: Prisma.InstallationUpdateListRelationFilter
   installerMappings?: Prisma.InstallerUserMappingListRelationFilter
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogListRelationFilter
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogListRelationFilter
   leadAmcContracts?: Prisma.LeadAmcContractListRelationFilter
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingListRelationFilter
   leadChatDocument?: Prisma.LeadChatDocumentListRelationFilter
@@ -379,6 +380,7 @@ export type AccountMasterOrderByWithRelationInput = {
   installationUpdates?: Prisma.InstallationUpdateOrderByRelationAggregateInput
   installerMappings?: Prisma.InstallerUserMappingOrderByRelationAggregateInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogOrderByRelationAggregateInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogOrderByRelationAggregateInput
   leadAmcContracts?: Prisma.LeadAmcContractOrderByRelationAggregateInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingOrderByRelationAggregateInput
   leadChatDocument?: Prisma.LeadChatDocumentOrderByRelationAggregateInput
@@ -435,6 +437,7 @@ export type AccountMasterWhereUniqueInput = Prisma.AtLeast<{
   installationUpdates?: Prisma.InstallationUpdateListRelationFilter
   installerMappings?: Prisma.InstallerUserMappingListRelationFilter
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogListRelationFilter
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogListRelationFilter
   leadAmcContracts?: Prisma.LeadAmcContractListRelationFilter
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingListRelationFilter
   leadChatDocument?: Prisma.LeadChatDocumentListRelationFilter
@@ -527,6 +530,7 @@ export type AccountMasterCreateInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -576,6 +580,7 @@ export type AccountMasterUncheckedCreateInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -624,6 +629,7 @@ export type AccountMasterUpdateInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -673,6 +679,7 @@ export type AccountMasterUncheckedUpdateInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -1009,6 +1016,20 @@ export type AccountMasterUpdateOneRequiredWithoutLeadActivityStatusLogNestedInpu
   upsert?: Prisma.AccountMasterUpsertWithoutLeadActivityStatusLogInput
   connect?: Prisma.AccountMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.AccountMasterUpdateToOneWithWhereWithoutLeadActivityStatusLogInput, Prisma.AccountMasterUpdateWithoutLeadActivityStatusLogInput>, Prisma.AccountMasterUncheckedUpdateWithoutLeadActivityStatusLogInput>
+}
+
+export type AccountMasterCreateNestedOneWithoutLeadScopedActivityStatusLogsInput = {
+  create?: Prisma.XOR<Prisma.AccountMasterCreateWithoutLeadScopedActivityStatusLogsInput, Prisma.AccountMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput>
+  connectOrCreate?: Prisma.AccountMasterCreateOrConnectWithoutLeadScopedActivityStatusLogsInput
+  connect?: Prisma.AccountMasterWhereUniqueInput
+}
+
+export type AccountMasterUpdateOneRequiredWithoutLeadScopedActivityStatusLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.AccountMasterCreateWithoutLeadScopedActivityStatusLogsInput, Prisma.AccountMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput>
+  connectOrCreate?: Prisma.AccountMasterCreateOrConnectWithoutLeadScopedActivityStatusLogsInput
+  upsert?: Prisma.AccountMasterUpsertWithoutLeadScopedActivityStatusLogsInput
+  connect?: Prisma.AccountMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AccountMasterUpdateToOneWithWhereWithoutLeadScopedActivityStatusLogsInput, Prisma.AccountMasterUpdateWithoutLeadScopedActivityStatusLogsInput>, Prisma.AccountMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput>
 }
 
 export type AccountMasterCreateNestedOneWithoutLeadsMappingInput = {
@@ -1469,6 +1490,7 @@ export type AccountMasterCreateWithoutVendorInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -1517,6 +1539,7 @@ export type AccountMasterUncheckedCreateWithoutVendorInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -1611,6 +1634,7 @@ export type AccountMasterCreateWithoutCreatedByInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -1659,6 +1683,7 @@ export type AccountMasterUncheckedCreateWithoutCreatedByInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -1716,6 +1741,7 @@ export type AccountMasterCreateWithoutUpdatedByInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -1764,6 +1790,7 @@ export type AccountMasterUncheckedCreateWithoutUpdatedByInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -1854,6 +1881,7 @@ export type AccountMasterCreateWithoutLeadsInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -1902,6 +1930,7 @@ export type AccountMasterUncheckedCreateWithoutLeadsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -1965,6 +1994,7 @@ export type AccountMasterUpdateWithoutLeadsInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -2013,6 +2043,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -2060,6 +2091,7 @@ export type AccountMasterCreateWithoutLeadUserMappingsInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -2108,6 +2140,7 @@ export type AccountMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -2171,6 +2204,7 @@ export type AccountMasterUpdateWithoutLeadUserMappingsInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -2219,6 +2253,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -2265,6 +2300,7 @@ export type AccountMasterCreateWithoutLeadActivityStatusLogInput = {
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -2313,6 +2349,7 @@ export type AccountMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -2376,6 +2413,7 @@ export type AccountMasterUpdateWithoutLeadActivityStatusLogInput = {
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -2424,6 +2462,217 @@ export type AccountMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutAccountNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutAccountNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutAccountNestedInput
+}
+
+export type AccountMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
+  name: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutAccountsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutAccountsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutAccountsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutAccountsInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutAccountInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
+  leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutAccountInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutAccountInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutAccountInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutAccountInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutAccountInput
+}
+
+export type AccountMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput = {
+  id?: number
+  name: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  vendor_id: number
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  franchise_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutAccountInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutAccountInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutAccountInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutAccountInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutAccountInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutAccountInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutAccountInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAccountInput
+  leadsMapping?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutAccountInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutAccountInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutAccountInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutAccountInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutAccountInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutAccountInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutAccountInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutAccountInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutAccountInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutAccountInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutAccountInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutAccountInput
+}
+
+export type AccountMasterCreateOrConnectWithoutLeadScopedActivityStatusLogsInput = {
+  where: Prisma.AccountMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.AccountMasterCreateWithoutLeadScopedActivityStatusLogsInput, Prisma.AccountMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput>
+}
+
+export type AccountMasterUpsertWithoutLeadScopedActivityStatusLogsInput = {
+  update: Prisma.XOR<Prisma.AccountMasterUpdateWithoutLeadScopedActivityStatusLogsInput, Prisma.AccountMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput>
+  create: Prisma.XOR<Prisma.AccountMasterCreateWithoutLeadScopedActivityStatusLogsInput, Prisma.AccountMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput>
+  where?: Prisma.AccountMasterWhereInput
+}
+
+export type AccountMasterUpdateToOneWithWhereWithoutLeadScopedActivityStatusLogsInput = {
+  where?: Prisma.AccountMasterWhereInput
+  data: Prisma.XOR<Prisma.AccountMasterUpdateWithoutLeadScopedActivityStatusLogsInput, Prisma.AccountMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput>
+}
+
+export type AccountMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutAccountsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutAccountsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutAccountsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutAccountsNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutAccountNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
+  leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutAccountNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutAccountNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutAccountNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutAccountNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutAccountNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutAccountNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutAccountNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutAccountNestedInput
+  leadsMapping?: Prisma.LeadProductMappingUpdateManyWithoutAccountNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutAccountNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutAccountNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutAccountNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutAccountNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutAccountNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutAccountNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutAccountNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutAccountNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutAccountNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutAccountNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutAccountNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutAccountNestedInput
+}
+
+export type AccountMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutAccountNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutAccountNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -2472,6 +2721,7 @@ export type AccountMasterCreateWithoutLeadsMappingInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -2520,6 +2770,7 @@ export type AccountMasterUncheckedCreateWithoutLeadsMappingInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -2583,6 +2834,7 @@ export type AccountMasterUpdateWithoutLeadsMappingInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -2631,6 +2883,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadsMappingInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -2678,6 +2931,7 @@ export type AccountMasterCreateWithoutDocumentsInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -2726,6 +2980,7 @@ export type AccountMasterUncheckedCreateWithoutDocumentsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -2789,6 +3044,7 @@ export type AccountMasterUpdateWithoutDocumentsInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -2837,6 +3093,7 @@ export type AccountMasterUncheckedUpdateWithoutDocumentsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -2884,6 +3141,7 @@ export type AccountMasterCreateWithoutLeadChatDocumentInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
@@ -2932,6 +3190,7 @@ export type AccountMasterUncheckedCreateWithoutLeadChatDocumentInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
@@ -2995,6 +3254,7 @@ export type AccountMasterUpdateWithoutLeadChatDocumentInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
@@ -3043,6 +3303,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadChatDocumentInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
@@ -3090,6 +3351,7 @@ export type AccountMasterCreateWithoutLeadProductStructureMappingInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -3138,6 +3400,7 @@ export type AccountMasterUncheckedCreateWithoutLeadProductStructureMappingInput 
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -3201,6 +3464,7 @@ export type AccountMasterUpdateWithoutLeadProductStructureMappingInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -3249,6 +3513,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadProductStructureMappingInput 
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -3296,6 +3561,7 @@ export type AccountMasterCreateWithoutProductStructureInstancesInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -3344,6 +3610,7 @@ export type AccountMasterUncheckedCreateWithoutProductStructureInstancesInput = 
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -3407,6 +3674,7 @@ export type AccountMasterUpdateWithoutProductStructureInstancesInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -3455,6 +3723,7 @@ export type AccountMasterUncheckedUpdateWithoutProductStructureInstancesInput = 
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -3502,6 +3771,7 @@ export type AccountMasterCreateWithoutPaymentsInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -3550,6 +3820,7 @@ export type AccountMasterUncheckedCreateWithoutPaymentsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -3613,6 +3884,7 @@ export type AccountMasterUpdateWithoutPaymentsInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -3661,6 +3933,7 @@ export type AccountMasterUncheckedUpdateWithoutPaymentsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -3708,6 +3981,7 @@ export type AccountMasterCreateWithoutLedgersInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -3756,6 +4030,7 @@ export type AccountMasterUncheckedCreateWithoutLedgersInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -3819,6 +4094,7 @@ export type AccountMasterUpdateWithoutLedgersInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -3867,6 +4143,7 @@ export type AccountMasterUncheckedUpdateWithoutLedgersInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -3914,6 +4191,7 @@ export type AccountMasterCreateWithoutLeadAmcContractsInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
@@ -3962,6 +4240,7 @@ export type AccountMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
@@ -4025,6 +4304,7 @@ export type AccountMasterUpdateWithoutLeadAmcContractsInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
@@ -4073,6 +4353,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
@@ -4120,6 +4401,7 @@ export type AccountMasterCreateWithoutLeadServiceSchedulesInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -4168,6 +4450,7 @@ export type AccountMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -4231,6 +4514,7 @@ export type AccountMasterUpdateWithoutLeadServiceSchedulesInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -4279,6 +4563,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -4326,6 +4611,7 @@ export type AccountMasterCreateWithoutLeadStatusLogsInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -4374,6 +4660,7 @@ export type AccountMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -4437,6 +4724,7 @@ export type AccountMasterUpdateWithoutLeadStatusLogsInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -4485,6 +4773,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -4532,6 +4821,7 @@ export type AccountMasterCreateWithoutDesignMeetingInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -4580,6 +4870,7 @@ export type AccountMasterUncheckedCreateWithoutDesignMeetingInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -4643,6 +4934,7 @@ export type AccountMasterUpdateWithoutDesignMeetingInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -4691,6 +4983,7 @@ export type AccountMasterUncheckedUpdateWithoutDesignMeetingInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -4738,6 +5031,7 @@ export type AccountMasterCreateWithoutClientVisitsInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -4786,6 +5080,7 @@ export type AccountMasterUncheckedCreateWithoutClientVisitsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -4849,6 +5144,7 @@ export type AccountMasterUpdateWithoutClientVisitsInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -4897,6 +5193,7 @@ export type AccountMasterUncheckedUpdateWithoutClientVisitsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -4944,6 +5241,7 @@ export type AccountMasterCreateWithoutDesignMeetingDocsMappingInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -4992,6 +5290,7 @@ export type AccountMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -5055,6 +5354,7 @@ export type AccountMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -5103,6 +5403,7 @@ export type AccountMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -5150,6 +5451,7 @@ export type AccountMasterCreateWithoutClientVisitDocumentMappingsInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -5198,6 +5500,7 @@ export type AccountMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput 
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -5261,6 +5564,7 @@ export type AccountMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -5309,6 +5613,7 @@ export type AccountMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput 
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -5356,6 +5661,7 @@ export type AccountMasterCreateWithoutDesignSelectionInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -5404,6 +5710,7 @@ export type AccountMasterUncheckedCreateWithoutDesignSelectionInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -5467,6 +5774,7 @@ export type AccountMasterUpdateWithoutDesignSelectionInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -5515,6 +5823,7 @@ export type AccountMasterUncheckedUpdateWithoutDesignSelectionInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -5562,6 +5871,7 @@ export type AccountMasterCreateWithoutSiteSupervisorsInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -5610,6 +5920,7 @@ export type AccountMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -5673,6 +5984,7 @@ export type AccountMasterUpdateWithoutSiteSupervisorsInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -5721,6 +6033,7 @@ export type AccountMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -5768,6 +6081,7 @@ export type AccountMasterCreateWithoutTasksInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -5816,6 +6130,7 @@ export type AccountMasterUncheckedCreateWithoutTasksInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -5879,6 +6194,7 @@ export type AccountMasterUpdateWithoutTasksInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -5927,6 +6243,7 @@ export type AccountMasterUncheckedUpdateWithoutTasksInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -5973,6 +6290,7 @@ export type AccountMasterCreateWithoutFastProductionRequestBatchesInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -6021,6 +6339,7 @@ export type AccountMasterUncheckedCreateWithoutFastProductionRequestBatchesInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -6084,6 +6403,7 @@ export type AccountMasterUpdateWithoutFastProductionRequestBatchesInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -6132,6 +6452,7 @@ export type AccountMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -6179,6 +6500,7 @@ export type AccountMasterCreateWithoutFastProductionRequestsInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -6227,6 +6549,7 @@ export type AccountMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -6290,6 +6613,7 @@ export type AccountMasterUpdateWithoutFastProductionRequestsInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -6338,6 +6662,7 @@ export type AccountMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -6386,6 +6711,7 @@ export type AccountMasterCreateWithoutLeadDetailedLogsInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -6434,6 +6760,7 @@ export type AccountMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -6497,6 +6824,7 @@ export type AccountMasterUpdateWithoutLeadDetailedLogsInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -6545,6 +6873,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -6592,6 +6921,7 @@ export type AccountMasterCreateWithoutLeadDocumentLogsInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -6640,6 +6970,7 @@ export type AccountMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -6703,6 +7034,7 @@ export type AccountMasterUpdateWithoutLeadDocumentLogsInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -6751,6 +7083,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -6798,6 +7131,7 @@ export type AccountMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput =
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutAccountInput
@@ -6846,6 +7180,7 @@ export type AccountMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappin
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
   clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutAccountInput
@@ -6909,6 +7244,7 @@ export type AccountMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput =
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutAccountNestedInput
@@ -6957,6 +7293,7 @@ export type AccountMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappin
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
   clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutAccountNestedInput
@@ -7004,6 +7341,7 @@ export type AccountMasterCreateWithoutOrderLoginDetailsInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -7052,6 +7390,7 @@ export type AccountMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -7115,6 +7454,7 @@ export type AccountMasterUpdateWithoutOrderLoginDetailsInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -7163,6 +7503,7 @@ export type AccountMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -7210,6 +7551,7 @@ export type AccountMasterCreateWithoutSiteReadinessInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -7258,6 +7600,7 @@ export type AccountMasterUncheckedCreateWithoutSiteReadinessInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -7321,6 +7664,7 @@ export type AccountMasterUpdateWithoutSiteReadinessInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -7369,6 +7713,7 @@ export type AccountMasterUncheckedUpdateWithoutSiteReadinessInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -7415,6 +7760,7 @@ export type AccountMasterCreateWithoutInstallerMappingsInput = {
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -7463,6 +7809,7 @@ export type AccountMasterUncheckedCreateWithoutInstallerMappingsInput = {
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -7526,6 +7873,7 @@ export type AccountMasterUpdateWithoutInstallerMappingsInput = {
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -7574,6 +7922,7 @@ export type AccountMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -7621,6 +7970,7 @@ export type AccountMasterCreateWithoutInstallationUpdatesInput = {
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -7669,6 +8019,7 @@ export type AccountMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -7732,6 +8083,7 @@ export type AccountMasterUpdateWithoutInstallationUpdatesInput = {
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -7780,6 +8132,7 @@ export type AccountMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -7828,6 +8181,7 @@ export type AccountMasterCreateWithoutMiscellaneousMasterInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -7876,6 +8230,7 @@ export type AccountMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -7939,6 +8294,7 @@ export type AccountMasterUpdateWithoutMiscellaneousMasterInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -7987,6 +8343,7 @@ export type AccountMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -8033,6 +8390,7 @@ export type AccountMasterCreateWithoutInstallationIssueLogMasterInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -8081,6 +8439,7 @@ export type AccountMasterUncheckedCreateWithoutInstallationIssueLogMasterInput =
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -8144,6 +8503,7 @@ export type AccountMasterUpdateWithoutInstallationIssueLogMasterInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -8192,6 +8552,7 @@ export type AccountMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput =
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -8239,6 +8600,7 @@ export type AccountMasterCreateWithoutFranchiseInput = {
   installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentCreateNestedManyWithoutAccountInput
@@ -8287,6 +8649,7 @@ export type AccountMasterUncheckedCreateWithoutFranchiseInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutAccountInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAccountInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutAccountInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutAccountInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutAccountInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutAccountInput
@@ -8377,6 +8740,7 @@ export type AccountMasterUpdateWithoutVendorInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -8425,6 +8789,7 @@ export type AccountMasterUncheckedUpdateWithoutVendorInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -8523,6 +8888,7 @@ export type AccountMasterUpdateWithoutCreatedByInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -8571,6 +8937,7 @@ export type AccountMasterUncheckedUpdateWithoutCreatedByInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -8635,6 +9002,7 @@ export type AccountMasterUpdateWithoutUpdatedByInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -8683,6 +9051,7 @@ export type AccountMasterUncheckedUpdateWithoutUpdatedByInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -8764,6 +9133,7 @@ export type AccountMasterUpdateWithoutFranchiseInput = {
   installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUpdateManyWithoutAccountNestedInput
@@ -8812,6 +9182,7 @@ export type AccountMasterUncheckedUpdateWithoutFranchiseInput = {
   installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutAccountNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutAccountNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutAccountNestedInput
   leadChatDocument?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutAccountNestedInput
@@ -8868,6 +9239,7 @@ export type AccountMasterCountOutputType = {
   installationUpdates: number
   installerMappings: number
   leadActivityStatusLog: number
+  leadScopedActivityStatusLogs: number
   leadAmcContracts: number
   leadApprovalRequestDocumentMappings: number
   leadChatDocument: number
@@ -8902,6 +9274,7 @@ export type AccountMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Ext
   installationUpdates?: boolean | AccountMasterCountOutputTypeCountInstallationUpdatesArgs
   installerMappings?: boolean | AccountMasterCountOutputTypeCountInstallerMappingsArgs
   leadActivityStatusLog?: boolean | AccountMasterCountOutputTypeCountLeadActivityStatusLogArgs
+  leadScopedActivityStatusLogs?: boolean | AccountMasterCountOutputTypeCountLeadScopedActivityStatusLogsArgs
   leadAmcContracts?: boolean | AccountMasterCountOutputTypeCountLeadAmcContractsArgs
   leadApprovalRequestDocumentMappings?: boolean | AccountMasterCountOutputTypeCountLeadApprovalRequestDocumentMappingsArgs
   leadChatDocument?: boolean | AccountMasterCountOutputTypeCountLeadChatDocumentArgs
@@ -8979,6 +9352,13 @@ export type AccountMasterCountOutputTypeCountInstallerMappingsArgs<ExtArgs exten
  */
 export type AccountMasterCountOutputTypeCountLeadActivityStatusLogArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LeadActivityStatusLogWhereInput
+}
+
+/**
+ * AccountMasterCountOutputType without action
+ */
+export type AccountMasterCountOutputTypeCountLeadScopedActivityStatusLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadScopedActivityStatusLogWhereInput
 }
 
 /**
@@ -9183,6 +9563,7 @@ export type AccountMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   installationUpdates?: boolean | Prisma.AccountMaster$installationUpdatesArgs<ExtArgs>
   installerMappings?: boolean | Prisma.AccountMaster$installerMappingsArgs<ExtArgs>
   leadActivityStatusLog?: boolean | Prisma.AccountMaster$leadActivityStatusLogArgs<ExtArgs>
+  leadScopedActivityStatusLogs?: boolean | Prisma.AccountMaster$leadScopedActivityStatusLogsArgs<ExtArgs>
   leadAmcContracts?: boolean | Prisma.AccountMaster$leadAmcContractsArgs<ExtArgs>
   leadApprovalRequestDocumentMappings?: boolean | Prisma.AccountMaster$leadApprovalRequestDocumentMappingsArgs<ExtArgs>
   leadChatDocument?: boolean | Prisma.AccountMaster$leadChatDocumentArgs<ExtArgs>
@@ -9285,6 +9666,7 @@ export type AccountMasterInclude<ExtArgs extends runtime.Types.Extensions.Intern
   installationUpdates?: boolean | Prisma.AccountMaster$installationUpdatesArgs<ExtArgs>
   installerMappings?: boolean | Prisma.AccountMaster$installerMappingsArgs<ExtArgs>
   leadActivityStatusLog?: boolean | Prisma.AccountMaster$leadActivityStatusLogArgs<ExtArgs>
+  leadScopedActivityStatusLogs?: boolean | Prisma.AccountMaster$leadScopedActivityStatusLogsArgs<ExtArgs>
   leadAmcContracts?: boolean | Prisma.AccountMaster$leadAmcContractsArgs<ExtArgs>
   leadApprovalRequestDocumentMappings?: boolean | Prisma.AccountMaster$leadApprovalRequestDocumentMappingsArgs<ExtArgs>
   leadChatDocument?: boolean | Prisma.AccountMaster$leadChatDocumentArgs<ExtArgs>
@@ -9338,6 +9720,7 @@ export type $AccountMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     installationUpdates: Prisma.$InstallationUpdatePayload<ExtArgs>[]
     installerMappings: Prisma.$InstallerUserMappingPayload<ExtArgs>[]
     leadActivityStatusLog: Prisma.$LeadActivityStatusLogPayload<ExtArgs>[]
+    leadScopedActivityStatusLogs: Prisma.$LeadScopedActivityStatusLogPayload<ExtArgs>[]
     leadAmcContracts: Prisma.$LeadAmcContractPayload<ExtArgs>[]
     leadApprovalRequestDocumentMappings: Prisma.$LeadApprovalRequestDocumentMappingPayload<ExtArgs>[]
     leadChatDocument: Prisma.$LeadChatDocumentPayload<ExtArgs>[]
@@ -9784,6 +10167,7 @@ export interface Prisma__AccountMasterClient<T, Null = never, ExtArgs extends ru
   installationUpdates<T extends Prisma.AccountMaster$installationUpdatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$installationUpdatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallationUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   installerMappings<T extends Prisma.AccountMaster$installerMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$installerMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallerUserMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadActivityStatusLog<T extends Prisma.AccountMaster$leadActivityStatusLogArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadActivityStatusLogArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadActivityStatusLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadScopedActivityStatusLogs<T extends Prisma.AccountMaster$leadScopedActivityStatusLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadScopedActivityStatusLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadScopedActivityStatusLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadAmcContracts<T extends Prisma.AccountMaster$leadAmcContractsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadAmcContractsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadAmcContractPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadApprovalRequestDocumentMappings<T extends Prisma.AccountMaster$leadApprovalRequestDocumentMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadApprovalRequestDocumentMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadApprovalRequestDocumentMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadChatDocument<T extends Prisma.AccountMaster$leadChatDocumentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMaster$leadChatDocumentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadChatDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -10433,6 +10817,30 @@ export type AccountMaster$leadActivityStatusLogArgs<ExtArgs extends runtime.Type
   take?: number
   skip?: number
   distinct?: Prisma.LeadActivityStatusLogScalarFieldEnum | Prisma.LeadActivityStatusLogScalarFieldEnum[]
+}
+
+/**
+ * AccountMaster.leadScopedActivityStatusLogs
+ */
+export type AccountMaster$leadScopedActivityStatusLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadScopedActivityStatusLog
+   */
+  select?: Prisma.LeadScopedActivityStatusLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadScopedActivityStatusLog
+   */
+  omit?: Prisma.LeadScopedActivityStatusLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadScopedActivityStatusLogInclude<ExtArgs> | null
+  where?: Prisma.LeadScopedActivityStatusLogWhereInput
+  orderBy?: Prisma.LeadScopedActivityStatusLogOrderByWithRelationInput | Prisma.LeadScopedActivityStatusLogOrderByWithRelationInput[]
+  cursor?: Prisma.LeadScopedActivityStatusLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadScopedActivityStatusLogScalarFieldEnum | Prisma.LeadScopedActivityStatusLogScalarFieldEnum[]
 }
 
 /**

@@ -422,6 +422,23 @@ export type EnumLeadUserStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumLeadUserStatusFilter<$PrismaModel>
 }
 
+export type EnumActivityStatusScopeTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ActivityStatusScopeType | Prisma.EnumActivityStatusScopeTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ActivityStatusScopeType[] | Prisma.ListEnumActivityStatusScopeTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ActivityStatusScopeType[] | Prisma.ListEnumActivityStatusScopeTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumActivityStatusScopeTypeFilter<$PrismaModel> | $Enums.ActivityStatusScopeType
+}
+
+export type EnumActivityStatusScopeTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ActivityStatusScopeType | Prisma.EnumActivityStatusScopeTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ActivityStatusScopeType[] | Prisma.ListEnumActivityStatusScopeTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ActivityStatusScopeType[] | Prisma.ListEnumActivityStatusScopeTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumActivityStatusScopeTypeWithAggregatesFilter<$PrismaModel> | $Enums.ActivityStatusScopeType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumActivityStatusScopeTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumActivityStatusScopeTypeFilter<$PrismaModel>
+}
+
 export type DecimalNullableFilter<$PrismaModel = never> = {
   equals?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel> | null
   in?: runtime.Decimal[] | runtime.DecimalJsLike[] | number[] | string[] | Prisma.ListDecimalFieldRefInput<$PrismaModel> | null
@@ -2090,6 +2107,23 @@ export type NestedEnumLeadUserStatusWithAggregatesFilter<$PrismaModel = never> =
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumLeadUserStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumLeadUserStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumActivityStatusScopeTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ActivityStatusScopeType | Prisma.EnumActivityStatusScopeTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ActivityStatusScopeType[] | Prisma.ListEnumActivityStatusScopeTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ActivityStatusScopeType[] | Prisma.ListEnumActivityStatusScopeTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumActivityStatusScopeTypeFilter<$PrismaModel> | $Enums.ActivityStatusScopeType
+}
+
+export type NestedEnumActivityStatusScopeTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ActivityStatusScopeType | Prisma.EnumActivityStatusScopeTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ActivityStatusScopeType[] | Prisma.ListEnumActivityStatusScopeTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ActivityStatusScopeType[] | Prisma.ListEnumActivityStatusScopeTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumActivityStatusScopeTypeWithAggregatesFilter<$PrismaModel> | $Enums.ActivityStatusScopeType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumActivityStatusScopeTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumActivityStatusScopeTypeFilter<$PrismaModel>
 }
 
 export type NestedDecimalNullableFilter<$PrismaModel = never> = {

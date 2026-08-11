@@ -92,6 +92,7 @@ model VendorMaster {
   itemGroups                             ItemGroupMaster[]
   itemTypes                              ItemTypeMaster[]
   leadActivityStatusLog                  LeadActivityStatusLog[]
+  leadScopedActivityStatusLogs           LeadScopedActivityStatusLog[]
   leadAmcContracts                       LeadAmcContract[]
   leadApprovalRequestDocumentMappings    LeadApprovalRequestDocumentMapping[]
   leadB2BReqMappings                     LeadB2BRequirementTypeMapping[]
@@ -338,6 +339,8 @@ model UserMaster {
   leadProcessBriefsCreated                   LeadProcessBriefMapping[]              @relation("LeadProcessBriefCreatedBy")
   leadProcessBriefsUpdated                   LeadProcessBriefMapping[]              @relation("LeadProcessBriefUpdatedBy")
   leadProductsCreated                        LeadProductMapping[]                   @relation("LeadProductCreatedBy")
+  leadScopedActivityStatusLogsCreated        LeadScopedActivityStatusLog[]          @relation("LeadScopedActivityStatusLogCreatedBy")
+  leadScopedActivityStatusLogsReleased       LeadScopedActivityStatusLog[]          @relation("LeadScopedActivityStatusLogReleasedBy")
   productStructureInstances                  LeadProductStructureInstance[]
   leadReqMaterialsCreated                    LeadRequirementMaterialMapping[]       @relation("LeadReqMatCreatedBy")
   leadReqMaterialsUpdated                    LeadRequirementMaterialMapping[]       @relation("LeadReqMatUpdatedBy")
@@ -780,6 +783,7 @@ model LeadMaster {
   installationUpdates                         InstallationUpdate[]
   installerMappings                           InstallerUserMapping[]
   leadActivityStatusLog                       LeadActivityStatusLog[]
+  leadScopedActivityStatusLogs                LeadScopedActivityStatusLog[]
   amcContracts                                LeadAmcContract[]
   leadApprovalRequestDocumentMappings         LeadApprovalRequestDocumentMapping[]
   leadB2BReqMappings                          LeadB2BRequirementTypeMapping[]
@@ -972,6 +976,33 @@ model LeadActivityStatusLog {
   vendor                 VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
+model LeadScopedActivityStatusLog {
+  id                     Int                           @id @default(autoincrement())
+  vendor_id              Int
+  account_id             Int
+  lead_id                Int
+  instance_id            Int?
+  scope_type             ActivityStatusScopeType
+  activity_status        ActivityStatus
+  activity_status_remark String?                       @db.VarChar(2000)
+  due_date               DateTime?
+  created_by             Int
+  created_at             DateTime                      @default(now())
+  released_by            Int?
+  released_at            DateTime?
+  release_remark         String?                       @db.VarChar(2000)
+  account                AccountMaster                 @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  createdBy              UserMaster                    @relation("LeadScopedActivityStatusLogCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  instance               LeadProductStructureInstance? @relation(fields: [instance_id], references: [id])
+  lead                   LeadMaster                    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  releasedBy             UserMaster?                   @relation("LeadScopedActivityStatusLogReleasedBy", fields: [released_by], references: [id])
+  vendor                 VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id, lead_id, scope_type, created_at])
+  @@index([vendor_id, instance_id, created_at])
+  @@index([lead_id, activity_status, released_at])
+}
+
 model SiteTypeMaster {
   id        Int          @id @default(autoincrement())
   type      String
@@ -1016,6 +1047,7 @@ model AccountMaster {
   installationUpdates                 InstallationUpdate[]
   installerMappings                   InstallerUserMapping[]
   leadActivityStatusLog               LeadActivityStatusLog[]
+  leadScopedActivityStatusLogs        LeadScopedActivityStatusLog[]
   leadAmcContracts                    LeadAmcContract[]
   leadApprovalRequestDocumentMappings LeadApprovalRequestDocumentMapping[]
   leadChatDocument                    LeadChatDocument[]
@@ -1630,6 +1662,7 @@ model LeadProductStructureInstance {
   product_item_code_id                       Int?
   quantity                                   Int?
   sub_product_structure_id                   Int?
+  activityStatusLogs                         LeadScopedActivityStatusLog[]
   fastProductionRequests                     FastProductionRequest[]
   designSelections                           LeadDesignSelection[]
   documents                                  LeadDocuments[]
@@ -4749,6 +4782,13 @@ enum ProductInstanceStatus {
   onHold
   lostApproval
   lost
+}
+
+enum ActivityStatusScopeType {
+  lead
+  item_group
+  item_code
+  instance
 }
 
 enum ActiveStatus {

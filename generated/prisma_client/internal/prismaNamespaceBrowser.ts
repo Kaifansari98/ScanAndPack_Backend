@@ -76,6 +76,7 @@ export const ModelName = {
   LeadSuperAdminApprovalLocIns: 'LeadSuperAdminApprovalLocIns',
   LeadUserMapping: 'LeadUserMapping',
   LeadActivityStatusLog: 'LeadActivityStatusLog',
+  LeadScopedActivityStatusLog: 'LeadScopedActivityStatusLog',
   SiteTypeMaster: 'SiteTypeMaster',
   SourceMaster: 'SourceMaster',
   AccountMaster: 'AccountMaster',
@@ -795,6 +796,26 @@ export const LeadActivityStatusLogScalarFieldEnum = {
 } as const
 
 export type LeadActivityStatusLogScalarFieldEnum = (typeof LeadActivityStatusLogScalarFieldEnum)[keyof typeof LeadActivityStatusLogScalarFieldEnum]
+
+
+export const LeadScopedActivityStatusLogScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  account_id: 'account_id',
+  lead_id: 'lead_id',
+  instance_id: 'instance_id',
+  scope_type: 'scope_type',
+  activity_status: 'activity_status',
+  activity_status_remark: 'activity_status_remark',
+  due_date: 'due_date',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  released_by: 'released_by',
+  released_at: 'released_at',
+  release_remark: 'release_remark'
+} as const
+
+export type LeadScopedActivityStatusLogScalarFieldEnum = (typeof LeadScopedActivityStatusLogScalarFieldEnum)[keyof typeof LeadScopedActivityStatusLogScalarFieldEnum]
 
 
 export const SiteTypeMasterScalarFieldEnum = {
