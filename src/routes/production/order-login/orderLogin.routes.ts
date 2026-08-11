@@ -115,4 +115,10 @@ orderLoginRoutes.put(
   controller.upsertProductionFilesRemark,
 );
 
+orderLoginRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/so-value-received",
+  upload.none(),
+  controller.updateSoValueReceivedStatus,
+);
+
 export default orderLoginRoutes;

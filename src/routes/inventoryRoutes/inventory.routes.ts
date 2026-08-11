@@ -6,7 +6,21 @@ import {
   getProductPurchaseHistory,
   createHSN,
   getAdditionalCostMasters,
-  createAdditionalCostMaster
+  createAdditionalCostMaster,
+  createSubCategory,
+  createCoreProduct,
+  createGrade,
+  createFinish,
+  createSize,
+  deleteSubCategory,
+  deleteCoreProduct,
+  deleteGrade,
+  deleteFinish,
+  deleteSize,
+  createBrand,
+  deleteBrand,
+  createProductType,
+  deleteProductType
 } from '../../controllers/inventoryController/inventory.controller';
 
 import {
@@ -43,7 +57,6 @@ const router = Router();
 // ── Inventory / Products ──────────────────────────────────────────────────────
 router.post("/sync-cadbid-products",                      syncCadbidProduct);
 router.get("/products/:vendor_id/filters",                getProductFilters);
-router.get("/products/:vendor_id",                        getProductMaster);
 router.get("/products/:vendor_id/:product_id/history",    getProductPurchaseHistory);
 
 // ── Purchase Intents ──────────────────────────────────────────────────────────
@@ -81,5 +94,22 @@ router.post("/hsn/:vendor_id", createHSN);
 router.get("/additional-costs/:vendor_id", getAdditionalCostMasters);
 router.post("/additional-costs/:vendor_id", createAdditionalCostMaster);
 
+router.post("/subcategory/:vendor_id", createSubCategory);
+router.post("/coreproduct/:vendor_id", createCoreProduct);
+router.post("/grade/:vendor_id", createGrade);
+router.post("/finish/:vendor_id", createFinish);
+router.post("/size/:vendor_id", createSize);
+
+router.delete("/subcategory/:vendor_id/:id", deleteSubCategory);
+router.delete("/coreproduct/:vendor_id/:id", deleteCoreProduct);
+router.delete("/grade/:vendor_id/:id", deleteGrade);
+router.delete("/finish/:vendor_id/:id", deleteFinish);
+router.delete("/size/:vendor_id/:id", deleteSize);
+
+router.post("/brand/:vendor_id", createBrand);
+router.delete("/brand/:vendor_id/:id", deleteBrand);
+
+router.post("/producttype/:vendor_id", createProductType);
+router.delete("/producttype/:vendor_id/:id", deleteProductType);
 
 export default router;

@@ -4,6 +4,7 @@ export interface ProductTypeInput {
   vendor_id: number;
   type: string;
   tag?: string;
+  is_b2b?: boolean;
 }
 
 export interface ProductType {
@@ -116,6 +117,7 @@ export interface CarcassType {
   id: number;
   name: string;
   vendor_id: number;
+  can_do_fast_production?: boolean;
 }
 
 export interface ShutterSubType {

@@ -36,6 +36,7 @@ export type LeadDocumentsAvgAggregateOutputType = {
   doc_type_id: number | null
   product_structure_instance_id: number | null
   product_type_id: number | null
+  b2b_requirement_type_id: number | null
 }
 
 export type LeadDocumentsSumAggregateOutputType = {
@@ -48,6 +49,7 @@ export type LeadDocumentsSumAggregateOutputType = {
   doc_type_id: number | null
   product_structure_instance_id: number | null
   product_type_id: number | null
+  b2b_requirement_type_id: number | null
 }
 
 export type LeadDocumentsMinAggregateOutputType = {
@@ -66,6 +68,7 @@ export type LeadDocumentsMinAggregateOutputType = {
   tech_check_status: $Enums.TechCheckStatus | null
   product_structure_instance_id: number | null
   product_type_id: number | null
+  b2b_requirement_type_id: number | null
 }
 
 export type LeadDocumentsMaxAggregateOutputType = {
@@ -84,6 +87,7 @@ export type LeadDocumentsMaxAggregateOutputType = {
   tech_check_status: $Enums.TechCheckStatus | null
   product_structure_instance_id: number | null
   product_type_id: number | null
+  b2b_requirement_type_id: number | null
 }
 
 export type LeadDocumentsCountAggregateOutputType = {
@@ -102,6 +106,7 @@ export type LeadDocumentsCountAggregateOutputType = {
   tech_check_status: number
   product_structure_instance_id: number
   product_type_id: number
+  b2b_requirement_type_id: number
   _all: number
 }
 
@@ -116,6 +121,7 @@ export type LeadDocumentsAvgAggregateInputType = {
   doc_type_id?: true
   product_structure_instance_id?: true
   product_type_id?: true
+  b2b_requirement_type_id?: true
 }
 
 export type LeadDocumentsSumAggregateInputType = {
@@ -128,6 +134,7 @@ export type LeadDocumentsSumAggregateInputType = {
   doc_type_id?: true
   product_structure_instance_id?: true
   product_type_id?: true
+  b2b_requirement_type_id?: true
 }
 
 export type LeadDocumentsMinAggregateInputType = {
@@ -146,6 +153,7 @@ export type LeadDocumentsMinAggregateInputType = {
   tech_check_status?: true
   product_structure_instance_id?: true
   product_type_id?: true
+  b2b_requirement_type_id?: true
 }
 
 export type LeadDocumentsMaxAggregateInputType = {
@@ -164,6 +172,7 @@ export type LeadDocumentsMaxAggregateInputType = {
   tech_check_status?: true
   product_structure_instance_id?: true
   product_type_id?: true
+  b2b_requirement_type_id?: true
 }
 
 export type LeadDocumentsCountAggregateInputType = {
@@ -182,6 +191,7 @@ export type LeadDocumentsCountAggregateInputType = {
   tech_check_status?: true
   product_structure_instance_id?: true
   product_type_id?: true
+  b2b_requirement_type_id?: true
   _all?: true
 }
 
@@ -287,6 +297,7 @@ export type LeadDocumentsGroupByOutputType = {
   tech_check_status: $Enums.TechCheckStatus | null
   product_structure_instance_id: number | null
   product_type_id: number | null
+  b2b_requirement_type_id: number | null
   _count: LeadDocumentsCountAggregateOutputType | null
   _avg: LeadDocumentsAvgAggregateOutputType | null
   _sum: LeadDocumentsSumAggregateOutputType | null
@@ -328,6 +339,7 @@ export type LeadDocumentsWhereInput = {
   tech_check_status?: Prisma.EnumTechCheckStatusNullableFilter<"LeadDocuments"> | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.IntNullableFilter<"LeadDocuments"> | number | null
   product_type_id?: Prisma.IntNullableFilter<"LeadDocuments"> | number | null
+  b2b_requirement_type_id?: Prisma.IntNullableFilter<"LeadDocuments"> | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentListRelationFilter
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsListRelationFilter
   amcContracts?: Prisma.LeadAmcContractListRelationFilter
@@ -341,6 +353,7 @@ export type LeadDocumentsWhereInput = {
   lead?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
   productStructureInstance?: Prisma.XOR<Prisma.LeadProductStructureInstanceNullableScalarRelationFilter, Prisma.LeadProductStructureInstanceWhereInput> | null
   productType?: Prisma.XOR<Prisma.ProductTypeMasterNullableScalarRelationFilter, Prisma.ProductTypeMasterWhereInput> | null
+  b2bRequirementType?: Prisma.XOR<Prisma.B2BRequirementTypeMasterNullableScalarRelationFilter, Prisma.B2BRequirementTypeMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   completedServiceSchedules?: Prisma.LeadServiceScheduleListRelationFilter
   miscellaneousDocument?: Prisma.MiscellaneousDocumentListRelationFilter
@@ -367,6 +380,7 @@ export type LeadDocumentsOrderByWithRelationInput = {
   tech_check_status?: Prisma.SortOrderInput | Prisma.SortOrder
   product_structure_instance_id?: Prisma.SortOrderInput | Prisma.SortOrder
   product_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  b2b_requirement_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentOrderByRelationAggregateInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsOrderByRelationAggregateInput
   amcContracts?: Prisma.LeadAmcContractOrderByRelationAggregateInput
@@ -380,6 +394,7 @@ export type LeadDocumentsOrderByWithRelationInput = {
   lead?: Prisma.LeadMasterOrderByWithRelationInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceOrderByWithRelationInput
   productType?: Prisma.ProductTypeMasterOrderByWithRelationInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleOrderByRelationAggregateInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentOrderByRelationAggregateInput
@@ -409,6 +424,7 @@ export type LeadDocumentsWhereUniqueInput = Prisma.AtLeast<{
   tech_check_status?: Prisma.EnumTechCheckStatusNullableFilter<"LeadDocuments"> | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.IntNullableFilter<"LeadDocuments"> | number | null
   product_type_id?: Prisma.IntNullableFilter<"LeadDocuments"> | number | null
+  b2b_requirement_type_id?: Prisma.IntNullableFilter<"LeadDocuments"> | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentListRelationFilter
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsListRelationFilter
   amcContracts?: Prisma.LeadAmcContractListRelationFilter
@@ -422,6 +438,7 @@ export type LeadDocumentsWhereUniqueInput = Prisma.AtLeast<{
   lead?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
   productStructureInstance?: Prisma.XOR<Prisma.LeadProductStructureInstanceNullableScalarRelationFilter, Prisma.LeadProductStructureInstanceWhereInput> | null
   productType?: Prisma.XOR<Prisma.ProductTypeMasterNullableScalarRelationFilter, Prisma.ProductTypeMasterWhereInput> | null
+  b2bRequirementType?: Prisma.XOR<Prisma.B2BRequirementTypeMasterNullableScalarRelationFilter, Prisma.B2BRequirementTypeMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   completedServiceSchedules?: Prisma.LeadServiceScheduleListRelationFilter
   miscellaneousDocument?: Prisma.MiscellaneousDocumentListRelationFilter
@@ -448,6 +465,7 @@ export type LeadDocumentsOrderByWithAggregationInput = {
   tech_check_status?: Prisma.SortOrderInput | Prisma.SortOrder
   product_structure_instance_id?: Prisma.SortOrderInput | Prisma.SortOrder
   product_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  b2b_requirement_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LeadDocumentsCountOrderByAggregateInput
   _avg?: Prisma.LeadDocumentsAvgOrderByAggregateInput
   _max?: Prisma.LeadDocumentsMaxOrderByAggregateInput
@@ -474,6 +492,7 @@ export type LeadDocumentsScalarWhereWithAggregatesInput = {
   tech_check_status?: Prisma.EnumTechCheckStatusNullableWithAggregatesFilter<"LeadDocuments"> | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.IntNullableWithAggregatesFilter<"LeadDocuments"> | number | null
   product_type_id?: Prisma.IntNullableWithAggregatesFilter<"LeadDocuments"> | number | null
+  b2b_requirement_type_id?: Prisma.IntNullableWithAggregatesFilter<"LeadDocuments"> | number | null
 }
 
 export type LeadDocumentsCreateInput = {
@@ -496,6 +515,7 @@ export type LeadDocumentsCreateInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -522,6 +542,7 @@ export type LeadDocumentsUncheckedCreateInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
@@ -557,6 +578,7 @@ export type LeadDocumentsUpdateInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -583,6 +605,7 @@ export type LeadDocumentsUncheckedUpdateInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
@@ -614,6 +637,7 @@ export type LeadDocumentsCreateManyInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
 }
 
 export type LeadDocumentsUpdateManyMutationInput = {
@@ -641,6 +665,7 @@ export type LeadDocumentsUncheckedUpdateManyInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDocumentsListRelationFilter = {
@@ -674,6 +699,7 @@ export type LeadDocumentsCountOrderByAggregateInput = {
   tech_check_status?: Prisma.SortOrder
   product_structure_instance_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
+  b2b_requirement_type_id?: Prisma.SortOrder
 }
 
 export type LeadDocumentsAvgOrderByAggregateInput = {
@@ -686,6 +712,7 @@ export type LeadDocumentsAvgOrderByAggregateInput = {
   doc_type_id?: Prisma.SortOrder
   product_structure_instance_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
+  b2b_requirement_type_id?: Prisma.SortOrder
 }
 
 export type LeadDocumentsMaxOrderByAggregateInput = {
@@ -704,6 +731,7 @@ export type LeadDocumentsMaxOrderByAggregateInput = {
   tech_check_status?: Prisma.SortOrder
   product_structure_instance_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
+  b2b_requirement_type_id?: Prisma.SortOrder
 }
 
 export type LeadDocumentsMinOrderByAggregateInput = {
@@ -722,6 +750,7 @@ export type LeadDocumentsMinOrderByAggregateInput = {
   tech_check_status?: Prisma.SortOrder
   product_structure_instance_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
+  b2b_requirement_type_id?: Prisma.SortOrder
 }
 
 export type LeadDocumentsSumOrderByAggregateInput = {
@@ -734,6 +763,7 @@ export type LeadDocumentsSumOrderByAggregateInput = {
   doc_type_id?: Prisma.SortOrder
   product_structure_instance_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
+  b2b_requirement_type_id?: Prisma.SortOrder
 }
 
 export type LeadDocumentsNullableScalarRelationFilter = {
@@ -1293,6 +1323,48 @@ export type LeadDocumentsUpdateOneRequiredWithoutOrderLoginPoFilesNestedInput = 
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadDocumentsUpdateToOneWithWhereWithoutOrderLoginPoFilesInput, Prisma.LeadDocumentsUpdateWithoutOrderLoginPoFilesInput>, Prisma.LeadDocumentsUncheckedUpdateWithoutOrderLoginPoFilesInput>
 }
 
+export type LeadDocumentsCreateNestedManyWithoutB2bRequirementTypeInput = {
+  create?: Prisma.XOR<Prisma.LeadDocumentsCreateWithoutB2bRequirementTypeInput, Prisma.LeadDocumentsUncheckedCreateWithoutB2bRequirementTypeInput> | Prisma.LeadDocumentsCreateWithoutB2bRequirementTypeInput[] | Prisma.LeadDocumentsUncheckedCreateWithoutB2bRequirementTypeInput[]
+  connectOrCreate?: Prisma.LeadDocumentsCreateOrConnectWithoutB2bRequirementTypeInput | Prisma.LeadDocumentsCreateOrConnectWithoutB2bRequirementTypeInput[]
+  createMany?: Prisma.LeadDocumentsCreateManyB2bRequirementTypeInputEnvelope
+  connect?: Prisma.LeadDocumentsWhereUniqueInput | Prisma.LeadDocumentsWhereUniqueInput[]
+}
+
+export type LeadDocumentsUncheckedCreateNestedManyWithoutB2bRequirementTypeInput = {
+  create?: Prisma.XOR<Prisma.LeadDocumentsCreateWithoutB2bRequirementTypeInput, Prisma.LeadDocumentsUncheckedCreateWithoutB2bRequirementTypeInput> | Prisma.LeadDocumentsCreateWithoutB2bRequirementTypeInput[] | Prisma.LeadDocumentsUncheckedCreateWithoutB2bRequirementTypeInput[]
+  connectOrCreate?: Prisma.LeadDocumentsCreateOrConnectWithoutB2bRequirementTypeInput | Prisma.LeadDocumentsCreateOrConnectWithoutB2bRequirementTypeInput[]
+  createMany?: Prisma.LeadDocumentsCreateManyB2bRequirementTypeInputEnvelope
+  connect?: Prisma.LeadDocumentsWhereUniqueInput | Prisma.LeadDocumentsWhereUniqueInput[]
+}
+
+export type LeadDocumentsUpdateManyWithoutB2bRequirementTypeNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadDocumentsCreateWithoutB2bRequirementTypeInput, Prisma.LeadDocumentsUncheckedCreateWithoutB2bRequirementTypeInput> | Prisma.LeadDocumentsCreateWithoutB2bRequirementTypeInput[] | Prisma.LeadDocumentsUncheckedCreateWithoutB2bRequirementTypeInput[]
+  connectOrCreate?: Prisma.LeadDocumentsCreateOrConnectWithoutB2bRequirementTypeInput | Prisma.LeadDocumentsCreateOrConnectWithoutB2bRequirementTypeInput[]
+  upsert?: Prisma.LeadDocumentsUpsertWithWhereUniqueWithoutB2bRequirementTypeInput | Prisma.LeadDocumentsUpsertWithWhereUniqueWithoutB2bRequirementTypeInput[]
+  createMany?: Prisma.LeadDocumentsCreateManyB2bRequirementTypeInputEnvelope
+  set?: Prisma.LeadDocumentsWhereUniqueInput | Prisma.LeadDocumentsWhereUniqueInput[]
+  disconnect?: Prisma.LeadDocumentsWhereUniqueInput | Prisma.LeadDocumentsWhereUniqueInput[]
+  delete?: Prisma.LeadDocumentsWhereUniqueInput | Prisma.LeadDocumentsWhereUniqueInput[]
+  connect?: Prisma.LeadDocumentsWhereUniqueInput | Prisma.LeadDocumentsWhereUniqueInput[]
+  update?: Prisma.LeadDocumentsUpdateWithWhereUniqueWithoutB2bRequirementTypeInput | Prisma.LeadDocumentsUpdateWithWhereUniqueWithoutB2bRequirementTypeInput[]
+  updateMany?: Prisma.LeadDocumentsUpdateManyWithWhereWithoutB2bRequirementTypeInput | Prisma.LeadDocumentsUpdateManyWithWhereWithoutB2bRequirementTypeInput[]
+  deleteMany?: Prisma.LeadDocumentsScalarWhereInput | Prisma.LeadDocumentsScalarWhereInput[]
+}
+
+export type LeadDocumentsUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadDocumentsCreateWithoutB2bRequirementTypeInput, Prisma.LeadDocumentsUncheckedCreateWithoutB2bRequirementTypeInput> | Prisma.LeadDocumentsCreateWithoutB2bRequirementTypeInput[] | Prisma.LeadDocumentsUncheckedCreateWithoutB2bRequirementTypeInput[]
+  connectOrCreate?: Prisma.LeadDocumentsCreateOrConnectWithoutB2bRequirementTypeInput | Prisma.LeadDocumentsCreateOrConnectWithoutB2bRequirementTypeInput[]
+  upsert?: Prisma.LeadDocumentsUpsertWithWhereUniqueWithoutB2bRequirementTypeInput | Prisma.LeadDocumentsUpsertWithWhereUniqueWithoutB2bRequirementTypeInput[]
+  createMany?: Prisma.LeadDocumentsCreateManyB2bRequirementTypeInputEnvelope
+  set?: Prisma.LeadDocumentsWhereUniqueInput | Prisma.LeadDocumentsWhereUniqueInput[]
+  disconnect?: Prisma.LeadDocumentsWhereUniqueInput | Prisma.LeadDocumentsWhereUniqueInput[]
+  delete?: Prisma.LeadDocumentsWhereUniqueInput | Prisma.LeadDocumentsWhereUniqueInput[]
+  connect?: Prisma.LeadDocumentsWhereUniqueInput | Prisma.LeadDocumentsWhereUniqueInput[]
+  update?: Prisma.LeadDocumentsUpdateWithWhereUniqueWithoutB2bRequirementTypeInput | Prisma.LeadDocumentsUpdateWithWhereUniqueWithoutB2bRequirementTypeInput[]
+  updateMany?: Prisma.LeadDocumentsUpdateManyWithWhereWithoutB2bRequirementTypeInput | Prisma.LeadDocumentsUpdateManyWithWhereWithoutB2bRequirementTypeInput[]
+  deleteMany?: Prisma.LeadDocumentsScalarWhereInput | Prisma.LeadDocumentsScalarWhereInput[]
+}
+
 export type LeadDocumentsCreateWithoutVendorInput = {
   doc_og_name: string
   doc_sys_name: string
@@ -1313,6 +1385,7 @@ export type LeadDocumentsCreateWithoutVendorInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
@@ -1337,6 +1410,7 @@ export type LeadDocumentsUncheckedCreateWithoutVendorInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
@@ -1397,6 +1471,7 @@ export type LeadDocumentsScalarWhereInput = {
   tech_check_status?: Prisma.EnumTechCheckStatusNullableFilter<"LeadDocuments"> | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.IntNullableFilter<"LeadDocuments"> | number | null
   product_type_id?: Prisma.IntNullableFilter<"LeadDocuments"> | number | null
+  b2b_requirement_type_id?: Prisma.IntNullableFilter<"LeadDocuments"> | number | null
 }
 
 export type LeadDocumentsCreateWithoutCreatedByInput = {
@@ -1418,6 +1493,7 @@ export type LeadDocumentsCreateWithoutCreatedByInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -1443,6 +1519,7 @@ export type LeadDocumentsUncheckedCreateWithoutCreatedByInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
@@ -1487,6 +1564,7 @@ export type LeadDocumentsCreateWithoutDeletedByInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -1512,6 +1590,7 @@ export type LeadDocumentsUncheckedCreateWithoutDeletedByInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
@@ -1588,6 +1667,7 @@ export type LeadDocumentsCreateWithoutLeadInput = {
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -1613,6 +1693,7 @@ export type LeadDocumentsUncheckedCreateWithoutLeadInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
@@ -1673,6 +1754,7 @@ export type LeadDocumentsCreateWithoutAccountInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -1698,6 +1780,7 @@ export type LeadDocumentsUncheckedCreateWithoutAccountInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
@@ -1758,6 +1841,7 @@ export type LeadDocumentsCreateWithoutProductTypeInput = {
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -1783,6 +1867,7 @@ export type LeadDocumentsUncheckedCreateWithoutProductTypeInput = {
   is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
@@ -1844,6 +1929,7 @@ export type LeadDocumentsCreateWithoutSpecificationDocumentMappingsInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -1869,6 +1955,7 @@ export type LeadDocumentsUncheckedCreateWithoutSpecificationDocumentMappingsInpu
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
@@ -1919,6 +2006,7 @@ export type LeadDocumentsUpdateWithoutSpecificationDocumentMappingsInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -1944,6 +2032,7 @@ export type LeadDocumentsUncheckedUpdateWithoutSpecificationDocumentMappingsInpu
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
@@ -1977,6 +2066,7 @@ export type LeadDocumentsCreateWithoutProductStructureInstanceInput = {
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -2002,6 +2092,7 @@ export type LeadDocumentsUncheckedCreateWithoutProductStructureInstanceInput = {
   is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
@@ -2063,6 +2154,7 @@ export type LeadDocumentsCreateWithoutPaymentInfoInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -2088,6 +2180,7 @@ export type LeadDocumentsUncheckedCreateWithoutPaymentInfoInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
@@ -2138,6 +2231,7 @@ export type LeadDocumentsUpdateWithoutPaymentInfoInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -2163,6 +2257,7 @@ export type LeadDocumentsUncheckedUpdateWithoutPaymentInfoInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2196,6 +2291,7 @@ export type LeadDocumentsCreateWithoutDocumentTypeInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -2221,6 +2317,7 @@ export type LeadDocumentsUncheckedCreateWithoutDocumentTypeInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
@@ -2282,6 +2379,7 @@ export type LeadDocumentsCreateWithoutSmallOrderRequestDocumentsInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -2307,6 +2405,7 @@ export type LeadDocumentsUncheckedCreateWithoutSmallOrderRequestDocumentsInput =
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
@@ -2357,6 +2456,7 @@ export type LeadDocumentsUpdateWithoutSmallOrderRequestDocumentsInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -2382,6 +2482,7 @@ export type LeadDocumentsUncheckedUpdateWithoutSmallOrderRequestDocumentsInput =
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2415,6 +2516,7 @@ export type LeadDocumentsCreateWithoutAmcContractsInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -2441,6 +2543,7 @@ export type LeadDocumentsUncheckedCreateWithoutAmcContractsInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
@@ -2490,6 +2593,7 @@ export type LeadDocumentsUpdateWithoutAmcContractsInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -2516,6 +2620,7 @@ export type LeadDocumentsUncheckedUpdateWithoutAmcContractsInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2550,6 +2655,7 @@ export type LeadDocumentsCreateWithoutCompletedServiceSchedulesInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
@@ -2575,6 +2681,7 @@ export type LeadDocumentsUncheckedCreateWithoutCompletedServiceSchedulesInput = 
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
@@ -2625,6 +2732,7 @@ export type LeadDocumentsUpdateWithoutCompletedServiceSchedulesInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
@@ -2650,6 +2758,7 @@ export type LeadDocumentsUncheckedUpdateWithoutCompletedServiceSchedulesInput = 
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2683,6 +2792,7 @@ export type LeadDocumentsCreateWithoutClientVisitDocumentMappingsInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -2709,6 +2819,7 @@ export type LeadDocumentsUncheckedCreateWithoutClientVisitDocumentMappingsInput 
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
@@ -2758,6 +2869,7 @@ export type LeadDocumentsUpdateWithoutClientVisitDocumentMappingsInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -2784,6 +2896,7 @@ export type LeadDocumentsUncheckedUpdateWithoutClientVisitDocumentMappingsInput 
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2817,6 +2930,7 @@ export type LeadDocumentsCreateWithoutFastProductionRequestDocumentsInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -2843,6 +2957,7 @@ export type LeadDocumentsUncheckedCreateWithoutFastProductionRequestDocumentsInp
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
@@ -2892,6 +3007,7 @@ export type LeadDocumentsUpdateWithoutFastProductionRequestDocumentsInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -2918,6 +3034,7 @@ export type LeadDocumentsUncheckedUpdateWithoutFastProductionRequestDocumentsInp
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2951,6 +3068,7 @@ export type LeadDocumentsCreateWithoutLeadDocumentLogsInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -2977,6 +3095,7 @@ export type LeadDocumentsUncheckedCreateWithoutLeadDocumentLogsInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
@@ -3026,6 +3145,7 @@ export type LeadDocumentsUpdateWithoutLeadDocumentLogsInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -3052,6 +3172,7 @@ export type LeadDocumentsUncheckedUpdateWithoutLeadDocumentLogsInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3085,6 +3206,7 @@ export type LeadDocumentsCreateWithoutLeadApprovalRequestDocumentMappingsInput =
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -3111,6 +3233,7 @@ export type LeadDocumentsUncheckedCreateWithoutLeadApprovalRequestDocumentMappin
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
@@ -3160,6 +3283,7 @@ export type LeadDocumentsUpdateWithoutLeadApprovalRequestDocumentMappingsInput =
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -3186,6 +3310,7 @@ export type LeadDocumentsUncheckedUpdateWithoutLeadApprovalRequestDocumentMappin
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3220,6 +3345,7 @@ export type LeadDocumentsCreateWithoutSite_readiness_photosInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -3245,6 +3371,7 @@ export type LeadDocumentsUncheckedCreateWithoutSite_readiness_photosInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
@@ -3299,6 +3426,7 @@ export type LeadDocumentsCreateWithoutInstallationUpdateDocsInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -3325,6 +3453,7 @@ export type LeadDocumentsUncheckedCreateWithoutInstallationUpdateDocsInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
@@ -3374,6 +3503,7 @@ export type LeadDocumentsUpdateWithoutInstallationUpdateDocsInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -3400,6 +3530,7 @@ export type LeadDocumentsUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3434,6 +3565,7 @@ export type LeadDocumentsCreateWithoutMiscellaneousDocumentInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
@@ -3459,6 +3591,7 @@ export type LeadDocumentsUncheckedCreateWithoutMiscellaneousDocumentInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
@@ -3509,6 +3642,7 @@ export type LeadDocumentsUpdateWithoutMiscellaneousDocumentInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
@@ -3534,6 +3668,7 @@ export type LeadDocumentsUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3568,6 +3703,7 @@ export type LeadDocumentsCreateWithoutOrderLoginPoFilesInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -3593,6 +3729,7 @@ export type LeadDocumentsUncheckedCreateWithoutOrderLoginPoFilesInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
@@ -3643,6 +3780,7 @@ export type LeadDocumentsUpdateWithoutOrderLoginPoFilesInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -3668,6 +3806,7 @@ export type LeadDocumentsUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3680,6 +3819,93 @@ export type LeadDocumentsUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadDocumentNestedInput
   site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
+}
+
+export type LeadDocumentsCreateWithoutB2bRequirementTypeInput = {
+  doc_og_name: string
+  doc_sys_name: string
+  created_at?: Date | string
+  deleted_at?: Date | string | null
+  is_deleted?: boolean
+  tech_check_status?: $Enums.TechCheckStatus | null
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutDocumentInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
+  account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
+  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
+  productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
+  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
+  completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutDocumentInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
+}
+
+export type LeadDocumentsUncheckedCreateWithoutB2bRequirementTypeInput = {
+  id?: number
+  doc_og_name: string
+  doc_sys_name: string
+  created_by: number
+  created_at?: Date | string
+  deleted_by?: number | null
+  deleted_at?: Date | string | null
+  account_id?: number | null
+  lead_id?: number | null
+  vendor_id: number
+  doc_type_id: number
+  is_deleted?: boolean
+  tech_check_status?: $Enums.TechCheckStatus | null
+  product_structure_instance_id?: number | null
+  product_type_id?: number | null
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
+  completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
+}
+
+export type LeadDocumentsCreateOrConnectWithoutB2bRequirementTypeInput = {
+  where: Prisma.LeadDocumentsWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadDocumentsCreateWithoutB2bRequirementTypeInput, Prisma.LeadDocumentsUncheckedCreateWithoutB2bRequirementTypeInput>
+}
+
+export type LeadDocumentsCreateManyB2bRequirementTypeInputEnvelope = {
+  data: Prisma.LeadDocumentsCreateManyB2bRequirementTypeInput | Prisma.LeadDocumentsCreateManyB2bRequirementTypeInput[]
+  skipDuplicates?: boolean
+}
+
+export type LeadDocumentsUpsertWithWhereUniqueWithoutB2bRequirementTypeInput = {
+  where: Prisma.LeadDocumentsWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeadDocumentsUpdateWithoutB2bRequirementTypeInput, Prisma.LeadDocumentsUncheckedUpdateWithoutB2bRequirementTypeInput>
+  create: Prisma.XOR<Prisma.LeadDocumentsCreateWithoutB2bRequirementTypeInput, Prisma.LeadDocumentsUncheckedCreateWithoutB2bRequirementTypeInput>
+}
+
+export type LeadDocumentsUpdateWithWhereUniqueWithoutB2bRequirementTypeInput = {
+  where: Prisma.LeadDocumentsWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeadDocumentsUpdateWithoutB2bRequirementTypeInput, Prisma.LeadDocumentsUncheckedUpdateWithoutB2bRequirementTypeInput>
+}
+
+export type LeadDocumentsUpdateManyWithWhereWithoutB2bRequirementTypeInput = {
+  where: Prisma.LeadDocumentsScalarWhereInput
+  data: Prisma.XOR<Prisma.LeadDocumentsUpdateManyMutationInput, Prisma.LeadDocumentsUncheckedUpdateManyWithoutB2bRequirementTypeInput>
 }
 
 export type LeadDocumentsCreateManyVendorInput = {
@@ -3697,6 +3923,7 @@ export type LeadDocumentsCreateManyVendorInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
 }
 
 export type LeadDocumentsUpdateWithoutVendorInput = {
@@ -3719,6 +3946,7 @@ export type LeadDocumentsUpdateWithoutVendorInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
@@ -3743,6 +3971,7 @@ export type LeadDocumentsUncheckedUpdateWithoutVendorInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3773,6 +4002,7 @@ export type LeadDocumentsUncheckedUpdateManyWithoutVendorInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDocumentsCreateManyCreatedByInput = {
@@ -3790,6 +4020,7 @@ export type LeadDocumentsCreateManyCreatedByInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
 }
 
 export type LeadDocumentsCreateManyDeletedByInput = {
@@ -3807,6 +4038,7 @@ export type LeadDocumentsCreateManyDeletedByInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
 }
 
 export type LeadDocumentsUpdateWithoutCreatedByInput = {
@@ -3828,6 +4060,7 @@ export type LeadDocumentsUpdateWithoutCreatedByInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -3853,6 +4086,7 @@ export type LeadDocumentsUncheckedUpdateWithoutCreatedByInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3883,6 +4117,7 @@ export type LeadDocumentsUncheckedUpdateManyWithoutCreatedByInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDocumentsUpdateWithoutDeletedByInput = {
@@ -3904,6 +4139,7 @@ export type LeadDocumentsUpdateWithoutDeletedByInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -3929,6 +4165,7 @@ export type LeadDocumentsUncheckedUpdateWithoutDeletedByInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3959,6 +4196,7 @@ export type LeadDocumentsUncheckedUpdateManyWithoutDeletedByInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDocumentsCreateManyLeadInput = {
@@ -3976,6 +4214,7 @@ export type LeadDocumentsCreateManyLeadInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
 }
 
 export type LeadDocumentsUpdateWithoutLeadInput = {
@@ -3997,6 +4236,7 @@ export type LeadDocumentsUpdateWithoutLeadInput = {
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -4022,6 +4262,7 @@ export type LeadDocumentsUncheckedUpdateWithoutLeadInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
@@ -4052,6 +4293,7 @@ export type LeadDocumentsUncheckedUpdateManyWithoutLeadInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDocumentsCreateManyAccountInput = {
@@ -4069,6 +4311,7 @@ export type LeadDocumentsCreateManyAccountInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
 }
 
 export type LeadDocumentsUpdateWithoutAccountInput = {
@@ -4090,6 +4333,7 @@ export type LeadDocumentsUpdateWithoutAccountInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -4115,6 +4359,7 @@ export type LeadDocumentsUncheckedUpdateWithoutAccountInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
@@ -4145,6 +4390,7 @@ export type LeadDocumentsUncheckedUpdateManyWithoutAccountInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDocumentsCreateManyProductTypeInput = {
@@ -4162,6 +4408,7 @@ export type LeadDocumentsCreateManyProductTypeInput = {
   is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
+  b2b_requirement_type_id?: number | null
 }
 
 export type LeadDocumentsUpdateWithoutProductTypeInput = {
@@ -4183,6 +4430,7 @@ export type LeadDocumentsUpdateWithoutProductTypeInput = {
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -4208,6 +4456,7 @@ export type LeadDocumentsUncheckedUpdateWithoutProductTypeInput = {
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
@@ -4238,6 +4487,7 @@ export type LeadDocumentsUncheckedUpdateManyWithoutProductTypeInput = {
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDocumentsCreateManyProductStructureInstanceInput = {
@@ -4255,6 +4505,7 @@ export type LeadDocumentsCreateManyProductStructureInstanceInput = {
   is_deleted?: boolean
   tech_check_status?: $Enums.TechCheckStatus | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
 }
 
 export type LeadDocumentsUpdateWithoutProductStructureInstanceInput = {
@@ -4276,6 +4527,7 @@ export type LeadDocumentsUpdateWithoutProductStructureInstanceInput = {
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -4301,6 +4553,7 @@ export type LeadDocumentsUncheckedUpdateWithoutProductStructureInstanceInput = {
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
@@ -4331,6 +4584,7 @@ export type LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceInput
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDocumentsCreateManyDocumentTypeInput = {
@@ -4348,6 +4602,7 @@ export type LeadDocumentsCreateManyDocumentTypeInput = {
   tech_check_status?: $Enums.TechCheckStatus | null
   product_structure_instance_id?: number | null
   product_type_id?: number | null
+  b2b_requirement_type_id?: number | null
 }
 
 export type LeadDocumentsUpdateWithoutDocumentTypeInput = {
@@ -4369,6 +4624,7 @@ export type LeadDocumentsUpdateWithoutDocumentTypeInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -4394,6 +4650,7 @@ export type LeadDocumentsUncheckedUpdateWithoutDocumentTypeInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
@@ -4424,9 +4681,108 @@ export type LeadDocumentsUncheckedUpdateManyWithoutDocumentTypeInput = {
   tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadDocumentsUpdateWithoutSite_readiness_photosInput = {
+  doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutDocumentNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
+  account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
+  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
+  productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutDocumentNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadDocumentNestedInput
+}
+
+export type LeadDocumentsUncheckedUpdateWithoutSite_readiness_photosInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
+  completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadDocumentNestedInput
+}
+
+export type LeadDocumentsUncheckedUpdateManyWithoutSite_readiness_photosInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type LeadDocumentsCreateManyB2bRequirementTypeInput = {
+  id?: number
+  doc_og_name: string
+  doc_sys_name: string
+  created_by: number
+  created_at?: Date | string
+  deleted_by?: number | null
+  deleted_at?: Date | string | null
+  account_id?: number | null
+  lead_id?: number | null
+  vendor_id: number
+  doc_type_id: number
+  is_deleted?: boolean
+  tech_check_status?: $Enums.TechCheckStatus | null
+  product_structure_instance_id?: number | null
+  product_type_id?: number | null
+}
+
+export type LeadDocumentsUpdateWithoutB2bRequirementTypeInput = {
   doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
   doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4453,9 +4809,10 @@ export type LeadDocumentsUpdateWithoutSite_readiness_photosInput = {
   paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutDocumentNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
-export type LeadDocumentsUncheckedUpdateWithoutSite_readiness_photosInput = {
+export type LeadDocumentsUncheckedUpdateWithoutB2bRequirementTypeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
   doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4483,9 +4840,10 @@ export type LeadDocumentsUncheckedUpdateWithoutSite_readiness_photosInput = {
   paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
-export type LeadDocumentsUncheckedUpdateManyWithoutSite_readiness_photosInput = {
+export type LeadDocumentsUncheckedUpdateManyWithoutB2bRequirementTypeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
   doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4658,6 +5016,7 @@ export type LeadDocumentsSelect<ExtArgs extends runtime.Types.Extensions.Interna
   tech_check_status?: boolean
   product_structure_instance_id?: boolean
   product_type_id?: boolean
+  b2b_requirement_type_id?: boolean
   fastProductionRequestDocuments?: boolean | Prisma.LeadDocuments$fastProductionRequestDocumentsArgs<ExtArgs>
   installationUpdateDocs?: boolean | Prisma.LeadDocuments$installationUpdateDocsArgs<ExtArgs>
   amcContracts?: boolean | Prisma.LeadDocuments$amcContractsArgs<ExtArgs>
@@ -4671,6 +5030,7 @@ export type LeadDocumentsSelect<ExtArgs extends runtime.Types.Extensions.Interna
   lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
   productStructureInstance?: boolean | Prisma.LeadDocuments$productStructureInstanceArgs<ExtArgs>
   productType?: boolean | Prisma.LeadDocuments$productTypeArgs<ExtArgs>
+  b2bRequirementType?: boolean | Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   completedServiceSchedules?: boolean | Prisma.LeadDocuments$completedServiceSchedulesArgs<ExtArgs>
   miscellaneousDocument?: boolean | Prisma.LeadDocuments$miscellaneousDocumentArgs<ExtArgs>
@@ -4698,6 +5058,7 @@ export type LeadDocumentsSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   tech_check_status?: boolean
   product_structure_instance_id?: boolean
   product_type_id?: boolean
+  b2b_requirement_type_id?: boolean
   account?: boolean | Prisma.LeadDocuments$accountArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.LeadDocuments$deletedByArgs<ExtArgs>
@@ -4705,6 +5066,7 @@ export type LeadDocumentsSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
   productStructureInstance?: boolean | Prisma.LeadDocuments$productStructureInstanceArgs<ExtArgs>
   productType?: boolean | Prisma.LeadDocuments$productTypeArgs<ExtArgs>
+  b2bRequirementType?: boolean | Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadDocuments"]>
 
@@ -4724,6 +5086,7 @@ export type LeadDocumentsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   tech_check_status?: boolean
   product_structure_instance_id?: boolean
   product_type_id?: boolean
+  b2b_requirement_type_id?: boolean
   account?: boolean | Prisma.LeadDocuments$accountArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.LeadDocuments$deletedByArgs<ExtArgs>
@@ -4731,6 +5094,7 @@ export type LeadDocumentsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
   productStructureInstance?: boolean | Prisma.LeadDocuments$productStructureInstanceArgs<ExtArgs>
   productType?: boolean | Prisma.LeadDocuments$productTypeArgs<ExtArgs>
+  b2bRequirementType?: boolean | Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadDocuments"]>
 
@@ -4750,9 +5114,10 @@ export type LeadDocumentsSelectScalar = {
   tech_check_status?: boolean
   product_structure_instance_id?: boolean
   product_type_id?: boolean
+  b2b_requirement_type_id?: boolean
 }
 
-export type LeadDocumentsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "doc_og_name" | "doc_sys_name" | "created_by" | "created_at" | "deleted_by" | "deleted_at" | "account_id" | "lead_id" | "vendor_id" | "doc_type_id" | "is_deleted" | "tech_check_status" | "product_structure_instance_id" | "product_type_id", ExtArgs["result"]["leadDocuments"]>
+export type LeadDocumentsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "doc_og_name" | "doc_sys_name" | "created_by" | "created_at" | "deleted_by" | "deleted_at" | "account_id" | "lead_id" | "vendor_id" | "doc_type_id" | "is_deleted" | "tech_check_status" | "product_structure_instance_id" | "product_type_id" | "b2b_requirement_type_id", ExtArgs["result"]["leadDocuments"]>
 export type LeadDocumentsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   fastProductionRequestDocuments?: boolean | Prisma.LeadDocuments$fastProductionRequestDocumentsArgs<ExtArgs>
   installationUpdateDocs?: boolean | Prisma.LeadDocuments$installationUpdateDocsArgs<ExtArgs>
@@ -4767,6 +5132,7 @@ export type LeadDocumentsInclude<ExtArgs extends runtime.Types.Extensions.Intern
   lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
   productStructureInstance?: boolean | Prisma.LeadDocuments$productStructureInstanceArgs<ExtArgs>
   productType?: boolean | Prisma.LeadDocuments$productTypeArgs<ExtArgs>
+  b2bRequirementType?: boolean | Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   completedServiceSchedules?: boolean | Prisma.LeadDocuments$completedServiceSchedulesArgs<ExtArgs>
   miscellaneousDocument?: boolean | Prisma.LeadDocuments$miscellaneousDocumentArgs<ExtArgs>
@@ -4785,6 +5151,7 @@ export type LeadDocumentsIncludeCreateManyAndReturn<ExtArgs extends runtime.Type
   lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
   productStructureInstance?: boolean | Prisma.LeadDocuments$productStructureInstanceArgs<ExtArgs>
   productType?: boolean | Prisma.LeadDocuments$productTypeArgs<ExtArgs>
+  b2bRequirementType?: boolean | Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadDocumentsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4795,6 +5162,7 @@ export type LeadDocumentsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Type
   lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
   productStructureInstance?: boolean | Prisma.LeadDocuments$productStructureInstanceArgs<ExtArgs>
   productType?: boolean | Prisma.LeadDocuments$productTypeArgs<ExtArgs>
+  b2bRequirementType?: boolean | Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
@@ -4814,6 +5182,7 @@ export type $LeadDocumentsPayload<ExtArgs extends runtime.Types.Extensions.Inter
     lead: Prisma.$LeadMasterPayload<ExtArgs> | null
     productStructureInstance: Prisma.$LeadProductStructureInstancePayload<ExtArgs> | null
     productType: Prisma.$ProductTypeMasterPayload<ExtArgs> | null
+    b2bRequirementType: Prisma.$B2BRequirementTypeMasterPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     completedServiceSchedules: Prisma.$LeadServiceSchedulePayload<ExtArgs>[]
     miscellaneousDocument: Prisma.$MiscellaneousDocumentPayload<ExtArgs>[]
@@ -4839,6 +5208,7 @@ export type $LeadDocumentsPayload<ExtArgs extends runtime.Types.Extensions.Inter
     tech_check_status: $Enums.TechCheckStatus | null
     product_structure_instance_id: number | null
     product_type_id: number | null
+    b2b_requirement_type_id: number | null
   }, ExtArgs["result"]["leadDocuments"]>
   composites: {}
 }
@@ -5246,6 +5616,7 @@ export interface Prisma__LeadDocumentsClient<T, Null = never, ExtArgs extends ru
   lead<T extends Prisma.LeadDocuments$leadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$leadArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   productStructureInstance<T extends Prisma.LeadDocuments$productStructureInstanceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$productStructureInstanceArgs<ExtArgs>>): Prisma.Prisma__LeadProductStructureInstanceClient<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureInstancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   productType<T extends Prisma.LeadDocuments$productTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$productTypeArgs<ExtArgs>>): Prisma.Prisma__ProductTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  b2bRequirementType<T extends Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>>): Prisma.Prisma__B2BRequirementTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$B2BRequirementTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   completedServiceSchedules<T extends Prisma.LeadDocuments$completedServiceSchedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$completedServiceSchedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadServiceSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   miscellaneousDocument<T extends Prisma.LeadDocuments$miscellaneousDocumentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$miscellaneousDocumentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MiscellaneousDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -5298,6 +5669,7 @@ export interface LeadDocumentsFieldRefs {
   readonly tech_check_status: Prisma.FieldRef<"LeadDocuments", 'TechCheckStatus'>
   readonly product_structure_instance_id: Prisma.FieldRef<"LeadDocuments", 'Int'>
   readonly product_type_id: Prisma.FieldRef<"LeadDocuments", 'Int'>
+  readonly b2b_requirement_type_id: Prisma.FieldRef<"LeadDocuments", 'Int'>
 }
     
 
@@ -5935,6 +6307,25 @@ export type LeadDocuments$productTypeArgs<ExtArgs extends runtime.Types.Extensio
    */
   include?: Prisma.ProductTypeMasterInclude<ExtArgs> | null
   where?: Prisma.ProductTypeMasterWhereInput
+}
+
+/**
+ * LeadDocuments.b2bRequirementType
+ */
+export type LeadDocuments$b2bRequirementTypeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the B2BRequirementTypeMaster
+   */
+  select?: Prisma.B2BRequirementTypeMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the B2BRequirementTypeMaster
+   */
+  omit?: Prisma.B2BRequirementTypeMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.B2BRequirementTypeMasterInclude<ExtArgs> | null
+  where?: Prisma.B2BRequirementTypeMasterWhereInput
 }
 
 /**

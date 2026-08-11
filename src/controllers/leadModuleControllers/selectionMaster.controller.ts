@@ -52,8 +52,10 @@ export const fetchAllCarcassTypes = async (req: Request, res: Response) => {
   try {
     const vendor_id = getVendorId(req, res);
     if (!vendor_id) return;
+    const onlyFastProduction =
+      String(req.query.only_fast_production ?? "").toLowerCase() === "true";
 
-    const types = await getAllCarcassTypes(vendor_id);
+    const types = await getAllCarcassTypes(vendor_id, onlyFastProduction);
     return res.status(200).json({ success: true, data: types });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
@@ -769,4 +771,3 @@ export const downloadOtherAppliancesReport = async (
     return res.status(500).json({ success: false, error: error.message });
   }
 };
-

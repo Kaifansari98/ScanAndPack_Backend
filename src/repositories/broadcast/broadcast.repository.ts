@@ -258,7 +258,7 @@ export class BroadcastRepository {
   }
 
   /**
-   * Get list of all users who have read a broadcast
+   * Get list of all target/sent users for a broadcast along with their read status
    */
   async findReaders(broadcastId: number) {
     let superAdminTypeIds: number[] = [];
@@ -266,7 +266,10 @@ export class BroadcastRepository {
       const superAdminRoles = await prisma.userTypeMaster.findMany({
         where: {
           user_type: {
-            in: ["super-admin", "superadmin", "super_admin"],
+            in: [
+              "super-admin", "superadmin", "super_admin",
+              "master-admin", "masteradmin", "master_admin", "master", "vloq master", "vloq_master"
+            ],
             mode: "insensitive",
           },
         },
@@ -279,11 +282,16 @@ export class BroadcastRepository {
 
     const broadcast = await prisma.broadcastMaster.findUnique({
       where: { id: broadcastId },
-      select: { created_at: true, publish_at: true },
+      include: {
+        audiences: true,
+      },
     });
 
-    const effectivePublishDate = broadcast?.publish_at || broadcast?.created_at;
+    if (!broadcast) return [];
 
+    const effectivePublishDate = broadcast.publish_at || broadcast.created_at;
+
+    // 1. Fetch read logs for this broadcast
     const reads = await prisma.broadcastRead.findMany({
       where: {
         broadcast_id: broadcastId,
@@ -300,6 +308,126 @@ export class BroadcastRepository {
       orderBy: { read_at: "desc" },
     });
 
-    return reads;
+    const readMap = new Map<number, { id: number; read_at: Date }>();
+    reads.forEach((r) => {
+      if (r.user_id) {
+        readMap.set(r.user_id, { id: r.id, read_at: r.read_at });
+      }
+    });
+
+    // 2. Fetch sent users from notifications table
+    const notifications = await prisma.notification.findMany({
+      where: {
+        entity_type: "broadcast",
+        entity_id: broadcastId,
+        user: {
+          ...(superAdminTypeIds.length > 0
+            ? { user_type_id: { notIn: superAdminTypeIds } }
+            : {}),
+        },
+      },
+      select: {
+        user: { select: { id: true, user_name: true, user_email: true, created_at: true } },
+      },
+      distinct: ["user_id"],
+    });
+
+    const userMap = new Map<number, { id: number; user_name: string; email?: string }>();
+
+    // 1. Resolve target users from audiences first (ensures the full target audience is shown immediately)
+    const isAll = broadcast.audiences.some((a) => a.audience_type === "ALL") || broadcast.audiences.length === 0;
+    if (isAll) {
+      const activeUsers = await prisma.userMaster.findMany({
+        where: {
+          status: { equals: "active", mode: "insensitive" },
+          ...(broadcast.vendor_id ? { vendor_id: broadcast.vendor_id } : {}),
+          ...(superAdminTypeIds.length > 0 ? { user_type_id: { notIn: superAdminTypeIds } } : {}),
+        },
+        select: { id: true, user_name: true, user_email: true },
+      });
+      activeUsers.forEach((u) => {
+        userMap.set(u.id, { id: u.id, user_name: u.user_name, email: u.user_email || undefined });
+      });
+    } else {
+      const franchiseIds = broadcast.audiences.filter((a) => a.audience_type === "FRANCHISE" && a.target_id).map((a) => a.target_id!);
+      const roleIds = broadcast.audiences.filter((a) => a.audience_type === "ROLE" && a.target_id).map((a) => a.target_id!);
+      const userIds = broadcast.audiences.filter((a) => a.audience_type === "USER" && a.target_id).map((a) => a.target_id!);
+
+      const orConds: any[] = [];
+      if (userIds.length > 0) orConds.push({ id: { in: userIds } });
+      if (franchiseIds.length > 0 && roleIds.length > 0) {
+        orConds.push({ franchise_id: { in: franchiseIds }, user_type_id: { in: roleIds } });
+      } else if (franchiseIds.length > 0) {
+        orConds.push({ franchise_id: { in: franchiseIds } });
+      } else if (roleIds.length > 0) {
+        orConds.push({ user_type_id: { in: roleIds } });
+      }
+
+      if (orConds.length > 0) {
+        const matched = await prisma.userMaster.findMany({
+          where: {
+            status: { equals: "active", mode: "insensitive" },
+            ...(broadcast.vendor_id ? { vendor_id: broadcast.vendor_id } : {}),
+            ...(superAdminTypeIds.length > 0 ? { user_type_id: { notIn: superAdminTypeIds } } : {}),
+            OR: orConds,
+          },
+          select: { id: true, user_name: true, user_email: true },
+        });
+        matched.forEach((u) => {
+          userMap.set(u.id, { id: u.id, user_name: u.user_name, email: u.user_email || undefined });
+        });
+      }
+    }
+
+    // 2. Merge users from notifications table (for completeness or legacy mapping)
+    notifications.forEach((n) => {
+      if (n.user && !userMap.has(n.user.id)) {
+        userMap.set(n.user.id, {
+          id: n.user.id,
+          user_name: n.user.user_name,
+          email: n.user.user_email || undefined,
+        });
+      }
+    });
+
+    // 3. Merge readers (in case they read it but weren't in the original target audience)
+    reads.forEach((r) => {
+      if (r.user && !userMap.has(r.user.id)) {
+        userMap.set(r.user.id, {
+          id: r.user.id,
+          user_name: r.user.user_name,
+          email: r.user.user_email || undefined,
+        });
+      }
+    });
+
+    // Combine userMap with read logs
+    const result = Array.from(userMap.values()).map((user) => {
+      const readInfo = readMap.get(user.id);
+      return {
+        id: readInfo?.id || user.id,
+        user_id: user.id,
+        broadcast_id: broadcastId,
+        read_at: readInfo?.read_at ? readInfo.read_at.toISOString() : null,
+        is_read: !!readInfo,
+        user: {
+          id: user.id,
+          user_name: user.user_name,
+          email: user.email,
+        },
+      };
+    });
+
+    // Sort: Viewed users first (newest read_at first), then Unread users alphabetically by user_name
+    result.sort((a, b) => {
+      if (a.is_read && !b.is_read) return -1;
+      if (!a.is_read && b.is_read) return 1;
+      if (a.is_read && b.is_read && a.read_at && b.read_at) {
+        return new Date(b.read_at).getTime() - new Date(a.read_at).getTime();
+      }
+      return (a.user.user_name || "").localeCompare(b.user.user_name || "");
+    });
+
+    return result;
   }
 }

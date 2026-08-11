@@ -15,7 +15,8 @@ import {
   seedVendorMastersController,
   updateVendorController,
   getVendorBySubdomainController,
-  getStatesController
+  getStatesController,
+  getLeadServicingReportController
 } from "../controllers/vendor.controller";
 import { verifyToken } from "../middlewares/auth.middleware";
 import { handleMulterUpload } from "../middlewares/handleMulterUpload";
@@ -45,6 +46,7 @@ router.get(
   getPaymentsBetweenClientAndStoreReportController,
 );
 router.get("/reports/erd", getErdReportController);
+router.get("/reports/lead-servicing", getLeadServicingReportController);
 router.get("/public/by-subdomain", getVendorBySubdomainController);
 router.get("/states", verifyToken, getStatesController);
 router.get("/:vendor_id", verifyToken, getVendorByIdController);
