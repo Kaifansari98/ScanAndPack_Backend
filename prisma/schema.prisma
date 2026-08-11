@@ -477,6 +477,7 @@ model ProjectMaster {
   order_no              String?
   updated_at            DateTime?               @updatedAt
   updated_by            Int?
+  no_of_boxes Int @default(0)
   packing_type          PackingType             @default(DEFAULT)
   box_info_values       BoxInfoFieldValue[]
   boxes                 BoxMaster[]

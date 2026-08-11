@@ -444,6 +444,7 @@ export const ProjectMasterScalarFieldEnum = {
   order_no: 'order_no',
   updated_at: 'updated_at',
   updated_by: 'updated_by',
+  no_of_boxes: 'no_of_boxes',
   packing_type: 'packing_type'
 } as const
 

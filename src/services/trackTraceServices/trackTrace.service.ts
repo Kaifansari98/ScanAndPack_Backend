@@ -5030,19 +5030,54 @@ export const getProjectDetailService = async (
     |--------------------------------------------------------------------------
     */
 
-    const boxItemCounts =
-      await Promise.all(
-        boxes.map((box) =>
-          prisma.cutListMachineMapping.count({
+    const boxIds = boxes.map((box) => box.id);
+
+    const boxItemStats =
+      boxIds.length > 0
+        ? await prisma.cutListMachineMapping.groupBy({
+            by: ["box_id"],
             where: {
-              box_id: box.id,
+              box_id: {
+                in: boxIds,
+              },
               project_id,
               vendor_id,
               expected_in: true,
             },
+            _count: {
+              id: true,
+            },
+            _sum: {
+              weight: true,
+            },
           })
-        )
+        : [];
+
+    const boxItemCountMap = new Map<number, number>();
+    const boxWeightMap = new Map<number, number>();
+
+    for (const stat of boxItemStats) {
+      if (!stat.box_id) {
+        continue;
+      }
+
+      boxItemCountMap.set(
+        Number(stat.box_id),
+        Number(stat._count.id || 0)
       );
+
+      boxWeightMap.set(
+        Number(stat.box_id),
+        Number(stat._sum.weight || 0)
+      );
+    }
+
+    const boxNameMap = new Map(
+      boxes.map((box) => [
+        box.id,
+        box.box_name,
+      ])
+    );
 
     /*
     |--------------------------------------------------------------------------
@@ -5105,11 +5140,13 @@ export const getProjectDetailService = async (
 
         select: {
           machine_id: true,
+          sequence_no: true,
 
           machine: {
             select: {
               id: true,
               machine_name: true,
+              sequence_no: true,
 
               machineType: {
                 select: {
@@ -5162,6 +5199,11 @@ export const getProjectDetailService = async (
               machineRow.machine.machineType
                 ?.machine_type ?? null,
 
+            sequence_no:
+              machineRow.sequence_no ??
+              machineRow.machine.sequence_no ??
+              0,
+
             total,
 
             scanned,
@@ -5201,6 +5243,7 @@ export const getProjectDetailService = async (
           actual_in_at: true,
           box_id: true,
           in_operator: true,
+          weight: true,
 
           machine: {
             select: {
@@ -5221,6 +5264,7 @@ export const getProjectDetailService = async (
               length: true,
               width: true,
               thickness: true,
+              weight: true,
             },
           },
         },
@@ -5325,12 +5369,16 @@ export const getProjectDetailService = async (
       length: any;
       width: any;
       thickness: any;
+      weight: number;
+      package_box_id: number | null;
+      package_box_name: string | null;
       machines: {
         mapping_id: number;
         machine_id: number;
         machine_name: string;
         sequence_no: number;
         box_id: number | null;
+        weight: number;
         scanned: boolean;
         scanned_at: Date | null;
         scanned_by: string | null;
@@ -5414,6 +5462,9 @@ export const getProjectDetailService = async (
             box_id:
               row.box_id,
 
+            weight:
+              Number(row.weight || 0),
+
             scanned:
               row.actual_in_at !== null,
 
@@ -5428,6 +5479,27 @@ export const getProjectDetailService = async (
                 : null,
           });
         }
+
+        const packageBoxId =
+          machineColumns.find((machineColumn) => machineColumn.box_id)
+            ?.box_id ?? null;
+
+        const packageBoxName =
+          packageBoxId
+            ? boxNameMap.get(packageBoxId) ?? null
+            : null;
+
+        const mappedWeight =
+          machineColumns.find((machineColumn) => Number(machineColumn.weight || 0) > 0)
+            ?.weight ?? 0;
+
+        const fallbackWeight =
+          Number(cutList.weight || 0) > 0 && Number(cutList.qty || 0) > 0
+            ? Number(cutList.weight || 0) / Number(cutList.qty || 1)
+            : 0;
+
+        const unitWeight =
+          Number(Number(mappedWeight || fallbackWeight || 0).toFixed(4));
 
         unitRows.push({
           row_number:
@@ -5465,6 +5537,15 @@ export const getProjectDetailService = async (
           thickness:
             cutList.thickness,
 
+          weight:
+            unitWeight,
+
+          package_box_id:
+            packageBoxId,
+
+          package_box_name:
+            packageBoxName,
+
           machines:
             machineColumns,
         });
@@ -5483,6 +5564,16 @@ export const getProjectDetailService = async (
     const uniqueItems =
       cutlistByItem.size;
 
+    const sortedMachineStats =
+      machineStats.sort((a, b) => {
+        return Number(a.sequence_no || 0) - Number(b.sequence_no || 0);
+      });
+
+    const totalBoxWeight = Array.from(boxWeightMap.values()).reduce(
+      (total, weight) => total + Number(weight || 0),
+      0
+    );
+
     /*
     |--------------------------------------------------------------------------
     | Format boxes with box_info_values
@@ -5490,7 +5581,7 @@ export const getProjectDetailService = async (
     */
 
     const formattedBoxes =
-      boxes.map((box, index) => {
+      boxes.map((box) => {
         const boxInfoValues =
           box.box_info_values
             .filter(
@@ -5544,7 +5635,10 @@ export const getProjectDetailService = async (
             box.box_status,
 
           items_count:
-            boxItemCounts[index],
+            boxItemCountMap.get(box.id) || 0,
+
+          total_weight:
+            Number((boxWeightMap.get(box.id) || 0).toFixed(4)),
 
           factory_out_at:
             box.factory_out_at,
@@ -5639,10 +5733,13 @@ export const getProjectDetailService = async (
               (box) =>
                 box.box_status === "unpacked"
             ).length,
+
+          total_weight:
+            Number(totalBoxWeight.toFixed(4)),
         },
 
         machines:
-          machineStats,
+          sortedMachineStats,
 
         boxes:
           formattedBoxes,
@@ -5694,6 +5791,7 @@ export const getBoxItemsService = async (
         machine_id: true,
         actual_in_at: true,
         site_in_at: true,
+        weight: true,
         in_operator: true,
         site_in_by: true,
         machine: { select: { machine_name: true } },
@@ -5701,12 +5799,17 @@ export const getBoxItemsService = async (
           select: {
             id: true, item_name: true, unique_code: true,
             qty: true, category_name: true, group_name: true,
-            length: true, width: true, thickness: true,
+            length: true, width: true, thickness: true, weight: true,
           },
         },
       },
       orderBy: { id: "asc" },
     });
+
+    const boxTotalWeight = mappings.reduce(
+      (total, mapping) => total + Number(mapping.weight || 0),
+      0
+    );
 
     const opIds = [...new Set([
       ...mappings.map(m => m.in_operator).filter(Boolean),
@@ -5719,14 +5822,30 @@ export const getBoxItemsService = async (
     const opMap = new Map(ops.map(u => [u.id, u.user_name]));
 
     return validationResponse(1, "Box items fetched", {
-      box,
+      box: {
+        ...box,
+        total_weight: Number(boxTotalWeight.toFixed(4)),
+      },
       items: mappings.map(m => ({
         id: m.id,
         machine: { machine_name: m.machine.machine_name },
         actual_in_at: m.actual_in_at,
         site_in_at: m.site_in_at,
+        weight: Number(m.weight || 0),
         scanned_by: m.in_operator ? (opMap.get(m.in_operator) ?? null) : null,
         site_in_by: m.site_in_by ? (opMap.get(m.site_in_by) ?? null) : null,
+        inOperator: m.in_operator
+          ? {
+              id: m.in_operator,
+              name: opMap.get(m.in_operator) ?? "",
+            }
+          : null,
+        siteInByUser: m.site_in_by
+          ? {
+              id: m.site_in_by,
+              name: opMap.get(m.site_in_by) ?? "",
+            }
+          : null,
         cut_list: m.cut_list,
       })),
     });

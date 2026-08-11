@@ -56,6 +56,7 @@ export const createProjectController = async (
       client_address,
       client_contact_no,
       packing_type,
+      no_of_boxes,
       box_info_fields,
       created_by,
     } = req.body;
@@ -76,8 +77,8 @@ export const createProjectController = async (
 
     const parsedLeadId =
       lead_id !== undefined &&
-      lead_id !== null &&
-      lead_id !== ""
+        lead_id !== null &&
+        lead_id !== ""
         ? Number(lead_id)
         : null;
 
@@ -105,6 +106,8 @@ export const createProjectController = async (
       client_contact_no,
 
       packing_type: resolvedPackingType,
+
+      no_of_boxes,
 
       box_info_fields: parsedBoxInfoFields,
 
@@ -136,7 +139,10 @@ export const createProjectController = async (
       error.message.includes("Invalid lead_id") ||
       error.message.includes("Vendor not found") ||
       error.message.includes("Vendor token not found") ||
-      error.message.includes("Duplicate box field");
+      error.message.includes("Duplicate box field") ||
+      error.message.includes("No of boxes") ||
+      error.message.includes("boxes cannot") ||
+      error.message.includes("empty boxes");
 
     return res.status(isValidationError ? 422 : 500).json({
       success: false,
@@ -300,6 +306,11 @@ export const updateTrackTraceProjectController = async (
         ? parseBoxInfoFields(req.body.box_info_fields)
         : undefined;
 
+    const parsedRemoveBoxIds =
+      req.body.remove_box_ids !== undefined
+        ? parseRemoveBoxIds(req.body.remove_box_ids)
+        : undefined;
+
     const result =
       await updateTrackTraceProjectService(
         unique_project_id,
@@ -308,6 +319,9 @@ export const updateTrackTraceProjectController = async (
 
           box_info_fields:
             parsedBoxInfoFields,
+
+          remove_box_ids:
+            parsedRemoveBoxIds,
 
           file:
             req.file,
@@ -332,5 +346,30 @@ export const updateTrackTraceProjectController = async (
         "Failed to update project",
       data: null,
     });
+  }
+};
+
+const parseRemoveBoxIds = (value: any): number[] => {
+  if (!value) return [];
+
+  if (Array.isArray(value)) {
+    return value
+      .map((id) => Number(id))
+      .filter((id) => Number.isFinite(id) && id > 0);
+  }
+
+  try {
+    const parsed = JSON.parse(value);
+
+    if (!Array.isArray(parsed)) return [];
+
+    return parsed
+      .map((id) => Number(id))
+      .filter((id) => Number.isFinite(id) && id > 0);
+  } catch {
+    return String(value)
+      .split(",")
+      .map((id) => Number(id.trim()))
+      .filter((id) => Number.isFinite(id) && id > 0);
   }
 };
