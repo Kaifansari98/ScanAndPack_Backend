@@ -212,9 +212,9 @@ export type SkirtingCarcassLegsMasterWhereInput = {
   name?: Prisma.StringFilter<"SkirtingCarcassLegsMaster"> | string
   carcass_legs_id?: Prisma.IntFilter<"SkirtingCarcassLegsMaster"> | number
   inScope?: Prisma.BoolFilter<"SkirtingCarcassLegsMaster"> | boolean
-  carcassLegs?: Prisma.XOR<Prisma.CarcassLegsMasterScalarRelationFilter, Prisma.CarcassLegsMasterWhereInput>
-  colors?: Prisma.SkirtingCarcassLegsColorMasterListRelationFilter
   leadMappings?: Prisma.LeadHardwareMappingListRelationFilter
+  colors?: Prisma.SkirtingCarcassLegsColorMasterListRelationFilter
+  carcassLegs?: Prisma.XOR<Prisma.CarcassLegsMasterScalarRelationFilter, Prisma.CarcassLegsMasterWhereInput>
 }
 
 export type SkirtingCarcassLegsMasterOrderByWithRelationInput = {
@@ -222,9 +222,9 @@ export type SkirtingCarcassLegsMasterOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   carcass_legs_id?: Prisma.SortOrder
   inScope?: Prisma.SortOrder
-  carcassLegs?: Prisma.CarcassLegsMasterOrderByWithRelationInput
-  colors?: Prisma.SkirtingCarcassLegsColorMasterOrderByRelationAggregateInput
   leadMappings?: Prisma.LeadHardwareMappingOrderByRelationAggregateInput
+  colors?: Prisma.SkirtingCarcassLegsColorMasterOrderByRelationAggregateInput
+  carcassLegs?: Prisma.CarcassLegsMasterOrderByWithRelationInput
 }
 
 export type SkirtingCarcassLegsMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -235,9 +235,9 @@ export type SkirtingCarcassLegsMasterWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"SkirtingCarcassLegsMaster"> | string
   carcass_legs_id?: Prisma.IntFilter<"SkirtingCarcassLegsMaster"> | number
   inScope?: Prisma.BoolFilter<"SkirtingCarcassLegsMaster"> | boolean
-  carcassLegs?: Prisma.XOR<Prisma.CarcassLegsMasterScalarRelationFilter, Prisma.CarcassLegsMasterWhereInput>
-  colors?: Prisma.SkirtingCarcassLegsColorMasterListRelationFilter
   leadMappings?: Prisma.LeadHardwareMappingListRelationFilter
+  colors?: Prisma.SkirtingCarcassLegsColorMasterListRelationFilter
+  carcassLegs?: Prisma.XOR<Prisma.CarcassLegsMasterScalarRelationFilter, Prisma.CarcassLegsMasterWhereInput>
 }, "id">
 
 export type SkirtingCarcassLegsMasterOrderByWithAggregationInput = {
@@ -265,9 +265,9 @@ export type SkirtingCarcassLegsMasterScalarWhereWithAggregatesInput = {
 export type SkirtingCarcassLegsMasterCreateInput = {
   name: string
   inScope?: boolean
-  carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutSkirtingsInput
-  colors?: Prisma.SkirtingCarcassLegsColorMasterCreateNestedManyWithoutSkirtingCarcassLegsInput
   leadMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutSkirtingCarcassLegsInput
+  colors?: Prisma.SkirtingCarcassLegsColorMasterCreateNestedManyWithoutSkirtingCarcassLegsInput
+  carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutSkirtingsInput
 }
 
 export type SkirtingCarcassLegsMasterUncheckedCreateInput = {
@@ -275,16 +275,16 @@ export type SkirtingCarcassLegsMasterUncheckedCreateInput = {
   name: string
   carcass_legs_id: number
   inScope?: boolean
-  colors?: Prisma.SkirtingCarcassLegsColorMasterUncheckedCreateNestedManyWithoutSkirtingCarcassLegsInput
   leadMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutSkirtingCarcassLegsInput
+  colors?: Prisma.SkirtingCarcassLegsColorMasterUncheckedCreateNestedManyWithoutSkirtingCarcassLegsInput
 }
 
 export type SkirtingCarcassLegsMasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inScope?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutSkirtingsNestedInput
-  colors?: Prisma.SkirtingCarcassLegsColorMasterUpdateManyWithoutSkirtingCarcassLegsNestedInput
   leadMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutSkirtingCarcassLegsNestedInput
+  colors?: Prisma.SkirtingCarcassLegsColorMasterUpdateManyWithoutSkirtingCarcassLegsNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutSkirtingsNestedInput
 }
 
 export type SkirtingCarcassLegsMasterUncheckedUpdateInput = {
@@ -292,8 +292,8 @@ export type SkirtingCarcassLegsMasterUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   inScope?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  colors?: Prisma.SkirtingCarcassLegsColorMasterUncheckedUpdateManyWithoutSkirtingCarcassLegsNestedInput
   leadMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutSkirtingCarcassLegsNestedInput
+  colors?: Prisma.SkirtingCarcassLegsColorMasterUncheckedUpdateManyWithoutSkirtingCarcassLegsNestedInput
 }
 
 export type SkirtingCarcassLegsMasterCreateManyInput = {
@@ -434,16 +434,16 @@ export type SkirtingCarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedI
 export type SkirtingCarcassLegsMasterCreateWithoutCarcassLegsInput = {
   name: string
   inScope?: boolean
-  colors?: Prisma.SkirtingCarcassLegsColorMasterCreateNestedManyWithoutSkirtingCarcassLegsInput
   leadMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutSkirtingCarcassLegsInput
+  colors?: Prisma.SkirtingCarcassLegsColorMasterCreateNestedManyWithoutSkirtingCarcassLegsInput
 }
 
 export type SkirtingCarcassLegsMasterUncheckedCreateWithoutCarcassLegsInput = {
   id?: number
   name: string
   inScope?: boolean
-  colors?: Prisma.SkirtingCarcassLegsColorMasterUncheckedCreateNestedManyWithoutSkirtingCarcassLegsInput
   leadMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutSkirtingCarcassLegsInput
+  colors?: Prisma.SkirtingCarcassLegsColorMasterUncheckedCreateNestedManyWithoutSkirtingCarcassLegsInput
 }
 
 export type SkirtingCarcassLegsMasterCreateOrConnectWithoutCarcassLegsInput = {
@@ -485,8 +485,8 @@ export type SkirtingCarcassLegsMasterScalarWhereInput = {
 export type SkirtingCarcassLegsMasterCreateWithoutColorsInput = {
   name: string
   inScope?: boolean
-  carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutSkirtingsInput
   leadMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutSkirtingCarcassLegsInput
+  carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutSkirtingsInput
 }
 
 export type SkirtingCarcassLegsMasterUncheckedCreateWithoutColorsInput = {
@@ -516,8 +516,8 @@ export type SkirtingCarcassLegsMasterUpdateToOneWithWhereWithoutColorsInput = {
 export type SkirtingCarcassLegsMasterUpdateWithoutColorsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inScope?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutSkirtingsNestedInput
   leadMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutSkirtingCarcassLegsNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutSkirtingsNestedInput
 }
 
 export type SkirtingCarcassLegsMasterUncheckedUpdateWithoutColorsInput = {
@@ -531,8 +531,8 @@ export type SkirtingCarcassLegsMasterUncheckedUpdateWithoutColorsInput = {
 export type SkirtingCarcassLegsMasterCreateWithoutLeadMappingsInput = {
   name: string
   inScope?: boolean
-  carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutSkirtingsInput
   colors?: Prisma.SkirtingCarcassLegsColorMasterCreateNestedManyWithoutSkirtingCarcassLegsInput
+  carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutSkirtingsInput
 }
 
 export type SkirtingCarcassLegsMasterUncheckedCreateWithoutLeadMappingsInput = {
@@ -562,8 +562,8 @@ export type SkirtingCarcassLegsMasterUpdateToOneWithWhereWithoutLeadMappingsInpu
 export type SkirtingCarcassLegsMasterUpdateWithoutLeadMappingsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inScope?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutSkirtingsNestedInput
   colors?: Prisma.SkirtingCarcassLegsColorMasterUpdateManyWithoutSkirtingCarcassLegsNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutSkirtingsNestedInput
 }
 
 export type SkirtingCarcassLegsMasterUncheckedUpdateWithoutLeadMappingsInput = {
@@ -583,16 +583,16 @@ export type SkirtingCarcassLegsMasterCreateManyCarcassLegsInput = {
 export type SkirtingCarcassLegsMasterUpdateWithoutCarcassLegsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inScope?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  colors?: Prisma.SkirtingCarcassLegsColorMasterUpdateManyWithoutSkirtingCarcassLegsNestedInput
   leadMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutSkirtingCarcassLegsNestedInput
+  colors?: Prisma.SkirtingCarcassLegsColorMasterUpdateManyWithoutSkirtingCarcassLegsNestedInput
 }
 
 export type SkirtingCarcassLegsMasterUncheckedUpdateWithoutCarcassLegsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inScope?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  colors?: Prisma.SkirtingCarcassLegsColorMasterUncheckedUpdateManyWithoutSkirtingCarcassLegsNestedInput
   leadMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutSkirtingCarcassLegsNestedInput
+  colors?: Prisma.SkirtingCarcassLegsColorMasterUncheckedUpdateManyWithoutSkirtingCarcassLegsNestedInput
 }
 
 export type SkirtingCarcassLegsMasterUncheckedUpdateManyWithoutCarcassLegsInput = {
@@ -607,13 +607,13 @@ export type SkirtingCarcassLegsMasterUncheckedUpdateManyWithoutCarcassLegsInput 
  */
 
 export type SkirtingCarcassLegsMasterCountOutputType = {
-  colors: number
   leadMappings: number
+  colors: number
 }
 
 export type SkirtingCarcassLegsMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  colors?: boolean | SkirtingCarcassLegsMasterCountOutputTypeCountColorsArgs
   leadMappings?: boolean | SkirtingCarcassLegsMasterCountOutputTypeCountLeadMappingsArgs
+  colors?: boolean | SkirtingCarcassLegsMasterCountOutputTypeCountColorsArgs
 }
 
 /**
@@ -629,15 +629,15 @@ export type SkirtingCarcassLegsMasterCountOutputTypeDefaultArgs<ExtArgs extends 
 /**
  * SkirtingCarcassLegsMasterCountOutputType without action
  */
-export type SkirtingCarcassLegsMasterCountOutputTypeCountColorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SkirtingCarcassLegsColorMasterWhereInput
+export type SkirtingCarcassLegsMasterCountOutputTypeCountLeadMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadHardwareMappingWhereInput
 }
 
 /**
  * SkirtingCarcassLegsMasterCountOutputType without action
  */
-export type SkirtingCarcassLegsMasterCountOutputTypeCountLeadMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadHardwareMappingWhereInput
+export type SkirtingCarcassLegsMasterCountOutputTypeCountColorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SkirtingCarcassLegsColorMasterWhereInput
 }
 
 
@@ -646,9 +646,9 @@ export type SkirtingCarcassLegsMasterSelect<ExtArgs extends runtime.Types.Extens
   name?: boolean
   carcass_legs_id?: boolean
   inScope?: boolean
-  carcassLegs?: boolean | Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>
-  colors?: boolean | Prisma.SkirtingCarcassLegsMaster$colorsArgs<ExtArgs>
   leadMappings?: boolean | Prisma.SkirtingCarcassLegsMaster$leadMappingsArgs<ExtArgs>
+  colors?: boolean | Prisma.SkirtingCarcassLegsMaster$colorsArgs<ExtArgs>
+  carcassLegs?: boolean | Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.SkirtingCarcassLegsMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["skirtingCarcassLegsMaster"]>
 
@@ -677,9 +677,9 @@ export type SkirtingCarcassLegsMasterSelectScalar = {
 
 export type SkirtingCarcassLegsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "carcass_legs_id" | "inScope", ExtArgs["result"]["skirtingCarcassLegsMaster"]>
 export type SkirtingCarcassLegsMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  carcassLegs?: boolean | Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>
-  colors?: boolean | Prisma.SkirtingCarcassLegsMaster$colorsArgs<ExtArgs>
   leadMappings?: boolean | Prisma.SkirtingCarcassLegsMaster$leadMappingsArgs<ExtArgs>
+  colors?: boolean | Prisma.SkirtingCarcassLegsMaster$colorsArgs<ExtArgs>
+  carcassLegs?: boolean | Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.SkirtingCarcassLegsMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SkirtingCarcassLegsMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -692,9 +692,9 @@ export type SkirtingCarcassLegsMasterIncludeUpdateManyAndReturn<ExtArgs extends 
 export type $SkirtingCarcassLegsMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SkirtingCarcassLegsMaster"
   objects: {
-    carcassLegs: Prisma.$CarcassLegsMasterPayload<ExtArgs>
-    colors: Prisma.$SkirtingCarcassLegsColorMasterPayload<ExtArgs>[]
     leadMappings: Prisma.$LeadHardwareMappingPayload<ExtArgs>[]
+    colors: Prisma.$SkirtingCarcassLegsColorMasterPayload<ExtArgs>[]
+    carcassLegs: Prisma.$CarcassLegsMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1095,9 +1095,9 @@ readonly fields: SkirtingCarcassLegsMasterFieldRefs;
  */
 export interface Prisma__SkirtingCarcassLegsMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  carcassLegs<T extends Prisma.CarcassLegsMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__CarcassLegsMasterClient<runtime.Types.Result.GetResult<Prisma.$CarcassLegsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  colors<T extends Prisma.SkirtingCarcassLegsMaster$colorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SkirtingCarcassLegsMaster$colorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SkirtingCarcassLegsColorMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadMappings<T extends Prisma.SkirtingCarcassLegsMaster$leadMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SkirtingCarcassLegsMaster$leadMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadHardwareMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  colors<T extends Prisma.SkirtingCarcassLegsMaster$colorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SkirtingCarcassLegsMaster$colorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SkirtingCarcassLegsColorMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  carcassLegs<T extends Prisma.CarcassLegsMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__CarcassLegsMasterClient<runtime.Types.Result.GetResult<Prisma.$CarcassLegsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1532,30 +1532,6 @@ export type SkirtingCarcassLegsMasterDeleteManyArgs<ExtArgs extends runtime.Type
 }
 
 /**
- * SkirtingCarcassLegsMaster.colors
- */
-export type SkirtingCarcassLegsMaster$colorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the SkirtingCarcassLegsColorMaster
-   */
-  select?: Prisma.SkirtingCarcassLegsColorMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the SkirtingCarcassLegsColorMaster
-   */
-  omit?: Prisma.SkirtingCarcassLegsColorMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.SkirtingCarcassLegsColorMasterInclude<ExtArgs> | null
-  where?: Prisma.SkirtingCarcassLegsColorMasterWhereInput
-  orderBy?: Prisma.SkirtingCarcassLegsColorMasterOrderByWithRelationInput | Prisma.SkirtingCarcassLegsColorMasterOrderByWithRelationInput[]
-  cursor?: Prisma.SkirtingCarcassLegsColorMasterWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.SkirtingCarcassLegsColorMasterScalarFieldEnum | Prisma.SkirtingCarcassLegsColorMasterScalarFieldEnum[]
-}
-
-/**
  * SkirtingCarcassLegsMaster.leadMappings
  */
 export type SkirtingCarcassLegsMaster$leadMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1577,6 +1553,30 @@ export type SkirtingCarcassLegsMaster$leadMappingsArgs<ExtArgs extends runtime.T
   take?: number
   skip?: number
   distinct?: Prisma.LeadHardwareMappingScalarFieldEnum | Prisma.LeadHardwareMappingScalarFieldEnum[]
+}
+
+/**
+ * SkirtingCarcassLegsMaster.colors
+ */
+export type SkirtingCarcassLegsMaster$colorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SkirtingCarcassLegsColorMaster
+   */
+  select?: Prisma.SkirtingCarcassLegsColorMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SkirtingCarcassLegsColorMaster
+   */
+  omit?: Prisma.SkirtingCarcassLegsColorMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SkirtingCarcassLegsColorMasterInclude<ExtArgs> | null
+  where?: Prisma.SkirtingCarcassLegsColorMasterWhereInput
+  orderBy?: Prisma.SkirtingCarcassLegsColorMasterOrderByWithRelationInput | Prisma.SkirtingCarcassLegsColorMasterOrderByWithRelationInput[]
+  cursor?: Prisma.SkirtingCarcassLegsColorMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SkirtingCarcassLegsColorMasterScalarFieldEnum | Prisma.SkirtingCarcassLegsColorMasterScalarFieldEnum[]
 }
 
 /**

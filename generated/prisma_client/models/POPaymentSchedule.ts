@@ -30,34 +30,32 @@ export type POPaymentScheduleAvgAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   purchase_order_id: number | null
-  grn_id: number | null
-  payment_term_stage_id: number | null
   stage_no: number | null
   percentage: runtime.Decimal | null
   scheduled_amount: runtime.Decimal | null
   paid_amount: runtime.Decimal | null
   pending_amount: runtime.Decimal | null
+  grn_id: number | null
+  payment_term_stage_id: number | null
 }
 
 export type POPaymentScheduleSumAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   purchase_order_id: number | null
-  grn_id: number | null
-  payment_term_stage_id: number | null
   stage_no: number | null
   percentage: runtime.Decimal | null
   scheduled_amount: runtime.Decimal | null
   paid_amount: runtime.Decimal | null
   pending_amount: runtime.Decimal | null
+  grn_id: number | null
+  payment_term_stage_id: number | null
 }
 
 export type POPaymentScheduleMinAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   purchase_order_id: number | null
-  grn_id: number | null
-  payment_term_stage_id: number | null
   stage_no: number | null
   stage_name: string | null
   trigger_type: $Enums.PaymentTriggerType | null
@@ -70,14 +68,14 @@ export type POPaymentScheduleMinAggregateOutputType = {
   remarks: string | null
   created_at: Date | null
   updated_at: Date | null
+  grn_id: number | null
+  payment_term_stage_id: number | null
 }
 
 export type POPaymentScheduleMaxAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   purchase_order_id: number | null
-  grn_id: number | null
-  payment_term_stage_id: number | null
   stage_no: number | null
   stage_name: string | null
   trigger_type: $Enums.PaymentTriggerType | null
@@ -90,14 +88,14 @@ export type POPaymentScheduleMaxAggregateOutputType = {
   remarks: string | null
   created_at: Date | null
   updated_at: Date | null
+  grn_id: number | null
+  payment_term_stage_id: number | null
 }
 
 export type POPaymentScheduleCountAggregateOutputType = {
   id: number
   vendor_id: number
   purchase_order_id: number
-  grn_id: number
-  payment_term_stage_id: number
   stage_no: number
   stage_name: number
   trigger_type: number
@@ -110,6 +108,8 @@ export type POPaymentScheduleCountAggregateOutputType = {
   remarks: number
   created_at: number
   updated_at: number
+  grn_id: number
+  payment_term_stage_id: number
   _all: number
 }
 
@@ -118,34 +118,32 @@ export type POPaymentScheduleAvgAggregateInputType = {
   id?: true
   vendor_id?: true
   purchase_order_id?: true
-  grn_id?: true
-  payment_term_stage_id?: true
   stage_no?: true
   percentage?: true
   scheduled_amount?: true
   paid_amount?: true
   pending_amount?: true
+  grn_id?: true
+  payment_term_stage_id?: true
 }
 
 export type POPaymentScheduleSumAggregateInputType = {
   id?: true
   vendor_id?: true
   purchase_order_id?: true
-  grn_id?: true
-  payment_term_stage_id?: true
   stage_no?: true
   percentage?: true
   scheduled_amount?: true
   paid_amount?: true
   pending_amount?: true
+  grn_id?: true
+  payment_term_stage_id?: true
 }
 
 export type POPaymentScheduleMinAggregateInputType = {
   id?: true
   vendor_id?: true
   purchase_order_id?: true
-  grn_id?: true
-  payment_term_stage_id?: true
   stage_no?: true
   stage_name?: true
   trigger_type?: true
@@ -158,14 +156,14 @@ export type POPaymentScheduleMinAggregateInputType = {
   remarks?: true
   created_at?: true
   updated_at?: true
+  grn_id?: true
+  payment_term_stage_id?: true
 }
 
 export type POPaymentScheduleMaxAggregateInputType = {
   id?: true
   vendor_id?: true
   purchase_order_id?: true
-  grn_id?: true
-  payment_term_stage_id?: true
   stage_no?: true
   stage_name?: true
   trigger_type?: true
@@ -178,14 +176,14 @@ export type POPaymentScheduleMaxAggregateInputType = {
   remarks?: true
   created_at?: true
   updated_at?: true
+  grn_id?: true
+  payment_term_stage_id?: true
 }
 
 export type POPaymentScheduleCountAggregateInputType = {
   id?: true
   vendor_id?: true
   purchase_order_id?: true
-  grn_id?: true
-  payment_term_stage_id?: true
   stage_no?: true
   stage_name?: true
   trigger_type?: true
@@ -198,6 +196,8 @@ export type POPaymentScheduleCountAggregateInputType = {
   remarks?: true
   created_at?: true
   updated_at?: true
+  grn_id?: true
+  payment_term_stage_id?: true
   _all?: true
 }
 
@@ -291,8 +291,6 @@ export type POPaymentScheduleGroupByOutputType = {
   id: number
   vendor_id: number
   purchase_order_id: number
-  grn_id: number | null
-  payment_term_stage_id: number | null
   stage_no: number
   stage_name: string
   trigger_type: $Enums.PaymentTriggerType
@@ -305,6 +303,8 @@ export type POPaymentScheduleGroupByOutputType = {
   remarks: string | null
   created_at: Date
   updated_at: Date
+  grn_id: number | null
+  payment_term_stage_id: number | null
   _count: POPaymentScheduleCountAggregateOutputType | null
   _avg: POPaymentScheduleAvgAggregateOutputType | null
   _sum: POPaymentScheduleSumAggregateOutputType | null
@@ -334,8 +334,6 @@ export type POPaymentScheduleWhereInput = {
   id?: Prisma.IntFilter<"POPaymentSchedule"> | number
   vendor_id?: Prisma.IntFilter<"POPaymentSchedule"> | number
   purchase_order_id?: Prisma.IntFilter<"POPaymentSchedule"> | number
-  grn_id?: Prisma.IntNullableFilter<"POPaymentSchedule"> | number | null
-  payment_term_stage_id?: Prisma.IntNullableFilter<"POPaymentSchedule"> | number | null
   stage_no?: Prisma.IntFilter<"POPaymentSchedule"> | number
   stage_name?: Prisma.StringFilter<"POPaymentSchedule"> | string
   trigger_type?: Prisma.EnumPaymentTriggerTypeFilter<"POPaymentSchedule"> | $Enums.PaymentTriggerType
@@ -348,11 +346,13 @@ export type POPaymentScheduleWhereInput = {
   remarks?: Prisma.StringNullableFilter<"POPaymentSchedule"> | string | null
   created_at?: Prisma.DateTimeFilter<"POPaymentSchedule"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"POPaymentSchedule"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  purchaseOrder?: Prisma.XOR<Prisma.PurchaseOrderMasterScalarRelationFilter, Prisma.PurchaseOrderMasterWhereInput>
+  grn_id?: Prisma.IntNullableFilter<"POPaymentSchedule"> | number | null
+  payment_term_stage_id?: Prisma.IntNullableFilter<"POPaymentSchedule"> | number | null
+  payments?: Prisma.POPaymentListRelationFilter
   grn?: Prisma.XOR<Prisma.GRNMasterNullableScalarRelationFilter, Prisma.GRNMasterWhereInput> | null
   paymentTermStage?: Prisma.XOR<Prisma.PaymentTermStageNullableScalarRelationFilter, Prisma.PaymentTermStageWhereInput> | null
-  payments?: Prisma.POPaymentListRelationFilter
+  purchaseOrder?: Prisma.XOR<Prisma.PurchaseOrderMasterScalarRelationFilter, Prisma.PurchaseOrderMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   histories?: Prisma.POPaymentScheduleHistoryListRelationFilter
 }
 
@@ -360,8 +360,6 @@ export type POPaymentScheduleOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   purchase_order_id?: Prisma.SortOrder
-  grn_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  payment_term_stage_id?: Prisma.SortOrderInput | Prisma.SortOrder
   stage_no?: Prisma.SortOrder
   stage_name?: Prisma.SortOrder
   trigger_type?: Prisma.SortOrder
@@ -374,11 +372,13 @@ export type POPaymentScheduleOrderByWithRelationInput = {
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  purchaseOrder?: Prisma.PurchaseOrderMasterOrderByWithRelationInput
+  grn_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  payment_term_stage_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  payments?: Prisma.POPaymentOrderByRelationAggregateInput
   grn?: Prisma.GRNMasterOrderByWithRelationInput
   paymentTermStage?: Prisma.PaymentTermStageOrderByWithRelationInput
-  payments?: Prisma.POPaymentOrderByRelationAggregateInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   histories?: Prisma.POPaymentScheduleHistoryOrderByRelationAggregateInput
 }
 
@@ -389,8 +389,6 @@ export type POPaymentScheduleWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.POPaymentScheduleWhereInput | Prisma.POPaymentScheduleWhereInput[]
   vendor_id?: Prisma.IntFilter<"POPaymentSchedule"> | number
   purchase_order_id?: Prisma.IntFilter<"POPaymentSchedule"> | number
-  grn_id?: Prisma.IntNullableFilter<"POPaymentSchedule"> | number | null
-  payment_term_stage_id?: Prisma.IntNullableFilter<"POPaymentSchedule"> | number | null
   stage_no?: Prisma.IntFilter<"POPaymentSchedule"> | number
   stage_name?: Prisma.StringFilter<"POPaymentSchedule"> | string
   trigger_type?: Prisma.EnumPaymentTriggerTypeFilter<"POPaymentSchedule"> | $Enums.PaymentTriggerType
@@ -403,11 +401,13 @@ export type POPaymentScheduleWhereUniqueInput = Prisma.AtLeast<{
   remarks?: Prisma.StringNullableFilter<"POPaymentSchedule"> | string | null
   created_at?: Prisma.DateTimeFilter<"POPaymentSchedule"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"POPaymentSchedule"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  purchaseOrder?: Prisma.XOR<Prisma.PurchaseOrderMasterScalarRelationFilter, Prisma.PurchaseOrderMasterWhereInput>
+  grn_id?: Prisma.IntNullableFilter<"POPaymentSchedule"> | number | null
+  payment_term_stage_id?: Prisma.IntNullableFilter<"POPaymentSchedule"> | number | null
+  payments?: Prisma.POPaymentListRelationFilter
   grn?: Prisma.XOR<Prisma.GRNMasterNullableScalarRelationFilter, Prisma.GRNMasterWhereInput> | null
   paymentTermStage?: Prisma.XOR<Prisma.PaymentTermStageNullableScalarRelationFilter, Prisma.PaymentTermStageWhereInput> | null
-  payments?: Prisma.POPaymentListRelationFilter
+  purchaseOrder?: Prisma.XOR<Prisma.PurchaseOrderMasterScalarRelationFilter, Prisma.PurchaseOrderMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   histories?: Prisma.POPaymentScheduleHistoryListRelationFilter
 }, "id">
 
@@ -415,8 +415,6 @@ export type POPaymentScheduleOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   purchase_order_id?: Prisma.SortOrder
-  grn_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  payment_term_stage_id?: Prisma.SortOrderInput | Prisma.SortOrder
   stage_no?: Prisma.SortOrder
   stage_name?: Prisma.SortOrder
   trigger_type?: Prisma.SortOrder
@@ -429,6 +427,8 @@ export type POPaymentScheduleOrderByWithAggregationInput = {
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  grn_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  payment_term_stage_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.POPaymentScheduleCountOrderByAggregateInput
   _avg?: Prisma.POPaymentScheduleAvgOrderByAggregateInput
   _max?: Prisma.POPaymentScheduleMaxOrderByAggregateInput
@@ -443,8 +443,6 @@ export type POPaymentScheduleScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"POPaymentSchedule"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"POPaymentSchedule"> | number
   purchase_order_id?: Prisma.IntWithAggregatesFilter<"POPaymentSchedule"> | number
-  grn_id?: Prisma.IntNullableWithAggregatesFilter<"POPaymentSchedule"> | number | null
-  payment_term_stage_id?: Prisma.IntNullableWithAggregatesFilter<"POPaymentSchedule"> | number | null
   stage_no?: Prisma.IntWithAggregatesFilter<"POPaymentSchedule"> | number
   stage_name?: Prisma.StringWithAggregatesFilter<"POPaymentSchedule"> | string
   trigger_type?: Prisma.EnumPaymentTriggerTypeWithAggregatesFilter<"POPaymentSchedule"> | $Enums.PaymentTriggerType
@@ -457,6 +455,8 @@ export type POPaymentScheduleScalarWhereWithAggregatesInput = {
   remarks?: Prisma.StringNullableWithAggregatesFilter<"POPaymentSchedule"> | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"POPaymentSchedule"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"POPaymentSchedule"> | Date | string
+  grn_id?: Prisma.IntNullableWithAggregatesFilter<"POPaymentSchedule"> | number | null
+  payment_term_stage_id?: Prisma.IntNullableWithAggregatesFilter<"POPaymentSchedule"> | number | null
 }
 
 export type POPaymentScheduleCreateInput = {
@@ -472,11 +472,11 @@ export type POPaymentScheduleCreateInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPoPaymentSchedulesInput
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutPaymentSchedulesInput
+  payments?: Prisma.POPaymentCreateNestedManyWithoutPaymentScheduleInput
   grn?: Prisma.GRNMasterCreateNestedOneWithoutPaymentSchedulesInput
   paymentTermStage?: Prisma.PaymentTermStageCreateNestedOneWithoutPaymentSchedulesInput
-  payments?: Prisma.POPaymentCreateNestedManyWithoutPaymentScheduleInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutPaymentSchedulesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPoPaymentSchedulesInput
   histories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutPaymentScheduleInput
 }
 
@@ -484,8 +484,6 @@ export type POPaymentScheduleUncheckedCreateInput = {
   id?: number
   vendor_id: number
   purchase_order_id: number
-  grn_id?: number | null
-  payment_term_stage_id?: number | null
   stage_no: number
   stage_name: string
   trigger_type: $Enums.PaymentTriggerType
@@ -498,6 +496,8 @@ export type POPaymentScheduleUncheckedCreateInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  grn_id?: number | null
+  payment_term_stage_id?: number | null
   payments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutPaymentScheduleInput
   histories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutPaymentScheduleInput
 }
@@ -515,11 +515,11 @@ export type POPaymentScheduleUpdateInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPoPaymentSchedulesNestedInput
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutPaymentSchedulesNestedInput
+  payments?: Prisma.POPaymentUpdateManyWithoutPaymentScheduleNestedInput
   grn?: Prisma.GRNMasterUpdateOneWithoutPaymentSchedulesNestedInput
   paymentTermStage?: Prisma.PaymentTermStageUpdateOneWithoutPaymentSchedulesNestedInput
-  payments?: Prisma.POPaymentUpdateManyWithoutPaymentScheduleNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutPaymentSchedulesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPoPaymentSchedulesNestedInput
   histories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutPaymentScheduleNestedInput
 }
 
@@ -527,8 +527,6 @@ export type POPaymentScheduleUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   purchase_order_id?: Prisma.IntFieldUpdateOperationsInput | number
-  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage_no?: Prisma.IntFieldUpdateOperationsInput | number
   stage_name?: Prisma.StringFieldUpdateOperationsInput | string
   trigger_type?: Prisma.EnumPaymentTriggerTypeFieldUpdateOperationsInput | $Enums.PaymentTriggerType
@@ -541,6 +539,8 @@ export type POPaymentScheduleUncheckedUpdateInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   payments?: Prisma.POPaymentUncheckedUpdateManyWithoutPaymentScheduleNestedInput
   histories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutPaymentScheduleNestedInput
 }
@@ -549,8 +549,6 @@ export type POPaymentScheduleCreateManyInput = {
   id?: number
   vendor_id: number
   purchase_order_id: number
-  grn_id?: number | null
-  payment_term_stage_id?: number | null
   stage_no: number
   stage_name: string
   trigger_type: $Enums.PaymentTriggerType
@@ -563,6 +561,8 @@ export type POPaymentScheduleCreateManyInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  grn_id?: number | null
+  payment_term_stage_id?: number | null
 }
 
 export type POPaymentScheduleUpdateManyMutationInput = {
@@ -584,8 +584,6 @@ export type POPaymentScheduleUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   purchase_order_id?: Prisma.IntFieldUpdateOperationsInput | number
-  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage_no?: Prisma.IntFieldUpdateOperationsInput | number
   stage_name?: Prisma.StringFieldUpdateOperationsInput | string
   trigger_type?: Prisma.EnumPaymentTriggerTypeFieldUpdateOperationsInput | $Enums.PaymentTriggerType
@@ -598,6 +596,8 @@ export type POPaymentScheduleUncheckedUpdateManyInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type POPaymentScheduleListRelationFilter = {
@@ -614,8 +614,6 @@ export type POPaymentScheduleCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   purchase_order_id?: Prisma.SortOrder
-  grn_id?: Prisma.SortOrder
-  payment_term_stage_id?: Prisma.SortOrder
   stage_no?: Prisma.SortOrder
   stage_name?: Prisma.SortOrder
   trigger_type?: Prisma.SortOrder
@@ -628,27 +626,27 @@ export type POPaymentScheduleCountOrderByAggregateInput = {
   remarks?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  grn_id?: Prisma.SortOrder
+  payment_term_stage_id?: Prisma.SortOrder
 }
 
 export type POPaymentScheduleAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   purchase_order_id?: Prisma.SortOrder
-  grn_id?: Prisma.SortOrder
-  payment_term_stage_id?: Prisma.SortOrder
   stage_no?: Prisma.SortOrder
   percentage?: Prisma.SortOrder
   scheduled_amount?: Prisma.SortOrder
   paid_amount?: Prisma.SortOrder
   pending_amount?: Prisma.SortOrder
+  grn_id?: Prisma.SortOrder
+  payment_term_stage_id?: Prisma.SortOrder
 }
 
 export type POPaymentScheduleMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   purchase_order_id?: Prisma.SortOrder
-  grn_id?: Prisma.SortOrder
-  payment_term_stage_id?: Prisma.SortOrder
   stage_no?: Prisma.SortOrder
   stage_name?: Prisma.SortOrder
   trigger_type?: Prisma.SortOrder
@@ -661,14 +659,14 @@ export type POPaymentScheduleMaxOrderByAggregateInput = {
   remarks?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  grn_id?: Prisma.SortOrder
+  payment_term_stage_id?: Prisma.SortOrder
 }
 
 export type POPaymentScheduleMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   purchase_order_id?: Prisma.SortOrder
-  grn_id?: Prisma.SortOrder
-  payment_term_stage_id?: Prisma.SortOrder
   stage_no?: Prisma.SortOrder
   stage_name?: Prisma.SortOrder
   trigger_type?: Prisma.SortOrder
@@ -681,19 +679,21 @@ export type POPaymentScheduleMinOrderByAggregateInput = {
   remarks?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  grn_id?: Prisma.SortOrder
+  payment_term_stage_id?: Prisma.SortOrder
 }
 
 export type POPaymentScheduleSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   purchase_order_id?: Prisma.SortOrder
-  grn_id?: Prisma.SortOrder
-  payment_term_stage_id?: Prisma.SortOrder
   stage_no?: Prisma.SortOrder
   percentage?: Prisma.SortOrder
   scheduled_amount?: Prisma.SortOrder
   paid_amount?: Prisma.SortOrder
   pending_amount?: Prisma.SortOrder
+  grn_id?: Prisma.SortOrder
+  payment_term_stage_id?: Prisma.SortOrder
 }
 
 export type POPaymentScheduleScalarRelationFilter = {
@@ -914,18 +914,16 @@ export type POPaymentScheduleCreateWithoutVendorInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutPaymentSchedulesInput
+  payments?: Prisma.POPaymentCreateNestedManyWithoutPaymentScheduleInput
   grn?: Prisma.GRNMasterCreateNestedOneWithoutPaymentSchedulesInput
   paymentTermStage?: Prisma.PaymentTermStageCreateNestedOneWithoutPaymentSchedulesInput
-  payments?: Prisma.POPaymentCreateNestedManyWithoutPaymentScheduleInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutPaymentSchedulesInput
   histories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutPaymentScheduleInput
 }
 
 export type POPaymentScheduleUncheckedCreateWithoutVendorInput = {
   id?: number
   purchase_order_id: number
-  grn_id?: number | null
-  payment_term_stage_id?: number | null
   stage_no: number
   stage_name: string
   trigger_type: $Enums.PaymentTriggerType
@@ -938,6 +936,8 @@ export type POPaymentScheduleUncheckedCreateWithoutVendorInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  grn_id?: number | null
+  payment_term_stage_id?: number | null
   payments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutPaymentScheduleInput
   histories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutPaymentScheduleInput
 }
@@ -975,8 +975,6 @@ export type POPaymentScheduleScalarWhereInput = {
   id?: Prisma.IntFilter<"POPaymentSchedule"> | number
   vendor_id?: Prisma.IntFilter<"POPaymentSchedule"> | number
   purchase_order_id?: Prisma.IntFilter<"POPaymentSchedule"> | number
-  grn_id?: Prisma.IntNullableFilter<"POPaymentSchedule"> | number | null
-  payment_term_stage_id?: Prisma.IntNullableFilter<"POPaymentSchedule"> | number | null
   stage_no?: Prisma.IntFilter<"POPaymentSchedule"> | number
   stage_name?: Prisma.StringFilter<"POPaymentSchedule"> | string
   trigger_type?: Prisma.EnumPaymentTriggerTypeFilter<"POPaymentSchedule"> | $Enums.PaymentTriggerType
@@ -989,6 +987,8 @@ export type POPaymentScheduleScalarWhereInput = {
   remarks?: Prisma.StringNullableFilter<"POPaymentSchedule"> | string | null
   created_at?: Prisma.DateTimeFilter<"POPaymentSchedule"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"POPaymentSchedule"> | Date | string
+  grn_id?: Prisma.IntNullableFilter<"POPaymentSchedule"> | number | null
+  payment_term_stage_id?: Prisma.IntNullableFilter<"POPaymentSchedule"> | number | null
 }
 
 export type POPaymentScheduleCreateWithoutPurchaseOrderInput = {
@@ -1004,18 +1004,16 @@ export type POPaymentScheduleCreateWithoutPurchaseOrderInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPoPaymentSchedulesInput
+  payments?: Prisma.POPaymentCreateNestedManyWithoutPaymentScheduleInput
   grn?: Prisma.GRNMasterCreateNestedOneWithoutPaymentSchedulesInput
   paymentTermStage?: Prisma.PaymentTermStageCreateNestedOneWithoutPaymentSchedulesInput
-  payments?: Prisma.POPaymentCreateNestedManyWithoutPaymentScheduleInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPoPaymentSchedulesInput
   histories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutPaymentScheduleInput
 }
 
 export type POPaymentScheduleUncheckedCreateWithoutPurchaseOrderInput = {
   id?: number
   vendor_id: number
-  grn_id?: number | null
-  payment_term_stage_id?: number | null
   stage_no: number
   stage_name: string
   trigger_type: $Enums.PaymentTriggerType
@@ -1028,6 +1026,8 @@ export type POPaymentScheduleUncheckedCreateWithoutPurchaseOrderInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  grn_id?: number | null
+  payment_term_stage_id?: number | null
   payments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutPaymentScheduleInput
   histories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutPaymentScheduleInput
 }
@@ -1071,10 +1071,10 @@ export type POPaymentScheduleCreateWithoutGrnInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPoPaymentSchedulesInput
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutPaymentSchedulesInput
-  paymentTermStage?: Prisma.PaymentTermStageCreateNestedOneWithoutPaymentSchedulesInput
   payments?: Prisma.POPaymentCreateNestedManyWithoutPaymentScheduleInput
+  paymentTermStage?: Prisma.PaymentTermStageCreateNestedOneWithoutPaymentSchedulesInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutPaymentSchedulesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPoPaymentSchedulesInput
   histories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutPaymentScheduleInput
 }
 
@@ -1082,7 +1082,6 @@ export type POPaymentScheduleUncheckedCreateWithoutGrnInput = {
   id?: number
   vendor_id: number
   purchase_order_id: number
-  payment_term_stage_id?: number | null
   stage_no: number
   stage_name: string
   trigger_type: $Enums.PaymentTriggerType
@@ -1095,6 +1094,7 @@ export type POPaymentScheduleUncheckedCreateWithoutGrnInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  payment_term_stage_id?: number | null
   payments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutPaymentScheduleInput
   histories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutPaymentScheduleInput
 }
@@ -1138,10 +1138,10 @@ export type POPaymentScheduleCreateWithoutPaymentTermStageInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPoPaymentSchedulesInput
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutPaymentSchedulesInput
-  grn?: Prisma.GRNMasterCreateNestedOneWithoutPaymentSchedulesInput
   payments?: Prisma.POPaymentCreateNestedManyWithoutPaymentScheduleInput
+  grn?: Prisma.GRNMasterCreateNestedOneWithoutPaymentSchedulesInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutPaymentSchedulesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPoPaymentSchedulesInput
   histories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutPaymentScheduleInput
 }
 
@@ -1149,7 +1149,6 @@ export type POPaymentScheduleUncheckedCreateWithoutPaymentTermStageInput = {
   id?: number
   vendor_id: number
   purchase_order_id: number
-  grn_id?: number | null
   stage_no: number
   stage_name: string
   trigger_type: $Enums.PaymentTriggerType
@@ -1162,6 +1161,7 @@ export type POPaymentScheduleUncheckedCreateWithoutPaymentTermStageInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  grn_id?: number | null
   payments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutPaymentScheduleInput
   histories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutPaymentScheduleInput
 }
@@ -1205,10 +1205,10 @@ export type POPaymentScheduleCreateWithoutPaymentsInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPoPaymentSchedulesInput
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutPaymentSchedulesInput
   grn?: Prisma.GRNMasterCreateNestedOneWithoutPaymentSchedulesInput
   paymentTermStage?: Prisma.PaymentTermStageCreateNestedOneWithoutPaymentSchedulesInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutPaymentSchedulesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPoPaymentSchedulesInput
   histories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutPaymentScheduleInput
 }
 
@@ -1216,8 +1216,6 @@ export type POPaymentScheduleUncheckedCreateWithoutPaymentsInput = {
   id?: number
   vendor_id: number
   purchase_order_id: number
-  grn_id?: number | null
-  payment_term_stage_id?: number | null
   stage_no: number
   stage_name: string
   trigger_type: $Enums.PaymentTriggerType
@@ -1230,6 +1228,8 @@ export type POPaymentScheduleUncheckedCreateWithoutPaymentsInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  grn_id?: number | null
+  payment_term_stage_id?: number | null
   histories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutPaymentScheduleInput
 }
 
@@ -1262,10 +1262,10 @@ export type POPaymentScheduleUpdateWithoutPaymentsInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPoPaymentSchedulesNestedInput
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutPaymentSchedulesNestedInput
   grn?: Prisma.GRNMasterUpdateOneWithoutPaymentSchedulesNestedInput
   paymentTermStage?: Prisma.PaymentTermStageUpdateOneWithoutPaymentSchedulesNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutPaymentSchedulesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPoPaymentSchedulesNestedInput
   histories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutPaymentScheduleNestedInput
 }
 
@@ -1273,8 +1273,6 @@ export type POPaymentScheduleUncheckedUpdateWithoutPaymentsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   purchase_order_id?: Prisma.IntFieldUpdateOperationsInput | number
-  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage_no?: Prisma.IntFieldUpdateOperationsInput | number
   stage_name?: Prisma.StringFieldUpdateOperationsInput | string
   trigger_type?: Prisma.EnumPaymentTriggerTypeFieldUpdateOperationsInput | $Enums.PaymentTriggerType
@@ -1287,6 +1285,8 @@ export type POPaymentScheduleUncheckedUpdateWithoutPaymentsInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   histories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutPaymentScheduleNestedInput
 }
 
@@ -1303,19 +1303,17 @@ export type POPaymentScheduleCreateWithoutHistoriesInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutPoPaymentSchedulesInput
-  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutPaymentSchedulesInput
+  payments?: Prisma.POPaymentCreateNestedManyWithoutPaymentScheduleInput
   grn?: Prisma.GRNMasterCreateNestedOneWithoutPaymentSchedulesInput
   paymentTermStage?: Prisma.PaymentTermStageCreateNestedOneWithoutPaymentSchedulesInput
-  payments?: Prisma.POPaymentCreateNestedManyWithoutPaymentScheduleInput
+  purchaseOrder: Prisma.PurchaseOrderMasterCreateNestedOneWithoutPaymentSchedulesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPoPaymentSchedulesInput
 }
 
 export type POPaymentScheduleUncheckedCreateWithoutHistoriesInput = {
   id?: number
   vendor_id: number
   purchase_order_id: number
-  grn_id?: number | null
-  payment_term_stage_id?: number | null
   stage_no: number
   stage_name: string
   trigger_type: $Enums.PaymentTriggerType
@@ -1328,6 +1326,8 @@ export type POPaymentScheduleUncheckedCreateWithoutHistoriesInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  grn_id?: number | null
+  payment_term_stage_id?: number | null
   payments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutPaymentScheduleInput
 }
 
@@ -1360,19 +1360,17 @@ export type POPaymentScheduleUpdateWithoutHistoriesInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPoPaymentSchedulesNestedInput
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutPaymentSchedulesNestedInput
+  payments?: Prisma.POPaymentUpdateManyWithoutPaymentScheduleNestedInput
   grn?: Prisma.GRNMasterUpdateOneWithoutPaymentSchedulesNestedInput
   paymentTermStage?: Prisma.PaymentTermStageUpdateOneWithoutPaymentSchedulesNestedInput
-  payments?: Prisma.POPaymentUpdateManyWithoutPaymentScheduleNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutPaymentSchedulesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPoPaymentSchedulesNestedInput
 }
 
 export type POPaymentScheduleUncheckedUpdateWithoutHistoriesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   purchase_order_id?: Prisma.IntFieldUpdateOperationsInput | number
-  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage_no?: Prisma.IntFieldUpdateOperationsInput | number
   stage_name?: Prisma.StringFieldUpdateOperationsInput | string
   trigger_type?: Prisma.EnumPaymentTriggerTypeFieldUpdateOperationsInput | $Enums.PaymentTriggerType
@@ -1385,14 +1383,14 @@ export type POPaymentScheduleUncheckedUpdateWithoutHistoriesInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   payments?: Prisma.POPaymentUncheckedUpdateManyWithoutPaymentScheduleNestedInput
 }
 
 export type POPaymentScheduleCreateManyVendorInput = {
   id?: number
   purchase_order_id: number
-  grn_id?: number | null
-  payment_term_stage_id?: number | null
   stage_no: number
   stage_name: string
   trigger_type: $Enums.PaymentTriggerType
@@ -1405,6 +1403,8 @@ export type POPaymentScheduleCreateManyVendorInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  grn_id?: number | null
+  payment_term_stage_id?: number | null
 }
 
 export type POPaymentScheduleUpdateWithoutVendorInput = {
@@ -1420,18 +1420,16 @@ export type POPaymentScheduleUpdateWithoutVendorInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutPaymentSchedulesNestedInput
+  payments?: Prisma.POPaymentUpdateManyWithoutPaymentScheduleNestedInput
   grn?: Prisma.GRNMasterUpdateOneWithoutPaymentSchedulesNestedInput
   paymentTermStage?: Prisma.PaymentTermStageUpdateOneWithoutPaymentSchedulesNestedInput
-  payments?: Prisma.POPaymentUpdateManyWithoutPaymentScheduleNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutPaymentSchedulesNestedInput
   histories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutPaymentScheduleNestedInput
 }
 
 export type POPaymentScheduleUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   purchase_order_id?: Prisma.IntFieldUpdateOperationsInput | number
-  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage_no?: Prisma.IntFieldUpdateOperationsInput | number
   stage_name?: Prisma.StringFieldUpdateOperationsInput | string
   trigger_type?: Prisma.EnumPaymentTriggerTypeFieldUpdateOperationsInput | $Enums.PaymentTriggerType
@@ -1444,6 +1442,8 @@ export type POPaymentScheduleUncheckedUpdateWithoutVendorInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   payments?: Prisma.POPaymentUncheckedUpdateManyWithoutPaymentScheduleNestedInput
   histories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutPaymentScheduleNestedInput
 }
@@ -1451,8 +1451,6 @@ export type POPaymentScheduleUncheckedUpdateWithoutVendorInput = {
 export type POPaymentScheduleUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   purchase_order_id?: Prisma.IntFieldUpdateOperationsInput | number
-  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage_no?: Prisma.IntFieldUpdateOperationsInput | number
   stage_name?: Prisma.StringFieldUpdateOperationsInput | string
   trigger_type?: Prisma.EnumPaymentTriggerTypeFieldUpdateOperationsInput | $Enums.PaymentTriggerType
@@ -1465,13 +1463,13 @@ export type POPaymentScheduleUncheckedUpdateManyWithoutVendorInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type POPaymentScheduleCreateManyPurchaseOrderInput = {
   id?: number
   vendor_id: number
-  grn_id?: number | null
-  payment_term_stage_id?: number | null
   stage_no: number
   stage_name: string
   trigger_type: $Enums.PaymentTriggerType
@@ -1484,6 +1482,8 @@ export type POPaymentScheduleCreateManyPurchaseOrderInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  grn_id?: number | null
+  payment_term_stage_id?: number | null
 }
 
 export type POPaymentScheduleUpdateWithoutPurchaseOrderInput = {
@@ -1499,18 +1499,16 @@ export type POPaymentScheduleUpdateWithoutPurchaseOrderInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPoPaymentSchedulesNestedInput
+  payments?: Prisma.POPaymentUpdateManyWithoutPaymentScheduleNestedInput
   grn?: Prisma.GRNMasterUpdateOneWithoutPaymentSchedulesNestedInput
   paymentTermStage?: Prisma.PaymentTermStageUpdateOneWithoutPaymentSchedulesNestedInput
-  payments?: Prisma.POPaymentUpdateManyWithoutPaymentScheduleNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPoPaymentSchedulesNestedInput
   histories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutPaymentScheduleNestedInput
 }
 
 export type POPaymentScheduleUncheckedUpdateWithoutPurchaseOrderInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage_no?: Prisma.IntFieldUpdateOperationsInput | number
   stage_name?: Prisma.StringFieldUpdateOperationsInput | string
   trigger_type?: Prisma.EnumPaymentTriggerTypeFieldUpdateOperationsInput | $Enums.PaymentTriggerType
@@ -1523,6 +1521,8 @@ export type POPaymentScheduleUncheckedUpdateWithoutPurchaseOrderInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   payments?: Prisma.POPaymentUncheckedUpdateManyWithoutPaymentScheduleNestedInput
   histories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutPaymentScheduleNestedInput
 }
@@ -1530,8 +1530,6 @@ export type POPaymentScheduleUncheckedUpdateWithoutPurchaseOrderInput = {
 export type POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage_no?: Prisma.IntFieldUpdateOperationsInput | number
   stage_name?: Prisma.StringFieldUpdateOperationsInput | string
   trigger_type?: Prisma.EnumPaymentTriggerTypeFieldUpdateOperationsInput | $Enums.PaymentTriggerType
@@ -1544,13 +1542,14 @@ export type POPaymentScheduleUncheckedUpdateManyWithoutPurchaseOrderInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type POPaymentScheduleCreateManyGrnInput = {
   id?: number
   vendor_id: number
   purchase_order_id: number
-  payment_term_stage_id?: number | null
   stage_no: number
   stage_name: string
   trigger_type: $Enums.PaymentTriggerType
@@ -1563,6 +1562,7 @@ export type POPaymentScheduleCreateManyGrnInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  payment_term_stage_id?: number | null
 }
 
 export type POPaymentScheduleUpdateWithoutGrnInput = {
@@ -1578,10 +1578,10 @@ export type POPaymentScheduleUpdateWithoutGrnInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPoPaymentSchedulesNestedInput
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutPaymentSchedulesNestedInput
-  paymentTermStage?: Prisma.PaymentTermStageUpdateOneWithoutPaymentSchedulesNestedInput
   payments?: Prisma.POPaymentUpdateManyWithoutPaymentScheduleNestedInput
+  paymentTermStage?: Prisma.PaymentTermStageUpdateOneWithoutPaymentSchedulesNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutPaymentSchedulesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPoPaymentSchedulesNestedInput
   histories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutPaymentScheduleNestedInput
 }
 
@@ -1589,7 +1589,6 @@ export type POPaymentScheduleUncheckedUpdateWithoutGrnInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   purchase_order_id?: Prisma.IntFieldUpdateOperationsInput | number
-  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage_no?: Prisma.IntFieldUpdateOperationsInput | number
   stage_name?: Prisma.StringFieldUpdateOperationsInput | string
   trigger_type?: Prisma.EnumPaymentTriggerTypeFieldUpdateOperationsInput | $Enums.PaymentTriggerType
@@ -1602,6 +1601,7 @@ export type POPaymentScheduleUncheckedUpdateWithoutGrnInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   payments?: Prisma.POPaymentUncheckedUpdateManyWithoutPaymentScheduleNestedInput
   histories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutPaymentScheduleNestedInput
 }
@@ -1610,7 +1610,6 @@ export type POPaymentScheduleUncheckedUpdateManyWithoutGrnInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   purchase_order_id?: Prisma.IntFieldUpdateOperationsInput | number
-  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage_no?: Prisma.IntFieldUpdateOperationsInput | number
   stage_name?: Prisma.StringFieldUpdateOperationsInput | string
   trigger_type?: Prisma.EnumPaymentTriggerTypeFieldUpdateOperationsInput | $Enums.PaymentTriggerType
@@ -1623,13 +1622,13 @@ export type POPaymentScheduleUncheckedUpdateManyWithoutGrnInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payment_term_stage_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type POPaymentScheduleCreateManyPaymentTermStageInput = {
   id?: number
   vendor_id: number
   purchase_order_id: number
-  grn_id?: number | null
   stage_no: number
   stage_name: string
   trigger_type: $Enums.PaymentTriggerType
@@ -1642,6 +1641,7 @@ export type POPaymentScheduleCreateManyPaymentTermStageInput = {
   remarks?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  grn_id?: number | null
 }
 
 export type POPaymentScheduleUpdateWithoutPaymentTermStageInput = {
@@ -1657,10 +1657,10 @@ export type POPaymentScheduleUpdateWithoutPaymentTermStageInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPoPaymentSchedulesNestedInput
-  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutPaymentSchedulesNestedInput
-  grn?: Prisma.GRNMasterUpdateOneWithoutPaymentSchedulesNestedInput
   payments?: Prisma.POPaymentUpdateManyWithoutPaymentScheduleNestedInput
+  grn?: Prisma.GRNMasterUpdateOneWithoutPaymentSchedulesNestedInput
+  purchaseOrder?: Prisma.PurchaseOrderMasterUpdateOneRequiredWithoutPaymentSchedulesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPoPaymentSchedulesNestedInput
   histories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutPaymentScheduleNestedInput
 }
 
@@ -1668,7 +1668,6 @@ export type POPaymentScheduleUncheckedUpdateWithoutPaymentTermStageInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   purchase_order_id?: Prisma.IntFieldUpdateOperationsInput | number
-  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage_no?: Prisma.IntFieldUpdateOperationsInput | number
   stage_name?: Prisma.StringFieldUpdateOperationsInput | string
   trigger_type?: Prisma.EnumPaymentTriggerTypeFieldUpdateOperationsInput | $Enums.PaymentTriggerType
@@ -1681,6 +1680,7 @@ export type POPaymentScheduleUncheckedUpdateWithoutPaymentTermStageInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   payments?: Prisma.POPaymentUncheckedUpdateManyWithoutPaymentScheduleNestedInput
   histories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutPaymentScheduleNestedInput
 }
@@ -1689,7 +1689,6 @@ export type POPaymentScheduleUncheckedUpdateManyWithoutPaymentTermStageInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   purchase_order_id?: Prisma.IntFieldUpdateOperationsInput | number
-  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage_no?: Prisma.IntFieldUpdateOperationsInput | number
   stage_name?: Prisma.StringFieldUpdateOperationsInput | string
   trigger_type?: Prisma.EnumPaymentTriggerTypeFieldUpdateOperationsInput | $Enums.PaymentTriggerType
@@ -1702,6 +1701,7 @@ export type POPaymentScheduleUncheckedUpdateManyWithoutPaymentTermStageInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  grn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -1748,8 +1748,6 @@ export type POPaymentScheduleSelect<ExtArgs extends runtime.Types.Extensions.Int
   id?: boolean
   vendor_id?: boolean
   purchase_order_id?: boolean
-  grn_id?: boolean
-  payment_term_stage_id?: boolean
   stage_no?: boolean
   stage_name?: boolean
   trigger_type?: boolean
@@ -1762,11 +1760,13 @@ export type POPaymentScheduleSelect<ExtArgs extends runtime.Types.Extensions.Int
   remarks?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  grn_id?: boolean
+  payment_term_stage_id?: boolean
+  payments?: boolean | Prisma.POPaymentSchedule$paymentsArgs<ExtArgs>
   grn?: boolean | Prisma.POPaymentSchedule$grnArgs<ExtArgs>
   paymentTermStage?: boolean | Prisma.POPaymentSchedule$paymentTermStageArgs<ExtArgs>
-  payments?: boolean | Prisma.POPaymentSchedule$paymentsArgs<ExtArgs>
+  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   histories?: boolean | Prisma.POPaymentSchedule$historiesArgs<ExtArgs>
   _count?: boolean | Prisma.POPaymentScheduleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["pOPaymentSchedule"]>
@@ -1775,8 +1775,6 @@ export type POPaymentScheduleSelectCreateManyAndReturn<ExtArgs extends runtime.T
   id?: boolean
   vendor_id?: boolean
   purchase_order_id?: boolean
-  grn_id?: boolean
-  payment_term_stage_id?: boolean
   stage_no?: boolean
   stage_name?: boolean
   trigger_type?: boolean
@@ -1789,18 +1787,18 @@ export type POPaymentScheduleSelectCreateManyAndReturn<ExtArgs extends runtime.T
   remarks?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  grn_id?: boolean
+  payment_term_stage_id?: boolean
   grn?: boolean | Prisma.POPaymentSchedule$grnArgs<ExtArgs>
   paymentTermStage?: boolean | Prisma.POPaymentSchedule$paymentTermStageArgs<ExtArgs>
+  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["pOPaymentSchedule"]>
 
 export type POPaymentScheduleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   vendor_id?: boolean
   purchase_order_id?: boolean
-  grn_id?: boolean
-  payment_term_stage_id?: boolean
   stage_no?: boolean
   stage_name?: boolean
   trigger_type?: boolean
@@ -1813,18 +1811,18 @@ export type POPaymentScheduleSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   remarks?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  grn_id?: boolean
+  payment_term_stage_id?: boolean
   grn?: boolean | Prisma.POPaymentSchedule$grnArgs<ExtArgs>
   paymentTermStage?: boolean | Prisma.POPaymentSchedule$paymentTermStageArgs<ExtArgs>
+  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["pOPaymentSchedule"]>
 
 export type POPaymentScheduleSelectScalar = {
   id?: boolean
   vendor_id?: boolean
   purchase_order_id?: boolean
-  grn_id?: boolean
-  payment_term_stage_id?: boolean
   stage_no?: boolean
   stage_name?: boolean
   trigger_type?: boolean
@@ -1837,47 +1835,47 @@ export type POPaymentScheduleSelectScalar = {
   remarks?: boolean
   created_at?: boolean
   updated_at?: boolean
+  grn_id?: boolean
+  payment_term_stage_id?: boolean
 }
 
-export type POPaymentScheduleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "purchase_order_id" | "grn_id" | "payment_term_stage_id" | "stage_no" | "stage_name" | "trigger_type" | "percentage" | "scheduled_amount" | "paid_amount" | "pending_amount" | "due_date" | "status" | "remarks" | "created_at" | "updated_at", ExtArgs["result"]["pOPaymentSchedule"]>
+export type POPaymentScheduleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "purchase_order_id" | "stage_no" | "stage_name" | "trigger_type" | "percentage" | "scheduled_amount" | "paid_amount" | "pending_amount" | "due_date" | "status" | "remarks" | "created_at" | "updated_at" | "grn_id" | "payment_term_stage_id", ExtArgs["result"]["pOPaymentSchedule"]>
 export type POPaymentScheduleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  payments?: boolean | Prisma.POPaymentSchedule$paymentsArgs<ExtArgs>
   grn?: boolean | Prisma.POPaymentSchedule$grnArgs<ExtArgs>
   paymentTermStage?: boolean | Prisma.POPaymentSchedule$paymentTermStageArgs<ExtArgs>
-  payments?: boolean | Prisma.POPaymentSchedule$paymentsArgs<ExtArgs>
+  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   histories?: boolean | Prisma.POPaymentSchedule$historiesArgs<ExtArgs>
   _count?: boolean | Prisma.POPaymentScheduleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type POPaymentScheduleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
   grn?: boolean | Prisma.POPaymentSchedule$grnArgs<ExtArgs>
   paymentTermStage?: boolean | Prisma.POPaymentSchedule$paymentTermStageArgs<ExtArgs>
+  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type POPaymentScheduleIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
   grn?: boolean | Prisma.POPaymentSchedule$grnArgs<ExtArgs>
   paymentTermStage?: boolean | Prisma.POPaymentSchedule$paymentTermStageArgs<ExtArgs>
+  purchaseOrder?: boolean | Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $POPaymentSchedulePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "POPaymentSchedule"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    purchaseOrder: Prisma.$PurchaseOrderMasterPayload<ExtArgs>
+    payments: Prisma.$POPaymentPayload<ExtArgs>[]
     grn: Prisma.$GRNMasterPayload<ExtArgs> | null
     paymentTermStage: Prisma.$PaymentTermStagePayload<ExtArgs> | null
-    payments: Prisma.$POPaymentPayload<ExtArgs>[]
+    purchaseOrder: Prisma.$PurchaseOrderMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     histories: Prisma.$POPaymentScheduleHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     vendor_id: number
     purchase_order_id: number
-    grn_id: number | null
-    payment_term_stage_id: number | null
     stage_no: number
     stage_name: string
     trigger_type: $Enums.PaymentTriggerType
@@ -1890,6 +1888,8 @@ export type $POPaymentSchedulePayload<ExtArgs extends runtime.Types.Extensions.I
     remarks: string | null
     created_at: Date
     updated_at: Date
+    grn_id: number | null
+    payment_term_stage_id: number | null
   }, ExtArgs["result"]["pOPaymentSchedule"]>
   composites: {}
 }
@@ -2284,11 +2284,11 @@ readonly fields: POPaymentScheduleFieldRefs;
  */
 export interface Prisma__POPaymentScheduleClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  purchaseOrder<T extends Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PurchaseOrderMasterClient<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  payments<T extends Prisma.POPaymentSchedule$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.POPaymentSchedule$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$POPaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   grn<T extends Prisma.POPaymentSchedule$grnArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.POPaymentSchedule$grnArgs<ExtArgs>>): Prisma.Prisma__GRNMasterClient<runtime.Types.Result.GetResult<Prisma.$GRNMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   paymentTermStage<T extends Prisma.POPaymentSchedule$paymentTermStageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.POPaymentSchedule$paymentTermStageArgs<ExtArgs>>): Prisma.Prisma__PaymentTermStageClient<runtime.Types.Result.GetResult<Prisma.$PaymentTermStagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  payments<T extends Prisma.POPaymentSchedule$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.POPaymentSchedule$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$POPaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  purchaseOrder<T extends Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrderMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PurchaseOrderMasterClient<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   histories<T extends Prisma.POPaymentSchedule$historiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.POPaymentSchedule$historiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$POPaymentScheduleHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2322,8 +2322,6 @@ export interface POPaymentScheduleFieldRefs {
   readonly id: Prisma.FieldRef<"POPaymentSchedule", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"POPaymentSchedule", 'Int'>
   readonly purchase_order_id: Prisma.FieldRef<"POPaymentSchedule", 'Int'>
-  readonly grn_id: Prisma.FieldRef<"POPaymentSchedule", 'Int'>
-  readonly payment_term_stage_id: Prisma.FieldRef<"POPaymentSchedule", 'Int'>
   readonly stage_no: Prisma.FieldRef<"POPaymentSchedule", 'Int'>
   readonly stage_name: Prisma.FieldRef<"POPaymentSchedule", 'String'>
   readonly trigger_type: Prisma.FieldRef<"POPaymentSchedule", 'PaymentTriggerType'>
@@ -2336,6 +2334,8 @@ export interface POPaymentScheduleFieldRefs {
   readonly remarks: Prisma.FieldRef<"POPaymentSchedule", 'String'>
   readonly created_at: Prisma.FieldRef<"POPaymentSchedule", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"POPaymentSchedule", 'DateTime'>
+  readonly grn_id: Prisma.FieldRef<"POPaymentSchedule", 'Int'>
+  readonly payment_term_stage_id: Prisma.FieldRef<"POPaymentSchedule", 'Int'>
 }
     
 
@@ -2737,6 +2737,30 @@ export type POPaymentScheduleDeleteManyArgs<ExtArgs extends runtime.Types.Extens
 }
 
 /**
+ * POPaymentSchedule.payments
+ */
+export type POPaymentSchedule$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the POPayment
+   */
+  select?: Prisma.POPaymentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the POPayment
+   */
+  omit?: Prisma.POPaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.POPaymentInclude<ExtArgs> | null
+  where?: Prisma.POPaymentWhereInput
+  orderBy?: Prisma.POPaymentOrderByWithRelationInput | Prisma.POPaymentOrderByWithRelationInput[]
+  cursor?: Prisma.POPaymentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.POPaymentScalarFieldEnum | Prisma.POPaymentScalarFieldEnum[]
+}
+
+/**
  * POPaymentSchedule.grn
  */
 export type POPaymentSchedule$grnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2772,30 +2796,6 @@ export type POPaymentSchedule$paymentTermStageArgs<ExtArgs extends runtime.Types
    */
   include?: Prisma.PaymentTermStageInclude<ExtArgs> | null
   where?: Prisma.PaymentTermStageWhereInput
-}
-
-/**
- * POPaymentSchedule.payments
- */
-export type POPaymentSchedule$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the POPayment
-   */
-  select?: Prisma.POPaymentSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the POPayment
-   */
-  omit?: Prisma.POPaymentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.POPaymentInclude<ExtArgs> | null
-  where?: Prisma.POPaymentWhereInput
-  orderBy?: Prisma.POPaymentOrderByWithRelationInput | Prisma.POPaymentOrderByWithRelationInput[]
-  cursor?: Prisma.POPaymentWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.POPaymentScalarFieldEnum | Prisma.POPaymentScalarFieldEnum[]
 }
 
 /**

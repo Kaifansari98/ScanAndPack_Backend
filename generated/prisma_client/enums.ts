@@ -9,12 +9,13 @@
 * 🟢 You can import this file directly.
 */
 
-export const LeadBillingAddressType = {
-  BILL_TO: 'BILL_TO',
-  SHIP_TO: 'SHIP_TO'
+export const MaterialSupplyType = {
+  Frankvin: 'Frankvin',
+  Client: 'Client',
+  Shared: 'Shared'
 } as const
 
-export type LeadBillingAddressType = (typeof LeadBillingAddressType)[keyof typeof LeadBillingAddressType]
+export type MaterialSupplyType = (typeof MaterialSupplyType)[keyof typeof MaterialSupplyType]
 
 
 export const BoxInfoFieldType = {
@@ -654,3 +655,28 @@ export const OtherApplianceType = {
 } as const
 
 export type OtherApplianceType = (typeof OtherApplianceType)[keyof typeof OtherApplianceType]
+
+
+export const LeadEntryType = {
+  ONLINE: 'ONLINE',
+  WALK_IN: 'WALK_IN'
+} as const
+
+export type LeadEntryType = (typeof LeadEntryType)[keyof typeof LeadEntryType]
+
+
+export const LeadCallType = {
+  OUTGOING: 'OUTGOING',
+  INCOMING: 'INCOMING'
+} as const
+
+export type LeadCallType = (typeof LeadCallType)[keyof typeof LeadCallType]
+
+
+export const LeadStoreActionType = {
+  PREFERENCE: 'PREFERENCE',
+  ASSIGNED: 'ASSIGNED',
+  TRANSFERRED: 'TRANSFERRED'
+} as const
+
+export type LeadStoreActionType = (typeof LeadStoreActionType)[keyof typeof LeadStoreActionType]

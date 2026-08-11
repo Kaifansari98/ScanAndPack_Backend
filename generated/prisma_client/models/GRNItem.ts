@@ -35,27 +35,27 @@ export type GRNItemAvgAggregateOutputType = {
   accepted_qty: runtime.Decimal | null
   rejected_qty: runtime.Decimal | null
   unit_price: runtime.Decimal | null
-  mrp: runtime.Decimal | null
-  discount_pct: runtime.Decimal | null
-  rate: runtime.Decimal | null
-  tax_pct: runtime.Decimal | null
-  cgst_pct: runtime.Decimal | null
-  sgst_pct: runtime.Decimal | null
-  igst_pct: runtime.Decimal | null
-  tax_amount: runtime.Decimal | null
   amount: runtime.Decimal | null
+  cgst_pct: runtime.Decimal | null
+  discount_pct: runtime.Decimal | null
+  igst_pct: runtime.Decimal | null
+  mrp: runtime.Decimal | null
+  rate: runtime.Decimal | null
+  sgst_pct: runtime.Decimal | null
+  tax_amount: runtime.Decimal | null
+  tax_pct: runtime.Decimal | null
   total_amount: runtime.Decimal | null
-  gst_percentage: runtime.Decimal | null
-  taxable_amount: runtime.Decimal | null
-  cgst_percentage: runtime.Decimal | null
-  sgst_percentage: runtime.Decimal | null
-  igst_percentage: runtime.Decimal | null
   cgst_amount: runtime.Decimal | null
-  sgst_amount: runtime.Decimal | null
-  igst_amount: runtime.Decimal | null
-  discount_percentage: runtime.Decimal | null
+  cgst_percentage: runtime.Decimal | null
   discount_amount: runtime.Decimal | null
+  discount_percentage: runtime.Decimal | null
+  gst_percentage: runtime.Decimal | null
+  igst_amount: runtime.Decimal | null
+  igst_percentage: runtime.Decimal | null
   line_total: runtime.Decimal | null
+  sgst_amount: runtime.Decimal | null
+  sgst_percentage: runtime.Decimal | null
+  taxable_amount: runtime.Decimal | null
 }
 
 export type GRNItemSumAggregateOutputType = {
@@ -67,27 +67,27 @@ export type GRNItemSumAggregateOutputType = {
   accepted_qty: runtime.Decimal | null
   rejected_qty: runtime.Decimal | null
   unit_price: runtime.Decimal | null
-  mrp: runtime.Decimal | null
-  discount_pct: runtime.Decimal | null
-  rate: runtime.Decimal | null
-  tax_pct: runtime.Decimal | null
-  cgst_pct: runtime.Decimal | null
-  sgst_pct: runtime.Decimal | null
-  igst_pct: runtime.Decimal | null
-  tax_amount: runtime.Decimal | null
   amount: runtime.Decimal | null
+  cgst_pct: runtime.Decimal | null
+  discount_pct: runtime.Decimal | null
+  igst_pct: runtime.Decimal | null
+  mrp: runtime.Decimal | null
+  rate: runtime.Decimal | null
+  sgst_pct: runtime.Decimal | null
+  tax_amount: runtime.Decimal | null
+  tax_pct: runtime.Decimal | null
   total_amount: runtime.Decimal | null
-  gst_percentage: runtime.Decimal | null
-  taxable_amount: runtime.Decimal | null
-  cgst_percentage: runtime.Decimal | null
-  sgst_percentage: runtime.Decimal | null
-  igst_percentage: runtime.Decimal | null
   cgst_amount: runtime.Decimal | null
-  sgst_amount: runtime.Decimal | null
-  igst_amount: runtime.Decimal | null
-  discount_percentage: runtime.Decimal | null
+  cgst_percentage: runtime.Decimal | null
   discount_amount: runtime.Decimal | null
+  discount_percentage: runtime.Decimal | null
+  gst_percentage: runtime.Decimal | null
+  igst_amount: runtime.Decimal | null
+  igst_percentage: runtime.Decimal | null
   line_total: runtime.Decimal | null
+  sgst_amount: runtime.Decimal | null
+  sgst_percentage: runtime.Decimal | null
+  taxable_amount: runtime.Decimal | null
 }
 
 export type GRNItemMinAggregateOutputType = {
@@ -104,28 +104,28 @@ export type GRNItemMinAggregateOutputType = {
   rejection_reason: string | null
   created_at: Date | null
   updated_at: Date | null
-  mrp: runtime.Decimal | null
-  discount_pct: runtime.Decimal | null
-  rate: runtime.Decimal | null
-  tax_pct: runtime.Decimal | null
-  cgst_pct: runtime.Decimal | null
-  sgst_pct: runtime.Decimal | null
-  igst_pct: runtime.Decimal | null
-  tax_amount: runtime.Decimal | null
   amount: runtime.Decimal | null
+  cgst_pct: runtime.Decimal | null
+  discount_pct: runtime.Decimal | null
+  igst_pct: runtime.Decimal | null
+  mrp: runtime.Decimal | null
+  rate: runtime.Decimal | null
+  sgst_pct: runtime.Decimal | null
+  tax_amount: runtime.Decimal | null
+  tax_pct: runtime.Decimal | null
   total_amount: runtime.Decimal | null
-  hsn_code: string | null
-  gst_percentage: runtime.Decimal | null
-  taxable_amount: runtime.Decimal | null
-  cgst_percentage: runtime.Decimal | null
-  sgst_percentage: runtime.Decimal | null
-  igst_percentage: runtime.Decimal | null
   cgst_amount: runtime.Decimal | null
-  sgst_amount: runtime.Decimal | null
-  igst_amount: runtime.Decimal | null
-  discount_percentage: runtime.Decimal | null
+  cgst_percentage: runtime.Decimal | null
   discount_amount: runtime.Decimal | null
+  discount_percentage: runtime.Decimal | null
+  gst_percentage: runtime.Decimal | null
+  hsn_code: string | null
+  igst_amount: runtime.Decimal | null
+  igst_percentage: runtime.Decimal | null
   line_total: runtime.Decimal | null
+  sgst_amount: runtime.Decimal | null
+  sgst_percentage: runtime.Decimal | null
+  taxable_amount: runtime.Decimal | null
 }
 
 export type GRNItemMaxAggregateOutputType = {
@@ -142,28 +142,28 @@ export type GRNItemMaxAggregateOutputType = {
   rejection_reason: string | null
   created_at: Date | null
   updated_at: Date | null
-  mrp: runtime.Decimal | null
-  discount_pct: runtime.Decimal | null
-  rate: runtime.Decimal | null
-  tax_pct: runtime.Decimal | null
-  cgst_pct: runtime.Decimal | null
-  sgst_pct: runtime.Decimal | null
-  igst_pct: runtime.Decimal | null
-  tax_amount: runtime.Decimal | null
   amount: runtime.Decimal | null
+  cgst_pct: runtime.Decimal | null
+  discount_pct: runtime.Decimal | null
+  igst_pct: runtime.Decimal | null
+  mrp: runtime.Decimal | null
+  rate: runtime.Decimal | null
+  sgst_pct: runtime.Decimal | null
+  tax_amount: runtime.Decimal | null
+  tax_pct: runtime.Decimal | null
   total_amount: runtime.Decimal | null
-  hsn_code: string | null
-  gst_percentage: runtime.Decimal | null
-  taxable_amount: runtime.Decimal | null
-  cgst_percentage: runtime.Decimal | null
-  sgst_percentage: runtime.Decimal | null
-  igst_percentage: runtime.Decimal | null
   cgst_amount: runtime.Decimal | null
-  sgst_amount: runtime.Decimal | null
-  igst_amount: runtime.Decimal | null
-  discount_percentage: runtime.Decimal | null
+  cgst_percentage: runtime.Decimal | null
   discount_amount: runtime.Decimal | null
+  discount_percentage: runtime.Decimal | null
+  gst_percentage: runtime.Decimal | null
+  hsn_code: string | null
+  igst_amount: runtime.Decimal | null
+  igst_percentage: runtime.Decimal | null
   line_total: runtime.Decimal | null
+  sgst_amount: runtime.Decimal | null
+  sgst_percentage: runtime.Decimal | null
+  taxable_amount: runtime.Decimal | null
 }
 
 export type GRNItemCountAggregateOutputType = {
@@ -180,28 +180,28 @@ export type GRNItemCountAggregateOutputType = {
   rejection_reason: number
   created_at: number
   updated_at: number
-  mrp: number
-  discount_pct: number
-  rate: number
-  tax_pct: number
-  cgst_pct: number
-  sgst_pct: number
-  igst_pct: number
-  tax_amount: number
   amount: number
+  cgst_pct: number
+  discount_pct: number
+  igst_pct: number
+  mrp: number
+  rate: number
+  sgst_pct: number
+  tax_amount: number
+  tax_pct: number
   total_amount: number
-  hsn_code: number
-  gst_percentage: number
-  taxable_amount: number
-  cgst_percentage: number
-  sgst_percentage: number
-  igst_percentage: number
   cgst_amount: number
-  sgst_amount: number
-  igst_amount: number
-  discount_percentage: number
+  cgst_percentage: number
   discount_amount: number
+  discount_percentage: number
+  gst_percentage: number
+  hsn_code: number
+  igst_amount: number
+  igst_percentage: number
   line_total: number
+  sgst_amount: number
+  sgst_percentage: number
+  taxable_amount: number
   _all: number
 }
 
@@ -215,27 +215,27 @@ export type GRNItemAvgAggregateInputType = {
   accepted_qty?: true
   rejected_qty?: true
   unit_price?: true
-  mrp?: true
-  discount_pct?: true
-  rate?: true
-  tax_pct?: true
-  cgst_pct?: true
-  sgst_pct?: true
-  igst_pct?: true
-  tax_amount?: true
   amount?: true
+  cgst_pct?: true
+  discount_pct?: true
+  igst_pct?: true
+  mrp?: true
+  rate?: true
+  sgst_pct?: true
+  tax_amount?: true
+  tax_pct?: true
   total_amount?: true
-  gst_percentage?: true
-  taxable_amount?: true
-  cgst_percentage?: true
-  sgst_percentage?: true
-  igst_percentage?: true
   cgst_amount?: true
-  sgst_amount?: true
-  igst_amount?: true
-  discount_percentage?: true
+  cgst_percentage?: true
   discount_amount?: true
+  discount_percentage?: true
+  gst_percentage?: true
+  igst_amount?: true
+  igst_percentage?: true
   line_total?: true
+  sgst_amount?: true
+  sgst_percentage?: true
+  taxable_amount?: true
 }
 
 export type GRNItemSumAggregateInputType = {
@@ -247,27 +247,27 @@ export type GRNItemSumAggregateInputType = {
   accepted_qty?: true
   rejected_qty?: true
   unit_price?: true
-  mrp?: true
-  discount_pct?: true
-  rate?: true
-  tax_pct?: true
-  cgst_pct?: true
-  sgst_pct?: true
-  igst_pct?: true
-  tax_amount?: true
   amount?: true
+  cgst_pct?: true
+  discount_pct?: true
+  igst_pct?: true
+  mrp?: true
+  rate?: true
+  sgst_pct?: true
+  tax_amount?: true
+  tax_pct?: true
   total_amount?: true
-  gst_percentage?: true
-  taxable_amount?: true
-  cgst_percentage?: true
-  sgst_percentage?: true
-  igst_percentage?: true
   cgst_amount?: true
-  sgst_amount?: true
-  igst_amount?: true
-  discount_percentage?: true
+  cgst_percentage?: true
   discount_amount?: true
+  discount_percentage?: true
+  gst_percentage?: true
+  igst_amount?: true
+  igst_percentage?: true
   line_total?: true
+  sgst_amount?: true
+  sgst_percentage?: true
+  taxable_amount?: true
 }
 
 export type GRNItemMinAggregateInputType = {
@@ -284,28 +284,28 @@ export type GRNItemMinAggregateInputType = {
   rejection_reason?: true
   created_at?: true
   updated_at?: true
-  mrp?: true
-  discount_pct?: true
-  rate?: true
-  tax_pct?: true
-  cgst_pct?: true
-  sgst_pct?: true
-  igst_pct?: true
-  tax_amount?: true
   amount?: true
+  cgst_pct?: true
+  discount_pct?: true
+  igst_pct?: true
+  mrp?: true
+  rate?: true
+  sgst_pct?: true
+  tax_amount?: true
+  tax_pct?: true
   total_amount?: true
-  hsn_code?: true
-  gst_percentage?: true
-  taxable_amount?: true
-  cgst_percentage?: true
-  sgst_percentage?: true
-  igst_percentage?: true
   cgst_amount?: true
-  sgst_amount?: true
-  igst_amount?: true
-  discount_percentage?: true
+  cgst_percentage?: true
   discount_amount?: true
+  discount_percentage?: true
+  gst_percentage?: true
+  hsn_code?: true
+  igst_amount?: true
+  igst_percentage?: true
   line_total?: true
+  sgst_amount?: true
+  sgst_percentage?: true
+  taxable_amount?: true
 }
 
 export type GRNItemMaxAggregateInputType = {
@@ -322,28 +322,28 @@ export type GRNItemMaxAggregateInputType = {
   rejection_reason?: true
   created_at?: true
   updated_at?: true
-  mrp?: true
-  discount_pct?: true
-  rate?: true
-  tax_pct?: true
-  cgst_pct?: true
-  sgst_pct?: true
-  igst_pct?: true
-  tax_amount?: true
   amount?: true
+  cgst_pct?: true
+  discount_pct?: true
+  igst_pct?: true
+  mrp?: true
+  rate?: true
+  sgst_pct?: true
+  tax_amount?: true
+  tax_pct?: true
   total_amount?: true
-  hsn_code?: true
-  gst_percentage?: true
-  taxable_amount?: true
-  cgst_percentage?: true
-  sgst_percentage?: true
-  igst_percentage?: true
   cgst_amount?: true
-  sgst_amount?: true
-  igst_amount?: true
-  discount_percentage?: true
+  cgst_percentage?: true
   discount_amount?: true
+  discount_percentage?: true
+  gst_percentage?: true
+  hsn_code?: true
+  igst_amount?: true
+  igst_percentage?: true
   line_total?: true
+  sgst_amount?: true
+  sgst_percentage?: true
+  taxable_amount?: true
 }
 
 export type GRNItemCountAggregateInputType = {
@@ -360,28 +360,28 @@ export type GRNItemCountAggregateInputType = {
   rejection_reason?: true
   created_at?: true
   updated_at?: true
-  mrp?: true
-  discount_pct?: true
-  rate?: true
-  tax_pct?: true
-  cgst_pct?: true
-  sgst_pct?: true
-  igst_pct?: true
-  tax_amount?: true
   amount?: true
+  cgst_pct?: true
+  discount_pct?: true
+  igst_pct?: true
+  mrp?: true
+  rate?: true
+  sgst_pct?: true
+  tax_amount?: true
+  tax_pct?: true
   total_amount?: true
-  hsn_code?: true
-  gst_percentage?: true
-  taxable_amount?: true
-  cgst_percentage?: true
-  sgst_percentage?: true
-  igst_percentage?: true
   cgst_amount?: true
-  sgst_amount?: true
-  igst_amount?: true
-  discount_percentage?: true
+  cgst_percentage?: true
   discount_amount?: true
+  discount_percentage?: true
+  gst_percentage?: true
+  hsn_code?: true
+  igst_amount?: true
+  igst_percentage?: true
   line_total?: true
+  sgst_amount?: true
+  sgst_percentage?: true
+  taxable_amount?: true
   _all?: true
 }
 
@@ -485,28 +485,28 @@ export type GRNItemGroupByOutputType = {
   rejection_reason: string | null
   created_at: Date
   updated_at: Date
-  mrp: runtime.Decimal | null
-  discount_pct: runtime.Decimal | null
-  rate: runtime.Decimal | null
-  tax_pct: runtime.Decimal | null
-  cgst_pct: runtime.Decimal | null
-  sgst_pct: runtime.Decimal | null
-  igst_pct: runtime.Decimal | null
-  tax_amount: runtime.Decimal | null
   amount: runtime.Decimal | null
+  cgst_pct: runtime.Decimal | null
+  discount_pct: runtime.Decimal | null
+  igst_pct: runtime.Decimal | null
+  mrp: runtime.Decimal | null
+  rate: runtime.Decimal | null
+  sgst_pct: runtime.Decimal | null
+  tax_amount: runtime.Decimal | null
+  tax_pct: runtime.Decimal | null
   total_amount: runtime.Decimal | null
-  hsn_code: string | null
-  gst_percentage: runtime.Decimal | null
-  taxable_amount: runtime.Decimal | null
-  cgst_percentage: runtime.Decimal | null
-  sgst_percentage: runtime.Decimal | null
-  igst_percentage: runtime.Decimal | null
   cgst_amount: runtime.Decimal | null
-  sgst_amount: runtime.Decimal | null
-  igst_amount: runtime.Decimal | null
-  discount_percentage: runtime.Decimal | null
+  cgst_percentage: runtime.Decimal | null
   discount_amount: runtime.Decimal | null
+  discount_percentage: runtime.Decimal | null
+  gst_percentage: runtime.Decimal | null
+  hsn_code: string | null
+  igst_amount: runtime.Decimal | null
+  igst_percentage: runtime.Decimal | null
   line_total: runtime.Decimal | null
+  sgst_amount: runtime.Decimal | null
+  sgst_percentage: runtime.Decimal | null
+  taxable_amount: runtime.Decimal | null
   _count: GRNItemCountAggregateOutputType | null
   _avg: GRNItemAvgAggregateOutputType | null
   _sum: GRNItemSumAggregateOutputType | null
@@ -546,28 +546,28 @@ export type GRNItemWhereInput = {
   rejection_reason?: Prisma.StringNullableFilter<"GRNItem"> | string | null
   created_at?: Prisma.DateTimeFilter<"GRNItem"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"GRNItem"> | Date | string
-  mrp?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: Prisma.StringNullableFilter<"GRNItem"> | string | null
-  gst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: Prisma.StringNullableFilter<"GRNItem"> | string | null
+  igst_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grn?: Prisma.XOR<Prisma.GRNMasterScalarRelationFilter, Prisma.GRNMasterWhereInput>
   poItem?: Prisma.XOR<Prisma.PurchaseOrderItemScalarRelationFilter, Prisma.PurchaseOrderItemWhereInput>
   product?: Prisma.XOR<Prisma.ProductMasterScalarRelationFilter, Prisma.ProductMasterWhereInput>
@@ -588,28 +588,28 @@ export type GRNItemOrderByWithRelationInput = {
   rejection_reason?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  mrp?: Prisma.SortOrderInput | Prisma.SortOrder
-  discount_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  rate?: Prisma.SortOrderInput | Prisma.SortOrder
-  tax_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  cgst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  sgst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  igst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  tax_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  cgst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
+  discount_pct?: Prisma.SortOrderInput | Prisma.SortOrder
+  igst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
+  mrp?: Prisma.SortOrderInput | Prisma.SortOrder
+  rate?: Prisma.SortOrderInput | Prisma.SortOrder
+  sgst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
+  tax_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  tax_pct?: Prisma.SortOrderInput | Prisma.SortOrder
   total_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  hsn_code?: Prisma.SortOrderInput | Prisma.SortOrder
-  gst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
-  taxable_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  cgst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
-  sgst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
-  igst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
   cgst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  sgst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  igst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  discount_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
+  cgst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
   discount_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  discount_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
+  gst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
+  hsn_code?: Prisma.SortOrderInput | Prisma.SortOrder
+  igst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  igst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
   line_total?: Prisma.SortOrderInput | Prisma.SortOrder
+  sgst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  sgst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
+  taxable_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   grn?: Prisma.GRNMasterOrderByWithRelationInput
   poItem?: Prisma.PurchaseOrderItemOrderByWithRelationInput
   product?: Prisma.ProductMasterOrderByWithRelationInput
@@ -633,28 +633,28 @@ export type GRNItemWhereUniqueInput = Prisma.AtLeast<{
   rejection_reason?: Prisma.StringNullableFilter<"GRNItem"> | string | null
   created_at?: Prisma.DateTimeFilter<"GRNItem"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"GRNItem"> | Date | string
-  mrp?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: Prisma.StringNullableFilter<"GRNItem"> | string | null
-  gst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: Prisma.StringNullableFilter<"GRNItem"> | string | null
+  igst_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grn?: Prisma.XOR<Prisma.GRNMasterScalarRelationFilter, Prisma.GRNMasterWhereInput>
   poItem?: Prisma.XOR<Prisma.PurchaseOrderItemScalarRelationFilter, Prisma.PurchaseOrderItemWhereInput>
   product?: Prisma.XOR<Prisma.ProductMasterScalarRelationFilter, Prisma.ProductMasterWhereInput>
@@ -675,28 +675,28 @@ export type GRNItemOrderByWithAggregationInput = {
   rejection_reason?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  mrp?: Prisma.SortOrderInput | Prisma.SortOrder
-  discount_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  rate?: Prisma.SortOrderInput | Prisma.SortOrder
-  tax_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  cgst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  sgst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  igst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
-  tax_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  cgst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
+  discount_pct?: Prisma.SortOrderInput | Prisma.SortOrder
+  igst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
+  mrp?: Prisma.SortOrderInput | Prisma.SortOrder
+  rate?: Prisma.SortOrderInput | Prisma.SortOrder
+  sgst_pct?: Prisma.SortOrderInput | Prisma.SortOrder
+  tax_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  tax_pct?: Prisma.SortOrderInput | Prisma.SortOrder
   total_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  hsn_code?: Prisma.SortOrderInput | Prisma.SortOrder
-  gst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
-  taxable_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  cgst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
-  sgst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
-  igst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
   cgst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  sgst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  igst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  discount_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
+  cgst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
   discount_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  discount_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
+  gst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
+  hsn_code?: Prisma.SortOrderInput | Prisma.SortOrder
+  igst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  igst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
   line_total?: Prisma.SortOrderInput | Prisma.SortOrder
+  sgst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  sgst_percentage?: Prisma.SortOrderInput | Prisma.SortOrder
+  taxable_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.GRNItemCountOrderByAggregateInput
   _avg?: Prisma.GRNItemAvgOrderByAggregateInput
   _max?: Prisma.GRNItemMaxOrderByAggregateInput
@@ -721,28 +721,28 @@ export type GRNItemScalarWhereWithAggregatesInput = {
   rejection_reason?: Prisma.StringNullableWithAggregatesFilter<"GRNItem"> | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"GRNItem"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"GRNItem"> | Date | string
-  mrp?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: Prisma.StringNullableWithAggregatesFilter<"GRNItem"> | string | null
-  gst_percentage?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: Prisma.StringNullableWithAggregatesFilter<"GRNItem"> | string | null
+  igst_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type GRNItemCreateInput = {
@@ -755,28 +755,28 @@ export type GRNItemCreateInput = {
   rejection_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: string | null
-  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grn: Prisma.GRNMasterCreateNestedOneWithoutItemsInput
   poItem: Prisma.PurchaseOrderItemCreateNestedOneWithoutGrnItemsInput
   product: Prisma.ProductMasterCreateNestedOneWithoutGrnItemsInput
@@ -797,28 +797,28 @@ export type GRNItemUncheckedCreateInput = {
   rejection_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: string | null
-  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutGrnItemInput
 }
 
@@ -832,28 +832,28 @@ export type GRNItemUpdateInput = {
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grn?: Prisma.GRNMasterUpdateOneRequiredWithoutItemsNestedInput
   poItem?: Prisma.PurchaseOrderItemUpdateOneRequiredWithoutGrnItemsNestedInput
   product?: Prisma.ProductMasterUpdateOneRequiredWithoutGrnItemsNestedInput
@@ -874,28 +874,28 @@ export type GRNItemUncheckedUpdateInput = {
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutGrnItemNestedInput
 }
 
@@ -913,28 +913,28 @@ export type GRNItemCreateManyInput = {
   rejection_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: string | null
-  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type GRNItemUpdateManyMutationInput = {
@@ -947,28 +947,28 @@ export type GRNItemUpdateManyMutationInput = {
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type GRNItemUncheckedUpdateManyInput = {
@@ -985,28 +985,28 @@ export type GRNItemUncheckedUpdateManyInput = {
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type GRNItemListRelationFilter = {
@@ -1033,28 +1033,28 @@ export type GRNItemCountOrderByAggregateInput = {
   rejection_reason?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  mrp?: Prisma.SortOrder
-  discount_pct?: Prisma.SortOrder
-  rate?: Prisma.SortOrder
-  tax_pct?: Prisma.SortOrder
-  cgst_pct?: Prisma.SortOrder
-  sgst_pct?: Prisma.SortOrder
-  igst_pct?: Prisma.SortOrder
-  tax_amount?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  cgst_pct?: Prisma.SortOrder
+  discount_pct?: Prisma.SortOrder
+  igst_pct?: Prisma.SortOrder
+  mrp?: Prisma.SortOrder
+  rate?: Prisma.SortOrder
+  sgst_pct?: Prisma.SortOrder
+  tax_amount?: Prisma.SortOrder
+  tax_pct?: Prisma.SortOrder
   total_amount?: Prisma.SortOrder
-  hsn_code?: Prisma.SortOrder
-  gst_percentage?: Prisma.SortOrder
-  taxable_amount?: Prisma.SortOrder
-  cgst_percentage?: Prisma.SortOrder
-  sgst_percentage?: Prisma.SortOrder
-  igst_percentage?: Prisma.SortOrder
   cgst_amount?: Prisma.SortOrder
-  sgst_amount?: Prisma.SortOrder
-  igst_amount?: Prisma.SortOrder
-  discount_percentage?: Prisma.SortOrder
+  cgst_percentage?: Prisma.SortOrder
   discount_amount?: Prisma.SortOrder
+  discount_percentage?: Prisma.SortOrder
+  gst_percentage?: Prisma.SortOrder
+  hsn_code?: Prisma.SortOrder
+  igst_amount?: Prisma.SortOrder
+  igst_percentage?: Prisma.SortOrder
   line_total?: Prisma.SortOrder
+  sgst_amount?: Prisma.SortOrder
+  sgst_percentage?: Prisma.SortOrder
+  taxable_amount?: Prisma.SortOrder
 }
 
 export type GRNItemAvgOrderByAggregateInput = {
@@ -1066,27 +1066,27 @@ export type GRNItemAvgOrderByAggregateInput = {
   accepted_qty?: Prisma.SortOrder
   rejected_qty?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
-  mrp?: Prisma.SortOrder
-  discount_pct?: Prisma.SortOrder
-  rate?: Prisma.SortOrder
-  tax_pct?: Prisma.SortOrder
-  cgst_pct?: Prisma.SortOrder
-  sgst_pct?: Prisma.SortOrder
-  igst_pct?: Prisma.SortOrder
-  tax_amount?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  cgst_pct?: Prisma.SortOrder
+  discount_pct?: Prisma.SortOrder
+  igst_pct?: Prisma.SortOrder
+  mrp?: Prisma.SortOrder
+  rate?: Prisma.SortOrder
+  sgst_pct?: Prisma.SortOrder
+  tax_amount?: Prisma.SortOrder
+  tax_pct?: Prisma.SortOrder
   total_amount?: Prisma.SortOrder
-  gst_percentage?: Prisma.SortOrder
-  taxable_amount?: Prisma.SortOrder
-  cgst_percentage?: Prisma.SortOrder
-  sgst_percentage?: Prisma.SortOrder
-  igst_percentage?: Prisma.SortOrder
   cgst_amount?: Prisma.SortOrder
-  sgst_amount?: Prisma.SortOrder
-  igst_amount?: Prisma.SortOrder
-  discount_percentage?: Prisma.SortOrder
+  cgst_percentage?: Prisma.SortOrder
   discount_amount?: Prisma.SortOrder
+  discount_percentage?: Prisma.SortOrder
+  gst_percentage?: Prisma.SortOrder
+  igst_amount?: Prisma.SortOrder
+  igst_percentage?: Prisma.SortOrder
   line_total?: Prisma.SortOrder
+  sgst_amount?: Prisma.SortOrder
+  sgst_percentage?: Prisma.SortOrder
+  taxable_amount?: Prisma.SortOrder
 }
 
 export type GRNItemMaxOrderByAggregateInput = {
@@ -1103,28 +1103,28 @@ export type GRNItemMaxOrderByAggregateInput = {
   rejection_reason?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  mrp?: Prisma.SortOrder
-  discount_pct?: Prisma.SortOrder
-  rate?: Prisma.SortOrder
-  tax_pct?: Prisma.SortOrder
-  cgst_pct?: Prisma.SortOrder
-  sgst_pct?: Prisma.SortOrder
-  igst_pct?: Prisma.SortOrder
-  tax_amount?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  cgst_pct?: Prisma.SortOrder
+  discount_pct?: Prisma.SortOrder
+  igst_pct?: Prisma.SortOrder
+  mrp?: Prisma.SortOrder
+  rate?: Prisma.SortOrder
+  sgst_pct?: Prisma.SortOrder
+  tax_amount?: Prisma.SortOrder
+  tax_pct?: Prisma.SortOrder
   total_amount?: Prisma.SortOrder
-  hsn_code?: Prisma.SortOrder
-  gst_percentage?: Prisma.SortOrder
-  taxable_amount?: Prisma.SortOrder
-  cgst_percentage?: Prisma.SortOrder
-  sgst_percentage?: Prisma.SortOrder
-  igst_percentage?: Prisma.SortOrder
   cgst_amount?: Prisma.SortOrder
-  sgst_amount?: Prisma.SortOrder
-  igst_amount?: Prisma.SortOrder
-  discount_percentage?: Prisma.SortOrder
+  cgst_percentage?: Prisma.SortOrder
   discount_amount?: Prisma.SortOrder
+  discount_percentage?: Prisma.SortOrder
+  gst_percentage?: Prisma.SortOrder
+  hsn_code?: Prisma.SortOrder
+  igst_amount?: Prisma.SortOrder
+  igst_percentage?: Prisma.SortOrder
   line_total?: Prisma.SortOrder
+  sgst_amount?: Prisma.SortOrder
+  sgst_percentage?: Prisma.SortOrder
+  taxable_amount?: Prisma.SortOrder
 }
 
 export type GRNItemMinOrderByAggregateInput = {
@@ -1141,28 +1141,28 @@ export type GRNItemMinOrderByAggregateInput = {
   rejection_reason?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  mrp?: Prisma.SortOrder
-  discount_pct?: Prisma.SortOrder
-  rate?: Prisma.SortOrder
-  tax_pct?: Prisma.SortOrder
-  cgst_pct?: Prisma.SortOrder
-  sgst_pct?: Prisma.SortOrder
-  igst_pct?: Prisma.SortOrder
-  tax_amount?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  cgst_pct?: Prisma.SortOrder
+  discount_pct?: Prisma.SortOrder
+  igst_pct?: Prisma.SortOrder
+  mrp?: Prisma.SortOrder
+  rate?: Prisma.SortOrder
+  sgst_pct?: Prisma.SortOrder
+  tax_amount?: Prisma.SortOrder
+  tax_pct?: Prisma.SortOrder
   total_amount?: Prisma.SortOrder
-  hsn_code?: Prisma.SortOrder
-  gst_percentage?: Prisma.SortOrder
-  taxable_amount?: Prisma.SortOrder
-  cgst_percentage?: Prisma.SortOrder
-  sgst_percentage?: Prisma.SortOrder
-  igst_percentage?: Prisma.SortOrder
   cgst_amount?: Prisma.SortOrder
-  sgst_amount?: Prisma.SortOrder
-  igst_amount?: Prisma.SortOrder
-  discount_percentage?: Prisma.SortOrder
+  cgst_percentage?: Prisma.SortOrder
   discount_amount?: Prisma.SortOrder
+  discount_percentage?: Prisma.SortOrder
+  gst_percentage?: Prisma.SortOrder
+  hsn_code?: Prisma.SortOrder
+  igst_amount?: Prisma.SortOrder
+  igst_percentage?: Prisma.SortOrder
   line_total?: Prisma.SortOrder
+  sgst_amount?: Prisma.SortOrder
+  sgst_percentage?: Prisma.SortOrder
+  taxable_amount?: Prisma.SortOrder
 }
 
 export type GRNItemSumOrderByAggregateInput = {
@@ -1174,27 +1174,27 @@ export type GRNItemSumOrderByAggregateInput = {
   accepted_qty?: Prisma.SortOrder
   rejected_qty?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
-  mrp?: Prisma.SortOrder
-  discount_pct?: Prisma.SortOrder
-  rate?: Prisma.SortOrder
-  tax_pct?: Prisma.SortOrder
-  cgst_pct?: Prisma.SortOrder
-  sgst_pct?: Prisma.SortOrder
-  igst_pct?: Prisma.SortOrder
-  tax_amount?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  cgst_pct?: Prisma.SortOrder
+  discount_pct?: Prisma.SortOrder
+  igst_pct?: Prisma.SortOrder
+  mrp?: Prisma.SortOrder
+  rate?: Prisma.SortOrder
+  sgst_pct?: Prisma.SortOrder
+  tax_amount?: Prisma.SortOrder
+  tax_pct?: Prisma.SortOrder
   total_amount?: Prisma.SortOrder
-  gst_percentage?: Prisma.SortOrder
-  taxable_amount?: Prisma.SortOrder
-  cgst_percentage?: Prisma.SortOrder
-  sgst_percentage?: Prisma.SortOrder
-  igst_percentage?: Prisma.SortOrder
   cgst_amount?: Prisma.SortOrder
-  sgst_amount?: Prisma.SortOrder
-  igst_amount?: Prisma.SortOrder
-  discount_percentage?: Prisma.SortOrder
+  cgst_percentage?: Prisma.SortOrder
   discount_amount?: Prisma.SortOrder
+  discount_percentage?: Prisma.SortOrder
+  gst_percentage?: Prisma.SortOrder
+  igst_amount?: Prisma.SortOrder
+  igst_percentage?: Prisma.SortOrder
   line_total?: Prisma.SortOrder
+  sgst_amount?: Prisma.SortOrder
+  sgst_percentage?: Prisma.SortOrder
+  taxable_amount?: Prisma.SortOrder
 }
 
 export type GRNItemScalarRelationFilter = {
@@ -1356,28 +1356,28 @@ export type GRNItemCreateWithoutProductInput = {
   rejection_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: string | null
-  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grn: Prisma.GRNMasterCreateNestedOneWithoutItemsInput
   poItem: Prisma.PurchaseOrderItemCreateNestedOneWithoutGrnItemsInput
   redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutGrnItemInput
@@ -1396,28 +1396,28 @@ export type GRNItemUncheckedCreateWithoutProductInput = {
   rejection_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: string | null
-  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutGrnItemInput
 }
 
@@ -1464,28 +1464,28 @@ export type GRNItemScalarWhereInput = {
   rejection_reason?: Prisma.StringNullableFilter<"GRNItem"> | string | null
   created_at?: Prisma.DateTimeFilter<"GRNItem"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"GRNItem"> | Date | string
-  mrp?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: Prisma.StringNullableFilter<"GRNItem"> | string | null
-  gst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: Prisma.StringNullableFilter<"GRNItem"> | string | null
+  igst_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.DecimalNullableFilter<"GRNItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type GRNItemCreateWithoutPoItemInput = {
@@ -1498,28 +1498,28 @@ export type GRNItemCreateWithoutPoItemInput = {
   rejection_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: string | null
-  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grn: Prisma.GRNMasterCreateNestedOneWithoutItemsInput
   product: Prisma.ProductMasterCreateNestedOneWithoutGrnItemsInput
   redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutGrnItemInput
@@ -1538,28 +1538,28 @@ export type GRNItemUncheckedCreateWithoutPoItemInput = {
   rejection_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: string | null
-  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutGrnItemInput
 }
 
@@ -1599,28 +1599,28 @@ export type GRNItemCreateWithoutGrnInput = {
   rejection_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: string | null
-  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   poItem: Prisma.PurchaseOrderItemCreateNestedOneWithoutGrnItemsInput
   product: Prisma.ProductMasterCreateNestedOneWithoutGrnItemsInput
   redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutGrnItemInput
@@ -1639,28 +1639,28 @@ export type GRNItemUncheckedCreateWithoutGrnInput = {
   rejection_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: string | null
-  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutGrnItemInput
 }
 
@@ -1700,28 +1700,28 @@ export type GRNItemCreateWithoutRedeliveryRequestsInput = {
   rejection_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: string | null
-  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grn: Prisma.GRNMasterCreateNestedOneWithoutItemsInput
   poItem: Prisma.PurchaseOrderItemCreateNestedOneWithoutGrnItemsInput
   product: Prisma.ProductMasterCreateNestedOneWithoutGrnItemsInput
@@ -1741,28 +1741,28 @@ export type GRNItemUncheckedCreateWithoutRedeliveryRequestsInput = {
   rejection_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: string | null
-  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type GRNItemCreateOrConnectWithoutRedeliveryRequestsInput = {
@@ -1791,28 +1791,28 @@ export type GRNItemUpdateWithoutRedeliveryRequestsInput = {
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grn?: Prisma.GRNMasterUpdateOneRequiredWithoutItemsNestedInput
   poItem?: Prisma.PurchaseOrderItemUpdateOneRequiredWithoutGrnItemsNestedInput
   product?: Prisma.ProductMasterUpdateOneRequiredWithoutGrnItemsNestedInput
@@ -1832,28 +1832,28 @@ export type GRNItemUncheckedUpdateWithoutRedeliveryRequestsInput = {
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type GRNItemCreateManyProductInput = {
@@ -1869,28 +1869,28 @@ export type GRNItemCreateManyProductInput = {
   rejection_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: string | null
-  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type GRNItemUpdateWithoutProductInput = {
@@ -1903,28 +1903,28 @@ export type GRNItemUpdateWithoutProductInput = {
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grn?: Prisma.GRNMasterUpdateOneRequiredWithoutItemsNestedInput
   poItem?: Prisma.PurchaseOrderItemUpdateOneRequiredWithoutGrnItemsNestedInput
   redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutGrnItemNestedInput
@@ -1943,28 +1943,28 @@ export type GRNItemUncheckedUpdateWithoutProductInput = {
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutGrnItemNestedInput
 }
 
@@ -1981,28 +1981,28 @@ export type GRNItemUncheckedUpdateManyWithoutProductInput = {
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type GRNItemCreateManyPoItemInput = {
@@ -2018,28 +2018,28 @@ export type GRNItemCreateManyPoItemInput = {
   rejection_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: string | null
-  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type GRNItemUpdateWithoutPoItemInput = {
@@ -2052,28 +2052,28 @@ export type GRNItemUpdateWithoutPoItemInput = {
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grn?: Prisma.GRNMasterUpdateOneRequiredWithoutItemsNestedInput
   product?: Prisma.ProductMasterUpdateOneRequiredWithoutGrnItemsNestedInput
   redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutGrnItemNestedInput
@@ -2092,28 +2092,28 @@ export type GRNItemUncheckedUpdateWithoutPoItemInput = {
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutGrnItemNestedInput
 }
 
@@ -2130,28 +2130,28 @@ export type GRNItemUncheckedUpdateManyWithoutPoItemInput = {
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type GRNItemCreateManyGrnInput = {
@@ -2167,28 +2167,28 @@ export type GRNItemCreateManyGrnInput = {
   rejection_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: string | null
-  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type GRNItemUpdateWithoutGrnInput = {
@@ -2201,28 +2201,28 @@ export type GRNItemUpdateWithoutGrnInput = {
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   poItem?: Prisma.PurchaseOrderItemUpdateOneRequiredWithoutGrnItemsNestedInput
   product?: Prisma.ProductMasterUpdateOneRequiredWithoutGrnItemsNestedInput
   redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutGrnItemNestedInput
@@ -2241,28 +2241,28 @@ export type GRNItemUncheckedUpdateWithoutGrnInput = {
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutGrnItemNestedInput
 }
 
@@ -2279,28 +2279,28 @@ export type GRNItemUncheckedUpdateManyWithoutGrnInput = {
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_pct?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  gst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   line_total?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_percentage?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 
@@ -2348,28 +2348,28 @@ export type GRNItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   rejection_reason?: boolean
   created_at?: boolean
   updated_at?: boolean
-  mrp?: boolean
-  discount_pct?: boolean
-  rate?: boolean
-  tax_pct?: boolean
-  cgst_pct?: boolean
-  sgst_pct?: boolean
-  igst_pct?: boolean
-  tax_amount?: boolean
   amount?: boolean
+  cgst_pct?: boolean
+  discount_pct?: boolean
+  igst_pct?: boolean
+  mrp?: boolean
+  rate?: boolean
+  sgst_pct?: boolean
+  tax_amount?: boolean
+  tax_pct?: boolean
   total_amount?: boolean
-  hsn_code?: boolean
-  gst_percentage?: boolean
-  taxable_amount?: boolean
-  cgst_percentage?: boolean
-  sgst_percentage?: boolean
-  igst_percentage?: boolean
   cgst_amount?: boolean
-  sgst_amount?: boolean
-  igst_amount?: boolean
-  discount_percentage?: boolean
+  cgst_percentage?: boolean
   discount_amount?: boolean
+  discount_percentage?: boolean
+  gst_percentage?: boolean
+  hsn_code?: boolean
+  igst_amount?: boolean
+  igst_percentage?: boolean
   line_total?: boolean
+  sgst_amount?: boolean
+  sgst_percentage?: boolean
+  taxable_amount?: boolean
   grn?: boolean | Prisma.GRNMasterDefaultArgs<ExtArgs>
   poItem?: boolean | Prisma.PurchaseOrderItemDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
@@ -2391,28 +2391,28 @@ export type GRNItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   rejection_reason?: boolean
   created_at?: boolean
   updated_at?: boolean
-  mrp?: boolean
-  discount_pct?: boolean
-  rate?: boolean
-  tax_pct?: boolean
-  cgst_pct?: boolean
-  sgst_pct?: boolean
-  igst_pct?: boolean
-  tax_amount?: boolean
   amount?: boolean
+  cgst_pct?: boolean
+  discount_pct?: boolean
+  igst_pct?: boolean
+  mrp?: boolean
+  rate?: boolean
+  sgst_pct?: boolean
+  tax_amount?: boolean
+  tax_pct?: boolean
   total_amount?: boolean
-  hsn_code?: boolean
-  gst_percentage?: boolean
-  taxable_amount?: boolean
-  cgst_percentage?: boolean
-  sgst_percentage?: boolean
-  igst_percentage?: boolean
   cgst_amount?: boolean
-  sgst_amount?: boolean
-  igst_amount?: boolean
-  discount_percentage?: boolean
+  cgst_percentage?: boolean
   discount_amount?: boolean
+  discount_percentage?: boolean
+  gst_percentage?: boolean
+  hsn_code?: boolean
+  igst_amount?: boolean
+  igst_percentage?: boolean
   line_total?: boolean
+  sgst_amount?: boolean
+  sgst_percentage?: boolean
+  taxable_amount?: boolean
   grn?: boolean | Prisma.GRNMasterDefaultArgs<ExtArgs>
   poItem?: boolean | Prisma.PurchaseOrderItemDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
@@ -2432,28 +2432,28 @@ export type GRNItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   rejection_reason?: boolean
   created_at?: boolean
   updated_at?: boolean
-  mrp?: boolean
-  discount_pct?: boolean
-  rate?: boolean
-  tax_pct?: boolean
-  cgst_pct?: boolean
-  sgst_pct?: boolean
-  igst_pct?: boolean
-  tax_amount?: boolean
   amount?: boolean
+  cgst_pct?: boolean
+  discount_pct?: boolean
+  igst_pct?: boolean
+  mrp?: boolean
+  rate?: boolean
+  sgst_pct?: boolean
+  tax_amount?: boolean
+  tax_pct?: boolean
   total_amount?: boolean
-  hsn_code?: boolean
-  gst_percentage?: boolean
-  taxable_amount?: boolean
-  cgst_percentage?: boolean
-  sgst_percentage?: boolean
-  igst_percentage?: boolean
   cgst_amount?: boolean
-  sgst_amount?: boolean
-  igst_amount?: boolean
-  discount_percentage?: boolean
+  cgst_percentage?: boolean
   discount_amount?: boolean
+  discount_percentage?: boolean
+  gst_percentage?: boolean
+  hsn_code?: boolean
+  igst_amount?: boolean
+  igst_percentage?: boolean
   line_total?: boolean
+  sgst_amount?: boolean
+  sgst_percentage?: boolean
+  taxable_amount?: boolean
   grn?: boolean | Prisma.GRNMasterDefaultArgs<ExtArgs>
   poItem?: boolean | Prisma.PurchaseOrderItemDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
@@ -2473,31 +2473,31 @@ export type GRNItemSelectScalar = {
   rejection_reason?: boolean
   created_at?: boolean
   updated_at?: boolean
-  mrp?: boolean
-  discount_pct?: boolean
-  rate?: boolean
-  tax_pct?: boolean
-  cgst_pct?: boolean
-  sgst_pct?: boolean
-  igst_pct?: boolean
-  tax_amount?: boolean
   amount?: boolean
+  cgst_pct?: boolean
+  discount_pct?: boolean
+  igst_pct?: boolean
+  mrp?: boolean
+  rate?: boolean
+  sgst_pct?: boolean
+  tax_amount?: boolean
+  tax_pct?: boolean
   total_amount?: boolean
-  hsn_code?: boolean
-  gst_percentage?: boolean
-  taxable_amount?: boolean
-  cgst_percentage?: boolean
-  sgst_percentage?: boolean
-  igst_percentage?: boolean
   cgst_amount?: boolean
-  sgst_amount?: boolean
-  igst_amount?: boolean
-  discount_percentage?: boolean
+  cgst_percentage?: boolean
   discount_amount?: boolean
+  discount_percentage?: boolean
+  gst_percentage?: boolean
+  hsn_code?: boolean
+  igst_amount?: boolean
+  igst_percentage?: boolean
   line_total?: boolean
+  sgst_amount?: boolean
+  sgst_percentage?: boolean
+  taxable_amount?: boolean
 }
 
-export type GRNItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "grn_id" | "po_item_id" | "product_id" | "received_qty" | "accepted_qty" | "rejected_qty" | "unit_price" | "uom" | "status" | "rejection_reason" | "created_at" | "updated_at" | "mrp" | "discount_pct" | "rate" | "tax_pct" | "cgst_pct" | "sgst_pct" | "igst_pct" | "tax_amount" | "amount" | "total_amount" | "hsn_code" | "gst_percentage" | "taxable_amount" | "cgst_percentage" | "sgst_percentage" | "igst_percentage" | "cgst_amount" | "sgst_amount" | "igst_amount" | "discount_percentage" | "discount_amount" | "line_total", ExtArgs["result"]["gRNItem"]>
+export type GRNItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "grn_id" | "po_item_id" | "product_id" | "received_qty" | "accepted_qty" | "rejected_qty" | "unit_price" | "uom" | "status" | "rejection_reason" | "created_at" | "updated_at" | "amount" | "cgst_pct" | "discount_pct" | "igst_pct" | "mrp" | "rate" | "sgst_pct" | "tax_amount" | "tax_pct" | "total_amount" | "cgst_amount" | "cgst_percentage" | "discount_amount" | "discount_percentage" | "gst_percentage" | "hsn_code" | "igst_amount" | "igst_percentage" | "line_total" | "sgst_amount" | "sgst_percentage" | "taxable_amount", ExtArgs["result"]["gRNItem"]>
 export type GRNItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   grn?: boolean | Prisma.GRNMasterDefaultArgs<ExtArgs>
   poItem?: boolean | Prisma.PurchaseOrderItemDefaultArgs<ExtArgs>
@@ -2538,28 +2538,28 @@ export type $GRNItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     rejection_reason: string | null
     created_at: Date
     updated_at: Date
-    mrp: runtime.Decimal | null
-    discount_pct: runtime.Decimal | null
-    rate: runtime.Decimal | null
-    tax_pct: runtime.Decimal | null
-    cgst_pct: runtime.Decimal | null
-    sgst_pct: runtime.Decimal | null
-    igst_pct: runtime.Decimal | null
-    tax_amount: runtime.Decimal | null
     amount: runtime.Decimal | null
+    cgst_pct: runtime.Decimal | null
+    discount_pct: runtime.Decimal | null
+    igst_pct: runtime.Decimal | null
+    mrp: runtime.Decimal | null
+    rate: runtime.Decimal | null
+    sgst_pct: runtime.Decimal | null
+    tax_amount: runtime.Decimal | null
+    tax_pct: runtime.Decimal | null
     total_amount: runtime.Decimal | null
-    hsn_code: string | null
-    gst_percentage: runtime.Decimal | null
-    taxable_amount: runtime.Decimal | null
-    cgst_percentage: runtime.Decimal | null
-    sgst_percentage: runtime.Decimal | null
-    igst_percentage: runtime.Decimal | null
     cgst_amount: runtime.Decimal | null
-    sgst_amount: runtime.Decimal | null
-    igst_amount: runtime.Decimal | null
-    discount_percentage: runtime.Decimal | null
+    cgst_percentage: runtime.Decimal | null
     discount_amount: runtime.Decimal | null
+    discount_percentage: runtime.Decimal | null
+    gst_percentage: runtime.Decimal | null
+    hsn_code: string | null
+    igst_amount: runtime.Decimal | null
+    igst_percentage: runtime.Decimal | null
     line_total: runtime.Decimal | null
+    sgst_amount: runtime.Decimal | null
+    sgst_percentage: runtime.Decimal | null
+    taxable_amount: runtime.Decimal | null
   }, ExtArgs["result"]["gRNItem"]>
   composites: {}
 }
@@ -3000,28 +3000,28 @@ export interface GRNItemFieldRefs {
   readonly rejection_reason: Prisma.FieldRef<"GRNItem", 'String'>
   readonly created_at: Prisma.FieldRef<"GRNItem", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"GRNItem", 'DateTime'>
-  readonly mrp: Prisma.FieldRef<"GRNItem", 'Decimal'>
-  readonly discount_pct: Prisma.FieldRef<"GRNItem", 'Decimal'>
-  readonly rate: Prisma.FieldRef<"GRNItem", 'Decimal'>
-  readonly tax_pct: Prisma.FieldRef<"GRNItem", 'Decimal'>
-  readonly cgst_pct: Prisma.FieldRef<"GRNItem", 'Decimal'>
-  readonly sgst_pct: Prisma.FieldRef<"GRNItem", 'Decimal'>
-  readonly igst_pct: Prisma.FieldRef<"GRNItem", 'Decimal'>
-  readonly tax_amount: Prisma.FieldRef<"GRNItem", 'Decimal'>
   readonly amount: Prisma.FieldRef<"GRNItem", 'Decimal'>
+  readonly cgst_pct: Prisma.FieldRef<"GRNItem", 'Decimal'>
+  readonly discount_pct: Prisma.FieldRef<"GRNItem", 'Decimal'>
+  readonly igst_pct: Prisma.FieldRef<"GRNItem", 'Decimal'>
+  readonly mrp: Prisma.FieldRef<"GRNItem", 'Decimal'>
+  readonly rate: Prisma.FieldRef<"GRNItem", 'Decimal'>
+  readonly sgst_pct: Prisma.FieldRef<"GRNItem", 'Decimal'>
+  readonly tax_amount: Prisma.FieldRef<"GRNItem", 'Decimal'>
+  readonly tax_pct: Prisma.FieldRef<"GRNItem", 'Decimal'>
   readonly total_amount: Prisma.FieldRef<"GRNItem", 'Decimal'>
-  readonly hsn_code: Prisma.FieldRef<"GRNItem", 'String'>
-  readonly gst_percentage: Prisma.FieldRef<"GRNItem", 'Decimal'>
-  readonly taxable_amount: Prisma.FieldRef<"GRNItem", 'Decimal'>
-  readonly cgst_percentage: Prisma.FieldRef<"GRNItem", 'Decimal'>
-  readonly sgst_percentage: Prisma.FieldRef<"GRNItem", 'Decimal'>
-  readonly igst_percentage: Prisma.FieldRef<"GRNItem", 'Decimal'>
   readonly cgst_amount: Prisma.FieldRef<"GRNItem", 'Decimal'>
-  readonly sgst_amount: Prisma.FieldRef<"GRNItem", 'Decimal'>
-  readonly igst_amount: Prisma.FieldRef<"GRNItem", 'Decimal'>
-  readonly discount_percentage: Prisma.FieldRef<"GRNItem", 'Decimal'>
+  readonly cgst_percentage: Prisma.FieldRef<"GRNItem", 'Decimal'>
   readonly discount_amount: Prisma.FieldRef<"GRNItem", 'Decimal'>
+  readonly discount_percentage: Prisma.FieldRef<"GRNItem", 'Decimal'>
+  readonly gst_percentage: Prisma.FieldRef<"GRNItem", 'Decimal'>
+  readonly hsn_code: Prisma.FieldRef<"GRNItem", 'String'>
+  readonly igst_amount: Prisma.FieldRef<"GRNItem", 'Decimal'>
+  readonly igst_percentage: Prisma.FieldRef<"GRNItem", 'Decimal'>
   readonly line_total: Prisma.FieldRef<"GRNItem", 'Decimal'>
+  readonly sgst_amount: Prisma.FieldRef<"GRNItem", 'Decimal'>
+  readonly sgst_percentage: Prisma.FieldRef<"GRNItem", 'Decimal'>
+  readonly taxable_amount: Prisma.FieldRef<"GRNItem", 'Decimal'>
 }
     
 

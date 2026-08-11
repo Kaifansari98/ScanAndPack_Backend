@@ -33,6 +33,7 @@ export type ProjectMasterAvgAggregateOutputType = {
   created_by: number | null
   lead_id: number | null
   updated_by: number | null
+  no_of_boxes: number | null
 }
 
 export type ProjectMasterSumAggregateOutputType = {
@@ -42,6 +43,7 @@ export type ProjectMasterSumAggregateOutputType = {
   created_by: number | null
   lead_id: number | null
   updated_by: number | null
+  no_of_boxes: number | null
 }
 
 export type ProjectMasterMinAggregateOutputType = {
@@ -54,17 +56,18 @@ export type ProjectMasterMinAggregateOutputType = {
   created_at: Date | null
   unique_project_id: string | null
   is_grouping: boolean | null
+  track_trace_status: string | null
   lead_id: number | null
-  order_no: string | null
-  client_name: string | null
+  track_completed_at: Date | null
+  track_started_at: Date | null
   client_address: string | null
   client_contact_no: string | null
-  packing_type: $Enums.PackingType | null
-  updated_by: number | null
+  client_name: string | null
+  order_no: string | null
   updated_at: Date | null
-  track_trace_status: string | null
-  track_started_at: Date | null
-  track_completed_at: Date | null
+  updated_by: number | null
+  no_of_boxes: number | null
+  packing_type: $Enums.PackingType | null
 }
 
 export type ProjectMasterMaxAggregateOutputType = {
@@ -77,17 +80,18 @@ export type ProjectMasterMaxAggregateOutputType = {
   created_at: Date | null
   unique_project_id: string | null
   is_grouping: boolean | null
+  track_trace_status: string | null
   lead_id: number | null
-  order_no: string | null
-  client_name: string | null
+  track_completed_at: Date | null
+  track_started_at: Date | null
   client_address: string | null
   client_contact_no: string | null
-  packing_type: $Enums.PackingType | null
-  updated_by: number | null
+  client_name: string | null
+  order_no: string | null
   updated_at: Date | null
-  track_trace_status: string | null
-  track_started_at: Date | null
-  track_completed_at: Date | null
+  updated_by: number | null
+  no_of_boxes: number | null
+  packing_type: $Enums.PackingType | null
 }
 
 export type ProjectMasterCountAggregateOutputType = {
@@ -100,17 +104,18 @@ export type ProjectMasterCountAggregateOutputType = {
   created_at: number
   unique_project_id: number
   is_grouping: number
+  track_trace_status: number
   lead_id: number
-  order_no: number
-  client_name: number
+  track_completed_at: number
+  track_started_at: number
   client_address: number
   client_contact_no: number
-  packing_type: number
-  updated_by: number
+  client_name: number
+  order_no: number
   updated_at: number
-  track_trace_status: number
-  track_started_at: number
-  track_completed_at: number
+  updated_by: number
+  no_of_boxes: number
+  packing_type: number
   _all: number
 }
 
@@ -122,6 +127,7 @@ export type ProjectMasterAvgAggregateInputType = {
   created_by?: true
   lead_id?: true
   updated_by?: true
+  no_of_boxes?: true
 }
 
 export type ProjectMasterSumAggregateInputType = {
@@ -131,6 +137,7 @@ export type ProjectMasterSumAggregateInputType = {
   created_by?: true
   lead_id?: true
   updated_by?: true
+  no_of_boxes?: true
 }
 
 export type ProjectMasterMinAggregateInputType = {
@@ -143,17 +150,18 @@ export type ProjectMasterMinAggregateInputType = {
   created_at?: true
   unique_project_id?: true
   is_grouping?: true
+  track_trace_status?: true
   lead_id?: true
-  order_no?: true
-  client_name?: true
+  track_completed_at?: true
+  track_started_at?: true
   client_address?: true
   client_contact_no?: true
-  packing_type?: true
-  updated_by?: true
+  client_name?: true
+  order_no?: true
   updated_at?: true
-  track_trace_status?: true
-  track_started_at?: true
-  track_completed_at?: true
+  updated_by?: true
+  no_of_boxes?: true
+  packing_type?: true
 }
 
 export type ProjectMasterMaxAggregateInputType = {
@@ -166,17 +174,18 @@ export type ProjectMasterMaxAggregateInputType = {
   created_at?: true
   unique_project_id?: true
   is_grouping?: true
+  track_trace_status?: true
   lead_id?: true
-  order_no?: true
-  client_name?: true
+  track_completed_at?: true
+  track_started_at?: true
   client_address?: true
   client_contact_no?: true
-  packing_type?: true
-  updated_by?: true
+  client_name?: true
+  order_no?: true
   updated_at?: true
-  track_trace_status?: true
-  track_started_at?: true
-  track_completed_at?: true
+  updated_by?: true
+  no_of_boxes?: true
+  packing_type?: true
 }
 
 export type ProjectMasterCountAggregateInputType = {
@@ -189,17 +198,18 @@ export type ProjectMasterCountAggregateInputType = {
   created_at?: true
   unique_project_id?: true
   is_grouping?: true
+  track_trace_status?: true
   lead_id?: true
-  order_no?: true
-  client_name?: true
+  track_completed_at?: true
+  track_started_at?: true
   client_address?: true
   client_contact_no?: true
-  packing_type?: true
-  updated_by?: true
+  client_name?: true
+  order_no?: true
   updated_at?: true
-  track_trace_status?: true
-  track_started_at?: true
-  track_completed_at?: true
+  updated_by?: true
+  no_of_boxes?: true
+  packing_type?: true
   _all?: true
 }
 
@@ -299,17 +309,18 @@ export type ProjectMasterGroupByOutputType = {
   created_at: Date
   unique_project_id: string
   is_grouping: boolean
+  track_trace_status: string
   lead_id: number | null
-  order_no: string | null
-  client_name: string | null
+  track_completed_at: Date | null
+  track_started_at: Date | null
   client_address: string | null
   client_contact_no: string | null
-  packing_type: $Enums.PackingType
-  updated_by: number | null
+  client_name: string | null
+  order_no: string | null
   updated_at: Date | null
-  track_trace_status: string
-  track_started_at: Date | null
-  track_completed_at: Date | null
+  updated_by: number | null
+  no_of_boxes: number
+  packing_type: $Enums.PackingType
   _count: ProjectMasterCountAggregateOutputType | null
   _avg: ProjectMasterAvgAggregateOutputType | null
   _sum: ProjectMasterSumAggregateOutputType | null
@@ -345,21 +356,24 @@ export type ProjectMasterWhereInput = {
   created_at?: Prisma.DateTimeFilter<"ProjectMaster"> | Date | string
   unique_project_id?: Prisma.StringFilter<"ProjectMaster"> | string
   is_grouping?: Prisma.BoolFilter<"ProjectMaster"> | boolean
+  track_trace_status?: Prisma.StringFilter<"ProjectMaster"> | string
   lead_id?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
-  order_no?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
-  client_name?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
+  track_completed_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
+  track_started_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
   client_address?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
   client_contact_no?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
-  packing_type?: Prisma.EnumPackingTypeFilter<"ProjectMaster"> | $Enums.PackingType
-  updated_by?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
+  client_name?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
+  order_no?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
-  track_trace_status?: Prisma.StringFilter<"ProjectMaster"> | string
-  track_started_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
-  track_completed_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
+  updated_by?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
+  no_of_boxes?: Prisma.IntFilter<"ProjectMaster"> | number
+  packing_type?: Prisma.EnumPackingTypeFilter<"ProjectMaster"> | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueListRelationFilter
   boxes?: Prisma.BoxMasterListRelationFilter
   CutList?: Prisma.CutListListRelationFilter
   cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
   defectedItems?: Prisma.DefectedItemListRelationFilter
+  box_info_fields?: Prisma.ProjectBoxInfoFieldListRelationFilter
   details?: Prisma.ProjectDetailsListRelationFilter
   items?: Prisma.ProjectItemsMasterListRelationFilter
   client?: Prisma.XOR<Prisma.ClientMasterNullableScalarRelationFilter, Prisma.ClientMasterWhereInput> | null
@@ -367,8 +381,6 @@ export type ProjectMasterWhereInput = {
   lead?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   scanItems?: Prisma.ScanAndPackItemListRelationFilter
-  box_info_fields?: Prisma.ProjectBoxInfoFieldListRelationFilter
-  box_info_values?: Prisma.BoxInfoFieldValueListRelationFilter
 }
 
 export type ProjectMasterOrderByWithRelationInput = {
@@ -381,21 +393,24 @@ export type ProjectMasterOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   unique_project_id?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
+  track_trace_status?: Prisma.SortOrder
   lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  order_no?: Prisma.SortOrderInput | Prisma.SortOrder
-  client_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  track_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  track_started_at?: Prisma.SortOrderInput | Prisma.SortOrder
   client_address?: Prisma.SortOrderInput | Prisma.SortOrder
   client_contact_no?: Prisma.SortOrderInput | Prisma.SortOrder
-  packing_type?: Prisma.SortOrder
-  updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  client_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  order_no?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  track_trace_status?: Prisma.SortOrder
-  track_started_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  track_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrder
+  packing_type?: Prisma.SortOrder
+  box_info_values?: Prisma.BoxInfoFieldValueOrderByRelationAggregateInput
   boxes?: Prisma.BoxMasterOrderByRelationAggregateInput
   CutList?: Prisma.CutListOrderByRelationAggregateInput
   cutListMachineMapping?: Prisma.CutListMachineMappingOrderByRelationAggregateInput
   defectedItems?: Prisma.DefectedItemOrderByRelationAggregateInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldOrderByRelationAggregateInput
   details?: Prisma.ProjectDetailsOrderByRelationAggregateInput
   items?: Prisma.ProjectItemsMasterOrderByRelationAggregateInput
   client?: Prisma.ClientMasterOrderByWithRelationInput
@@ -403,8 +418,6 @@ export type ProjectMasterOrderByWithRelationInput = {
   lead?: Prisma.LeadMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   scanItems?: Prisma.ScanAndPackItemOrderByRelationAggregateInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldOrderByRelationAggregateInput
-  box_info_values?: Prisma.BoxInfoFieldValueOrderByRelationAggregateInput
 }
 
 export type ProjectMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -420,21 +433,24 @@ export type ProjectMasterWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"ProjectMaster"> | Date | string
   unique_project_id?: Prisma.StringFilter<"ProjectMaster"> | string
   is_grouping?: Prisma.BoolFilter<"ProjectMaster"> | boolean
+  track_trace_status?: Prisma.StringFilter<"ProjectMaster"> | string
   lead_id?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
-  order_no?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
-  client_name?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
+  track_completed_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
+  track_started_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
   client_address?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
   client_contact_no?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
-  packing_type?: Prisma.EnumPackingTypeFilter<"ProjectMaster"> | $Enums.PackingType
-  updated_by?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
+  client_name?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
+  order_no?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
-  track_trace_status?: Prisma.StringFilter<"ProjectMaster"> | string
-  track_started_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
-  track_completed_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
+  updated_by?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
+  no_of_boxes?: Prisma.IntFilter<"ProjectMaster"> | number
+  packing_type?: Prisma.EnumPackingTypeFilter<"ProjectMaster"> | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueListRelationFilter
   boxes?: Prisma.BoxMasterListRelationFilter
   CutList?: Prisma.CutListListRelationFilter
   cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
   defectedItems?: Prisma.DefectedItemListRelationFilter
+  box_info_fields?: Prisma.ProjectBoxInfoFieldListRelationFilter
   details?: Prisma.ProjectDetailsListRelationFilter
   items?: Prisma.ProjectItemsMasterListRelationFilter
   client?: Prisma.XOR<Prisma.ClientMasterNullableScalarRelationFilter, Prisma.ClientMasterWhereInput> | null
@@ -442,8 +458,6 @@ export type ProjectMasterWhereUniqueInput = Prisma.AtLeast<{
   lead?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   scanItems?: Prisma.ScanAndPackItemListRelationFilter
-  box_info_fields?: Prisma.ProjectBoxInfoFieldListRelationFilter
-  box_info_values?: Prisma.BoxInfoFieldValueListRelationFilter
 }, "id">
 
 export type ProjectMasterOrderByWithAggregationInput = {
@@ -456,17 +470,18 @@ export type ProjectMasterOrderByWithAggregationInput = {
   created_at?: Prisma.SortOrder
   unique_project_id?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
+  track_trace_status?: Prisma.SortOrder
   lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  order_no?: Prisma.SortOrderInput | Prisma.SortOrder
-  client_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  track_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  track_started_at?: Prisma.SortOrderInput | Prisma.SortOrder
   client_address?: Prisma.SortOrderInput | Prisma.SortOrder
   client_contact_no?: Prisma.SortOrderInput | Prisma.SortOrder
-  packing_type?: Prisma.SortOrder
-  updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  client_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  order_no?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  track_trace_status?: Prisma.SortOrder
-  track_started_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  track_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrder
+  packing_type?: Prisma.SortOrder
   _count?: Prisma.ProjectMasterCountOrderByAggregateInput
   _avg?: Prisma.ProjectMasterAvgOrderByAggregateInput
   _max?: Prisma.ProjectMasterMaxOrderByAggregateInput
@@ -487,17 +502,18 @@ export type ProjectMasterScalarWhereWithAggregatesInput = {
   created_at?: Prisma.DateTimeWithAggregatesFilter<"ProjectMaster"> | Date | string
   unique_project_id?: Prisma.StringWithAggregatesFilter<"ProjectMaster"> | string
   is_grouping?: Prisma.BoolWithAggregatesFilter<"ProjectMaster"> | boolean
+  track_trace_status?: Prisma.StringWithAggregatesFilter<"ProjectMaster"> | string
   lead_id?: Prisma.IntNullableWithAggregatesFilter<"ProjectMaster"> | number | null
-  order_no?: Prisma.StringNullableWithAggregatesFilter<"ProjectMaster"> | string | null
-  client_name?: Prisma.StringNullableWithAggregatesFilter<"ProjectMaster"> | string | null
+  track_completed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"ProjectMaster"> | Date | string | null
+  track_started_at?: Prisma.DateTimeNullableWithAggregatesFilter<"ProjectMaster"> | Date | string | null
   client_address?: Prisma.StringNullableWithAggregatesFilter<"ProjectMaster"> | string | null
   client_contact_no?: Prisma.StringNullableWithAggregatesFilter<"ProjectMaster"> | string | null
-  packing_type?: Prisma.EnumPackingTypeWithAggregatesFilter<"ProjectMaster"> | $Enums.PackingType
-  updated_by?: Prisma.IntNullableWithAggregatesFilter<"ProjectMaster"> | number | null
+  client_name?: Prisma.StringNullableWithAggregatesFilter<"ProjectMaster"> | string | null
+  order_no?: Prisma.StringNullableWithAggregatesFilter<"ProjectMaster"> | string | null
   updated_at?: Prisma.DateTimeNullableWithAggregatesFilter<"ProjectMaster"> | Date | string | null
-  track_trace_status?: Prisma.StringWithAggregatesFilter<"ProjectMaster"> | string
-  track_started_at?: Prisma.DateTimeNullableWithAggregatesFilter<"ProjectMaster"> | Date | string | null
-  track_completed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"ProjectMaster"> | Date | string | null
+  updated_by?: Prisma.IntNullableWithAggregatesFilter<"ProjectMaster"> | number | null
+  no_of_boxes?: Prisma.IntWithAggregatesFilter<"ProjectMaster"> | number
+  packing_type?: Prisma.EnumPackingTypeWithAggregatesFilter<"ProjectMaster"> | $Enums.PackingType
 }
 
 export type ProjectMasterCreateInput = {
@@ -506,20 +522,23 @@ export type ProjectMasterCreateInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  order_no?: string | null
-  client_name?: string | null
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutProjectInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutProjectsInput
@@ -527,8 +546,6 @@ export type ProjectMasterCreateInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutProjectsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectsInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterUncheckedCreateInput = {
@@ -541,26 +558,27 @@ export type ProjectMasterUncheckedCreateInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   lead_id?: number | null
-  order_no?: string | null
-  client_name?: string | null
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutProjectInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterUpdateInput = {
@@ -569,20 +587,23 @@ export type ProjectMasterUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
@@ -590,8 +611,6 @@ export type ProjectMasterUpdateInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterUncheckedUpdateInput = {
@@ -604,26 +623,27 @@ export type ProjectMasterUncheckedUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutProjectNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterCreateManyInput = {
@@ -636,17 +656,18 @@ export type ProjectMasterCreateManyInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   lead_id?: number | null
-  order_no?: string | null
-  client_name?: string | null
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
 }
 
 export type ProjectMasterUpdateManyMutationInput = {
@@ -655,16 +676,17 @@ export type ProjectMasterUpdateManyMutationInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
 }
 
 export type ProjectMasterUncheckedUpdateManyInput = {
@@ -677,17 +699,18 @@ export type ProjectMasterUncheckedUpdateManyInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
 }
 
 export type ProjectMasterListRelationFilter = {
@@ -710,17 +733,18 @@ export type ProjectMasterCountOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   unique_project_id?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
+  track_trace_status?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
-  order_no?: Prisma.SortOrder
-  client_name?: Prisma.SortOrder
+  track_completed_at?: Prisma.SortOrder
+  track_started_at?: Prisma.SortOrder
   client_address?: Prisma.SortOrder
   client_contact_no?: Prisma.SortOrder
-  packing_type?: Prisma.SortOrder
-  updated_by?: Prisma.SortOrder
+  client_name?: Prisma.SortOrder
+  order_no?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  track_trace_status?: Prisma.SortOrder
-  track_started_at?: Prisma.SortOrder
-  track_completed_at?: Prisma.SortOrder
+  updated_by?: Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrder
+  packing_type?: Prisma.SortOrder
 }
 
 export type ProjectMasterAvgOrderByAggregateInput = {
@@ -730,6 +754,7 @@ export type ProjectMasterAvgOrderByAggregateInput = {
   created_by?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrder
 }
 
 export type ProjectMasterMaxOrderByAggregateInput = {
@@ -742,17 +767,18 @@ export type ProjectMasterMaxOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   unique_project_id?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
+  track_trace_status?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
-  order_no?: Prisma.SortOrder
-  client_name?: Prisma.SortOrder
+  track_completed_at?: Prisma.SortOrder
+  track_started_at?: Prisma.SortOrder
   client_address?: Prisma.SortOrder
   client_contact_no?: Prisma.SortOrder
-  packing_type?: Prisma.SortOrder
-  updated_by?: Prisma.SortOrder
+  client_name?: Prisma.SortOrder
+  order_no?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  track_trace_status?: Prisma.SortOrder
-  track_started_at?: Prisma.SortOrder
-  track_completed_at?: Prisma.SortOrder
+  updated_by?: Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrder
+  packing_type?: Prisma.SortOrder
 }
 
 export type ProjectMasterMinOrderByAggregateInput = {
@@ -765,17 +791,18 @@ export type ProjectMasterMinOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   unique_project_id?: Prisma.SortOrder
   is_grouping?: Prisma.SortOrder
+  track_trace_status?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
-  order_no?: Prisma.SortOrder
-  client_name?: Prisma.SortOrder
+  track_completed_at?: Prisma.SortOrder
+  track_started_at?: Prisma.SortOrder
   client_address?: Prisma.SortOrder
   client_contact_no?: Prisma.SortOrder
-  packing_type?: Prisma.SortOrder
-  updated_by?: Prisma.SortOrder
+  client_name?: Prisma.SortOrder
+  order_no?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  track_trace_status?: Prisma.SortOrder
-  track_started_at?: Prisma.SortOrder
-  track_completed_at?: Prisma.SortOrder
+  updated_by?: Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrder
+  packing_type?: Prisma.SortOrder
 }
 
 export type ProjectMasterSumOrderByAggregateInput = {
@@ -785,6 +812,7 @@ export type ProjectMasterSumOrderByAggregateInput = {
   created_by?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrder
 }
 
 export type ProjectMasterScalarRelationFilter = {
@@ -1096,28 +1124,29 @@ export type ProjectMasterCreateWithoutVendorInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  order_no?: string | null
-  client_name?: string | null
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutProjectInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutProjectsInput
   createdByUser: Prisma.UserMasterCreateNestedOneWithoutCreatedProjectsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutProjectsInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterUncheckedCreateWithoutVendorInput = {
@@ -1129,26 +1158,27 @@ export type ProjectMasterUncheckedCreateWithoutVendorInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   lead_id?: number | null
-  order_no?: string | null
-  client_name?: string | null
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutProjectInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterCreateOrConnectWithoutVendorInput = {
@@ -1190,17 +1220,18 @@ export type ProjectMasterScalarWhereInput = {
   created_at?: Prisma.DateTimeFilter<"ProjectMaster"> | Date | string
   unique_project_id?: Prisma.StringFilter<"ProjectMaster"> | string
   is_grouping?: Prisma.BoolFilter<"ProjectMaster"> | boolean
+  track_trace_status?: Prisma.StringFilter<"ProjectMaster"> | string
   lead_id?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
-  order_no?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
-  client_name?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
+  track_completed_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
+  track_started_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
   client_address?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
   client_contact_no?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
-  packing_type?: Prisma.EnumPackingTypeFilter<"ProjectMaster"> | $Enums.PackingType
-  updated_by?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
+  client_name?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
+  order_no?: Prisma.StringNullableFilter<"ProjectMaster"> | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
-  track_trace_status?: Prisma.StringFilter<"ProjectMaster"> | string
-  track_started_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
-  track_completed_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
+  updated_by?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
+  no_of_boxes?: Prisma.IntFilter<"ProjectMaster"> | number
+  packing_type?: Prisma.EnumPackingTypeFilter<"ProjectMaster"> | $Enums.PackingType
 }
 
 export type ProjectMasterCreateWithoutCreatedByUserInput = {
@@ -1209,28 +1240,29 @@ export type ProjectMasterCreateWithoutCreatedByUserInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  order_no?: string | null
-  client_name?: string | null
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutProjectInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutProjectsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutProjectsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectsInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterUncheckedCreateWithoutCreatedByUserInput = {
@@ -1242,26 +1274,27 @@ export type ProjectMasterUncheckedCreateWithoutCreatedByUserInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   lead_id?: number | null
-  order_no?: string | null
-  client_name?: string | null
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutProjectInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterCreateOrConnectWithoutCreatedByUserInput = {
@@ -1296,28 +1329,29 @@ export type ProjectMasterCreateWithoutDetailsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  order_no?: string | null
-  client_name?: string | null
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutProjectInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutProjectsInput
   createdByUser: Prisma.UserMasterCreateNestedOneWithoutCreatedProjectsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutProjectsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectsInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterUncheckedCreateWithoutDetailsInput = {
@@ -1330,25 +1364,26 @@ export type ProjectMasterUncheckedCreateWithoutDetailsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   lead_id?: number | null
-  order_no?: string | null
-  client_name?: string | null
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutProjectInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterCreateOrConnectWithoutDetailsInput = {
@@ -1373,28 +1408,29 @@ export type ProjectMasterUpdateWithoutDetailsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
   createdByUser?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedProjectsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterUncheckedUpdateWithoutDetailsInput = {
@@ -1407,25 +1443,26 @@ export type ProjectMasterUncheckedUpdateWithoutDetailsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutProjectNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterCreateWithoutItemsInput = {
@@ -1434,28 +1471,29 @@ export type ProjectMasterCreateWithoutItemsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  order_no?: string | null
-  client_name?: string | null
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsCreateNestedManyWithoutProjectInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutProjectsInput
   createdByUser: Prisma.UserMasterCreateNestedOneWithoutCreatedProjectsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutProjectsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectsInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterUncheckedCreateWithoutItemsInput = {
@@ -1468,25 +1506,26 @@ export type ProjectMasterUncheckedCreateWithoutItemsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   lead_id?: number | null
-  order_no?: string | null
-  client_name?: string | null
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutProjectInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterCreateOrConnectWithoutItemsInput = {
@@ -1511,28 +1550,29 @@ export type ProjectMasterUpdateWithoutItemsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
   createdByUser?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedProjectsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterUncheckedUpdateWithoutItemsInput = {
@@ -1545,25 +1585,26 @@ export type ProjectMasterUncheckedUpdateWithoutItemsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutProjectNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterCreateWithoutBoxesInput = {
@@ -1572,19 +1613,22 @@ export type ProjectMasterCreateWithoutBoxesInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  order_no?: string | null
-  client_name?: string | null
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutProjectInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutProjectsInput
@@ -1592,8 +1636,6 @@ export type ProjectMasterCreateWithoutBoxesInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutProjectsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectsInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterUncheckedCreateWithoutBoxesInput = {
@@ -1606,25 +1648,26 @@ export type ProjectMasterUncheckedCreateWithoutBoxesInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   lead_id?: number | null
-  order_no?: string | null
-  client_name?: string | null
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutProjectInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterCreateOrConnectWithoutBoxesInput = {
@@ -1649,19 +1692,22 @@ export type ProjectMasterUpdateWithoutBoxesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
@@ -1669,8 +1715,6 @@ export type ProjectMasterUpdateWithoutBoxesInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterUncheckedUpdateWithoutBoxesInput = {
@@ -1683,25 +1727,26 @@ export type ProjectMasterUncheckedUpdateWithoutBoxesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutProjectNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterCreateWithoutScanItemsInput = {
@@ -1710,28 +1755,29 @@ export type ProjectMasterCreateWithoutScanItemsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  order_no?: string | null
-  client_name?: string | null
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutProjectInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutProjectsInput
   createdByUser: Prisma.UserMasterCreateNestedOneWithoutCreatedProjectsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutProjectsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectsInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterUncheckedCreateWithoutScanItemsInput = {
@@ -1744,25 +1790,26 @@ export type ProjectMasterUncheckedCreateWithoutScanItemsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   lead_id?: number | null
-  order_no?: string | null
-  client_name?: string | null
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterCreateOrConnectWithoutScanItemsInput = {
@@ -1787,28 +1834,29 @@ export type ProjectMasterUpdateWithoutScanItemsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
   createdByUser?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedProjectsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterUncheckedUpdateWithoutScanItemsInput = {
@@ -1821,25 +1869,26 @@ export type ProjectMasterUncheckedUpdateWithoutScanItemsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterCreateWithoutClientInput = {
@@ -1848,28 +1897,29 @@ export type ProjectMasterCreateWithoutClientInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  order_no?: string | null
-  client_name?: string | null
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutProjectInput
   createdByUser: Prisma.UserMasterCreateNestedOneWithoutCreatedProjectsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutProjectsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectsInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterUncheckedCreateWithoutClientInput = {
@@ -1881,26 +1931,27 @@ export type ProjectMasterUncheckedCreateWithoutClientInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   lead_id?: number | null
-  order_no?: string | null
-  client_name?: string | null
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutProjectInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterCreateOrConnectWithoutClientInput = {
@@ -1935,28 +1986,29 @@ export type ProjectMasterCreateWithoutLeadInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  order_no?: string | null
-  client_name?: string | null
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutProjectInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutProjectsInput
   createdByUser: Prisma.UserMasterCreateNestedOneWithoutCreatedProjectsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectsInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterUncheckedCreateWithoutLeadInput = {
@@ -1969,25 +2021,26 @@ export type ProjectMasterUncheckedCreateWithoutLeadInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  order_no?: string | null
-  client_name?: string | null
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutProjectInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterCreateOrConnectWithoutLeadInput = {
@@ -2022,19 +2075,22 @@ export type ProjectMasterCreateWithoutCutListInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  order_no?: string | null
-  client_name?: string | null
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutProjectInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutProjectsInput
@@ -2042,8 +2098,6 @@ export type ProjectMasterCreateWithoutCutListInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutProjectsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectsInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterUncheckedCreateWithoutCutListInput = {
@@ -2056,25 +2110,26 @@ export type ProjectMasterUncheckedCreateWithoutCutListInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   lead_id?: number | null
-  order_no?: string | null
-  client_name?: string | null
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutProjectInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterCreateOrConnectWithoutCutListInput = {
@@ -2099,19 +2154,22 @@ export type ProjectMasterUpdateWithoutCutListInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
@@ -2119,8 +2177,6 @@ export type ProjectMasterUpdateWithoutCutListInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterUncheckedUpdateWithoutCutListInput = {
@@ -2133,25 +2189,26 @@ export type ProjectMasterUncheckedUpdateWithoutCutListInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutProjectNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterCreateWithoutCutListMachineMappingInput = {
@@ -2160,19 +2217,22 @@ export type ProjectMasterCreateWithoutCutListMachineMappingInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  order_no?: string | null
-  client_name?: string | null
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutProjectInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutProjectsInput
@@ -2180,8 +2240,6 @@ export type ProjectMasterCreateWithoutCutListMachineMappingInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutProjectsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectsInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterUncheckedCreateWithoutCutListMachineMappingInput = {
@@ -2194,25 +2252,26 @@ export type ProjectMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   lead_id?: number | null
-  order_no?: string | null
-  client_name?: string | null
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutProjectInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterCreateOrConnectWithoutCutListMachineMappingInput = {
@@ -2237,19 +2296,22 @@ export type ProjectMasterUpdateWithoutCutListMachineMappingInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
@@ -2257,8 +2319,6 @@ export type ProjectMasterUpdateWithoutCutListMachineMappingInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
@@ -2271,25 +2331,26 @@ export type ProjectMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutProjectNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterCreateWithoutDefectedItemsInput = {
@@ -2298,19 +2359,22 @@ export type ProjectMasterCreateWithoutDefectedItemsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  order_no?: string | null
-  client_name?: string | null
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutProjectInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutProjectsInput
@@ -2318,8 +2382,6 @@ export type ProjectMasterCreateWithoutDefectedItemsInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutProjectsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectsInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterUncheckedCreateWithoutDefectedItemsInput = {
@@ -2332,25 +2394,26 @@ export type ProjectMasterUncheckedCreateWithoutDefectedItemsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   lead_id?: number | null
-  order_no?: string | null
-  client_name?: string | null
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutProjectInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterCreateOrConnectWithoutDefectedItemsInput = {
@@ -2375,19 +2438,22 @@ export type ProjectMasterUpdateWithoutDefectedItemsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
@@ -2395,8 +2461,6 @@ export type ProjectMasterUpdateWithoutDefectedItemsInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterUncheckedUpdateWithoutDefectedItemsInput = {
@@ -2409,25 +2473,26 @@ export type ProjectMasterUncheckedUpdateWithoutDefectedItemsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutProjectNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterCreateWithoutBox_info_fieldsInput = {
@@ -2436,16 +2501,18 @@ export type ProjectMasterCreateWithoutBox_info_fieldsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  order_no?: string | null
-  client_name?: string | null
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
@@ -2457,7 +2524,6 @@ export type ProjectMasterCreateWithoutBox_info_fieldsInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutProjectsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectsInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterUncheckedCreateWithoutBox_info_fieldsInput = {
@@ -2470,17 +2536,19 @@ export type ProjectMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   lead_id?: number | null
-  order_no?: string | null
-  client_name?: string | null
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
@@ -2488,7 +2556,6 @@ export type ProjectMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutProjectInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutProjectInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterCreateOrConnectWithoutBox_info_fieldsInput = {
@@ -2513,16 +2580,18 @@ export type ProjectMasterUpdateWithoutBox_info_fieldsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
@@ -2534,7 +2603,6 @@ export type ProjectMasterUpdateWithoutBox_info_fieldsInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
@@ -2547,17 +2615,19 @@ export type ProjectMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
@@ -2565,7 +2635,6 @@ export type ProjectMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutProjectNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterCreateWithoutBox_info_valuesInput = {
@@ -2574,20 +2643,22 @@ export type ProjectMasterCreateWithoutBox_info_valuesInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  order_no?: string | null
-  client_name?: string | null
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutProjectInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutProjectsInput
@@ -2595,7 +2666,6 @@ export type ProjectMasterCreateWithoutBox_info_valuesInput = {
   lead?: Prisma.LeadMasterCreateNestedOneWithoutProjectsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectsInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterUncheckedCreateWithoutBox_info_valuesInput = {
@@ -2608,25 +2678,26 @@ export type ProjectMasterUncheckedCreateWithoutBox_info_valuesInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   lead_id?: number | null
-  order_no?: string | null
-  client_name?: string | null
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
   details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutProjectInput
   items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutProjectInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutProjectInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectMasterCreateOrConnectWithoutBox_info_valuesInput = {
@@ -2651,20 +2722,22 @@ export type ProjectMasterUpdateWithoutBox_info_valuesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
@@ -2672,7 +2745,6 @@ export type ProjectMasterUpdateWithoutBox_info_valuesInput = {
   lead?: Prisma.LeadMasterUpdateOneWithoutProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterUncheckedUpdateWithoutBox_info_valuesInput = {
@@ -2685,25 +2757,26 @@ export type ProjectMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutProjectNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterCreateManyVendorInput = {
@@ -2715,17 +2788,18 @@ export type ProjectMasterCreateManyVendorInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   lead_id?: number | null
-  order_no?: string | null
-  client_name?: string | null
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
 }
 
 export type ProjectMasterUpdateWithoutVendorInput = {
@@ -2734,28 +2808,29 @@ export type ProjectMasterUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
   createdByUser?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedProjectsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterUncheckedUpdateWithoutVendorInput = {
@@ -2767,26 +2842,27 @@ export type ProjectMasterUncheckedUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutProjectNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -2798,17 +2874,18 @@ export type ProjectMasterUncheckedUpdateManyWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
 }
 
 export type ProjectMasterCreateManyCreatedByUserInput = {
@@ -2820,17 +2897,18 @@ export type ProjectMasterCreateManyCreatedByUserInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   lead_id?: number | null
-  order_no?: string | null
-  client_name?: string | null
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
 }
 
 export type ProjectMasterUpdateWithoutCreatedByUserInput = {
@@ -2839,28 +2917,29 @@ export type ProjectMasterUpdateWithoutCreatedByUserInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterUncheckedUpdateWithoutCreatedByUserInput = {
@@ -2872,26 +2951,27 @@ export type ProjectMasterUncheckedUpdateWithoutCreatedByUserInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutProjectNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterUncheckedUpdateManyWithoutCreatedByUserInput = {
@@ -2903,17 +2983,18 @@ export type ProjectMasterUncheckedUpdateManyWithoutCreatedByUserInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
 }
 
 export type ProjectMasterCreateManyClientInput = {
@@ -2925,17 +3006,18 @@ export type ProjectMasterCreateManyClientInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
+  track_trace_status?: string
   lead_id?: number | null
-  order_no?: string | null
-  client_name?: string | null
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
 }
 
 export type ProjectMasterUpdateWithoutClientInput = {
@@ -2944,28 +3026,29 @@ export type ProjectMasterUpdateWithoutClientInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
   createdByUser?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedProjectsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterUncheckedUpdateWithoutClientInput = {
@@ -2977,26 +3060,27 @@ export type ProjectMasterUncheckedUpdateWithoutClientInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutProjectNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterUncheckedUpdateManyWithoutClientInput = {
@@ -3008,17 +3092,18 @@ export type ProjectMasterUncheckedUpdateManyWithoutClientInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
 }
 
 export type ProjectMasterCreateManyLeadInput = {
@@ -3031,16 +3116,17 @@ export type ProjectMasterCreateManyLeadInput = {
   created_at?: Date | string
   unique_project_id: string
   is_grouping?: boolean
-  order_no?: string | null
-  client_name?: string | null
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
   client_address?: string | null
   client_contact_no?: string | null
-  packing_type?: $Enums.PackingType
-  updated_by?: number | null
+  client_name?: string | null
+  order_no?: string | null
   updated_at?: Date | string | null
-  track_trace_status?: string
-  track_started_at?: Date | string | null
-  track_completed_at?: Date | string | null
+  updated_by?: number | null
+  no_of_boxes?: number
+  packing_type?: $Enums.PackingType
 }
 
 export type ProjectMasterUpdateWithoutLeadInput = {
@@ -3049,28 +3135,29 @@ export type ProjectMasterUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
   createdByUser?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedProjectsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterUncheckedUpdateWithoutLeadInput = {
@@ -3083,25 +3170,26 @@ export type ProjectMasterUncheckedUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
   details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutProjectNestedInput
   items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutProjectNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
-  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectMasterUncheckedUpdateManyWithoutLeadInput = {
@@ -3114,16 +3202,17 @@ export type ProjectMasterUncheckedUpdateManyWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
   is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
-  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
 }
 
 
@@ -3132,27 +3221,27 @@ export type ProjectMasterUncheckedUpdateManyWithoutLeadInput = {
  */
 
 export type ProjectMasterCountOutputType = {
+  box_info_values: number
   boxes: number
   CutList: number
   cutListMachineMapping: number
   defectedItems: number
+  box_info_fields: number
   details: number
   items: number
   scanItems: number
-  box_info_fields: number
-  box_info_values: number
 }
 
 export type ProjectMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  box_info_values?: boolean | ProjectMasterCountOutputTypeCountBox_info_valuesArgs
   boxes?: boolean | ProjectMasterCountOutputTypeCountBoxesArgs
   CutList?: boolean | ProjectMasterCountOutputTypeCountCutListArgs
   cutListMachineMapping?: boolean | ProjectMasterCountOutputTypeCountCutListMachineMappingArgs
   defectedItems?: boolean | ProjectMasterCountOutputTypeCountDefectedItemsArgs
+  box_info_fields?: boolean | ProjectMasterCountOutputTypeCountBox_info_fieldsArgs
   details?: boolean | ProjectMasterCountOutputTypeCountDetailsArgs
   items?: boolean | ProjectMasterCountOutputTypeCountItemsArgs
   scanItems?: boolean | ProjectMasterCountOutputTypeCountScanItemsArgs
-  box_info_fields?: boolean | ProjectMasterCountOutputTypeCountBox_info_fieldsArgs
-  box_info_values?: boolean | ProjectMasterCountOutputTypeCountBox_info_valuesArgs
 }
 
 /**
@@ -3163,6 +3252,13 @@ export type ProjectMasterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Type
    * Select specific fields to fetch from the ProjectMasterCountOutputType
    */
   select?: Prisma.ProjectMasterCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ProjectMasterCountOutputType without action
+ */
+export type ProjectMasterCountOutputTypeCountBox_info_valuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoxInfoFieldValueWhereInput
 }
 
 /**
@@ -3196,6 +3292,13 @@ export type ProjectMasterCountOutputTypeCountDefectedItemsArgs<ExtArgs extends r
 /**
  * ProjectMasterCountOutputType without action
  */
+export type ProjectMasterCountOutputTypeCountBox_info_fieldsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProjectBoxInfoFieldWhereInput
+}
+
+/**
+ * ProjectMasterCountOutputType without action
+ */
 export type ProjectMasterCountOutputTypeCountDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ProjectDetailsWhereInput
 }
@@ -3214,20 +3317,6 @@ export type ProjectMasterCountOutputTypeCountScanItemsArgs<ExtArgs extends runti
   where?: Prisma.ScanAndPackItemWhereInput
 }
 
-/**
- * ProjectMasterCountOutputType without action
- */
-export type ProjectMasterCountOutputTypeCountBox_info_fieldsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ProjectBoxInfoFieldWhereInput
-}
-
-/**
- * ProjectMasterCountOutputType without action
- */
-export type ProjectMasterCountOutputTypeCountBox_info_valuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BoxInfoFieldValueWhereInput
-}
-
 
 export type ProjectMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3239,21 +3328,24 @@ export type ProjectMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   created_at?: boolean
   unique_project_id?: boolean
   is_grouping?: boolean
+  track_trace_status?: boolean
   lead_id?: boolean
-  order_no?: boolean
-  client_name?: boolean
+  track_completed_at?: boolean
+  track_started_at?: boolean
   client_address?: boolean
   client_contact_no?: boolean
-  packing_type?: boolean
-  updated_by?: boolean
+  client_name?: boolean
+  order_no?: boolean
   updated_at?: boolean
-  track_trace_status?: boolean
-  track_started_at?: boolean
-  track_completed_at?: boolean
+  updated_by?: boolean
+  no_of_boxes?: boolean
+  packing_type?: boolean
+  box_info_values?: boolean | Prisma.ProjectMaster$box_info_valuesArgs<ExtArgs>
   boxes?: boolean | Prisma.ProjectMaster$boxesArgs<ExtArgs>
   CutList?: boolean | Prisma.ProjectMaster$CutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.ProjectMaster$cutListMachineMappingArgs<ExtArgs>
   defectedItems?: boolean | Prisma.ProjectMaster$defectedItemsArgs<ExtArgs>
+  box_info_fields?: boolean | Prisma.ProjectMaster$box_info_fieldsArgs<ExtArgs>
   details?: boolean | Prisma.ProjectMaster$detailsArgs<ExtArgs>
   items?: boolean | Prisma.ProjectMaster$itemsArgs<ExtArgs>
   client?: boolean | Prisma.ProjectMaster$clientArgs<ExtArgs>
@@ -3261,8 +3353,6 @@ export type ProjectMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   lead?: boolean | Prisma.ProjectMaster$leadArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   scanItems?: boolean | Prisma.ProjectMaster$scanItemsArgs<ExtArgs>
-  box_info_fields?: boolean | Prisma.ProjectMaster$box_info_fieldsArgs<ExtArgs>
-  box_info_values?: boolean | Prisma.ProjectMaster$box_info_valuesArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectMaster"]>
 
@@ -3276,17 +3366,18 @@ export type ProjectMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   created_at?: boolean
   unique_project_id?: boolean
   is_grouping?: boolean
+  track_trace_status?: boolean
   lead_id?: boolean
-  order_no?: boolean
-  client_name?: boolean
+  track_completed_at?: boolean
+  track_started_at?: boolean
   client_address?: boolean
   client_contact_no?: boolean
-  packing_type?: boolean
-  updated_by?: boolean
+  client_name?: boolean
+  order_no?: boolean
   updated_at?: boolean
-  track_trace_status?: boolean
-  track_started_at?: boolean
-  track_completed_at?: boolean
+  updated_by?: boolean
+  no_of_boxes?: boolean
+  packing_type?: boolean
   client?: boolean | Prisma.ProjectMaster$clientArgs<ExtArgs>
   createdByUser?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.ProjectMaster$leadArgs<ExtArgs>
@@ -3303,17 +3394,18 @@ export type ProjectMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   created_at?: boolean
   unique_project_id?: boolean
   is_grouping?: boolean
+  track_trace_status?: boolean
   lead_id?: boolean
-  order_no?: boolean
-  client_name?: boolean
+  track_completed_at?: boolean
+  track_started_at?: boolean
   client_address?: boolean
   client_contact_no?: boolean
-  packing_type?: boolean
-  updated_by?: boolean
+  client_name?: boolean
+  order_no?: boolean
   updated_at?: boolean
-  track_trace_status?: boolean
-  track_started_at?: boolean
-  track_completed_at?: boolean
+  updated_by?: boolean
+  no_of_boxes?: boolean
+  packing_type?: boolean
   client?: boolean | Prisma.ProjectMaster$clientArgs<ExtArgs>
   createdByUser?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.ProjectMaster$leadArgs<ExtArgs>
@@ -3330,25 +3422,28 @@ export type ProjectMasterSelectScalar = {
   created_at?: boolean
   unique_project_id?: boolean
   is_grouping?: boolean
+  track_trace_status?: boolean
   lead_id?: boolean
-  order_no?: boolean
-  client_name?: boolean
+  track_completed_at?: boolean
+  track_started_at?: boolean
   client_address?: boolean
   client_contact_no?: boolean
-  packing_type?: boolean
-  updated_by?: boolean
+  client_name?: boolean
+  order_no?: boolean
   updated_at?: boolean
-  track_trace_status?: boolean
-  track_started_at?: boolean
-  track_completed_at?: boolean
+  updated_by?: boolean
+  no_of_boxes?: boolean
+  packing_type?: boolean
 }
 
-export type ProjectMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_name" | "vendor_id" | "client_id" | "created_by" | "project_status" | "created_at" | "unique_project_id" | "is_grouping" | "lead_id" | "order_no" | "client_name" | "client_address" | "client_contact_no" | "packing_type" | "updated_by" | "updated_at" | "track_trace_status" | "track_started_at" | "track_completed_at", ExtArgs["result"]["projectMaster"]>
+export type ProjectMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_name" | "vendor_id" | "client_id" | "created_by" | "project_status" | "created_at" | "unique_project_id" | "is_grouping" | "track_trace_status" | "lead_id" | "track_completed_at" | "track_started_at" | "client_address" | "client_contact_no" | "client_name" | "order_no" | "updated_at" | "updated_by" | "no_of_boxes" | "packing_type", ExtArgs["result"]["projectMaster"]>
 export type ProjectMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  box_info_values?: boolean | Prisma.ProjectMaster$box_info_valuesArgs<ExtArgs>
   boxes?: boolean | Prisma.ProjectMaster$boxesArgs<ExtArgs>
   CutList?: boolean | Prisma.ProjectMaster$CutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.ProjectMaster$cutListMachineMappingArgs<ExtArgs>
   defectedItems?: boolean | Prisma.ProjectMaster$defectedItemsArgs<ExtArgs>
+  box_info_fields?: boolean | Prisma.ProjectMaster$box_info_fieldsArgs<ExtArgs>
   details?: boolean | Prisma.ProjectMaster$detailsArgs<ExtArgs>
   items?: boolean | Prisma.ProjectMaster$itemsArgs<ExtArgs>
   client?: boolean | Prisma.ProjectMaster$clientArgs<ExtArgs>
@@ -3356,8 +3451,6 @@ export type ProjectMasterInclude<ExtArgs extends runtime.Types.Extensions.Intern
   lead?: boolean | Prisma.ProjectMaster$leadArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   scanItems?: boolean | Prisma.ProjectMaster$scanItemsArgs<ExtArgs>
-  box_info_fields?: boolean | Prisma.ProjectMaster$box_info_fieldsArgs<ExtArgs>
-  box_info_values?: boolean | Prisma.ProjectMaster$box_info_valuesArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3376,10 +3469,12 @@ export type ProjectMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Type
 export type $ProjectMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProjectMaster"
   objects: {
+    box_info_values: Prisma.$BoxInfoFieldValuePayload<ExtArgs>[]
     boxes: Prisma.$BoxMasterPayload<ExtArgs>[]
     CutList: Prisma.$CutListPayload<ExtArgs>[]
     cutListMachineMapping: Prisma.$CutListMachineMappingPayload<ExtArgs>[]
     defectedItems: Prisma.$DefectedItemPayload<ExtArgs>[]
+    box_info_fields: Prisma.$ProjectBoxInfoFieldPayload<ExtArgs>[]
     details: Prisma.$ProjectDetailsPayload<ExtArgs>[]
     items: Prisma.$ProjectItemsMasterPayload<ExtArgs>[]
     client: Prisma.$ClientMasterPayload<ExtArgs> | null
@@ -3387,8 +3482,6 @@ export type $ProjectMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     lead: Prisma.$LeadMasterPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     scanItems: Prisma.$ScanAndPackItemPayload<ExtArgs>[]
-    box_info_fields: Prisma.$ProjectBoxInfoFieldPayload<ExtArgs>[]
-    box_info_values: Prisma.$BoxInfoFieldValuePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -3400,17 +3493,18 @@ export type $ProjectMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     created_at: Date
     unique_project_id: string
     is_grouping: boolean
+    track_trace_status: string
     lead_id: number | null
-    order_no: string | null
-    client_name: string | null
+    track_completed_at: Date | null
+    track_started_at: Date | null
     client_address: string | null
     client_contact_no: string | null
-    packing_type: $Enums.PackingType
-    updated_by: number | null
+    client_name: string | null
+    order_no: string | null
     updated_at: Date | null
-    track_trace_status: string
-    track_started_at: Date | null
-    track_completed_at: Date | null
+    updated_by: number | null
+    no_of_boxes: number
+    packing_type: $Enums.PackingType
   }, ExtArgs["result"]["projectMaster"]>
   composites: {}
 }
@@ -3805,10 +3899,12 @@ readonly fields: ProjectMasterFieldRefs;
  */
 export interface Prisma__ProjectMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  box_info_values<T extends Prisma.ProjectMaster$box_info_valuesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$box_info_valuesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxInfoFieldValuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boxes<T extends Prisma.ProjectMaster$boxesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$boxesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   CutList<T extends Prisma.ProjectMaster$CutListArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$CutListArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cutListMachineMapping<T extends Prisma.ProjectMaster$cutListMachineMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$cutListMachineMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListMachineMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   defectedItems<T extends Prisma.ProjectMaster$defectedItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$defectedItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DefectedItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  box_info_fields<T extends Prisma.ProjectMaster$box_info_fieldsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$box_info_fieldsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectBoxInfoFieldPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   details<T extends Prisma.ProjectMaster$detailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$detailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   items<T extends Prisma.ProjectMaster$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectItemsMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   client<T extends Prisma.ProjectMaster$clientArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$clientArgs<ExtArgs>>): Prisma.Prisma__ClientMasterClient<runtime.Types.Result.GetResult<Prisma.$ClientMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -3816,8 +3912,6 @@ export interface Prisma__ProjectMasterClient<T, Null = never, ExtArgs extends ru
   lead<T extends Prisma.ProjectMaster$leadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$leadArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   scanItems<T extends Prisma.ProjectMaster$scanItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$scanItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScanAndPackItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  box_info_fields<T extends Prisma.ProjectMaster$box_info_fieldsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$box_info_fieldsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectBoxInfoFieldPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  box_info_values<T extends Prisma.ProjectMaster$box_info_valuesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$box_info_valuesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxInfoFieldValuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3856,17 +3950,18 @@ export interface ProjectMasterFieldRefs {
   readonly created_at: Prisma.FieldRef<"ProjectMaster", 'DateTime'>
   readonly unique_project_id: Prisma.FieldRef<"ProjectMaster", 'String'>
   readonly is_grouping: Prisma.FieldRef<"ProjectMaster", 'Boolean'>
+  readonly track_trace_status: Prisma.FieldRef<"ProjectMaster", 'String'>
   readonly lead_id: Prisma.FieldRef<"ProjectMaster", 'Int'>
-  readonly order_no: Prisma.FieldRef<"ProjectMaster", 'String'>
-  readonly client_name: Prisma.FieldRef<"ProjectMaster", 'String'>
+  readonly track_completed_at: Prisma.FieldRef<"ProjectMaster", 'DateTime'>
+  readonly track_started_at: Prisma.FieldRef<"ProjectMaster", 'DateTime'>
   readonly client_address: Prisma.FieldRef<"ProjectMaster", 'String'>
   readonly client_contact_no: Prisma.FieldRef<"ProjectMaster", 'String'>
-  readonly packing_type: Prisma.FieldRef<"ProjectMaster", 'PackingType'>
-  readonly updated_by: Prisma.FieldRef<"ProjectMaster", 'Int'>
+  readonly client_name: Prisma.FieldRef<"ProjectMaster", 'String'>
+  readonly order_no: Prisma.FieldRef<"ProjectMaster", 'String'>
   readonly updated_at: Prisma.FieldRef<"ProjectMaster", 'DateTime'>
-  readonly track_trace_status: Prisma.FieldRef<"ProjectMaster", 'String'>
-  readonly track_started_at: Prisma.FieldRef<"ProjectMaster", 'DateTime'>
-  readonly track_completed_at: Prisma.FieldRef<"ProjectMaster", 'DateTime'>
+  readonly updated_by: Prisma.FieldRef<"ProjectMaster", 'Int'>
+  readonly no_of_boxes: Prisma.FieldRef<"ProjectMaster", 'Int'>
+  readonly packing_type: Prisma.FieldRef<"ProjectMaster", 'PackingType'>
 }
     
 
@@ -4268,6 +4363,30 @@ export type ProjectMasterDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
+ * ProjectMaster.box_info_values
+ */
+export type ProjectMaster$box_info_valuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoxInfoFieldValue
+   */
+  select?: Prisma.BoxInfoFieldValueSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoxInfoFieldValue
+   */
+  omit?: Prisma.BoxInfoFieldValueOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoxInfoFieldValueInclude<ExtArgs> | null
+  where?: Prisma.BoxInfoFieldValueWhereInput
+  orderBy?: Prisma.BoxInfoFieldValueOrderByWithRelationInput | Prisma.BoxInfoFieldValueOrderByWithRelationInput[]
+  cursor?: Prisma.BoxInfoFieldValueWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoxInfoFieldValueScalarFieldEnum | Prisma.BoxInfoFieldValueScalarFieldEnum[]
+}
+
+/**
  * ProjectMaster.boxes
  */
 export type ProjectMaster$boxesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4361,6 +4480,30 @@ export type ProjectMaster$defectedItemsArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.DefectedItemScalarFieldEnum | Prisma.DefectedItemScalarFieldEnum[]
+}
+
+/**
+ * ProjectMaster.box_info_fields
+ */
+export type ProjectMaster$box_info_fieldsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectBoxInfoField
+   */
+  select?: Prisma.ProjectBoxInfoFieldSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectBoxInfoField
+   */
+  omit?: Prisma.ProjectBoxInfoFieldOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectBoxInfoFieldInclude<ExtArgs> | null
+  where?: Prisma.ProjectBoxInfoFieldWhereInput
+  orderBy?: Prisma.ProjectBoxInfoFieldOrderByWithRelationInput | Prisma.ProjectBoxInfoFieldOrderByWithRelationInput[]
+  cursor?: Prisma.ProjectBoxInfoFieldWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProjectBoxInfoFieldScalarFieldEnum | Prisma.ProjectBoxInfoFieldScalarFieldEnum[]
 }
 
 /**
@@ -4471,54 +4614,6 @@ export type ProjectMaster$scanItemsArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.ScanAndPackItemScalarFieldEnum | Prisma.ScanAndPackItemScalarFieldEnum[]
-}
-
-/**
- * ProjectMaster.box_info_fields
- */
-export type ProjectMaster$box_info_fieldsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ProjectBoxInfoField
-   */
-  select?: Prisma.ProjectBoxInfoFieldSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ProjectBoxInfoField
-   */
-  omit?: Prisma.ProjectBoxInfoFieldOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ProjectBoxInfoFieldInclude<ExtArgs> | null
-  where?: Prisma.ProjectBoxInfoFieldWhereInput
-  orderBy?: Prisma.ProjectBoxInfoFieldOrderByWithRelationInput | Prisma.ProjectBoxInfoFieldOrderByWithRelationInput[]
-  cursor?: Prisma.ProjectBoxInfoFieldWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ProjectBoxInfoFieldScalarFieldEnum | Prisma.ProjectBoxInfoFieldScalarFieldEnum[]
-}
-
-/**
- * ProjectMaster.box_info_values
- */
-export type ProjectMaster$box_info_valuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the BoxInfoFieldValue
-   */
-  select?: Prisma.BoxInfoFieldValueSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the BoxInfoFieldValue
-   */
-  omit?: Prisma.BoxInfoFieldValueOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.BoxInfoFieldValueInclude<ExtArgs> | null
-  where?: Prisma.BoxInfoFieldValueWhereInput
-  orderBy?: Prisma.BoxInfoFieldValueOrderByWithRelationInput | Prisma.BoxInfoFieldValueOrderByWithRelationInput[]
-  cursor?: Prisma.BoxInfoFieldValueWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.BoxInfoFieldValueScalarFieldEnum | Prisma.BoxInfoFieldValueScalarFieldEnum[]
 }
 
 /**

@@ -272,8 +272,8 @@ export type ArchitechuremasterWhereInput = {
   createdBy?: Prisma.IntFilter<"Architechuremaster"> | number
   isDeleted?: Prisma.BoolFilter<"Architechuremaster"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"Architechuremaster"> | Date | string | null
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   leads?: Prisma.LeadMasterListRelationFilter
 }
 
@@ -289,8 +289,8 @@ export type ArchitechuremasterOrderByWithRelationInput = {
   createdBy?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   user?: Prisma.UserMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   leads?: Prisma.LeadMasterOrderByRelationAggregateInput
 }
 
@@ -309,8 +309,8 @@ export type ArchitechuremasterWhereUniqueInput = Prisma.AtLeast<{
   createdBy?: Prisma.IntFilter<"Architechuremaster"> | number
   isDeleted?: Prisma.BoolFilter<"Architechuremaster"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"Architechuremaster"> | Date | string | null
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   leads?: Prisma.LeadMasterListRelationFilter
 }, "id">
 
@@ -359,8 +359,8 @@ export type ArchitechuremasterCreateInput = {
   createdAt?: Date | string
   isDeleted?: boolean
   deletedAt?: Date | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutArchitechuremastersInput
   user: Prisma.UserMasterCreateNestedOneWithoutArchitechuremastersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutArchitechuremastersInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutArchitectInput
 }
 
@@ -388,8 +388,8 @@ export type ArchitechuremasterUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutArchitectNestedInput
 }
 
@@ -748,8 +748,8 @@ export type ArchitechuremasterCreateWithoutLeadsInput = {
   createdAt?: Date | string
   isDeleted?: boolean
   deletedAt?: Date | string | null
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutArchitechuremastersInput
   user: Prisma.UserMasterCreateNestedOneWithoutArchitechuremastersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutArchitechuremastersInput
 }
 
 export type ArchitechuremasterUncheckedCreateWithoutLeadsInput = {
@@ -791,8 +791,8 @@ export type ArchitechuremasterUpdateWithoutLeadsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
 }
 
 export type ArchitechuremasterUncheckedUpdateWithoutLeadsInput = {
@@ -958,8 +958,8 @@ export type ArchitechuremasterSelect<ExtArgs extends runtime.Types.Extensions.In
   createdBy?: boolean
   isDeleted?: boolean
   deletedAt?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   leads?: boolean | Prisma.Architechuremaster$leadsArgs<ExtArgs>
   _count?: boolean | Prisma.ArchitechuremasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["architechuremaster"]>
@@ -976,8 +976,8 @@ export type ArchitechuremasterSelectCreateManyAndReturn<ExtArgs extends runtime.
   createdBy?: boolean
   isDeleted?: boolean
   deletedAt?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["architechuremaster"]>
 
 export type ArchitechuremasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -992,8 +992,8 @@ export type ArchitechuremasterSelectUpdateManyAndReturn<ExtArgs extends runtime.
   createdBy?: boolean
   isDeleted?: boolean
   deletedAt?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["architechuremaster"]>
 
 export type ArchitechuremasterSelectScalar = {
@@ -1012,25 +1012,25 @@ export type ArchitechuremasterSelectScalar = {
 
 export type ArchitechuremasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendorId" | "name" | "email" | "mobile" | "alt_mobile" | "isActive" | "createdAt" | "createdBy" | "isDeleted" | "deletedAt", ExtArgs["result"]["architechuremaster"]>
 export type ArchitechuremasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   leads?: boolean | Prisma.Architechuremaster$leadsArgs<ExtArgs>
   _count?: boolean | Prisma.ArchitechuremasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ArchitechuremasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type ArchitechuremasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $ArchitechuremasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Architechuremaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     user: Prisma.$UserMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     leads: Prisma.$LeadMasterPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1439,8 +1439,8 @@ readonly fields: ArchitechuremasterFieldRefs;
  */
 export interface Prisma__ArchitechuremasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   leads<T extends Prisma.Architechuremaster$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Architechuremaster$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.

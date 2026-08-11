@@ -871,24 +871,17 @@ export type LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput = {
   deleteMany?: Prisma.LeadServiceScheduleScalarWhereInput | Prisma.LeadServiceScheduleScalarWhereInput[]
 }
 
-export type LeadServiceScheduleCreateNestedManyWithoutCreatedByInput = {
-  create?: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutCreatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput> | Prisma.LeadServiceScheduleCreateWithoutCreatedByInput[] | Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput[]
-  connectOrCreate?: Prisma.LeadServiceScheduleCreateOrConnectWithoutCreatedByInput | Prisma.LeadServiceScheduleCreateOrConnectWithoutCreatedByInput[]
-  createMany?: Prisma.LeadServiceScheduleCreateManyCreatedByInputEnvelope
-  connect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
-}
-
-export type LeadServiceScheduleCreateNestedManyWithoutUpdatedByInput = {
-  create?: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutUpdatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutUpdatedByInput> | Prisma.LeadServiceScheduleCreateWithoutUpdatedByInput[] | Prisma.LeadServiceScheduleUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.LeadServiceScheduleCreateOrConnectWithoutUpdatedByInput | Prisma.LeadServiceScheduleCreateOrConnectWithoutUpdatedByInput[]
-  createMany?: Prisma.LeadServiceScheduleCreateManyUpdatedByInputEnvelope
-  connect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
-}
-
 export type LeadServiceScheduleCreateNestedManyWithoutCompletedByInput = {
   create?: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutCompletedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutCompletedByInput> | Prisma.LeadServiceScheduleCreateWithoutCompletedByInput[] | Prisma.LeadServiceScheduleUncheckedCreateWithoutCompletedByInput[]
   connectOrCreate?: Prisma.LeadServiceScheduleCreateOrConnectWithoutCompletedByInput | Prisma.LeadServiceScheduleCreateOrConnectWithoutCompletedByInput[]
   createMany?: Prisma.LeadServiceScheduleCreateManyCompletedByInputEnvelope
+  connect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
+}
+
+export type LeadServiceScheduleCreateNestedManyWithoutCreatedByInput = {
+  create?: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutCreatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput> | Prisma.LeadServiceScheduleCreateWithoutCreatedByInput[] | Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.LeadServiceScheduleCreateOrConnectWithoutCreatedByInput | Prisma.LeadServiceScheduleCreateOrConnectWithoutCreatedByInput[]
+  createMany?: Prisma.LeadServiceScheduleCreateManyCreatedByInputEnvelope
   connect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
 }
 
@@ -899,14 +892,7 @@ export type LeadServiceScheduleCreateNestedManyWithoutRejectedByInput = {
   connect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
 }
 
-export type LeadServiceScheduleUncheckedCreateNestedManyWithoutCreatedByInput = {
-  create?: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutCreatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput> | Prisma.LeadServiceScheduleCreateWithoutCreatedByInput[] | Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput[]
-  connectOrCreate?: Prisma.LeadServiceScheduleCreateOrConnectWithoutCreatedByInput | Prisma.LeadServiceScheduleCreateOrConnectWithoutCreatedByInput[]
-  createMany?: Prisma.LeadServiceScheduleCreateManyCreatedByInputEnvelope
-  connect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
-}
-
-export type LeadServiceScheduleUncheckedCreateNestedManyWithoutUpdatedByInput = {
+export type LeadServiceScheduleCreateNestedManyWithoutUpdatedByInput = {
   create?: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutUpdatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutUpdatedByInput> | Prisma.LeadServiceScheduleCreateWithoutUpdatedByInput[] | Prisma.LeadServiceScheduleUncheckedCreateWithoutUpdatedByInput[]
   connectOrCreate?: Prisma.LeadServiceScheduleCreateOrConnectWithoutUpdatedByInput | Prisma.LeadServiceScheduleCreateOrConnectWithoutUpdatedByInput[]
   createMany?: Prisma.LeadServiceScheduleCreateManyUpdatedByInputEnvelope
@@ -920,6 +906,13 @@ export type LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletedByInput 
   connect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
 }
 
+export type LeadServiceScheduleUncheckedCreateNestedManyWithoutCreatedByInput = {
+  create?: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutCreatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput> | Prisma.LeadServiceScheduleCreateWithoutCreatedByInput[] | Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.LeadServiceScheduleCreateOrConnectWithoutCreatedByInput | Prisma.LeadServiceScheduleCreateOrConnectWithoutCreatedByInput[]
+  createMany?: Prisma.LeadServiceScheduleCreateManyCreatedByInputEnvelope
+  connect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
+}
+
 export type LeadServiceScheduleUncheckedCreateNestedManyWithoutRejectedByInput = {
   create?: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutRejectedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutRejectedByInput> | Prisma.LeadServiceScheduleCreateWithoutRejectedByInput[] | Prisma.LeadServiceScheduleUncheckedCreateWithoutRejectedByInput[]
   connectOrCreate?: Prisma.LeadServiceScheduleCreateOrConnectWithoutRejectedByInput | Prisma.LeadServiceScheduleCreateOrConnectWithoutRejectedByInput[]
@@ -927,32 +920,11 @@ export type LeadServiceScheduleUncheckedCreateNestedManyWithoutRejectedByInput =
   connect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
 }
 
-export type LeadServiceScheduleUpdateManyWithoutCreatedByNestedInput = {
-  create?: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutCreatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput> | Prisma.LeadServiceScheduleCreateWithoutCreatedByInput[] | Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput[]
-  connectOrCreate?: Prisma.LeadServiceScheduleCreateOrConnectWithoutCreatedByInput | Prisma.LeadServiceScheduleCreateOrConnectWithoutCreatedByInput[]
-  upsert?: Prisma.LeadServiceScheduleUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.LeadServiceScheduleUpsertWithWhereUniqueWithoutCreatedByInput[]
-  createMany?: Prisma.LeadServiceScheduleCreateManyCreatedByInputEnvelope
-  set?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
-  disconnect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
-  delete?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
-  connect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
-  update?: Prisma.LeadServiceScheduleUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.LeadServiceScheduleUpdateWithWhereUniqueWithoutCreatedByInput[]
-  updateMany?: Prisma.LeadServiceScheduleUpdateManyWithWhereWithoutCreatedByInput | Prisma.LeadServiceScheduleUpdateManyWithWhereWithoutCreatedByInput[]
-  deleteMany?: Prisma.LeadServiceScheduleScalarWhereInput | Prisma.LeadServiceScheduleScalarWhereInput[]
-}
-
-export type LeadServiceScheduleUpdateManyWithoutUpdatedByNestedInput = {
+export type LeadServiceScheduleUncheckedCreateNestedManyWithoutUpdatedByInput = {
   create?: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutUpdatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutUpdatedByInput> | Prisma.LeadServiceScheduleCreateWithoutUpdatedByInput[] | Prisma.LeadServiceScheduleUncheckedCreateWithoutUpdatedByInput[]
   connectOrCreate?: Prisma.LeadServiceScheduleCreateOrConnectWithoutUpdatedByInput | Prisma.LeadServiceScheduleCreateOrConnectWithoutUpdatedByInput[]
-  upsert?: Prisma.LeadServiceScheduleUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.LeadServiceScheduleUpsertWithWhereUniqueWithoutUpdatedByInput[]
   createMany?: Prisma.LeadServiceScheduleCreateManyUpdatedByInputEnvelope
-  set?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
-  disconnect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
-  delete?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
   connect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
-  update?: Prisma.LeadServiceScheduleUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.LeadServiceScheduleUpdateWithWhereUniqueWithoutUpdatedByInput[]
-  updateMany?: Prisma.LeadServiceScheduleUpdateManyWithWhereWithoutUpdatedByInput | Prisma.LeadServiceScheduleUpdateManyWithWhereWithoutUpdatedByInput[]
-  deleteMany?: Prisma.LeadServiceScheduleScalarWhereInput | Prisma.LeadServiceScheduleScalarWhereInput[]
 }
 
 export type LeadServiceScheduleUpdateManyWithoutCompletedByNestedInput = {
@@ -966,6 +938,20 @@ export type LeadServiceScheduleUpdateManyWithoutCompletedByNestedInput = {
   connect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
   update?: Prisma.LeadServiceScheduleUpdateWithWhereUniqueWithoutCompletedByInput | Prisma.LeadServiceScheduleUpdateWithWhereUniqueWithoutCompletedByInput[]
   updateMany?: Prisma.LeadServiceScheduleUpdateManyWithWhereWithoutCompletedByInput | Prisma.LeadServiceScheduleUpdateManyWithWhereWithoutCompletedByInput[]
+  deleteMany?: Prisma.LeadServiceScheduleScalarWhereInput | Prisma.LeadServiceScheduleScalarWhereInput[]
+}
+
+export type LeadServiceScheduleUpdateManyWithoutCreatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutCreatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput> | Prisma.LeadServiceScheduleCreateWithoutCreatedByInput[] | Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.LeadServiceScheduleCreateOrConnectWithoutCreatedByInput | Prisma.LeadServiceScheduleCreateOrConnectWithoutCreatedByInput[]
+  upsert?: Prisma.LeadServiceScheduleUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.LeadServiceScheduleUpsertWithWhereUniqueWithoutCreatedByInput[]
+  createMany?: Prisma.LeadServiceScheduleCreateManyCreatedByInputEnvelope
+  set?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
+  disconnect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
+  delete?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
+  connect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
+  update?: Prisma.LeadServiceScheduleUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.LeadServiceScheduleUpdateWithWhereUniqueWithoutCreatedByInput[]
+  updateMany?: Prisma.LeadServiceScheduleUpdateManyWithWhereWithoutCreatedByInput | Prisma.LeadServiceScheduleUpdateManyWithWhereWithoutCreatedByInput[]
   deleteMany?: Prisma.LeadServiceScheduleScalarWhereInput | Prisma.LeadServiceScheduleScalarWhereInput[]
 }
 
@@ -983,21 +969,7 @@ export type LeadServiceScheduleUpdateManyWithoutRejectedByNestedInput = {
   deleteMany?: Prisma.LeadServiceScheduleScalarWhereInput | Prisma.LeadServiceScheduleScalarWhereInput[]
 }
 
-export type LeadServiceScheduleUncheckedUpdateManyWithoutCreatedByNestedInput = {
-  create?: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutCreatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput> | Prisma.LeadServiceScheduleCreateWithoutCreatedByInput[] | Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput[]
-  connectOrCreate?: Prisma.LeadServiceScheduleCreateOrConnectWithoutCreatedByInput | Prisma.LeadServiceScheduleCreateOrConnectWithoutCreatedByInput[]
-  upsert?: Prisma.LeadServiceScheduleUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.LeadServiceScheduleUpsertWithWhereUniqueWithoutCreatedByInput[]
-  createMany?: Prisma.LeadServiceScheduleCreateManyCreatedByInputEnvelope
-  set?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
-  disconnect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
-  delete?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
-  connect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
-  update?: Prisma.LeadServiceScheduleUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.LeadServiceScheduleUpdateWithWhereUniqueWithoutCreatedByInput[]
-  updateMany?: Prisma.LeadServiceScheduleUpdateManyWithWhereWithoutCreatedByInput | Prisma.LeadServiceScheduleUpdateManyWithWhereWithoutCreatedByInput[]
-  deleteMany?: Prisma.LeadServiceScheduleScalarWhereInput | Prisma.LeadServiceScheduleScalarWhereInput[]
-}
-
-export type LeadServiceScheduleUncheckedUpdateManyWithoutUpdatedByNestedInput = {
+export type LeadServiceScheduleUpdateManyWithoutUpdatedByNestedInput = {
   create?: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutUpdatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutUpdatedByInput> | Prisma.LeadServiceScheduleCreateWithoutUpdatedByInput[] | Prisma.LeadServiceScheduleUncheckedCreateWithoutUpdatedByInput[]
   connectOrCreate?: Prisma.LeadServiceScheduleCreateOrConnectWithoutUpdatedByInput | Prisma.LeadServiceScheduleCreateOrConnectWithoutUpdatedByInput[]
   upsert?: Prisma.LeadServiceScheduleUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.LeadServiceScheduleUpsertWithWhereUniqueWithoutUpdatedByInput[]
@@ -1025,6 +997,20 @@ export type LeadServiceScheduleUncheckedUpdateManyWithoutCompletedByNestedInput 
   deleteMany?: Prisma.LeadServiceScheduleScalarWhereInput | Prisma.LeadServiceScheduleScalarWhereInput[]
 }
 
+export type LeadServiceScheduleUncheckedUpdateManyWithoutCreatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutCreatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput> | Prisma.LeadServiceScheduleCreateWithoutCreatedByInput[] | Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.LeadServiceScheduleCreateOrConnectWithoutCreatedByInput | Prisma.LeadServiceScheduleCreateOrConnectWithoutCreatedByInput[]
+  upsert?: Prisma.LeadServiceScheduleUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.LeadServiceScheduleUpsertWithWhereUniqueWithoutCreatedByInput[]
+  createMany?: Prisma.LeadServiceScheduleCreateManyCreatedByInputEnvelope
+  set?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
+  disconnect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
+  delete?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
+  connect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
+  update?: Prisma.LeadServiceScheduleUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.LeadServiceScheduleUpdateWithWhereUniqueWithoutCreatedByInput[]
+  updateMany?: Prisma.LeadServiceScheduleUpdateManyWithWhereWithoutCreatedByInput | Prisma.LeadServiceScheduleUpdateManyWithWhereWithoutCreatedByInput[]
+  deleteMany?: Prisma.LeadServiceScheduleScalarWhereInput | Prisma.LeadServiceScheduleScalarWhereInput[]
+}
+
 export type LeadServiceScheduleUncheckedUpdateManyWithoutRejectedByNestedInput = {
   create?: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutRejectedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutRejectedByInput> | Prisma.LeadServiceScheduleCreateWithoutRejectedByInput[] | Prisma.LeadServiceScheduleUncheckedCreateWithoutRejectedByInput[]
   connectOrCreate?: Prisma.LeadServiceScheduleCreateOrConnectWithoutRejectedByInput | Prisma.LeadServiceScheduleCreateOrConnectWithoutRejectedByInput[]
@@ -1036,6 +1022,20 @@ export type LeadServiceScheduleUncheckedUpdateManyWithoutRejectedByNestedInput =
   connect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
   update?: Prisma.LeadServiceScheduleUpdateWithWhereUniqueWithoutRejectedByInput | Prisma.LeadServiceScheduleUpdateWithWhereUniqueWithoutRejectedByInput[]
   updateMany?: Prisma.LeadServiceScheduleUpdateManyWithWhereWithoutRejectedByInput | Prisma.LeadServiceScheduleUpdateManyWithWhereWithoutRejectedByInput[]
+  deleteMany?: Prisma.LeadServiceScheduleScalarWhereInput | Prisma.LeadServiceScheduleScalarWhereInput[]
+}
+
+export type LeadServiceScheduleUncheckedUpdateManyWithoutUpdatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutUpdatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutUpdatedByInput> | Prisma.LeadServiceScheduleCreateWithoutUpdatedByInput[] | Prisma.LeadServiceScheduleUncheckedCreateWithoutUpdatedByInput[]
+  connectOrCreate?: Prisma.LeadServiceScheduleCreateOrConnectWithoutUpdatedByInput | Prisma.LeadServiceScheduleCreateOrConnectWithoutUpdatedByInput[]
+  upsert?: Prisma.LeadServiceScheduleUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.LeadServiceScheduleUpsertWithWhereUniqueWithoutUpdatedByInput[]
+  createMany?: Prisma.LeadServiceScheduleCreateManyUpdatedByInputEnvelope
+  set?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
+  disconnect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
+  delete?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
+  connect?: Prisma.LeadServiceScheduleWhereUniqueInput | Prisma.LeadServiceScheduleWhereUniqueInput[]
+  update?: Prisma.LeadServiceScheduleUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.LeadServiceScheduleUpdateWithWhereUniqueWithoutUpdatedByInput[]
+  updateMany?: Prisma.LeadServiceScheduleUpdateManyWithWhereWithoutUpdatedByInput | Prisma.LeadServiceScheduleUpdateManyWithWhereWithoutUpdatedByInput[]
   deleteMany?: Prisma.LeadServiceScheduleScalarWhereInput | Prisma.LeadServiceScheduleScalarWhereInput[]
 }
 
@@ -1281,124 +1281,6 @@ export type LeadServiceScheduleScalarWhereInput = {
   updated_at?: Prisma.DateTimeFilter<"LeadServiceSchedule"> | Date | string
 }
 
-export type LeadServiceScheduleCreateWithoutCreatedByInput = {
-  service_no: number
-  service_type?: $Enums.ServiceVisitType
-  scheduled_for: Date | string
-  original_scheduled_for: Date | string
-  status?: $Enums.ServiceVisitStatus
-  rescheduled_once?: boolean
-  rescheduled_from?: Date | string | null
-  completed_at?: Date | string | null
-  completion_remark?: string | null
-  rejected_at?: Date | string | null
-  rejection_remark?: string | null
-  closure_reason?: $Enums.ServiceClosureReason | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  account: Prisma.AccountMasterCreateNestedOneWithoutLeadServiceSchedulesInput
-  completedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadServiceSchedulesCompletedInput
-  completionDocument?: Prisma.LeadDocumentsCreateNestedOneWithoutCompletedServiceSchedulesInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutServiceSchedulesInput
-  rejectedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadServiceSchedulesRejectedInput
-  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadServiceSchedulesUpdatedInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadServiceSchedulesInput
-}
-
-export type LeadServiceScheduleUncheckedCreateWithoutCreatedByInput = {
-  id?: number
-  vendor_id: number
-  lead_id: number
-  account_id: number
-  service_no: number
-  service_type?: $Enums.ServiceVisitType
-  scheduled_for: Date | string
-  original_scheduled_for: Date | string
-  status?: $Enums.ServiceVisitStatus
-  rescheduled_once?: boolean
-  rescheduled_from?: Date | string | null
-  completed_at?: Date | string | null
-  completed_by?: number | null
-  completion_remark?: string | null
-  completion_document_id?: number | null
-  rejected_at?: Date | string | null
-  rejected_by?: number | null
-  rejection_remark?: string | null
-  closure_reason?: $Enums.ServiceClosureReason | null
-  created_at?: Date | string
-  updated_by?: number | null
-  updated_at?: Date | string
-}
-
-export type LeadServiceScheduleCreateOrConnectWithoutCreatedByInput = {
-  where: Prisma.LeadServiceScheduleWhereUniqueInput
-  create: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutCreatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput>
-}
-
-export type LeadServiceScheduleCreateManyCreatedByInputEnvelope = {
-  data: Prisma.LeadServiceScheduleCreateManyCreatedByInput | Prisma.LeadServiceScheduleCreateManyCreatedByInput[]
-  skipDuplicates?: boolean
-}
-
-export type LeadServiceScheduleCreateWithoutUpdatedByInput = {
-  service_no: number
-  service_type?: $Enums.ServiceVisitType
-  scheduled_for: Date | string
-  original_scheduled_for: Date | string
-  status?: $Enums.ServiceVisitStatus
-  rescheduled_once?: boolean
-  rescheduled_from?: Date | string | null
-  completed_at?: Date | string | null
-  completion_remark?: string | null
-  rejected_at?: Date | string | null
-  rejection_remark?: string | null
-  closure_reason?: $Enums.ServiceClosureReason | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  account: Prisma.AccountMasterCreateNestedOneWithoutLeadServiceSchedulesInput
-  completedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadServiceSchedulesCompletedInput
-  completionDocument?: Prisma.LeadDocumentsCreateNestedOneWithoutCompletedServiceSchedulesInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadServiceSchedulesCreatedInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutServiceSchedulesInput
-  rejectedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadServiceSchedulesRejectedInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadServiceSchedulesInput
-}
-
-export type LeadServiceScheduleUncheckedCreateWithoutUpdatedByInput = {
-  id?: number
-  vendor_id: number
-  lead_id: number
-  account_id: number
-  service_no: number
-  service_type?: $Enums.ServiceVisitType
-  scheduled_for: Date | string
-  original_scheduled_for: Date | string
-  status?: $Enums.ServiceVisitStatus
-  rescheduled_once?: boolean
-  rescheduled_from?: Date | string | null
-  completed_at?: Date | string | null
-  completed_by?: number | null
-  completion_remark?: string | null
-  completion_document_id?: number | null
-  rejected_at?: Date | string | null
-  rejected_by?: number | null
-  rejection_remark?: string | null
-  closure_reason?: $Enums.ServiceClosureReason | null
-  created_by: number
-  created_at?: Date | string
-  updated_at?: Date | string
-}
-
-export type LeadServiceScheduleCreateOrConnectWithoutUpdatedByInput = {
-  where: Prisma.LeadServiceScheduleWhereUniqueInput
-  create: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutUpdatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutUpdatedByInput>
-}
-
-export type LeadServiceScheduleCreateManyUpdatedByInputEnvelope = {
-  data: Prisma.LeadServiceScheduleCreateManyUpdatedByInput | Prisma.LeadServiceScheduleCreateManyUpdatedByInput[]
-  skipDuplicates?: boolean
-}
-
 export type LeadServiceScheduleCreateWithoutCompletedByInput = {
   service_no: number
   service_type?: $Enums.ServiceVisitType
@@ -1455,6 +1337,65 @@ export type LeadServiceScheduleCreateOrConnectWithoutCompletedByInput = {
 
 export type LeadServiceScheduleCreateManyCompletedByInputEnvelope = {
   data: Prisma.LeadServiceScheduleCreateManyCompletedByInput | Prisma.LeadServiceScheduleCreateManyCompletedByInput[]
+  skipDuplicates?: boolean
+}
+
+export type LeadServiceScheduleCreateWithoutCreatedByInput = {
+  service_no: number
+  service_type?: $Enums.ServiceVisitType
+  scheduled_for: Date | string
+  original_scheduled_for: Date | string
+  status?: $Enums.ServiceVisitStatus
+  rescheduled_once?: boolean
+  rescheduled_from?: Date | string | null
+  completed_at?: Date | string | null
+  completion_remark?: string | null
+  rejected_at?: Date | string | null
+  rejection_remark?: string | null
+  closure_reason?: $Enums.ServiceClosureReason | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  account: Prisma.AccountMasterCreateNestedOneWithoutLeadServiceSchedulesInput
+  completedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadServiceSchedulesCompletedInput
+  completionDocument?: Prisma.LeadDocumentsCreateNestedOneWithoutCompletedServiceSchedulesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutServiceSchedulesInput
+  rejectedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadServiceSchedulesRejectedInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadServiceSchedulesUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadServiceSchedulesInput
+}
+
+export type LeadServiceScheduleUncheckedCreateWithoutCreatedByInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  service_no: number
+  service_type?: $Enums.ServiceVisitType
+  scheduled_for: Date | string
+  original_scheduled_for: Date | string
+  status?: $Enums.ServiceVisitStatus
+  rescheduled_once?: boolean
+  rescheduled_from?: Date | string | null
+  completed_at?: Date | string | null
+  completed_by?: number | null
+  completion_remark?: string | null
+  completion_document_id?: number | null
+  rejected_at?: Date | string | null
+  rejected_by?: number | null
+  rejection_remark?: string | null
+  closure_reason?: $Enums.ServiceClosureReason | null
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+}
+
+export type LeadServiceScheduleCreateOrConnectWithoutCreatedByInput = {
+  where: Prisma.LeadServiceScheduleWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutCreatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput>
+}
+
+export type LeadServiceScheduleCreateManyCreatedByInputEnvelope = {
+  data: Prisma.LeadServiceScheduleCreateManyCreatedByInput | Prisma.LeadServiceScheduleCreateManyCreatedByInput[]
   skipDuplicates?: boolean
 }
 
@@ -1517,36 +1458,63 @@ export type LeadServiceScheduleCreateManyRejectedByInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type LeadServiceScheduleUpsertWithWhereUniqueWithoutCreatedByInput = {
-  where: Prisma.LeadServiceScheduleWhereUniqueInput
-  update: Prisma.XOR<Prisma.LeadServiceScheduleUpdateWithoutCreatedByInput, Prisma.LeadServiceScheduleUncheckedUpdateWithoutCreatedByInput>
-  create: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutCreatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput>
+export type LeadServiceScheduleCreateWithoutUpdatedByInput = {
+  service_no: number
+  service_type?: $Enums.ServiceVisitType
+  scheduled_for: Date | string
+  original_scheduled_for: Date | string
+  status?: $Enums.ServiceVisitStatus
+  rescheduled_once?: boolean
+  rescheduled_from?: Date | string | null
+  completed_at?: Date | string | null
+  completion_remark?: string | null
+  rejected_at?: Date | string | null
+  rejection_remark?: string | null
+  closure_reason?: $Enums.ServiceClosureReason | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  account: Prisma.AccountMasterCreateNestedOneWithoutLeadServiceSchedulesInput
+  completedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadServiceSchedulesCompletedInput
+  completionDocument?: Prisma.LeadDocumentsCreateNestedOneWithoutCompletedServiceSchedulesInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadServiceSchedulesCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutServiceSchedulesInput
+  rejectedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadServiceSchedulesRejectedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadServiceSchedulesInput
 }
 
-export type LeadServiceScheduleUpdateWithWhereUniqueWithoutCreatedByInput = {
-  where: Prisma.LeadServiceScheduleWhereUniqueInput
-  data: Prisma.XOR<Prisma.LeadServiceScheduleUpdateWithoutCreatedByInput, Prisma.LeadServiceScheduleUncheckedUpdateWithoutCreatedByInput>
+export type LeadServiceScheduleUncheckedCreateWithoutUpdatedByInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  service_no: number
+  service_type?: $Enums.ServiceVisitType
+  scheduled_for: Date | string
+  original_scheduled_for: Date | string
+  status?: $Enums.ServiceVisitStatus
+  rescheduled_once?: boolean
+  rescheduled_from?: Date | string | null
+  completed_at?: Date | string | null
+  completed_by?: number | null
+  completion_remark?: string | null
+  completion_document_id?: number | null
+  rejected_at?: Date | string | null
+  rejected_by?: number | null
+  rejection_remark?: string | null
+  closure_reason?: $Enums.ServiceClosureReason | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
-export type LeadServiceScheduleUpdateManyWithWhereWithoutCreatedByInput = {
-  where: Prisma.LeadServiceScheduleScalarWhereInput
-  data: Prisma.XOR<Prisma.LeadServiceScheduleUpdateManyMutationInput, Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCreatedByInput>
-}
-
-export type LeadServiceScheduleUpsertWithWhereUniqueWithoutUpdatedByInput = {
+export type LeadServiceScheduleCreateOrConnectWithoutUpdatedByInput = {
   where: Prisma.LeadServiceScheduleWhereUniqueInput
-  update: Prisma.XOR<Prisma.LeadServiceScheduleUpdateWithoutUpdatedByInput, Prisma.LeadServiceScheduleUncheckedUpdateWithoutUpdatedByInput>
   create: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutUpdatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutUpdatedByInput>
 }
 
-export type LeadServiceScheduleUpdateWithWhereUniqueWithoutUpdatedByInput = {
-  where: Prisma.LeadServiceScheduleWhereUniqueInput
-  data: Prisma.XOR<Prisma.LeadServiceScheduleUpdateWithoutUpdatedByInput, Prisma.LeadServiceScheduleUncheckedUpdateWithoutUpdatedByInput>
-}
-
-export type LeadServiceScheduleUpdateManyWithWhereWithoutUpdatedByInput = {
-  where: Prisma.LeadServiceScheduleScalarWhereInput
-  data: Prisma.XOR<Prisma.LeadServiceScheduleUpdateManyMutationInput, Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutUpdatedByInput>
+export type LeadServiceScheduleCreateManyUpdatedByInputEnvelope = {
+  data: Prisma.LeadServiceScheduleCreateManyUpdatedByInput | Prisma.LeadServiceScheduleCreateManyUpdatedByInput[]
+  skipDuplicates?: boolean
 }
 
 export type LeadServiceScheduleUpsertWithWhereUniqueWithoutCompletedByInput = {
@@ -1565,6 +1533,22 @@ export type LeadServiceScheduleUpdateManyWithWhereWithoutCompletedByInput = {
   data: Prisma.XOR<Prisma.LeadServiceScheduleUpdateManyMutationInput, Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletedByInput>
 }
 
+export type LeadServiceScheduleUpsertWithWhereUniqueWithoutCreatedByInput = {
+  where: Prisma.LeadServiceScheduleWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeadServiceScheduleUpdateWithoutCreatedByInput, Prisma.LeadServiceScheduleUncheckedUpdateWithoutCreatedByInput>
+  create: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutCreatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutCreatedByInput>
+}
+
+export type LeadServiceScheduleUpdateWithWhereUniqueWithoutCreatedByInput = {
+  where: Prisma.LeadServiceScheduleWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeadServiceScheduleUpdateWithoutCreatedByInput, Prisma.LeadServiceScheduleUncheckedUpdateWithoutCreatedByInput>
+}
+
+export type LeadServiceScheduleUpdateManyWithWhereWithoutCreatedByInput = {
+  where: Prisma.LeadServiceScheduleScalarWhereInput
+  data: Prisma.XOR<Prisma.LeadServiceScheduleUpdateManyMutationInput, Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCreatedByInput>
+}
+
 export type LeadServiceScheduleUpsertWithWhereUniqueWithoutRejectedByInput = {
   where: Prisma.LeadServiceScheduleWhereUniqueInput
   update: Prisma.XOR<Prisma.LeadServiceScheduleUpdateWithoutRejectedByInput, Prisma.LeadServiceScheduleUncheckedUpdateWithoutRejectedByInput>
@@ -1579,6 +1563,22 @@ export type LeadServiceScheduleUpdateWithWhereUniqueWithoutRejectedByInput = {
 export type LeadServiceScheduleUpdateManyWithWhereWithoutRejectedByInput = {
   where: Prisma.LeadServiceScheduleScalarWhereInput
   data: Prisma.XOR<Prisma.LeadServiceScheduleUpdateManyMutationInput, Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutRejectedByInput>
+}
+
+export type LeadServiceScheduleUpsertWithWhereUniqueWithoutUpdatedByInput = {
+  where: Prisma.LeadServiceScheduleWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeadServiceScheduleUpdateWithoutUpdatedByInput, Prisma.LeadServiceScheduleUncheckedUpdateWithoutUpdatedByInput>
+  create: Prisma.XOR<Prisma.LeadServiceScheduleCreateWithoutUpdatedByInput, Prisma.LeadServiceScheduleUncheckedCreateWithoutUpdatedByInput>
+}
+
+export type LeadServiceScheduleUpdateWithWhereUniqueWithoutUpdatedByInput = {
+  where: Prisma.LeadServiceScheduleWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeadServiceScheduleUpdateWithoutUpdatedByInput, Prisma.LeadServiceScheduleUncheckedUpdateWithoutUpdatedByInput>
+}
+
+export type LeadServiceScheduleUpdateManyWithWhereWithoutUpdatedByInput = {
+  where: Prisma.LeadServiceScheduleScalarWhereInput
+  data: Prisma.XOR<Prisma.LeadServiceScheduleUpdateManyMutationInput, Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutUpdatedByInput>
 }
 
 export type LeadServiceScheduleCreateWithoutLeadInput = {
@@ -1905,56 +1905,6 @@ export type LeadServiceScheduleUncheckedUpdateManyWithoutVendorInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type LeadServiceScheduleCreateManyCreatedByInput = {
-  id?: number
-  vendor_id: number
-  lead_id: number
-  account_id: number
-  service_no: number
-  service_type?: $Enums.ServiceVisitType
-  scheduled_for: Date | string
-  original_scheduled_for: Date | string
-  status?: $Enums.ServiceVisitStatus
-  rescheduled_once?: boolean
-  rescheduled_from?: Date | string | null
-  completed_at?: Date | string | null
-  completed_by?: number | null
-  completion_remark?: string | null
-  completion_document_id?: number | null
-  rejected_at?: Date | string | null
-  rejected_by?: number | null
-  rejection_remark?: string | null
-  closure_reason?: $Enums.ServiceClosureReason | null
-  created_at?: Date | string
-  updated_by?: number | null
-  updated_at?: Date | string
-}
-
-export type LeadServiceScheduleCreateManyUpdatedByInput = {
-  id?: number
-  vendor_id: number
-  lead_id: number
-  account_id: number
-  service_no: number
-  service_type?: $Enums.ServiceVisitType
-  scheduled_for: Date | string
-  original_scheduled_for: Date | string
-  status?: $Enums.ServiceVisitStatus
-  rescheduled_once?: boolean
-  rescheduled_from?: Date | string | null
-  completed_at?: Date | string | null
-  completed_by?: number | null
-  completion_remark?: string | null
-  completion_document_id?: number | null
-  rejected_at?: Date | string | null
-  rejected_by?: number | null
-  rejection_remark?: string | null
-  closure_reason?: $Enums.ServiceClosureReason | null
-  created_by: number
-  created_at?: Date | string
-  updated_at?: Date | string
-}
-
 export type LeadServiceScheduleCreateManyCompletedByInput = {
   id?: number
   vendor_id: number
@@ -1975,6 +1925,31 @@ export type LeadServiceScheduleCreateManyCompletedByInput = {
   rejection_remark?: string | null
   closure_reason?: $Enums.ServiceClosureReason | null
   created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+}
+
+export type LeadServiceScheduleCreateManyCreatedByInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  service_no: number
+  service_type?: $Enums.ServiceVisitType
+  scheduled_for: Date | string
+  original_scheduled_for: Date | string
+  status?: $Enums.ServiceVisitStatus
+  rescheduled_once?: boolean
+  rescheduled_from?: Date | string | null
+  completed_at?: Date | string | null
+  completed_by?: number | null
+  completion_remark?: string | null
+  completion_document_id?: number | null
+  rejected_at?: Date | string | null
+  rejected_by?: number | null
+  rejection_remark?: string | null
+  closure_reason?: $Enums.ServiceClosureReason | null
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
@@ -2005,152 +1980,29 @@ export type LeadServiceScheduleCreateManyRejectedByInput = {
   updated_at?: Date | string
 }
 
-export type LeadServiceScheduleUpdateWithoutCreatedByInput = {
-  service_no?: Prisma.IntFieldUpdateOperationsInput | number
-  service_type?: Prisma.EnumServiceVisitTypeFieldUpdateOperationsInput | $Enums.ServiceVisitType
-  scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  original_scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumServiceVisitStatusFieldUpdateOperationsInput | $Enums.ServiceVisitStatus
-  rescheduled_once?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  rescheduled_from?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  completion_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  rejection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  closure_reason?: Prisma.NullableEnumServiceClosureReasonFieldUpdateOperationsInput | $Enums.ServiceClosureReason | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadServiceSchedulesNestedInput
-  completedBy?: Prisma.UserMasterUpdateOneWithoutLeadServiceSchedulesCompletedNestedInput
-  completionDocument?: Prisma.LeadDocumentsUpdateOneWithoutCompletedServiceSchedulesNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutServiceSchedulesNestedInput
-  rejectedBy?: Prisma.UserMasterUpdateOneWithoutLeadServiceSchedulesRejectedNestedInput
-  updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadServiceSchedulesUpdatedNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadServiceSchedulesNestedInput
-}
-
-export type LeadServiceScheduleUncheckedUpdateWithoutCreatedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  service_no?: Prisma.IntFieldUpdateOperationsInput | number
-  service_type?: Prisma.EnumServiceVisitTypeFieldUpdateOperationsInput | $Enums.ServiceVisitType
-  scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  original_scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumServiceVisitStatusFieldUpdateOperationsInput | $Enums.ServiceVisitStatus
-  rescheduled_once?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  rescheduled_from?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  completion_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  completion_document_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  rejected_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  rejection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  closure_reason?: Prisma.NullableEnumServiceClosureReasonFieldUpdateOperationsInput | $Enums.ServiceClosureReason | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type LeadServiceScheduleUncheckedUpdateManyWithoutCreatedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  service_no?: Prisma.IntFieldUpdateOperationsInput | number
-  service_type?: Prisma.EnumServiceVisitTypeFieldUpdateOperationsInput | $Enums.ServiceVisitType
-  scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  original_scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumServiceVisitStatusFieldUpdateOperationsInput | $Enums.ServiceVisitStatus
-  rescheduled_once?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  rescheduled_from?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  completion_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  completion_document_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  rejected_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  rejection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  closure_reason?: Prisma.NullableEnumServiceClosureReasonFieldUpdateOperationsInput | $Enums.ServiceClosureReason | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type LeadServiceScheduleUpdateWithoutUpdatedByInput = {
-  service_no?: Prisma.IntFieldUpdateOperationsInput | number
-  service_type?: Prisma.EnumServiceVisitTypeFieldUpdateOperationsInput | $Enums.ServiceVisitType
-  scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  original_scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumServiceVisitStatusFieldUpdateOperationsInput | $Enums.ServiceVisitStatus
-  rescheduled_once?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  rescheduled_from?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  completion_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  rejection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  closure_reason?: Prisma.NullableEnumServiceClosureReasonFieldUpdateOperationsInput | $Enums.ServiceClosureReason | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadServiceSchedulesNestedInput
-  completedBy?: Prisma.UserMasterUpdateOneWithoutLeadServiceSchedulesCompletedNestedInput
-  completionDocument?: Prisma.LeadDocumentsUpdateOneWithoutCompletedServiceSchedulesNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadServiceSchedulesCreatedNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutServiceSchedulesNestedInput
-  rejectedBy?: Prisma.UserMasterUpdateOneWithoutLeadServiceSchedulesRejectedNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadServiceSchedulesNestedInput
-}
-
-export type LeadServiceScheduleUncheckedUpdateWithoutUpdatedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  service_no?: Prisma.IntFieldUpdateOperationsInput | number
-  service_type?: Prisma.EnumServiceVisitTypeFieldUpdateOperationsInput | $Enums.ServiceVisitType
-  scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  original_scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumServiceVisitStatusFieldUpdateOperationsInput | $Enums.ServiceVisitStatus
-  rescheduled_once?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  rescheduled_from?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  completion_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  completion_document_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  rejected_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  rejection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  closure_reason?: Prisma.NullableEnumServiceClosureReasonFieldUpdateOperationsInput | $Enums.ServiceClosureReason | null
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type LeadServiceScheduleUncheckedUpdateManyWithoutUpdatedByInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  service_no?: Prisma.IntFieldUpdateOperationsInput | number
-  service_type?: Prisma.EnumServiceVisitTypeFieldUpdateOperationsInput | $Enums.ServiceVisitType
-  scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  original_scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumServiceVisitStatusFieldUpdateOperationsInput | $Enums.ServiceVisitStatus
-  rescheduled_once?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  rescheduled_from?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  completion_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  completion_document_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  rejected_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  rejection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  closure_reason?: Prisma.NullableEnumServiceClosureReasonFieldUpdateOperationsInput | $Enums.ServiceClosureReason | null
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type LeadServiceScheduleCreateManyUpdatedByInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  service_no: number
+  service_type?: $Enums.ServiceVisitType
+  scheduled_for: Date | string
+  original_scheduled_for: Date | string
+  status?: $Enums.ServiceVisitStatus
+  rescheduled_once?: boolean
+  rescheduled_from?: Date | string | null
+  completed_at?: Date | string | null
+  completed_by?: number | null
+  completion_remark?: string | null
+  completion_document_id?: number | null
+  rejected_at?: Date | string | null
+  rejected_by?: number | null
+  rejection_remark?: string | null
+  closure_reason?: $Enums.ServiceClosureReason | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type LeadServiceScheduleUpdateWithoutCompletedByInput = {
@@ -2227,6 +2079,80 @@ export type LeadServiceScheduleUncheckedUpdateManyWithoutCompletedByInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type LeadServiceScheduleUpdateWithoutCreatedByInput = {
+  service_no?: Prisma.IntFieldUpdateOperationsInput | number
+  service_type?: Prisma.EnumServiceVisitTypeFieldUpdateOperationsInput | $Enums.ServiceVisitType
+  scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  original_scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumServiceVisitStatusFieldUpdateOperationsInput | $Enums.ServiceVisitStatus
+  rescheduled_once?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rescheduled_from?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completion_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  closure_reason?: Prisma.NullableEnumServiceClosureReasonFieldUpdateOperationsInput | $Enums.ServiceClosureReason | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadServiceSchedulesNestedInput
+  completedBy?: Prisma.UserMasterUpdateOneWithoutLeadServiceSchedulesCompletedNestedInput
+  completionDocument?: Prisma.LeadDocumentsUpdateOneWithoutCompletedServiceSchedulesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutServiceSchedulesNestedInput
+  rejectedBy?: Prisma.UserMasterUpdateOneWithoutLeadServiceSchedulesRejectedNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadServiceSchedulesUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadServiceSchedulesNestedInput
+}
+
+export type LeadServiceScheduleUncheckedUpdateWithoutCreatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  service_no?: Prisma.IntFieldUpdateOperationsInput | number
+  service_type?: Prisma.EnumServiceVisitTypeFieldUpdateOperationsInput | $Enums.ServiceVisitType
+  scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  original_scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumServiceVisitStatusFieldUpdateOperationsInput | $Enums.ServiceVisitStatus
+  rescheduled_once?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rescheduled_from?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  completion_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completion_document_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejected_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  closure_reason?: Prisma.NullableEnumServiceClosureReasonFieldUpdateOperationsInput | $Enums.ServiceClosureReason | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type LeadServiceScheduleUncheckedUpdateManyWithoutCreatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  service_no?: Prisma.IntFieldUpdateOperationsInput | number
+  service_type?: Prisma.EnumServiceVisitTypeFieldUpdateOperationsInput | $Enums.ServiceVisitType
+  scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  original_scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumServiceVisitStatusFieldUpdateOperationsInput | $Enums.ServiceVisitStatus
+  rescheduled_once?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rescheduled_from?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  completion_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completion_document_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejected_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  closure_reason?: Prisma.NullableEnumServiceClosureReasonFieldUpdateOperationsInput | $Enums.ServiceClosureReason | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type LeadServiceScheduleUpdateWithoutRejectedByInput = {
   service_no?: Prisma.IntFieldUpdateOperationsInput | number
   service_type?: Prisma.EnumServiceVisitTypeFieldUpdateOperationsInput | $Enums.ServiceVisitType
@@ -2298,6 +2224,80 @@ export type LeadServiceScheduleUncheckedUpdateManyWithoutRejectedByInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type LeadServiceScheduleUpdateWithoutUpdatedByInput = {
+  service_no?: Prisma.IntFieldUpdateOperationsInput | number
+  service_type?: Prisma.EnumServiceVisitTypeFieldUpdateOperationsInput | $Enums.ServiceVisitType
+  scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  original_scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumServiceVisitStatusFieldUpdateOperationsInput | $Enums.ServiceVisitStatus
+  rescheduled_once?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rescheduled_from?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completion_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  closure_reason?: Prisma.NullableEnumServiceClosureReasonFieldUpdateOperationsInput | $Enums.ServiceClosureReason | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadServiceSchedulesNestedInput
+  completedBy?: Prisma.UserMasterUpdateOneWithoutLeadServiceSchedulesCompletedNestedInput
+  completionDocument?: Prisma.LeadDocumentsUpdateOneWithoutCompletedServiceSchedulesNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadServiceSchedulesCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutServiceSchedulesNestedInput
+  rejectedBy?: Prisma.UserMasterUpdateOneWithoutLeadServiceSchedulesRejectedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadServiceSchedulesNestedInput
+}
+
+export type LeadServiceScheduleUncheckedUpdateWithoutUpdatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  service_no?: Prisma.IntFieldUpdateOperationsInput | number
+  service_type?: Prisma.EnumServiceVisitTypeFieldUpdateOperationsInput | $Enums.ServiceVisitType
+  scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  original_scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumServiceVisitStatusFieldUpdateOperationsInput | $Enums.ServiceVisitStatus
+  rescheduled_once?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rescheduled_from?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  completion_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completion_document_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejected_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  closure_reason?: Prisma.NullableEnumServiceClosureReasonFieldUpdateOperationsInput | $Enums.ServiceClosureReason | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type LeadServiceScheduleUncheckedUpdateManyWithoutUpdatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  service_no?: Prisma.IntFieldUpdateOperationsInput | number
+  service_type?: Prisma.EnumServiceVisitTypeFieldUpdateOperationsInput | $Enums.ServiceVisitType
+  scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  original_scheduled_for?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumServiceVisitStatusFieldUpdateOperationsInput | $Enums.ServiceVisitStatus
+  rescheduled_once?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rescheduled_from?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  completion_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completion_document_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejected_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  closure_reason?: Prisma.NullableEnumServiceClosureReasonFieldUpdateOperationsInput | $Enums.ServiceClosureReason | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 

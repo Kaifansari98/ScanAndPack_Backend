@@ -248,8 +248,8 @@ export type FastProductionApprovalWhereInput = {
   remark?: Prisma.StringNullableFilter<"FastProductionApproval"> | string | null
   acted_at?: Prisma.DateTimeNullableFilter<"FastProductionApproval"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"FastProductionApproval"> | Date | string
-  batch?: Prisma.XOR<Prisma.FastProductionRequestBatchScalarRelationFilter, Prisma.FastProductionRequestBatchWhereInput>
   approver?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  batch?: Prisma.XOR<Prisma.FastProductionRequestBatchScalarRelationFilter, Prisma.FastProductionRequestBatchWhereInput>
 }
 
 export type FastProductionApprovalOrderByWithRelationInput = {
@@ -261,8 +261,8 @@ export type FastProductionApprovalOrderByWithRelationInput = {
   remark?: Prisma.SortOrderInput | Prisma.SortOrder
   acted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  batch?: Prisma.FastProductionRequestBatchOrderByWithRelationInput
   approver?: Prisma.UserMasterOrderByWithRelationInput
+  batch?: Prisma.FastProductionRequestBatchOrderByWithRelationInput
 }
 
 export type FastProductionApprovalWhereUniqueInput = Prisma.AtLeast<{
@@ -278,8 +278,8 @@ export type FastProductionApprovalWhereUniqueInput = Prisma.AtLeast<{
   remark?: Prisma.StringNullableFilter<"FastProductionApproval"> | string | null
   acted_at?: Prisma.DateTimeNullableFilter<"FastProductionApproval"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"FastProductionApproval"> | Date | string
-  batch?: Prisma.XOR<Prisma.FastProductionRequestBatchScalarRelationFilter, Prisma.FastProductionRequestBatchWhereInput>
   approver?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  batch?: Prisma.XOR<Prisma.FastProductionRequestBatchScalarRelationFilter, Prisma.FastProductionRequestBatchWhereInput>
 }, "id" | "batch_id_approver_role">
 
 export type FastProductionApprovalOrderByWithAggregationInput = {
@@ -318,8 +318,8 @@ export type FastProductionApprovalCreateInput = {
   remark?: string | null
   acted_at?: Date | string | null
   created_at?: Date | string
-  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutApprovalsInput
   approver?: Prisma.UserMasterCreateNestedOneWithoutFastProductionApprovalsInput
+  batch: Prisma.FastProductionRequestBatchCreateNestedOneWithoutApprovalsInput
 }
 
 export type FastProductionApprovalUncheckedCreateInput = {
@@ -339,8 +339,8 @@ export type FastProductionApprovalUpdateInput = {
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   acted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutApprovalsNestedInput
   approver?: Prisma.UserMasterUpdateOneWithoutFastProductionApprovalsNestedInput
+  batch?: Prisma.FastProductionRequestBatchUpdateOneRequiredWithoutApprovalsNestedInput
 }
 
 export type FastProductionApprovalUncheckedUpdateInput = {
@@ -729,8 +729,8 @@ export type FastProductionApprovalSelect<ExtArgs extends runtime.Types.Extension
   remark?: boolean
   acted_at?: boolean
   created_at?: boolean
-  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
   approver?: boolean | Prisma.FastProductionApproval$approverArgs<ExtArgs>
+  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fastProductionApproval"]>
 
 export type FastProductionApprovalSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -742,8 +742,8 @@ export type FastProductionApprovalSelectCreateManyAndReturn<ExtArgs extends runt
   remark?: boolean
   acted_at?: boolean
   created_at?: boolean
-  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
   approver?: boolean | Prisma.FastProductionApproval$approverArgs<ExtArgs>
+  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fastProductionApproval"]>
 
 export type FastProductionApprovalSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -755,8 +755,8 @@ export type FastProductionApprovalSelectUpdateManyAndReturn<ExtArgs extends runt
   remark?: boolean
   acted_at?: boolean
   created_at?: boolean
-  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
   approver?: boolean | Prisma.FastProductionApproval$approverArgs<ExtArgs>
+  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fastProductionApproval"]>
 
 export type FastProductionApprovalSelectScalar = {
@@ -772,23 +772,23 @@ export type FastProductionApprovalSelectScalar = {
 
 export type FastProductionApprovalOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "batch_id" | "approver_role" | "approver_user_id" | "status" | "remark" | "acted_at" | "created_at", ExtArgs["result"]["fastProductionApproval"]>
 export type FastProductionApprovalInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
   approver?: boolean | Prisma.FastProductionApproval$approverArgs<ExtArgs>
+  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
 }
 export type FastProductionApprovalIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
   approver?: boolean | Prisma.FastProductionApproval$approverArgs<ExtArgs>
+  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
 }
 export type FastProductionApprovalIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
   approver?: boolean | Prisma.FastProductionApproval$approverArgs<ExtArgs>
+  batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
 }
 
 export type $FastProductionApprovalPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "FastProductionApproval"
   objects: {
-    batch: Prisma.$FastProductionRequestBatchPayload<ExtArgs>
     approver: Prisma.$UserMasterPayload<ExtArgs> | null
+    batch: Prisma.$FastProductionRequestBatchPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1193,8 +1193,8 @@ readonly fields: FastProductionApprovalFieldRefs;
  */
 export interface Prisma__FastProductionApprovalClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  batch<T extends Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>>): Prisma.Prisma__FastProductionRequestBatchClient<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestBatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   approver<T extends Prisma.FastProductionApproval$approverArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FastProductionApproval$approverArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  batch<T extends Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>>): Prisma.Prisma__FastProductionRequestBatchClient<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestBatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

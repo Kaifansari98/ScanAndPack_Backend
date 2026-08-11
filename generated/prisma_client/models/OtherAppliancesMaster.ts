@@ -39,28 +39,28 @@ export type OtherAppliancesMasterSumAggregateOutputType = {
 export type OtherAppliancesMasterMinAggregateOutputType = {
   id: number | null
   vendor_id: number | null
-  type: $Enums.OtherApplianceType | null
   article_number: string | null
   description: string | null
   created_at: Date | null
+  type: $Enums.OtherApplianceType | null
 }
 
 export type OtherAppliancesMasterMaxAggregateOutputType = {
   id: number | null
   vendor_id: number | null
-  type: $Enums.OtherApplianceType | null
   article_number: string | null
   description: string | null
   created_at: Date | null
+  type: $Enums.OtherApplianceType | null
 }
 
 export type OtherAppliancesMasterCountAggregateOutputType = {
   id: number
   vendor_id: number
-  type: number
   article_number: number
   description: number
   created_at: number
+  type: number
   _all: number
 }
 
@@ -78,28 +78,28 @@ export type OtherAppliancesMasterSumAggregateInputType = {
 export type OtherAppliancesMasterMinAggregateInputType = {
   id?: true
   vendor_id?: true
-  type?: true
   article_number?: true
   description?: true
   created_at?: true
+  type?: true
 }
 
 export type OtherAppliancesMasterMaxAggregateInputType = {
   id?: true
   vendor_id?: true
-  type?: true
   article_number?: true
   description?: true
   created_at?: true
+  type?: true
 }
 
 export type OtherAppliancesMasterCountAggregateInputType = {
   id?: true
   vendor_id?: true
-  type?: true
   article_number?: true
   description?: true
   created_at?: true
+  type?: true
   _all?: true
 }
 
@@ -192,10 +192,10 @@ export type OtherAppliancesMasterGroupByArgs<ExtArgs extends runtime.Types.Exten
 export type OtherAppliancesMasterGroupByOutputType = {
   id: number
   vendor_id: number
-  type: $Enums.OtherApplianceType
   article_number: string
   description: string
   created_at: Date
+  type: $Enums.OtherApplianceType
   _count: OtherAppliancesMasterCountAggregateOutputType | null
   _avg: OtherAppliancesMasterAvgAggregateOutputType | null
   _sum: OtherAppliancesMasterSumAggregateOutputType | null
@@ -224,23 +224,23 @@ export type OtherAppliancesMasterWhereInput = {
   NOT?: Prisma.OtherAppliancesMasterWhereInput | Prisma.OtherAppliancesMasterWhereInput[]
   id?: Prisma.IntFilter<"OtherAppliancesMaster"> | number
   vendor_id?: Prisma.IntFilter<"OtherAppliancesMaster"> | number
-  type?: Prisma.EnumOtherApplianceTypeFilter<"OtherAppliancesMaster"> | $Enums.OtherApplianceType
   article_number?: Prisma.StringFilter<"OtherAppliancesMaster"> | string
   description?: Prisma.StringFilter<"OtherAppliancesMaster"> | string
   created_at?: Prisma.DateTimeFilter<"OtherAppliancesMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  type?: Prisma.EnumOtherApplianceTypeFilter<"OtherAppliancesMaster"> | $Enums.OtherApplianceType
   leadMappings?: Prisma.LeadOtherAppliancesMappingListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type OtherAppliancesMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   article_number?: Prisma.SortOrder
   description?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  type?: Prisma.SortOrder
   leadMappings?: Prisma.LeadOtherAppliancesMappingOrderByRelationAggregateInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type OtherAppliancesMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -249,21 +249,21 @@ export type OtherAppliancesMasterWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.OtherAppliancesMasterWhereInput[]
   NOT?: Prisma.OtherAppliancesMasterWhereInput | Prisma.OtherAppliancesMasterWhereInput[]
   vendor_id?: Prisma.IntFilter<"OtherAppliancesMaster"> | number
-  type?: Prisma.EnumOtherApplianceTypeFilter<"OtherAppliancesMaster"> | $Enums.OtherApplianceType
   article_number?: Prisma.StringFilter<"OtherAppliancesMaster"> | string
   description?: Prisma.StringFilter<"OtherAppliancesMaster"> | string
   created_at?: Prisma.DateTimeFilter<"OtherAppliancesMaster"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  type?: Prisma.EnumOtherApplianceTypeFilter<"OtherAppliancesMaster"> | $Enums.OtherApplianceType
   leadMappings?: Prisma.LeadOtherAppliancesMappingListRelationFilter
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
 export type OtherAppliancesMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   article_number?: Prisma.SortOrder
   description?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   _count?: Prisma.OtherAppliancesMasterCountOrderByAggregateInput
   _avg?: Prisma.OtherAppliancesMasterAvgOrderByAggregateInput
   _max?: Prisma.OtherAppliancesMasterMaxOrderByAggregateInput
@@ -277,73 +277,73 @@ export type OtherAppliancesMasterScalarWhereWithAggregatesInput = {
   NOT?: Prisma.OtherAppliancesMasterScalarWhereWithAggregatesInput | Prisma.OtherAppliancesMasterScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"OtherAppliancesMaster"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"OtherAppliancesMaster"> | number
-  type?: Prisma.EnumOtherApplianceTypeWithAggregatesFilter<"OtherAppliancesMaster"> | $Enums.OtherApplianceType
   article_number?: Prisma.StringWithAggregatesFilter<"OtherAppliancesMaster"> | string
   description?: Prisma.StringWithAggregatesFilter<"OtherAppliancesMaster"> | string
   created_at?: Prisma.DateTimeWithAggregatesFilter<"OtherAppliancesMaster"> | Date | string
+  type?: Prisma.EnumOtherApplianceTypeWithAggregatesFilter<"OtherAppliancesMaster"> | $Enums.OtherApplianceType
 }
 
 export type OtherAppliancesMasterCreateInput = {
-  type: $Enums.OtherApplianceType
   article_number: string
   description: string
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutOtherAppliancesInput
+  type: $Enums.OtherApplianceType
   leadMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutOtherAppliancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutOtherAppliancesInput
 }
 
 export type OtherAppliancesMasterUncheckedCreateInput = {
   id?: number
   vendor_id: number
-  type: $Enums.OtherApplianceType
   article_number: string
   description: string
   created_at?: Date | string
+  type: $Enums.OtherApplianceType
   leadMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutOtherAppliancesInput
 }
 
 export type OtherAppliancesMasterUpdateInput = {
-  type?: Prisma.EnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType
   article_number?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutOtherAppliancesNestedInput
+  type?: Prisma.EnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType
   leadMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutOtherAppliancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutOtherAppliancesNestedInput
 }
 
 export type OtherAppliancesMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.EnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType
   article_number?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType
   leadMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutOtherAppliancesNestedInput
 }
 
 export type OtherAppliancesMasterCreateManyInput = {
   id?: number
   vendor_id: number
-  type: $Enums.OtherApplianceType
   article_number: string
   description: string
   created_at?: Date | string
+  type: $Enums.OtherApplianceType
 }
 
 export type OtherAppliancesMasterUpdateManyMutationInput = {
-  type?: Prisma.EnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType
   article_number?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType
 }
 
 export type OtherAppliancesMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.EnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType
   article_number?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType
 }
 
 export type OtherAppliancesMasterListRelationFilter = {
@@ -359,10 +359,10 @@ export type OtherAppliancesMasterOrderByRelationAggregateInput = {
 export type OtherAppliancesMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   article_number?: Prisma.SortOrder
   description?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  type?: Prisma.SortOrder
 }
 
 export type OtherAppliancesMasterAvgOrderByAggregateInput = {
@@ -373,19 +373,19 @@ export type OtherAppliancesMasterAvgOrderByAggregateInput = {
 export type OtherAppliancesMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   article_number?: Prisma.SortOrder
   description?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  type?: Prisma.SortOrder
 }
 
 export type OtherAppliancesMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   article_number?: Prisma.SortOrder
   description?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  type?: Prisma.SortOrder
 }
 
 export type OtherAppliancesMasterSumOrderByAggregateInput = {
@@ -393,9 +393,9 @@ export type OtherAppliancesMasterSumOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
 }
 
-export type OtherAppliancesMasterScalarRelationFilter = {
-  is?: Prisma.OtherAppliancesMasterWhereInput
-  isNot?: Prisma.OtherAppliancesMasterWhereInput
+export type OtherAppliancesMasterNullableScalarRelationFilter = {
+  is?: Prisma.OtherAppliancesMasterWhereInput | null
+  isNot?: Prisma.OtherAppliancesMasterWhereInput | null
 }
 
 export type OtherAppliancesMasterCreateNestedManyWithoutVendorInput = {
@@ -450,28 +450,30 @@ export type OtherAppliancesMasterCreateNestedOneWithoutLeadMappingsInput = {
   connect?: Prisma.OtherAppliancesMasterWhereUniqueInput
 }
 
-export type OtherAppliancesMasterUpdateOneRequiredWithoutLeadMappingsNestedInput = {
+export type OtherAppliancesMasterUpdateOneWithoutLeadMappingsNestedInput = {
   create?: Prisma.XOR<Prisma.OtherAppliancesMasterCreateWithoutLeadMappingsInput, Prisma.OtherAppliancesMasterUncheckedCreateWithoutLeadMappingsInput>
   connectOrCreate?: Prisma.OtherAppliancesMasterCreateOrConnectWithoutLeadMappingsInput
   upsert?: Prisma.OtherAppliancesMasterUpsertWithoutLeadMappingsInput
+  disconnect?: Prisma.OtherAppliancesMasterWhereInput | boolean
+  delete?: Prisma.OtherAppliancesMasterWhereInput | boolean
   connect?: Prisma.OtherAppliancesMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.OtherAppliancesMasterUpdateToOneWithWhereWithoutLeadMappingsInput, Prisma.OtherAppliancesMasterUpdateWithoutLeadMappingsInput>, Prisma.OtherAppliancesMasterUncheckedUpdateWithoutLeadMappingsInput>
 }
 
 export type OtherAppliancesMasterCreateWithoutVendorInput = {
-  type: $Enums.OtherApplianceType
   article_number: string
   description: string
   created_at?: Date | string
+  type: $Enums.OtherApplianceType
   leadMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutOtherAppliancesInput
 }
 
 export type OtherAppliancesMasterUncheckedCreateWithoutVendorInput = {
   id?: number
-  type: $Enums.OtherApplianceType
   article_number: string
   description: string
   created_at?: Date | string
+  type: $Enums.OtherApplianceType
   leadMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutOtherAppliancesInput
 }
 
@@ -507,27 +509,27 @@ export type OtherAppliancesMasterScalarWhereInput = {
   NOT?: Prisma.OtherAppliancesMasterScalarWhereInput | Prisma.OtherAppliancesMasterScalarWhereInput[]
   id?: Prisma.IntFilter<"OtherAppliancesMaster"> | number
   vendor_id?: Prisma.IntFilter<"OtherAppliancesMaster"> | number
-  type?: Prisma.EnumOtherApplianceTypeFilter<"OtherAppliancesMaster"> | $Enums.OtherApplianceType
   article_number?: Prisma.StringFilter<"OtherAppliancesMaster"> | string
   description?: Prisma.StringFilter<"OtherAppliancesMaster"> | string
   created_at?: Prisma.DateTimeFilter<"OtherAppliancesMaster"> | Date | string
+  type?: Prisma.EnumOtherApplianceTypeFilter<"OtherAppliancesMaster"> | $Enums.OtherApplianceType
 }
 
 export type OtherAppliancesMasterCreateWithoutLeadMappingsInput = {
-  type: $Enums.OtherApplianceType
   article_number: string
   description: string
   created_at?: Date | string
+  type: $Enums.OtherApplianceType
   vendor: Prisma.VendorMasterCreateNestedOneWithoutOtherAppliancesInput
 }
 
 export type OtherAppliancesMasterUncheckedCreateWithoutLeadMappingsInput = {
   id?: number
   vendor_id: number
-  type: $Enums.OtherApplianceType
   article_number: string
   description: string
   created_at?: Date | string
+  type: $Enums.OtherApplianceType
 }
 
 export type OtherAppliancesMasterCreateOrConnectWithoutLeadMappingsInput = {
@@ -547,53 +549,53 @@ export type OtherAppliancesMasterUpdateToOneWithWhereWithoutLeadMappingsInput = 
 }
 
 export type OtherAppliancesMasterUpdateWithoutLeadMappingsInput = {
-  type?: Prisma.EnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType
   article_number?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutOtherAppliancesNestedInput
 }
 
 export type OtherAppliancesMasterUncheckedUpdateWithoutLeadMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.EnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType
   article_number?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType
 }
 
 export type OtherAppliancesMasterCreateManyVendorInput = {
   id?: number
-  type: $Enums.OtherApplianceType
   article_number: string
   description: string
   created_at?: Date | string
+  type: $Enums.OtherApplianceType
 }
 
 export type OtherAppliancesMasterUpdateWithoutVendorInput = {
-  type?: Prisma.EnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType
   article_number?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType
   leadMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutOtherAppliancesNestedInput
 }
 
 export type OtherAppliancesMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.EnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType
   article_number?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType
   leadMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutOtherAppliancesNestedInput
 }
 
 export type OtherAppliancesMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.EnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType
   article_number?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumOtherApplianceTypeFieldUpdateOperationsInput | $Enums.OtherApplianceType
 }
 
 
@@ -630,48 +632,48 @@ export type OtherAppliancesMasterCountOutputTypeCountLeadMappingsArgs<ExtArgs ex
 export type OtherAppliancesMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   vendor_id?: boolean
-  type?: boolean
   article_number?: boolean
   description?: boolean
   created_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  type?: boolean
   leadMappings?: boolean | Prisma.OtherAppliancesMaster$leadMappingsArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.OtherAppliancesMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["otherAppliancesMaster"]>
 
 export type OtherAppliancesMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   vendor_id?: boolean
-  type?: boolean
   article_number?: boolean
   description?: boolean
   created_at?: boolean
+  type?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["otherAppliancesMaster"]>
 
 export type OtherAppliancesMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   vendor_id?: boolean
-  type?: boolean
   article_number?: boolean
   description?: boolean
   created_at?: boolean
+  type?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["otherAppliancesMaster"]>
 
 export type OtherAppliancesMasterSelectScalar = {
   id?: boolean
   vendor_id?: boolean
-  type?: boolean
   article_number?: boolean
   description?: boolean
   created_at?: boolean
+  type?: boolean
 }
 
-export type OtherAppliancesMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "type" | "article_number" | "description" | "created_at", ExtArgs["result"]["otherAppliancesMaster"]>
+export type OtherAppliancesMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "article_number" | "description" | "created_at" | "type", ExtArgs["result"]["otherAppliancesMaster"]>
 export type OtherAppliancesMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   leadMappings?: boolean | Prisma.OtherAppliancesMaster$leadMappingsArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.OtherAppliancesMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OtherAppliancesMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -684,16 +686,16 @@ export type OtherAppliancesMasterIncludeUpdateManyAndReturn<ExtArgs extends runt
 export type $OtherAppliancesMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "OtherAppliancesMaster"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     leadMappings: Prisma.$LeadOtherAppliancesMappingPayload<ExtArgs>[]
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     vendor_id: number
-    type: $Enums.OtherApplianceType
     article_number: string
     description: string
     created_at: Date
+    type: $Enums.OtherApplianceType
   }, ExtArgs["result"]["otherAppliancesMaster"]>
   composites: {}
 }
@@ -1088,8 +1090,8 @@ readonly fields: OtherAppliancesMasterFieldRefs;
  */
 export interface Prisma__OtherAppliancesMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   leadMappings<T extends Prisma.OtherAppliancesMaster$leadMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OtherAppliancesMaster$leadMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadOtherAppliancesMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1121,10 +1123,10 @@ export interface Prisma__OtherAppliancesMasterClient<T, Null = never, ExtArgs ex
 export interface OtherAppliancesMasterFieldRefs {
   readonly id: Prisma.FieldRef<"OtherAppliancesMaster", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"OtherAppliancesMaster", 'Int'>
-  readonly type: Prisma.FieldRef<"OtherAppliancesMaster", 'OtherApplianceType'>
   readonly article_number: Prisma.FieldRef<"OtherAppliancesMaster", 'String'>
   readonly description: Prisma.FieldRef<"OtherAppliancesMaster", 'String'>
   readonly created_at: Prisma.FieldRef<"OtherAppliancesMaster", 'DateTime'>
+  readonly type: Prisma.FieldRef<"OtherAppliancesMaster", 'OtherApplianceType'>
 }
     
 

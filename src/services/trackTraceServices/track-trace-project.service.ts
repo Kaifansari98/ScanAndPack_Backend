@@ -5,13 +5,20 @@ import { prisma } from "../../../src/prisma/client";
 import { randomUUID } from "crypto";
 import logger from "../../../src/utils/logger";
 import { uploadToWasabiProjectExcel } from "../../../src/utils/wasabiClient";
-import { PackingType } from "../../../generated/prisma_client/enums";
+import { PackingType, BoxStatus } from "../../../generated/prisma_client/enums";
 import {
   syncProjectBoxInfoFields,
 } from "../../services/trackTraceServices/boxInfoField.service";
 
 
 /* ------------------ TYPES ------------------ */
+
+type BoxRemovalOption = {
+  id: number;
+  box_name: string;
+  item_count: number;
+  can_remove: boolean;
+};
 
 export interface CadbidPayload {
   projectName: string;
@@ -30,7 +37,7 @@ export interface CadbidItem {
   l2: number;
   l3: number;
   qty: number;
-  weight?: number | string | null; 
+  weight?: number | string | null;
 
   barcode1?: string | null;
   barcode2?: string | null;
@@ -78,6 +85,366 @@ const requiredString = (field: string) =>
 
 const requiredNumber = (field: string) =>
   z.coerce.number({ error: `${field} missing` });
+
+const normalizeNoOfBoxes = (value: unknown): number => {
+  if (value === null || value === undefined || value === "") {
+    return 0;
+  }
+
+  const parsed = Number(value);
+
+  if (!Number.isFinite(parsed)) {
+    throw new Error("No of boxes must be a valid number");
+  }
+
+  if (!Number.isInteger(parsed)) {
+    throw new Error("No of boxes must be an integer");
+  }
+
+  if (parsed < 0) {
+    throw new Error("No of boxes cannot be negative");
+  }
+
+  return parsed;
+};
+
+const parseNumberArray = (value: unknown): number[] => {
+  if (value === null || value === undefined || value === "") {
+    return [];
+  }
+
+  let parsedValue = value;
+
+  if (typeof value === "string") {
+    try {
+      parsedValue = JSON.parse(value);
+    } catch {
+      parsedValue = value
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean);
+    }
+  }
+
+  if (!Array.isArray(parsedValue)) {
+    return [];
+  }
+
+  return Array.from(
+    new Set(
+      parsedValue
+        .map((item) => Number(item))
+        .filter((item) => Number.isInteger(item) && item > 0)
+    )
+  );
+};
+
+const getProjectBoxRemovalOptions = async (
+  client: any,
+  projectId: number,
+  vendorId: number
+) => {
+  const boxes = await client.boxMaster.findMany({
+    where: {
+      project_id: projectId,
+      vendor_id: vendorId,
+      is_deleted: false,
+    },
+    select: {
+      id: true,
+      box_name: true,
+      box_status: true,
+      created_date: true,
+    },
+    orderBy: [
+      {
+        created_date: "asc",
+      },
+      {
+        id: "asc",
+      },
+    ],
+  });
+
+  if (!boxes.length) {
+    return [];
+  }
+
+  const mappings = await client.cutListMachineMapping.findMany({
+    where: {
+      project_id: projectId,
+      vendor_id: vendorId,
+      box_id: {
+        in: boxes.map((box: any) => box.id),
+      },
+    },
+    select: {
+      box_id: true,
+    },
+  });
+
+  const itemCountMap = new Map<number, number>();
+
+  for (const mapping of mappings) {
+    if (!mapping.box_id) {
+      continue;
+    }
+
+    itemCountMap.set(
+      mapping.box_id,
+      (itemCountMap.get(mapping.box_id) || 0) + 1
+    );
+  }
+
+  return boxes.map((box: any, index: number) => {
+    const itemCount = itemCountMap.get(box.id) || 0;
+
+    return {
+      id: box.id,
+      box_name: box.box_name,
+      sequence_no: index + 1,
+      box_status: box.box_status,
+      item_count: itemCount,
+      can_remove: itemCount === 0,
+    };
+  });
+};
+
+const createProjectBoxes = async ({
+  tx,
+  projectId,
+  vendorId,
+  projectDetailsId,
+  leadId,
+  createdBy,
+  startSequence,
+  count,
+}: {
+  tx: any;
+  projectId: number;
+  vendorId: number;
+  projectDetailsId: number;
+  leadId: number | null;
+  createdBy: number;
+  startSequence: number;
+  count: number;
+}) => {
+  if (count <= 0) {
+    return;
+  }
+
+  await tx.boxMaster.createMany({
+    data: Array.from({ length: count }, (_, index) => ({
+      project_id: projectId,
+      vendor_id: vendorId,
+      project_details_id: projectDetailsId,
+      lead_id: leadId,
+      box_name: String(startSequence + index),
+      box_status: BoxStatus.unpacked,
+      created_by: createdBy,
+    })),
+  });
+};
+
+const renumberEmptyBoxesOnly = async (
+  tx: any,
+  projectId: number,
+  vendorId: number
+) => {
+  const activeBoxes = await tx.boxMaster.findMany({
+    where: {
+      project_id: projectId,
+      vendor_id: vendorId,
+      is_deleted: false,
+    },
+    select: {
+      id: true,
+      box_name: true,
+      created_date: true,
+    },
+    orderBy: [
+      { created_date: "asc" },
+      { id: "asc" },
+    ],
+  });
+
+  if (activeBoxes.length === 0) {
+    return;
+  }
+
+  const boxIds = activeBoxes.map((box: { id: number }) => box.id);
+
+  const itemCounts = await tx.cutListMachineMapping.groupBy({
+    by: ["box_id"],
+    where: {
+      project_id: projectId,
+      vendor_id: vendorId,
+      box_id: {
+        in: boxIds,
+      },
+    },
+    _count: {
+      id: true,
+    },
+  });
+
+  const occupiedBoxIds = new Set<number>(
+    itemCounts
+      .filter((item: { box_id: number | null; _count: { id: number } }) => {
+        return Boolean(item.box_id) && item._count.id > 0;
+      })
+      .map((item: { box_id: number | null }) => Number(item.box_id))
+  );
+
+  /*
+  |--------------------------------------------------------------------------
+  | Do not change box_name if item is already present in that box
+  |--------------------------------------------------------------------------
+  */
+  const usedOccupiedBoxNames = new Set<string>(
+    activeBoxes
+      .filter((box: { id: number }) => occupiedBoxIds.has(box.id))
+      .map((box: { box_name: string | null }) =>
+        String(box.box_name || "").trim()
+      )
+      .filter(Boolean)
+  );
+
+  const emptyBoxes = activeBoxes.filter(
+    (box: { id: number }) => !occupiedBoxIds.has(box.id)
+  );
+
+  const availableNames: string[] = [];
+
+  for (let i = 1; i <= activeBoxes.length; i++) {
+    const name = String(i);
+
+    if (!usedOccupiedBoxNames.has(name)) {
+      availableNames.push(name);
+    }
+  }
+
+  for (const box of emptyBoxes) {
+    const nextName = availableNames.shift();
+
+    if (!nextName) {
+      continue;
+    }
+
+    if (String(box.box_name || "").trim() === nextName) {
+      continue;
+    }
+
+    await tx.boxMaster.update({
+      where: {
+        id: box.id,
+      },
+      data: {
+        box_name: nextName,
+      },
+    });
+  }
+};
+
+const createAdditionalBoxes = async ({
+  tx,
+  projectId,
+  vendorId,
+  projectDetailsId,
+  leadId,
+  createdBy,
+  count,
+}: {
+  tx: any;
+  projectId: number;
+  vendorId: number;
+  projectDetailsId: number;
+  leadId: number | null;
+  createdBy: number;
+  count: number;
+}) => {
+  if (count <= 0) {
+    return;
+  }
+
+  const existingBoxes = await tx.boxMaster.findMany({
+    where: {
+      project_id: projectId,
+      vendor_id: vendorId,
+      is_deleted: false,
+    },
+    select: {
+      box_name: true,
+    },
+  });
+
+  const usedNames = new Set<string>(
+    existingBoxes
+      .map((box: { box_name: string | null }) =>
+        String(box.box_name || "").trim()
+      )
+      .filter(Boolean)
+  );
+
+  const data: any[] = [];
+  let nextNumber = 1;
+
+  while (data.length < count) {
+    const boxName = String(nextNumber);
+
+    if (!usedNames.has(boxName)) {
+      data.push({
+        project_id: projectId,
+        vendor_id: vendorId,
+        project_details_id: projectDetailsId,
+        lead_id: leadId,
+        box_name: boxName,
+        box_status: BoxStatus.unpacked,
+        is_deleted: false,
+        created_by: createdBy,
+      });
+
+      usedNames.add(boxName);
+    }
+
+    nextNumber++;
+  }
+
+  await tx.boxMaster.createMany({
+    data,
+  });
+};
+
+const buildBoxRemovalSelectionResponse = ({
+  requestedBoxCount,
+  currentBoxCount,
+  removeCount,
+  boxes,
+  message,
+}: {
+  requestedBoxCount: number;
+  currentBoxCount: number;
+  removeCount: number;
+  boxes: any[];
+  message?: string;
+}) => {
+  return {
+    success: false,
+    message:
+      message ||
+      `Select ${removeCount} empty box${removeCount > 1 ? "es" : ""} to remove`,
+    data: {
+      requires_box_removal_selection: true,
+      requested_no_of_boxes: requestedBoxCount,
+      current_no_of_boxes: currentBoxCount,
+      remove_count: removeCount,
+      boxes,
+      removable_boxes: boxes.filter((box) => box.can_remove),
+      blocked_boxes: boxes.filter((box) => !box.can_remove),
+    },
+  };
+};
+
 
 const optionalWeight = z.preprocess((value) => {
   if (value === null || value === undefined || value === "") {
@@ -437,6 +804,8 @@ export type CreateProjectServicePayload = {
 
   packing_type?: PackingType;
 
+  no_of_boxes?: number | string | null;
+
   box_info_fields?: BoxInfoFieldPayload[];
 
   created_by?: number;
@@ -456,6 +825,7 @@ export const createProjectService_29_july = async (
     client_address,
     client_contact_no,
     packing_type,
+    no_of_boxes,
     box_info_fields = [],
     created_by,
     file,
@@ -498,6 +868,8 @@ export const createProjectService_29_july = async (
         PackingType.GROUPWISE
         ? PackingType.GROUPWISE
         : PackingType.DEFAULT;
+
+    const requestedBoxCount = normalizeNoOfBoxes(no_of_boxes);
 
     resolvedVendorId = vendor.id;
 
@@ -795,6 +1167,7 @@ export const createProjectService_29_july = async (
             client_name: resolvedClientName,
             client_address: resolvedClientAddress,
             client_contact_no: resolvedClientContactNo,
+            no_of_boxes: requestedBoxCount,
           },
         });
 
@@ -821,7 +1194,7 @@ export const createProjectService_29_july = async (
           return sum + Number(item.qty);
         }, 0);
 
-        await tx.projectDetails.create({
+        const projectDetails = await tx.projectDetails.create({
           data: {
             project_id: project.id,
             vendor_id: vendor.id,
@@ -834,6 +1207,17 @@ export const createProjectService_29_july = async (
             start_date: new Date(),
             estimated_completion_date: null,
           },
+        });
+
+        await createProjectBoxes({
+          tx,
+          projectId: project.id,
+          vendorId: vendor.id,
+          projectDetailsId: projectDetails.id,
+          leadId: lead_id,
+          createdBy: createdByUserId,
+          startSequence: 1,
+          count: requestedBoxCount,
         });
 
         /*
@@ -1188,6 +1572,7 @@ export const createProjectService = async (
     client_address,
     client_contact_no,
     packing_type,
+    no_of_boxes,
     box_info_fields = [],
     created_by,
     file,
@@ -1226,30 +1611,14 @@ export const createProjectService = async (
       throw new Error("Vendor not found");
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | STEP 0.0 — Resolve workstation mode
-    |--------------------------------------------------------------------------
-    | Actual rule:
-    | - is_tracktrace_enabled = true  -> Track & Trace machines: 3, 7, 11
-    | - is_scanpack_enabled = true    -> ScanPack machines: 17, 18
-    | - both true                     -> 3, 7, 11, 17, 18
-    | - both false                    -> stop before creating project/cutlist
-    |--------------------------------------------------------------------------
-    */
-    const isTrackTraceEnabled = vendor.is_tracktrace_enabled === true;
-    const isScanPackEnabled = vendor.is_scanpack_enabled === true;
-
-    if (!isTrackTraceEnabled && !isScanPackEnabled) {
-      throw new Error("workstation not configured");
-    }
-
     const resolvedPackingType:
       PackingType =
       packing_type ===
         PackingType.GROUPWISE
         ? PackingType.GROUPWISE
         : PackingType.DEFAULT;
+
+    const requestedBoxCount = normalizeNoOfBoxes(no_of_boxes);
 
     resolvedVendorId = vendor.id;
 
@@ -1563,6 +1932,7 @@ export const createProjectService = async (
             client_name: resolvedClientName,
             client_address: resolvedClientAddress,
             client_contact_no: resolvedClientContactNo,
+            no_of_boxes: requestedBoxCount,
           },
         });
 
@@ -1589,7 +1959,7 @@ export const createProjectService = async (
           return sum + Number(item.qty);
         }, 0);
 
-        await tx.projectDetails.create({
+        const projectDetails = await tx.projectDetails.create({
           data: {
             project_id: project.id,
             vendor_id: vendor.id,
@@ -1604,21 +1974,27 @@ export const createProjectService = async (
           },
         });
 
+        await createProjectBoxes({
+          tx,
+          projectId: project.id,
+          vendorId: vendor.id,
+          projectDetailsId: projectDetails.id,
+          leadId: lead_id,
+          createdBy: createdByUserId,
+          startSequence: 1,
+          count: requestedBoxCount,
+        });
+
         /*
         |--------------------------------------------------------------------------
         | Fetch machines only once
         |--------------------------------------------------------------------------
         */
-        const enabledMachineTypeIds = [
-          ...(isTrackTraceEnabled ? [3, 7, 11] : []),
-          ...(isScanPackEnabled ? [17, 18] : []),
-        ];
-
         const machines = await tx.machineMaster.findMany({
           where: {
             vendor_id: vendor.id,
             machine_type_id: {
-              in: [...new Set(enabledMachineTypeIds)],
+              in: [3, 7, 11, 17, 18],
             },
           },
           select: {
@@ -1701,100 +2077,6 @@ export const createProjectService = async (
                   ? perItemWeight
                   : 0,
             });
-          }
-        };
-
-        const pushScanPackMachineMappingRows = ({
-          cutListId,
-          quantity,
-          perItemWeight,
-        }: {
-          cutListId: number;
-          quantity: number;
-          perItemWeight: number;
-        }) => {
-          const scanMachine = getMachine(17);
-          const packMachine = getMachine(18);
-
-          if (scanMachine) {
-            pushMachineMappingRows({
-              cutListId,
-              machine: scanMachine,
-              quantity,
-              perItemWeight,
-            });
-          }
-
-          if (packMachine) {
-            pushMachineMappingRows({
-              cutListId,
-              machine: packMachine,
-              quantity,
-              perItemWeight,
-            });
-          }
-        };
-
-        const pushTrackTraceMachineMappingRows = ({
-          cutListId,
-          item,
-          hasEdgeBanding,
-          quantity,
-          perItemWeight,
-        }: {
-          cutListId: number;
-          item: any;
-          hasEdgeBanding: boolean;
-          quantity: number;
-          perItemWeight: number;
-        }) => {
-          /*
-          |--------------------------------------------------------------------------
-          | Track & Trace flow
-          |--------------------------------------------------------------------------
-          | Only machine types 3, 7 and 11 are considered here.
-          | ScanPack machines 17 and 18 are added separately only when
-          | is_scanpack_enabled is true.
-          |--------------------------------------------------------------------------
-          */
-
-          if (hasEdgeBanding) {
-            const edgeBandingMachine = getMachine(11);
-
-            if (!edgeBandingMachine) {
-              throw new Error("Edgebanding machine is not configured");
-            }
-
-            pushMachineMappingRows({
-              cutListId,
-              machine: edgeBandingMachine,
-              quantity,
-              perItemWeight,
-            });
-          }
-
-          const cuttingMachine = getMachine(3, true);
-
-          if (cuttingMachine) {
-            pushMachineMappingRows({
-              cutListId,
-              machine: cuttingMachine,
-              quantity,
-              perItemWeight,
-            });
-          }
-
-          if (Number(item.l3) > 9) {
-            const cncMachine = getMachine(7, true);
-
-            if (cncMachine) {
-              pushMachineMappingRows({
-                cutListId,
-                machine: cncMachine,
-                quantity,
-                perItemWeight,
-              });
-            }
           }
         };
 
@@ -1887,16 +2169,26 @@ export const createProjectService = async (
 
           /*
           |--------------------------------------------------------------------------
-          | Type 3 — ScanPack category
-          |--------------------------------------------------------------------------
-          | Type 3 items belong to Quality/Packaging flow.
-          | They get machine types 17 and 18 only when ScanPack is enabled.
+          | Type 3 — Only Scan/Pack machine types 17 and 18
           |--------------------------------------------------------------------------
           */
           if (hasType3 && !isNormalFlow) {
-            if (isScanPackEnabled) {
-              pushScanPackMachineMappingRows({
+            const scanMachine = getMachine(17);
+            const packMachine = getMachine(18);
+
+            if (scanMachine) {
+              pushMachineMappingRows({
                 cutListId: row.id,
+                machine: scanMachine,
+                quantity,
+                perItemWeight,
+              });
+            }
+
+            if (packMachine) {
+              pushMachineMappingRows({
+                cutListId: row.id,
+                machine: packMachine,
                 quantity,
                 perItemWeight,
               });
@@ -1909,24 +2201,62 @@ export const createProjectService = async (
           |--------------------------------------------------------------------------
           | Normal flow
           |--------------------------------------------------------------------------
-          | Track & Trace enabled  -> 3, 7, 11
-          | ScanPack enabled      -> 17, 18
-          | Both enabled          -> 3, 7, 11, 17, 18
-          |--------------------------------------------------------------------------
           */
-          if (isTrackTraceEnabled) {
-            pushTrackTraceMachineMappingRows({
+          if (hasEdgeBanding) {
+            const edgeBandingMachine = getMachine(11);
+
+            if (!edgeBandingMachine) {
+              throw new Error("Edgebanding machine is not configured");
+            }
+
+            pushMachineMappingRows({
               cutListId: row.id,
-              item,
-              hasEdgeBanding,
+              machine: edgeBandingMachine,
               quantity,
               perItemWeight,
             });
           }
 
-          if (isScanPackEnabled) {
-            pushScanPackMachineMappingRows({
+          const cuttingMachine = getMachine(3, true);
+
+          if (cuttingMachine) {
+            pushMachineMappingRows({
               cutListId: row.id,
+              machine: cuttingMachine,
+              quantity,
+              perItemWeight,
+            });
+          }
+
+          if (Number(item.l3) > 9) {
+            const cncMachine = getMachine(7, true);
+
+            if (cncMachine) {
+              pushMachineMappingRows({
+                cutListId: row.id,
+                machine: cncMachine,
+                quantity,
+                perItemWeight,
+              });
+            }
+          }
+
+          const scanMachine = getMachine(17);
+          const packMachine = getMachine(18);
+
+          if (scanMachine) {
+            pushMachineMappingRows({
+              cutListId: row.id,
+              machine: scanMachine,
+              quantity,
+              perItemWeight,
+            });
+          }
+
+          if (packMachine) {
+            pushMachineMappingRows({
+              cutListId: row.id,
+              machine: packMachine,
               quantity,
               perItemWeight,
             });
@@ -2184,6 +2514,7 @@ export const getTrackTraceProjectService = async (
         client_address: true,
         client_contact_no: true,
         packing_type: true,
+        no_of_boxes: true,
 
         lead: {
           select: {
@@ -2261,6 +2592,9 @@ type UpdateTrackTraceProjectPayload = {
   updated_by?: number;
 
   box_info_fields?: BoxInfoFieldPayload[];
+  no_of_boxes?: number | string | null;
+  remove_box_ids?: number[] | string | null;
+
 
   file?: Express.Multer.File;
 };
@@ -2312,6 +2646,8 @@ export const updateTrackTraceProjectService = async (
         id: true,
         vendor_id: true,
         lead_id: true,
+        created_by: true,
+        no_of_boxes: true,
       },
     });
 
@@ -2433,10 +2769,76 @@ export const updateTrackTraceProjectService = async (
         ? PackingType.GROUPWISE
         : PackingType.DEFAULT;
 
+    const requestedBoxCount = normalizeNoOfBoxes(payload.no_of_boxes);
+    const selectedRemoveBoxIds = parseNumberArray(payload.remove_box_ids);
+
+    const projectBoxOptions = await getProjectBoxRemovalOptions(
+      prisma,
+      existingProject.id,
+      vendorId
+    );
+
+    const currentBoxCount = projectBoxOptions.length;
+    const boxCountDifference = currentBoxCount - requestedBoxCount;
+
+    const projectDetails = await prisma.projectDetails.findFirst({
+      where: {
+        project_id: existingProject.id,
+        vendor_id: vendorId,
+      },
+      select: {
+        id: true,
+      },
+      orderBy: {
+        id: "asc",
+      },
+    });
+
+    if (requestedBoxCount > currentBoxCount && !projectDetails) {
+      return {
+        success: false,
+        message: "Project details not found. Boxes cannot be created.",
+        data: null,
+      };
+    }
+
+    if (boxCountDifference > 0) {
+      if (selectedRemoveBoxIds.length !== boxCountDifference) {
+        return buildBoxRemovalSelectionResponse({
+          requestedBoxCount,
+          currentBoxCount,
+          removeCount: boxCountDifference,
+          boxes: projectBoxOptions,
+        });
+      }
+
+      const selectedBoxSet = new Set(selectedRemoveBoxIds);
+      const invalidSelectedBoxes = projectBoxOptions.filter(
+        (box: BoxRemovalOption) => selectedBoxSet.has(box.id) && !box.can_remove
+      );
+
+      const notFoundSelectedBoxIds = selectedRemoveBoxIds.filter(
+        (boxId) => !projectBoxOptions.some((box: BoxRemovalOption) => box.id === boxId)
+      );
+
+      if (invalidSelectedBoxes.length > 0 || notFoundSelectedBoxIds.length > 0) {
+        return buildBoxRemovalSelectionResponse({
+          requestedBoxCount,
+          currentBoxCount,
+          removeCount: boxCountDifference,
+          boxes: projectBoxOptions,
+          message:
+            invalidSelectedBoxes.length > 0
+              ? "Only empty boxes can be removed"
+              : "Selected box is not valid for this project",
+        });
+      }
+    }
+
 
     /*
     |--------------------------------------------------------------------------
-    | Update only project master details
+    | Update project, box fields and box count
     | File replacement is NOT processed here yet.
     |--------------------------------------------------------------------------
     */
@@ -2478,6 +2880,9 @@ export const updateTrackTraceProjectService = async (
                 client_contact_no:
                   resolvedClientContactNo,
 
+                no_of_boxes:
+                  requestedBoxCount,
+
                 ...(payload.updated_by
                   ? {
                     updated_by:
@@ -2512,6 +2917,55 @@ export const updateTrackTraceProjectService = async (
                   )
                   : undefined,
             });
+          }
+
+          if (requestedBoxCount > currentBoxCount && projectDetails) {
+            /*
+            |--------------------------------------------------------------------------
+            | Increase boxes
+            |--------------------------------------------------------------------------
+            | 1. First fix sequence only for empty boxes.
+            | 2. Never change box_name of boxes that already have items.
+            | 3. Create new boxes using first available sequence numbers.
+            |--------------------------------------------------------------------------
+            */
+            await renumberEmptyBoxesOnly(tx, existingProject.id, vendorId);
+
+            await createAdditionalBoxes({
+              tx,
+              projectId: existingProject.id,
+              vendorId,
+              projectDetailsId: projectDetails.id,
+              leadId: resolvedLeadId,
+              createdBy: payload.updated_by
+                ? Number(payload.updated_by)
+                : existingProject.created_by,
+              count: requestedBoxCount - currentBoxCount,
+            });
+          }
+
+          if (requestedBoxCount < currentBoxCount) {
+            await tx.boxMaster.updateMany({
+              where: {
+                id: {
+                  in: selectedRemoveBoxIds,
+                },
+                project_id: existingProject.id,
+                vendor_id: vendorId,
+                is_deleted: false,
+              },
+              data: {
+                is_deleted: true,
+                deleted_at: new Date(),
+                ...(payload.updated_by
+                  ? {
+                    deleted_by: Number(payload.updated_by),
+                  }
+                  : {}),
+              },
+            });
+
+            await renumberEmptyBoxesOnly(tx, existingProject.id, vendorId);
           }
 
           return project;

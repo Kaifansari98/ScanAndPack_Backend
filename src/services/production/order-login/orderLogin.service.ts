@@ -3083,4 +3083,52 @@ export class OrderLoginService {
 
     return updated;
   }
+
+  async updateSoValueReceivedStatus(
+    vendorId: number,
+    leadId: number,
+    isSoValueReceived: boolean,
+    updatedBy: number,
+  ) {
+    const lead = await prisma.leadMaster.findFirst({
+      where: { id: leadId, vendor_id: vendorId },
+      select: { id: true, account_id: true },
+    });
+
+    if (!lead) {
+      const error = new Error("Lead not found.");
+      (error as any).statusCode = 404;
+      throw error;
+    }
+
+    const timestamp = isSoValueReceived ? new Date() : null;
+
+    const updated = await prisma.leadMaster.update({
+      where: { id: leadId },
+      data: {
+        is_so_value_received: isSoValueReceived,
+        so_value_received_at: timestamp,
+        updated_by: updatedBy,
+        updated_at: new Date(),
+      },
+      select: {
+        id: true,
+        is_so_value_received: true,
+        so_value_received_at: true,
+      },
+    });
+
+    if (isSoValueReceived && lead.account_id) {
+      await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: lead.account_id,
+        action: "SO Value marked as sent.",
+        action_type: "UPDATE",
+        created_by: updatedBy,
+      });
+    }
+
+    return updated;
+  }
 }

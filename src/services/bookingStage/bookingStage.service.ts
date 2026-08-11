@@ -1451,7 +1451,8 @@ export class BookingStageService {
   // post filter service
   public static async getVendorLeadsByTag2(
     vendorId: number,
-    franchiseId: number,
+    franchiseId: number | undefined,
+    franchiseIds: number[] | undefined,
     tag: string,
     userId: number | null,
     page: number = 1,
@@ -1478,11 +1479,14 @@ export class BookingStageService {
       date_range?: { from: string; to: string };
       production_status?: string;
       pending_services?: boolean;
+      franchise_ids?: number[];
+      franchises?: Array<number | string>;
     },
   ): Promise<{ leads: any[]; count: number }> {
     logger.info("[BookingStageService] getVendorLeadsByTag2 called", {
       vendorId,
       franchiseId,
+      franchiseIds,
       tag,
       userId,
       page,
@@ -1491,11 +1495,14 @@ export class BookingStageService {
     console.log("[Service] getVendorLeadsByTag2 ids", {
       vendorId,
       franchiseId,
+      franchiseIds,
       tag,
       userId,
       page,
       limit,
     });
+    const normalizedFranchises =
+      filters.franchises ?? filters.franchise_ids;
 
     const skip = (page - 1) * limit;
 
@@ -1562,7 +1569,7 @@ export class BookingStageService {
       const taskLeads = await prisma.userLeadTask.findMany({
         where: {
           vendor_id: vendorId,
-          franchise_id: franchiseId,
+          ...(franchiseId ? { franchise_id: franchiseId } : {}),
           OR: [{ created_by: userId }, { user_id: userId }],
         },
         select: { lead_id: true },
@@ -1608,6 +1615,8 @@ export class BookingStageService {
         return { numbers, strings };
       };
 
+
+
       // ---------- GLOBAL SEARCH ----------
 
       const globalSearch = toString(filters.global_search);
@@ -1645,10 +1654,7 @@ export class BookingStageService {
         }
       }
 
-      const leadCode = toString(filters.filter_lead_code);
-      if (leadCode) {
-        addAnd({ lead_code: { contains: leadCode, mode: "insensitive" } });
-      }
+
 
       const nameFilter = toString(filters.filter_name);
       if (nameFilter) {
@@ -1800,6 +1806,20 @@ export class BookingStageService {
       // ASSIGN TO (MULTI SELECT)
       // --------------------
 
+      if (Array.isArray(normalizedFranchises) && normalizedFranchises.length > 0) {
+        const franchiseIds = normalizedFranchises
+          .map(Number)
+          .filter((id) => !Number.isNaN(id));
+
+        if (franchiseIds.length > 0) {
+          addAnd({
+            franchise_id: {
+              in: franchiseIds,
+            },
+          });
+        }
+      }
+
       if (Array.isArray(filters.assign_to) && filters.assign_to.length > 0) {
         const assignIds = filters.assign_to
           .map(Number)
@@ -1914,9 +1934,14 @@ export class BookingStageService {
     // FINAL QUERY
     // ============================
 
+      const hasExplicitFranchiseFilter =
+      Array.isArray(normalizedFranchises) && normalizedFranchises.length > 0;
+
     const whereClause = addFilterConditions({
       vendor_id: vendorId,
-      franchise_id: franchiseId,
+      ...(!hasExplicitFranchiseFilter && franchiseId && !Number.isNaN(franchiseId)
+        ? { franchise_id: franchiseId }
+        : {}),
       is_deleted: false,
       ...(statusIds !== null && { status_id: { in: statusIds } }),
       ...(shouldExcludeLaterStageTags && {
@@ -3900,6 +3925,7 @@ export class BookingStageService {
     vendorId: number,
     userId: number,
     franchiseId: number | undefined,
+    franchiseIds: number[] | undefined,
     tag?: string,
     page: number = 1,
     limit: number = 10,
@@ -3925,6 +3951,8 @@ export class BookingStageService {
       date_range?: { from: string; to: string };
       production_status?: string;
       pending_services?: boolean;
+      franchise_ids?: number[];
+      franchises?: number[];
     } = {},
     options: {
       requireMiscellaneous?: boolean;
@@ -3935,6 +3963,7 @@ export class BookingStageService {
       vendorId,
       userId,
       franchiseId,
+      franchiseIds,
       tag,
       page,
       limit,
@@ -3943,10 +3972,13 @@ export class BookingStageService {
       vendorId,
       userId,
       franchiseId,
+      franchiseIds,
       tag,
       page,
       limit,
     });
+    const normalizedFranchises =
+      filters.franchises ?? filters.franchise_ids;
 
     if (!tag) {
       throw new Error("Status tag is required to fetch universal table data");
@@ -4054,12 +4086,12 @@ export class BookingStageService {
       normalizedUserType === "auditor" ||
       normalizedUserType === "sales-executive";
     const skip = (page - 1) * limit;
-    const orderBy = {
-      created_at:
-        filters.created_at === "asc"
-          ? Prisma.SortOrder.asc
-          : Prisma.SortOrder.desc,
-    };
+    const sortDir = filters.created_at === "asc" ? Prisma.SortOrder.asc : Prisma.SortOrder.desc;
+    const orderBy: Prisma.LeadMasterOrderByWithRelationInput[] = [
+      { updated_at: sortDir },
+      { created_at: sortDir },
+      { id: sortDir },
+    ];
     const normalizedStageTag = String(tag || "").trim();
     const includeConfig = BookingStageService.leadIncludes(normalizedStageTag);
     const shouldApplyStageSort =
@@ -4099,10 +4131,7 @@ export class BookingStageService {
         return { numbers, strings };
       };
 
-      const leadCode = toString(filters.filter_lead_code);
-      if (leadCode) {
-        addAnd({ lead_code: { contains: leadCode, mode: "insensitive" } });
-      }
+
 
       const nameFilter = toString(filters.filter_name);
       if (nameFilter) {
@@ -4313,6 +4342,20 @@ export class BookingStageService {
           addAnd({
             assign_to: {
               in: assignIds,
+            },
+          });
+        }
+      }
+
+      if (Array.isArray(normalizedFranchises) && normalizedFranchises.length > 0) {
+        const franchiseIds = normalizedFranchises
+          .map(Number)
+          .filter((id) => !Number.isNaN(id));
+
+        if (franchiseIds.length > 0) {
+          addAnd({
+            franchise_id: {
+              in: franchiseIds,
             },
           });
         }
@@ -4534,7 +4577,11 @@ export class BookingStageService {
           ? "onGoing"
           : { in: ["onGoing", "lostApproval"] },
       };
+      const hasExplicitFranchiseFilter =
+        Array.isArray(normalizedFranchises) && normalizedFranchises.length > 0;
+
       const includeFranchise =
+        !hasExplicitFranchiseFilter &&
         (isType4To16 ? shouldIncludeFranchiseByRole : shouldIncludeFranchise) &&
         franchiseId &&
         !ignoreFranchiseForStage;
@@ -4883,10 +4930,7 @@ export class BookingStageService {
         return { numbers, strings };
       };
 
-      const leadCode = toString(filters.filter_lead_code);
-      if (leadCode) {
-        addAnd({ lead_code: { contains: leadCode, mode: "insensitive" } });
-      }
+
 
       const nameFilter = toString(filters.filter_name);
       if (nameFilter) {

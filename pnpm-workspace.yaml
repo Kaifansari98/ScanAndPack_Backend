@@ -1,0 +1,7 @@
+allowBuilds:
+  '@firebase/util': true
+  '@prisma/engines': true
+  '@swc/core': true
+  prisma: true
+  protobufjs: true
+  puppeteer: true

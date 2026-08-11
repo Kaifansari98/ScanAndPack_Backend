@@ -240,10 +240,10 @@ export type LeadExternalPlatformCustomerMappingWhereInput = {
   external_platform_customer_id?: Prisma.StringFilter<"LeadExternalPlatformCustomerMapping"> | string
   external_platform_id?: Prisma.IntFilter<"LeadExternalPlatformCustomerMapping"> | number
   external_platform_token_id?: Prisma.IntFilter<"LeadExternalPlatformCustomerMapping"> | number
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   externalPlatform?: Prisma.XOR<Prisma.ExternalPlatformMasterScalarRelationFilter, Prisma.ExternalPlatformMasterWhereInput>
   externalPlatformToken?: Prisma.XOR<Prisma.ExternalPlatformTokenScalarRelationFilter, Prisma.ExternalPlatformTokenWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type LeadExternalPlatformCustomerMappingOrderByWithRelationInput = {
@@ -253,10 +253,10 @@ export type LeadExternalPlatformCustomerMappingOrderByWithRelationInput = {
   external_platform_customer_id?: Prisma.SortOrder
   external_platform_id?: Prisma.SortOrder
   external_platform_token_id?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  lead?: Prisma.LeadMasterOrderByWithRelationInput
   externalPlatform?: Prisma.ExternalPlatformMasterOrderByWithRelationInput
   externalPlatformToken?: Prisma.ExternalPlatformTokenOrderByWithRelationInput
+  lead?: Prisma.LeadMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type LeadExternalPlatformCustomerMappingWhereUniqueInput = Prisma.AtLeast<{
@@ -270,10 +270,10 @@ export type LeadExternalPlatformCustomerMappingWhereUniqueInput = Prisma.AtLeast
   external_platform_customer_id?: Prisma.StringFilter<"LeadExternalPlatformCustomerMapping"> | string
   external_platform_id?: Prisma.IntFilter<"LeadExternalPlatformCustomerMapping"> | number
   external_platform_token_id?: Prisma.IntFilter<"LeadExternalPlatformCustomerMapping"> | number
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   externalPlatform?: Prisma.XOR<Prisma.ExternalPlatformMasterScalarRelationFilter, Prisma.ExternalPlatformMasterWhereInput>
   externalPlatformToken?: Prisma.XOR<Prisma.ExternalPlatformTokenScalarRelationFilter, Prisma.ExternalPlatformTokenWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id" | "uniq_vendor_lead_external_platform_customer_mapping">
 
 export type LeadExternalPlatformCustomerMappingOrderByWithAggregationInput = {
@@ -304,10 +304,10 @@ export type LeadExternalPlatformCustomerMappingScalarWhereWithAggregatesInput = 
 
 export type LeadExternalPlatformCustomerMappingCreateInput = {
   external_platform_customer_id: string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadExternalPlatformCustomerMappingsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutExternalPlatformCustomerMappingsInput
   externalPlatform: Prisma.ExternalPlatformMasterCreateNestedOneWithoutLeadExternalPlatformCustomerMappingsInput
   externalPlatformToken: Prisma.ExternalPlatformTokenCreateNestedOneWithoutLeadExternalPlatformCustomerMappingsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutExternalPlatformCustomerMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadExternalPlatformCustomerMappingsInput
 }
 
 export type LeadExternalPlatformCustomerMappingUncheckedCreateInput = {
@@ -321,10 +321,10 @@ export type LeadExternalPlatformCustomerMappingUncheckedCreateInput = {
 
 export type LeadExternalPlatformCustomerMappingUpdateInput = {
   external_platform_customer_id?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadExternalPlatformCustomerMappingsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutExternalPlatformCustomerMappingsNestedInput
   externalPlatform?: Prisma.ExternalPlatformMasterUpdateOneRequiredWithoutLeadExternalPlatformCustomerMappingsNestedInput
   externalPlatformToken?: Prisma.ExternalPlatformTokenUpdateOneRequiredWithoutLeadExternalPlatformCustomerMappingsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutExternalPlatformCustomerMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadExternalPlatformCustomerMappingsNestedInput
 }
 
 export type LeadExternalPlatformCustomerMappingUncheckedUpdateInput = {
@@ -587,9 +587,9 @@ export type LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutExterna
 
 export type LeadExternalPlatformCustomerMappingCreateWithoutVendorInput = {
   external_platform_customer_id: string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutExternalPlatformCustomerMappingsInput
   externalPlatform: Prisma.ExternalPlatformMasterCreateNestedOneWithoutLeadExternalPlatformCustomerMappingsInput
   externalPlatformToken: Prisma.ExternalPlatformTokenCreateNestedOneWithoutLeadExternalPlatformCustomerMappingsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutExternalPlatformCustomerMappingsInput
 }
 
 export type LeadExternalPlatformCustomerMappingUncheckedCreateWithoutVendorInput = {
@@ -640,9 +640,9 @@ export type LeadExternalPlatformCustomerMappingScalarWhereInput = {
 
 export type LeadExternalPlatformCustomerMappingCreateWithoutLeadInput = {
   external_platform_customer_id: string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadExternalPlatformCustomerMappingsInput
   externalPlatform: Prisma.ExternalPlatformMasterCreateNestedOneWithoutLeadExternalPlatformCustomerMappingsInput
   externalPlatformToken: Prisma.ExternalPlatformTokenCreateNestedOneWithoutLeadExternalPlatformCustomerMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadExternalPlatformCustomerMappingsInput
 }
 
 export type LeadExternalPlatformCustomerMappingUncheckedCreateWithoutLeadInput = {
@@ -681,9 +681,9 @@ export type LeadExternalPlatformCustomerMappingUpdateManyWithWhereWithoutLeadInp
 
 export type LeadExternalPlatformCustomerMappingCreateWithoutExternalPlatformInput = {
   external_platform_customer_id: string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadExternalPlatformCustomerMappingsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutExternalPlatformCustomerMappingsInput
   externalPlatformToken: Prisma.ExternalPlatformTokenCreateNestedOneWithoutLeadExternalPlatformCustomerMappingsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutExternalPlatformCustomerMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadExternalPlatformCustomerMappingsInput
 }
 
 export type LeadExternalPlatformCustomerMappingUncheckedCreateWithoutExternalPlatformInput = {
@@ -722,9 +722,9 @@ export type LeadExternalPlatformCustomerMappingUpdateManyWithWhereWithoutExterna
 
 export type LeadExternalPlatformCustomerMappingCreateWithoutExternalPlatformTokenInput = {
   external_platform_customer_id: string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadExternalPlatformCustomerMappingsInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutExternalPlatformCustomerMappingsInput
   externalPlatform: Prisma.ExternalPlatformMasterCreateNestedOneWithoutLeadExternalPlatformCustomerMappingsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutExternalPlatformCustomerMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadExternalPlatformCustomerMappingsInput
 }
 
 export type LeadExternalPlatformCustomerMappingUncheckedCreateWithoutExternalPlatformTokenInput = {
@@ -771,9 +771,9 @@ export type LeadExternalPlatformCustomerMappingCreateManyVendorInput = {
 
 export type LeadExternalPlatformCustomerMappingUpdateWithoutVendorInput = {
   external_platform_customer_id?: Prisma.StringFieldUpdateOperationsInput | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutExternalPlatformCustomerMappingsNestedInput
   externalPlatform?: Prisma.ExternalPlatformMasterUpdateOneRequiredWithoutLeadExternalPlatformCustomerMappingsNestedInput
   externalPlatformToken?: Prisma.ExternalPlatformTokenUpdateOneRequiredWithoutLeadExternalPlatformCustomerMappingsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutExternalPlatformCustomerMappingsNestedInput
 }
 
 export type LeadExternalPlatformCustomerMappingUncheckedUpdateWithoutVendorInput = {
@@ -802,9 +802,9 @@ export type LeadExternalPlatformCustomerMappingCreateManyLeadInput = {
 
 export type LeadExternalPlatformCustomerMappingUpdateWithoutLeadInput = {
   external_platform_customer_id?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadExternalPlatformCustomerMappingsNestedInput
   externalPlatform?: Prisma.ExternalPlatformMasterUpdateOneRequiredWithoutLeadExternalPlatformCustomerMappingsNestedInput
   externalPlatformToken?: Prisma.ExternalPlatformTokenUpdateOneRequiredWithoutLeadExternalPlatformCustomerMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadExternalPlatformCustomerMappingsNestedInput
 }
 
 export type LeadExternalPlatformCustomerMappingUncheckedUpdateWithoutLeadInput = {
@@ -833,9 +833,9 @@ export type LeadExternalPlatformCustomerMappingCreateManyExternalPlatformInput =
 
 export type LeadExternalPlatformCustomerMappingUpdateWithoutExternalPlatformInput = {
   external_platform_customer_id?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadExternalPlatformCustomerMappingsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutExternalPlatformCustomerMappingsNestedInput
   externalPlatformToken?: Prisma.ExternalPlatformTokenUpdateOneRequiredWithoutLeadExternalPlatformCustomerMappingsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutExternalPlatformCustomerMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadExternalPlatformCustomerMappingsNestedInput
 }
 
 export type LeadExternalPlatformCustomerMappingUncheckedUpdateWithoutExternalPlatformInput = {
@@ -864,9 +864,9 @@ export type LeadExternalPlatformCustomerMappingCreateManyExternalPlatformTokenIn
 
 export type LeadExternalPlatformCustomerMappingUpdateWithoutExternalPlatformTokenInput = {
   external_platform_customer_id?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadExternalPlatformCustomerMappingsNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutExternalPlatformCustomerMappingsNestedInput
   externalPlatform?: Prisma.ExternalPlatformMasterUpdateOneRequiredWithoutLeadExternalPlatformCustomerMappingsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutExternalPlatformCustomerMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadExternalPlatformCustomerMappingsNestedInput
 }
 
 export type LeadExternalPlatformCustomerMappingUncheckedUpdateWithoutExternalPlatformTokenInput = {
@@ -894,10 +894,10 @@ export type LeadExternalPlatformCustomerMappingSelect<ExtArgs extends runtime.Ty
   external_platform_customer_id?: boolean
   external_platform_id?: boolean
   external_platform_token_id?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   externalPlatform?: boolean | Prisma.ExternalPlatformMasterDefaultArgs<ExtArgs>
   externalPlatformToken?: boolean | Prisma.ExternalPlatformTokenDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadExternalPlatformCustomerMapping"]>
 
 export type LeadExternalPlatformCustomerMappingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -907,10 +907,10 @@ export type LeadExternalPlatformCustomerMappingSelectCreateManyAndReturn<ExtArgs
   external_platform_customer_id?: boolean
   external_platform_id?: boolean
   external_platform_token_id?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   externalPlatform?: boolean | Prisma.ExternalPlatformMasterDefaultArgs<ExtArgs>
   externalPlatformToken?: boolean | Prisma.ExternalPlatformTokenDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadExternalPlatformCustomerMapping"]>
 
 export type LeadExternalPlatformCustomerMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -920,10 +920,10 @@ export type LeadExternalPlatformCustomerMappingSelectUpdateManyAndReturn<ExtArgs
   external_platform_customer_id?: boolean
   external_platform_id?: boolean
   external_platform_token_id?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   externalPlatform?: boolean | Prisma.ExternalPlatformMasterDefaultArgs<ExtArgs>
   externalPlatformToken?: boolean | Prisma.ExternalPlatformTokenDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadExternalPlatformCustomerMapping"]>
 
 export type LeadExternalPlatformCustomerMappingSelectScalar = {
@@ -937,31 +937,31 @@ export type LeadExternalPlatformCustomerMappingSelectScalar = {
 
 export type LeadExternalPlatformCustomerMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "external_platform_customer_id" | "external_platform_id" | "external_platform_token_id", ExtArgs["result"]["leadExternalPlatformCustomerMapping"]>
 export type LeadExternalPlatformCustomerMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   externalPlatform?: boolean | Prisma.ExternalPlatformMasterDefaultArgs<ExtArgs>
   externalPlatformToken?: boolean | Prisma.ExternalPlatformTokenDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadExternalPlatformCustomerMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   externalPlatform?: boolean | Prisma.ExternalPlatformMasterDefaultArgs<ExtArgs>
   externalPlatformToken?: boolean | Prisma.ExternalPlatformTokenDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadExternalPlatformCustomerMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   externalPlatform?: boolean | Prisma.ExternalPlatformMasterDefaultArgs<ExtArgs>
   externalPlatformToken?: boolean | Prisma.ExternalPlatformTokenDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $LeadExternalPlatformCustomerMappingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadExternalPlatformCustomerMapping"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    lead: Prisma.$LeadMasterPayload<ExtArgs>
     externalPlatform: Prisma.$ExternalPlatformMasterPayload<ExtArgs>
     externalPlatformToken: Prisma.$ExternalPlatformTokenPayload<ExtArgs>
+    lead: Prisma.$LeadMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1364,10 +1364,10 @@ readonly fields: LeadExternalPlatformCustomerMappingFieldRefs;
  */
 export interface Prisma__LeadExternalPlatformCustomerMappingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   externalPlatform<T extends Prisma.ExternalPlatformMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ExternalPlatformMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ExternalPlatformMasterClient<runtime.Types.Result.GetResult<Prisma.$ExternalPlatformMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   externalPlatformToken<T extends Prisma.ExternalPlatformTokenDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ExternalPlatformTokenDefaultArgs<ExtArgs>>): Prisma.Prisma__ExternalPlatformTokenClient<runtime.Types.Result.GetResult<Prisma.$ExternalPlatformTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

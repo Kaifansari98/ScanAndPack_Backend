@@ -49,6 +49,40 @@ export class DesigingStageController {
     return value ?? -1;
   }
 
+  private static buildReviewStateData(body: any) {
+    const hasApprove = typeof body.is_approved === "boolean";
+    const hasAmend = typeof body.is_amended === "boolean";
+    const hasDelete = typeof body.is_deleted_item === "boolean";
+
+    if (!hasApprove && !hasAmend && !hasDelete) {
+      return {};
+    }
+
+    const isApproved = body.is_approved === true;
+    const isAmended = body.is_amended === true;
+    const isDeleted = body.is_deleted_item === true;
+    const amendedRemark =
+      typeof body.amended_remark === "string"
+        ? body.amended_remark.trim()
+        : "";
+    const deletedRemark =
+      typeof body.deleted_remark === "string"
+        ? body.deleted_remark.trim()
+        : "";
+    const now = new Date();
+
+    return {
+      is_approved: isApproved,
+      approved_at: isApproved ? now : null,
+      is_amended: isAmended,
+      amended_at: isAmended ? now : null,
+      amended_remark: isAmended ? amendedRemark || null : null,
+      is_deleted_item: isDeleted,
+      deleted_item_at: isDeleted ? now : null,
+      deleted_remark: isDeleted ? deletedRemark || null : null,
+    };
+  }
+
   private static async getActorRole(
     req: Request,
     fallbackUserId?: number | null,
@@ -320,6 +354,13 @@ export class DesigingStageController {
               tag: true,
             },
           },
+          specificationDocumentMappings: {
+            select: {
+              specification: {
+                select: { id: true, name: true },
+              },
+            },
+          },
           createdBy: {
             select: {
               id: true,
@@ -342,8 +383,12 @@ export class DesigingStageController {
       const documentsWithSignedUrls = await Promise.all(
         documents.map(async (doc: any) => {
           const signedUrl = await generateSignedUrl(doc.doc_sys_name);
+          const specification =
+            doc.specificationDocumentMappings?.[0]?.specification || null;
+          const { specificationDocumentMappings, ...rest } = doc;
           return {
-            ...doc,
+            ...rest,
+            specification,
             signedUrl,
           };
         }),
@@ -445,6 +490,13 @@ export class DesigingStageController {
               tag: true,
             },
           },
+          specificationDocumentMappings: {
+            select: {
+              specification: {
+                select: { id: true, name: true },
+              },
+            },
+          },
           createdBy: {
             select: {
               id: true,
@@ -467,8 +519,12 @@ export class DesigingStageController {
       const documentsWithSignedUrls = await Promise.all(
         documents.map(async (doc: any) => {
           const signedUrl = await generateSignedUrl(doc.doc_sys_name);
+          const specification =
+            doc.specificationDocumentMappings?.[0]?.specification || null;
+          const { specificationDocumentMappings, ...rest } = doc;
           return {
-            ...doc,
+            ...rest,
+            specification,
             signedUrl,
           };
         }),
@@ -1051,6 +1107,9 @@ export class DesigingStageController {
       console.log("[BACKEND UPLOAD DESIGNS] req.body:", req.body);
       const { vendorId, leadId, userId } = req.body;
       const rawInstanceIds = req.body.product_structure_instance_ids;
+      const specId = req.body.specification_id
+        ? Number(req.body.specification_id)
+        : null;
 
       if (!req.files || (req.files as Express.Multer.File[]).length === 0) {
         return res.status(400).json({
@@ -1157,6 +1216,47 @@ export class DesigingStageController {
 
           if (!designDocType) {
             throw new Error("Design document type (Type 6) not found");
+          }
+
+          if (specId != null) {
+            if (!Number.isFinite(specId) || specId <= 0) {
+              throw new Error("Invalid specification selected");
+            }
+
+            const specification = await tx.leadSpecificationsMaster.findFirst({
+              where: {
+                id: specId,
+                vendor_id: Number(vendorId),
+                lead_id: Number(leadId),
+              },
+              select: { id: true },
+            });
+
+            if (!specification) {
+              throw new Error(
+                "Selected specification does not belong to this lead",
+              );
+            }
+
+            const existingDesignSpecMapping =
+              await tx.specificationDocumentMapping.findFirst({
+                where: {
+                  vendor_id: Number(vendorId),
+                  lead_id: Number(leadId),
+                  specs_id: specId,
+                  leadDocument: {
+                    is_deleted: false,
+                    doc_type_id: designDocType.id,
+                  },
+                },
+                select: { id: true },
+              });
+
+            if (existingDesignSpecMapping) {
+              throw new Error(
+                "Selected specification is already linked with another design file",
+              );
+            }
           }
 
           const newDocs: any[] = [];
@@ -1296,6 +1396,18 @@ export class DesigingStageController {
                 product_structure_instance_id: instanceIdToPersist,
               },
             });
+
+            if (specId) {
+              await tx.specificationDocumentMapping.create({
+                data: {
+                  vendor_id: Number(vendorId),
+                  lead_id: Number(leadId),
+                  specs_id: specId,
+                  document_id: doc.id,
+                  created_by: Number(userId),
+                },
+              });
+            }
 
             newDocs.push(doc);
           }
@@ -3411,6 +3523,40 @@ export class DesigingStageController {
         orderBy: { created_at: "asc" },
       });
 
+      const specificationIds = specifications.map((specification) => specification.id);
+      const otherApplianceRemarkMappings =
+        specificationIds.length > 0
+          ? await prisma.leadOtherAppliancesRemarkMapping.findMany({
+              where: {
+                specs_id: { in: specificationIds },
+              },
+              select: {
+                specs_id: true,
+                other_appliance_type: true,
+                remark: true,
+              },
+            })
+          : [];
+      const remarkMap = new Map<
+        number,
+        Partial<{
+          appliances_remark: string;
+          stone_remark: string;
+          sinks_remark: string;
+          faucets_remark: string;
+        }>
+      >();
+
+      otherApplianceRemarkMappings.forEach((mapping) => {
+        const entry = remarkMap.get(mapping.specs_id) ?? {};
+        const type = String(mapping.other_appliance_type);
+        if (type === "Appliances") entry.appliances_remark = mapping.remark;
+        if (type === "Stone") entry.stone_remark = mapping.remark;
+        if (type === "Sinks") entry.sinks_remark = mapping.remark;
+        if (type === "Faucets") entry.faucets_remark = mapping.remark;
+        remarkMap.set(mapping.specs_id, entry);
+      });
+
       const actorRole = await DesigingStageController.getActorRole(req);
       const latestSpecByItemCode = new Map<number, number>();
 
@@ -3438,6 +3584,11 @@ export class DesigingStageController {
 
         return {
           ...specification,
+          appliances_remark:
+            remarkMap.get(specification.id)?.appliances_remark ?? null,
+          stone_remark: remarkMap.get(specification.id)?.stone_remark ?? null,
+          sinks_remark: remarkMap.get(specification.id)?.sinks_remark ?? null,
+          faucets_remark: remarkMap.get(specification.id)?.faucets_remark ?? null,
           is_latest_for_item_code: isLatestForItemCode,
           is_editable:
             actorRole === "super-admin" ? true : isLatestForItemCode,
@@ -3507,14 +3658,39 @@ export class DesigingStageController {
             { id: "desc" },
           ],
           include: {
+            carcassMaterialMappings: {
+              select: {
+                carcass_type_id: true,
+                carcas_material_id: true,
+                carcass_material_finish_id: true,
+              },
+            },
+            shutterMaterialMappings: {
+              select: {
+                shutter_type_id: true,
+                shutter_material_id: true,
+                shutter_material_finish_id: true,
+              },
+            },
+            hardwareMappings: {
+              select: {
+                carcass_legs_id: true,
+                skirting_carcass_legs_id: true,
+                skirting_carcass_legs_color_id: true,
+                note: true,
+              },
+            },
             lightCarcasUnitMappings: {
               select: {
                 light_carcas_unit_master_id: true,
+                custom_remark: true,
               },
             },
             otherAppliancesMappings: {
               select: {
+                other_appliance_type: true,
                 other_appliances_master_id: true,
+                custom_remark: true,
               },
             },
             specificationDocumentMappings: {
@@ -3524,6 +3700,17 @@ export class DesigingStageController {
             },
           },
         });
+        const previousOtherApplianceRemarkMappings = previousLatestSpecification
+          ? await tx.leadOtherAppliancesRemarkMapping.findMany({
+              where: {
+                specs_id: previousLatestSpecification.id,
+              },
+              select: {
+                other_appliance_type: true,
+                remark: true,
+              },
+            })
+          : [];
 
         const leadProductMapping = await tx.leadProductMapping.findFirst({
           where: { vendor_id: Number(vendorId), lead_id: Number(leadId) },
@@ -3566,6 +3753,57 @@ export class DesigingStageController {
         });
 
         if (previousLatestSpecification) {
+          if (previousLatestSpecification.carcassMaterialMappings.length > 0) {
+            await tx.leadCarcassMaterialMapping.createMany({
+              data: previousLatestSpecification.carcassMaterialMappings.map(
+                (mapping) => ({
+                  vendor_id: Number(vendorId),
+                  lead_id: Number(leadId),
+                  specs_id: createdSpecification.id,
+                  carcass_type_id: mapping.carcass_type_id,
+                  carcas_material_id: mapping.carcas_material_id,
+                  carcass_material_finish_id: mapping.carcass_material_finish_id,
+                  created_by: Number(created_by),
+                }),
+              ),
+            });
+          }
+
+          if (previousLatestSpecification.shutterMaterialMappings.length > 0) {
+            await tx.leadShutterMaterialMapping.createMany({
+              data: previousLatestSpecification.shutterMaterialMappings.map(
+                (mapping) => ({
+                  vendor_id: Number(vendorId),
+                  lead_id: Number(leadId),
+                  specs_id: createdSpecification.id,
+                  shutter_type_id: mapping.shutter_type_id,
+                  shutter_material_id: mapping.shutter_material_id,
+                  shutter_material_finish_id:
+                    mapping.shutter_material_finish_id,
+                  created_by: Number(created_by),
+                }),
+              ),
+            });
+          }
+
+          if (previousLatestSpecification.hardwareMappings.length > 0) {
+            await tx.leadHardwareMapping.createMany({
+              data: previousLatestSpecification.hardwareMappings.map(
+                (mapping) => ({
+                  vendor_id: Number(vendorId),
+                  lead_id: Number(leadId),
+                  specs_id: createdSpecification.id,
+                  carcass_legs_id: mapping.carcass_legs_id,
+                  skirting_carcass_legs_id: mapping.skirting_carcass_legs_id,
+                  skirting_carcass_legs_color_id:
+                    mapping.skirting_carcass_legs_color_id,
+                  note: mapping.note,
+                  created_by: Number(created_by),
+                }),
+              ),
+            });
+          }
+
           if (previousLatestSpecification.lightCarcasUnitMappings.length > 0) {
             await tx.leadLightCarcasUnitMapping.createMany({
               data: previousLatestSpecification.lightCarcasUnitMappings.map(
@@ -3575,6 +3813,7 @@ export class DesigingStageController {
                   specs_id: createdSpecification.id,
                   light_carcas_unit_master_id:
                     mapping.light_carcas_unit_master_id,
+                  custom_remark: mapping.custom_remark,
                   created_by: Number(created_by),
                 }),
               ),
@@ -3588,11 +3827,26 @@ export class DesigingStageController {
                   vendor_id: Number(vendorId),
                   lead_id: Number(leadId),
                   specs_id: createdSpecification.id,
+                  other_appliance_type: mapping.other_appliance_type,
                   other_appliances_master_id:
                     mapping.other_appliances_master_id,
+                  custom_remark: mapping.custom_remark,
                   created_by: Number(created_by),
                 }),
               ),
+            });
+          }
+
+          if (previousOtherApplianceRemarkMappings.length > 0) {
+            await tx.leadOtherAppliancesRemarkMapping.createMany({
+              data: previousOtherApplianceRemarkMappings.map((mapping) => ({
+                vendor_id: Number(vendorId),
+                lead_id: Number(leadId),
+                specs_id: createdSpecification.id,
+                other_appliance_type: mapping.other_appliance_type,
+                remark: mapping.remark,
+                created_by: Number(created_by),
+              })),
             });
           }
 
@@ -3676,6 +3930,165 @@ export class DesigingStageController {
     }
   }
 
+  public static async updateLeadSpecificationSectionRemark(
+    req: Request,
+    res: Response,
+  ) {
+    try {
+      const specsId = Number(req.params.specsId);
+      const section = String(req.body.section || "").trim().toLowerCase();
+      const remark = req.body.remark;
+
+      const allowedValues = [
+        "In our scope",
+        "Not in our scope",
+        "Provide only grooves",
+      ];
+      const sectionFieldMap: Record<string, string> = {
+        appliances: "Appliances",
+        stone: "Stone",
+        sinks: "Sinks",
+        faucets: "Faucets",
+      };
+      const targetType = sectionFieldMap[section];
+
+      if (!specsId || !targetType || !allowedValues.includes(remark)) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "specsId is required and section/remark must be valid values.",
+        });
+      }
+
+      await DesigingStageController.ensureSpecificationEditable(req, specsId);
+
+      const specification = await prisma.leadSpecificationsMaster.findUnique({
+        where: { id: specsId },
+        select: {
+          id: true,
+          vendor_id: true,
+          lead_id: true,
+          created_by: true,
+        },
+      });
+
+      if (!specification) {
+        return res.status(404).json({
+          success: false,
+          message: "Specification not found",
+        });
+      }
+
+      await prisma.leadOtherAppliancesRemarkMapping.upsert({
+        where: {
+          specs_id_other_appliance_type: {
+            specs_id: specsId,
+            other_appliance_type: targetType as any,
+          },
+        },
+        update: {
+          remark,
+        },
+        create: {
+          vendor_id: specification.vendor_id,
+          lead_id: specification.lead_id,
+          specs_id: specsId,
+          other_appliance_type: targetType as any,
+          remark,
+          created_by: specification.created_by,
+        },
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Section remark updated successfully",
+        data: { specs_id: specsId, section, remark },
+      });
+    } catch (error: any) {
+      console.error("Error updating lead specification section remark:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
+
+  public static async markLeadSpecificationCompleted(
+    req: Request,
+    res: Response,
+  ) {
+    try {
+      const specsId = Number(req.params.specsId);
+
+      if (!specsId) {
+        return res.status(400).json({
+          success: false,
+          message: "specsId is required",
+        });
+      }
+
+      await DesigingStageController.ensureSpecificationEditable(req, specsId);
+
+      const unreviewedWhere = {
+        specs_id: specsId,
+        is_approved: false,
+        is_amended: false,
+        is_deleted_item: false,
+      };
+
+      const [
+        unreviewedCarcassCount,
+        unreviewedShutterCount,
+        unreviewedHardwareCount,
+        unreviewedLightCount,
+        unreviewedOtherApplianceCount,
+      ] = await Promise.all([
+        prisma.leadCarcassMaterialMapping.count({ where: unreviewedWhere }),
+        prisma.leadShutterMaterialMapping.count({ where: unreviewedWhere }),
+        prisma.leadHardwareMapping.count({ where: unreviewedWhere }),
+        prisma.leadLightCarcasUnitMapping.count({ where: unreviewedWhere }),
+        prisma.leadOtherAppliancesMapping.count({ where: unreviewedWhere }),
+      ]);
+
+      const totalUnreviewed =
+        unreviewedCarcassCount +
+        unreviewedShutterCount +
+        unreviewedHardwareCount +
+        unreviewedLightCount +
+        unreviewedOtherApplianceCount;
+
+      if (totalUnreviewed > 0) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "All specification items must be approved, amended, or deleted before marking as completed.",
+        });
+      }
+
+      const specification = await prisma.leadSpecificationsMaster.update({
+        where: { id: specsId },
+        data: {
+          is_completed: true,
+          completed_marked_at: new Date(),
+        },
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Specification marked as completed",
+        data: specification,
+      });
+    } catch (error: any) {
+      console.error("Error marking lead specification as completed:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
+
   public static async getLeadCarcassMaterialMappings(
     req: Request,
     res: Response,
@@ -3683,11 +4096,12 @@ export class DesigingStageController {
     try {
       const vendorId = Number(req.params.vendorId);
       const leadId = Number(req.params.leadId);
+      const specsId = Number(req.params.specsId);
 
-      if (!vendorId || !leadId) {
+      if (!vendorId || !leadId || !specsId) {
         return res.status(400).json({
           success: false,
-          message: "vendorId and leadId are required",
+          message: "vendorId, leadId and specsId are required",
         });
       }
 
@@ -3695,6 +4109,7 @@ export class DesigingStageController {
         where: {
           vendor_id: vendorId,
           lead_id: leadId,
+          specs_id: specsId,
         },
         include: {
           carcassType: { select: { id: true, name: true } },
@@ -3727,14 +4142,18 @@ export class DesigingStageController {
       const id = req.body.id ? Number(req.body.id) : undefined;
       const vendorId = Number(req.body.vendor_id);
       const leadId = Number(req.body.lead_id);
+      const specsId = Number(req.body.specs_id);
       const carcassTypeId = Number(req.body.carcass_type_id);
       const carcasMaterialId = Number(req.body.carcas_material_id);
       const carcassMaterialFinishId = Number(req.body.carcass_material_finish_id);
       const createdBy = Number(req.body.created_by);
+      const reviewStateData =
+        DesigingStageController.buildReviewStateData(req.body);
 
       if (
         !vendorId ||
         !leadId ||
+        !specsId ||
         !carcassTypeId ||
         !carcasMaterialId ||
         !carcassMaterialFinishId ||
@@ -3743,23 +4162,32 @@ export class DesigingStageController {
         return res.status(400).json({
           success: false,
           message:
-            "vendor_id, lead_id, carcass_type_id, carcas_material_id, carcass_material_finish_id and created_by are required",
+            "vendor_id, lead_id, specs_id, carcass_type_id, carcas_material_id, carcass_material_finish_id and created_by are required",
         });
       }
+
+      await DesigingStageController.ensureSpecificationEditable(
+        req,
+        specsId,
+        createdBy,
+      );
 
       const data = {
         vendor_id: vendorId,
         lead_id: leadId,
+        specs_id: specsId,
         carcass_type_id: carcassTypeId,
         carcas_material_id: carcasMaterialId,
         carcass_material_finish_id: carcassMaterialFinishId,
         created_by: createdBy,
+        ...reviewStateData,
       };
 
       const existingDuplicate = await prisma.leadCarcassMaterialMapping.findFirst({
         where: {
           vendor_id: vendorId,
           lead_id: leadId,
+          specs_id: specsId,
           carcass_type_id: carcassTypeId,
           carcas_material_id: carcasMaterialId,
           carcass_material_finish_id: carcassMaterialFinishId,
@@ -3772,7 +4200,7 @@ export class DesigingStageController {
         return res.status(400).json({
           success: false,
           message:
-            "This carcass type, material, and finish combination already exists for this lead.",
+            "This carcass type, material, and finish combination already exists for this specification.",
         });
       }
 
@@ -3819,11 +4247,12 @@ export class DesigingStageController {
     try {
       const vendorId = Number(req.params.vendorId);
       const leadId = Number(req.params.leadId);
+      const specsId = Number(req.params.specsId);
 
-      if (!vendorId || !leadId) {
+      if (!vendorId || !leadId || !specsId) {
         return res.status(400).json({
           success: false,
-          message: "vendorId and leadId are required",
+          message: "vendorId, leadId and specsId are required",
         });
       }
 
@@ -3831,6 +4260,7 @@ export class DesigingStageController {
         where: {
           vendor_id: vendorId,
           lead_id: leadId,
+          specs_id: specsId,
         },
         include: {
           shutterType: { select: { id: true, name: true } },
@@ -3863,14 +4293,18 @@ export class DesigingStageController {
       const id = req.body.id ? Number(req.body.id) : undefined;
       const vendorId = Number(req.body.vendor_id);
       const leadId = Number(req.body.lead_id);
+      const specsId = Number(req.body.specs_id);
       const shutterTypeId = Number(req.body.shutter_type_id);
       const shutterMaterialId = Number(req.body.shutter_material_id);
       const shutterMaterialFinishId = Number(req.body.shutter_material_finish_id);
       const createdBy = Number(req.body.created_by);
+      const reviewStateData =
+        DesigingStageController.buildReviewStateData(req.body);
 
       if (
         !vendorId ||
         !leadId ||
+        !specsId ||
         !shutterTypeId ||
         !shutterMaterialId ||
         !shutterMaterialFinishId ||
@@ -3879,23 +4313,32 @@ export class DesigingStageController {
         return res.status(400).json({
           success: false,
           message:
-            "vendor_id, lead_id, shutter_type_id, shutter_material_id, shutter_material_finish_id and created_by are required",
+            "vendor_id, lead_id, specs_id, shutter_type_id, shutter_material_id, shutter_material_finish_id and created_by are required",
         });
       }
+
+      await DesigingStageController.ensureSpecificationEditable(
+        req,
+        specsId,
+        createdBy,
+      );
 
       const data = {
         vendor_id: vendorId,
         lead_id: leadId,
+        specs_id: specsId,
         shutter_type_id: shutterTypeId,
         shutter_material_id: shutterMaterialId,
         shutter_material_finish_id: shutterMaterialFinishId,
         created_by: createdBy,
+        ...reviewStateData,
       };
 
       const existingDuplicate = await prisma.leadShutterMaterialMapping.findFirst({
         where: {
           vendor_id: vendorId,
           lead_id: leadId,
+          specs_id: specsId,
           shutter_type_id: shutterTypeId,
           shutter_material_id: shutterMaterialId,
           shutter_material_finish_id: shutterMaterialFinishId,
@@ -3908,7 +4351,7 @@ export class DesigingStageController {
         return res.status(400).json({
           success: false,
           message:
-            "This shutter type, material, and finish combination already exists for this lead.",
+            "This shutter type, material, and finish combination already exists for this specification.",
         });
       }
 
@@ -3952,11 +4395,12 @@ export class DesigingStageController {
     try {
       const vendorId = Number(req.params.vendorId);
       const leadId = Number(req.params.leadId);
+      const specsId = Number(req.params.specsId);
 
-      if (!vendorId || !leadId) {
+      if (!vendorId || !leadId || !specsId) {
         return res.status(400).json({
           success: false,
-          message: "vendorId and leadId are required",
+          message: "vendorId, leadId and specsId are required",
         });
       }
 
@@ -3964,6 +4408,7 @@ export class DesigingStageController {
         where: {
           vendor_id: vendorId,
           lead_id: leadId,
+          specs_id: specsId,
         },
         include: {
           carcassLegs: { select: { id: true, name: true } },
@@ -3995,6 +4440,7 @@ export class DesigingStageController {
       const id = req.body.id ? Number(req.body.id) : undefined;
       const vendorId = Number(req.body.vendor_id);
       const leadId = Number(req.body.lead_id);
+      const specsId = Number(req.body.specs_id);
       const carcassLegsId = Number(req.body.carcass_legs_id);
       const skirtingCarcassLegsId = Number(req.body.skirting_carcass_legs_id);
       const skirtingCarcassLegsColorId = req.body.skirting_carcass_legs_color_id
@@ -4005,10 +4451,13 @@ export class DesigingStageController {
           ? req.body.note
           : null;
       const createdBy = Number(req.body.created_by);
+      const reviewStateData =
+        DesigingStageController.buildReviewStateData(req.body);
 
       if (
         !vendorId ||
         !leadId ||
+        !specsId ||
         !carcassLegsId ||
         !skirtingCarcassLegsId ||
         !createdBy
@@ -4016,24 +4465,33 @@ export class DesigingStageController {
         return res.status(400).json({
           success: false,
           message:
-            "vendor_id, lead_id, carcass_legs_id, skirting_carcass_legs_id and created_by are required",
+            "vendor_id, lead_id, specs_id, carcass_legs_id, skirting_carcass_legs_id and created_by are required",
         });
       }
+
+      await DesigingStageController.ensureSpecificationEditable(
+        req,
+        specsId,
+        createdBy,
+      );
 
       const data = {
         vendor_id: vendorId,
         lead_id: leadId,
+        specs_id: specsId,
         carcass_legs_id: carcassLegsId,
         skirting_carcass_legs_id: skirtingCarcassLegsId,
         skirting_carcass_legs_color_id: skirtingCarcassLegsColorId,
         note,
         created_by: createdBy,
+        ...reviewStateData,
       };
 
       const existingDuplicate = await prisma.leadHardwareMapping.findFirst({
         where: {
           vendor_id: vendorId,
           lead_id: leadId,
+          specs_id: specsId,
           carcass_legs_id: carcassLegsId,
           skirting_carcass_legs_id: skirtingCarcassLegsId,
           skirting_carcass_legs_color_id: skirtingCarcassLegsColorId,
@@ -4046,7 +4504,7 @@ export class DesigingStageController {
         return res.status(400).json({
           success: false,
           message:
-            "This carcass legs, skirting, and color combination already exists for this lead.",
+            "This carcass legs, skirting, and color combination already exists for this specification.",
         });
       }
 
@@ -4139,20 +4597,39 @@ export class DesigingStageController {
       const vendorId = Number(req.body.vendor_id);
       const leadId = Number(req.body.lead_id);
       const specsId = Number(req.body.specs_id);
-      const lightCarcasUnitMasterId = Number(req.body.light_carcas_unit_master_id);
+      const rawLightCarcasUnitMasterId = req.body.light_carcas_unit_master_id;
+      const lightCarcasUnitMasterId = rawLightCarcasUnitMasterId
+        ? Number(rawLightCarcasUnitMasterId)
+        : undefined;
+      const customRemark =
+        typeof req.body.custom_remark === "string"
+          ? req.body.custom_remark.trim()
+          : "";
       const createdBy = Number(req.body.created_by);
+      const reviewStateData =
+        DesigingStageController.buildReviewStateData(req.body);
 
       if (
         !vendorId ||
         !leadId ||
         !specsId ||
-        !lightCarcasUnitMasterId ||
         !createdBy
       ) {
         return res.status(400).json({
           success: false,
           message:
-            "vendor_id, lead_id, specs_id, light_carcas_unit_master_id and created_by are required",
+            "vendor_id, lead_id, specs_id and created_by are required",
+        });
+      }
+
+      if (
+        (!lightCarcasUnitMasterId && !customRemark) ||
+        (lightCarcasUnitMasterId && customRemark)
+      ) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Provide either light_carcas_unit_master_id or custom_remark.",
         });
       }
 
@@ -4166,8 +4643,10 @@ export class DesigingStageController {
         vendor_id: vendorId,
         lead_id: leadId,
         specs_id: specsId,
-        light_carcas_unit_master_id: lightCarcasUnitMasterId,
+        light_carcas_unit_master_id: lightCarcasUnitMasterId ?? null,
+        custom_remark: customRemark || null,
         created_by: createdBy,
+        ...reviewStateData,
       };
 
       const existingDuplicate = await prisma.leadLightCarcasUnitMapping.findFirst({
@@ -4175,7 +4654,14 @@ export class DesigingStageController {
           vendor_id: vendorId,
           lead_id: leadId,
           specs_id: specsId,
-          light_carcas_unit_master_id: lightCarcasUnitMasterId,
+          ...(lightCarcasUnitMasterId
+            ? { light_carcas_unit_master_id: lightCarcasUnitMasterId }
+            : {
+                custom_remark: {
+                  equals: customRemark,
+                  mode: "insensitive",
+                },
+              }),
           ...(id ? { NOT: { id } } : {}),
         },
         select: { id: true },
@@ -4184,7 +4670,9 @@ export class DesigingStageController {
       if (existingDuplicate) {
         return res.status(400).json({
           success: false,
-          message: "This carcas type and remark combination has already been added.",
+          message: lightCarcasUnitMasterId
+            ? "This carcas type and remark combination has already been added."
+            : "This custom light remark has already been added.",
         });
       }
 
@@ -4280,20 +4768,43 @@ export class DesigingStageController {
       const vendorId = Number(req.body.vendor_id);
       const leadId = Number(req.body.lead_id);
       const specsId = Number(req.body.specs_id);
-      const otherAppliancesMasterId = Number(req.body.other_appliances_master_id);
+      const rawOtherAppliancesMasterId = req.body.other_appliances_master_id;
+      const otherAppliancesMasterId = rawOtherAppliancesMasterId
+        ? Number(rawOtherAppliancesMasterId)
+        : undefined;
+      const otherApplianceType =
+        typeof req.body.other_appliance_type === "string"
+          ? req.body.other_appliance_type.trim()
+          : undefined;
+      const customRemark =
+        typeof req.body.custom_remark === "string"
+          ? req.body.custom_remark.trim()
+          : "";
       const createdBy = Number(req.body.created_by);
+      const reviewStateData =
+        DesigingStageController.buildReviewStateData(req.body);
 
       if (
         !vendorId ||
         !leadId ||
         !specsId ||
-        !otherAppliancesMasterId ||
         !createdBy
       ) {
         return res.status(400).json({
           success: false,
           message:
-            "vendor_id, lead_id, specs_id, other_appliances_master_id and created_by are required",
+            "vendor_id, lead_id, specs_id and created_by are required",
+        });
+      }
+
+      if (
+        (!otherAppliancesMasterId && !customRemark) ||
+        (otherAppliancesMasterId && customRemark)
+      ) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Provide either other_appliances_master_id or custom_remark.",
         });
       }
 
@@ -4307,8 +4818,11 @@ export class DesigingStageController {
         vendor_id: vendorId,
         lead_id: leadId,
         specs_id: specsId,
-        other_appliances_master_id: otherAppliancesMasterId,
+        other_appliance_type: otherApplianceType || null,
+        other_appliances_master_id: otherAppliancesMasterId ?? null,
+        custom_remark: customRemark || null,
         created_by: createdBy,
+        ...reviewStateData,
       };
 
       const existingDuplicate = await prisma.leadOtherAppliancesMapping.findFirst({
@@ -4316,7 +4830,15 @@ export class DesigingStageController {
           vendor_id: vendorId,
           lead_id: leadId,
           specs_id: specsId,
-          other_appliances_master_id: otherAppliancesMasterId,
+          ...(otherApplianceType ? { other_appliance_type: otherApplianceType as any } : {}),
+          ...(otherAppliancesMasterId
+            ? { other_appliances_master_id: otherAppliancesMasterId }
+            : {
+                custom_remark: {
+                  equals: customRemark,
+                  mode: "insensitive",
+                },
+              }),
           ...(id ? { NOT: { id } } : {}),
         },
         select: { id: true },
@@ -4325,7 +4847,9 @@ export class DesigingStageController {
       if (existingDuplicate) {
         return res.status(400).json({
           success: false,
-          message: "This article has already been added.",
+          message: otherAppliancesMasterId
+            ? "This article has already been added."
+            : "This custom remark has already been added.",
         });
       }
 
