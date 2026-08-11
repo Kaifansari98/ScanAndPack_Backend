@@ -263,11 +263,6 @@ export type OtherAppliancesMaster = Prisma.OtherAppliancesMasterModel
  */
 export type LeadOtherAppliancesMapping = Prisma.LeadOtherAppliancesMappingModel
 /**
- * Model LeadOtherAppliancesRemarkMapping
- * 
- */
-export type LeadOtherAppliancesRemarkMapping = Prisma.LeadOtherAppliancesRemarkMappingModel
-/**
  * Model HandleTypeMaster
  * 
  */
@@ -1007,38 +1002,3 @@ export type B2BRequirementTypeMaster = Prisma.B2BRequirementTypeMasterModel
  * 
  */
 export type LeadB2BRequirementTypeMapping = Prisma.LeadB2BRequirementTypeMappingModel
-/**
- * Model OnlineLead
- * 
- */
-export type OnlineLead = Prisma.OnlineLeadModel
-/**
- * Model OnlineLeadFollowupStatus
- * 
- */
-export type OnlineLeadFollowupStatus = Prisma.OnlineLeadFollowupStatusModel
-/**
- * Model OnlineLeadHistory
- * 
- */
-export type OnlineLeadHistory = Prisma.OnlineLeadHistoryModel
-/**
- * Model OnlineLeadCallLog
- * 
- */
-export type OnlineLeadCallLog = Prisma.OnlineLeadCallLogModel
-/**
- * Model OnlineLeadStoreLog
- * 
- */
-export type OnlineLeadStoreLog = Prisma.OnlineLeadStoreLogModel
-/**
- * Model UserTypePrivilegeMapping
- * 
- */
-export type UserTypePrivilegeMapping = Prisma.UserTypePrivilegeMappingModel
-/**
- * Model TelecallerCampaignLead
- * 
- */
-export type TelecallerCampaignLead = Prisma.TelecallerCampaignLeadModel

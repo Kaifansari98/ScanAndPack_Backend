@@ -30,96 +30,96 @@ export type DefectedItemAvgAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   project_id: number | null
-  machine_id: number | null
-  defect_id: number | null
-  created_by: number | null
-  previous_scanned_by: number | null
-  previous_scanned_machine_id: number | null
   cut_list_machine_mapping_id: number | null
   cut_list_id: number | null
-  rework_machine_id: number | null
+  machine_id: number | null
+  defect_id: number | null
+  previous_scanned_by: number | null
+  previous_scanned_machine_id: number | null
+  created_by: number | null
   defect_completed_by: number | null
+  rework_machine_id: number | null
 }
 
 export type DefectedItemSumAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   project_id: number | null
-  machine_id: number | null
-  defect_id: number | null
-  created_by: number | null
-  previous_scanned_by: number | null
-  previous_scanned_machine_id: number | null
   cut_list_machine_mapping_id: number | null
   cut_list_id: number | null
-  rework_machine_id: number | null
+  machine_id: number | null
+  defect_id: number | null
+  previous_scanned_by: number | null
+  previous_scanned_machine_id: number | null
+  created_by: number | null
   defect_completed_by: number | null
+  rework_machine_id: number | null
 }
 
 export type DefectedItemMinAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   project_id: number | null
+  cut_list_machine_mapping_id: number | null
+  cut_list_id: number | null
   machine_id: number | null
   defect_id: number | null
+  previous_scanned_by: number | null
+  previous_scanned_at: Date | null
+  previous_scanned_machine_id: number | null
   remark: string | null
   created_by: number | null
   created_at: Date | null
   updated_at: Date | null
-  previous_scanned_at: Date | null
-  previous_scanned_by: number | null
-  previous_scanned_machine_id: number | null
-  cut_list_machine_mapping_id: number | null
-  cut_list_id: number | null
   action: string | null
-  rework_machine_id: number | null
-  defect_status: $Enums.DefectStatus | null
   defect_completed_at: Date | null
   defect_completed_by: number | null
+  defect_status: $Enums.DefectStatus | null
+  rework_machine_id: number | null
 }
 
 export type DefectedItemMaxAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   project_id: number | null
+  cut_list_machine_mapping_id: number | null
+  cut_list_id: number | null
   machine_id: number | null
   defect_id: number | null
+  previous_scanned_by: number | null
+  previous_scanned_at: Date | null
+  previous_scanned_machine_id: number | null
   remark: string | null
   created_by: number | null
   created_at: Date | null
   updated_at: Date | null
-  previous_scanned_at: Date | null
-  previous_scanned_by: number | null
-  previous_scanned_machine_id: number | null
-  cut_list_machine_mapping_id: number | null
-  cut_list_id: number | null
   action: string | null
-  rework_machine_id: number | null
-  defect_status: $Enums.DefectStatus | null
   defect_completed_at: Date | null
   defect_completed_by: number | null
+  defect_status: $Enums.DefectStatus | null
+  rework_machine_id: number | null
 }
 
 export type DefectedItemCountAggregateOutputType = {
   id: number
   vendor_id: number
   project_id: number
+  cut_list_machine_mapping_id: number
+  cut_list_id: number
   machine_id: number
   defect_id: number
+  previous_scanned_by: number
+  previous_scanned_at: number
+  previous_scanned_machine_id: number
   remark: number
   created_by: number
   created_at: number
   updated_at: number
-  previous_scanned_at: number
-  previous_scanned_by: number
-  previous_scanned_machine_id: number
-  cut_list_machine_mapping_id: number
-  cut_list_id: number
   action: number
-  rework_machine_id: number
-  defect_status: number
   defect_completed_at: number
   defect_completed_by: number
+  defect_status: number
+  rework_machine_id: number
   _all: number
 }
 
@@ -128,96 +128,96 @@ export type DefectedItemAvgAggregateInputType = {
   id?: true
   vendor_id?: true
   project_id?: true
-  machine_id?: true
-  defect_id?: true
-  created_by?: true
-  previous_scanned_by?: true
-  previous_scanned_machine_id?: true
   cut_list_machine_mapping_id?: true
   cut_list_id?: true
-  rework_machine_id?: true
+  machine_id?: true
+  defect_id?: true
+  previous_scanned_by?: true
+  previous_scanned_machine_id?: true
+  created_by?: true
   defect_completed_by?: true
+  rework_machine_id?: true
 }
 
 export type DefectedItemSumAggregateInputType = {
   id?: true
   vendor_id?: true
   project_id?: true
-  machine_id?: true
-  defect_id?: true
-  created_by?: true
-  previous_scanned_by?: true
-  previous_scanned_machine_id?: true
   cut_list_machine_mapping_id?: true
   cut_list_id?: true
-  rework_machine_id?: true
+  machine_id?: true
+  defect_id?: true
+  previous_scanned_by?: true
+  previous_scanned_machine_id?: true
+  created_by?: true
   defect_completed_by?: true
+  rework_machine_id?: true
 }
 
 export type DefectedItemMinAggregateInputType = {
   id?: true
   vendor_id?: true
   project_id?: true
+  cut_list_machine_mapping_id?: true
+  cut_list_id?: true
   machine_id?: true
   defect_id?: true
+  previous_scanned_by?: true
+  previous_scanned_at?: true
+  previous_scanned_machine_id?: true
   remark?: true
   created_by?: true
   created_at?: true
   updated_at?: true
-  previous_scanned_at?: true
-  previous_scanned_by?: true
-  previous_scanned_machine_id?: true
-  cut_list_machine_mapping_id?: true
-  cut_list_id?: true
   action?: true
-  rework_machine_id?: true
-  defect_status?: true
   defect_completed_at?: true
   defect_completed_by?: true
+  defect_status?: true
+  rework_machine_id?: true
 }
 
 export type DefectedItemMaxAggregateInputType = {
   id?: true
   vendor_id?: true
   project_id?: true
+  cut_list_machine_mapping_id?: true
+  cut_list_id?: true
   machine_id?: true
   defect_id?: true
+  previous_scanned_by?: true
+  previous_scanned_at?: true
+  previous_scanned_machine_id?: true
   remark?: true
   created_by?: true
   created_at?: true
   updated_at?: true
-  previous_scanned_at?: true
-  previous_scanned_by?: true
-  previous_scanned_machine_id?: true
-  cut_list_machine_mapping_id?: true
-  cut_list_id?: true
   action?: true
-  rework_machine_id?: true
-  defect_status?: true
   defect_completed_at?: true
   defect_completed_by?: true
+  defect_status?: true
+  rework_machine_id?: true
 }
 
 export type DefectedItemCountAggregateInputType = {
   id?: true
   vendor_id?: true
   project_id?: true
+  cut_list_machine_mapping_id?: true
+  cut_list_id?: true
   machine_id?: true
   defect_id?: true
+  previous_scanned_by?: true
+  previous_scanned_at?: true
+  previous_scanned_machine_id?: true
   remark?: true
   created_by?: true
   created_at?: true
   updated_at?: true
-  previous_scanned_at?: true
-  previous_scanned_by?: true
-  previous_scanned_machine_id?: true
-  cut_list_machine_mapping_id?: true
-  cut_list_id?: true
   action?: true
-  rework_machine_id?: true
-  defect_status?: true
   defect_completed_at?: true
   defect_completed_by?: true
+  defect_status?: true
+  rework_machine_id?: true
   _all?: true
 }
 
@@ -311,22 +311,22 @@ export type DefectedItemGroupByOutputType = {
   id: number
   vendor_id: number
   project_id: number
+  cut_list_machine_mapping_id: number
+  cut_list_id: number | null
   machine_id: number
   defect_id: number | null
+  previous_scanned_by: number | null
+  previous_scanned_at: Date | null
+  previous_scanned_machine_id: number | null
   remark: string | null
   created_by: number
   created_at: Date
   updated_at: Date
-  previous_scanned_at: Date | null
-  previous_scanned_by: number | null
-  previous_scanned_machine_id: number | null
-  cut_list_machine_mapping_id: number
-  cut_list_id: number | null
   action: string | null
-  rework_machine_id: number | null
-  defect_status: $Enums.DefectStatus
   defect_completed_at: Date | null
   defect_completed_by: number | null
+  defect_status: $Enums.DefectStatus
+  rework_machine_id: number | null
   _count: DefectedItemCountAggregateOutputType | null
   _avg: DefectedItemAvgAggregateOutputType | null
   _sum: DefectedItemSumAggregateOutputType | null
@@ -356,22 +356,22 @@ export type DefectedItemWhereInput = {
   id?: Prisma.IntFilter<"DefectedItem"> | number
   vendor_id?: Prisma.IntFilter<"DefectedItem"> | number
   project_id?: Prisma.IntFilter<"DefectedItem"> | number
+  cut_list_machine_mapping_id?: Prisma.IntFilter<"DefectedItem"> | number
+  cut_list_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
   machine_id?: Prisma.IntFilter<"DefectedItem"> | number
   defect_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
+  previous_scanned_by?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
+  previous_scanned_at?: Prisma.DateTimeNullableFilter<"DefectedItem"> | Date | string | null
+  previous_scanned_machine_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
   remark?: Prisma.StringNullableFilter<"DefectedItem"> | string | null
   created_by?: Prisma.IntFilter<"DefectedItem"> | number
   created_at?: Prisma.DateTimeFilter<"DefectedItem"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"DefectedItem"> | Date | string
-  previous_scanned_at?: Prisma.DateTimeNullableFilter<"DefectedItem"> | Date | string | null
-  previous_scanned_by?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
-  previous_scanned_machine_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
-  cut_list_machine_mapping_id?: Prisma.IntFilter<"DefectedItem"> | number
-  cut_list_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
   action?: Prisma.StringNullableFilter<"DefectedItem"> | string | null
-  rework_machine_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
-  defect_status?: Prisma.EnumDefectStatusFilter<"DefectedItem"> | $Enums.DefectStatus
   defect_completed_at?: Prisma.DateTimeNullableFilter<"DefectedItem"> | Date | string | null
   defect_completed_by?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
+  defect_status?: Prisma.EnumDefectStatusFilter<"DefectedItem"> | $Enums.DefectStatus
+  rework_machine_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   cutList?: Prisma.XOR<Prisma.CutListNullableScalarRelationFilter, Prisma.CutListWhereInput> | null
@@ -387,22 +387,22 @@ export type DefectedItemOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
+  cut_list_machine_mapping_id?: Prisma.SortOrder
+  cut_list_id?: Prisma.SortOrderInput | Prisma.SortOrder
   machine_id?: Prisma.SortOrder
   defect_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  previous_scanned_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  previous_scanned_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  previous_scanned_machine_id?: Prisma.SortOrderInput | Prisma.SortOrder
   remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  previous_scanned_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  previous_scanned_by?: Prisma.SortOrderInput | Prisma.SortOrder
-  previous_scanned_machine_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  cut_list_machine_mapping_id?: Prisma.SortOrder
-  cut_list_id?: Prisma.SortOrderInput | Prisma.SortOrder
   action?: Prisma.SortOrderInput | Prisma.SortOrder
-  rework_machine_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  defect_status?: Prisma.SortOrder
   defect_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   defect_completed_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  defect_status?: Prisma.SortOrder
+  rework_machine_id?: Prisma.SortOrderInput | Prisma.SortOrder
   completionPhotos?: Prisma.DefectCompletionPhotoOrderByRelationAggregateInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   cutList?: Prisma.CutListOrderByWithRelationInput
@@ -421,22 +421,22 @@ export type DefectedItemWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.DefectedItemWhereInput | Prisma.DefectedItemWhereInput[]
   vendor_id?: Prisma.IntFilter<"DefectedItem"> | number
   project_id?: Prisma.IntFilter<"DefectedItem"> | number
+  cut_list_machine_mapping_id?: Prisma.IntFilter<"DefectedItem"> | number
+  cut_list_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
   machine_id?: Prisma.IntFilter<"DefectedItem"> | number
   defect_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
+  previous_scanned_by?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
+  previous_scanned_at?: Prisma.DateTimeNullableFilter<"DefectedItem"> | Date | string | null
+  previous_scanned_machine_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
   remark?: Prisma.StringNullableFilter<"DefectedItem"> | string | null
   created_by?: Prisma.IntFilter<"DefectedItem"> | number
   created_at?: Prisma.DateTimeFilter<"DefectedItem"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"DefectedItem"> | Date | string
-  previous_scanned_at?: Prisma.DateTimeNullableFilter<"DefectedItem"> | Date | string | null
-  previous_scanned_by?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
-  previous_scanned_machine_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
-  cut_list_machine_mapping_id?: Prisma.IntFilter<"DefectedItem"> | number
-  cut_list_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
   action?: Prisma.StringNullableFilter<"DefectedItem"> | string | null
-  rework_machine_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
-  defect_status?: Prisma.EnumDefectStatusFilter<"DefectedItem"> | $Enums.DefectStatus
   defect_completed_at?: Prisma.DateTimeNullableFilter<"DefectedItem"> | Date | string | null
   defect_completed_by?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
+  defect_status?: Prisma.EnumDefectStatusFilter<"DefectedItem"> | $Enums.DefectStatus
+  rework_machine_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   cutList?: Prisma.XOR<Prisma.CutListNullableScalarRelationFilter, Prisma.CutListWhereInput> | null
@@ -452,22 +452,22 @@ export type DefectedItemOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
+  cut_list_machine_mapping_id?: Prisma.SortOrder
+  cut_list_id?: Prisma.SortOrderInput | Prisma.SortOrder
   machine_id?: Prisma.SortOrder
   defect_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  previous_scanned_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  previous_scanned_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  previous_scanned_machine_id?: Prisma.SortOrderInput | Prisma.SortOrder
   remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  previous_scanned_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  previous_scanned_by?: Prisma.SortOrderInput | Prisma.SortOrder
-  previous_scanned_machine_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  cut_list_machine_mapping_id?: Prisma.SortOrder
-  cut_list_id?: Prisma.SortOrderInput | Prisma.SortOrder
   action?: Prisma.SortOrderInput | Prisma.SortOrder
-  rework_machine_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  defect_status?: Prisma.SortOrder
   defect_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   defect_completed_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  defect_status?: Prisma.SortOrder
+  rework_machine_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.DefectedItemCountOrderByAggregateInput
   _avg?: Prisma.DefectedItemAvgOrderByAggregateInput
   _max?: Prisma.DefectedItemMaxOrderByAggregateInput
@@ -482,36 +482,36 @@ export type DefectedItemScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"DefectedItem"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"DefectedItem"> | number
   project_id?: Prisma.IntWithAggregatesFilter<"DefectedItem"> | number
+  cut_list_machine_mapping_id?: Prisma.IntWithAggregatesFilter<"DefectedItem"> | number
+  cut_list_id?: Prisma.IntNullableWithAggregatesFilter<"DefectedItem"> | number | null
   machine_id?: Prisma.IntWithAggregatesFilter<"DefectedItem"> | number
   defect_id?: Prisma.IntNullableWithAggregatesFilter<"DefectedItem"> | number | null
+  previous_scanned_by?: Prisma.IntNullableWithAggregatesFilter<"DefectedItem"> | number | null
+  previous_scanned_at?: Prisma.DateTimeNullableWithAggregatesFilter<"DefectedItem"> | Date | string | null
+  previous_scanned_machine_id?: Prisma.IntNullableWithAggregatesFilter<"DefectedItem"> | number | null
   remark?: Prisma.StringNullableWithAggregatesFilter<"DefectedItem"> | string | null
   created_by?: Prisma.IntWithAggregatesFilter<"DefectedItem"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"DefectedItem"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"DefectedItem"> | Date | string
-  previous_scanned_at?: Prisma.DateTimeNullableWithAggregatesFilter<"DefectedItem"> | Date | string | null
-  previous_scanned_by?: Prisma.IntNullableWithAggregatesFilter<"DefectedItem"> | number | null
-  previous_scanned_machine_id?: Prisma.IntNullableWithAggregatesFilter<"DefectedItem"> | number | null
-  cut_list_machine_mapping_id?: Prisma.IntWithAggregatesFilter<"DefectedItem"> | number
-  cut_list_id?: Prisma.IntNullableWithAggregatesFilter<"DefectedItem"> | number | null
   action?: Prisma.StringNullableWithAggregatesFilter<"DefectedItem"> | string | null
-  rework_machine_id?: Prisma.IntNullableWithAggregatesFilter<"DefectedItem"> | number | null
-  defect_status?: Prisma.EnumDefectStatusWithAggregatesFilter<"DefectedItem"> | $Enums.DefectStatus
   defect_completed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"DefectedItem"> | Date | string | null
   defect_completed_by?: Prisma.IntNullableWithAggregatesFilter<"DefectedItem"> | number | null
+  defect_status?: Prisma.EnumDefectStatusWithAggregatesFilter<"DefectedItem"> | $Enums.DefectStatus
+  rework_machine_id?: Prisma.IntNullableWithAggregatesFilter<"DefectedItem"> | number | null
 }
 
 export type DefectedItemCreateInput = {
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutDefectedItemInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedDefectsInput
   cutList?: Prisma.CutListCreateNestedOneWithoutDefectedItemsInput
@@ -527,38 +527,38 @@ export type DefectedItemUncheckedCreateInput = {
   id?: number
   vendor_id: number
   project_id: number
+  cut_list_machine_mapping_id: number
+  cut_list_id?: number | null
   machine_id: number
   defect_id?: number | null
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
-  cut_list_machine_mapping_id: number
-  cut_list_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutDefectedItemInput
   images?: Prisma.DefectedItemImageUncheckedCreateNestedManyWithoutDefected_itemInput
 }
 
 export type DefectedItemUpdateInput = {
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutDefectedItemNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput
   cutList?: Prisma.CutListUpdateOneWithoutDefectedItemsNestedInput
@@ -574,22 +574,22 @@ export type DefectedItemUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   defect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
-  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutDefectedItemNestedInput
   images?: Prisma.DefectedItemImageUncheckedUpdateManyWithoutDefected_itemNestedInput
 }
@@ -598,58 +598,58 @@ export type DefectedItemCreateManyInput = {
   id?: number
   vendor_id: number
   project_id: number
+  cut_list_machine_mapping_id: number
+  cut_list_id?: number | null
   machine_id: number
   defect_id?: number | null
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
-  cut_list_machine_mapping_id: number
-  cut_list_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
 }
 
 export type DefectedItemUpdateManyMutationInput = {
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DefectedItemUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   defect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
-  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DefectedItemListRelationFilter = {
@@ -666,96 +666,96 @@ export type DefectedItemCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
+  cut_list_machine_mapping_id?: Prisma.SortOrder
+  cut_list_id?: Prisma.SortOrder
   machine_id?: Prisma.SortOrder
   defect_id?: Prisma.SortOrder
+  previous_scanned_by?: Prisma.SortOrder
+  previous_scanned_at?: Prisma.SortOrder
+  previous_scanned_machine_id?: Prisma.SortOrder
   remark?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  previous_scanned_at?: Prisma.SortOrder
-  previous_scanned_by?: Prisma.SortOrder
-  previous_scanned_machine_id?: Prisma.SortOrder
-  cut_list_machine_mapping_id?: Prisma.SortOrder
-  cut_list_id?: Prisma.SortOrder
   action?: Prisma.SortOrder
-  rework_machine_id?: Prisma.SortOrder
-  defect_status?: Prisma.SortOrder
   defect_completed_at?: Prisma.SortOrder
   defect_completed_by?: Prisma.SortOrder
+  defect_status?: Prisma.SortOrder
+  rework_machine_id?: Prisma.SortOrder
 }
 
 export type DefectedItemAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
-  machine_id?: Prisma.SortOrder
-  defect_id?: Prisma.SortOrder
-  created_by?: Prisma.SortOrder
-  previous_scanned_by?: Prisma.SortOrder
-  previous_scanned_machine_id?: Prisma.SortOrder
   cut_list_machine_mapping_id?: Prisma.SortOrder
   cut_list_id?: Prisma.SortOrder
-  rework_machine_id?: Prisma.SortOrder
+  machine_id?: Prisma.SortOrder
+  defect_id?: Prisma.SortOrder
+  previous_scanned_by?: Prisma.SortOrder
+  previous_scanned_machine_id?: Prisma.SortOrder
+  created_by?: Prisma.SortOrder
   defect_completed_by?: Prisma.SortOrder
+  rework_machine_id?: Prisma.SortOrder
 }
 
 export type DefectedItemMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
+  cut_list_machine_mapping_id?: Prisma.SortOrder
+  cut_list_id?: Prisma.SortOrder
   machine_id?: Prisma.SortOrder
   defect_id?: Prisma.SortOrder
+  previous_scanned_by?: Prisma.SortOrder
+  previous_scanned_at?: Prisma.SortOrder
+  previous_scanned_machine_id?: Prisma.SortOrder
   remark?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  previous_scanned_at?: Prisma.SortOrder
-  previous_scanned_by?: Prisma.SortOrder
-  previous_scanned_machine_id?: Prisma.SortOrder
-  cut_list_machine_mapping_id?: Prisma.SortOrder
-  cut_list_id?: Prisma.SortOrder
   action?: Prisma.SortOrder
-  rework_machine_id?: Prisma.SortOrder
-  defect_status?: Prisma.SortOrder
   defect_completed_at?: Prisma.SortOrder
   defect_completed_by?: Prisma.SortOrder
+  defect_status?: Prisma.SortOrder
+  rework_machine_id?: Prisma.SortOrder
 }
 
 export type DefectedItemMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
+  cut_list_machine_mapping_id?: Prisma.SortOrder
+  cut_list_id?: Prisma.SortOrder
   machine_id?: Prisma.SortOrder
   defect_id?: Prisma.SortOrder
+  previous_scanned_by?: Prisma.SortOrder
+  previous_scanned_at?: Prisma.SortOrder
+  previous_scanned_machine_id?: Prisma.SortOrder
   remark?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  previous_scanned_at?: Prisma.SortOrder
-  previous_scanned_by?: Prisma.SortOrder
-  previous_scanned_machine_id?: Prisma.SortOrder
-  cut_list_machine_mapping_id?: Prisma.SortOrder
-  cut_list_id?: Prisma.SortOrder
   action?: Prisma.SortOrder
-  rework_machine_id?: Prisma.SortOrder
-  defect_status?: Prisma.SortOrder
   defect_completed_at?: Prisma.SortOrder
   defect_completed_by?: Prisma.SortOrder
+  defect_status?: Prisma.SortOrder
+  rework_machine_id?: Prisma.SortOrder
 }
 
 export type DefectedItemSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
-  machine_id?: Prisma.SortOrder
-  defect_id?: Prisma.SortOrder
-  created_by?: Prisma.SortOrder
-  previous_scanned_by?: Prisma.SortOrder
-  previous_scanned_machine_id?: Prisma.SortOrder
   cut_list_machine_mapping_id?: Prisma.SortOrder
   cut_list_id?: Prisma.SortOrder
-  rework_machine_id?: Prisma.SortOrder
+  machine_id?: Prisma.SortOrder
+  defect_id?: Prisma.SortOrder
+  previous_scanned_by?: Prisma.SortOrder
+  previous_scanned_machine_id?: Prisma.SortOrder
+  created_by?: Prisma.SortOrder
   defect_completed_by?: Prisma.SortOrder
+  rework_machine_id?: Prisma.SortOrder
 }
 
 export type DefectedItemScalarRelationFilter = {
@@ -1097,17 +1097,17 @@ export type DefectedItemUpdateOneWithoutCompletionPhotosNestedInput = {
 }
 
 export type DefectedItemCreateWithoutVendorInput = {
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutDefectedItemInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedDefectsInput
   cutList?: Prisma.CutListCreateNestedOneWithoutDefectedItemsInput
@@ -1121,22 +1121,22 @@ export type DefectedItemCreateWithoutVendorInput = {
 export type DefectedItemUncheckedCreateWithoutVendorInput = {
   id?: number
   project_id: number
+  cut_list_machine_mapping_id: number
+  cut_list_id?: number | null
   machine_id: number
   defect_id?: number | null
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
-  cut_list_machine_mapping_id: number
-  cut_list_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutDefectedItemInput
   images?: Prisma.DefectedItemImageUncheckedCreateNestedManyWithoutDefected_itemInput
 }
@@ -1174,36 +1174,36 @@ export type DefectedItemScalarWhereInput = {
   id?: Prisma.IntFilter<"DefectedItem"> | number
   vendor_id?: Prisma.IntFilter<"DefectedItem"> | number
   project_id?: Prisma.IntFilter<"DefectedItem"> | number
+  cut_list_machine_mapping_id?: Prisma.IntFilter<"DefectedItem"> | number
+  cut_list_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
   machine_id?: Prisma.IntFilter<"DefectedItem"> | number
   defect_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
+  previous_scanned_by?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
+  previous_scanned_at?: Prisma.DateTimeNullableFilter<"DefectedItem"> | Date | string | null
+  previous_scanned_machine_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
   remark?: Prisma.StringNullableFilter<"DefectedItem"> | string | null
   created_by?: Prisma.IntFilter<"DefectedItem"> | number
   created_at?: Prisma.DateTimeFilter<"DefectedItem"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"DefectedItem"> | Date | string
-  previous_scanned_at?: Prisma.DateTimeNullableFilter<"DefectedItem"> | Date | string | null
-  previous_scanned_by?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
-  previous_scanned_machine_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
-  cut_list_machine_mapping_id?: Prisma.IntFilter<"DefectedItem"> | number
-  cut_list_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
   action?: Prisma.StringNullableFilter<"DefectedItem"> | string | null
-  rework_machine_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
-  defect_status?: Prisma.EnumDefectStatusFilter<"DefectedItem"> | $Enums.DefectStatus
   defect_completed_at?: Prisma.DateTimeNullableFilter<"DefectedItem"> | Date | string | null
   defect_completed_by?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
+  defect_status?: Prisma.EnumDefectStatusFilter<"DefectedItem"> | $Enums.DefectStatus
+  rework_machine_id?: Prisma.IntNullableFilter<"DefectedItem"> | number | null
 }
 
 export type DefectedItemCreateWithoutCreatedByInput = {
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutDefectedItemInput
   cutList?: Prisma.CutListCreateNestedOneWithoutDefectedItemsInput
   cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutDefectedItemsInput
@@ -1218,21 +1218,21 @@ export type DefectedItemUncheckedCreateWithoutCreatedByInput = {
   id?: number
   vendor_id: number
   project_id: number
+  cut_list_machine_mapping_id: number
+  cut_list_id?: number | null
   machine_id: number
   defect_id?: number | null
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
-  cut_list_machine_mapping_id: number
-  cut_list_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutDefectedItemInput
   images?: Prisma.DefectedItemImageUncheckedCreateNestedManyWithoutDefected_itemInput
 }
@@ -1264,17 +1264,17 @@ export type DefectedItemUpdateManyWithWhereWithoutCreatedByInput = {
 }
 
 export type DefectedItemCreateWithoutProjectInput = {
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutDefectedItemInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedDefectsInput
   cutList?: Prisma.CutListCreateNestedOneWithoutDefectedItemsInput
@@ -1288,22 +1288,22 @@ export type DefectedItemCreateWithoutProjectInput = {
 export type DefectedItemUncheckedCreateWithoutProjectInput = {
   id?: number
   vendor_id: number
+  cut_list_machine_mapping_id: number
+  cut_list_id?: number | null
   machine_id: number
   defect_id?: number | null
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
-  cut_list_machine_mapping_id: number
-  cut_list_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutDefectedItemInput
   images?: Prisma.DefectedItemImageUncheckedCreateNestedManyWithoutDefected_itemInput
 }
@@ -1335,17 +1335,17 @@ export type DefectedItemUpdateManyWithWhereWithoutProjectInput = {
 }
 
 export type DefectedItemCreateWithoutMachineInput = {
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutDefectedItemInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedDefectsInput
   cutList?: Prisma.CutListCreateNestedOneWithoutDefectedItemsInput
@@ -1360,21 +1360,21 @@ export type DefectedItemUncheckedCreateWithoutMachineInput = {
   id?: number
   vendor_id: number
   project_id: number
+  cut_list_machine_mapping_id: number
+  cut_list_id?: number | null
   defect_id?: number | null
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
-  cut_list_machine_mapping_id: number
-  cut_list_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutDefectedItemInput
   images?: Prisma.DefectedItemImageUncheckedCreateNestedManyWithoutDefected_itemInput
 }
@@ -1406,17 +1406,17 @@ export type DefectedItemUpdateManyWithWhereWithoutMachineInput = {
 }
 
 export type DefectedItemCreateWithoutCutListInput = {
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutDefectedItemInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedDefectsInput
   cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutDefectedItemsInput
@@ -1431,21 +1431,21 @@ export type DefectedItemUncheckedCreateWithoutCutListInput = {
   id?: number
   vendor_id: number
   project_id: number
+  cut_list_machine_mapping_id: number
   machine_id: number
   defect_id?: number | null
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
-  cut_list_machine_mapping_id: number
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutDefectedItemInput
   images?: Prisma.DefectedItemImageUncheckedCreateNestedManyWithoutDefected_itemInput
 }
@@ -1477,17 +1477,17 @@ export type DefectedItemUpdateManyWithWhereWithoutCutListInput = {
 }
 
 export type DefectedItemCreateWithoutCutListMachineMappingInput = {
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutDefectedItemInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedDefectsInput
   cutList?: Prisma.CutListCreateNestedOneWithoutDefectedItemsInput
@@ -1502,21 +1502,21 @@ export type DefectedItemUncheckedCreateWithoutCutListMachineMappingInput = {
   id?: number
   vendor_id: number
   project_id: number
+  cut_list_id?: number | null
   machine_id: number
   defect_id?: number | null
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
-  cut_list_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutDefectedItemInput
   images?: Prisma.DefectedItemImageUncheckedCreateNestedManyWithoutDefected_itemInput
 }
@@ -1548,17 +1548,17 @@ export type DefectedItemUpdateManyWithWhereWithoutCutListMachineMappingInput = {
 }
 
 export type DefectedItemCreateWithoutDefectInput = {
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutDefectedItemInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedDefectsInput
   cutList?: Prisma.CutListCreateNestedOneWithoutDefectedItemsInput
@@ -1573,21 +1573,21 @@ export type DefectedItemUncheckedCreateWithoutDefectInput = {
   id?: number
   vendor_id: number
   project_id: number
+  cut_list_machine_mapping_id: number
+  cut_list_id?: number | null
   machine_id: number
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
-  cut_list_machine_mapping_id: number
-  cut_list_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutDefectedItemInput
   images?: Prisma.DefectedItemImageUncheckedCreateNestedManyWithoutDefected_itemInput
 }
@@ -1619,17 +1619,17 @@ export type DefectedItemUpdateManyWithWhereWithoutDefectInput = {
 }
 
 export type DefectedItemCreateWithoutImagesInput = {
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutDefectedItemInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedDefectsInput
   cutList?: Prisma.CutListCreateNestedOneWithoutDefectedItemsInput
@@ -1644,22 +1644,22 @@ export type DefectedItemUncheckedCreateWithoutImagesInput = {
   id?: number
   vendor_id: number
   project_id: number
+  cut_list_machine_mapping_id: number
+  cut_list_id?: number | null
   machine_id: number
   defect_id?: number | null
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
-  cut_list_machine_mapping_id: number
-  cut_list_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutDefectedItemInput
 }
 
@@ -1680,17 +1680,17 @@ export type DefectedItemUpdateToOneWithWhereWithoutImagesInput = {
 }
 
 export type DefectedItemUpdateWithoutImagesInput = {
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutDefectedItemNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput
   cutList?: Prisma.CutListUpdateOneWithoutDefectedItemsNestedInput
@@ -1705,37 +1705,37 @@ export type DefectedItemUncheckedUpdateWithoutImagesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   defect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
-  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutDefectedItemNestedInput
 }
 
 export type DefectedItemCreateWithoutCompletionPhotosInput = {
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCreatedDefectsInput
   cutList?: Prisma.CutListCreateNestedOneWithoutDefectedItemsInput
   cutListMachineMapping: Prisma.CutListMachineMappingCreateNestedOneWithoutDefectedItemsInput
@@ -1750,22 +1750,22 @@ export type DefectedItemUncheckedCreateWithoutCompletionPhotosInput = {
   id?: number
   vendor_id: number
   project_id: number
+  cut_list_machine_mapping_id: number
+  cut_list_id?: number | null
   machine_id: number
   defect_id?: number | null
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
-  cut_list_machine_mapping_id: number
-  cut_list_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
   images?: Prisma.DefectedItemImageUncheckedCreateNestedManyWithoutDefected_itemInput
 }
 
@@ -1786,17 +1786,17 @@ export type DefectedItemUpdateToOneWithWhereWithoutCompletionPhotosInput = {
 }
 
 export type DefectedItemUpdateWithoutCompletionPhotosInput = {
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput
   cutList?: Prisma.CutListUpdateOneWithoutDefectedItemsNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutDefectedItemsNestedInput
@@ -1811,58 +1811,58 @@ export type DefectedItemUncheckedUpdateWithoutCompletionPhotosInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   defect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
-  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.DefectedItemImageUncheckedUpdateManyWithoutDefected_itemNestedInput
 }
 
 export type DefectedItemCreateManyVendorInput = {
   id?: number
   project_id: number
+  cut_list_machine_mapping_id: number
+  cut_list_id?: number | null
   machine_id: number
   defect_id?: number | null
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
-  cut_list_machine_mapping_id: number
-  cut_list_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
 }
 
 export type DefectedItemUpdateWithoutVendorInput = {
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutDefectedItemNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput
   cutList?: Prisma.CutListUpdateOneWithoutDefectedItemsNestedInput
@@ -1876,22 +1876,22 @@ export type DefectedItemUpdateWithoutVendorInput = {
 export type DefectedItemUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   defect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
-  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutDefectedItemNestedInput
   images?: Prisma.DefectedItemImageUncheckedUpdateManyWithoutDefected_itemNestedInput
 }
@@ -1899,57 +1899,57 @@ export type DefectedItemUncheckedUpdateWithoutVendorInput = {
 export type DefectedItemUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   defect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
-  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DefectedItemCreateManyCreatedByInput = {
   id?: number
   vendor_id: number
   project_id: number
+  cut_list_machine_mapping_id: number
+  cut_list_id?: number | null
   machine_id: number
   defect_id?: number | null
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
-  cut_list_machine_mapping_id: number
-  cut_list_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
 }
 
 export type DefectedItemUpdateWithoutCreatedByInput = {
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutDefectedItemNestedInput
   cutList?: Prisma.CutListUpdateOneWithoutDefectedItemsNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutDefectedItemsNestedInput
@@ -1964,21 +1964,21 @@ export type DefectedItemUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   defect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
-  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutDefectedItemNestedInput
   images?: Prisma.DefectedItemImageUncheckedUpdateManyWithoutDefected_itemNestedInput
 }
@@ -1987,56 +1987,56 @@ export type DefectedItemUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   defect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
-  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DefectedItemCreateManyProjectInput = {
   id?: number
   vendor_id: number
+  cut_list_machine_mapping_id: number
+  cut_list_id?: number | null
   machine_id: number
   defect_id?: number | null
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
-  cut_list_machine_mapping_id: number
-  cut_list_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
 }
 
 export type DefectedItemUpdateWithoutProjectInput = {
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutDefectedItemNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput
   cutList?: Prisma.CutListUpdateOneWithoutDefectedItemsNestedInput
@@ -2050,22 +2050,22 @@ export type DefectedItemUpdateWithoutProjectInput = {
 export type DefectedItemUncheckedUpdateWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   defect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
-  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutDefectedItemNestedInput
   images?: Prisma.DefectedItemImageUncheckedUpdateManyWithoutDefected_itemNestedInput
 }
@@ -2073,57 +2073,57 @@ export type DefectedItemUncheckedUpdateWithoutProjectInput = {
 export type DefectedItemUncheckedUpdateManyWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   defect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
-  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DefectedItemCreateManyMachineInput = {
   id?: number
   vendor_id: number
   project_id: number
+  cut_list_machine_mapping_id: number
+  cut_list_id?: number | null
   defect_id?: number | null
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
-  cut_list_machine_mapping_id: number
-  cut_list_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
 }
 
 export type DefectedItemUpdateWithoutMachineInput = {
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutDefectedItemNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput
   cutList?: Prisma.CutListUpdateOneWithoutDefectedItemsNestedInput
@@ -2138,21 +2138,21 @@ export type DefectedItemUncheckedUpdateWithoutMachineInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
-  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutDefectedItemNestedInput
   images?: Prisma.DefectedItemImageUncheckedUpdateManyWithoutDefected_itemNestedInput
 }
@@ -2161,56 +2161,56 @@ export type DefectedItemUncheckedUpdateManyWithoutMachineInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   defect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
-  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DefectedItemCreateManyCutListInput = {
   id?: number
   vendor_id: number
   project_id: number
+  cut_list_machine_mapping_id: number
   machine_id: number
   defect_id?: number | null
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
-  cut_list_machine_mapping_id: number
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
 }
 
 export type DefectedItemUpdateWithoutCutListInput = {
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutDefectedItemNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateOneRequiredWithoutDefectedItemsNestedInput
@@ -2225,21 +2225,21 @@ export type DefectedItemUncheckedUpdateWithoutCutListInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   defect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutDefectedItemNestedInput
   images?: Prisma.DefectedItemImageUncheckedUpdateManyWithoutDefected_itemNestedInput
 }
@@ -2248,56 +2248,56 @@ export type DefectedItemUncheckedUpdateManyWithoutCutListInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   defect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DefectedItemCreateManyCutListMachineMappingInput = {
   id?: number
   vendor_id: number
   project_id: number
+  cut_list_id?: number | null
   machine_id: number
   defect_id?: number | null
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
-  cut_list_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
 }
 
 export type DefectedItemUpdateWithoutCutListMachineMappingInput = {
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutDefectedItemNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput
   cutList?: Prisma.CutListUpdateOneWithoutDefectedItemsNestedInput
@@ -2312,21 +2312,21 @@ export type DefectedItemUncheckedUpdateWithoutCutListMachineMappingInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   defect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutDefectedItemNestedInput
   images?: Prisma.DefectedItemImageUncheckedUpdateManyWithoutDefected_itemNestedInput
 }
@@ -2335,56 +2335,56 @@ export type DefectedItemUncheckedUpdateManyWithoutCutListMachineMappingInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
   defect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type DefectedItemCreateManyDefectInput = {
   id?: number
   vendor_id: number
   project_id: number
+  cut_list_machine_mapping_id: number
+  cut_list_id?: number | null
   machine_id: number
+  previous_scanned_by?: number | null
+  previous_scanned_at?: Date | string | null
+  previous_scanned_machine_id?: number | null
   remark?: string | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  previous_scanned_at?: Date | string | null
-  previous_scanned_by?: number | null
-  previous_scanned_machine_id?: number | null
-  cut_list_machine_mapping_id: number
-  cut_list_id?: number | null
   action?: string | null
-  rework_machine_id?: number | null
-  defect_status?: $Enums.DefectStatus
   defect_completed_at?: Date | string | null
   defect_completed_by?: number | null
+  defect_status?: $Enums.DefectStatus
+  rework_machine_id?: number | null
 }
 
 export type DefectedItemUpdateWithoutDefectInput = {
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutDefectedItemNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput
   cutList?: Prisma.CutListUpdateOneWithoutDefectedItemsNestedInput
@@ -2399,21 +2399,21 @@ export type DefectedItemUncheckedUpdateWithoutDefectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
-  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutDefectedItemNestedInput
   images?: Prisma.DefectedItemImageUncheckedUpdateManyWithoutDefected_itemNestedInput
 }
@@ -2422,21 +2422,21 @@ export type DefectedItemUncheckedUpdateManyWithoutDefectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   machine_id?: Prisma.IntFieldUpdateOperationsInput | number
+  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  previous_scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  previous_scanned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  previous_scanned_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  cut_list_machine_mapping_id?: Prisma.IntFieldUpdateOperationsInput | number
-  cut_list_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   action?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
   defect_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   defect_completed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  defect_status?: Prisma.EnumDefectStatusFieldUpdateOperationsInput | $Enums.DefectStatus
+  rework_machine_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -2483,22 +2483,22 @@ export type DefectedItemSelect<ExtArgs extends runtime.Types.Extensions.Internal
   id?: boolean
   vendor_id?: boolean
   project_id?: boolean
+  cut_list_machine_mapping_id?: boolean
+  cut_list_id?: boolean
   machine_id?: boolean
   defect_id?: boolean
+  previous_scanned_by?: boolean
+  previous_scanned_at?: boolean
+  previous_scanned_machine_id?: boolean
   remark?: boolean
   created_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  previous_scanned_at?: boolean
-  previous_scanned_by?: boolean
-  previous_scanned_machine_id?: boolean
-  cut_list_machine_mapping_id?: boolean
-  cut_list_id?: boolean
   action?: boolean
-  rework_machine_id?: boolean
-  defect_status?: boolean
   defect_completed_at?: boolean
   defect_completed_by?: boolean
+  defect_status?: boolean
+  rework_machine_id?: boolean
   completionPhotos?: boolean | Prisma.DefectedItem$completionPhotosArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   cutList?: boolean | Prisma.DefectedItem$cutListArgs<ExtArgs>
@@ -2515,22 +2515,22 @@ export type DefectedItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   vendor_id?: boolean
   project_id?: boolean
+  cut_list_machine_mapping_id?: boolean
+  cut_list_id?: boolean
   machine_id?: boolean
   defect_id?: boolean
+  previous_scanned_by?: boolean
+  previous_scanned_at?: boolean
+  previous_scanned_machine_id?: boolean
   remark?: boolean
   created_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  previous_scanned_at?: boolean
-  previous_scanned_by?: boolean
-  previous_scanned_machine_id?: boolean
-  cut_list_machine_mapping_id?: boolean
-  cut_list_id?: boolean
   action?: boolean
-  rework_machine_id?: boolean
-  defect_status?: boolean
   defect_completed_at?: boolean
   defect_completed_by?: boolean
+  defect_status?: boolean
+  rework_machine_id?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   cutList?: boolean | Prisma.DefectedItem$cutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
@@ -2544,22 +2544,22 @@ export type DefectedItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   vendor_id?: boolean
   project_id?: boolean
+  cut_list_machine_mapping_id?: boolean
+  cut_list_id?: boolean
   machine_id?: boolean
   defect_id?: boolean
+  previous_scanned_by?: boolean
+  previous_scanned_at?: boolean
+  previous_scanned_machine_id?: boolean
   remark?: boolean
   created_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  previous_scanned_at?: boolean
-  previous_scanned_by?: boolean
-  previous_scanned_machine_id?: boolean
-  cut_list_machine_mapping_id?: boolean
-  cut_list_id?: boolean
   action?: boolean
-  rework_machine_id?: boolean
-  defect_status?: boolean
   defect_completed_at?: boolean
   defect_completed_by?: boolean
+  defect_status?: boolean
+  rework_machine_id?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   cutList?: boolean | Prisma.DefectedItem$cutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.CutListMachineMappingDefaultArgs<ExtArgs>
@@ -2573,25 +2573,25 @@ export type DefectedItemSelectScalar = {
   id?: boolean
   vendor_id?: boolean
   project_id?: boolean
+  cut_list_machine_mapping_id?: boolean
+  cut_list_id?: boolean
   machine_id?: boolean
   defect_id?: boolean
+  previous_scanned_by?: boolean
+  previous_scanned_at?: boolean
+  previous_scanned_machine_id?: boolean
   remark?: boolean
   created_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  previous_scanned_at?: boolean
-  previous_scanned_by?: boolean
-  previous_scanned_machine_id?: boolean
-  cut_list_machine_mapping_id?: boolean
-  cut_list_id?: boolean
   action?: boolean
-  rework_machine_id?: boolean
-  defect_status?: boolean
   defect_completed_at?: boolean
   defect_completed_by?: boolean
+  defect_status?: boolean
+  rework_machine_id?: boolean
 }
 
-export type DefectedItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "project_id" | "machine_id" | "defect_id" | "remark" | "created_by" | "created_at" | "updated_at" | "previous_scanned_at" | "previous_scanned_by" | "previous_scanned_machine_id" | "cut_list_machine_mapping_id" | "cut_list_id" | "action" | "rework_machine_id" | "defect_status" | "defect_completed_at" | "defect_completed_by", ExtArgs["result"]["defectedItem"]>
+export type DefectedItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "project_id" | "cut_list_machine_mapping_id" | "cut_list_id" | "machine_id" | "defect_id" | "previous_scanned_by" | "previous_scanned_at" | "previous_scanned_machine_id" | "remark" | "created_by" | "created_at" | "updated_at" | "action" | "defect_completed_at" | "defect_completed_by" | "defect_status" | "rework_machine_id", ExtArgs["result"]["defectedItem"]>
 export type DefectedItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   completionPhotos?: boolean | Prisma.DefectedItem$completionPhotosArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -2640,22 +2640,22 @@ export type $DefectedItemPayload<ExtArgs extends runtime.Types.Extensions.Intern
     id: number
     vendor_id: number
     project_id: number
+    cut_list_machine_mapping_id: number
+    cut_list_id: number | null
     machine_id: number
     defect_id: number | null
+    previous_scanned_by: number | null
+    previous_scanned_at: Date | null
+    previous_scanned_machine_id: number | null
     remark: string | null
     created_by: number
     created_at: Date
     updated_at: Date
-    previous_scanned_at: Date | null
-    previous_scanned_by: number | null
-    previous_scanned_machine_id: number | null
-    cut_list_machine_mapping_id: number
-    cut_list_id: number | null
     action: string | null
-    rework_machine_id: number | null
-    defect_status: $Enums.DefectStatus
     defect_completed_at: Date | null
     defect_completed_by: number | null
+    defect_status: $Enums.DefectStatus
+    rework_machine_id: number | null
   }, ExtArgs["result"]["defectedItem"]>
   composites: {}
 }
@@ -3091,22 +3091,22 @@ export interface DefectedItemFieldRefs {
   readonly id: Prisma.FieldRef<"DefectedItem", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"DefectedItem", 'Int'>
   readonly project_id: Prisma.FieldRef<"DefectedItem", 'Int'>
+  readonly cut_list_machine_mapping_id: Prisma.FieldRef<"DefectedItem", 'Int'>
+  readonly cut_list_id: Prisma.FieldRef<"DefectedItem", 'Int'>
   readonly machine_id: Prisma.FieldRef<"DefectedItem", 'Int'>
   readonly defect_id: Prisma.FieldRef<"DefectedItem", 'Int'>
+  readonly previous_scanned_by: Prisma.FieldRef<"DefectedItem", 'Int'>
+  readonly previous_scanned_at: Prisma.FieldRef<"DefectedItem", 'DateTime'>
+  readonly previous_scanned_machine_id: Prisma.FieldRef<"DefectedItem", 'Int'>
   readonly remark: Prisma.FieldRef<"DefectedItem", 'String'>
   readonly created_by: Prisma.FieldRef<"DefectedItem", 'Int'>
   readonly created_at: Prisma.FieldRef<"DefectedItem", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"DefectedItem", 'DateTime'>
-  readonly previous_scanned_at: Prisma.FieldRef<"DefectedItem", 'DateTime'>
-  readonly previous_scanned_by: Prisma.FieldRef<"DefectedItem", 'Int'>
-  readonly previous_scanned_machine_id: Prisma.FieldRef<"DefectedItem", 'Int'>
-  readonly cut_list_machine_mapping_id: Prisma.FieldRef<"DefectedItem", 'Int'>
-  readonly cut_list_id: Prisma.FieldRef<"DefectedItem", 'Int'>
   readonly action: Prisma.FieldRef<"DefectedItem", 'String'>
-  readonly rework_machine_id: Prisma.FieldRef<"DefectedItem", 'Int'>
-  readonly defect_status: Prisma.FieldRef<"DefectedItem", 'DefectStatus'>
   readonly defect_completed_at: Prisma.FieldRef<"DefectedItem", 'DateTime'>
   readonly defect_completed_by: Prisma.FieldRef<"DefectedItem", 'Int'>
+  readonly defect_status: Prisma.FieldRef<"DefectedItem", 'DefectStatus'>
+  readonly rework_machine_id: Prisma.FieldRef<"DefectedItem", 'Int'>
 }
     
 

@@ -34,7 +34,6 @@ export type LedgerAvgAggregateOutputType = {
   vendor_id: number | null
   amount: number | null
   created_by: number | null
-  product_type_id: number | null
 }
 
 export type LedgerSumAggregateOutputType = {
@@ -45,7 +44,6 @@ export type LedgerSumAggregateOutputType = {
   vendor_id: number | null
   amount: number | null
   created_by: number | null
-  product_type_id: number | null
 }
 
 export type LedgerMinAggregateOutputType = {
@@ -59,7 +57,6 @@ export type LedgerMinAggregateOutputType = {
   type: $Enums.LedgerType | null
   created_by: number | null
   created_at: Date | null
-  product_type_id: number | null
 }
 
 export type LedgerMaxAggregateOutputType = {
@@ -73,7 +70,6 @@ export type LedgerMaxAggregateOutputType = {
   type: $Enums.LedgerType | null
   created_by: number | null
   created_at: Date | null
-  product_type_id: number | null
 }
 
 export type LedgerCountAggregateOutputType = {
@@ -87,7 +83,6 @@ export type LedgerCountAggregateOutputType = {
   type: number
   created_by: number
   created_at: number
-  product_type_id: number
   _all: number
 }
 
@@ -100,7 +95,6 @@ export type LedgerAvgAggregateInputType = {
   vendor_id?: true
   amount?: true
   created_by?: true
-  product_type_id?: true
 }
 
 export type LedgerSumAggregateInputType = {
@@ -111,7 +105,6 @@ export type LedgerSumAggregateInputType = {
   vendor_id?: true
   amount?: true
   created_by?: true
-  product_type_id?: true
 }
 
 export type LedgerMinAggregateInputType = {
@@ -125,7 +118,6 @@ export type LedgerMinAggregateInputType = {
   type?: true
   created_by?: true
   created_at?: true
-  product_type_id?: true
 }
 
 export type LedgerMaxAggregateInputType = {
@@ -139,7 +131,6 @@ export type LedgerMaxAggregateInputType = {
   type?: true
   created_by?: true
   created_at?: true
-  product_type_id?: true
 }
 
 export type LedgerCountAggregateInputType = {
@@ -153,7 +144,6 @@ export type LedgerCountAggregateInputType = {
   type?: true
   created_by?: true
   created_at?: true
-  product_type_id?: true
   _all?: true
 }
 
@@ -254,7 +244,6 @@ export type LedgerGroupByOutputType = {
   type: $Enums.LedgerType
   created_by: number
   created_at: Date
-  product_type_id: number | null
   _count: LedgerCountAggregateOutputType | null
   _avg: LedgerAvgAggregateOutputType | null
   _sum: LedgerSumAggregateOutputType | null
@@ -291,12 +280,10 @@ export type LedgerWhereInput = {
   type?: Prisma.EnumLedgerTypeFilter<"Ledger"> | $Enums.LedgerType
   created_by?: Prisma.IntFilter<"Ledger"> | number
   created_at?: Prisma.DateTimeFilter<"Ledger"> | Date | string
-  product_type_id?: Prisma.IntNullableFilter<"Ledger"> | number | null
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   client?: Prisma.XOR<Prisma.ClientMasterNullableScalarRelationFilter, Prisma.ClientMasterWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
-  productType?: Prisma.XOR<Prisma.ProductTypeMasterNullableScalarRelationFilter, Prisma.ProductTypeMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
@@ -311,12 +298,10 @@ export type LedgerOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  product_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
   account?: Prisma.AccountMasterOrderByWithRelationInput
   client?: Prisma.ClientMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   lead?: Prisma.LeadMasterOrderByWithRelationInput
-  productType?: Prisma.ProductTypeMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
@@ -334,12 +319,10 @@ export type LedgerWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.EnumLedgerTypeFilter<"Ledger"> | $Enums.LedgerType
   created_by?: Prisma.IntFilter<"Ledger"> | number
   created_at?: Prisma.DateTimeFilter<"Ledger"> | Date | string
-  product_type_id?: Prisma.IntNullableFilter<"Ledger"> | number | null
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   client?: Prisma.XOR<Prisma.ClientMasterNullableScalarRelationFilter, Prisma.ClientMasterWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
-  productType?: Prisma.XOR<Prisma.ProductTypeMasterNullableScalarRelationFilter, Prisma.ProductTypeMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
@@ -354,7 +337,6 @@ export type LedgerOrderByWithAggregationInput = {
   type?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  product_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LedgerCountOrderByAggregateInput
   _avg?: Prisma.LedgerAvgOrderByAggregateInput
   _max?: Prisma.LedgerMaxOrderByAggregateInput
@@ -376,7 +358,6 @@ export type LedgerScalarWhereWithAggregatesInput = {
   type?: Prisma.EnumLedgerTypeWithAggregatesFilter<"Ledger"> | $Enums.LedgerType
   created_by?: Prisma.IntWithAggregatesFilter<"Ledger"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"Ledger"> | Date | string
-  product_type_id?: Prisma.IntNullableWithAggregatesFilter<"Ledger"> | number | null
 }
 
 export type LedgerCreateInput = {
@@ -388,7 +369,6 @@ export type LedgerCreateInput = {
   client?: Prisma.ClientMasterCreateNestedOneWithoutLedgersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLedgersCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
-  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutLedgersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
 }
 
@@ -403,7 +383,6 @@ export type LedgerUncheckedCreateInput = {
   type: $Enums.LedgerType
   created_by: number
   created_at?: Date | string
-  product_type_id?: number | null
 }
 
 export type LedgerUpdateInput = {
@@ -415,7 +394,6 @@ export type LedgerUpdateInput = {
   client?: Prisma.ClientMasterUpdateOneWithoutLedgersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLedgersCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneWithoutLedgersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
 }
 
@@ -430,7 +408,6 @@ export type LedgerUncheckedUpdateInput = {
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LedgerCreateManyInput = {
@@ -444,7 +421,6 @@ export type LedgerCreateManyInput = {
   type: $Enums.LedgerType
   created_by: number
   created_at?: Date | string
-  product_type_id?: number | null
 }
 
 export type LedgerUpdateManyMutationInput = {
@@ -465,7 +441,6 @@ export type LedgerUncheckedUpdateManyInput = {
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LedgerListRelationFilter = {
@@ -489,7 +464,6 @@ export type LedgerCountOrderByAggregateInput = {
   type?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  product_type_id?: Prisma.SortOrder
 }
 
 export type LedgerAvgOrderByAggregateInput = {
@@ -500,7 +474,6 @@ export type LedgerAvgOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
-  product_type_id?: Prisma.SortOrder
 }
 
 export type LedgerMaxOrderByAggregateInput = {
@@ -514,7 +487,6 @@ export type LedgerMaxOrderByAggregateInput = {
   type?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  product_type_id?: Prisma.SortOrder
 }
 
 export type LedgerMinOrderByAggregateInput = {
@@ -528,7 +500,6 @@ export type LedgerMinOrderByAggregateInput = {
   type?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  product_type_id?: Prisma.SortOrder
 }
 
 export type LedgerSumOrderByAggregateInput = {
@@ -539,7 +510,6 @@ export type LedgerSumOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
-  product_type_id?: Prisma.SortOrder
 }
 
 export type LedgerCreateNestedManyWithoutVendorInput = {
@@ -752,48 +722,6 @@ export type LedgerUncheckedUpdateManyWithoutAccountNestedInput = {
   deleteMany?: Prisma.LedgerScalarWhereInput | Prisma.LedgerScalarWhereInput[]
 }
 
-export type LedgerCreateNestedManyWithoutProductTypeInput = {
-  create?: Prisma.XOR<Prisma.LedgerCreateWithoutProductTypeInput, Prisma.LedgerUncheckedCreateWithoutProductTypeInput> | Prisma.LedgerCreateWithoutProductTypeInput[] | Prisma.LedgerUncheckedCreateWithoutProductTypeInput[]
-  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutProductTypeInput | Prisma.LedgerCreateOrConnectWithoutProductTypeInput[]
-  createMany?: Prisma.LedgerCreateManyProductTypeInputEnvelope
-  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-}
-
-export type LedgerUncheckedCreateNestedManyWithoutProductTypeInput = {
-  create?: Prisma.XOR<Prisma.LedgerCreateWithoutProductTypeInput, Prisma.LedgerUncheckedCreateWithoutProductTypeInput> | Prisma.LedgerCreateWithoutProductTypeInput[] | Prisma.LedgerUncheckedCreateWithoutProductTypeInput[]
-  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutProductTypeInput | Prisma.LedgerCreateOrConnectWithoutProductTypeInput[]
-  createMany?: Prisma.LedgerCreateManyProductTypeInputEnvelope
-  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-}
-
-export type LedgerUpdateManyWithoutProductTypeNestedInput = {
-  create?: Prisma.XOR<Prisma.LedgerCreateWithoutProductTypeInput, Prisma.LedgerUncheckedCreateWithoutProductTypeInput> | Prisma.LedgerCreateWithoutProductTypeInput[] | Prisma.LedgerUncheckedCreateWithoutProductTypeInput[]
-  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutProductTypeInput | Prisma.LedgerCreateOrConnectWithoutProductTypeInput[]
-  upsert?: Prisma.LedgerUpsertWithWhereUniqueWithoutProductTypeInput | Prisma.LedgerUpsertWithWhereUniqueWithoutProductTypeInput[]
-  createMany?: Prisma.LedgerCreateManyProductTypeInputEnvelope
-  set?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  disconnect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  delete?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  update?: Prisma.LedgerUpdateWithWhereUniqueWithoutProductTypeInput | Prisma.LedgerUpdateWithWhereUniqueWithoutProductTypeInput[]
-  updateMany?: Prisma.LedgerUpdateManyWithWhereWithoutProductTypeInput | Prisma.LedgerUpdateManyWithWhereWithoutProductTypeInput[]
-  deleteMany?: Prisma.LedgerScalarWhereInput | Prisma.LedgerScalarWhereInput[]
-}
-
-export type LedgerUncheckedUpdateManyWithoutProductTypeNestedInput = {
-  create?: Prisma.XOR<Prisma.LedgerCreateWithoutProductTypeInput, Prisma.LedgerUncheckedCreateWithoutProductTypeInput> | Prisma.LedgerCreateWithoutProductTypeInput[] | Prisma.LedgerUncheckedCreateWithoutProductTypeInput[]
-  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutProductTypeInput | Prisma.LedgerCreateOrConnectWithoutProductTypeInput[]
-  upsert?: Prisma.LedgerUpsertWithWhereUniqueWithoutProductTypeInput | Prisma.LedgerUpsertWithWhereUniqueWithoutProductTypeInput[]
-  createMany?: Prisma.LedgerCreateManyProductTypeInputEnvelope
-  set?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  disconnect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  delete?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  update?: Prisma.LedgerUpdateWithWhereUniqueWithoutProductTypeInput | Prisma.LedgerUpdateWithWhereUniqueWithoutProductTypeInput[]
-  updateMany?: Prisma.LedgerUpdateManyWithWhereWithoutProductTypeInput | Prisma.LedgerUpdateManyWithWhereWithoutProductTypeInput[]
-  deleteMany?: Prisma.LedgerScalarWhereInput | Prisma.LedgerScalarWhereInput[]
-}
-
 export type EnumLedgerTypeFieldUpdateOperationsInput = {
   set?: $Enums.LedgerType
 }
@@ -807,7 +735,6 @@ export type LedgerCreateWithoutVendorInput = {
   client?: Prisma.ClientMasterCreateNestedOneWithoutLedgersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLedgersCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
-  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutLedgersInput
 }
 
 export type LedgerUncheckedCreateWithoutVendorInput = {
@@ -820,7 +747,6 @@ export type LedgerUncheckedCreateWithoutVendorInput = {
   type: $Enums.LedgerType
   created_by: number
   created_at?: Date | string
-  product_type_id?: number | null
 }
 
 export type LedgerCreateOrConnectWithoutVendorInput = {
@@ -863,7 +789,6 @@ export type LedgerScalarWhereInput = {
   type?: Prisma.EnumLedgerTypeFilter<"Ledger"> | $Enums.LedgerType
   created_by?: Prisma.IntFilter<"Ledger"> | number
   created_at?: Prisma.DateTimeFilter<"Ledger"> | Date | string
-  product_type_id?: Prisma.IntNullableFilter<"Ledger"> | number | null
 }
 
 export type LedgerCreateWithoutCreatedByInput = {
@@ -874,7 +799,6 @@ export type LedgerCreateWithoutCreatedByInput = {
   account: Prisma.AccountMasterCreateNestedOneWithoutLedgersInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutLedgersInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
-  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutLedgersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
 }
 
@@ -888,7 +812,6 @@ export type LedgerUncheckedCreateWithoutCreatedByInput = {
   payment_date: Date | string
   type: $Enums.LedgerType
   created_at?: Date | string
-  product_type_id?: number | null
 }
 
 export type LedgerCreateOrConnectWithoutCreatedByInput = {
@@ -925,7 +848,6 @@ export type LedgerCreateWithoutClientInput = {
   account: Prisma.AccountMasterCreateNestedOneWithoutLedgersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLedgersCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
-  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutLedgersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
 }
 
@@ -939,7 +861,6 @@ export type LedgerUncheckedCreateWithoutClientInput = {
   type: $Enums.LedgerType
   created_by: number
   created_at?: Date | string
-  product_type_id?: number | null
 }
 
 export type LedgerCreateOrConnectWithoutClientInput = {
@@ -976,7 +897,6 @@ export type LedgerCreateWithoutLeadInput = {
   account: Prisma.AccountMasterCreateNestedOneWithoutLedgersInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutLedgersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLedgersCreatedInput
-  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutLedgersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
 }
 
@@ -990,7 +910,6 @@ export type LedgerUncheckedCreateWithoutLeadInput = {
   type: $Enums.LedgerType
   created_by: number
   created_at?: Date | string
-  product_type_id?: number | null
 }
 
 export type LedgerCreateOrConnectWithoutLeadInput = {
@@ -1027,7 +946,6 @@ export type LedgerCreateWithoutAccountInput = {
   client?: Prisma.ClientMasterCreateNestedOneWithoutLedgersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLedgersCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
-  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutLedgersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
 }
 
@@ -1041,7 +959,6 @@ export type LedgerUncheckedCreateWithoutAccountInput = {
   type: $Enums.LedgerType
   created_by: number
   created_at?: Date | string
-  product_type_id?: number | null
 }
 
 export type LedgerCreateOrConnectWithoutAccountInput = {
@@ -1070,57 +987,6 @@ export type LedgerUpdateManyWithWhereWithoutAccountInput = {
   data: Prisma.XOR<Prisma.LedgerUpdateManyMutationInput, Prisma.LedgerUncheckedUpdateManyWithoutAccountInput>
 }
 
-export type LedgerCreateWithoutProductTypeInput = {
-  amount: number
-  payment_date: Date | string
-  type: $Enums.LedgerType
-  created_at?: Date | string
-  account: Prisma.AccountMasterCreateNestedOneWithoutLedgersInput
-  client?: Prisma.ClientMasterCreateNestedOneWithoutLedgersInput
-  createdBy: Prisma.UserMasterCreateNestedOneWithoutLedgersCreatedInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
-}
-
-export type LedgerUncheckedCreateWithoutProductTypeInput = {
-  id?: number
-  lead_id: number
-  account_id: number
-  client_id?: number | null
-  vendor_id: number
-  amount: number
-  payment_date: Date | string
-  type: $Enums.LedgerType
-  created_by: number
-  created_at?: Date | string
-}
-
-export type LedgerCreateOrConnectWithoutProductTypeInput = {
-  where: Prisma.LedgerWhereUniqueInput
-  create: Prisma.XOR<Prisma.LedgerCreateWithoutProductTypeInput, Prisma.LedgerUncheckedCreateWithoutProductTypeInput>
-}
-
-export type LedgerCreateManyProductTypeInputEnvelope = {
-  data: Prisma.LedgerCreateManyProductTypeInput | Prisma.LedgerCreateManyProductTypeInput[]
-  skipDuplicates?: boolean
-}
-
-export type LedgerUpsertWithWhereUniqueWithoutProductTypeInput = {
-  where: Prisma.LedgerWhereUniqueInput
-  update: Prisma.XOR<Prisma.LedgerUpdateWithoutProductTypeInput, Prisma.LedgerUncheckedUpdateWithoutProductTypeInput>
-  create: Prisma.XOR<Prisma.LedgerCreateWithoutProductTypeInput, Prisma.LedgerUncheckedCreateWithoutProductTypeInput>
-}
-
-export type LedgerUpdateWithWhereUniqueWithoutProductTypeInput = {
-  where: Prisma.LedgerWhereUniqueInput
-  data: Prisma.XOR<Prisma.LedgerUpdateWithoutProductTypeInput, Prisma.LedgerUncheckedUpdateWithoutProductTypeInput>
-}
-
-export type LedgerUpdateManyWithWhereWithoutProductTypeInput = {
-  where: Prisma.LedgerScalarWhereInput
-  data: Prisma.XOR<Prisma.LedgerUpdateManyMutationInput, Prisma.LedgerUncheckedUpdateManyWithoutProductTypeInput>
-}
-
 export type LedgerCreateManyVendorInput = {
   id?: number
   lead_id: number
@@ -1131,7 +997,6 @@ export type LedgerCreateManyVendorInput = {
   type: $Enums.LedgerType
   created_by: number
   created_at?: Date | string
-  product_type_id?: number | null
 }
 
 export type LedgerUpdateWithoutVendorInput = {
@@ -1143,7 +1008,6 @@ export type LedgerUpdateWithoutVendorInput = {
   client?: Prisma.ClientMasterUpdateOneWithoutLedgersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLedgersCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneWithoutLedgersNestedInput
 }
 
 export type LedgerUncheckedUpdateWithoutVendorInput = {
@@ -1156,7 +1020,6 @@ export type LedgerUncheckedUpdateWithoutVendorInput = {
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LedgerUncheckedUpdateManyWithoutVendorInput = {
@@ -1169,7 +1032,6 @@ export type LedgerUncheckedUpdateManyWithoutVendorInput = {
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LedgerCreateManyCreatedByInput = {
@@ -1182,7 +1044,6 @@ export type LedgerCreateManyCreatedByInput = {
   payment_date: Date | string
   type: $Enums.LedgerType
   created_at?: Date | string
-  product_type_id?: number | null
 }
 
 export type LedgerUpdateWithoutCreatedByInput = {
@@ -1193,7 +1054,6 @@ export type LedgerUpdateWithoutCreatedByInput = {
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLedgersNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutLedgersNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneWithoutLedgersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
 }
 
@@ -1207,7 +1067,6 @@ export type LedgerUncheckedUpdateWithoutCreatedByInput = {
   payment_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LedgerUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1220,7 +1079,6 @@ export type LedgerUncheckedUpdateManyWithoutCreatedByInput = {
   payment_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LedgerCreateManyClientInput = {
@@ -1233,7 +1091,6 @@ export type LedgerCreateManyClientInput = {
   type: $Enums.LedgerType
   created_by: number
   created_at?: Date | string
-  product_type_id?: number | null
 }
 
 export type LedgerUpdateWithoutClientInput = {
@@ -1244,7 +1101,6 @@ export type LedgerUpdateWithoutClientInput = {
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLedgersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLedgersCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneWithoutLedgersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
 }
 
@@ -1258,7 +1114,6 @@ export type LedgerUncheckedUpdateWithoutClientInput = {
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LedgerUncheckedUpdateManyWithoutClientInput = {
@@ -1271,7 +1126,6 @@ export type LedgerUncheckedUpdateManyWithoutClientInput = {
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LedgerCreateManyLeadInput = {
@@ -1284,7 +1138,6 @@ export type LedgerCreateManyLeadInput = {
   type: $Enums.LedgerType
   created_by: number
   created_at?: Date | string
-  product_type_id?: number | null
 }
 
 export type LedgerUpdateWithoutLeadInput = {
@@ -1295,7 +1148,6 @@ export type LedgerUpdateWithoutLeadInput = {
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLedgersNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutLedgersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLedgersCreatedNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneWithoutLedgersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
 }
 
@@ -1309,7 +1161,6 @@ export type LedgerUncheckedUpdateWithoutLeadInput = {
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LedgerUncheckedUpdateManyWithoutLeadInput = {
@@ -1322,7 +1173,6 @@ export type LedgerUncheckedUpdateManyWithoutLeadInput = {
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LedgerCreateManyAccountInput = {
@@ -1335,7 +1185,6 @@ export type LedgerCreateManyAccountInput = {
   type: $Enums.LedgerType
   created_by: number
   created_at?: Date | string
-  product_type_id?: number | null
 }
 
 export type LedgerUpdateWithoutAccountInput = {
@@ -1346,7 +1195,6 @@ export type LedgerUpdateWithoutAccountInput = {
   client?: Prisma.ClientMasterUpdateOneWithoutLedgersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLedgersCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneWithoutLedgersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
 }
 
@@ -1360,64 +1208,11 @@ export type LedgerUncheckedUpdateWithoutAccountInput = {
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LedgerUncheckedUpdateManyWithoutAccountInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  payment_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-}
-
-export type LedgerCreateManyProductTypeInput = {
-  id?: number
-  lead_id: number
-  account_id: number
-  client_id?: number | null
-  vendor_id: number
-  amount: number
-  payment_date: Date | string
-  type: $Enums.LedgerType
-  created_by: number
-  created_at?: Date | string
-}
-
-export type LedgerUpdateWithoutProductTypeInput = {
-  amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  payment_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  account?: Prisma.AccountMasterUpdateOneRequiredWithoutLedgersNestedInput
-  client?: Prisma.ClientMasterUpdateOneWithoutLedgersNestedInput
-  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLedgersCreatedNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
-}
-
-export type LedgerUncheckedUpdateWithoutProductTypeInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  payment_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type LedgerUncheckedUpdateManyWithoutProductTypeInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  account_id?: Prisma.IntFieldUpdateOperationsInput | number
   client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1440,12 +1235,10 @@ export type LedgerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   type?: boolean
   created_by?: boolean
   created_at?: boolean
-  product_type_id?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   client?: boolean | Prisma.Ledger$clientArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.Ledger$productTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ledger"]>
 
@@ -1460,12 +1253,10 @@ export type LedgerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   type?: boolean
   created_by?: boolean
   created_at?: boolean
-  product_type_id?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   client?: boolean | Prisma.Ledger$clientArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.Ledger$productTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ledger"]>
 
@@ -1480,12 +1271,10 @@ export type LedgerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   type?: boolean
   created_by?: boolean
   created_at?: boolean
-  product_type_id?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   client?: boolean | Prisma.Ledger$clientArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.Ledger$productTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ledger"]>
 
@@ -1500,16 +1289,14 @@ export type LedgerSelectScalar = {
   type?: boolean
   created_by?: boolean
   created_at?: boolean
-  product_type_id?: boolean
 }
 
-export type LedgerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "client_id" | "vendor_id" | "amount" | "payment_date" | "type" | "created_by" | "created_at" | "product_type_id", ExtArgs["result"]["ledger"]>
+export type LedgerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "client_id" | "vendor_id" | "amount" | "payment_date" | "type" | "created_by" | "created_at", ExtArgs["result"]["ledger"]>
 export type LedgerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   client?: boolean | Prisma.Ledger$clientArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.Ledger$productTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LedgerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1517,7 +1304,6 @@ export type LedgerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   client?: boolean | Prisma.Ledger$clientArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.Ledger$productTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LedgerIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1525,7 +1311,6 @@ export type LedgerIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   client?: boolean | Prisma.Ledger$clientArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.Ledger$productTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
@@ -1536,7 +1321,6 @@ export type $LedgerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     client: Prisma.$ClientMasterPayload<ExtArgs> | null
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     lead: Prisma.$LeadMasterPayload<ExtArgs>
-    productType: Prisma.$ProductTypeMasterPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1550,7 +1334,6 @@ export type $LedgerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     type: $Enums.LedgerType
     created_by: number
     created_at: Date
-    product_type_id: number | null
   }, ExtArgs["result"]["ledger"]>
   composites: {}
 }
@@ -1949,7 +1732,6 @@ export interface Prisma__LedgerClient<T, Null = never, ExtArgs extends runtime.T
   client<T extends Prisma.Ledger$clientArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ledger$clientArgs<ExtArgs>>): Prisma.Prisma__ClientMasterClient<runtime.Types.Result.GetResult<Prisma.$ClientMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  productType<T extends Prisma.Ledger$productTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ledger$productTypeArgs<ExtArgs>>): Prisma.Prisma__ProductTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1990,7 +1772,6 @@ export interface LedgerFieldRefs {
   readonly type: Prisma.FieldRef<"Ledger", 'LedgerType'>
   readonly created_by: Prisma.FieldRef<"Ledger", 'Int'>
   readonly created_at: Prisma.FieldRef<"Ledger", 'DateTime'>
-  readonly product_type_id: Prisma.FieldRef<"Ledger", 'Int'>
 }
     
 
@@ -2408,25 +2189,6 @@ export type Ledger$clientArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   include?: Prisma.ClientMasterInclude<ExtArgs> | null
   where?: Prisma.ClientMasterWhereInput
-}
-
-/**
- * Ledger.productType
- */
-export type Ledger$productTypeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ProductTypeMaster
-   */
-  select?: Prisma.ProductTypeMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ProductTypeMaster
-   */
-  omit?: Prisma.ProductTypeMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ProductTypeMasterInclude<ExtArgs> | null
-  where?: Prisma.ProductTypeMasterWhereInput
 }
 
 /**

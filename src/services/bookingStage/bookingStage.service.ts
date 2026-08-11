@@ -118,8 +118,19 @@ export class BookingStageService {
           productType: { select: { id: true, type: true, tag: true } },
         },
       },
+      leadB2BReqMappings: {
+        select: {
+          b2bRequirementType: { select: { id: true, type: true, status: true } },
+        },
+      },
       leadProductStructureMapping: {
         select: { productStructure: { select: { id: true, type: true } } },
+      },
+      leadProcessBriefs: {
+        select: {
+          processBrief: { select: { id: true, name: true } },
+          b2bRequirementType: { select: { id: true, type: true } },
+        },
       },
       productStructureInstances: {
         select: {
@@ -1679,9 +1690,18 @@ export class BookingStageService {
       const furnitureTypes = parseNumberList(filters.furniture_type);
       if (furnitureTypes.numbers.length) {
         addAnd({
-          productMappings: {
-            some: { product_type_id: { in: furnitureTypes.numbers } },
-          },
+          OR: [
+            {
+              productMappings: {
+                some: { product_type_id: { in: furnitureTypes.numbers } },
+              },
+            },
+            {
+              leadB2BReqMappings: {
+                some: { b2b_requirement_type_id: { in: furnitureTypes.numbers } },
+              },
+            },
+          ],
         });
       }
 
@@ -1854,9 +1874,18 @@ export class BookingStageService {
       const furnitureStructures = parseNumberList(filters.furniture_structure);
       if (furnitureStructures.numbers.length) {
         addAnd({
-          leadProductStructureMapping: {
-            some: { product_structure_id: { in: furnitureStructures.numbers } },
-          },
+          OR: [
+            {
+              leadProductStructureMapping: {
+                some: { product_structure_id: { in: furnitureStructures.numbers } },
+              },
+            },
+            {
+              leadProcessBriefs: {
+                some: { process_brief_id: { in: furnitureStructures.numbers } },
+              },
+            },
+          ],
         });
       }
 
@@ -4395,15 +4424,33 @@ export class BookingStageService {
       const furnitureTypes = parseNumberList(filters.furniture_type);
       if (furnitureTypes.numbers.length > 0) {
         addAnd({
-          productMappings: {
-            some: { product_type_id: { in: furnitureTypes.numbers } },
-          },
+          OR: [
+            {
+              productMappings: {
+                some: { product_type_id: { in: furnitureTypes.numbers } },
+              },
+            },
+            {
+              leadB2BReqMappings: {
+                some: { b2b_requirement_type_id: { in: furnitureTypes.numbers } },
+              },
+            },
+          ],
         });
       } else if (furnitureTypes.strings.length > 0) {
         addAnd({
-          productMappings: {
-            some: { productType: { type: { in: furnitureTypes.strings } } },
-          },
+          OR: [
+            {
+              productMappings: {
+                some: { productType: { type: { in: furnitureTypes.strings } } },
+              },
+            },
+            {
+              leadB2BReqMappings: {
+                some: { b2bRequirementType: { type: { in: furnitureTypes.strings } } },
+              },
+            },
+          ],
         });
       }
 
@@ -4426,19 +4473,41 @@ export class BookingStageService {
       const furnitureStructures = parseNumberList(filters.furniture_structure);
       if (furnitureStructures.numbers.length > 0) {
         addAnd({
-          leadProductStructureMapping: {
-            some: {
-              product_structure_id: { in: furnitureStructures.numbers },
+          OR: [
+            {
+              leadProductStructureMapping: {
+                some: {
+                  product_structure_id: { in: furnitureStructures.numbers },
+                },
+              },
             },
-          },
+            {
+              leadProcessBriefs: {
+                some: {
+                  process_brief_id: { in: furnitureStructures.numbers },
+                },
+              },
+            },
+          ],
         });
       } else if (furnitureStructures.strings.length > 0) {
         addAnd({
-          leadProductStructureMapping: {
-            some: {
-              productStructure: { type: { in: furnitureStructures.strings } },
+          OR: [
+            {
+              leadProductStructureMapping: {
+                some: {
+                  productStructure: { type: { in: furnitureStructures.strings } },
+                },
+              },
             },
-          },
+            {
+              leadProcessBriefs: {
+                some: {
+                  processBrief: { name: { in: furnitureStructures.strings } },
+                },
+              },
+            },
+          ],
         });
       }
 

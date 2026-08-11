@@ -32,8 +32,8 @@ export type CompanyVendorsMasterAvgAggregateOutputType = {
   created_by: number | null
   updated_by: number | null
   deleted_by: number | null
-  state_id: number | null
   default_payment_term_id: number | null
+  state_id: number | null
   primary_contact_id: number | null
 }
 
@@ -43,8 +43,8 @@ export type CompanyVendorsMasterSumAggregateOutputType = {
   created_by: number | null
   updated_by: number | null
   deleted_by: number | null
-  state_id: number | null
   default_payment_term_id: number | null
+  state_id: number | null
   primary_contact_id: number | null
 }
 
@@ -65,8 +65,8 @@ export type CompanyVendorsMasterMinAggregateOutputType = {
   deleted_by: number | null
   is_deleted: boolean | null
   in_house: boolean | null
-  state_id: number | null
   default_payment_term_id: number | null
+  state_id: number | null
   alternate_email: string | null
   alternate_mobile_no: string | null
   gst_no: string | null
@@ -93,8 +93,8 @@ export type CompanyVendorsMasterMaxAggregateOutputType = {
   deleted_by: number | null
   is_deleted: boolean | null
   in_house: boolean | null
-  state_id: number | null
   default_payment_term_id: number | null
+  state_id: number | null
   alternate_email: string | null
   alternate_mobile_no: string | null
   gst_no: string | null
@@ -121,8 +121,8 @@ export type CompanyVendorsMasterCountAggregateOutputType = {
   deleted_by: number
   is_deleted: number
   in_house: number
-  state_id: number
   default_payment_term_id: number
+  state_id: number
   alternate_email: number
   alternate_mobile_no: number
   gst_no: number
@@ -140,8 +140,8 @@ export type CompanyVendorsMasterAvgAggregateInputType = {
   created_by?: true
   updated_by?: true
   deleted_by?: true
-  state_id?: true
   default_payment_term_id?: true
+  state_id?: true
   primary_contact_id?: true
 }
 
@@ -151,8 +151,8 @@ export type CompanyVendorsMasterSumAggregateInputType = {
   created_by?: true
   updated_by?: true
   deleted_by?: true
-  state_id?: true
   default_payment_term_id?: true
+  state_id?: true
   primary_contact_id?: true
 }
 
@@ -173,8 +173,8 @@ export type CompanyVendorsMasterMinAggregateInputType = {
   deleted_by?: true
   is_deleted?: true
   in_house?: true
-  state_id?: true
   default_payment_term_id?: true
+  state_id?: true
   alternate_email?: true
   alternate_mobile_no?: true
   gst_no?: true
@@ -201,8 +201,8 @@ export type CompanyVendorsMasterMaxAggregateInputType = {
   deleted_by?: true
   is_deleted?: true
   in_house?: true
-  state_id?: true
   default_payment_term_id?: true
+  state_id?: true
   alternate_email?: true
   alternate_mobile_no?: true
   gst_no?: true
@@ -229,8 +229,8 @@ export type CompanyVendorsMasterCountAggregateInputType = {
   deleted_by?: true
   is_deleted?: true
   in_house?: true
-  state_id?: true
   default_payment_term_id?: true
+  state_id?: true
   alternate_email?: true
   alternate_mobile_no?: true
   gst_no?: true
@@ -344,8 +344,8 @@ export type CompanyVendorsMasterGroupByOutputType = {
   deleted_by: number | null
   is_deleted: boolean
   in_house: boolean
-  state_id: number | null
   default_payment_term_id: number | null
+  state_id: number | null
   alternate_email: string | null
   alternate_mobile_no: string | null
   gst_no: string | null
@@ -395,8 +395,8 @@ export type CompanyVendorsMasterWhereInput = {
   deleted_by?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   is_deleted?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
   in_house?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
-  state_id?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   default_payment_term_id?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
+  state_id?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   alternate_email?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
   alternate_mobile_no?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
   gst_no?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
@@ -445,8 +445,8 @@ export type CompanyVendorsMasterOrderByWithRelationInput = {
   deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   in_house?: Prisma.SortOrder
-  state_id?: Prisma.SortOrderInput | Prisma.SortOrder
   default_payment_term_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  state_id?: Prisma.SortOrderInput | Prisma.SortOrder
   alternate_email?: Prisma.SortOrderInput | Prisma.SortOrder
   alternate_mobile_no?: Prisma.SortOrderInput | Prisma.SortOrder
   gst_no?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -499,8 +499,8 @@ export type CompanyVendorsMasterWhereUniqueInput = Prisma.AtLeast<{
   deleted_by?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   is_deleted?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
   in_house?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
-  state_id?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   default_payment_term_id?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
+  state_id?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   alternate_email?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
   alternate_mobile_no?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
   gst_no?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
@@ -549,8 +549,8 @@ export type CompanyVendorsMasterOrderByWithAggregationInput = {
   deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   in_house?: Prisma.SortOrder
-  state_id?: Prisma.SortOrderInput | Prisma.SortOrder
   default_payment_term_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  state_id?: Prisma.SortOrderInput | Prisma.SortOrder
   alternate_email?: Prisma.SortOrderInput | Prisma.SortOrder
   alternate_mobile_no?: Prisma.SortOrderInput | Prisma.SortOrder
   gst_no?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -585,8 +585,8 @@ export type CompanyVendorsMasterScalarWhereWithAggregatesInput = {
   deleted_by?: Prisma.IntNullableWithAggregatesFilter<"CompanyVendorsMaster"> | number | null
   is_deleted?: Prisma.BoolWithAggregatesFilter<"CompanyVendorsMaster"> | boolean
   in_house?: Prisma.BoolWithAggregatesFilter<"CompanyVendorsMaster"> | boolean
-  state_id?: Prisma.IntNullableWithAggregatesFilter<"CompanyVendorsMaster"> | number | null
   default_payment_term_id?: Prisma.IntNullableWithAggregatesFilter<"CompanyVendorsMaster"> | number | null
+  state_id?: Prisma.IntNullableWithAggregatesFilter<"CompanyVendorsMaster"> | number | null
   alternate_email?: Prisma.StringNullableWithAggregatesFilter<"CompanyVendorsMaster"> | string | null
   alternate_mobile_no?: Prisma.StringNullableWithAggregatesFilter<"CompanyVendorsMaster"> | string | null
   gst_no?: Prisma.StringNullableWithAggregatesFilter<"CompanyVendorsMaster"> | string | null
@@ -655,8 +655,8 @@ export type CompanyVendorsMasterUncheckedCreateInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -740,8 +740,8 @@ export type CompanyVendorsMasterUncheckedUpdateInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -783,8 +783,8 @@ export type CompanyVendorsMasterCreateManyInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -831,8 +831,8 @@ export type CompanyVendorsMasterUncheckedUpdateManyInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -874,8 +874,8 @@ export type CompanyVendorsMasterCountOrderByAggregateInput = {
   deleted_by?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   in_house?: Prisma.SortOrder
-  state_id?: Prisma.SortOrder
   default_payment_term_id?: Prisma.SortOrder
+  state_id?: Prisma.SortOrder
   alternate_email?: Prisma.SortOrder
   alternate_mobile_no?: Prisma.SortOrder
   gst_no?: Prisma.SortOrder
@@ -891,8 +891,8 @@ export type CompanyVendorsMasterAvgOrderByAggregateInput = {
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
-  state_id?: Prisma.SortOrder
   default_payment_term_id?: Prisma.SortOrder
+  state_id?: Prisma.SortOrder
   primary_contact_id?: Prisma.SortOrder
 }
 
@@ -913,8 +913,8 @@ export type CompanyVendorsMasterMaxOrderByAggregateInput = {
   deleted_by?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   in_house?: Prisma.SortOrder
-  state_id?: Prisma.SortOrder
   default_payment_term_id?: Prisma.SortOrder
+  state_id?: Prisma.SortOrder
   alternate_email?: Prisma.SortOrder
   alternate_mobile_no?: Prisma.SortOrder
   gst_no?: Prisma.SortOrder
@@ -941,8 +941,8 @@ export type CompanyVendorsMasterMinOrderByAggregateInput = {
   deleted_by?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   in_house?: Prisma.SortOrder
-  state_id?: Prisma.SortOrder
   default_payment_term_id?: Prisma.SortOrder
+  state_id?: Prisma.SortOrder
   alternate_email?: Prisma.SortOrder
   alternate_mobile_no?: Prisma.SortOrder
   gst_no?: Prisma.SortOrder
@@ -958,8 +958,8 @@ export type CompanyVendorsMasterSumOrderByAggregateInput = {
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
-  state_id?: Prisma.SortOrder
   default_payment_term_id?: Prisma.SortOrder
+  state_id?: Prisma.SortOrder
   primary_contact_id?: Prisma.SortOrder
 }
 
@@ -1538,8 +1538,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutVendorInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -1610,8 +1610,8 @@ export type CompanyVendorsMasterScalarWhereInput = {
   deleted_by?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   is_deleted?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
   in_house?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
-  state_id?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   default_payment_term_id?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
+  state_id?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   alternate_email?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
   alternate_mobile_no?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
   gst_no?: Prisma.StringNullableFilter<"CompanyVendorsMaster"> | string | null
@@ -1678,8 +1678,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutCreatedByInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -1771,8 +1771,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutDeletedByInput = {
   deleted_at?: Date | string | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -1864,8 +1864,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -2006,8 +2006,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutOrderLoginLinksInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -2105,8 +2105,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutOrderLoginLinksInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2297,8 +2297,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutPurchaseIntentVendorMappin
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -2396,8 +2396,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutPurchaseIntentVendorMappin
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2479,8 +2479,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -2578,8 +2578,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2661,8 +2661,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutGrnsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -2760,8 +2760,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutGrnsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2843,8 +2843,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -2942,8 +2942,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3025,8 +3025,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutRedeliveryRequestsInput = 
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -3124,8 +3124,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutRedeliveryRequestsInput = 
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3300,8 +3300,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutPaymentTermsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -3415,8 +3415,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutPaymentTermsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3498,8 +3498,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutProductSupplierMappingsInp
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -3597,8 +3597,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutProductSupplierMappingsInp
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3680,8 +3680,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutPiSupplierAdditionalCostsI
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -3779,8 +3779,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsI
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3862,8 +3862,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutPoSupplierAdditionalCostsI
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -3961,8 +3961,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsI
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4044,8 +4044,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutVendorTypesInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -4143,8 +4143,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutVendorTypesInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4226,8 +4226,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutContactPersonsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -4314,8 +4314,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutPrimaryContactInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -4418,8 +4418,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutContactPersonsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4517,8 +4517,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutBankAccountsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -4616,8 +4616,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutBankAccountsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4699,8 +4699,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutDocumentsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -4798,8 +4798,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutDocumentsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4881,8 +4881,8 @@ export type CompanyVendorsMasterUncheckedCreateWithoutAddressesInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -4980,8 +4980,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutAddressesInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5021,8 +5021,8 @@ export type CompanyVendorsMasterCreateManyVendorInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -5089,8 +5089,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutVendorInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5131,8 +5131,8 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutVendorInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5158,8 +5158,8 @@ export type CompanyVendorsMasterCreateManyCreatedByInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -5185,8 +5185,8 @@ export type CompanyVendorsMasterCreateManyDeletedByInput = {
   deleted_at?: Date | string | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -5212,8 +5212,8 @@ export type CompanyVendorsMasterCreateManyUpdatedByInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -5280,8 +5280,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutCreatedByInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5322,8 +5322,8 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5390,8 +5390,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutDeletedByInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5432,8 +5432,8 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5500,8 +5500,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutUpdatedByInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5542,8 +5542,8 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5844,8 +5844,8 @@ export type CompanyVendorsMasterCreateManyPrimaryContactInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: number | null
   default_payment_term_id?: number | null
+  state_id?: number | null
   alternate_email?: string | null
   alternate_mobile_no?: string | null
   gst_no?: string | null
@@ -5912,8 +5912,8 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutPrimaryContactInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5954,8 +5954,8 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutPrimaryContactInput = 
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   alternate_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alternate_mobile_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6138,8 +6138,8 @@ export type CompanyVendorsMasterSelect<ExtArgs extends runtime.Types.Extensions.
   deleted_by?: boolean
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: boolean
   default_payment_term_id?: boolean
+  state_id?: boolean
   alternate_email?: boolean
   alternate_mobile_no?: boolean
   gst_no?: boolean
@@ -6189,8 +6189,8 @@ export type CompanyVendorsMasterSelectCreateManyAndReturn<ExtArgs extends runtim
   deleted_by?: boolean
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: boolean
   default_payment_term_id?: boolean
+  state_id?: boolean
   alternate_email?: boolean
   alternate_mobile_no?: boolean
   gst_no?: boolean
@@ -6224,8 +6224,8 @@ export type CompanyVendorsMasterSelectUpdateManyAndReturn<ExtArgs extends runtim
   deleted_by?: boolean
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: boolean
   default_payment_term_id?: boolean
+  state_id?: boolean
   alternate_email?: boolean
   alternate_mobile_no?: boolean
   gst_no?: boolean
@@ -6259,8 +6259,8 @@ export type CompanyVendorsMasterSelectScalar = {
   deleted_by?: boolean
   is_deleted?: boolean
   in_house?: boolean
-  state_id?: boolean
   default_payment_term_id?: boolean
+  state_id?: boolean
   alternate_email?: boolean
   alternate_mobile_no?: boolean
   gst_no?: boolean
@@ -6270,7 +6270,7 @@ export type CompanyVendorsMasterSelectScalar = {
   is_active?: boolean
 }
 
-export type CompanyVendorsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "vendor_code" | "company_name" | "point_of_contact" | "contact_no" | "email" | "address" | "created_at" | "created_by" | "updated_at" | "updated_by" | "deleted_at" | "deleted_by" | "is_deleted" | "in_house" | "state_id" | "default_payment_term_id" | "alternate_email" | "alternate_mobile_no" | "gst_no" | "pan_no" | "primary_contact_id" | "vendor_name" | "is_active", ExtArgs["result"]["companyVendorsMaster"]>
+export type CompanyVendorsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "vendor_code" | "company_name" | "point_of_contact" | "contact_no" | "email" | "address" | "created_at" | "created_by" | "updated_at" | "updated_by" | "deleted_at" | "deleted_by" | "is_deleted" | "in_house" | "default_payment_term_id" | "state_id" | "alternate_email" | "alternate_mobile_no" | "gst_no" | "pan_no" | "primary_contact_id" | "vendor_name" | "is_active", ExtArgs["result"]["companyVendorsMaster"]>
 export type CompanyVendorsMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   addresses?: boolean | Prisma.CompanyVendorsMaster$addressesArgs<ExtArgs>
   bankAccounts?: boolean | Prisma.CompanyVendorsMaster$bankAccountsArgs<ExtArgs>
@@ -6358,8 +6358,8 @@ export type $CompanyVendorsMasterPayload<ExtArgs extends runtime.Types.Extension
     deleted_by: number | null
     is_deleted: boolean
     in_house: boolean
-    state_id: number | null
     default_payment_term_id: number | null
+    state_id: number | null
     alternate_email: string | null
     alternate_mobile_no: string | null
     gst_no: string | null
@@ -6828,8 +6828,8 @@ export interface CompanyVendorsMasterFieldRefs {
   readonly deleted_by: Prisma.FieldRef<"CompanyVendorsMaster", 'Int'>
   readonly is_deleted: Prisma.FieldRef<"CompanyVendorsMaster", 'Boolean'>
   readonly in_house: Prisma.FieldRef<"CompanyVendorsMaster", 'Boolean'>
-  readonly state_id: Prisma.FieldRef<"CompanyVendorsMaster", 'Int'>
   readonly default_payment_term_id: Prisma.FieldRef<"CompanyVendorsMaster", 'Int'>
+  readonly state_id: Prisma.FieldRef<"CompanyVendorsMaster", 'Int'>
   readonly alternate_email: Prisma.FieldRef<"CompanyVendorsMaster", 'String'>
   readonly alternate_mobile_no: Prisma.FieldRef<"CompanyVendorsMaster", 'String'>
   readonly gst_no: Prisma.FieldRef<"CompanyVendorsMaster", 'String'>
