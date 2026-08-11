@@ -3,6 +3,7 @@ import {
   ActivityStatus,
   NotificationType,
   Prisma,
+  ProductInstanceStatus,
 } from "../../../prisma/generated";
 import { NotificationService } from "../../notification/notification.service";
 import { getFranchiseAdminRecipients } from "../../notification/adminRecipients.service";
@@ -18,6 +19,7 @@ import {
   sendLeadOnHoldEmail,
   sendLeadMarkedActiveEmail,
 } from "../../email/brevoEmail.service";
+import { generateLeadCode } from "../../../utils/generateLeadCode";
 
 export const STAGE_PATH_BY_TAG: Record<string, string> = {
   "Type 1":  "/dashboard/leads/leadstable/details",
@@ -64,6 +66,483 @@ export const buildLeadDetailsUrl = (
   return `${baseUrl}${buildLeadDetailsPath(leadId, accountId)}`;
 };
 
+type TxClient = Prisma.TransactionClient;
+
+type PartialOnHoldSelection = {
+  applyToWholeLead?: boolean;
+  selectedGroupIds?: number[];
+  selectedItemIds?: number[];
+};
+
+const normalizePositiveIds = (values?: number[]) =>
+  Array.from(
+    new Set(
+      (values ?? [])
+        .map((value) => Number(value))
+        .filter((value) => Number.isInteger(value) && value > 0),
+    ),
+  );
+
+const clonePartialLeadForOnHold = async (
+  tx: TxClient,
+  params: {
+    leadId: number;
+    vendorId: number;
+    accountId: number;
+    userId: number;
+    createdBy: number;
+    remark: string;
+    dueDate: string;
+    selection: PartialOnHoldSelection;
+  },
+) => {
+  const {
+    leadId,
+    vendorId,
+    accountId,
+    userId,
+    createdBy,
+    remark,
+    dueDate,
+    selection,
+  } = params;
+
+  const selectedGroupIds = normalizePositiveIds(selection.selectedGroupIds);
+  const selectedItemIds = normalizePositiveIds(selection.selectedItemIds);
+
+  if (selectedGroupIds.length === 0 && selectedItemIds.length === 0) {
+    throw new Error("At least one item group or item code must be selected.");
+  }
+
+  const sourceLead = await tx.leadMaster.findUnique({
+    where: { id: leadId, vendor_id: vendorId },
+  });
+
+  if (!sourceLead) {
+    throw new Error("Lead not found.");
+  }
+
+  const sourceInstances = await tx.leadProductStructureInstance.findMany({
+    where: { lead_id: leadId, vendor_id: vendorId },
+  });
+
+  const selectedInstances = sourceInstances.filter(
+    (instance) =>
+      selectedGroupIds.includes(instance.product_type_id) ||
+      (instance.product_item_code_id != null &&
+        selectedItemIds.includes(instance.product_item_code_id)),
+  );
+
+  if (selectedInstances.length === 0) {
+    throw new Error("No matching item groups or item codes found on this lead.");
+  }
+
+  if (selectedInstances.length === sourceInstances.length) {
+    throw new Error(
+      "Partial On Hold flow cannot be used when all items are selected.",
+    );
+  }
+
+  if (!sourceLead.franchise_id) {
+    throw new Error(
+      "Cannot create a cloned lead for On Hold because franchise_id is missing.",
+    );
+  }
+
+  const touchedProductTypeIds = Array.from(
+    new Set(selectedInstances.map((instance) => instance.product_type_id)),
+  );
+  const touchedStructureIds = Array.from(
+    new Set(selectedInstances.map((instance) => instance.product_structure_id)),
+  );
+  const touchedItemCodeIds = Array.from(
+    new Set(
+      selectedInstances
+        .map((instance) => instance.product_item_code_id)
+        .filter((value): value is number => value != null),
+    ),
+  );
+  const selectedInstanceIds = selectedInstances.map((instance) => instance.id);
+
+  const newLeadCode = await generateLeadCode(tx, {
+    franchiseId: sourceLead.franchise_id,
+    vendorId,
+  });
+
+  const {
+    id: _sourceLeadId,
+    lead_code: _oldLeadCode,
+    created_at: _sourceCreatedAt,
+    updated_at: _sourceUpdatedAt,
+    deleted_at: _sourceDeletedAt,
+    deleted_by: _sourceDeletedBy,
+    activity_status: _sourceActivityStatus,
+    activity_status_remark: _sourceActivityStatusRemark,
+    ...clonedLeadScalars
+  } = sourceLead;
+
+  const clonedLead = await tx.leadMaster.create({
+    data: {
+      ...clonedLeadScalars,
+      lead_code: newLeadCode,
+      activity_status: ActivityStatus.onHold,
+      activity_status_remark: remark,
+      created_by: createdBy,
+      updated_by: createdBy,
+      is_deleted: false,
+      deleted_at: null,
+      deleted_by: null,
+    },
+  });
+
+  const productMappings = await tx.leadProductMapping.findMany({
+    where: {
+      lead_id: leadId,
+      vendor_id: vendorId,
+      product_type_id: { in: touchedProductTypeIds },
+    },
+  });
+  if (productMappings.length > 0) {
+    await tx.leadProductMapping.createMany({
+      data: productMappings.map((mapping) => ({
+        vendor_id: mapping.vendor_id,
+        lead_id: clonedLead.id,
+        account_id: clonedLead.account_id ?? accountId,
+        product_type_id: mapping.product_type_id,
+        approximate_budget: mapping.approximate_budget,
+        project_status: mapping.project_status,
+        created_by: createdBy,
+        created_at: new Date(),
+      })),
+    });
+  }
+
+  const structureMappings = await tx.leadProductStructureMapping.findMany({
+    where: {
+      lead_id: leadId,
+      vendor_id: vendorId,
+      product_structure_id: { in: touchedStructureIds },
+    },
+  });
+  if (structureMappings.length > 0) {
+    await tx.leadProductStructureMapping.createMany({
+      data: structureMappings.map((mapping) => ({
+        vendor_id: mapping.vendor_id,
+        lead_id: clonedLead.id,
+        account_id: clonedLead.account_id ?? accountId,
+        product_structure_id: mapping.product_structure_id,
+        created_by: createdBy,
+        created_at: new Date(),
+      })),
+    });
+  }
+
+  const userMappings = await tx.leadUserMapping.findMany({
+    where: { lead_id: leadId, vendor_id: vendorId },
+  });
+  if (userMappings.length > 0) {
+    await tx.leadUserMapping.createMany({
+      data: userMappings.map((mapping) => ({
+        account_id: mapping.account_id,
+        lead_id: clonedLead.id,
+        vendor_id: mapping.vendor_id,
+        user_id: mapping.user_id,
+        type: mapping.type,
+        status: mapping.status,
+        created_by: createdBy,
+        created_at: new Date(),
+        updated_by: createdBy,
+        updated_at: new Date(),
+      })),
+    });
+  }
+
+  const processBriefMappings = await tx.leadProcessBriefMapping.findMany({
+    where: {
+      lead_id: leadId,
+      vendor_id: vendorId,
+      product_type_id: { in: touchedProductTypeIds },
+    },
+  });
+  if (processBriefMappings.length > 0) {
+    await tx.leadProcessBriefMapping.createMany({
+      data: processBriefMappings.map((mapping) => ({
+        lead_id: clonedLead.id,
+        vendor_id: mapping.vendor_id,
+        product_type_id: mapping.product_type_id,
+        process_brief_id: mapping.process_brief_id,
+        b2b_requirement_type_id: mapping.b2b_requirement_type_id,
+        created_by: createdBy,
+        created_at: new Date(),
+        updated_by: createdBy,
+        updated_at: new Date(),
+      })),
+    });
+  }
+
+  const requirementMaterialMappings =
+    await tx.leadRequirementMaterialMapping.findMany({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+        product_type_id: { in: touchedProductTypeIds },
+      },
+    });
+  if (requirementMaterialMappings.length > 0) {
+    await tx.leadRequirementMaterialMapping.createMany({
+      data: requirementMaterialMappings.map((mapping) => ({
+        lead_id: clonedLead.id,
+        vendor_id: mapping.vendor_id,
+        product_type_id: mapping.product_type_id,
+        b2b_requirement_type_id: mapping.b2b_requirement_type_id,
+        product_id: mapping.product_id,
+        quantity: mapping.quantity,
+        unit_id: mapping.unit_id,
+        unit_name: mapping.unit_name,
+        supplied_by: mapping.supplied_by,
+        client_percentage: mapping.client_percentage,
+        frankvin_percentage: mapping.frankvin_percentage,
+        client_quantity: mapping.client_quantity,
+        frankvin_quantity: mapping.frankvin_quantity,
+        created_by: createdBy,
+        created_at: new Date(),
+        updated_by: createdBy,
+        updated_at: new Date(),
+      })),
+    });
+  }
+
+  await tx.leadProductStructureInstance.updateMany({
+    where: { id: { in: selectedInstanceIds } },
+    data: {
+      lead_id: clonedLead.id,
+      account_id: clonedLead.account_id ?? accountId,
+      status: ProductInstanceStatus.onHold,
+      updated_by: createdBy,
+    },
+  });
+
+  const movedSelections = await tx.leadDesignSelection.findMany({
+    where: {
+      lead_id: leadId,
+      vendor_id: vendorId,
+      product_structure_instance_id: { in: selectedInstanceIds },
+    },
+    select: { id: true },
+  });
+  const movedSelectionIds = movedSelections.map((selectionRow) => selectionRow.id);
+
+  await tx.leadDesignSelection.updateMany({
+    where: { id: { in: movedSelectionIds } },
+    data: {
+      lead_id: clonedLead.id,
+      account_id: clonedLead.account_id ?? accountId,
+      updated_by: createdBy,
+    },
+  });
+
+  if (movedSelectionIds.length > 0) {
+    await tx.cHSSelectionTypeMapping.updateMany({
+      where: { selection_id: { in: movedSelectionIds } },
+      data: { lead_id: clonedLead.id, updated_by: createdBy },
+    });
+  }
+
+  await tx.leadDocuments.updateMany({
+    where: {
+      lead_id: leadId,
+      vendor_id: vendorId,
+      product_structure_instance_id: { in: selectedInstanceIds },
+    },
+    data: {
+      lead_id: clonedLead.id,
+      account_id: clonedLead.account_id ?? accountId,
+    },
+  });
+
+  const movedSpecifications = await tx.leadSpecificationsMaster.findMany({
+    where: {
+      lead_id: leadId,
+      vendor_id: vendorId,
+      item_code_id: { in: touchedItemCodeIds },
+    },
+    select: { id: true },
+  });
+  const movedSpecIds = movedSpecifications.map((spec) => spec.id);
+
+  if (movedSpecIds.length > 0) {
+    await tx.leadSpecificationsMaster.updateMany({
+      where: { id: { in: movedSpecIds } },
+      data: { lead_id: clonedLead.id },
+    });
+
+    await Promise.all([
+      tx.leadCarcassMaterialMapping.updateMany({
+        where: { specs_id: { in: movedSpecIds } },
+        data: { lead_id: clonedLead.id },
+      }),
+      tx.leadShutterMaterialMapping.updateMany({
+        where: { specs_id: { in: movedSpecIds } },
+        data: { lead_id: clonedLead.id },
+      }),
+      tx.leadHardwareMapping.updateMany({
+        where: { specs_id: { in: movedSpecIds } },
+        data: { lead_id: clonedLead.id },
+      }),
+      tx.leadLightCarcasUnitMapping.updateMany({
+        where: { specs_id: { in: movedSpecIds } },
+        data: { lead_id: clonedLead.id },
+      }),
+      tx.leadOtherAppliancesMapping.updateMany({
+        where: { specs_id: { in: movedSpecIds } },
+        data: { lead_id: clonedLead.id },
+      }),
+      tx.leadOtherAppliancesRemarkMapping.updateMany({
+        where: { specs_id: { in: movedSpecIds } },
+        data: { lead_id: clonedLead.id },
+      }),
+      tx.specificationDocumentMapping.updateMany({
+        where: { specs_id: { in: movedSpecIds } },
+        data: { lead_id: clonedLead.id },
+      }),
+    ]);
+  }
+
+  await tx.leadScopedActivityStatusLog.createMany({
+    data: selectedInstances.map((instance) => ({
+      vendor_id: vendorId,
+      account_id: clonedLead.account_id ?? accountId,
+      lead_id: leadId,
+      instance_id: instance.id,
+      scope_type: "instance",
+      activity_status: ActivityStatus.onHold,
+      activity_status_remark: remark,
+      due_date: new Date(dueDate),
+      created_by: createdBy,
+      created_at: new Date(),
+    })),
+  });
+
+  await tx.leadActivityStatusLog.create({
+    data: {
+      vendor_id: vendorId,
+      account_id: clonedLead.account_id ?? accountId,
+      lead_id: clonedLead.id,
+      user_id: userId,
+      activity_status: ActivityStatus.onHold,
+      activity_status_remark: remark,
+      created_by: createdBy,
+    },
+  });
+
+  const leadStage = clonedLead.status_id
+    ? ((
+        await tx.statusTypeMaster.findUnique({
+          where: { id: clonedLead.status_id },
+          select: { type: true },
+        })
+      )?.type ?? null)
+    : null;
+
+  const task = await tx.userLeadTask.create({
+    data: {
+      lead_id: clonedLead.id,
+      account_id: clonedLead.account_id ?? accountId,
+      vendor_id: vendorId,
+      franchise_id: clonedLead.franchise_id ?? null,
+      user_id: userId,
+      task_type: "Follow Up",
+      lead_stage: leadStage,
+      due_date: new Date(dueDate),
+      remark,
+      status: "open",
+      created_by: createdBy,
+    },
+  });
+
+  await createTaskHistoryLog({
+    db: tx,
+    task,
+    createdBy,
+    actionType: "CREATE",
+  });
+
+  const remainingInstances = await tx.leadProductStructureInstance.findMany({
+    where: { lead_id: leadId, vendor_id: vendorId },
+    select: { product_type_id: true, product_structure_id: true },
+  });
+  const remainingTypeIds = Array.from(
+    new Set(remainingInstances.map((instance) => instance.product_type_id)),
+  );
+  const remainingStructureIds = Array.from(
+    new Set(remainingInstances.map((instance) => instance.product_structure_id)),
+  );
+  const orphanTypeIds = touchedProductTypeIds.filter(
+    (productTypeId) => !remainingTypeIds.includes(productTypeId),
+  );
+  const orphanStructureIds = touchedStructureIds.filter(
+    (structureId) => !remainingStructureIds.includes(structureId),
+  );
+
+  if (orphanStructureIds.length > 0) {
+    await tx.leadProductStructureMapping.deleteMany({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+        product_structure_id: { in: orphanStructureIds },
+      },
+    });
+  }
+
+  if (orphanTypeIds.length > 0) {
+    await Promise.all([
+      tx.leadProductMapping.deleteMany({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+          product_type_id: { in: orphanTypeIds },
+        },
+      }),
+      tx.leadProcessBriefMapping.deleteMany({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+          product_type_id: { in: orphanTypeIds },
+        },
+      }),
+      tx.leadRequirementMaterialMapping.deleteMany({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+          product_type_id: { in: orphanTypeIds },
+        },
+      }),
+    ]);
+  }
+
+  await createLeadLog(tx, {
+    vendor_id: vendorId,
+    lead_id: leadId,
+    account_id: accountId,
+    action: `Selected items moved to cloned lead ${newLeadCode} for On Hold. — Remark: ${remark.trim()}`,
+    action_type: "UPDATE",
+    created_by: createdBy,
+    created_at: new Date(),
+  });
+
+  await createLeadLog(tx, {
+    vendor_id: vendorId,
+    lead_id: clonedLead.id,
+    account_id: clonedLead.account_id ?? accountId,
+    action: `Lead cloned from ${sourceLead.lead_code} and put On Hold. — Remark: ${remark.trim()}`,
+    action_type: "CREATE",
+    created_by: createdBy,
+    created_at: new Date(),
+  });
+
+  return clonedLead;
+};
+
 export class LeadActivityStatusService {
   // Change status (onHold / lostApproval / lost )
   static async updateStatus(
@@ -76,6 +555,7 @@ export class LeadActivityStatusService {
     createdBy: number,
     baseUrl: string,
     dueDate?: string,
+    selection?: PartialOnHoldSelection,
   ) {
     if (!remark) {
       throw new Error("Remark is required when changing activity status.");
@@ -123,9 +603,33 @@ export class LeadActivityStatusService {
       }
     }
 
-    const affectedTaskUserIds = new Set<number>();
+    const transactionResult = await prisma.$transaction(async (tx) => {
+      const affectedTaskUserIds = new Set<number>();
 
-    const lead = await prisma.$transaction(async (tx) => {
+      if (
+        effectiveStatus === ActivityStatus.onHold &&
+        dueDate &&
+        selection &&
+        selection.applyToWholeLead !== true &&
+        (normalizePositiveIds(selection.selectedGroupIds).length > 0 ||
+          normalizePositiveIds(selection.selectedItemIds).length > 0)
+      ) {
+        const clonedLead = await clonePartialLeadForOnHold(tx, {
+          leadId,
+          vendorId,
+          accountId,
+          userId,
+          createdBy,
+          remark,
+          dueDate,
+          selection,
+        });
+
+        await cache.del(`dashboard:tasks:${vendorId}:${userId}`);
+
+        return { lead: clonedLead, affectedTaskUserIds };
+      }
+
       // 1. Update LeadMaster
       const updatedLead = await tx.leadMaster.update({
         where: { id: leadId, vendor_id: vendorId },
@@ -264,14 +768,18 @@ export class LeadActivityStatusService {
       );
 
       logger.info("Lead activity status updated", { leadId, vendorId, status: effectiveStatus });
-      return updatedLead;
+      return { lead: updatedLead, affectedTaskUserIds };
     });
+    const lead = transactionResult.lead;
+    const affectedTaskUserIds = transactionResult.affectedTaskUserIds;
+    const targetLeadId = lead.id;
+    const targetAccountId = lead.account_id ?? accountId;
 
     // ✅ Notification and Email Handling (Outside Transaction)
     try {
       const [leadInfo, updatedByUser] = await Promise.all([
         prisma.leadMaster.findUnique({
-          where: { id: leadId, vendor_id: vendorId },
+          where: { id: targetLeadId, vendor_id: vendorId },
           select: {
             lead_code: true,
             firstname: true,
@@ -310,9 +818,9 @@ export class LeadActivityStatusService {
       });
 
       // ✅ UPDATED: Correct routes with leadId and accountId
-      const onHoldPath = `/dashboard/leads/leadstable/pendingleaddetails/${leadId}?accountId=${accountId}&tab=onHold`;
-      const lostApprovalPath = `/dashboard/leads/leadstable/pendingleaddetails/${leadId}?accountId=${accountId}&tab=lostApproval`;
-      const lostPath = `/dashboard/leads/leadstable/pendingleaddetails/${leadId}?accountId=${accountId}&tab=lost`;
+      const onHoldPath = `/dashboard/leads/leadstable/pendingleaddetails/${targetLeadId}?accountId=${targetAccountId}&tab=onHold`;
+      const lostApprovalPath = `/dashboard/leads/leadstable/pendingleaddetails/${targetLeadId}?accountId=${targetAccountId}&tab=lostApproval`;
+      const lostPath = `/dashboard/leads/leadstable/pendingleaddetails/${targetLeadId}?accountId=${targetAccountId}&tab=lost`;
 
       const onHoldUrl = `${baseUrl}${onHoldPath}`;
       const lostApprovalUrl = `${baseUrl}${lostApprovalPath}`;
@@ -349,7 +857,7 @@ export class LeadActivityStatusService {
                   ? `Lead ${leadCode} - ${leadName} placed On Hold by ${updatedByName}.`
                   : `Lead ${leadCode} - ${leadName} marked Lost and awaiting approval.`,
                 entity_type: "lead",
-                entity_id: leadId,
+                entity_id: targetLeadId,
                 redirect_url: redirectUrl, // ✅ UPDATED
               });
 
@@ -415,14 +923,14 @@ export class LeadActivityStatusService {
             await Promise.allSettled(
               salesExecutives.map(async (salesExec) => {
                 await NotificationService.createAndSend({
-                  vendor_id: vendorId,
-                  user_id: salesExec.id,
-                  sender_id: createdBy,
+              vendor_id: vendorId,
+              user_id: salesExec.id,
+              sender_id: createdBy,
                   type: NotificationType.LEAD_ACTION,
                   title: "Lead placed On Hold",
                   message: `Lead ${leadCode} - ${leadName} placed On Hold by ${updatedByName}.`,
                   entity_type: "lead",
-                  entity_id: leadId,
+                  entity_id: targetLeadId,
                   redirect_url: onHoldPath, // ✅ UPDATED
                 });
 
@@ -450,7 +958,7 @@ export class LeadActivityStatusService {
       if (finalStatus === ActivityStatus.lost) {
         const lostApprovalLog = await prisma.leadActivityStatusLog.findFirst({
           where: {
-            lead_id: leadId,
+            lead_id: targetLeadId,
             vendor_id: vendorId,
             activity_status: ActivityStatus.lostApproval,
           },
@@ -459,7 +967,7 @@ export class LeadActivityStatusService {
         });
 
         const latestLeadTask = await prisma.userLeadTask.findFirst({
-          where: { lead_id: leadId, vendor_id: vendorId },
+          where: { lead_id: targetLeadId, vendor_id: vendorId },
           orderBy: { created_at: "desc" },
           select: { created_by: true },
         });
@@ -485,7 +993,7 @@ export class LeadActivityStatusService {
             title: "Lost lead approved",
             message: `Lead ${leadCode} - ${leadName} marked Lost approved by ${updatedByName}.`,
             entity_type: "lead",
-            entity_id: leadId,
+            entity_id: targetLeadId,
             redirect_url: lostPath, // ✅ UPDATED
           });
 
@@ -512,7 +1020,7 @@ export class LeadActivityStatusService {
     } catch (notifyError: any) {
       logger.warn("⚠️ Failed to send activity status notifications", {
         error: notifyError?.message,
-        lead_id: leadId,
+        lead_id: targetLeadId,
         status: lead.activity_status,
       });
     }

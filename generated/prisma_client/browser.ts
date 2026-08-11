@@ -143,6 +143,11 @@ export type LeadUserMapping = Prisma.LeadUserMappingModel
  */
 export type LeadActivityStatusLog = Prisma.LeadActivityStatusLogModel
 /**
+ * Model LeadScopedActivityStatusLog
+ * 
+ */
+export type LeadScopedActivityStatusLog = Prisma.LeadScopedActivityStatusLogModel
+/**
  * Model SiteTypeMaster
  * 
  */

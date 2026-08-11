@@ -23,6 +23,9 @@ export class LeadActivityStatusController {
         remark,
         createdBy,
         dueDate,
+        applyToWholeLead,
+        selectedGroupIds,
+        selectedItemIds,
       } = req.body;
 
       if (
@@ -58,6 +61,17 @@ export class LeadActivityStatusController {
         createdBy,
         clientBaseUrl,
         dueDate, // 👈 pass dueDate
+        {
+          applyToWholeLead:
+            applyToWholeLead === true ||
+            applyToWholeLead === "true",
+          selectedGroupIds: Array.isArray(selectedGroupIds)
+            ? selectedGroupIds.map((value) => Number(value))
+            : [],
+          selectedItemIds: Array.isArray(selectedItemIds)
+            ? selectedItemIds.map((value) => Number(value))
+            : [],
+        },
       );
 
       return res
