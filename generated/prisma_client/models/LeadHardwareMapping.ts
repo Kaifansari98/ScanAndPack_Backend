@@ -30,6 +30,7 @@ export type LeadHardwareMappingAvgAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   lead_id: number | null
+  specs_id: number | null
   carcass_legs_id: number | null
   skirting_carcass_legs_id: number | null
   skirting_carcass_legs_color_id: number | null
@@ -40,6 +41,7 @@ export type LeadHardwareMappingSumAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   lead_id: number | null
+  specs_id: number | null
   carcass_legs_id: number | null
   skirting_carcass_legs_id: number | null
   skirting_carcass_legs_color_id: number | null
@@ -50,6 +52,7 @@ export type LeadHardwareMappingMinAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   lead_id: number | null
+  specs_id: number | null
   carcass_legs_id: number | null
   skirting_carcass_legs_id: number | null
   skirting_carcass_legs_color_id: number | null
@@ -62,6 +65,7 @@ export type LeadHardwareMappingMaxAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   lead_id: number | null
+  specs_id: number | null
   carcass_legs_id: number | null
   skirting_carcass_legs_id: number | null
   skirting_carcass_legs_color_id: number | null
@@ -74,6 +78,7 @@ export type LeadHardwareMappingCountAggregateOutputType = {
   id: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   carcass_legs_id: number
   skirting_carcass_legs_id: number
   skirting_carcass_legs_color_id: number
@@ -88,6 +93,7 @@ export type LeadHardwareMappingAvgAggregateInputType = {
   id?: true
   vendor_id?: true
   lead_id?: true
+  specs_id?: true
   carcass_legs_id?: true
   skirting_carcass_legs_id?: true
   skirting_carcass_legs_color_id?: true
@@ -98,6 +104,7 @@ export type LeadHardwareMappingSumAggregateInputType = {
   id?: true
   vendor_id?: true
   lead_id?: true
+  specs_id?: true
   carcass_legs_id?: true
   skirting_carcass_legs_id?: true
   skirting_carcass_legs_color_id?: true
@@ -108,6 +115,7 @@ export type LeadHardwareMappingMinAggregateInputType = {
   id?: true
   vendor_id?: true
   lead_id?: true
+  specs_id?: true
   carcass_legs_id?: true
   skirting_carcass_legs_id?: true
   skirting_carcass_legs_color_id?: true
@@ -120,6 +128,7 @@ export type LeadHardwareMappingMaxAggregateInputType = {
   id?: true
   vendor_id?: true
   lead_id?: true
+  specs_id?: true
   carcass_legs_id?: true
   skirting_carcass_legs_id?: true
   skirting_carcass_legs_color_id?: true
@@ -132,6 +141,7 @@ export type LeadHardwareMappingCountAggregateInputType = {
   id?: true
   vendor_id?: true
   lead_id?: true
+  specs_id?: true
   carcass_legs_id?: true
   skirting_carcass_legs_id?: true
   skirting_carcass_legs_color_id?: true
@@ -231,6 +241,7 @@ export type LeadHardwareMappingGroupByOutputType = {
   id: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   carcass_legs_id: number
   skirting_carcass_legs_id: number
   skirting_carcass_legs_color_id: number | null
@@ -266,6 +277,7 @@ export type LeadHardwareMappingWhereInput = {
   id?: Prisma.IntFilter<"LeadHardwareMapping"> | number
   vendor_id?: Prisma.IntFilter<"LeadHardwareMapping"> | number
   lead_id?: Prisma.IntFilter<"LeadHardwareMapping"> | number
+  specs_id?: Prisma.IntFilter<"LeadHardwareMapping"> | number
   carcass_legs_id?: Prisma.IntFilter<"LeadHardwareMapping"> | number
   skirting_carcass_legs_id?: Prisma.IntFilter<"LeadHardwareMapping"> | number
   skirting_carcass_legs_color_id?: Prisma.IntNullableFilter<"LeadHardwareMapping"> | number | null
@@ -275,6 +287,7 @@ export type LeadHardwareMappingWhereInput = {
   carcassLegs?: Prisma.XOR<Prisma.CarcassLegsMasterScalarRelationFilter, Prisma.CarcassLegsMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  specification?: Prisma.XOR<Prisma.LeadSpecificationsMasterScalarRelationFilter, Prisma.LeadSpecificationsMasterWhereInput>
   skirtingCarcassLegsColor?: Prisma.XOR<Prisma.SkirtingCarcassLegsColorMasterNullableScalarRelationFilter, Prisma.SkirtingCarcassLegsColorMasterWhereInput> | null
   skirtingCarcassLegs?: Prisma.XOR<Prisma.SkirtingCarcassLegsMasterScalarRelationFilter, Prisma.SkirtingCarcassLegsMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -284,6 +297,7 @@ export type LeadHardwareMappingOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  specs_id?: Prisma.SortOrder
   carcass_legs_id?: Prisma.SortOrder
   skirting_carcass_legs_id?: Prisma.SortOrder
   skirting_carcass_legs_color_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -293,6 +307,7 @@ export type LeadHardwareMappingOrderByWithRelationInput = {
   carcassLegs?: Prisma.CarcassLegsMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   lead?: Prisma.LeadMasterOrderByWithRelationInput
+  specification?: Prisma.LeadSpecificationsMasterOrderByWithRelationInput
   skirtingCarcassLegsColor?: Prisma.SkirtingCarcassLegsColorMasterOrderByWithRelationInput
   skirtingCarcassLegs?: Prisma.SkirtingCarcassLegsMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
@@ -305,6 +320,7 @@ export type LeadHardwareMappingWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.LeadHardwareMappingWhereInput | Prisma.LeadHardwareMappingWhereInput[]
   vendor_id?: Prisma.IntFilter<"LeadHardwareMapping"> | number
   lead_id?: Prisma.IntFilter<"LeadHardwareMapping"> | number
+  specs_id?: Prisma.IntFilter<"LeadHardwareMapping"> | number
   carcass_legs_id?: Prisma.IntFilter<"LeadHardwareMapping"> | number
   skirting_carcass_legs_id?: Prisma.IntFilter<"LeadHardwareMapping"> | number
   skirting_carcass_legs_color_id?: Prisma.IntNullableFilter<"LeadHardwareMapping"> | number | null
@@ -314,6 +330,7 @@ export type LeadHardwareMappingWhereUniqueInput = Prisma.AtLeast<{
   carcassLegs?: Prisma.XOR<Prisma.CarcassLegsMasterScalarRelationFilter, Prisma.CarcassLegsMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  specification?: Prisma.XOR<Prisma.LeadSpecificationsMasterScalarRelationFilter, Prisma.LeadSpecificationsMasterWhereInput>
   skirtingCarcassLegsColor?: Prisma.XOR<Prisma.SkirtingCarcassLegsColorMasterNullableScalarRelationFilter, Prisma.SkirtingCarcassLegsColorMasterWhereInput> | null
   skirtingCarcassLegs?: Prisma.XOR<Prisma.SkirtingCarcassLegsMasterScalarRelationFilter, Prisma.SkirtingCarcassLegsMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -323,6 +340,7 @@ export type LeadHardwareMappingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  specs_id?: Prisma.SortOrder
   carcass_legs_id?: Prisma.SortOrder
   skirting_carcass_legs_id?: Prisma.SortOrder
   skirting_carcass_legs_color_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -343,6 +361,7 @@ export type LeadHardwareMappingScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"LeadHardwareMapping"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"LeadHardwareMapping"> | number
   lead_id?: Prisma.IntWithAggregatesFilter<"LeadHardwareMapping"> | number
+  specs_id?: Prisma.IntWithAggregatesFilter<"LeadHardwareMapping"> | number
   carcass_legs_id?: Prisma.IntWithAggregatesFilter<"LeadHardwareMapping"> | number
   skirting_carcass_legs_id?: Prisma.IntWithAggregatesFilter<"LeadHardwareMapping"> | number
   skirting_carcass_legs_color_id?: Prisma.IntNullableWithAggregatesFilter<"LeadHardwareMapping"> | number | null
@@ -357,6 +376,7 @@ export type LeadHardwareMappingCreateInput = {
   carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadHardwareMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutHardwareMappingsInput
+  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutHardwareMappingsInput
   skirtingCarcassLegsColor?: Prisma.SkirtingCarcassLegsColorMasterCreateNestedOneWithoutLeadMappingsInput
   skirtingCarcassLegs: Prisma.SkirtingCarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadHardwareMappingsInput
@@ -366,6 +386,7 @@ export type LeadHardwareMappingUncheckedCreateInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   carcass_legs_id: number
   skirting_carcass_legs_id: number
   skirting_carcass_legs_color_id?: number | null
@@ -380,6 +401,7 @@ export type LeadHardwareMappingUpdateInput = {
   carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadHardwareMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutHardwareMappingsNestedInput
+  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutHardwareMappingsNestedInput
   skirtingCarcassLegsColor?: Prisma.SkirtingCarcassLegsColorMasterUpdateOneWithoutLeadMappingsNestedInput
   skirtingCarcassLegs?: Prisma.SkirtingCarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadHardwareMappingsNestedInput
@@ -389,6 +411,7 @@ export type LeadHardwareMappingUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_color_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -401,6 +424,7 @@ export type LeadHardwareMappingCreateManyInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   carcass_legs_id: number
   skirting_carcass_legs_id: number
   skirting_carcass_legs_color_id?: number | null
@@ -418,6 +442,7 @@ export type LeadHardwareMappingUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_color_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -440,6 +465,7 @@ export type LeadHardwareMappingCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  specs_id?: Prisma.SortOrder
   carcass_legs_id?: Prisma.SortOrder
   skirting_carcass_legs_id?: Prisma.SortOrder
   skirting_carcass_legs_color_id?: Prisma.SortOrder
@@ -452,6 +478,7 @@ export type LeadHardwareMappingAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  specs_id?: Prisma.SortOrder
   carcass_legs_id?: Prisma.SortOrder
   skirting_carcass_legs_id?: Prisma.SortOrder
   skirting_carcass_legs_color_id?: Prisma.SortOrder
@@ -462,6 +489,7 @@ export type LeadHardwareMappingMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  specs_id?: Prisma.SortOrder
   carcass_legs_id?: Prisma.SortOrder
   skirting_carcass_legs_id?: Prisma.SortOrder
   skirting_carcass_legs_color_id?: Prisma.SortOrder
@@ -474,6 +502,7 @@ export type LeadHardwareMappingMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  specs_id?: Prisma.SortOrder
   carcass_legs_id?: Prisma.SortOrder
   skirting_carcass_legs_id?: Prisma.SortOrder
   skirting_carcass_legs_color_id?: Prisma.SortOrder
@@ -486,6 +515,7 @@ export type LeadHardwareMappingSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  specs_id?: Prisma.SortOrder
   carcass_legs_id?: Prisma.SortOrder
   skirting_carcass_legs_id?: Prisma.SortOrder
   skirting_carcass_legs_color_id?: Prisma.SortOrder
@@ -615,6 +645,48 @@ export type LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput = {
   connect?: Prisma.LeadHardwareMappingWhereUniqueInput | Prisma.LeadHardwareMappingWhereUniqueInput[]
   update?: Prisma.LeadHardwareMappingUpdateWithWhereUniqueWithoutLeadInput | Prisma.LeadHardwareMappingUpdateWithWhereUniqueWithoutLeadInput[]
   updateMany?: Prisma.LeadHardwareMappingUpdateManyWithWhereWithoutLeadInput | Prisma.LeadHardwareMappingUpdateManyWithWhereWithoutLeadInput[]
+  deleteMany?: Prisma.LeadHardwareMappingScalarWhereInput | Prisma.LeadHardwareMappingScalarWhereInput[]
+}
+
+export type LeadHardwareMappingCreateNestedManyWithoutSpecificationInput = {
+  create?: Prisma.XOR<Prisma.LeadHardwareMappingCreateWithoutSpecificationInput, Prisma.LeadHardwareMappingUncheckedCreateWithoutSpecificationInput> | Prisma.LeadHardwareMappingCreateWithoutSpecificationInput[] | Prisma.LeadHardwareMappingUncheckedCreateWithoutSpecificationInput[]
+  connectOrCreate?: Prisma.LeadHardwareMappingCreateOrConnectWithoutSpecificationInput | Prisma.LeadHardwareMappingCreateOrConnectWithoutSpecificationInput[]
+  createMany?: Prisma.LeadHardwareMappingCreateManySpecificationInputEnvelope
+  connect?: Prisma.LeadHardwareMappingWhereUniqueInput | Prisma.LeadHardwareMappingWhereUniqueInput[]
+}
+
+export type LeadHardwareMappingUncheckedCreateNestedManyWithoutSpecificationInput = {
+  create?: Prisma.XOR<Prisma.LeadHardwareMappingCreateWithoutSpecificationInput, Prisma.LeadHardwareMappingUncheckedCreateWithoutSpecificationInput> | Prisma.LeadHardwareMappingCreateWithoutSpecificationInput[] | Prisma.LeadHardwareMappingUncheckedCreateWithoutSpecificationInput[]
+  connectOrCreate?: Prisma.LeadHardwareMappingCreateOrConnectWithoutSpecificationInput | Prisma.LeadHardwareMappingCreateOrConnectWithoutSpecificationInput[]
+  createMany?: Prisma.LeadHardwareMappingCreateManySpecificationInputEnvelope
+  connect?: Prisma.LeadHardwareMappingWhereUniqueInput | Prisma.LeadHardwareMappingWhereUniqueInput[]
+}
+
+export type LeadHardwareMappingUpdateManyWithoutSpecificationNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadHardwareMappingCreateWithoutSpecificationInput, Prisma.LeadHardwareMappingUncheckedCreateWithoutSpecificationInput> | Prisma.LeadHardwareMappingCreateWithoutSpecificationInput[] | Prisma.LeadHardwareMappingUncheckedCreateWithoutSpecificationInput[]
+  connectOrCreate?: Prisma.LeadHardwareMappingCreateOrConnectWithoutSpecificationInput | Prisma.LeadHardwareMappingCreateOrConnectWithoutSpecificationInput[]
+  upsert?: Prisma.LeadHardwareMappingUpsertWithWhereUniqueWithoutSpecificationInput | Prisma.LeadHardwareMappingUpsertWithWhereUniqueWithoutSpecificationInput[]
+  createMany?: Prisma.LeadHardwareMappingCreateManySpecificationInputEnvelope
+  set?: Prisma.LeadHardwareMappingWhereUniqueInput | Prisma.LeadHardwareMappingWhereUniqueInput[]
+  disconnect?: Prisma.LeadHardwareMappingWhereUniqueInput | Prisma.LeadHardwareMappingWhereUniqueInput[]
+  delete?: Prisma.LeadHardwareMappingWhereUniqueInput | Prisma.LeadHardwareMappingWhereUniqueInput[]
+  connect?: Prisma.LeadHardwareMappingWhereUniqueInput | Prisma.LeadHardwareMappingWhereUniqueInput[]
+  update?: Prisma.LeadHardwareMappingUpdateWithWhereUniqueWithoutSpecificationInput | Prisma.LeadHardwareMappingUpdateWithWhereUniqueWithoutSpecificationInput[]
+  updateMany?: Prisma.LeadHardwareMappingUpdateManyWithWhereWithoutSpecificationInput | Prisma.LeadHardwareMappingUpdateManyWithWhereWithoutSpecificationInput[]
+  deleteMany?: Prisma.LeadHardwareMappingScalarWhereInput | Prisma.LeadHardwareMappingScalarWhereInput[]
+}
+
+export type LeadHardwareMappingUncheckedUpdateManyWithoutSpecificationNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadHardwareMappingCreateWithoutSpecificationInput, Prisma.LeadHardwareMappingUncheckedCreateWithoutSpecificationInput> | Prisma.LeadHardwareMappingCreateWithoutSpecificationInput[] | Prisma.LeadHardwareMappingUncheckedCreateWithoutSpecificationInput[]
+  connectOrCreate?: Prisma.LeadHardwareMappingCreateOrConnectWithoutSpecificationInput | Prisma.LeadHardwareMappingCreateOrConnectWithoutSpecificationInput[]
+  upsert?: Prisma.LeadHardwareMappingUpsertWithWhereUniqueWithoutSpecificationInput | Prisma.LeadHardwareMappingUpsertWithWhereUniqueWithoutSpecificationInput[]
+  createMany?: Prisma.LeadHardwareMappingCreateManySpecificationInputEnvelope
+  set?: Prisma.LeadHardwareMappingWhereUniqueInput | Prisma.LeadHardwareMappingWhereUniqueInput[]
+  disconnect?: Prisma.LeadHardwareMappingWhereUniqueInput | Prisma.LeadHardwareMappingWhereUniqueInput[]
+  delete?: Prisma.LeadHardwareMappingWhereUniqueInput | Prisma.LeadHardwareMappingWhereUniqueInput[]
+  connect?: Prisma.LeadHardwareMappingWhereUniqueInput | Prisma.LeadHardwareMappingWhereUniqueInput[]
+  update?: Prisma.LeadHardwareMappingUpdateWithWhereUniqueWithoutSpecificationInput | Prisma.LeadHardwareMappingUpdateWithWhereUniqueWithoutSpecificationInput[]
+  updateMany?: Prisma.LeadHardwareMappingUpdateManyWithWhereWithoutSpecificationInput | Prisma.LeadHardwareMappingUpdateManyWithWhereWithoutSpecificationInput[]
   deleteMany?: Prisma.LeadHardwareMappingScalarWhereInput | Prisma.LeadHardwareMappingScalarWhereInput[]
 }
 
@@ -750,6 +822,7 @@ export type LeadHardwareMappingCreateWithoutVendorInput = {
   carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadHardwareMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutHardwareMappingsInput
+  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutHardwareMappingsInput
   skirtingCarcassLegsColor?: Prisma.SkirtingCarcassLegsColorMasterCreateNestedOneWithoutLeadMappingsInput
   skirtingCarcassLegs: Prisma.SkirtingCarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
 }
@@ -757,6 +830,7 @@ export type LeadHardwareMappingCreateWithoutVendorInput = {
 export type LeadHardwareMappingUncheckedCreateWithoutVendorInput = {
   id?: number
   lead_id: number
+  specs_id: number
   carcass_legs_id: number
   skirting_carcass_legs_id: number
   skirting_carcass_legs_color_id?: number | null
@@ -798,6 +872,7 @@ export type LeadHardwareMappingScalarWhereInput = {
   id?: Prisma.IntFilter<"LeadHardwareMapping"> | number
   vendor_id?: Prisma.IntFilter<"LeadHardwareMapping"> | number
   lead_id?: Prisma.IntFilter<"LeadHardwareMapping"> | number
+  specs_id?: Prisma.IntFilter<"LeadHardwareMapping"> | number
   carcass_legs_id?: Prisma.IntFilter<"LeadHardwareMapping"> | number
   skirting_carcass_legs_id?: Prisma.IntFilter<"LeadHardwareMapping"> | number
   skirting_carcass_legs_color_id?: Prisma.IntNullableFilter<"LeadHardwareMapping"> | number | null
@@ -811,6 +886,7 @@ export type LeadHardwareMappingCreateWithoutCreatedByInput = {
   created_at?: Date | string
   carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutHardwareMappingsInput
+  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutHardwareMappingsInput
   skirtingCarcassLegsColor?: Prisma.SkirtingCarcassLegsColorMasterCreateNestedOneWithoutLeadMappingsInput
   skirtingCarcassLegs: Prisma.SkirtingCarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadHardwareMappingsInput
@@ -820,6 +896,7 @@ export type LeadHardwareMappingUncheckedCreateWithoutCreatedByInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   carcass_legs_id: number
   skirting_carcass_legs_id: number
   skirting_carcass_legs_color_id?: number | null
@@ -858,6 +935,7 @@ export type LeadHardwareMappingCreateWithoutLeadInput = {
   created_at?: Date | string
   carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadHardwareMappingsCreatedInput
+  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutHardwareMappingsInput
   skirtingCarcassLegsColor?: Prisma.SkirtingCarcassLegsColorMasterCreateNestedOneWithoutLeadMappingsInput
   skirtingCarcassLegs: Prisma.SkirtingCarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadHardwareMappingsInput
@@ -866,6 +944,7 @@ export type LeadHardwareMappingCreateWithoutLeadInput = {
 export type LeadHardwareMappingUncheckedCreateWithoutLeadInput = {
   id?: number
   vendor_id: number
+  specs_id: number
   carcass_legs_id: number
   skirting_carcass_legs_id: number
   skirting_carcass_legs_color_id?: number | null
@@ -900,11 +979,61 @@ export type LeadHardwareMappingUpdateManyWithWhereWithoutLeadInput = {
   data: Prisma.XOR<Prisma.LeadHardwareMappingUpdateManyMutationInput, Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadInput>
 }
 
+export type LeadHardwareMappingCreateWithoutSpecificationInput = {
+  note?: string | null
+  created_at?: Date | string
+  carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadHardwareMappingsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutHardwareMappingsInput
+  skirtingCarcassLegsColor?: Prisma.SkirtingCarcassLegsColorMasterCreateNestedOneWithoutLeadMappingsInput
+  skirtingCarcassLegs: Prisma.SkirtingCarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadHardwareMappingsInput
+}
+
+export type LeadHardwareMappingUncheckedCreateWithoutSpecificationInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  carcass_legs_id: number
+  skirting_carcass_legs_id: number
+  skirting_carcass_legs_color_id?: number | null
+  note?: string | null
+  created_at?: Date | string
+  created_by: number
+}
+
+export type LeadHardwareMappingCreateOrConnectWithoutSpecificationInput = {
+  where: Prisma.LeadHardwareMappingWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadHardwareMappingCreateWithoutSpecificationInput, Prisma.LeadHardwareMappingUncheckedCreateWithoutSpecificationInput>
+}
+
+export type LeadHardwareMappingCreateManySpecificationInputEnvelope = {
+  data: Prisma.LeadHardwareMappingCreateManySpecificationInput | Prisma.LeadHardwareMappingCreateManySpecificationInput[]
+  skipDuplicates?: boolean
+}
+
+export type LeadHardwareMappingUpsertWithWhereUniqueWithoutSpecificationInput = {
+  where: Prisma.LeadHardwareMappingWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeadHardwareMappingUpdateWithoutSpecificationInput, Prisma.LeadHardwareMappingUncheckedUpdateWithoutSpecificationInput>
+  create: Prisma.XOR<Prisma.LeadHardwareMappingCreateWithoutSpecificationInput, Prisma.LeadHardwareMappingUncheckedCreateWithoutSpecificationInput>
+}
+
+export type LeadHardwareMappingUpdateWithWhereUniqueWithoutSpecificationInput = {
+  where: Prisma.LeadHardwareMappingWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeadHardwareMappingUpdateWithoutSpecificationInput, Prisma.LeadHardwareMappingUncheckedUpdateWithoutSpecificationInput>
+}
+
+export type LeadHardwareMappingUpdateManyWithWhereWithoutSpecificationInput = {
+  where: Prisma.LeadHardwareMappingScalarWhereInput
+  data: Prisma.XOR<Prisma.LeadHardwareMappingUpdateManyMutationInput, Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutSpecificationInput>
+}
+
 export type LeadHardwareMappingCreateWithoutCarcassLegsInput = {
   note?: string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadHardwareMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutHardwareMappingsInput
+  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutHardwareMappingsInput
   skirtingCarcassLegsColor?: Prisma.SkirtingCarcassLegsColorMasterCreateNestedOneWithoutLeadMappingsInput
   skirtingCarcassLegs: Prisma.SkirtingCarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadHardwareMappingsInput
@@ -914,6 +1043,7 @@ export type LeadHardwareMappingUncheckedCreateWithoutCarcassLegsInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   skirting_carcass_legs_id: number
   skirting_carcass_legs_color_id?: number | null
   note?: string | null
@@ -953,6 +1083,7 @@ export type LeadHardwareMappingCreateWithoutSkirtingCarcassLegsInput = {
   carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadHardwareMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutHardwareMappingsInput
+  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutHardwareMappingsInput
   skirtingCarcassLegsColor?: Prisma.SkirtingCarcassLegsColorMasterCreateNestedOneWithoutLeadMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadHardwareMappingsInput
 }
@@ -961,6 +1092,7 @@ export type LeadHardwareMappingUncheckedCreateWithoutSkirtingCarcassLegsInput = 
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   carcass_legs_id: number
   skirting_carcass_legs_color_id?: number | null
   note?: string | null
@@ -1000,6 +1132,7 @@ export type LeadHardwareMappingCreateWithoutSkirtingCarcassLegsColorInput = {
   carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadHardwareMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutHardwareMappingsInput
+  specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutHardwareMappingsInput
   skirtingCarcassLegs: Prisma.SkirtingCarcassLegsMasterCreateNestedOneWithoutLeadMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadHardwareMappingsInput
 }
@@ -1008,6 +1141,7 @@ export type LeadHardwareMappingUncheckedCreateWithoutSkirtingCarcassLegsColorInp
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   carcass_legs_id: number
   skirting_carcass_legs_id: number
   note?: string | null
@@ -1044,6 +1178,7 @@ export type LeadHardwareMappingUpdateManyWithWhereWithoutSkirtingCarcassLegsColo
 export type LeadHardwareMappingCreateManyVendorInput = {
   id?: number
   lead_id: number
+  specs_id: number
   carcass_legs_id: number
   skirting_carcass_legs_id: number
   skirting_carcass_legs_color_id?: number | null
@@ -1058,6 +1193,7 @@ export type LeadHardwareMappingUpdateWithoutVendorInput = {
   carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadHardwareMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutHardwareMappingsNestedInput
+  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutHardwareMappingsNestedInput
   skirtingCarcassLegsColor?: Prisma.SkirtingCarcassLegsColorMasterUpdateOneWithoutLeadMappingsNestedInput
   skirtingCarcassLegs?: Prisma.SkirtingCarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
 }
@@ -1065,6 +1201,7 @@ export type LeadHardwareMappingUpdateWithoutVendorInput = {
 export type LeadHardwareMappingUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_color_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1076,6 +1213,7 @@ export type LeadHardwareMappingUncheckedUpdateWithoutVendorInput = {
 export type LeadHardwareMappingUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_color_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1088,6 +1226,7 @@ export type LeadHardwareMappingCreateManyCreatedByInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   carcass_legs_id: number
   skirting_carcass_legs_id: number
   skirting_carcass_legs_color_id?: number | null
@@ -1100,6 +1239,7 @@ export type LeadHardwareMappingUpdateWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutHardwareMappingsNestedInput
+  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutHardwareMappingsNestedInput
   skirtingCarcassLegsColor?: Prisma.SkirtingCarcassLegsColorMasterUpdateOneWithoutLeadMappingsNestedInput
   skirtingCarcassLegs?: Prisma.SkirtingCarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadHardwareMappingsNestedInput
@@ -1109,6 +1249,7 @@ export type LeadHardwareMappingUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_color_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1120,6 +1261,7 @@ export type LeadHardwareMappingUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_color_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1130,6 +1272,7 @@ export type LeadHardwareMappingUncheckedUpdateManyWithoutCreatedByInput = {
 export type LeadHardwareMappingCreateManyLeadInput = {
   id?: number
   vendor_id: number
+  specs_id: number
   carcass_legs_id: number
   skirting_carcass_legs_id: number
   skirting_carcass_legs_color_id?: number | null
@@ -1143,6 +1286,7 @@ export type LeadHardwareMappingUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadHardwareMappingsCreatedNestedInput
+  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutHardwareMappingsNestedInput
   skirtingCarcassLegsColor?: Prisma.SkirtingCarcassLegsColorMasterUpdateOneWithoutLeadMappingsNestedInput
   skirtingCarcassLegs?: Prisma.SkirtingCarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadHardwareMappingsNestedInput
@@ -1151,6 +1295,7 @@ export type LeadHardwareMappingUpdateWithoutLeadInput = {
 export type LeadHardwareMappingUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_color_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1162,6 +1307,54 @@ export type LeadHardwareMappingUncheckedUpdateWithoutLeadInput = {
 export type LeadHardwareMappingUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
+  carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
+  skirting_carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
+  skirting_carcass_legs_color_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type LeadHardwareMappingCreateManySpecificationInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  carcass_legs_id: number
+  skirting_carcass_legs_id: number
+  skirting_carcass_legs_color_id?: number | null
+  note?: string | null
+  created_at?: Date | string
+  created_by: number
+}
+
+export type LeadHardwareMappingUpdateWithoutSpecificationInput = {
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadHardwareMappingsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutHardwareMappingsNestedInput
+  skirtingCarcassLegsColor?: Prisma.SkirtingCarcassLegsColorMasterUpdateOneWithoutLeadMappingsNestedInput
+  skirtingCarcassLegs?: Prisma.SkirtingCarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadHardwareMappingsNestedInput
+}
+
+export type LeadHardwareMappingUncheckedUpdateWithoutSpecificationInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
+  skirting_carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
+  skirting_carcass_legs_color_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type LeadHardwareMappingUncheckedUpdateManyWithoutSpecificationInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_color_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1174,6 +1367,7 @@ export type LeadHardwareMappingCreateManyCarcassLegsInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   skirting_carcass_legs_id: number
   skirting_carcass_legs_color_id?: number | null
   note?: string | null
@@ -1186,6 +1380,7 @@ export type LeadHardwareMappingUpdateWithoutCarcassLegsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadHardwareMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutHardwareMappingsNestedInput
+  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutHardwareMappingsNestedInput
   skirtingCarcassLegsColor?: Prisma.SkirtingCarcassLegsColorMasterUpdateOneWithoutLeadMappingsNestedInput
   skirtingCarcassLegs?: Prisma.SkirtingCarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadHardwareMappingsNestedInput
@@ -1195,6 +1390,7 @@ export type LeadHardwareMappingUncheckedUpdateWithoutCarcassLegsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_color_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1206,6 +1402,7 @@ export type LeadHardwareMappingUncheckedUpdateManyWithoutCarcassLegsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_color_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1217,6 +1414,7 @@ export type LeadHardwareMappingCreateManySkirtingCarcassLegsInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   carcass_legs_id: number
   skirting_carcass_legs_color_id?: number | null
   note?: string | null
@@ -1230,6 +1428,7 @@ export type LeadHardwareMappingUpdateWithoutSkirtingCarcassLegsInput = {
   carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadHardwareMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutHardwareMappingsNestedInput
+  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutHardwareMappingsNestedInput
   skirtingCarcassLegsColor?: Prisma.SkirtingCarcassLegsColorMasterUpdateOneWithoutLeadMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadHardwareMappingsNestedInput
 }
@@ -1238,6 +1437,7 @@ export type LeadHardwareMappingUncheckedUpdateWithoutSkirtingCarcassLegsInput = 
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_color_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1249,6 +1449,7 @@ export type LeadHardwareMappingUncheckedUpdateManyWithoutSkirtingCarcassLegsInpu
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_color_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1260,6 +1461,7 @@ export type LeadHardwareMappingCreateManySkirtingCarcassLegsColorInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  specs_id: number
   carcass_legs_id: number
   skirting_carcass_legs_id: number
   note?: string | null
@@ -1273,6 +1475,7 @@ export type LeadHardwareMappingUpdateWithoutSkirtingCarcassLegsColorInput = {
   carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadHardwareMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutHardwareMappingsNestedInput
+  specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutHardwareMappingsNestedInput
   skirtingCarcassLegs?: Prisma.SkirtingCarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadHardwareMappingsNestedInput
 }
@@ -1281,6 +1484,7 @@ export type LeadHardwareMappingUncheckedUpdateWithoutSkirtingCarcassLegsColorInp
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1292,6 +1496,7 @@ export type LeadHardwareMappingUncheckedUpdateManyWithoutSkirtingCarcassLegsColo
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  specs_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   skirting_carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1305,6 +1510,7 @@ export type LeadHardwareMappingSelect<ExtArgs extends runtime.Types.Extensions.I
   id?: boolean
   vendor_id?: boolean
   lead_id?: boolean
+  specs_id?: boolean
   carcass_legs_id?: boolean
   skirting_carcass_legs_id?: boolean
   skirting_carcass_legs_color_id?: boolean
@@ -1314,6 +1520,7 @@ export type LeadHardwareMappingSelect<ExtArgs extends runtime.Types.Extensions.I
   carcassLegs?: boolean | Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   skirtingCarcassLegsColor?: boolean | Prisma.LeadHardwareMapping$skirtingCarcassLegsColorArgs<ExtArgs>
   skirtingCarcassLegs?: boolean | Prisma.SkirtingCarcassLegsMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1323,6 +1530,7 @@ export type LeadHardwareMappingSelectCreateManyAndReturn<ExtArgs extends runtime
   id?: boolean
   vendor_id?: boolean
   lead_id?: boolean
+  specs_id?: boolean
   carcass_legs_id?: boolean
   skirting_carcass_legs_id?: boolean
   skirting_carcass_legs_color_id?: boolean
@@ -1332,6 +1540,7 @@ export type LeadHardwareMappingSelectCreateManyAndReturn<ExtArgs extends runtime
   carcassLegs?: boolean | Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   skirtingCarcassLegsColor?: boolean | Prisma.LeadHardwareMapping$skirtingCarcassLegsColorArgs<ExtArgs>
   skirtingCarcassLegs?: boolean | Prisma.SkirtingCarcassLegsMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1341,6 +1550,7 @@ export type LeadHardwareMappingSelectUpdateManyAndReturn<ExtArgs extends runtime
   id?: boolean
   vendor_id?: boolean
   lead_id?: boolean
+  specs_id?: boolean
   carcass_legs_id?: boolean
   skirting_carcass_legs_id?: boolean
   skirting_carcass_legs_color_id?: boolean
@@ -1350,6 +1560,7 @@ export type LeadHardwareMappingSelectUpdateManyAndReturn<ExtArgs extends runtime
   carcassLegs?: boolean | Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   skirtingCarcassLegsColor?: boolean | Prisma.LeadHardwareMapping$skirtingCarcassLegsColorArgs<ExtArgs>
   skirtingCarcassLegs?: boolean | Prisma.SkirtingCarcassLegsMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1359,6 +1570,7 @@ export type LeadHardwareMappingSelectScalar = {
   id?: boolean
   vendor_id?: boolean
   lead_id?: boolean
+  specs_id?: boolean
   carcass_legs_id?: boolean
   skirting_carcass_legs_id?: boolean
   skirting_carcass_legs_color_id?: boolean
@@ -1367,11 +1579,12 @@ export type LeadHardwareMappingSelectScalar = {
   created_by?: boolean
 }
 
-export type LeadHardwareMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "carcass_legs_id" | "skirting_carcass_legs_id" | "skirting_carcass_legs_color_id" | "note" | "created_at" | "created_by", ExtArgs["result"]["leadHardwareMapping"]>
+export type LeadHardwareMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "specs_id" | "carcass_legs_id" | "skirting_carcass_legs_id" | "skirting_carcass_legs_color_id" | "note" | "created_at" | "created_by", ExtArgs["result"]["leadHardwareMapping"]>
 export type LeadHardwareMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   carcassLegs?: boolean | Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   skirtingCarcassLegsColor?: boolean | Prisma.LeadHardwareMapping$skirtingCarcassLegsColorArgs<ExtArgs>
   skirtingCarcassLegs?: boolean | Prisma.SkirtingCarcassLegsMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1380,6 +1593,7 @@ export type LeadHardwareMappingIncludeCreateManyAndReturn<ExtArgs extends runtim
   carcassLegs?: boolean | Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   skirtingCarcassLegsColor?: boolean | Prisma.LeadHardwareMapping$skirtingCarcassLegsColorArgs<ExtArgs>
   skirtingCarcassLegs?: boolean | Prisma.SkirtingCarcassLegsMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1388,6 +1602,7 @@ export type LeadHardwareMappingIncludeUpdateManyAndReturn<ExtArgs extends runtim
   carcassLegs?: boolean | Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   skirtingCarcassLegsColor?: boolean | Prisma.LeadHardwareMapping$skirtingCarcassLegsColorArgs<ExtArgs>
   skirtingCarcassLegs?: boolean | Prisma.SkirtingCarcassLegsMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1399,6 +1614,7 @@ export type $LeadHardwareMappingPayload<ExtArgs extends runtime.Types.Extensions
     carcassLegs: Prisma.$CarcassLegsMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     lead: Prisma.$LeadMasterPayload<ExtArgs>
+    specification: Prisma.$LeadSpecificationsMasterPayload<ExtArgs>
     skirtingCarcassLegsColor: Prisma.$SkirtingCarcassLegsColorMasterPayload<ExtArgs> | null
     skirtingCarcassLegs: Prisma.$SkirtingCarcassLegsMasterPayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
@@ -1407,6 +1623,7 @@ export type $LeadHardwareMappingPayload<ExtArgs extends runtime.Types.Extensions
     id: number
     vendor_id: number
     lead_id: number
+    specs_id: number
     carcass_legs_id: number
     skirting_carcass_legs_id: number
     skirting_carcass_legs_color_id: number | null
@@ -1810,6 +2027,7 @@ export interface Prisma__LeadHardwareMappingClient<T, Null = never, ExtArgs exte
   carcassLegs<T extends Prisma.CarcassLegsMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__CarcassLegsMasterClient<runtime.Types.Result.GetResult<Prisma.$CarcassLegsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  specification<T extends Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadSpecificationsMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadSpecificationsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   skirtingCarcassLegsColor<T extends Prisma.LeadHardwareMapping$skirtingCarcassLegsColorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadHardwareMapping$skirtingCarcassLegsColorArgs<ExtArgs>>): Prisma.Prisma__SkirtingCarcassLegsColorMasterClient<runtime.Types.Result.GetResult<Prisma.$SkirtingCarcassLegsColorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   skirtingCarcassLegs<T extends Prisma.SkirtingCarcassLegsMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SkirtingCarcassLegsMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__SkirtingCarcassLegsMasterClient<runtime.Types.Result.GetResult<Prisma.$SkirtingCarcassLegsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
@@ -1845,6 +2063,7 @@ export interface LeadHardwareMappingFieldRefs {
   readonly id: Prisma.FieldRef<"LeadHardwareMapping", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"LeadHardwareMapping", 'Int'>
   readonly lead_id: Prisma.FieldRef<"LeadHardwareMapping", 'Int'>
+  readonly specs_id: Prisma.FieldRef<"LeadHardwareMapping", 'Int'>
   readonly carcass_legs_id: Prisma.FieldRef<"LeadHardwareMapping", 'Int'>
   readonly skirting_carcass_legs_id: Prisma.FieldRef<"LeadHardwareMapping", 'Int'>
   readonly skirting_carcass_legs_color_id: Prisma.FieldRef<"LeadHardwareMapping", 'Int'>

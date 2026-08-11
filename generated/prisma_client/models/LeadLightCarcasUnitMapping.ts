@@ -50,6 +50,7 @@ export type LeadLightCarcasUnitMappingMinAggregateOutputType = {
   lead_id: number | null
   specs_id: number | null
   light_carcas_unit_master_id: number | null
+  custom_remark: string | null
   created_at: Date | null
   created_by: number | null
 }
@@ -60,6 +61,7 @@ export type LeadLightCarcasUnitMappingMaxAggregateOutputType = {
   lead_id: number | null
   specs_id: number | null
   light_carcas_unit_master_id: number | null
+  custom_remark: string | null
   created_at: Date | null
   created_by: number | null
 }
@@ -70,6 +72,7 @@ export type LeadLightCarcasUnitMappingCountAggregateOutputType = {
   lead_id: number
   specs_id: number
   light_carcas_unit_master_id: number
+  custom_remark: number
   created_at: number
   created_by: number
   _all: number
@@ -100,6 +103,7 @@ export type LeadLightCarcasUnitMappingMinAggregateInputType = {
   lead_id?: true
   specs_id?: true
   light_carcas_unit_master_id?: true
+  custom_remark?: true
   created_at?: true
   created_by?: true
 }
@@ -110,6 +114,7 @@ export type LeadLightCarcasUnitMappingMaxAggregateInputType = {
   lead_id?: true
   specs_id?: true
   light_carcas_unit_master_id?: true
+  custom_remark?: true
   created_at?: true
   created_by?: true
 }
@@ -120,6 +125,7 @@ export type LeadLightCarcasUnitMappingCountAggregateInputType = {
   lead_id?: true
   specs_id?: true
   light_carcas_unit_master_id?: true
+  custom_remark?: true
   created_at?: true
   created_by?: true
   _all?: true
@@ -216,7 +222,8 @@ export type LeadLightCarcasUnitMappingGroupByOutputType = {
   vendor_id: number
   lead_id: number
   specs_id: number
-  light_carcas_unit_master_id: number
+  light_carcas_unit_master_id: number | null
+  custom_remark: string | null
   created_at: Date
   created_by: number
   _count: LeadLightCarcasUnitMappingCountAggregateOutputType | null
@@ -249,12 +256,13 @@ export type LeadLightCarcasUnitMappingWhereInput = {
   vendor_id?: Prisma.IntFilter<"LeadLightCarcasUnitMapping"> | number
   lead_id?: Prisma.IntFilter<"LeadLightCarcasUnitMapping"> | number
   specs_id?: Prisma.IntFilter<"LeadLightCarcasUnitMapping"> | number
-  light_carcas_unit_master_id?: Prisma.IntFilter<"LeadLightCarcasUnitMapping"> | number
+  light_carcas_unit_master_id?: Prisma.IntNullableFilter<"LeadLightCarcasUnitMapping"> | number | null
+  custom_remark?: Prisma.StringNullableFilter<"LeadLightCarcasUnitMapping"> | string | null
   created_at?: Prisma.DateTimeFilter<"LeadLightCarcasUnitMapping"> | Date | string
   created_by?: Prisma.IntFilter<"LeadLightCarcasUnitMapping"> | number
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
-  lightCarcasUnit?: Prisma.XOR<Prisma.LightCarcasUnitMasterScalarRelationFilter, Prisma.LightCarcasUnitMasterWhereInput>
+  lightCarcasUnit?: Prisma.XOR<Prisma.LightCarcasUnitMasterNullableScalarRelationFilter, Prisma.LightCarcasUnitMasterWhereInput> | null
   specification?: Prisma.XOR<Prisma.LeadSpecificationsMasterScalarRelationFilter, Prisma.LeadSpecificationsMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
@@ -264,7 +272,8 @@ export type LeadLightCarcasUnitMappingOrderByWithRelationInput = {
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   specs_id?: Prisma.SortOrder
-  light_carcas_unit_master_id?: Prisma.SortOrder
+  light_carcas_unit_master_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  custom_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
@@ -282,12 +291,13 @@ export type LeadLightCarcasUnitMappingWhereUniqueInput = Prisma.AtLeast<{
   vendor_id?: Prisma.IntFilter<"LeadLightCarcasUnitMapping"> | number
   lead_id?: Prisma.IntFilter<"LeadLightCarcasUnitMapping"> | number
   specs_id?: Prisma.IntFilter<"LeadLightCarcasUnitMapping"> | number
-  light_carcas_unit_master_id?: Prisma.IntFilter<"LeadLightCarcasUnitMapping"> | number
+  light_carcas_unit_master_id?: Prisma.IntNullableFilter<"LeadLightCarcasUnitMapping"> | number | null
+  custom_remark?: Prisma.StringNullableFilter<"LeadLightCarcasUnitMapping"> | string | null
   created_at?: Prisma.DateTimeFilter<"LeadLightCarcasUnitMapping"> | Date | string
   created_by?: Prisma.IntFilter<"LeadLightCarcasUnitMapping"> | number
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
-  lightCarcasUnit?: Prisma.XOR<Prisma.LightCarcasUnitMasterScalarRelationFilter, Prisma.LightCarcasUnitMasterWhereInput>
+  lightCarcasUnit?: Prisma.XOR<Prisma.LightCarcasUnitMasterNullableScalarRelationFilter, Prisma.LightCarcasUnitMasterWhereInput> | null
   specification?: Prisma.XOR<Prisma.LeadSpecificationsMasterScalarRelationFilter, Prisma.LeadSpecificationsMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
@@ -297,7 +307,8 @@ export type LeadLightCarcasUnitMappingOrderByWithAggregationInput = {
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   specs_id?: Prisma.SortOrder
-  light_carcas_unit_master_id?: Prisma.SortOrder
+  light_carcas_unit_master_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  custom_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   _count?: Prisma.LeadLightCarcasUnitMappingCountOrderByAggregateInput
@@ -315,16 +326,18 @@ export type LeadLightCarcasUnitMappingScalarWhereWithAggregatesInput = {
   vendor_id?: Prisma.IntWithAggregatesFilter<"LeadLightCarcasUnitMapping"> | number
   lead_id?: Prisma.IntWithAggregatesFilter<"LeadLightCarcasUnitMapping"> | number
   specs_id?: Prisma.IntWithAggregatesFilter<"LeadLightCarcasUnitMapping"> | number
-  light_carcas_unit_master_id?: Prisma.IntWithAggregatesFilter<"LeadLightCarcasUnitMapping"> | number
+  light_carcas_unit_master_id?: Prisma.IntNullableWithAggregatesFilter<"LeadLightCarcasUnitMapping"> | number | null
+  custom_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadLightCarcasUnitMapping"> | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"LeadLightCarcasUnitMapping"> | Date | string
   created_by?: Prisma.IntWithAggregatesFilter<"LeadLightCarcasUnitMapping"> | number
 }
 
 export type LeadLightCarcasUnitMappingCreateInput = {
+  custom_remark?: string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadLightCarcasUnitMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLightCarcasUnitMappingsInput
-  lightCarcasUnit: Prisma.LightCarcasUnitMasterCreateNestedOneWithoutLeadMappingsInput
+  lightCarcasUnit?: Prisma.LightCarcasUnitMasterCreateNestedOneWithoutLeadMappingsInput
   specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutLightCarcasUnitMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadLightCarcasUnitMappingsInput
 }
@@ -334,16 +347,18 @@ export type LeadLightCarcasUnitMappingUncheckedCreateInput = {
   vendor_id: number
   lead_id: number
   specs_id: number
-  light_carcas_unit_master_id: number
+  light_carcas_unit_master_id?: number | null
+  custom_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadLightCarcasUnitMappingUpdateInput = {
+  custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadLightCarcasUnitMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLightCarcasUnitMappingsNestedInput
-  lightCarcasUnit?: Prisma.LightCarcasUnitMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
+  lightCarcasUnit?: Prisma.LightCarcasUnitMasterUpdateOneWithoutLeadMappingsNestedInput
   specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutLightCarcasUnitMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadLightCarcasUnitMappingsNestedInput
 }
@@ -353,7 +368,8 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   specs_id?: Prisma.IntFieldUpdateOperationsInput | number
-  light_carcas_unit_master_id?: Prisma.IntFieldUpdateOperationsInput | number
+  light_carcas_unit_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -363,12 +379,14 @@ export type LeadLightCarcasUnitMappingCreateManyInput = {
   vendor_id: number
   lead_id: number
   specs_id: number
-  light_carcas_unit_master_id: number
+  light_carcas_unit_master_id?: number | null
+  custom_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadLightCarcasUnitMappingUpdateManyMutationInput = {
+  custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -377,7 +395,8 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateManyInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   specs_id?: Prisma.IntFieldUpdateOperationsInput | number
-  light_carcas_unit_master_id?: Prisma.IntFieldUpdateOperationsInput | number
+  light_carcas_unit_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -398,6 +417,7 @@ export type LeadLightCarcasUnitMappingCountOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   specs_id?: Prisma.SortOrder
   light_carcas_unit_master_id?: Prisma.SortOrder
+  custom_remark?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -417,6 +437,7 @@ export type LeadLightCarcasUnitMappingMaxOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   specs_id?: Prisma.SortOrder
   light_carcas_unit_master_id?: Prisma.SortOrder
+  custom_remark?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -427,6 +448,7 @@ export type LeadLightCarcasUnitMappingMinOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   specs_id?: Prisma.SortOrder
   light_carcas_unit_master_id?: Prisma.SortOrder
+  custom_remark?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -651,10 +673,11 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLightCarcasUnitN
 }
 
 export type LeadLightCarcasUnitMappingCreateWithoutVendorInput = {
+  custom_remark?: string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadLightCarcasUnitMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLightCarcasUnitMappingsInput
-  lightCarcasUnit: Prisma.LightCarcasUnitMasterCreateNestedOneWithoutLeadMappingsInput
+  lightCarcasUnit?: Prisma.LightCarcasUnitMasterCreateNestedOneWithoutLeadMappingsInput
   specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutLightCarcasUnitMappingsInput
 }
 
@@ -662,7 +685,8 @@ export type LeadLightCarcasUnitMappingUncheckedCreateWithoutVendorInput = {
   id?: number
   lead_id: number
   specs_id: number
-  light_carcas_unit_master_id: number
+  light_carcas_unit_master_id?: number | null
+  custom_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -701,15 +725,17 @@ export type LeadLightCarcasUnitMappingScalarWhereInput = {
   vendor_id?: Prisma.IntFilter<"LeadLightCarcasUnitMapping"> | number
   lead_id?: Prisma.IntFilter<"LeadLightCarcasUnitMapping"> | number
   specs_id?: Prisma.IntFilter<"LeadLightCarcasUnitMapping"> | number
-  light_carcas_unit_master_id?: Prisma.IntFilter<"LeadLightCarcasUnitMapping"> | number
+  light_carcas_unit_master_id?: Prisma.IntNullableFilter<"LeadLightCarcasUnitMapping"> | number | null
+  custom_remark?: Prisma.StringNullableFilter<"LeadLightCarcasUnitMapping"> | string | null
   created_at?: Prisma.DateTimeFilter<"LeadLightCarcasUnitMapping"> | Date | string
   created_by?: Prisma.IntFilter<"LeadLightCarcasUnitMapping"> | number
 }
 
 export type LeadLightCarcasUnitMappingCreateWithoutCreatedByInput = {
+  custom_remark?: string | null
   created_at?: Date | string
   lead: Prisma.LeadMasterCreateNestedOneWithoutLightCarcasUnitMappingsInput
-  lightCarcasUnit: Prisma.LightCarcasUnitMasterCreateNestedOneWithoutLeadMappingsInput
+  lightCarcasUnit?: Prisma.LightCarcasUnitMasterCreateNestedOneWithoutLeadMappingsInput
   specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutLightCarcasUnitMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadLightCarcasUnitMappingsInput
 }
@@ -719,7 +745,8 @@ export type LeadLightCarcasUnitMappingUncheckedCreateWithoutCreatedByInput = {
   vendor_id: number
   lead_id: number
   specs_id: number
-  light_carcas_unit_master_id: number
+  light_carcas_unit_master_id?: number | null
+  custom_remark?: string | null
   created_at?: Date | string
 }
 
@@ -750,9 +777,10 @@ export type LeadLightCarcasUnitMappingUpdateManyWithWhereWithoutCreatedByInput =
 }
 
 export type LeadLightCarcasUnitMappingCreateWithoutLeadInput = {
+  custom_remark?: string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadLightCarcasUnitMappingsCreatedInput
-  lightCarcasUnit: Prisma.LightCarcasUnitMasterCreateNestedOneWithoutLeadMappingsInput
+  lightCarcasUnit?: Prisma.LightCarcasUnitMasterCreateNestedOneWithoutLeadMappingsInput
   specification: Prisma.LeadSpecificationsMasterCreateNestedOneWithoutLightCarcasUnitMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadLightCarcasUnitMappingsInput
 }
@@ -761,7 +789,8 @@ export type LeadLightCarcasUnitMappingUncheckedCreateWithoutLeadInput = {
   id?: number
   vendor_id: number
   specs_id: number
-  light_carcas_unit_master_id: number
+  light_carcas_unit_master_id?: number | null
+  custom_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -793,10 +822,11 @@ export type LeadLightCarcasUnitMappingUpdateManyWithWhereWithoutLeadInput = {
 }
 
 export type LeadLightCarcasUnitMappingCreateWithoutSpecificationInput = {
+  custom_remark?: string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadLightCarcasUnitMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLightCarcasUnitMappingsInput
-  lightCarcasUnit: Prisma.LightCarcasUnitMasterCreateNestedOneWithoutLeadMappingsInput
+  lightCarcasUnit?: Prisma.LightCarcasUnitMasterCreateNestedOneWithoutLeadMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadLightCarcasUnitMappingsInput
 }
 
@@ -804,7 +834,8 @@ export type LeadLightCarcasUnitMappingUncheckedCreateWithoutSpecificationInput =
   id?: number
   vendor_id: number
   lead_id: number
-  light_carcas_unit_master_id: number
+  light_carcas_unit_master_id?: number | null
+  custom_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -836,6 +867,7 @@ export type LeadLightCarcasUnitMappingUpdateManyWithWhereWithoutSpecificationInp
 }
 
 export type LeadLightCarcasUnitMappingCreateWithoutLightCarcasUnitInput = {
+  custom_remark?: string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadLightCarcasUnitMappingsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLightCarcasUnitMappingsInput
@@ -848,6 +880,7 @@ export type LeadLightCarcasUnitMappingUncheckedCreateWithoutLightCarcasUnitInput
   vendor_id: number
   lead_id: number
   specs_id: number
+  custom_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
@@ -882,16 +915,18 @@ export type LeadLightCarcasUnitMappingCreateManyVendorInput = {
   id?: number
   lead_id: number
   specs_id: number
-  light_carcas_unit_master_id: number
+  light_carcas_unit_master_id?: number | null
+  custom_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadLightCarcasUnitMappingUpdateWithoutVendorInput = {
+  custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadLightCarcasUnitMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLightCarcasUnitMappingsNestedInput
-  lightCarcasUnit?: Prisma.LightCarcasUnitMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
+  lightCarcasUnit?: Prisma.LightCarcasUnitMasterUpdateOneWithoutLeadMappingsNestedInput
   specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutLightCarcasUnitMappingsNestedInput
 }
 
@@ -899,7 +934,8 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   specs_id?: Prisma.IntFieldUpdateOperationsInput | number
-  light_carcas_unit_master_id?: Prisma.IntFieldUpdateOperationsInput | number
+  light_carcas_unit_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -908,7 +944,8 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   specs_id?: Prisma.IntFieldUpdateOperationsInput | number
-  light_carcas_unit_master_id?: Prisma.IntFieldUpdateOperationsInput | number
+  light_carcas_unit_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -918,14 +955,16 @@ export type LeadLightCarcasUnitMappingCreateManyCreatedByInput = {
   vendor_id: number
   lead_id: number
   specs_id: number
-  light_carcas_unit_master_id: number
+  light_carcas_unit_master_id?: number | null
+  custom_remark?: string | null
   created_at?: Date | string
 }
 
 export type LeadLightCarcasUnitMappingUpdateWithoutCreatedByInput = {
+  custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLightCarcasUnitMappingsNestedInput
-  lightCarcasUnit?: Prisma.LightCarcasUnitMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
+  lightCarcasUnit?: Prisma.LightCarcasUnitMasterUpdateOneWithoutLeadMappingsNestedInput
   specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutLightCarcasUnitMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadLightCarcasUnitMappingsNestedInput
 }
@@ -935,7 +974,8 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateWithoutCreatedByInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   specs_id?: Prisma.IntFieldUpdateOperationsInput | number
-  light_carcas_unit_master_id?: Prisma.IntFieldUpdateOperationsInput | number
+  light_carcas_unit_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -944,7 +984,8 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutCreatedByInput =
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   specs_id?: Prisma.IntFieldUpdateOperationsInput | number
-  light_carcas_unit_master_id?: Prisma.IntFieldUpdateOperationsInput | number
+  light_carcas_unit_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -952,15 +993,17 @@ export type LeadLightCarcasUnitMappingCreateManyLeadInput = {
   id?: number
   vendor_id: number
   specs_id: number
-  light_carcas_unit_master_id: number
+  light_carcas_unit_master_id?: number | null
+  custom_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadLightCarcasUnitMappingUpdateWithoutLeadInput = {
+  custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadLightCarcasUnitMappingsCreatedNestedInput
-  lightCarcasUnit?: Prisma.LightCarcasUnitMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
+  lightCarcasUnit?: Prisma.LightCarcasUnitMasterUpdateOneWithoutLeadMappingsNestedInput
   specification?: Prisma.LeadSpecificationsMasterUpdateOneRequiredWithoutLightCarcasUnitMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadLightCarcasUnitMappingsNestedInput
 }
@@ -969,7 +1012,8 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   specs_id?: Prisma.IntFieldUpdateOperationsInput | number
-  light_carcas_unit_master_id?: Prisma.IntFieldUpdateOperationsInput | number
+  light_carcas_unit_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -978,7 +1022,8 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   specs_id?: Prisma.IntFieldUpdateOperationsInput | number
-  light_carcas_unit_master_id?: Prisma.IntFieldUpdateOperationsInput | number
+  light_carcas_unit_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -987,16 +1032,18 @@ export type LeadLightCarcasUnitMappingCreateManySpecificationInput = {
   id?: number
   vendor_id: number
   lead_id: number
-  light_carcas_unit_master_id: number
+  light_carcas_unit_master_id?: number | null
+  custom_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadLightCarcasUnitMappingUpdateWithoutSpecificationInput = {
+  custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadLightCarcasUnitMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLightCarcasUnitMappingsNestedInput
-  lightCarcasUnit?: Prisma.LightCarcasUnitMasterUpdateOneRequiredWithoutLeadMappingsNestedInput
+  lightCarcasUnit?: Prisma.LightCarcasUnitMasterUpdateOneWithoutLeadMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadLightCarcasUnitMappingsNestedInput
 }
 
@@ -1004,7 +1051,8 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateWithoutSpecificationInput =
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  light_carcas_unit_master_id?: Prisma.IntFieldUpdateOperationsInput | number
+  light_carcas_unit_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1013,7 +1061,8 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutSpecificationInp
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  light_carcas_unit_master_id?: Prisma.IntFieldUpdateOperationsInput | number
+  light_carcas_unit_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1023,11 +1072,13 @@ export type LeadLightCarcasUnitMappingCreateManyLightCarcasUnitInput = {
   vendor_id: number
   lead_id: number
   specs_id: number
+  custom_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadLightCarcasUnitMappingUpdateWithoutLightCarcasUnitInput = {
+  custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadLightCarcasUnitMappingsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLightCarcasUnitMappingsNestedInput
@@ -1040,6 +1091,7 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateWithoutLightCarcasUnitInput
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   specs_id?: Prisma.IntFieldUpdateOperationsInput | number
+  custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1049,6 +1101,7 @@ export type LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLightCarcasUnitI
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   specs_id?: Prisma.IntFieldUpdateOperationsInput | number
+  custom_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1061,11 +1114,12 @@ export type LeadLightCarcasUnitMappingSelect<ExtArgs extends runtime.Types.Exten
   lead_id?: boolean
   specs_id?: boolean
   light_carcas_unit_master_id?: boolean
+  custom_remark?: boolean
   created_at?: boolean
   created_by?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  lightCarcasUnit?: boolean | Prisma.LightCarcasUnitMasterDefaultArgs<ExtArgs>
+  lightCarcasUnit?: boolean | Prisma.LeadLightCarcasUnitMapping$lightCarcasUnitArgs<ExtArgs>
   specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadLightCarcasUnitMapping"]>
@@ -1076,11 +1130,12 @@ export type LeadLightCarcasUnitMappingSelectCreateManyAndReturn<ExtArgs extends 
   lead_id?: boolean
   specs_id?: boolean
   light_carcas_unit_master_id?: boolean
+  custom_remark?: boolean
   created_at?: boolean
   created_by?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  lightCarcasUnit?: boolean | Prisma.LightCarcasUnitMasterDefaultArgs<ExtArgs>
+  lightCarcasUnit?: boolean | Prisma.LeadLightCarcasUnitMapping$lightCarcasUnitArgs<ExtArgs>
   specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadLightCarcasUnitMapping"]>
@@ -1091,11 +1146,12 @@ export type LeadLightCarcasUnitMappingSelectUpdateManyAndReturn<ExtArgs extends 
   lead_id?: boolean
   specs_id?: boolean
   light_carcas_unit_master_id?: boolean
+  custom_remark?: boolean
   created_at?: boolean
   created_by?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  lightCarcasUnit?: boolean | Prisma.LightCarcasUnitMasterDefaultArgs<ExtArgs>
+  lightCarcasUnit?: boolean | Prisma.LeadLightCarcasUnitMapping$lightCarcasUnitArgs<ExtArgs>
   specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadLightCarcasUnitMapping"]>
@@ -1106,29 +1162,30 @@ export type LeadLightCarcasUnitMappingSelectScalar = {
   lead_id?: boolean
   specs_id?: boolean
   light_carcas_unit_master_id?: boolean
+  custom_remark?: boolean
   created_at?: boolean
   created_by?: boolean
 }
 
-export type LeadLightCarcasUnitMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "specs_id" | "light_carcas_unit_master_id" | "created_at" | "created_by", ExtArgs["result"]["leadLightCarcasUnitMapping"]>
+export type LeadLightCarcasUnitMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "specs_id" | "light_carcas_unit_master_id" | "custom_remark" | "created_at" | "created_by", ExtArgs["result"]["leadLightCarcasUnitMapping"]>
 export type LeadLightCarcasUnitMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  lightCarcasUnit?: boolean | Prisma.LightCarcasUnitMasterDefaultArgs<ExtArgs>
+  lightCarcasUnit?: boolean | Prisma.LeadLightCarcasUnitMapping$lightCarcasUnitArgs<ExtArgs>
   specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadLightCarcasUnitMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  lightCarcasUnit?: boolean | Prisma.LightCarcasUnitMasterDefaultArgs<ExtArgs>
+  lightCarcasUnit?: boolean | Prisma.LeadLightCarcasUnitMapping$lightCarcasUnitArgs<ExtArgs>
   specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadLightCarcasUnitMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  lightCarcasUnit?: boolean | Prisma.LightCarcasUnitMasterDefaultArgs<ExtArgs>
+  lightCarcasUnit?: boolean | Prisma.LeadLightCarcasUnitMapping$lightCarcasUnitArgs<ExtArgs>
   specification?: boolean | Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
@@ -1138,7 +1195,7 @@ export type $LeadLightCarcasUnitMappingPayload<ExtArgs extends runtime.Types.Ext
   objects: {
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     lead: Prisma.$LeadMasterPayload<ExtArgs>
-    lightCarcasUnit: Prisma.$LightCarcasUnitMasterPayload<ExtArgs>
+    lightCarcasUnit: Prisma.$LightCarcasUnitMasterPayload<ExtArgs> | null
     specification: Prisma.$LeadSpecificationsMasterPayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
@@ -1147,7 +1204,8 @@ export type $LeadLightCarcasUnitMappingPayload<ExtArgs extends runtime.Types.Ext
     vendor_id: number
     lead_id: number
     specs_id: number
-    light_carcas_unit_master_id: number
+    light_carcas_unit_master_id: number | null
+    custom_remark: string | null
     created_at: Date
     created_by: number
   }, ExtArgs["result"]["leadLightCarcasUnitMapping"]>
@@ -1546,7 +1604,7 @@ export interface Prisma__LeadLightCarcasUnitMappingClient<T, Null = never, ExtAr
   readonly [Symbol.toStringTag]: "PrismaPromise"
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  lightCarcasUnit<T extends Prisma.LightCarcasUnitMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LightCarcasUnitMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LightCarcasUnitMasterClient<runtime.Types.Result.GetResult<Prisma.$LightCarcasUnitMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lightCarcasUnit<T extends Prisma.LeadLightCarcasUnitMapping$lightCarcasUnitArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadLightCarcasUnitMapping$lightCarcasUnitArgs<ExtArgs>>): Prisma.Prisma__LightCarcasUnitMasterClient<runtime.Types.Result.GetResult<Prisma.$LightCarcasUnitMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   specification<T extends Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadSpecificationsMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadSpecificationsMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadSpecificationsMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
@@ -1583,6 +1641,7 @@ export interface LeadLightCarcasUnitMappingFieldRefs {
   readonly lead_id: Prisma.FieldRef<"LeadLightCarcasUnitMapping", 'Int'>
   readonly specs_id: Prisma.FieldRef<"LeadLightCarcasUnitMapping", 'Int'>
   readonly light_carcas_unit_master_id: Prisma.FieldRef<"LeadLightCarcasUnitMapping", 'Int'>
+  readonly custom_remark: Prisma.FieldRef<"LeadLightCarcasUnitMapping", 'String'>
   readonly created_at: Prisma.FieldRef<"LeadLightCarcasUnitMapping", 'DateTime'>
   readonly created_by: Prisma.FieldRef<"LeadLightCarcasUnitMapping", 'Int'>
 }
@@ -1983,6 +2042,25 @@ export type LeadLightCarcasUnitMappingDeleteManyArgs<ExtArgs extends runtime.Typ
    * Limit how many LeadLightCarcasUnitMappings to delete.
    */
   limit?: number
+}
+
+/**
+ * LeadLightCarcasUnitMapping.lightCarcasUnit
+ */
+export type LeadLightCarcasUnitMapping$lightCarcasUnitArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LightCarcasUnitMaster
+   */
+  select?: Prisma.LightCarcasUnitMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LightCarcasUnitMaster
+   */
+  omit?: Prisma.LightCarcasUnitMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LightCarcasUnitMasterInclude<ExtArgs> | null
+  where?: Prisma.LightCarcasUnitMasterWhereInput
 }
 
 /**

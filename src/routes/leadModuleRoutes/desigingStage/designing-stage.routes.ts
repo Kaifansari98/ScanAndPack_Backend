@@ -19,6 +19,7 @@ import {
   uploadFinalIsmFiles,
 } from "../../../utils/wasabiClient";
 import { handleMulterUpload } from "../../../middlewares/handleMulterUpload";
+import { verifyToken } from "../../../middlewares/auth.middleware";
 
 const DesigningStageRouter = Router();
 
@@ -195,78 +196,93 @@ DesigningStageRouter.get(
 // GET /api/leads/designing-stage/vendor/:vendorId/lead/:leadId/specifications
 DesigningStageRouter.get(
   "/vendor/:vendorId/lead/:leadId/specifications",
+  verifyToken,
   (req, res) => DesigingStageController.getLeadSpecifications(req, res),
 );
 
 // POST /api/leads/designing-stage/vendor/:vendorId/lead/:leadId/specifications
 DesigningStageRouter.post(
   "/vendor/:vendorId/lead/:leadId/specifications",
+  verifyToken,
   (req, res) => DesigingStageController.createLeadSpecification(req, res),
 );
 
 // PUT /api/leads/designing-stage/specifications/:specsId/lights-remark
 DesigningStageRouter.put(
   "/specifications/:specsId/lights-remark",
+  verifyToken,
   (req, res) => DesigingStageController.updateLeadSpecificationLightsRemark(req, res),
 );
 
 DesigningStageRouter.put(
   "/specifications/:specsId/section-remark",
+  verifyToken,
   (req, res) => DesigingStageController.updateLeadSpecificationSectionRemark(req, res),
 );
 
 DesigningStageRouter.put(
   "/specifications/:specsId/mark-completed",
+  verifyToken,
   (req, res) => DesigingStageController.markLeadSpecificationCompleted(req, res),
 );
 
 DesigningStageRouter.get(
   "/vendor/:vendorId/lead/:leadId/specs/:specsId/carcass-material-mappings",
+  verifyToken,
   (req, res) => DesigingStageController.getLeadCarcassMaterialMappings(req, res),
 );
 
 DesigningStageRouter.post(
   "/carcass-material-mappings",
+  verifyToken,
   (req, res) => DesigingStageController.upsertLeadCarcassMaterialMapping(req, res),
 );
 
 DesigningStageRouter.get(
   "/vendor/:vendorId/lead/:leadId/specs/:specsId/shutter-material-mappings",
+  verifyToken,
   (req, res) => DesigingStageController.getLeadShutterMaterialMappings(req, res),
 );
 
 DesigningStageRouter.post(
   "/shutter-material-mappings",
+  verifyToken,
   (req, res) => DesigingStageController.upsertLeadShutterMaterialMapping(req, res),
 );
 
 DesigningStageRouter.get(
   "/vendor/:vendorId/lead/:leadId/specs/:specsId/hardware-mappings",
+  verifyToken,
   (req, res) => DesigingStageController.getLeadHardwareMappings(req, res),
 );
 
 DesigningStageRouter.post(
   "/hardware-mappings",
+  verifyToken,
   (req, res) => DesigingStageController.upsertLeadHardwareMapping(req, res),
 );
 
 DesigningStageRouter.get(
   "/vendor/:vendorId/lead/:leadId/specs/:specsId/light-carcas-unit-mappings",
+  verifyToken,
   (req, res) => DesigingStageController.getLeadLightCarcasUnitMappings(req, res),
 );
 
 DesigningStageRouter.post(
   "/light-carcas-unit-mappings",
+  verifyToken,
   (req, res) => DesigingStageController.upsertLeadLightCarcasUnitMapping(req, res),
 );
 
 DesigningStageRouter.get(
   "/vendor/:vendorId/lead/:leadId/specs/:specsId/other-appliances-mappings",
+  verifyToken,
   (req, res) => DesigingStageController.getLeadOtherAppliancesMappings(req, res),
 );
 
 DesigningStageRouter.post(
   "/other-appliances-mappings",
+  verifyToken,
   (req, res) => DesigingStageController.upsertLeadOtherAppliancesMapping(req, res),
 );
 
