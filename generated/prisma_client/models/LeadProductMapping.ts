@@ -32,7 +32,6 @@ export type LeadProductMappingAvgAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   product_type_id: number | null
-  approximate_budget: runtime.Decimal | null
   created_by: number | null
 }
 
@@ -42,7 +41,6 @@ export type LeadProductMappingSumAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   product_type_id: number | null
-  approximate_budget: runtime.Decimal | null
   created_by: number | null
 }
 
@@ -52,8 +50,6 @@ export type LeadProductMappingMinAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   product_type_id: number | null
-  approximate_budget: runtime.Decimal | null
-  project_status: string | null
   created_by: number | null
   created_at: Date | null
 }
@@ -64,8 +60,6 @@ export type LeadProductMappingMaxAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   product_type_id: number | null
-  approximate_budget: runtime.Decimal | null
-  project_status: string | null
   created_by: number | null
   created_at: Date | null
 }
@@ -76,8 +70,6 @@ export type LeadProductMappingCountAggregateOutputType = {
   lead_id: number
   account_id: number
   product_type_id: number
-  approximate_budget: number
-  project_status: number
   created_by: number
   created_at: number
   _all: number
@@ -90,7 +82,6 @@ export type LeadProductMappingAvgAggregateInputType = {
   lead_id?: true
   account_id?: true
   product_type_id?: true
-  approximate_budget?: true
   created_by?: true
 }
 
@@ -100,7 +91,6 @@ export type LeadProductMappingSumAggregateInputType = {
   lead_id?: true
   account_id?: true
   product_type_id?: true
-  approximate_budget?: true
   created_by?: true
 }
 
@@ -110,8 +100,6 @@ export type LeadProductMappingMinAggregateInputType = {
   lead_id?: true
   account_id?: true
   product_type_id?: true
-  approximate_budget?: true
-  project_status?: true
   created_by?: true
   created_at?: true
 }
@@ -122,8 +110,6 @@ export type LeadProductMappingMaxAggregateInputType = {
   lead_id?: true
   account_id?: true
   product_type_id?: true
-  approximate_budget?: true
-  project_status?: true
   created_by?: true
   created_at?: true
 }
@@ -134,8 +120,6 @@ export type LeadProductMappingCountAggregateInputType = {
   lead_id?: true
   account_id?: true
   product_type_id?: true
-  approximate_budget?: true
-  project_status?: true
   created_by?: true
   created_at?: true
   _all?: true
@@ -233,8 +217,6 @@ export type LeadProductMappingGroupByOutputType = {
   lead_id: number
   account_id: number
   product_type_id: number
-  approximate_budget: runtime.Decimal | null
-  project_status: string | null
   created_by: number
   created_at: Date
   _count: LeadProductMappingCountAggregateOutputType | null
@@ -268,8 +250,6 @@ export type LeadProductMappingWhereInput = {
   lead_id?: Prisma.IntFilter<"LeadProductMapping"> | number
   account_id?: Prisma.IntFilter<"LeadProductMapping"> | number
   product_type_id?: Prisma.IntFilter<"LeadProductMapping"> | number
-  approximate_budget?: Prisma.DecimalNullableFilter<"LeadProductMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.StringNullableFilter<"LeadProductMapping"> | string | null
   created_by?: Prisma.IntFilter<"LeadProductMapping"> | number
   created_at?: Prisma.DateTimeFilter<"LeadProductMapping"> | Date | string
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
@@ -285,8 +265,6 @@ export type LeadProductMappingOrderByWithRelationInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
-  approximate_budget?: Prisma.SortOrderInput | Prisma.SortOrder
-  project_status?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   account?: Prisma.AccountMasterOrderByWithRelationInput
@@ -305,8 +283,6 @@ export type LeadProductMappingWhereUniqueInput = Prisma.AtLeast<{
   lead_id?: Prisma.IntFilter<"LeadProductMapping"> | number
   account_id?: Prisma.IntFilter<"LeadProductMapping"> | number
   product_type_id?: Prisma.IntFilter<"LeadProductMapping"> | number
-  approximate_budget?: Prisma.DecimalNullableFilter<"LeadProductMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.StringNullableFilter<"LeadProductMapping"> | string | null
   created_by?: Prisma.IntFilter<"LeadProductMapping"> | number
   created_at?: Prisma.DateTimeFilter<"LeadProductMapping"> | Date | string
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
@@ -322,8 +298,6 @@ export type LeadProductMappingOrderByWithAggregationInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
-  approximate_budget?: Prisma.SortOrderInput | Prisma.SortOrder
-  project_status?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   _count?: Prisma.LeadProductMappingCountOrderByAggregateInput
@@ -342,15 +316,11 @@ export type LeadProductMappingScalarWhereWithAggregatesInput = {
   lead_id?: Prisma.IntWithAggregatesFilter<"LeadProductMapping"> | number
   account_id?: Prisma.IntWithAggregatesFilter<"LeadProductMapping"> | number
   product_type_id?: Prisma.IntWithAggregatesFilter<"LeadProductMapping"> | number
-  approximate_budget?: Prisma.DecimalNullableWithAggregatesFilter<"LeadProductMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.StringNullableWithAggregatesFilter<"LeadProductMapping"> | string | null
   created_by?: Prisma.IntWithAggregatesFilter<"LeadProductMapping"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"LeadProductMapping"> | Date | string
 }
 
 export type LeadProductMappingCreateInput = {
-  approximate_budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: string | null
   created_at?: Date | string
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadsMappingInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadProductsCreatedInput
@@ -365,15 +335,11 @@ export type LeadProductMappingUncheckedCreateInput = {
   lead_id: number
   account_id: number
   product_type_id: number
-  approximate_budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: string | null
   created_by: number
   created_at?: Date | string
 }
 
 export type LeadProductMappingUpdateInput = {
-  approximate_budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadsMappingNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadProductsCreatedNestedInput
@@ -388,8 +354,6 @@ export type LeadProductMappingUncheckedUpdateInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
-  approximate_budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -400,15 +364,11 @@ export type LeadProductMappingCreateManyInput = {
   lead_id: number
   account_id: number
   product_type_id: number
-  approximate_budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: string | null
   created_by: number
   created_at?: Date | string
 }
 
 export type LeadProductMappingUpdateManyMutationInput = {
-  approximate_budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -418,8 +378,6 @@ export type LeadProductMappingUncheckedUpdateManyInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
-  approximate_budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -440,8 +398,6 @@ export type LeadProductMappingCountOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
-  approximate_budget?: Prisma.SortOrder
-  project_status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
@@ -452,7 +408,6 @@ export type LeadProductMappingAvgOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
-  approximate_budget?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
 
@@ -462,8 +417,6 @@ export type LeadProductMappingMaxOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
-  approximate_budget?: Prisma.SortOrder
-  project_status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
@@ -474,8 +427,6 @@ export type LeadProductMappingMinOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
-  approximate_budget?: Prisma.SortOrder
-  project_status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
@@ -486,7 +437,6 @@ export type LeadProductMappingSumOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
-  approximate_budget?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
 
@@ -658,14 +608,6 @@ export type LeadProductMappingUncheckedUpdateManyWithoutAccountNestedInput = {
   deleteMany?: Prisma.LeadProductMappingScalarWhereInput | Prisma.LeadProductMappingScalarWhereInput[]
 }
 
-export type NullableDecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
 export type LeadProductMappingCreateNestedManyWithoutProductTypeInput = {
   create?: Prisma.XOR<Prisma.LeadProductMappingCreateWithoutProductTypeInput, Prisma.LeadProductMappingUncheckedCreateWithoutProductTypeInput> | Prisma.LeadProductMappingCreateWithoutProductTypeInput[] | Prisma.LeadProductMappingUncheckedCreateWithoutProductTypeInput[]
   connectOrCreate?: Prisma.LeadProductMappingCreateOrConnectWithoutProductTypeInput | Prisma.LeadProductMappingCreateOrConnectWithoutProductTypeInput[]
@@ -709,8 +651,6 @@ export type LeadProductMappingUncheckedUpdateManyWithoutProductTypeNestedInput =
 }
 
 export type LeadProductMappingCreateWithoutVendorInput = {
-  approximate_budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: string | null
   created_at?: Date | string
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadsMappingInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadProductsCreatedInput
@@ -723,8 +663,6 @@ export type LeadProductMappingUncheckedCreateWithoutVendorInput = {
   lead_id: number
   account_id: number
   product_type_id: number
-  approximate_budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: string | null
   created_by: number
   created_at?: Date | string
 }
@@ -764,15 +702,11 @@ export type LeadProductMappingScalarWhereInput = {
   lead_id?: Prisma.IntFilter<"LeadProductMapping"> | number
   account_id?: Prisma.IntFilter<"LeadProductMapping"> | number
   product_type_id?: Prisma.IntFilter<"LeadProductMapping"> | number
-  approximate_budget?: Prisma.DecimalNullableFilter<"LeadProductMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.StringNullableFilter<"LeadProductMapping"> | string | null
   created_by?: Prisma.IntFilter<"LeadProductMapping"> | number
   created_at?: Prisma.DateTimeFilter<"LeadProductMapping"> | Date | string
 }
 
 export type LeadProductMappingCreateWithoutCreatedByInput = {
-  approximate_budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: string | null
   created_at?: Date | string
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadsMappingInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutProductMappingsInput
@@ -786,8 +720,6 @@ export type LeadProductMappingUncheckedCreateWithoutCreatedByInput = {
   lead_id: number
   account_id: number
   product_type_id: number
-  approximate_budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: string | null
   created_at?: Date | string
 }
 
@@ -818,8 +750,6 @@ export type LeadProductMappingUpdateManyWithWhereWithoutCreatedByInput = {
 }
 
 export type LeadProductMappingCreateWithoutLeadInput = {
-  approximate_budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: string | null
   created_at?: Date | string
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadsMappingInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadProductsCreatedInput
@@ -832,8 +762,6 @@ export type LeadProductMappingUncheckedCreateWithoutLeadInput = {
   vendor_id: number
   account_id: number
   product_type_id: number
-  approximate_budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: string | null
   created_by: number
   created_at?: Date | string
 }
@@ -865,8 +793,6 @@ export type LeadProductMappingUpdateManyWithWhereWithoutLeadInput = {
 }
 
 export type LeadProductMappingCreateWithoutAccountInput = {
-  approximate_budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: string | null
   created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadProductsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutProductMappingsInput
@@ -879,8 +805,6 @@ export type LeadProductMappingUncheckedCreateWithoutAccountInput = {
   vendor_id: number
   lead_id: number
   product_type_id: number
-  approximate_budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: string | null
   created_by: number
   created_at?: Date | string
 }
@@ -912,8 +836,6 @@ export type LeadProductMappingUpdateManyWithWhereWithoutAccountInput = {
 }
 
 export type LeadProductMappingCreateWithoutProductTypeInput = {
-  approximate_budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: string | null
   created_at?: Date | string
   account: Prisma.AccountMasterCreateNestedOneWithoutLeadsMappingInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadProductsCreatedInput
@@ -926,8 +848,6 @@ export type LeadProductMappingUncheckedCreateWithoutProductTypeInput = {
   vendor_id: number
   lead_id: number
   account_id: number
-  approximate_budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: string | null
   created_by: number
   created_at?: Date | string
 }
@@ -963,15 +883,11 @@ export type LeadProductMappingCreateManyVendorInput = {
   lead_id: number
   account_id: number
   product_type_id: number
-  approximate_budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: string | null
   created_by: number
   created_at?: Date | string
 }
 
 export type LeadProductMappingUpdateWithoutVendorInput = {
-  approximate_budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadsMappingNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadProductsCreatedNestedInput
@@ -984,8 +900,6 @@ export type LeadProductMappingUncheckedUpdateWithoutVendorInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
-  approximate_budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -995,8 +909,6 @@ export type LeadProductMappingUncheckedUpdateManyWithoutVendorInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
-  approximate_budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1007,14 +919,10 @@ export type LeadProductMappingCreateManyCreatedByInput = {
   lead_id: number
   account_id: number
   product_type_id: number
-  approximate_budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: string | null
   created_at?: Date | string
 }
 
 export type LeadProductMappingUpdateWithoutCreatedByInput = {
-  approximate_budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadsMappingNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductMappingsNestedInput
@@ -1028,8 +936,6 @@ export type LeadProductMappingUncheckedUpdateWithoutCreatedByInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
-  approximate_budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1039,8 +945,6 @@ export type LeadProductMappingUncheckedUpdateManyWithoutCreatedByInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
-  approximate_budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1049,15 +953,11 @@ export type LeadProductMappingCreateManyLeadInput = {
   vendor_id: number
   account_id: number
   product_type_id: number
-  approximate_budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: string | null
   created_by: number
   created_at?: Date | string
 }
 
 export type LeadProductMappingUpdateWithoutLeadInput = {
-  approximate_budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadsMappingNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadProductsCreatedNestedInput
@@ -1070,8 +970,6 @@ export type LeadProductMappingUncheckedUpdateWithoutLeadInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
-  approximate_budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1081,8 +979,6 @@ export type LeadProductMappingUncheckedUpdateManyWithoutLeadInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
-  approximate_budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1092,15 +988,11 @@ export type LeadProductMappingCreateManyAccountInput = {
   vendor_id: number
   lead_id: number
   product_type_id: number
-  approximate_budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: string | null
   created_by: number
   created_at?: Date | string
 }
 
 export type LeadProductMappingUpdateWithoutAccountInput = {
-  approximate_budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadProductsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductMappingsNestedInput
@@ -1113,8 +1005,6 @@ export type LeadProductMappingUncheckedUpdateWithoutAccountInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
-  approximate_budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1124,8 +1014,6 @@ export type LeadProductMappingUncheckedUpdateManyWithoutAccountInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
-  approximate_budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1135,15 +1023,11 @@ export type LeadProductMappingCreateManyProductTypeInput = {
   vendor_id: number
   lead_id: number
   account_id: number
-  approximate_budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: string | null
   created_by: number
   created_at?: Date | string
 }
 
 export type LeadProductMappingUpdateWithoutProductTypeInput = {
-  approximate_budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLeadsMappingNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadProductsCreatedNestedInput
@@ -1156,8 +1040,6 @@ export type LeadProductMappingUncheckedUpdateWithoutProductTypeInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  approximate_budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1167,8 +1049,6 @@ export type LeadProductMappingUncheckedUpdateManyWithoutProductTypeInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  approximate_budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1181,8 +1061,6 @@ export type LeadProductMappingSelect<ExtArgs extends runtime.Types.Extensions.In
   lead_id?: boolean
   account_id?: boolean
   product_type_id?: boolean
-  approximate_budget?: boolean
-  project_status?: boolean
   created_by?: boolean
   created_at?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
@@ -1198,8 +1076,6 @@ export type LeadProductMappingSelectCreateManyAndReturn<ExtArgs extends runtime.
   lead_id?: boolean
   account_id?: boolean
   product_type_id?: boolean
-  approximate_budget?: boolean
-  project_status?: boolean
   created_by?: boolean
   created_at?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
@@ -1215,8 +1091,6 @@ export type LeadProductMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.
   lead_id?: boolean
   account_id?: boolean
   product_type_id?: boolean
-  approximate_budget?: boolean
-  project_status?: boolean
   created_by?: boolean
   created_at?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
@@ -1232,13 +1106,11 @@ export type LeadProductMappingSelectScalar = {
   lead_id?: boolean
   account_id?: boolean
   product_type_id?: boolean
-  approximate_budget?: boolean
-  project_status?: boolean
   created_by?: boolean
   created_at?: boolean
 }
 
-export type LeadProductMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "product_type_id" | "approximate_budget" | "project_status" | "created_by" | "created_at", ExtArgs["result"]["leadProductMapping"]>
+export type LeadProductMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "product_type_id" | "created_by" | "created_at", ExtArgs["result"]["leadProductMapping"]>
 export type LeadProductMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -1276,8 +1148,6 @@ export type $LeadProductMappingPayload<ExtArgs extends runtime.Types.Extensions.
     lead_id: number
     account_id: number
     product_type_id: number
-    approximate_budget: runtime.Decimal | null
-    project_status: string | null
     created_by: number
     created_at: Date
   }, ExtArgs["result"]["leadProductMapping"]>
@@ -1713,8 +1583,6 @@ export interface LeadProductMappingFieldRefs {
   readonly lead_id: Prisma.FieldRef<"LeadProductMapping", 'Int'>
   readonly account_id: Prisma.FieldRef<"LeadProductMapping", 'Int'>
   readonly product_type_id: Prisma.FieldRef<"LeadProductMapping", 'Int'>
-  readonly approximate_budget: Prisma.FieldRef<"LeadProductMapping", 'Decimal'>
-  readonly project_status: Prisma.FieldRef<"LeadProductMapping", 'String'>
   readonly created_by: Prisma.FieldRef<"LeadProductMapping", 'Int'>
   readonly created_at: Prisma.FieldRef<"LeadProductMapping", 'DateTime'>
 }

@@ -393,9 +393,9 @@ export type OtherAppliancesMasterSumOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
 }
 
-export type OtherAppliancesMasterNullableScalarRelationFilter = {
-  is?: Prisma.OtherAppliancesMasterWhereInput | null
-  isNot?: Prisma.OtherAppliancesMasterWhereInput | null
+export type OtherAppliancesMasterScalarRelationFilter = {
+  is?: Prisma.OtherAppliancesMasterWhereInput
+  isNot?: Prisma.OtherAppliancesMasterWhereInput
 }
 
 export type OtherAppliancesMasterCreateNestedManyWithoutVendorInput = {
@@ -450,12 +450,10 @@ export type OtherAppliancesMasterCreateNestedOneWithoutLeadMappingsInput = {
   connect?: Prisma.OtherAppliancesMasterWhereUniqueInput
 }
 
-export type OtherAppliancesMasterUpdateOneWithoutLeadMappingsNestedInput = {
+export type OtherAppliancesMasterUpdateOneRequiredWithoutLeadMappingsNestedInput = {
   create?: Prisma.XOR<Prisma.OtherAppliancesMasterCreateWithoutLeadMappingsInput, Prisma.OtherAppliancesMasterUncheckedCreateWithoutLeadMappingsInput>
   connectOrCreate?: Prisma.OtherAppliancesMasterCreateOrConnectWithoutLeadMappingsInput
   upsert?: Prisma.OtherAppliancesMasterUpsertWithoutLeadMappingsInput
-  disconnect?: Prisma.OtherAppliancesMasterWhereInput | boolean
-  delete?: Prisma.OtherAppliancesMasterWhereInput | boolean
   connect?: Prisma.OtherAppliancesMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.OtherAppliancesMasterUpdateToOneWithWhereWithoutLeadMappingsInput, Prisma.OtherAppliancesMasterUpdateWithoutLeadMappingsInput>, Prisma.OtherAppliancesMasterUncheckedUpdateWithoutLeadMappingsInput>
 }

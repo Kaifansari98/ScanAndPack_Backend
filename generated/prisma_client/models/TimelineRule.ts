@@ -53,9 +53,9 @@ export type TimelineRuleMinAggregateOutputType = {
   vendor_id: number | null
   carcass_id: number | null
   shutter_id: number | null
+  created_at: Date | null
   kitchen_manufacturing_days: number | null
   other_manufacturing_days: number | null
-  created_at: Date | null
   kitchen_manufacturing_days_for_fast_production: number | null
   other_manufacturing_days_for_fast_production: number | null
 }
@@ -65,9 +65,9 @@ export type TimelineRuleMaxAggregateOutputType = {
   vendor_id: number | null
   carcass_id: number | null
   shutter_id: number | null
+  created_at: Date | null
   kitchen_manufacturing_days: number | null
   other_manufacturing_days: number | null
-  created_at: Date | null
   kitchen_manufacturing_days_for_fast_production: number | null
   other_manufacturing_days_for_fast_production: number | null
 }
@@ -77,9 +77,9 @@ export type TimelineRuleCountAggregateOutputType = {
   vendor_id: number
   carcass_id: number
   shutter_id: number
+  created_at: number
   kitchen_manufacturing_days: number
   other_manufacturing_days: number
-  created_at: number
   kitchen_manufacturing_days_for_fast_production: number
   other_manufacturing_days_for_fast_production: number
   _all: number
@@ -113,9 +113,9 @@ export type TimelineRuleMinAggregateInputType = {
   vendor_id?: true
   carcass_id?: true
   shutter_id?: true
+  created_at?: true
   kitchen_manufacturing_days?: true
   other_manufacturing_days?: true
-  created_at?: true
   kitchen_manufacturing_days_for_fast_production?: true
   other_manufacturing_days_for_fast_production?: true
 }
@@ -125,9 +125,9 @@ export type TimelineRuleMaxAggregateInputType = {
   vendor_id?: true
   carcass_id?: true
   shutter_id?: true
+  created_at?: true
   kitchen_manufacturing_days?: true
   other_manufacturing_days?: true
-  created_at?: true
   kitchen_manufacturing_days_for_fast_production?: true
   other_manufacturing_days_for_fast_production?: true
 }
@@ -137,9 +137,9 @@ export type TimelineRuleCountAggregateInputType = {
   vendor_id?: true
   carcass_id?: true
   shutter_id?: true
+  created_at?: true
   kitchen_manufacturing_days?: true
   other_manufacturing_days?: true
-  created_at?: true
   kitchen_manufacturing_days_for_fast_production?: true
   other_manufacturing_days_for_fast_production?: true
   _all?: true
@@ -236,9 +236,9 @@ export type TimelineRuleGroupByOutputType = {
   vendor_id: number
   carcass_id: number
   shutter_id: number | null
+  created_at: Date
   kitchen_manufacturing_days: number
   other_manufacturing_days: number
-  created_at: Date
   kitchen_manufacturing_days_for_fast_production: number | null
   other_manufacturing_days_for_fast_production: number | null
   _count: TimelineRuleCountAggregateOutputType | null
@@ -271,9 +271,9 @@ export type TimelineRuleWhereInput = {
   vendor_id?: Prisma.IntFilter<"TimelineRule"> | number
   carcass_id?: Prisma.IntFilter<"TimelineRule"> | number
   shutter_id?: Prisma.IntNullableFilter<"TimelineRule"> | number | null
+  created_at?: Prisma.DateTimeFilter<"TimelineRule"> | Date | string
   kitchen_manufacturing_days?: Prisma.IntFilter<"TimelineRule"> | number
   other_manufacturing_days?: Prisma.IntFilter<"TimelineRule"> | number
-  created_at?: Prisma.DateTimeFilter<"TimelineRule"> | Date | string
   kitchen_manufacturing_days_for_fast_production?: Prisma.IntNullableFilter<"TimelineRule"> | number | null
   other_manufacturing_days_for_fast_production?: Prisma.IntNullableFilter<"TimelineRule"> | number | null
   carcass?: Prisma.XOR<Prisma.CarcassTypeMasterScalarRelationFilter, Prisma.CarcassTypeMasterWhereInput>
@@ -286,9 +286,9 @@ export type TimelineRuleOrderByWithRelationInput = {
   vendor_id?: Prisma.SortOrder
   carcass_id?: Prisma.SortOrder
   shutter_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_at?: Prisma.SortOrder
   kitchen_manufacturing_days?: Prisma.SortOrder
   other_manufacturing_days?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
   kitchen_manufacturing_days_for_fast_production?: Prisma.SortOrderInput | Prisma.SortOrder
   other_manufacturing_days_for_fast_production?: Prisma.SortOrderInput | Prisma.SortOrder
   carcass?: Prisma.CarcassTypeMasterOrderByWithRelationInput
@@ -305,9 +305,9 @@ export type TimelineRuleWhereUniqueInput = Prisma.AtLeast<{
   vendor_id?: Prisma.IntFilter<"TimelineRule"> | number
   carcass_id?: Prisma.IntFilter<"TimelineRule"> | number
   shutter_id?: Prisma.IntNullableFilter<"TimelineRule"> | number | null
+  created_at?: Prisma.DateTimeFilter<"TimelineRule"> | Date | string
   kitchen_manufacturing_days?: Prisma.IntFilter<"TimelineRule"> | number
   other_manufacturing_days?: Prisma.IntFilter<"TimelineRule"> | number
-  created_at?: Prisma.DateTimeFilter<"TimelineRule"> | Date | string
   kitchen_manufacturing_days_for_fast_production?: Prisma.IntNullableFilter<"TimelineRule"> | number | null
   other_manufacturing_days_for_fast_production?: Prisma.IntNullableFilter<"TimelineRule"> | number | null
   carcass?: Prisma.XOR<Prisma.CarcassTypeMasterScalarRelationFilter, Prisma.CarcassTypeMasterWhereInput>
@@ -320,9 +320,9 @@ export type TimelineRuleOrderByWithAggregationInput = {
   vendor_id?: Prisma.SortOrder
   carcass_id?: Prisma.SortOrder
   shutter_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_at?: Prisma.SortOrder
   kitchen_manufacturing_days?: Prisma.SortOrder
   other_manufacturing_days?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
   kitchen_manufacturing_days_for_fast_production?: Prisma.SortOrderInput | Prisma.SortOrder
   other_manufacturing_days_for_fast_production?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.TimelineRuleCountOrderByAggregateInput
@@ -340,17 +340,17 @@ export type TimelineRuleScalarWhereWithAggregatesInput = {
   vendor_id?: Prisma.IntWithAggregatesFilter<"TimelineRule"> | number
   carcass_id?: Prisma.IntWithAggregatesFilter<"TimelineRule"> | number
   shutter_id?: Prisma.IntNullableWithAggregatesFilter<"TimelineRule"> | number | null
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"TimelineRule"> | Date | string
   kitchen_manufacturing_days?: Prisma.IntWithAggregatesFilter<"TimelineRule"> | number
   other_manufacturing_days?: Prisma.IntWithAggregatesFilter<"TimelineRule"> | number
-  created_at?: Prisma.DateTimeWithAggregatesFilter<"TimelineRule"> | Date | string
   kitchen_manufacturing_days_for_fast_production?: Prisma.IntNullableWithAggregatesFilter<"TimelineRule"> | number | null
   other_manufacturing_days_for_fast_production?: Prisma.IntNullableWithAggregatesFilter<"TimelineRule"> | number | null
 }
 
 export type TimelineRuleCreateInput = {
+  created_at?: Date | string
   kitchen_manufacturing_days: number
   other_manufacturing_days: number
-  created_at?: Date | string
   kitchen_manufacturing_days_for_fast_production?: number | null
   other_manufacturing_days_for_fast_production?: number | null
   carcass: Prisma.CarcassTypeMasterCreateNestedOneWithoutRulesInput
@@ -363,17 +363,17 @@ export type TimelineRuleUncheckedCreateInput = {
   vendor_id: number
   carcass_id: number
   shutter_id?: number | null
+  created_at?: Date | string
   kitchen_manufacturing_days: number
   other_manufacturing_days: number
-  created_at?: Date | string
   kitchen_manufacturing_days_for_fast_production?: number | null
   other_manufacturing_days_for_fast_production?: number | null
 }
 
 export type TimelineRuleUpdateInput = {
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
   other_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   other_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   carcass?: Prisma.CarcassTypeMasterUpdateOneRequiredWithoutRulesNestedInput
@@ -386,9 +386,9 @@ export type TimelineRuleUncheckedUpdateInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
   other_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   other_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -398,17 +398,17 @@ export type TimelineRuleCreateManyInput = {
   vendor_id: number
   carcass_id: number
   shutter_id?: number | null
+  created_at?: Date | string
   kitchen_manufacturing_days: number
   other_manufacturing_days: number
-  created_at?: Date | string
   kitchen_manufacturing_days_for_fast_production?: number | null
   other_manufacturing_days_for_fast_production?: number | null
 }
 
 export type TimelineRuleUpdateManyMutationInput = {
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
   other_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   other_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -418,9 +418,9 @@ export type TimelineRuleUncheckedUpdateManyInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
   other_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   other_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -446,9 +446,9 @@ export type TimelineRuleCountOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   carcass_id?: Prisma.SortOrder
   shutter_id?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
   kitchen_manufacturing_days?: Prisma.SortOrder
   other_manufacturing_days?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
   kitchen_manufacturing_days_for_fast_production?: Prisma.SortOrder
   other_manufacturing_days_for_fast_production?: Prisma.SortOrder
 }
@@ -469,9 +469,9 @@ export type TimelineRuleMaxOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   carcass_id?: Prisma.SortOrder
   shutter_id?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
   kitchen_manufacturing_days?: Prisma.SortOrder
   other_manufacturing_days?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
   kitchen_manufacturing_days_for_fast_production?: Prisma.SortOrder
   other_manufacturing_days_for_fast_production?: Prisma.SortOrder
 }
@@ -481,9 +481,9 @@ export type TimelineRuleMinOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   carcass_id?: Prisma.SortOrder
   shutter_id?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
   kitchen_manufacturing_days?: Prisma.SortOrder
   other_manufacturing_days?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
   kitchen_manufacturing_days_for_fast_production?: Prisma.SortOrder
   other_manufacturing_days_for_fast_production?: Prisma.SortOrder
 }
@@ -626,9 +626,9 @@ export type TimelineRuleUncheckedUpdateManyWithoutShutterNestedInput = {
 }
 
 export type TimelineRuleCreateWithoutVendorInput = {
+  created_at?: Date | string
   kitchen_manufacturing_days: number
   other_manufacturing_days: number
-  created_at?: Date | string
   kitchen_manufacturing_days_for_fast_production?: number | null
   other_manufacturing_days_for_fast_production?: number | null
   carcass: Prisma.CarcassTypeMasterCreateNestedOneWithoutRulesInput
@@ -639,9 +639,9 @@ export type TimelineRuleUncheckedCreateWithoutVendorInput = {
   id?: number
   carcass_id: number
   shutter_id?: number | null
+  created_at?: Date | string
   kitchen_manufacturing_days: number
   other_manufacturing_days: number
-  created_at?: Date | string
   kitchen_manufacturing_days_for_fast_production?: number | null
   other_manufacturing_days_for_fast_production?: number | null
 }
@@ -680,17 +680,17 @@ export type TimelineRuleScalarWhereInput = {
   vendor_id?: Prisma.IntFilter<"TimelineRule"> | number
   carcass_id?: Prisma.IntFilter<"TimelineRule"> | number
   shutter_id?: Prisma.IntNullableFilter<"TimelineRule"> | number | null
+  created_at?: Prisma.DateTimeFilter<"TimelineRule"> | Date | string
   kitchen_manufacturing_days?: Prisma.IntFilter<"TimelineRule"> | number
   other_manufacturing_days?: Prisma.IntFilter<"TimelineRule"> | number
-  created_at?: Prisma.DateTimeFilter<"TimelineRule"> | Date | string
   kitchen_manufacturing_days_for_fast_production?: Prisma.IntNullableFilter<"TimelineRule"> | number | null
   other_manufacturing_days_for_fast_production?: Prisma.IntNullableFilter<"TimelineRule"> | number | null
 }
 
 export type TimelineRuleCreateWithoutCarcassInput = {
+  created_at?: Date | string
   kitchen_manufacturing_days: number
   other_manufacturing_days: number
-  created_at?: Date | string
   kitchen_manufacturing_days_for_fast_production?: number | null
   other_manufacturing_days_for_fast_production?: number | null
   shutter?: Prisma.ShutterTypeMasterCreateNestedOneWithoutRulesInput
@@ -701,9 +701,9 @@ export type TimelineRuleUncheckedCreateWithoutCarcassInput = {
   id?: number
   vendor_id: number
   shutter_id?: number | null
+  created_at?: Date | string
   kitchen_manufacturing_days: number
   other_manufacturing_days: number
-  created_at?: Date | string
   kitchen_manufacturing_days_for_fast_production?: number | null
   other_manufacturing_days_for_fast_production?: number | null
 }
@@ -735,9 +735,9 @@ export type TimelineRuleUpdateManyWithWhereWithoutCarcassInput = {
 }
 
 export type TimelineRuleCreateWithoutShutterInput = {
+  created_at?: Date | string
   kitchen_manufacturing_days: number
   other_manufacturing_days: number
-  created_at?: Date | string
   kitchen_manufacturing_days_for_fast_production?: number | null
   other_manufacturing_days_for_fast_production?: number | null
   carcass: Prisma.CarcassTypeMasterCreateNestedOneWithoutRulesInput
@@ -748,9 +748,9 @@ export type TimelineRuleUncheckedCreateWithoutShutterInput = {
   id?: number
   vendor_id: number
   carcass_id: number
+  created_at?: Date | string
   kitchen_manufacturing_days: number
   other_manufacturing_days: number
-  created_at?: Date | string
   kitchen_manufacturing_days_for_fast_production?: number | null
   other_manufacturing_days_for_fast_production?: number | null
 }
@@ -785,17 +785,17 @@ export type TimelineRuleCreateManyVendorInput = {
   id?: number
   carcass_id: number
   shutter_id?: number | null
+  created_at?: Date | string
   kitchen_manufacturing_days: number
   other_manufacturing_days: number
-  created_at?: Date | string
   kitchen_manufacturing_days_for_fast_production?: number | null
   other_manufacturing_days_for_fast_production?: number | null
 }
 
 export type TimelineRuleUpdateWithoutVendorInput = {
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
   other_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   other_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   carcass?: Prisma.CarcassTypeMasterUpdateOneRequiredWithoutRulesNestedInput
@@ -806,9 +806,9 @@ export type TimelineRuleUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
   other_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   other_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -817,9 +817,9 @@ export type TimelineRuleUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
   other_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   other_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -828,17 +828,17 @@ export type TimelineRuleCreateManyCarcassInput = {
   id?: number
   vendor_id: number
   shutter_id?: number | null
+  created_at?: Date | string
   kitchen_manufacturing_days: number
   other_manufacturing_days: number
-  created_at?: Date | string
   kitchen_manufacturing_days_for_fast_production?: number | null
   other_manufacturing_days_for_fast_production?: number | null
 }
 
 export type TimelineRuleUpdateWithoutCarcassInput = {
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
   other_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   other_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shutter?: Prisma.ShutterTypeMasterUpdateOneWithoutRulesNestedInput
@@ -849,9 +849,9 @@ export type TimelineRuleUncheckedUpdateWithoutCarcassInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
   other_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   other_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -860,9 +860,9 @@ export type TimelineRuleUncheckedUpdateManyWithoutCarcassInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   shutter_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
   other_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   other_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -871,17 +871,17 @@ export type TimelineRuleCreateManyShutterInput = {
   id?: number
   vendor_id: number
   carcass_id: number
+  created_at?: Date | string
   kitchen_manufacturing_days: number
   other_manufacturing_days: number
-  created_at?: Date | string
   kitchen_manufacturing_days_for_fast_production?: number | null
   other_manufacturing_days_for_fast_production?: number | null
 }
 
 export type TimelineRuleUpdateWithoutShutterInput = {
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
   other_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   other_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   carcass?: Prisma.CarcassTypeMasterUpdateOneRequiredWithoutRulesNestedInput
@@ -892,9 +892,9 @@ export type TimelineRuleUncheckedUpdateWithoutShutterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_id?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
   other_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   other_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -903,9 +903,9 @@ export type TimelineRuleUncheckedUpdateManyWithoutShutterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   carcass_id?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
   other_manufacturing_days?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kitchen_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   other_manufacturing_days_for_fast_production?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -917,9 +917,9 @@ export type TimelineRuleSelect<ExtArgs extends runtime.Types.Extensions.Internal
   vendor_id?: boolean
   carcass_id?: boolean
   shutter_id?: boolean
+  created_at?: boolean
   kitchen_manufacturing_days?: boolean
   other_manufacturing_days?: boolean
-  created_at?: boolean
   kitchen_manufacturing_days_for_fast_production?: boolean
   other_manufacturing_days_for_fast_production?: boolean
   carcass?: boolean | Prisma.CarcassTypeMasterDefaultArgs<ExtArgs>
@@ -932,9 +932,9 @@ export type TimelineRuleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   vendor_id?: boolean
   carcass_id?: boolean
   shutter_id?: boolean
+  created_at?: boolean
   kitchen_manufacturing_days?: boolean
   other_manufacturing_days?: boolean
-  created_at?: boolean
   kitchen_manufacturing_days_for_fast_production?: boolean
   other_manufacturing_days_for_fast_production?: boolean
   carcass?: boolean | Prisma.CarcassTypeMasterDefaultArgs<ExtArgs>
@@ -947,9 +947,9 @@ export type TimelineRuleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   vendor_id?: boolean
   carcass_id?: boolean
   shutter_id?: boolean
+  created_at?: boolean
   kitchen_manufacturing_days?: boolean
   other_manufacturing_days?: boolean
-  created_at?: boolean
   kitchen_manufacturing_days_for_fast_production?: boolean
   other_manufacturing_days_for_fast_production?: boolean
   carcass?: boolean | Prisma.CarcassTypeMasterDefaultArgs<ExtArgs>
@@ -962,14 +962,14 @@ export type TimelineRuleSelectScalar = {
   vendor_id?: boolean
   carcass_id?: boolean
   shutter_id?: boolean
+  created_at?: boolean
   kitchen_manufacturing_days?: boolean
   other_manufacturing_days?: boolean
-  created_at?: boolean
   kitchen_manufacturing_days_for_fast_production?: boolean
   other_manufacturing_days_for_fast_production?: boolean
 }
 
-export type TimelineRuleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "carcass_id" | "shutter_id" | "kitchen_manufacturing_days" | "other_manufacturing_days" | "created_at" | "kitchen_manufacturing_days_for_fast_production" | "other_manufacturing_days_for_fast_production", ExtArgs["result"]["timelineRule"]>
+export type TimelineRuleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "carcass_id" | "shutter_id" | "created_at" | "kitchen_manufacturing_days" | "other_manufacturing_days" | "kitchen_manufacturing_days_for_fast_production" | "other_manufacturing_days_for_fast_production", ExtArgs["result"]["timelineRule"]>
 export type TimelineRuleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   carcass?: boolean | Prisma.CarcassTypeMasterDefaultArgs<ExtArgs>
   shutter?: boolean | Prisma.TimelineRule$shutterArgs<ExtArgs>
@@ -998,9 +998,9 @@ export type $TimelineRulePayload<ExtArgs extends runtime.Types.Extensions.Intern
     vendor_id: number
     carcass_id: number
     shutter_id: number | null
+    created_at: Date
     kitchen_manufacturing_days: number
     other_manufacturing_days: number
-    created_at: Date
     kitchen_manufacturing_days_for_fast_production: number | null
     other_manufacturing_days_for_fast_production: number | null
   }, ExtArgs["result"]["timelineRule"]>
@@ -1433,9 +1433,9 @@ export interface TimelineRuleFieldRefs {
   readonly vendor_id: Prisma.FieldRef<"TimelineRule", 'Int'>
   readonly carcass_id: Prisma.FieldRef<"TimelineRule", 'Int'>
   readonly shutter_id: Prisma.FieldRef<"TimelineRule", 'Int'>
+  readonly created_at: Prisma.FieldRef<"TimelineRule", 'DateTime'>
   readonly kitchen_manufacturing_days: Prisma.FieldRef<"TimelineRule", 'Int'>
   readonly other_manufacturing_days: Prisma.FieldRef<"TimelineRule", 'Int'>
-  readonly created_at: Prisma.FieldRef<"TimelineRule", 'DateTime'>
   readonly kitchen_manufacturing_days_for_fast_production: Prisma.FieldRef<"TimelineRule", 'Int'>
   readonly other_manufacturing_days_for_fast_production: Prisma.FieldRef<"TimelineRule", 'Int'>
 }
